@@ -194,37 +194,60 @@ public class FighterImage {
 
 
     private void MultiFighters(){
-        if (fighter.getUrlName().equals("pokemon_trainer") ||
-                fighter.getUrlName().equals("villager") ||
-                fighter.getUrlName().equals("robin") ||
-                fighter.getUrlName().equals("corrin") ||
-                fighter.getUrlName().equals("byleth")){
-            if (fighter.getAlt() % 2==0){
-                fighter.setUrlName(fighter.getUrlName()+"F");
-            }else{
-                fighter.setUrlName(fighter.getUrlName()+"M");
-            }
+        if ("pokemon_trainer".contains(fighter.getUrlName())) {
+            if (fighter.getAlt() % 2 == 0) fighter.setUrlName("pokemon_trainerF");
+            else fighter.setUrlName("pokemon_trainerM");
             return;
         }
 
-        if (fighter.getUrlName().equals("wii_fit_trainer") ||
-                fighter.getUrlName().equals("inkling")){
-            if (fighter.getAlt() % 2==0){
-                fighter.setUrlName(fighter.getUrlName()+"M");
-            }else{
-                fighter.setUrlName(fighter.getUrlName()+"F");
-            }
+        if ("villager".contains(fighter.getUrlName())){
+            if (fighter.getAlt() % 2==0)  fighter.setUrlName("villagerF");
+            else fighter.setUrlName("villagerM");
             return;
         }
 
-        if (fighter.getUrlName().equals("cloud")){
+        if ("robin".contains(fighter.getUrlName())){
+            if (fighter.getAlt() % 2==0)  fighter.setUrlName("robinF");
+            else fighter.setUrlName("robinM");
+            return;
+        }
+
+        if ("corrin".contains(fighter.getUrlName())){
+            if (fighter.getAlt() % 2==0)  fighter.setUrlName("corrinF");
+            else fighter.setUrlName("corrinM");
+            return;
+        }
+
+        if ("byleth".contains(fighter.getUrlName())) {
+            if (fighter.getAlt() % 2 == 0) fighter.setUrlName("bylethF");
+            else fighter.setUrlName("bylethM");
+            return;
+        }
+
+
+
+        if ("wii_fit_trainer".contains(fighter.getUrlName())) {
+            if (fighter.getAlt() % 2 == 0) fighter.setUrlName("wii_fit_trainerM");
+            else fighter.setUrlName("wii_fit_trainerF");
+            return;
+        }
+
+        if ("inkling".contains(fighter.getUrlName())) {
+            if (fighter.getAlt() % 2 == 0) fighter.setUrlName("inklingM");
+            else fighter.setUrlName("inklingF");
+            return;
+        }
+
+
+
+        if ("cloud".contains(fighter.getUrlName())) {
             if (fighter.getAlt() % 2==0){
                 fighter.setUrlName("cloudAC");
             }
             return;
         }
 
-        if (fighter.getUrlName().equals("ike")){
+        if ("ike".contains(fighter.getUrlName())) {
             if (fighter.getAlt() % 2==0){
                 fighter.setUrlName("ike2");
             }else{
@@ -233,26 +256,26 @@ public class FighterImage {
             return;
         }
 
-        if (fighter.getUrlName().equals("olimar")){
+        if ("olimar".contains(fighter.getUrlName())) {
             if (fighter.getAlt() > 4 ){
                 fighter.setUrlName("alph");
             }
             return;
         }
 
-        if (fighter.getUrlName().equals("mii_gunner")){
+        if ("mii_gunner".contains(fighter.getUrlName())) {
             if (fighter.getAlt() == 2){
                 fighter.setUrlName("sans");
             }
             return;
         }
 
-        if (fighter.getUrlName().equals("bowser_jr")){
+        if (!"bowser".equals(fighter.getUrlName()) && "bowser_jr".contains(fighter.getUrlName())) {
             fighter.setUrlName("bowser_jr"+fighter.getAlt());
             return;
         }
 
-        if (fighter.getUrlName().equals("bayonetta")){
+        if ("bayonetta".contains(fighter.getUrlName())) {
             if (fighter.getAlt() % 2==0){
                 fighter.setUrlName("bayonetta1");
             }else{
@@ -261,7 +284,7 @@ public class FighterImage {
             return;
         }
 
-        if (fighter.getUrlName().equals("dq_hero")){
+        if ("dq_hero".contains(fighter.getUrlName())) {
             //1 and 5
             if (fighter.getAlt() % 4 == 1) fighter.setUrlName("dq_hero1");
             //2 and 6
@@ -273,7 +296,7 @@ public class FighterImage {
             return;
         }
 
-        if (fighter.getUrlName().equals("joker")){
+        if ("joker".contains(fighter.getUrlName())) {
             //1 to 6
             if (fighter.getAlt()<7) fighter.setUrlName("joker1");
             //7 and 8
@@ -281,7 +304,7 @@ public class FighterImage {
             return;
         }
 
-        if (fighter.getUrlName().equals("falco")){
+        if ("falco".contains(fighter.getUrlName())) {
             fighter.setUrlName("falco ");
         }
 

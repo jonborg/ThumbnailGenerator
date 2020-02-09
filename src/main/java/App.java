@@ -2,7 +2,6 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -11,14 +10,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import java.io.File;
 import java.util.Map;
 
 public class App extends Application {
+
+    Button fromFile = new Button();
 
     TextField round = new TextField();
     TextField date = new TextField();
@@ -76,9 +76,6 @@ public class App extends Application {
 
         fighter1.getItems().setAll(map.keySet());
         fighter2.getItems().setAll(map.keySet());
-        fighter1.getItems().get(0);
-        fighter1.setButtonCell(null);
-
 
 
         alt1.setMaxWidth(80);
@@ -145,7 +142,7 @@ public class App extends Application {
         VBox allContentBox = new VBox(allLeaguesBox, extraBox, allPlayersBox);
         allContentBox.setSpacing(20);
 
-        VBox allContentBox2 = new VBox(allContentBox, saveBox);
+        VBox allContentBox2 = new VBox(fromFile, allContentBox, saveBox);
         allContentBox2.setSpacing(40);
         allContentBox2.setAlignment(Pos.CENTER);
 
@@ -224,6 +221,31 @@ public class App extends Application {
                 alert.showAndWait();
             }
         });
+
+        fromFile.setOnAction(actionEvent -> {
+            if (foreground == null){
+                System.out.println("League was not chosen");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText("Warning");
+                alert.setContentText("A league must be chosen before generating the thumbnail.");
+
+                alert.showAndWait();
+                return;
+            }
+            FileChooser fileChooser = new FileChooser();
+            File selectedFile = fileChooser.showOpenDialog(primaryStage);
+            if (selectedFile != null) {
+                ThumbnailFromFile tbf = new ThumbnailFromFile();
+                tbf.generateFromFile(selectedFile, foreground, saveLocally.isSelected());
+            }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Success");
+            alert.setContentText("Thumbnails were successfully generated and saved!");
+        });
+
         StackPane root = new StackPane();
 
         root.getChildren().add(allContentBox2);
