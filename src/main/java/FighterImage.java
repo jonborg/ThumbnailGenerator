@@ -24,7 +24,7 @@ public class FighterImage {
     public FighterImage(Fighter fighter, BufferedImage image){
         this.fighter = fighter;
         this.image = image;
-        MultiFighters();
+        MultiFighters(fighter);
     }
 
     public BufferedImage editImage( int port){
@@ -193,7 +193,7 @@ public class FighterImage {
     }
 
 
-    private void MultiFighters(){
+    static public void MultiFighters(Fighter fighter){
         if ("pokemon_trainer".contains(fighter.getUrlName())) {
             if (fighter.getAlt() % 2 == 0) fighter.setUrlName("pokemon_trainerF");
             else fighter.setUrlName("pokemon_trainerM");
@@ -206,7 +206,7 @@ public class FighterImage {
             return;
         }
 
-        if ("robin".contains(fighter.getUrlName())){
+        if ("robin".contains(fighter.getUrlName()) && !"rob".equals(fighter.getUrlName())){
             if (fighter.getAlt() % 2==0)  fighter.setUrlName("robinF");
             else fighter.setUrlName("robinM");
             return;

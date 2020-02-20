@@ -44,7 +44,7 @@ king_dedede 0.7
 olimar 0.7
 alph 0.7
 lucario 0.65
-rob 0.7
+rob 0.75
 toon_link 0.6
 wolf 0.75
 

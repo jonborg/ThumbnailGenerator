@@ -13,12 +13,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class App extends Application {
 
-    Button fromFile = new Button();
+    Button fromFile = new Button("Generate from file");
 
     TextField round = new TextField();
     TextField date = new TextField();
@@ -55,10 +56,13 @@ public class App extends Application {
         ToggleGroup leagues = new ToggleGroup();
         ToggleButton throwdown = new ToggleButton();
         ToggleButton invicta = new ToggleButton();
+        ToggleButton sop = new ToggleButton();
         throwdown.setToggleGroup(leagues);
         invicta.setToggleGroup(leagues);
+        sop.setToggleGroup(leagues);
         throwdown.setGraphic(new ImageView(new Image(new File("resources/images/leagues/throwdown.png").toURI().toString())));
         invicta.setGraphic(new ImageView(new Image(new File("resources/images/leagues/invicta.png").toURI().toString())));
+        sop.setGraphic(new ImageView(new Image(new File("resources/images/leagues/sop.png").toURI().toString())));
         leagues.selectedToggleProperty().addListener((obs,oldToggle,newToggle)->{
             if (newToggle == null){
                foreground = null;
@@ -70,6 +74,10 @@ public class App extends Application {
                 if(invicta.isSelected()) {
                     foreground = "foregroundPorto.png";
                     leagueLabel.setText("League: Smash Invicta");
+                }
+                if(sop.isSelected()) {
+                    foreground = "foregroundSop.png";
+                    leagueLabel.setText("League: Smash or Pass");
                 }
             }
         });
@@ -89,7 +97,7 @@ public class App extends Application {
         saveButton.setAlignment(Pos.CENTER);
 
 
-        HBox leaguesBox = new HBox(throwdown,invicta);
+        HBox leaguesBox = new HBox(throwdown,invicta,sop);
         leaguesBox.setSpacing(10);
         leaguesBox.setAlignment(Pos.CENTER);
         VBox allLeaguesBox = new VBox(leagueLabel,leaguesBox);
@@ -114,6 +122,9 @@ public class App extends Application {
         VBox allPlayer1Box= new VBox(player1Box,allChar1Box);
         allPlayer1Box.setSpacing(10);
 
+        Button flipPlayer = new Button();
+        flipPlayer.setGraphic(new ImageView(new Image(new File("resources/images/ui/flip.png").toURI().toString())));
+
 
         VBox player2Box = new VBox(new Label("Player 2:"),player2);
         VBox char2Box = new VBox (new Label("Character:"),fighter2);
@@ -125,8 +136,8 @@ public class App extends Application {
         allPlayer2Box.setSpacing(10);
 
 
-        HBox allPlayersBox = new HBox(allPlayer1Box, allPlayer2Box);
-        allPlayersBox.setSpacing(100);
+        HBox allPlayersBox = new HBox(allPlayer1Box, flipPlayer, allPlayer2Box);
+        allPlayersBox.setSpacing(50);
         allPlayer1Box.setAlignment(Pos.CENTER);
         allPlayer2Box.setAlignment(Pos.CENTER);
         allPlayersBox.setAlignment(Pos.CENTER);
@@ -134,7 +145,11 @@ public class App extends Application {
 
         CheckBox saveLocally = new CheckBox("Save/Load fighters' image locally");
 
-        VBox saveBox = new VBox(saveLocally, saveButton);
+        HBox buttonsBox = new HBox(saveButton, fromFile);
+        buttonsBox.setSpacing(10);
+        buttonsBox.setAlignment(Pos.CENTER);
+
+        VBox saveBox = new VBox(saveLocally, buttonsBox);
         saveBox.setSpacing(10);
         saveBox.setAlignment(Pos.CENTER);
 
@@ -142,7 +157,7 @@ public class App extends Application {
         VBox allContentBox = new VBox(allLeaguesBox, extraBox, allPlayersBox);
         allContentBox.setSpacing(20);
 
-        VBox allContentBox2 = new VBox(fromFile, allContentBox, saveBox);
+        VBox allContentBox2 = new VBox(allContentBox, saveBox);
         allContentBox2.setSpacing(40);
         allContentBox2.setAlignment(Pos.CENTER);
 
@@ -153,26 +168,76 @@ public class App extends Application {
             String sel = fighter1.getSelectionModel().getSelectedItem();
             if (sel==null || sel.equals("Mii Brawler")  || sel.equals("Mii Swordfighter")){
                 alt1.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,1));
-                return;
+            }else {
+                if (sel.equals("Mii Gunner")) {
+                    alt1.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2));
+                } else {
+                    alt1.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
+                }
             }
-            if (sel.equals("Mii Gunner")){
-                alt1.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,2));
-                return;
+
+            String urlName = map.get(sel);
+            boolean skip = false;
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                    new FileInputStream("resources/config/flip.txt"), StandardCharsets.UTF_8))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    if (urlName == "falco" && !skip && line.contains(urlName)){
+                        skip = true;
+                        continue;
+                    }
+                    if (line.contains(urlName)){
+                        String[] words = line.split(" ");
+                        if (words.length>1)
+                            flip1.setSelected(Boolean.parseBoolean(words[1]));
+                        break;
+                    }
+                }
+            }catch(IOException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Could not detect flip.txt");
+                alert.showAndWait();
             }
-            alt1.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,8));
         });
 
         fighter2.setOnAction(actionEvent -> {
             String sel = fighter2.getSelectionModel().getSelectedItem();
             if (sel==null || sel.equals("Mii Brawler")  || sel.equals("Mii Swordfighter")){
                 alt2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,1));
-                return;
+            }else {
+                if (sel.equals("Mii Gunner")) {
+                    alt2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2));
+                } else {
+                    alt2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
+                }
             }
-            if (sel.equals("Mii Gunner")){
-                alt2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,2));
-                return;
+
+            String urlName = map.get(sel);
+            boolean skip = false;
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                    new FileInputStream("resources/config/flip.txt"), StandardCharsets.UTF_8))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    if (urlName == "falco" && !skip && line.contains(urlName)){
+                        skip = true;
+                        continue;
+                    }
+                    if (line.contains(urlName)){
+                        String[] words = line.split(" ");
+                        if (words.length>1)
+                            flip2.setSelected(!Boolean.parseBoolean(words[1]));
+                        break;
+                    }
+                }
+            }catch(IOException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Could not detect flip.txt");
+                alert.showAndWait();
             }
-            alt2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,8));
         });
 
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -223,27 +288,44 @@ public class App extends Application {
         });
 
         fromFile.setOnAction(actionEvent -> {
-            if (foreground == null){
-                System.out.println("League was not chosen");
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning");
-                alert.setHeaderText("Warning");
-                alert.setContentText("A league must be chosen before generating the thumbnail.");
-
-                alert.showAndWait();
-                return;
-            }
             FileChooser fileChooser = new FileChooser();
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
             if (selectedFile != null) {
                 ThumbnailFromFile tbf = new ThumbnailFromFile();
-                tbf.generateFromFile(selectedFile, foreground, saveLocally.isSelected());
+                tbf.generateFromFile(selectedFile, saveLocally.isSelected());
             }
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Success");
             alert.setContentText("Thumbnails were successfully generated and saved!");
+
+            alert.showAndWait();
+        });
+
+        flipPlayer.setOnAction(actionEvent ->{
+            String nameAux = player1.getText();
+            player1.setText(player2.getText());
+            player2.setText(nameAux);
+
+            int auxAlt1 = 1;
+            int auxAlt2 = 1;
+
+            if (!fighter1.getSelectionModel().isEmpty() && !fighter2.getSelectionModel().isEmpty()) {
+                auxAlt1 = alt1.getValue();
+                auxAlt2 = alt2.getValue();
+            }
+
+            String auxSel = fighter1.getSelectionModel().getSelectedItem();
+            fighter1.getSelectionModel().select(fighter2.getSelectionModel().getSelectedItem());
+            fighter2.getSelectionModel().select(auxSel);
+
+            alt1.getValueFactory().setValue(auxAlt2);
+            alt2.getValueFactory().setValue(auxAlt1);
+
+            boolean auxFlip = flip1.isSelected();
+            flip1.setSelected(!flip2.isSelected());
+            flip2.setSelected(!auxFlip);
         });
 
         StackPane root = new StackPane();
