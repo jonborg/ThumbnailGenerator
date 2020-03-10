@@ -64,9 +64,9 @@ to use them for future uses without requiring access to the website
 The images needed some scaling and reposition in other to be printed 
 correctly on the thumbnail. 
 
-Each fighters scalling and reposition is found on these files:
+Each fighters scaling and reposition is found on these files:
 
- - scalling: resources/config/scale.txt
+ - scaling: resources/config/scale.txt
  - offset: resources/config/offset.txt
 
 
@@ -106,16 +106,6 @@ And finally, the name of the round played by the players
 
 - The characters names must be written the exact same way as shown in scale.txt
 and offset.txt
-	
-
-
-
-
-
-
-
-
-ation
  
 
 

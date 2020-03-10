@@ -8,13 +8,17 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import ui.LeagueButton;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class App extends Application {
@@ -49,38 +53,9 @@ public class App extends Application {
         primaryStage.getIcons().add(new Image("https://pbs.twimg.com/profile_images/1132749237945552901/v74uelMr_400x400.png"));
         primaryStage.setTitle("Smash Bros. VOD Thumbnail Generator");
 
-        Label leagueLabel = new Label("League:");
-
         Map<String,String> map = Names.map;
 
-        ToggleGroup leagues = new ToggleGroup();
-        ToggleButton throwdown = new ToggleButton();
-        ToggleButton invicta = new ToggleButton();
-        ToggleButton sop = new ToggleButton();
-        throwdown.setToggleGroup(leagues);
-        invicta.setToggleGroup(leagues);
-        sop.setToggleGroup(leagues);
-        throwdown.setGraphic(new ImageView(new Image(new File("resources/images/leagues/throwdown.png").toURI().toString())));
-        invicta.setGraphic(new ImageView(new Image(new File("resources/images/leagues/invicta.png").toURI().toString())));
-        sop.setGraphic(new ImageView(new Image(new File("resources/images/leagues/sop.png").toURI().toString())));
-        leagues.selectedToggleProperty().addListener((obs,oldToggle,newToggle)->{
-            if (newToggle == null){
-               foreground = null;
-            }else{
-                if(throwdown.isSelected()) {
-                    foreground = "foregroundLx.png";
-                    leagueLabel.setText("League: Throwdown Lx");
-                }
-                if(invicta.isSelected()) {
-                    foreground = "foregroundPorto.png";
-                    leagueLabel.setText("League: Smash Invicta");
-                }
-                if(sop.isSelected()) {
-                    foreground = "foregroundSop.png";
-                    leagueLabel.setText("League: Smash or Pass");
-                }
-            }
-        });
+        Pane allLeaguesBox = generateLeaguesButtons();
 
         fighter1.getItems().setAll(map.keySet());
         fighter2.getItems().setAll(map.keySet());
@@ -96,13 +71,6 @@ public class App extends Application {
         saveButton.setMinWidth(100);
         saveButton.setAlignment(Pos.CENTER);
 
-
-        HBox leaguesBox = new HBox(throwdown,invicta,sop);
-        leaguesBox.setSpacing(10);
-        leaguesBox.setAlignment(Pos.CENTER);
-        VBox allLeaguesBox = new VBox(leagueLabel,leaguesBox);
-        allLeaguesBox.setSpacing(5);
-        allLeaguesBox.setAlignment(Pos.CENTER);
 
         VBox roundBox = new VBox(new Label("Round:"), round);
         VBox dateBox = new VBox(new Label("Date:"), date);
@@ -337,5 +305,44 @@ public class App extends Application {
         primaryStage.show();
 
 
+    }
+
+    private Pane generateLeaguesButtons(){
+        Label leagueLabel = new Label("League:");
+        File[] leaguesImages = new File("resources/images/leagues/").listFiles();
+        ToggleGroup leaguesGroup = new ToggleGroup();
+        List<LeagueButton> leaguesButtons = new ArrayList<>();
+
+        HBox leaguesBox = new HBox();
+        leaguesBox.setSpacing(10);
+        leaguesBox.setAlignment(Pos.CENTER);
+
+        for(File image : leaguesImages){
+            LeagueButton league = new LeagueButton(image);
+            league.setToggleGroup(leaguesGroup);
+            leaguesButtons.add(league);
+            leaguesBox.getChildren().add(league);
+        }
+
+        leaguesGroup.selectedToggleProperty().addListener((obs,oldToggle,newToggle)->{
+            if (newToggle == null){
+                foreground = null;
+            }else{
+                for(LeagueButton league : leaguesButtons){
+                    if (league.isSelected()){
+                        foreground = league.getForeground();
+                        leagueLabel.setText("League: " + league.getLeague());
+                    }
+                }
+            }
+
+        });
+
+
+        VBox allLeaguesBox = new VBox(leagueLabel,leaguesBox);
+        allLeaguesBox.setSpacing(5);
+        allLeaguesBox.setAlignment(Pos.CENTER);
+
+        return allLeaguesBox;
     }
 }
