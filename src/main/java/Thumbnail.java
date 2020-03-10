@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.Buffer;
 
+import javafx.scene.control.Alert;
 import org.imgscalr.Scalr;
 
 public class Thumbnail {
@@ -100,6 +101,12 @@ public class Thumbnail {
             System.out.println(e.getMessage());
         } catch (IOException e) {
             System.out.println("Could not read URL as image");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error");
+            alert.setContentText("Could not find image online");
+
+            alert.showAndWait();
         }
         return null;
     }

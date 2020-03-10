@@ -44,7 +44,7 @@ king_dedede 30 30
 olimar -20 -70
 alph -20 -70
 lucario -30 0
-rob -130 130
+rob -80 130
 toon_link 30 40
 wolf 50 80
 
@@ -78,7 +78,7 @@ duck_hunt 60 -40
 ryu 30 70
 cloud 270 -50
 cloudAC -30 -120
-corrinM -100 70
+corrinM -160 70
 corrinF -60 30
 bayonetta2 60 -100
 bayonetta1 60 -100
@@ -89,20 +89,20 @@ inklingM 0 -20
 ridley 300 -250
 simon 50 -30
 king_k_rool -40 -10
-isabelle 0 -50
+isabelle -30 -70
 incineroar 180 70
 joker1 60 20
-joker2 70 50
+joker2 30 50
 dq_hero1 -170 -50
 dq_hero2 -150 -80
 dq_hero3 -80 -70
 dq_hero4 -200 -20
+banjo_and_kazooie 40 -50
 terry 80 0
-banjo_and_kazooie 90 -50
-bylethM -60 100
-bylethF -10 90
+bylethM -20 50
+bylethF -10 10
 
-//echoese outros ds
+//echoes
 dark_pit -10 -130
 lucina 20 50
 daisy 100 -25

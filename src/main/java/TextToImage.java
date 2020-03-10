@@ -30,7 +30,7 @@ public class TextToImage {
 
 
     private static BufferedImage generateText(String text, Color color, int fontSize){
-        Font font = new Font ("Bebas Neue",Font.BOLD, fontSize);
+        Font font = new Font ("Bebas Neue",Font.BOLD + Font.ITALIC, fontSize);
 
         BufferedImage rect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = rect.createGraphics();
@@ -81,7 +81,6 @@ public class TextToImage {
         double locationX = finalRect.getWidth() / 2;
         double locationY = finalRect.getHeight() / 2;
         AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
-        tx.shear(-0.1,0);
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
         Graphics2D g2d = finalRect.createGraphics();
         g2d.drawImage(op.filter(rect, null), 0, 0, null);
