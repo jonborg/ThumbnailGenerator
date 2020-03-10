@@ -1,3 +1,5 @@
+package fighter;
+
 import java.awt.image.BufferedImage;
 
 public class Fighter  {

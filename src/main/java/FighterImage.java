@@ -1,3 +1,4 @@
+import fighter.Fighter;
 import javafx.scene.control.Alert;
 import org.imgscalr.Scalr;
 

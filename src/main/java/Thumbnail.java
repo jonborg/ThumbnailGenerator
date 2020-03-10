@@ -1,3 +1,4 @@
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -8,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.Buffer;
 
+import fighter.Fighter;
 import javafx.scene.control.Alert;
 import org.imgscalr.Scalr;
 
