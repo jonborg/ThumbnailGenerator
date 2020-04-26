@@ -39,6 +39,7 @@ ike2 0.95
 pokemon_trainerM 1.1
 pokemon_trainerF 1.2
 diddy_kong 0.65
+lucas 0.57
 sonic 0.48
 king_dedede 0.7
 olimar 0.7
@@ -91,6 +92,7 @@ simon 0.90
 king_k_rool 0.7
 isabelle 0.55
 incineroar 0.7
+piranha_plant 0.5
 joker1 0.8
 joker2 0.8
 dq_hero1 1.1

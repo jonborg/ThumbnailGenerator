@@ -39,6 +39,7 @@ ike2 100 20
 pokemon_trainerM 20 80
 pokemon_trainerF 10 80
 diddy_kong -40 0
+lucas -30 30
 sonic 20 50
 king_dedede 30 30
 olimar -20 -70
@@ -91,6 +92,7 @@ simon 50 -30
 king_k_rool -40 -10
 isabelle -30 -70
 incineroar 180 70
+piranha_plant -140 110
 joker1 60 20
 joker2 30 50
 dq_hero1 -170 -50

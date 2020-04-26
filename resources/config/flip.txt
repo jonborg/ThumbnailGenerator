@@ -39,6 +39,7 @@ ike2 false
 pokemon_trainerM true
 pokemon_trainerF false
 diddy_kong true
+lucas true
 sonic true
 king_dedede true
 olimar false
@@ -91,6 +92,7 @@ simon false
 king_k_rool false
 isabelle false
 incineroar false
+piranha_plant false
 joker1 true
 joker2 false
 dq_hero1 false
