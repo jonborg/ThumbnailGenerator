@@ -46,6 +46,7 @@ public class Names {
         map.put("Ike", "ike");
         map.put("Pokémon Trainer", "pokemon_trainer");
         map.put("Diddy Kong", "diddy_kong");
+		map.put("Lucas", "lucas");
         map.put("Sonic", "sonic");
         map.put("King Dedede", "king_dedede");
         map.put("Olimar", "olimar");
@@ -82,6 +83,7 @@ public class Names {
         map.put("King K. Rool", "king_k_rool");
         map.put("Isabelle", "isabelle");
         map.put("Incineroar", "incineroar");
+		map.put("Piranha Plant", "piranha_plant");
         map.put("Joker", "joker");
         map.put("Hero", "dq_hero");
         map.put("Banjo & Kazooie", "banjo_and_kazooie");
