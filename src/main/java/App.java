@@ -1,6 +1,7 @@
 
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
+import exception.ThumbnailFromFileException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -120,9 +121,9 @@ public class App extends Application {
                         p2.generateFighter());
                 alertFactory.displayInfo("Thumbnail was successfully generated and saved!");
             }catch (LocalImageNotFoundException e){
-                
+                alertFactory.displayError(e.getMessage());
             }catch (OnlineImageNotFoundException e){
-                //error previously dealt. Catch is used to interrupt thumbnail generation when fighters images are missing
+                alertFactory.displayError(e.getMessage());
             }
         });
 
@@ -132,9 +133,13 @@ public class App extends Application {
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
             if (selectedFile != null) {
                 ThumbnailFromFile tbf = new ThumbnailFromFile();
-                tbf.generateFromFile(selectedFile, saveLocally.isSelected());
+                try {
+                    tbf.generateFromFile(selectedFile, saveLocally.isSelected());
+                    alertFactory.displayInfo("Thumbnails were successfully generated and saved!");
+                }catch(ThumbnailFromFileException e){
+                    //alertFactory already thrown inside tbf.generateFromFile
+                }
             }
-            alertFactory.displayInfo("Thumbnails were successfully generated and saved!");
         });
 
         //flip player info listener

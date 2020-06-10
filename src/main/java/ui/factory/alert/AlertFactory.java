@@ -43,7 +43,7 @@ public class AlertFactory {
         alert.setContentText(contextText[0]);
         if (contextText.length>1 && !contextText[1].isEmpty())
             writeAdditionalText(contextText[1]);
-
+        alert.showAndWait();
     }
 
     private void writeAdditionalText(String additionalText){
@@ -59,7 +59,6 @@ public class AlertFactory {
         gridPane.add(textArea, 0, 0);
         alert.getDialogPane().setExpanded(true);
         alert.getDialogPane().setExpandableContent(gridPane);
-        alert.showAndWait();
     }
 
 }

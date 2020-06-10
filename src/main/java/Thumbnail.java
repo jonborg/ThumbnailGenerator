@@ -33,8 +33,6 @@ public class Thumbnail {
     static String saveThumbnailsPath = "thumbnails/";
     boolean saveLocally;
 
-    private AlertFactory alertFactory = new AlertFactory();
-
     public void generateThumbnail(String foreground, boolean saveLocally, String round, String date, Fighter... fighters)
             throws LocalImageNotFoundException, OnlineImageNotFoundException {
 
@@ -48,37 +46,20 @@ public class Thumbnail {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-        List<Fighter> missingFighters = new ArrayList<>();
-
         drawElement(backgroundPath);
         int port = 0;
         for (Fighter f : fighters) {
             port++;
-            try {
-                BufferedImage image = getFighterImage(f);
-                if (missingFighters.isEmpty()) {
-                    FighterImage fighterImage = new FighterImage(f, image);
-                    fighterImage.editImage(port);
-                    if (fighterImage.getImage().getWidth() < WIDTH / 2 && fighterImage.getFighter().isFlip()) {
-                        g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * port - fighterImage.getImage().getWidth(), 0);
-                    } else {
-                        g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * (port - 1), 0);
-                    }
-                }
-            }catch (OnlineImageNotFoundException e){
-                missingFighters.add(f);
+            BufferedImage image = getFighterImage(f);
+            FighterImage fighterImage = new FighterImage(f, image);
+            fighterImage.editImage(port);
+            if (fighterImage.getImage().getWidth() < WIDTH / 2 && fighterImage.getFighter().isFlip()) {
+                g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * port - fighterImage.getImage().getWidth(), 0);
+            } else {
+                g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * (port - 1), 0);
+            }
 
-            }
         }
-        /*if (!missingFighters.isEmpty()){
-            String details = "";
-            for (Fighter  missing:missingFighters){
-                details += missing.getName()+" (Alt " + missing.getAlt() + ")" + System.lineSeparator();
-            }
-            alertFactory.displayError("Could not find image online for the following fighters." +
-                    " Generation of thumbnail " + thumbnailFileName + " will be cancelled.", details);
-            throw new OnlineImageNotFoundException();
-        }*/
 
         drawElement(foregroundPath+foreground);
 
