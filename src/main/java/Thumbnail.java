@@ -1,17 +1,19 @@
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.Buffer;
 
+import java.nio.Buffer;
+import java.util.List;
+import java.util.ArrayList;
+
+import exception.LocalImageNotFoundException;
+import exception.OnlineImageNotFoundException;
 import fighter.Fighter;
-import javafx.scene.control.Alert;
-import org.imgscalr.Scalr;
+import ui.factory.alert.AlertFactory;
+
 
 public class Thumbnail {
     static int WIDTH = 1280;
@@ -31,28 +33,52 @@ public class Thumbnail {
     static String saveThumbnailsPath = "thumbnails/";
     boolean saveLocally;
 
-    public void generateThumbnail(String foreground, boolean saveLocally, String round, String date, Fighter... fighters) {
+    private AlertFactory alertFactory = new AlertFactory();
+
+    public void generateThumbnail(String foreground, boolean saveLocally, String round, String date, Fighter... fighters)
+            throws LocalImageNotFoundException, OnlineImageNotFoundException {
+
+        String thumbnailFileName = fighters[0].getPlayerName().replace("|","_")+"-"+fighters[0].getUrlName()+fighters[0].getAlt()+"--"+
+                fighters[1].getPlayerName().replace("|","_")+"-"+fighters[1].getUrlName()+fighters[1].getAlt()+"--"+
+                round+"-"+date.replace("/","_")+".png";
+
         this.saveLocally = saveLocally;
         thumbnail = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         g2d = thumbnail.createGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
+        List<Fighter> missingFighters = new ArrayList<>();
 
         drawElement(backgroundPath);
         int port = 0;
         for (Fighter f : fighters) {
             port++;
-            FighterImage fighterImage = new FighterImage(f, getFighterImage(f));
-            int offset = 100;
+            try {
+                BufferedImage image = getFighterImage(f);
+                if (missingFighters.isEmpty()) {
+                    FighterImage fighterImage = new FighterImage(f, image);
+                    fighterImage.editImage(port);
+                    if (fighterImage.getImage().getWidth() < WIDTH / 2 && fighterImage.getFighter().isFlip()) {
+                        g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * port - fighterImage.getImage().getWidth(), 0);
+                    } else {
+                        g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * (port - 1), 0);
+                    }
+                }
+            }catch (OnlineImageNotFoundException e){
+                missingFighters.add(f);
 
-            fighterImage.editImage(port);
-            if (fighterImage.getImage().getWidth()<WIDTH/2 && fighterImage.getFighter().isFlip()) {
-                g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * port - fighterImage.getImage().getWidth(), 0);
-            }else{
-                g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * (port - 1), 0);
             }
         }
+        /*if (!missingFighters.isEmpty()){
+            String details = "";
+            for (Fighter  missing:missingFighters){
+                details += missing.getName()+" (Alt " + missing.getAlt() + ")" + System.lineSeparator();
+            }
+            alertFactory.displayError("Could not find image online for the following fighters." +
+                    " Generation of thumbnail " + thumbnailFileName + " will be cancelled.", details);
+            throw new OnlineImageNotFoundException();
+        }*/
 
         drawElement(foregroundPath+foreground);
 
@@ -66,15 +92,57 @@ public class Thumbnail {
         File dirThumbnails = new File(saveThumbnailsPath);
         if (!dirThumbnails.exists()) dirThumbnails.mkdir();
         saveImage(thumbnail, new File(saveThumbnailsPath+
-                fighters[0].getPlayerName()+"-"+fighters[0].getUrlName()+fighters[0].getAlt()+" "+
-                fighters[1].getPlayerName()+"-"+fighters[1].getUrlName()+fighters[1].getAlt()+" "+
-                round+" "+date.replace("/","_")+".png"));
+                thumbnailFileName));
     }
 
 
-    private  BufferedImage getFighterImageOnline(Fighter fighter) {
+    private void drawElement(String pathname) throws LocalImageNotFoundException {
         try {
-            String urlString;
+            g2d.drawImage(ImageIO.read(new FileInputStream(pathname)), 0, 0, null);
+        } catch (IOException e) {
+            throw new LocalImageNotFoundException(pathname);
+        }
+    }
+
+    void saveImage(BufferedImage image, File file) {
+        try {
+            ImageIO.write(image, "png", file);
+            System.out.println("Image saved!");
+        } catch (IOException ioe) {
+            System.out.println("Image could not be saved: " + ioe.getMessage());
+        }
+    }
+
+    BufferedImage getFighterImage(Fighter fighter) throws OnlineImageNotFoundException {
+        if (saveLocally) {
+            File directory = new File(localFightersPath);
+            String fighterDirPath = localFightersPath + fighter.getUrlName() + "/";
+            File fighterDir = new File(fighterDirPath);
+            BufferedImage image;
+
+            if (!directory.exists()) directory.mkdir();
+            if (!fighterDir.exists()) fighterDir.mkdir();
+
+            File localImage = new File(fighterDirPath + fighter.getAlt()+".png");
+            try {
+                image = ImageIO.read(localImage);
+                return image;
+            } catch (IOException e) {
+                System.out.println("Image for " + fighter.getUrlName() + fighter.getAlt() + " does not exist locally. Will try finding online");
+            }
+
+            //if cannot find locally, will try to find online
+            image = getFighterImageOnline(fighter);
+            saveImage(image, localImage);
+            return image;
+        } else {
+            return getFighterImageOnline(fighter);
+        }
+    }
+
+    private  BufferedImage getFighterImageOnline(Fighter fighter) throws OnlineImageNotFoundException {
+        String urlString = null;
+        try {
             if (fighter.getAlt() == 1) {
                 urlString = FIGHTERS_URL + fighter.getUrlName() + "/main.png";
             } else {
@@ -99,62 +167,10 @@ public class Thumbnail {
             URL url = new URL(urlString);
             return ImageIO.read(url);
 
-        } catch (MalformedURLException e) {
-            System.out.println(e.getMessage());
         } catch (IOException e) {
-            System.out.println("Could not read URL as image");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error");
-            alert.setContentText("Could not find image online");
-
-            alert.showAndWait();
-        }
-        return null;
-    }
-
-
-    private void drawElement(String pathname) {
-        try {
-            g2d.drawImage(ImageIO.read(new FileInputStream(pathname)), 0, 0, null);
-        } catch (IOException e) {
-            System.out.println("Could not find location for image in path " + getClass().getResource(pathname).getPath());
+            throw new OnlineImageNotFoundException(urlString);
         }
     }
 
-    void saveImage(BufferedImage image, File file) {
-        try {
-            ImageIO.write(image, "png", file);
-            System.out.println("Image saved!");
-        } catch (IOException ioe) {
-            System.out.println("Image could not be saved: " + ioe.getMessage());
-        }
-    }
-
-    BufferedImage getFighterImage(Fighter fighter) {
-        if (saveLocally) {
-            File directory = new File(localFightersPath);
-            String fighterDirPath = localFightersPath + fighter.getUrlName() + "/";
-            File fighterDir = new File(fighterDirPath);
-            BufferedImage image;
-
-            if (!directory.exists()) directory.mkdir();
-            if (!fighterDir.exists()) fighterDir.mkdir();
-
-            File localImage = new File(fighterDirPath + fighter.getAlt()+".png");
-            try {
-                image = ImageIO.read(localImage);
-                return image;
-            } catch (IOException e) {
-                System.out.println("Image for " + fighter.getUrlName() + fighter.getAlt() + " does not exist locally. Will try finding online");
-            }
-
-            image = getFighterImageOnline(fighter);
-            saveImage(image, localImage);
-            return image;
-        } else {
-            return getFighterImageOnline(fighter);
-        }
-    }
 }
 

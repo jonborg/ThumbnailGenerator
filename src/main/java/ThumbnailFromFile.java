@@ -36,8 +36,8 @@ public class ThumbnailFromFile extends Thumbnail {
                 parameters = Arrays.asList(line.split(";"));
                 parameters.replaceAll(String::trim);
                 parameters.replaceAll(String::toLowerCase);
-                Fighter p1 = new Fighter(parameters.get(0),parameters.get(2), Integer.parseInt(parameters.get(4)), false);
-                Fighter p2 = new Fighter(parameters.get(1), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
+                Fighter p1 = new Fighter(parameters.get(0),parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
+                Fighter p2 = new Fighter(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
                 p1.setFlip(readFlipFile(p1));
                 p2.setFlip(!readFlipFile(p2));
                 generateThumbnail(foreground, saveLocally, parameters.get(6),date, p1, p2);

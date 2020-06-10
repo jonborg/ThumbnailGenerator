@@ -1,4 +1,4 @@
-package ui;
+package ui.league;
 
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;

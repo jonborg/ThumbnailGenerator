@@ -101,7 +101,7 @@ public class PlayerPane extends VBox {
     }
 
     public Fighter generateFighter(){
-        return new Fighter(getPlayer(), getUrlName(), getAlt(), isFlip());
+        return new Fighter(getPlayer(), getFighter() ,getUrlName(), getAlt(), isFlip());
     }
 
     public String getPlayer(){

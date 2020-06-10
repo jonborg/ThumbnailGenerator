@@ -1,4 +1,6 @@
 
+import exception.LocalImageNotFoundException;
+import exception.OnlineImageNotFoundException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,14 +15,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import ui.LeagueButton;
+import ui.factory.alert.AlertFactory;
+import ui.league.LeagueButton;
 import ui.player.PlayerPane;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class App extends Application {
 
@@ -36,6 +37,8 @@ public class App extends Application {
 
     Button flipPlayer = new Button();
 
+    AlertFactory alertFactory = new AlertFactory();
+
 
     public static void main(String[] args) {
         launch(args);
@@ -47,26 +50,28 @@ public class App extends Application {
         primaryStage.getIcons().add(new Image("https://pbs.twimg.com/profile_images/1132749237945552901/v74uelMr_400x400.png"));
         primaryStage.setTitle("Smash Bros. VOD Thumbnail Generator");
 
-
+        //Leagues UI
         Pane allLeaguesBox = generateLeaguesButtons();
+
+        //Date and Round UI
+        VBox roundBox = new VBox(new Label("Round:"), round);
+        VBox dateBox = new VBox(new Label("Date:"), date);
+        HBox dateRoundBox = new HBox(roundBox, dateBox);
+        dateRoundBox.setSpacing(20);
+        dateRoundBox.setAlignment(Pos.CENTER);
+
+
+        //Players UI
+        flipPlayer.setGraphic(new ImageView(new Image(new File("resources/images/ui/flip.png").toURI().toString())));
+        Pane allPlayersBox = generatePlayersPane();
+
+
+        //Save UI
+        CheckBox saveLocally = new CheckBox("Save/Load fighters' image locally");
 
         Button saveButton = new Button("Save");
         saveButton.setMinWidth(100);
         saveButton.setAlignment(Pos.CENTER);
-
-
-        VBox roundBox = new VBox(new Label("Round:"), round);
-        VBox dateBox = new VBox(new Label("Date:"), date);
-
-
-        HBox extraBox = new HBox(roundBox, dateBox);
-        extraBox.setSpacing(20);
-        extraBox.setAlignment(Pos.CENTER);
-
-        flipPlayer.setGraphic(new ImageView(new Image(new File("resources/images/ui/flip.png").toURI().toString())));
-        Pane allPlayersBox = generatePlayerPane();
-
-        CheckBox saveLocally = new CheckBox("Save/Load fighters' image locally");
 
         HBox buttonsBox = new HBox(saveButton, fromFile);
         buttonsBox.setSpacing(10);
@@ -77,57 +82,51 @@ public class App extends Application {
         saveBox.setAlignment(Pos.CENTER);
 
 
-        VBox allContentBox = new VBox(allLeaguesBox, extraBox, allPlayersBox);
-        allContentBox.setSpacing(20);
+        // Combining all UIs
+        VBox allInfoBox = new VBox(allLeaguesBox, dateRoundBox, allPlayersBox);
+        allInfoBox.setSpacing(20);
 
-        VBox allContentBox2 = new VBox(allContentBox, saveBox);
-        allContentBox2.setSpacing(40);
-        allContentBox2.setAlignment(Pos.CENTER);
+        VBox allContentBox = new VBox(allInfoBox, saveBox);
+        allContentBox.setSpacing(40);
+        allContentBox.setAlignment(Pos.CENTER);
 
-
-
-
-        saveButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-                if (p1.getUrlName() == null || p2.getUrlName() == null){
-                    System.out.println("Missing fighters");
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning");
-                    alert.setHeaderText("Warning");
-                    alert.setContentText("2 fighters must be chosen before generating the thumbnail.");
-
-                    alert.showAndWait();
-                    return;
-                }
-
-                if (foreground == null){
-                    System.out.println("League was not chosen");
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning");
-                    alert.setHeaderText("Warning");
-                    alert.setContentText("A league must be chosen before generating the thumbnail.");
-
-                    alert.showAndWait();
-                    return;
-                }
+        StackPane root = new StackPane();
+        root.getChildren().add(allContentBox);
+        primaryStage.setScene(new Scene(root, 800, 500));
+        primaryStage.show();
 
 
-                Thumbnail t = new Thumbnail();
+
+        //Buttons' listeners
+        //save listener
+        saveButton.setOnAction(actionEvent ->{
+
+            if (p1.getUrlName() == null || p2.getUrlName() == null){
+                System.out.println("Missing fighters");
+                alertFactory.displayWarning("2 fighters must be chosen before generating the thumbnail.");
+                return;
+            }
+
+            if (foreground == null){
+                System.out.println("League was not chosen");
+                alertFactory.displayWarning("A league must be chosen before generating the thumbnail.");
+                return;
+            }
+
+            Thumbnail t = new Thumbnail();
+            try {
                 t.generateThumbnail(foreground, saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
-                                        p1.generateFighter(),
-                                        p2.generateFighter());
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText("Success");
-                alert.setContentText("Thumbnail was successfully generated and saved!");
-
-                alert.showAndWait();
+                        p1.generateFighter(),
+                        p2.generateFighter());
+                alertFactory.displayInfo("Thumbnail was successfully generated and saved!");
+            }catch (LocalImageNotFoundException e){
+                
+            }catch (OnlineImageNotFoundException e){
+                //error previously dealt. Catch is used to interrupt thumbnail generation when fighters images are missing
             }
         });
 
+        //load from file listener
         fromFile.setOnAction(actionEvent -> {
             FileChooser fileChooser = new FileChooser();
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
@@ -135,15 +134,10 @@ public class App extends Application {
                 ThumbnailFromFile tbf = new ThumbnailFromFile();
                 tbf.generateFromFile(selectedFile, saveLocally.isSelected());
             }
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText("Success");
-            alert.setContentText("Thumbnails were successfully generated and saved!");
-
-            alert.showAndWait();
+            alertFactory.displayInfo("Thumbnails were successfully generated and saved!");
         });
 
+        //flip player info listener
         flipPlayer.setOnAction(actionEvent ->{
             String nameAux = p1.getPlayer();
             p1.setPlayer(p2.getPlayer());
@@ -163,22 +157,10 @@ public class App extends Application {
 
             p1.setAlt(auxAlt2);
             p2.setAlt(auxAlt1);
-
-            boolean auxFlip = p1.isFlip();
-            p1.setFlip(!p2.isFlip());
-            p2.setFlip(!auxFlip);
+            
         });
-
-        StackPane root = new StackPane();
-
-        root.getChildren().add(allContentBox2);
-  //      root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 800, 500));
-
-        primaryStage.show();
-
-
     }
+
 
     private Pane generateLeaguesButtons(){
         Label leagueLabel = new Label("League:");
@@ -220,7 +202,7 @@ public class App extends Application {
     }
 
 
-    private Pane generatePlayerPane(){
+    private Pane generatePlayersPane(){
 
         HBox allPlayersBox = new HBox(p1, flipPlayer, p2);
         allPlayersBox.setSpacing(50);
