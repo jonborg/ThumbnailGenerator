@@ -1,9 +1,17 @@
 This is an instructions manual for v1.1.0. of Thumbnail Generator
 
+----------Added features for v1.2.0-----------
+- Enabled text search when selecting fighters on their dropdowns;
+- Errors during Thumbnail creation via file does not interrupt the parsing of the file anymore;
+- Each cause of errors during Thumbnail creation via file is individually shown to the user;
+- Some code improvements/cleanup was performed (let's see if it didn't break anything).
+
+
+
 ----------Added features for v1.1.0-----------
 - Multi thumbnail generation from 1 file in csv syntax;
 - Switch button that swaps player 1 and player 2 information;
-- Added Smash or Pass online league thumbnail generation;
+- Added Smash or Pass online league thumbnail generation.
 
 
 

@@ -6,7 +6,7 @@
 
   <groupId>com.sbpt.apps</groupId>
   <artifactId>thumbnail-generator</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -103,7 +103,7 @@
                                 <jdkPreference>preferJre</jdkPreference>
                             </jre>
                             <versionInfo>
-                                <fileVersion>1.0.0.0</fileVersion>
+                                <fileVersion>1.2.0.0</fileVersion>
                                 <txtFileVersion>${project.version}</txtFileVersion>
                                 <fileDescription>${project.name}</fileDescription>
                                 <copyright>2012 thumbnailgenerator.com</copyright>
