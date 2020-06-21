@@ -1,4 +1,4 @@
-This is an instructions manual for v1.1.0. of Thumbnail Generator
+This is an instructions manual for Thumbnail Generator
 
 ----------Added features for v1.2.1-----------
 - Thumbnail font is now locally loaded. Now is not required to have the font installed on PC.
