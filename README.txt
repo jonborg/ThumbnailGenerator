@@ -1,9 +1,22 @@
 This is an instructions manual for v1.1.0. of Thumbnail Generator
 
+----------Added features for v1.2.1-----------
+- Thumbnail font is now locally loaded. Now is not required to have the font installed on PC.
+
+
+
+----------Added features for v1.2.0-----------
+- Enabled text search when selecting fighters on their dropdowns;
+- Errors during Thumbnail creation via file does not interrupt the parsing of the file anymore;
+- Each cause of errors during Thumbnail creation via file is individually shown to the user;
+- Some code improvements/cleanup was performed (let's see if it didn't break anything).
+
+
+
 ----------Added features for v1.1.0-----------
 - Multi thumbnail generation from 1 file in csv syntax;
 - Switch button that swaps player 1 and player 2 information;
-- Added Smash or Pass online league thumbnail generation;
+- Added Smash or Pass online league thumbnail generation.
 
 
 
@@ -11,7 +24,7 @@ This is an instructions manual for v1.1.0. of Thumbnail Generator
 -----------------Introduction-----------------
 Click on ThumbnailGenerator.exe to start the program. 
 
-It needs to be on the same folder as the folder "resources" in order
+It needs to be on the same folder as the folder "assets" in order
 to function properly.
 
 
@@ -40,9 +53,9 @@ If you want to use another image (ex.:background), save the new
 image on the target folder and rename it like the old image 
 (ex.:background.png)
 
- -Background image: resources/images/others/background.png 
- -Foreground image (Throwndown Lx): resources/images/others/foregroundLx.png
- -Foreground image (Smash Invicta): resources/images/others/foregroundPorto.png
+ -Background image: assets/images/others/background.png
+ -Foreground image (Throwndown Lx): assets/images/others/foregroundLx.png
+ -Foreground image (Smash Invicta): assets/images/others/foregroundPorto.png
 
 
 
@@ -55,7 +68,7 @@ the official page of Super Smash Bros. Ultimate website.
 As an option, Thumbnail Generator can save those downloaded images
 to use them for future uses without requiring access to the website
 
- -Fighter images path: resources/fighters/
+ -Fighter images path: assets/fighters/
 
 
 
@@ -64,10 +77,10 @@ to use them for future uses without requiring access to the website
 The images needed some scaling and reposition in other to be printed 
 correctly on the thumbnail. 
 
-Each fighters scalling and reposition is found on these files:
+Each fighters scaling and reposition is found on these files:
 
- - scalling: resources/config/scale.txt
- - offset: resources/config/offset.txt
+ - scaling: assets/config/scale.txt
+ - offset: assets/config/offset.txt
 
 
 Each line of scale.txt has a fighter name and its image multiplier for
@@ -106,16 +119,6 @@ And finally, the name of the round played by the players
 
 - The characters names must be written the exact same way as shown in scale.txt
 and offset.txt
-	
-
-
-
-
-
-
-
-
-ation
  
 
 

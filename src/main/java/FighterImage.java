@@ -1,25 +1,23 @@
-import javafx.scene.control.Alert;
+import fighter.Fighter;
 import org.imgscalr.Scalr;
+import ui.factory.alert.AlertFactory;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.nio.Buffer;
 import java.nio.charset.StandardCharsets;
 
 public class FighterImage {
     private Fighter fighter;
     private BufferedImage image;
 
-    private final String scalerPath = "resources/config/scale.txt";
-    private final String offsetPath = "resources/config/offset.txt";
+    private final String scalerPath = "assets/config/scale.txt";
+    private final String offsetPath = "assets/config/offset.txt";
 
-    public int offsetX=0;
-    public int offsetY=0;
 
+    AlertFactory alertFactory = new AlertFactory();
 
     public FighterImage(Fighter fighter, BufferedImage image){
         this.fighter = fighter;
@@ -29,7 +27,7 @@ public class FighterImage {
 
     public BufferedImage editImage( int port){
         image = this.resizeImage(fighter.getUrlName()); //later, use urlname to find mult in a file
-        image = this.offsetImage(fighter.getUrlName(),fighter.isFlip(),port);
+        image = this.offsetImage(fighter.getUrlName());
         image = this.flipImage(fighter.isFlip());
         image = this.cropImage(1280/2,720);
         return image;
@@ -67,29 +65,22 @@ public class FighterImage {
                 }
             }
         }catch(IOException e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Could not detect scaler.txt");
-            alert.showAndWait();
+            alertFactory.displayError("Could not detect scaler.txt");
         }
 
         int width = (int) (mult * image.getWidth());
         int height = (int) (mult * image.getHeight());
-        //int width = (int) (mult * image.getWidth());
-        //int height = (int) (width / image.getWidth() * image.getHeight());
 
         System.out.println("Resize complete "+image.getWidth() + " "+ image.getHeight());
 
         return Scalr.resize(image, Scalr.Method.ULTRA_QUALITY, image.getHeight() < image.getWidth() ? Scalr.Mode.FIT_TO_HEIGHT : Scalr.Mode.FIT_TO_WIDTH,
                 Math.max(width, height), Math.max(width, height), Scalr.OP_ANTIALIAS);
-        //return Scalr.resize(image, width, height, Scalr.OP_ANTIALIAS);
     }
 
 
 
 
-    private BufferedImage offsetImage(String urlName, boolean flip, int port){
+    private BufferedImage offsetImage(String urlName){
         int offsetX = 0;
         int offsetY = 0;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -106,11 +97,8 @@ public class FighterImage {
                 }
             }
         }catch(IOException e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("ERROR");
-            alert.setContentText("Could not detect offset.txt");
-            alert.showAndWait();        }
+            alertFactory.displayError("Could not detect offset.txt");
+        }
 
 
         BufferedImage img = new BufferedImage(image.getWidth() + Math.abs(offsetX),
@@ -119,22 +107,7 @@ public class FighterImage {
         Graphics2D g2d = img.createGraphics();
         int inputX=0;
         int inputY=0;
-       /* if (offsetX>0 && offsetY>0){
-            g2d.drawImage(image,offsetX,offsetY,null);
-        }
-        if (offsetX>0 && offsetY<=0){
-            image=cropImageY(image,-offsetY);
-            g2d.drawImage(image,offsetX,0,null);
-        }
-        if (offsetX<=0 && offsetY>0){
-            image=cropImageX(image,-offsetX);
-            g2d.drawImage(image,0,offsetY,null);
-        }
-        if (offsetX<=0 && offsetY<=0){
-            image=cropImageY(image,-offsetY);
-            image=cropImageX(image,-offsetX);
-            g2d.drawImage(img,0,0,null);
-        }*/
+
         if(offsetX>0) inputX=offsetX;
         if(offsetY>0) {
             inputY=offsetY;
@@ -159,18 +132,11 @@ public class FighterImage {
         }
         System.out.println(image.getWidth()+" "+image.getHeight());
         if (height>heightLimit) {
-          //  marginY = (height-heightLimit)/2;
-          //  marginY = (height-heightLimit)/2;
+
         }
         return Scalr.crop(image, marginX,marginY,Math.min(width,widthLimit), Math.min(height,heightLimit), null);
     }
 
-    private BufferedImage cropImageX(BufferedImage img, int x){
-        int width = img.getWidth();
-        int height = img.getHeight();
-
-        return Scalr.crop(img,x,0,width-x,height,null);
-    }
 
     private BufferedImage cropImageY(BufferedImage img, int y){
         int width = img.getWidth();
@@ -178,20 +144,6 @@ public class FighterImage {
 
         return Scalr.crop(img,0,y,width,height-y,null);
     }
-
-    private BufferedImage cropImageY(int widthLimit,int heightLimit){
-        int width = image.getWidth();
-        int height = image.getHeight();
-        int marginX = 0;
-        int marginY= 0;
-
-        if (height>heightLimit) {
-            //marginX = (width-widthLimit)/2;
-        }
-
-        return Scalr.crop(image, 0,marginY,Math.min(width,widthLimit), Math.min(height,heightLimit), null);
-    }
-
 
     static public void MultiFighters(Fighter fighter){
         if ("pokemon_trainer".contains(fighter.getUrlName())) {

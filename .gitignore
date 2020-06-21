@@ -31,5 +31,5 @@ hs_err_pid*
 
 #folders
 target/
-resources/fighters/*
+assets/fighters/*
 thumbnails/
