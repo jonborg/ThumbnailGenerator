@@ -1,5 +1,10 @@
 This is an instructions manual for v1.1.0. of Thumbnail Generator
 
+----------Added features for v1.2.1-----------
+- Thumbnail font is now locally loaded. Now is not required to have the font installed on PC.
+
+
+
 ----------Added features for v1.2.0-----------
 - Enabled text search when selecting fighters on their dropdowns;
 - Errors during Thumbnail creation via file does not interrupt the parsing of the file anymore;
