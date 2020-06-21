@@ -6,14 +6,15 @@
 
   <groupId>com.sbpt.apps</groupId>
   <artifactId>thumbnail-generator</artifactId>
-  <version>1.2.0</version>
+  <version>${project.version}</version>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <jdk.version>1.8</jdk.version>
-
-    <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      <jdk.version>1.8</jdk.version>
+      <project.version>1.2.0</project.version>
+      <file.version>${project.version}.0</file.version>
+      <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
   </properties>
 
 
@@ -38,7 +39,11 @@
   </dependencies>
   
   <build>
-
+      <resources>
+          <resource>
+              <directory>src/main/resources</directory>
+          </resource>
+      </resources>
         <plugins>
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -103,12 +108,12 @@
                                 <jdkPreference>preferJre</jdkPreference>
                             </jre>
                             <versionInfo>
-                                <fileVersion>1.2.0.0</fileVersion>
-                                <txtFileVersion>${project.version}</txtFileVersion>
+                                <fileVersion>${file.version}</fileVersion>
+                                <txtFileVersion>${file.version}</txtFileVersion>
                                 <fileDescription>${project.name}</fileDescription>
                                 <copyright>2012 thumbnailgenerator.com</copyright>
-                                <productVersion>1.0.0.0</productVersion>
-                                <txtProductVersion>1.0.0.0</txtProductVersion>
+                                <productVersion>${file.version}</productVersion>
+                                <txtProductVersion>${file.version}</txtProductVersion>
                                 <productName>${project.name}</productName>
                                 <internalName>thumbnailgenerator</internalName>
                                 <originalFilename>thumbnailgenerator.exe</originalFilename>

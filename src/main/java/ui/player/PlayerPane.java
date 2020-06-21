@@ -77,7 +77,7 @@ public class PlayerPane extends VBox {
     private void setDefaultFlip (String urlName){
         boolean skip = false;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream("resources/config/flip.txt"), StandardCharsets.UTF_8))) {
+                new FileInputStream("assets/config/flip.txt"), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (urlName == "falco" && !skip && line.contains(urlName)){

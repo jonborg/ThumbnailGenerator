@@ -9,6 +9,7 @@ import java.nio.Buffer;
 import java.util.List;
 import java.util.ArrayList;
 
+import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import fighter.Fighter;
@@ -26,15 +27,15 @@ public class Thumbnail {
     static String FIGHTERS_URL_2 = "https://raw.githubusercontent.com/marcrd/smash-ultimate-assets/master/renders/";
     static String SANS_URL = "https://i.redd.it/n2tcplon8qk31.png";
 
-    static String foregroundPath = "resources/images/others/";
+    static String foregroundPath = "assets/images/others/";
     static String backgroundPath = foregroundPath + "background.png";
-    static String localFightersPath = "resources/fighters/";
+    static String localFightersPath = "assets/fighters/";
 
     static String saveThumbnailsPath = "thumbnails/";
     boolean saveLocally;
 
     public void generateThumbnail(String foreground, boolean saveLocally, String round, String date, Fighter... fighters)
-            throws LocalImageNotFoundException, OnlineImageNotFoundException {
+            throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException {
 
         String thumbnailFileName = fighters[0].getPlayerName().replace("|","_")+"-"+fighters[0].getUrlName()+fighters[0].getAlt()+"--"+
                 fighters[1].getPlayerName().replace("|","_")+"-"+fighters[1].getUrlName()+fighters[1].getAlt()+"--"+
@@ -63,8 +64,8 @@ public class Thumbnail {
 
         drawElement(foregroundPath+foreground);
 
-        g2d.drawImage(TextToImage.convert(fighters[0].getPlayerName(), 90), 0 , 10, null);
-        g2d.drawImage(TextToImage.convert(fighters[1].getPlayerName(), 90), WIDTH / 2 , 5, null);
+        g2d.drawImage(TextToImage.convert(fighters[0].getPlayerName(), 90), 0, 10, null);
+        g2d.drawImage(TextToImage.convert(fighters[1].getPlayerName(), 90), WIDTH / 2, 5, null);
 
 
         g2d.drawImage(TextToImage.convert(round, 75), 0, HEIGHT - 100, null);
@@ -72,9 +73,9 @@ public class Thumbnail {
 
         File dirThumbnails = new File(saveThumbnailsPath);
         if (!dirThumbnails.exists()) dirThumbnails.mkdir();
-        saveImage(thumbnail, new File(saveThumbnailsPath+
+        saveImage(thumbnail, new File(saveThumbnailsPath +
                 thumbnailFileName));
-    }
+}
 
 
     private void drawElement(String pathname) throws LocalImageNotFoundException {

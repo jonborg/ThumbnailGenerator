@@ -1,3 +1,4 @@
+import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
@@ -15,7 +16,7 @@ public class ThumbnailFromFile extends Thumbnail {
     AlertFactory alertFactory = new AlertFactory();
 
     public void generateFromFile(File file, boolean saveLocally)
-        throws ThumbnailFromFileException{
+        throws ThumbnailFromFileException, FontNotFoundException{
         boolean firstLine = true;
         String foreground = null;
         String date = null;
@@ -55,9 +56,11 @@ public class ThumbnailFromFile extends Thumbnail {
                     generateThumbnail(foreground, saveLocally, parameters.get(6), date, p1, p2);
                 }catch(OnlineImageNotFoundException e) {
                     invalidLines.add(e.getMessage() + " -> " + line);
-                }catch(LocalImageNotFoundException e){
+                }catch(LocalImageNotFoundException e) {
                     alertFactory.displayError(e.getMessage());
                     throw new ThumbnailFromFileException();
+                }catch(FontNotFoundException e){
+                    throw e;
                 }catch (Exception e){
                     invalidLines.add("Invalid line -> "+ line);
                 }
@@ -84,7 +87,7 @@ public class ThumbnailFromFile extends Thumbnail {
         boolean result = false;
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream("resources/config/flip.txt"), StandardCharsets.UTF_8))) {
+                new FileInputStream("assets/config/flip.txt"), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.contains(fighter.getUrlName())){

@@ -19,7 +19,7 @@ This is an instructions manual for v1.1.0. of Thumbnail Generator
 -----------------Introduction-----------------
 Click on ThumbnailGenerator.exe to start the program. 
 
-It needs to be on the same folder as the folder "resources" in order
+It needs to be on the same folder as the folder "assets" in order
 to function properly.
 
 
@@ -48,9 +48,9 @@ If you want to use another image (ex.:background), save the new
 image on the target folder and rename it like the old image 
 (ex.:background.png)
 
- -Background image: resources/images/others/background.png 
- -Foreground image (Throwndown Lx): resources/images/others/foregroundLx.png
- -Foreground image (Smash Invicta): resources/images/others/foregroundPorto.png
+ -Background image: assets/images/others/background.png
+ -Foreground image (Throwndown Lx): assets/images/others/foregroundLx.png
+ -Foreground image (Smash Invicta): assets/images/others/foregroundPorto.png
 
 
 
@@ -63,7 +63,7 @@ the official page of Super Smash Bros. Ultimate website.
 As an option, Thumbnail Generator can save those downloaded images
 to use them for future uses without requiring access to the website
 
- -Fighter images path: resources/fighters/
+ -Fighter images path: assets/fighters/
 
 
 
@@ -74,8 +74,8 @@ correctly on the thumbnail.
 
 Each fighters scaling and reposition is found on these files:
 
- - scaling: resources/config/scale.txt
- - offset: resources/config/offset.txt
+ - scaling: assets/config/scale.txt
+ - offset: assets/config/offset.txt
 
 
 Each line of scale.txt has a fighter name and its image multiplier for

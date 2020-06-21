@@ -1,4 +1,5 @@
 
+import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
@@ -63,7 +64,7 @@ public class App extends Application {
 
 
         //Players UI
-        flipPlayer.setGraphic(new ImageView(new Image(new File("resources/images/ui/flip.png").toURI().toString())));
+        flipPlayer.setGraphic(new ImageView(new Image(new File("assets/images/ui/flip.png").toURI().toString())));
         Pane allPlayersBox = generatePlayersPane();
 
 
@@ -124,6 +125,8 @@ public class App extends Application {
                 alertFactory.displayError(e.getMessage());
             }catch (OnlineImageNotFoundException e){
                 alertFactory.displayError(e.getMessage());
+            }catch (FontNotFoundException e){
+                alertFactory.displayError(e.getMessage());
             }
         });
 
@@ -138,6 +141,8 @@ public class App extends Application {
                     alertFactory.displayInfo("Thumbnails were successfully generated and saved!");
                 }catch(ThumbnailFromFileException e){
                     //alertFactory already thrown inside tbf.generateFromFile
+                }catch(FontNotFoundException e){
+                    alertFactory.displayError(e.getMessage());
                 }
             }
         });
@@ -169,7 +174,7 @@ public class App extends Application {
 
     private Pane generateLeaguesButtons(){
         Label leagueLabel = new Label("League:");
-        File[] leaguesImages = new File("resources/images/leagues/").listFiles();
+        File[] leaguesImages = new File("assets/images/leagues/").listFiles();
         ToggleGroup leaguesGroup = new ToggleGroup();
         List<LeagueButton> leaguesButtons = new ArrayList<>();
 

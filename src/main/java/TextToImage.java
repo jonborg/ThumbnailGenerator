@@ -1,3 +1,5 @@
+import com.thoughtworks.xstream.mapper.Mapper;
+import exception.FontNotFoundException;
 import javafx.scene.effect.DropShadow;
 import org.imgscalr.Scalr;
 
@@ -9,6 +11,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class TextToImage {
 
@@ -16,8 +19,10 @@ public class TextToImage {
     private static int HEIGHT = 110;
     private static float angle = -2f;
 
+    private static String fontName = "BebasNeue-Regular";
 
-    public static BufferedImage convert(String text, int fontSize) {
+
+    public static BufferedImage convert(String text, int fontSize) throws FontNotFoundException {
         if (text.isEmpty()) return null;
         BufferedImage rect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = rect.createGraphics();
@@ -29,8 +34,15 @@ public class TextToImage {
     }
 
 
-    private static BufferedImage generateText(String text, Color color, int fontSize){
-        Font font = new Font ("Bebas Neue",Font.BOLD + Font.ITALIC, fontSize);
+    private static BufferedImage generateText(String text, Color color, int fontSize) throws FontNotFoundException {
+        Font font;
+        try {
+            InputStream fontFile = TextToImage.class.getResourceAsStream("/fonts/" + fontName + ".ttf");
+            font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD + Font.ITALIC, fontSize);
+        }catch (FontFormatException | IOException | NullPointerException e){
+            throw new FontNotFoundException(fontName);
+        }
+        //font = new Font ("Bebas Neue",Font.BOLD + Font.ITALIC, fontSize);
 
         BufferedImage rect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = rect.createGraphics();
