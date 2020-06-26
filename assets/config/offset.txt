@@ -103,6 +103,7 @@ banjo_and_kazooie 40 -50
 terry 80 0
 bylethM -20 50
 bylethF -10 10
+minmin 140 -140
 
 //echoes
 dark_pit -10 -130

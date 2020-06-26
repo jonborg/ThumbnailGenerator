@@ -103,6 +103,7 @@ banjo_and_kazooie 0.55
 terry 1.2
 bylethM 1
 bylethF 1
+minmin 1.1
 
 //echoes
 dark_pit 1.25
