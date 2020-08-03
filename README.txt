@@ -1,5 +1,9 @@
 This is an instructions manual for Thumbnail Generator
 
+----------Added features for v1.2.2-----------
+- Min Min is added.
+
+
 ----------Added features for v1.2.1-----------
 - Thumbnail font is now locally loaded. Now is not required to have the font installed on PC.
 
