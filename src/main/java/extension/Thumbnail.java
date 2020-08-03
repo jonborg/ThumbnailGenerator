@@ -1,3 +1,5 @@
+package extension;
+
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -5,15 +7,12 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 
-import java.nio.Buffer;
-import java.util.List;
-import java.util.ArrayList;
-
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
+import extension.FighterImage;
+import extension.TextToImage;
 import fighter.Fighter;
-import ui.factory.alert.AlertFactory;
 
 
 public class Thumbnail {
@@ -75,7 +74,7 @@ public class Thumbnail {
         if (!dirThumbnails.exists()) dirThumbnails.mkdir();
         saveImage(thumbnail, new File(saveThumbnailsPath +
                 thumbnailFileName));
-}
+    }
 
 
     private void drawElement(String pathname) throws LocalImageNotFoundException {
@@ -155,4 +154,5 @@ public class Thumbnail {
     }
 
 }
+
 

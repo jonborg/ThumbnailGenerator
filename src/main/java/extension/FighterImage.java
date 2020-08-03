@@ -1,3 +1,5 @@
+package extension;
+
 import fighter.Fighter;
 import org.imgscalr.Scalr;
 import ui.factory.alert.AlertFactory;

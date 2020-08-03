@@ -1,9 +1,11 @@
+package extension;
+
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
+import extension.FighterImage;
 import fighter.Fighter;
-import javafx.scene.control.Alert;
 import ui.factory.alert.AlertFactory;
 
 import java.io.*;

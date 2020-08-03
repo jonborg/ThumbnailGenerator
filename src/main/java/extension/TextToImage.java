@@ -1,15 +1,12 @@
-import com.thoughtworks.xstream.mapper.Mapper;
-import exception.FontNotFoundException;
-import javafx.scene.effect.DropShadow;
-import org.imgscalr.Scalr;
+package extension;
 
-import javax.imageio.ImageIO;
+import exception.FontNotFoundException;
+
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.image.*;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
