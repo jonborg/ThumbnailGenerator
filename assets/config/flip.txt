@@ -103,6 +103,7 @@ terry false
 banjo_and_kazooie false
 bylethM true
 bylethF false
+minmin false
 
 //echoese outros ds
 dark_pit true
