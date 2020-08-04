@@ -1,5 +1,9 @@
 package ui.menu;
 
+import exception.FontNotFoundException;
+import exception.LocalImageNotFoundException;
+import exception.OnlineImageNotFoundException;
+import extension.Thumbnail;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -10,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import ui.factory.alert.AlertFactory;
 import ui.league.LeagueButton;
+import ui.placement.PlacementPane;
 import ui.player.PlayerPane;
 
 import java.io.File;
@@ -21,7 +26,7 @@ public class Top8Menu {
     private Spinner<Integer> participants = new Spinner<>();
     private TextField date = new TextField();
 
-    private ArrayList<String> placements = new ArrayList<>();
+    private ArrayList<PlacementPane> placements;
 
     private String foreground;
 
@@ -48,7 +53,12 @@ public class Top8Menu {
 
 
         //Placements UI
+        placements = buildPlacements();
+        VBox placesBox = new VBox();
+        placesBox.getChildren().addAll(placements);
 
+        HBox placementsBox = new HBox(placesBox);
+        placementsBox.setAlignment(Pos.CENTER);
 
         //Save UI
         CheckBox saveLocally = new CheckBox("Save/Load fighters' image locally");
@@ -67,9 +77,43 @@ public class Top8Menu {
 
 
         // Combining all UIs
-        //VBox allInfoBox = new VBox(allLeaguesBox, dateRoundBox, something);
-        VBox allInfoBox = new VBox(allLeaguesBox, dateRoundBox);
+        VBox allInfoBox = new VBox(allLeaguesBox, dateRoundBox, placementsBox);
         allInfoBox.setSpacing(20);
+
+        // Save button logic
+
+        saveButton.setOnAction(actionEvent ->{
+
+            if (foreground == null){
+                System.out.println("League was not chosen");
+                alertFactory.displayWarning("A league must be chosen before generating the thumbnail.");
+                return;
+            }
+
+            for (PlacementPane p : placements) {
+                if (p.getUrlName() == null){
+                    System.out.println("Missing fighters");
+                    alertFactory.displayWarning("All 8 fighters must be chosen before generating the thumbnail.");
+                    return;
+                }
+            }
+
+            // TO DO: Create Top 8 chart logic
+
+            /*Thumbnail t = new Thumbnail();
+            try {
+                t.generateThumbnail(foreground, saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
+                        p1.generateFighter(),
+                        p2.generateFighter());
+                alertFactory.displayInfo("Thumbnail was successfully generated and saved!");
+            }catch (LocalImageNotFoundException e){
+                alertFactory.displayError(e.getMessage());
+            }catch (OnlineImageNotFoundException e){
+                alertFactory.displayError(e.getMessage());
+            }catch (FontNotFoundException e){
+                alertFactory.displayError(e.getMessage());
+            }*/
+        });
 
         vbox = new VBox(allInfoBox, saveBox);
         vbox.setSpacing(40);
@@ -78,6 +122,21 @@ public class Top8Menu {
         tab = new Tab("Top 8");
         tab.setContent(vbox);
         tab.setClosable(false);
+    }
+
+    private ArrayList<PlacementPane> buildPlacements() {
+        ArrayList<PlacementPane> places = new ArrayList<>();
+
+        places.add(new PlacementPane(1));
+        places.add(new PlacementPane(2));
+        places.add(new PlacementPane(3));
+        places.add(new PlacementPane(4));
+        places.add(new PlacementPane(5));
+        places.add(new PlacementPane(6));
+        places.add(new PlacementPane(7));
+        places.add(new PlacementPane(8));
+
+        return places;
     }
 
     public Tab getTab() {

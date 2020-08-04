@@ -23,7 +23,7 @@ public class App extends Application {
 
         StackPane root = new StackPane();
         root.getChildren().add(mainMenu.getTabPane());
-        primaryStage.setScene(new Scene(root, 800, 500));
+        primaryStage.setScene(new Scene(root, 900, 700));
         primaryStage.show();
     }
 }
