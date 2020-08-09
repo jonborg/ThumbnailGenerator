@@ -30,6 +30,7 @@ hs_err_pid*
 
 
 #folders
+charts/
 target/
 assets/fighters/*
 thumbnails/

@@ -11,35 +11,35 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class FighterImage {
+public class IconImage {
     private Fighter fighter;
     private BufferedImage image;
 
-    private final String scalerPath = "assets/config/fighters/scale.txt";
-    private final String offsetPath = "assets/config/fighters/offset.txt";
+    private final String scalerPath = "assets/config/scale.txt";
+    private final String offsetPath = "assets/config/icons/offset.txt";
 
 
     AlertFactory alertFactory = new AlertFactory();
 
-    public FighterImage(Fighter fighter, BufferedImage image){
+    public IconImage(Fighter fighter, BufferedImage image){
         this.fighter = fighter;
         this.image = image;
         MultiFighters(fighter);
     }
 
-    public BufferedImage editImage( int port){
+    public BufferedImage editImage(String tournament, int placement, int port){
         image = this.resizeImage(fighter.getUrlName()); //later, use urlname to find mult in a file
-        image = this.offsetImage(fighter.getUrlName());
-        image = this.flipImage(fighter.isFlip());
-        image = this.cropImage(1280/2,720);
+        image = this.offsetImage(tournament, placement, port);
+        //image = this.flipImage(fighter.isFlip());
+        //image = this.cropImage(1280/2,720);
         return image;
     }
 
-    public BufferedImage editImage( int port, int portZ){
+    public BufferedImage editImage(String tournament, int placement, int port, int portZ){
         image = this.resizeImage(fighter.getUrlName()); //later, use urlname to find mult in a file
-        image = this.offsetImage(fighter.getUrlName());
-        image = this.flipImage(fighter.isFlip());
-        image = this.cropImage(1280/2,720);
+        image = this.offsetImage(tournament, placement, portZ);
+        //image = this.flipImage(fighter.isFlip());
+        //image = this.cropImage(1280/2,720);
         return image;
     }
 
@@ -60,8 +60,8 @@ public class FighterImage {
     private BufferedImage resizeImage(String urlName) {
         System.out.println("Performing resize of image with size: "+image.getWidth()+ " "+ image.getWidth());
 
-        double mult = 1;
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+        double mult = 0.12;
+        /*try (BufferedReader br = new BufferedReader(new InputStreamReader(
                 new FileInputStream(scalerPath), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -74,7 +74,7 @@ public class FighterImage {
             }
         }catch(IOException e){
             alertFactory.displayError("Could not detect scaler.txt");
-        }
+        }*/
 
         int width = (int) (mult * image.getWidth());
         int height = (int) (mult * image.getHeight());
@@ -88,30 +88,42 @@ public class FighterImage {
 
 
 
-    private BufferedImage offsetImage(String urlName){
+    private BufferedImage offsetImage(String tournament, int placement, int portZ){
         int offsetX = 0;
         int offsetY = 0;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
                 new FileInputStream(offsetPath), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
-                if (line.contains(urlName)){
-                    String[] words = line.split(" ");
-                    if (words.length>1)
-                        offsetX = 2* Integer.parseInt(words[1]);
-                    if (words.length>2)
-                        offsetY = Integer.parseInt(words[2]);
-                    break;
-                }
+                    if (line.startsWith(tournament + " ")){
+                        String[] words = line.split(" ");
+                        if (words.length>1)
+                            offsetY = Integer.parseInt(words[1]);
+                        break;
+                    }
             }
         }catch(IOException e){
             alertFactory.displayError("Could not detect offset.txt");
         }
 
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                new FileInputStream(offsetPath), StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                    if (line.startsWith(tournament + "_" + placement + "_" + portZ)){
+                        String[] words = line.split(" ");
+                        if (words.length>1)
+                            offsetX = 2 * Integer.parseInt(words[1]);
+                        break;
+                    }
+            }
+        }catch(IOException e){
+            alertFactory.displayError("Could not detect offset.txt");
+        }
 
         BufferedImage img = new BufferedImage(image.getWidth() + Math.abs(offsetX),
-                                                image.getHeight() + Math.abs(offsetY),
-                                                    BufferedImage.TYPE_INT_ARGB);
+                image.getHeight() + Math.abs(offsetY),
+                BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();
         int inputX=0;
         int inputY=0;
@@ -154,6 +166,7 @@ public class FighterImage {
     }
 
     static public void MultiFighters(Fighter fighter){
+        /*
         if ("pokemon_trainer".contains(fighter.getUrlName())) {
             if (fighter.getAlt() % 2 == 0) fighter.setUrlName("pokemon_trainerF");
             else fighter.setUrlName("pokemon_trainerM");
@@ -259,7 +272,7 @@ public class FighterImage {
         if ("joker".contains(fighter.getUrlName())) {
             //1 to 6
             if (fighter.getAlt()<7) fighter.setUrlName("joker1");
-            //7 and 8
+                //7 and 8
             else fighter.setUrlName("joker2");
             return;
         }
@@ -267,7 +280,7 @@ public class FighterImage {
         if ("falco".contains(fighter.getUrlName())) {
             fighter.setUrlName("falco ");
         }
-
+        */
 
     }
 

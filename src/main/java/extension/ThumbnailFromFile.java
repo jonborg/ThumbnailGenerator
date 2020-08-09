@@ -89,7 +89,7 @@ public class ThumbnailFromFile extends Thumbnail {
         boolean result = false;
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream("assets/config/flip.txt"), StandardCharsets.UTF_8))) {
+                new FileInputStream("assets/config/fighters/flip.txt"), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.contains(fighter.getUrlName())){

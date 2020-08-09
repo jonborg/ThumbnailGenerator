@@ -4,6 +4,7 @@ import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import extension.Thumbnail;
+import extension.Top8Chart;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -24,11 +25,13 @@ import java.util.List;
 public class Top8Menu {
 
     private Spinner<Integer> participants = new Spinner<>();
+    private Spinner<Integer> tournamentNumber = new Spinner<>();
     private TextField date = new TextField();
 
     private ArrayList<PlacementPane> placements;
 
-    private String foreground;
+    private String template;
+    private String leagueId;
 
     private AlertFactory alertFactory = new AlertFactory();
 
@@ -41,13 +44,18 @@ public class Top8Menu {
         Pane allLeaguesBox = generateLeaguesButtons();
 
         //Date and Participants UI
+        tournamentNumber.setMaxWidth(80);
+        tournamentNumber.setEditable(true);
+        tournamentNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25556));
+
         participants.setMaxWidth(80);
         participants.setEditable(true);
         participants.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(8, 25556));
 
-        VBox roundBox = new VBox(new Label("Participants:"), participants);
+        VBox roundBox1 = new VBox(new Label("Tournament Number:"), tournamentNumber);
+        VBox roundBox2 = new VBox(new Label("Participants:"), participants);
         VBox dateBox = new VBox(new Label("Date:"), date);
-        HBox dateRoundBox = new HBox(roundBox, dateBox);
+        HBox dateRoundBox = new HBox(roundBox1, roundBox2, dateBox);
         dateRoundBox.setSpacing(20);
         dateRoundBox.setAlignment(Pos.CENTER);
 
@@ -84,27 +92,23 @@ public class Top8Menu {
 
         saveButton.setOnAction(actionEvent ->{
 
-            if (foreground == null){
+            if (template == null){
                 System.out.println("League was not chosen");
                 alertFactory.displayWarning("A league must be chosen before generating the thumbnail.");
                 return;
             }
 
             for (PlacementPane p : placements) {
-                if (p.getUrlName() == null){
+                if (p.getUrlName1() == null){
                     System.out.println("Missing fighters");
                     alertFactory.displayWarning("All 8 fighters must be chosen before generating the thumbnail.");
                     return;
                 }
             }
 
-            // TO DO: Create Top 8 chart logic
-
-            /*Thumbnail t = new Thumbnail();
+            Top8Chart t = new Top8Chart();
             try {
-                t.generateThumbnail(foreground, saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
-                        p1.generateFighter(),
-                        p2.generateFighter());
+                t.generateChart(leagueId, template, saveLocally.isSelected(), tournamentNumber.getValue(), participants.getValue(), date.getText(), placements);
                 alertFactory.displayInfo("Thumbnail was successfully generated and saved!");
             }catch (LocalImageNotFoundException e){
                 alertFactory.displayError(e.getMessage());
@@ -112,14 +116,14 @@ public class Top8Menu {
                 alertFactory.displayError(e.getMessage());
             }catch (FontNotFoundException e){
                 alertFactory.displayError(e.getMessage());
-            }*/
+            }
         });
 
         vbox = new VBox(allInfoBox, saveBox);
         vbox.setSpacing(40);
         vbox.setAlignment(Pos.CENTER);
 
-        tab = new Tab("Top 8");
+        tab = new Tab("Top 8 (Beta)");
         tab.setContent(vbox);
         tab.setClosable(false);
     }
@@ -162,11 +166,12 @@ public class Top8Menu {
 
         leaguesGroup.selectedToggleProperty().addListener((obs,oldToggle,newToggle)->{
             if (newToggle == null){
-                foreground = null;
+                template = null;
             }else{
                 for(LeagueButton league : leaguesButtons){
                     if (league.isSelected()){
-                        foreground = league.getForeground();
+                        template = league.getTemplate();
+                        leagueId = league.getLeagueId();
                         leagueLabel.setText("League: " + league.getLeague());
                     }
                 }

@@ -17,9 +17,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Map;
 
 import fighter.Fighter;
+import placement.Placement;
 import ui.factory.alert.AlertFactory;
 
 import ui.player.Names;
@@ -30,12 +32,18 @@ public class PlacementPane extends VBox {
     private Map<String,String> map = Names.map;
 
     private TextField player = new TextField();
-    private ComboBox<String> fighter = new ComboBox<>();
-    private Spinner<Integer> alt = new Spinner<>();
+    private ComboBox<String> fighter1 = new ComboBox<>();
+    private Spinner<Integer> alt1 = new Spinner<>();
+    private ComboBox<String> fighter2 = new ComboBox<>();
+    private Spinner<Integer> alt2 = new Spinner<>();
+    private ComboBox<String> fighter3 = new ComboBox<>();
+    private Spinner<Integer> alt3 = new Spinner<>();
 
     private int playerNumber;
 
-    String urlName;
+    String urlName1;
+    String urlName2;
+    String urlName3;
 
     private PlacementPane(){
         super();
@@ -48,14 +56,26 @@ public class PlacementPane extends VBox {
         player.setMaxWidth(180);
 
         initFighterSelection();
-        alt.setMaxWidth(80);
-        alt.setEditable(true);
-        alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
+        alt1.setMaxWidth(80);
+        alt1.setEditable(true);
+        alt1.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
+
+        alt2.setMaxWidth(80);
+        alt2.setEditable(true);
+        alt2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
+
+        alt3.setMaxWidth(80);
+        alt3.setEditable(true);
+        alt3.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
 
         VBox playerBox = new VBox(new Label("Player "+ playerNumber + ":"), player);
-        VBox char1Box = new VBox (new Label("Character:"), fighter);
-        VBox alt1Box = new VBox(new Label("Alt nº:"), alt);
-        HBox allPlacement1Box = new HBox(playerBox,char1Box,alt1Box);
+        VBox char1Box = new VBox (new Label("Main character:"), fighter1);
+        VBox alt1Box = new VBox(new Label("Alt nº:"), alt1);
+        VBox char2Box = new VBox (new Label("2nd Character:"), fighter2);
+        VBox alt2Box = new VBox(new Label("Alt nº:"), alt2);
+        VBox char3Box = new VBox (new Label("3rd Character:"), fighter3);
+        VBox alt3Box = new VBox(new Label("Alt nº:"), alt3);
+        HBox allPlacement1Box = new HBox(playerBox,char1Box,alt1Box,char2Box,alt2Box,char3Box,alt3Box);
         allPlacement1Box.setSpacing(5);
 
         this.getChildren().addAll(allPlacement1Box);
@@ -63,15 +83,43 @@ public class PlacementPane extends VBox {
 
     }
 
-    private String getSelectionName() {
-        String sel = fighter.getSelectionModel().getSelectedItem();
+    private String getSelectionNameF1() {
+        String sel = fighter1.getSelectionModel().getSelectedItem();
         if (sel == null || sel.equals("Mii Brawler") || sel.equals("Mii Swordfighter")) {
-            alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
+            alt1.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
         } else {
             if (sel.equals("Mii Gunner")) {
-                alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2));
+                alt1.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2));
             } else {
-                alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
+                alt1.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
+            }
+        }
+        return map.get(sel);
+    }
+
+    private String getSelectionNameF2() {
+        String sel = fighter2.getSelectionModel().getSelectedItem();
+        if (sel == null || sel.equals("Mii Brawler") || sel.equals("Mii Swordfighter")) {
+            alt2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
+        } else {
+            if (sel.equals("Mii Gunner")) {
+                alt2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2));
+            } else {
+                alt2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
+            }
+        }
+        return map.get(sel);
+    }
+
+    private String getSelectionNameF3() {
+        String sel = fighter3.getSelectionModel().getSelectedItem();
+        if (sel == null || sel.equals("Mii Brawler") || sel.equals("Mii Swordfighter")) {
+            alt3.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
+        } else {
+            if (sel.equals("Mii Gunner")) {
+                alt3.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2));
+            } else {
+                alt3.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
             }
         }
         return map.get(sel);
@@ -80,7 +128,7 @@ public class PlacementPane extends VBox {
     private void setDefaultFlip (String urlName){
         boolean skip = false;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream("assets/config/flip.txt"), StandardCharsets.UTF_8))) {
+                new FileInputStream("assets/config/fighters/flip.txt"), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (urlName == "falco" && !skip && line.contains(urlName)){
@@ -98,23 +146,47 @@ public class PlacementPane extends VBox {
     }
 
     private void initFighterSelection(){
-        fighter.setEditable(true);
-        fighter.setMaxWidth(180);
+        fighter1.setEditable(true);
+        fighter1.setMaxWidth(180);
+        fighter2.setEditable(true);
+        fighter2.setMaxWidth(180);
+        fighter3.setEditable(true);
+        fighter3.setMaxWidth(180);
         ObservableList<String> items = FXCollections.observableArrayList(map.keySet());
         FilteredList<String> filteredItems = new FilteredList<>(items);
 
-        fighter.getEditor().textProperty().addListener(new InputFilter(fighter, filteredItems, false));
-        fighter.setItems(filteredItems);
+        fighter1.getEditor().textProperty().addListener(new InputFilter(fighter1, filteredItems, false));
+        fighter1.setItems(filteredItems);
 
-        fighter.setOnAction(actionEvent -> {
-            urlName = getSelectionName();
-            setDefaultFlip(urlName);
+        fighter2.getEditor().textProperty().addListener(new InputFilter(fighter2, filteredItems, false));
+        fighter2.setItems(filteredItems);
+
+        fighter3.getEditor().textProperty().addListener(new InputFilter(fighter3, filteredItems, false));
+        fighter3.setItems(filteredItems);
+
+        fighter1.setOnAction(actionEvent -> {
+            urlName1 = getSelectionNameF1();
+            setDefaultFlip(urlName1);
+        });
+
+        fighter2.setOnAction(actionEvent -> {
+            urlName2 = getSelectionNameF2();
+            setDefaultFlip(urlName2);
+        });
+
+        fighter3.setOnAction(actionEvent -> {
+            urlName3 = getSelectionNameF3();
+            setDefaultFlip(urlName3);
         });
 
     }
 
-    public Fighter generateFighter(){
-        return new Fighter(getPlayer(), getFighter() ,getUrlName(), getAlt(), false);
+    public Placement generatePlacement(){
+        ArrayList<Fighter> fighters = new ArrayList<>();
+        fighters.add(new Fighter(getPlayer(), getFighter1(), getUrlName1(), getAlt1(), false));
+        fighters.add(new Fighter(getPlayer(), getFighter2(), getUrlName2(), getAlt2(), false));
+        fighters.add(new Fighter(getPlayer(), getFighter3(), getUrlName3(), getAlt3(), false));
+        return new Placement(playerNumber, getPlayer(), fighters);
     }
 
     public String getPlayer(){
@@ -125,28 +197,76 @@ public class PlacementPane extends VBox {
         this.player.setText(player);
     }
 
-    public String getUrlName(){
-        return this.urlName;
+    public String getUrlName1(){
+        return this.urlName1;
     }
 
-    public void setUrlName(){
-        this.urlName = urlName;
+    public void setUrlName1(){
+        this.urlName1 = urlName1;
     }
 
-    public String getFighter(){
-        return fighter.getSelectionModel().getSelectedItem();
+    public String getUrlName2(){
+        return this.urlName2;
     }
 
-    public void setFighter(String fighter){
-        this.fighter.getSelectionModel().select(fighter);
+    public void setUrlName2(){
+        this.urlName2 = urlName2;
     }
 
-    public int getAlt(){
-        return this.alt.getValue();
+    public String getUrlName3(){
+        return this.urlName3;
     }
 
-    public void setAlt(int alt){
-        this.alt.getValueFactory().setValue(alt);
+    public void setUrlName3(){
+        this.urlName3 = urlName3;
+    }
+
+    public String getFighter1(){
+        return fighter1.getSelectionModel().getSelectedItem();
+    }
+
+    public void setFighter1(String fighter1){
+        this.fighter1.getSelectionModel().select(fighter1);
+    }
+
+    public String getFighter2(){
+        return fighter2.getSelectionModel().getSelectedItem();
+    }
+
+    public void setFighter2(String fighter2){
+        this.fighter2.getSelectionModel().select(fighter2);
+    }
+
+    public String getFighter3(){
+        return fighter3.getSelectionModel().getSelectedItem();
+    }
+
+    public void setFighter3(String fighter3){
+        this.fighter3.getSelectionModel().select(fighter3);
+    }
+
+    public int getAlt1(){
+        return this.alt1.getValue();
+    }
+
+    public void setAlt1(int alt1){
+        this.alt1.getValueFactory().setValue(alt1);
+    }
+
+    public int getAlt2(){
+        return this.alt2.getValue();
+    }
+
+    public void setAlt2(int alt2){
+        this.alt2.getValueFactory().setValue(alt2);
+    }
+
+    public int getAlt3(){
+        return this.alt3.getValue();
+    }
+
+    public void setAlt3(int alt3){
+        this.alt3.getValueFactory().setValue(alt3);
     }
 
 
