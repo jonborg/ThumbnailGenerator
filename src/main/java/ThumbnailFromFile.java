@@ -41,6 +41,9 @@ public class ThumbnailFromFile extends Thumbnail {
                     if ("sop".equalsIgnoreCase(parameters.get(0))){
                         foreground = "foregroundSop.png";
                     }
+                    if ("tiamat".equalsIgnoreCase(parameters.get(0))){
+                        foreground = "foregroundTiamat.png";
+                    }
                     date=parameters.get(1);
                     firstLine = false;
                     continue;
