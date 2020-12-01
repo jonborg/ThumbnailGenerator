@@ -1,11 +1,8 @@
-
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -49,7 +46,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        primaryStage.getIcons().add(new Image("https://pbs.twimg.com/profile_images/1132749237945552901/v74uelMr_400x400.png"));
+        primaryStage.getIcons().add(new Image(App.class.getResourceAsStream("/logo/smash_ball.png")));
         primaryStage.setTitle("Smash Bros. VOD Thumbnail Generator");
 
         //Leagues UI
@@ -94,7 +91,7 @@ public class App extends Application {
 
         StackPane root = new StackPane();
         root.getChildren().add(allContentBox);
-        primaryStage.setScene(new Scene(root, 800, 500));
+        primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
 
 
@@ -156,8 +153,10 @@ public class App extends Application {
             int auxAlt1 = 1;
             int auxAlt2 = 1;
 
-            if (p1.getUrlName() != null && p2.getUrlName() != null) {
+            if (p1.getUrlName() != null) {
                 auxAlt1 = p1.getAlt();
+            }
+            if (p2.getUrlName() != null) {
                 auxAlt2 = p2.getAlt();
             }
 
