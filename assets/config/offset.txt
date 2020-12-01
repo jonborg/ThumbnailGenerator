@@ -104,6 +104,7 @@ terry 80 0
 bylethM -20 50
 bylethF -10 10
 minmin 140 -270
+steve -150 90
 
 //echoes
 dark_pit -10 -130

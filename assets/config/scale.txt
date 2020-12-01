@@ -104,6 +104,7 @@ terry 1.2
 bylethM 1
 bylethF 1
 minmin 1.1
+steve 0.5
 
 //echoes
 dark_pit 1.25
