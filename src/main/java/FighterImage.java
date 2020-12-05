@@ -13,8 +13,8 @@ public class FighterImage {
     private Fighter fighter;
     private BufferedImage image;
 
-    private final String scalerPath = "assets/config/scale.txt";
-    private final String offsetPath = "assets/config/offset.txt";
+    private final String scalerPath = "settings/thumbnails/images/scale.txt";
+    private final String offsetPath = "settings/thumbnails/images/offset.txt";
 
 
     AlertFactory alertFactory = new AlertFactory();

@@ -1,5 +1,6 @@
 package ui.player;
 
+import fighter.DownloadFighterURL;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -9,13 +10,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.awt.*;
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
@@ -29,11 +34,14 @@ public class PlayerPane extends VBox {
 
     private TextField player = new TextField();
     private ComboBox<String> fighter = new ComboBox<>();
-    private Spinner<Integer> alt = new Spinner<>();
     private CheckBox flip = new CheckBox();
+    private Spinner<Integer> alt = new Spinner<>();
+    private ImageView icon = new ImageView();
+    private Hyperlink iconLink = new Hyperlink();
     private int playerNumber;
+    private String urlName;
 
-    String urlName;
+    private String flipFile = "settings/thumbnails/images/flip.txt";
 
     private PlayerPane(){
         super();
@@ -42,6 +50,10 @@ public class PlayerPane extends VBox {
     public PlayerPane(int playerNumber){
         this();
         this.playerNumber = playerNumber;
+        icon.setPreserveRatio(true);
+        icon.setFitHeight(64);
+        iconLink.setGraphic(icon);
+        iconLink.setDisable(true);
 
         initFighterSelection();
         alt.setMaxWidth(80);
@@ -49,13 +61,18 @@ public class PlayerPane extends VBox {
         alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
 
         VBox playerBox = new VBox(new Label("Player "+ playerNumber + ":"), player);
-        VBox char1Box = new VBox (new Label("Character:"), fighter);
-        VBox alt1Box = new VBox(new Label("Alt nº:"), alt);
-        VBox fli1Box = new VBox(new Label ("Flip?"), flip);
-        HBox allChar1Box = new HBox(char1Box,alt1Box,fli1Box);
-        allChar1Box.setSpacing(5);
+        VBox charBox = new VBox (new Label("Character:"), fighter);
+        VBox flipBox = new VBox(new Label ("Flip?"), flip);
+        HBox CharBox = new HBox(charBox,flipBox);
+        CharBox.setSpacing(5);
 
-        this.getChildren().addAll(playerBox,allChar1Box);
+        HBox colorBox = new HBox(alt, iconLink);
+        colorBox.setSpacing(30);
+        VBox altBox = new VBox(new Label("Alt nº:"), colorBox);
+
+        VBox fullCharBox= new VBox(CharBox, altBox);
+
+        this.getChildren().addAll(playerBox,fullCharBox);
         this.setSpacing(10);
 
     }
@@ -71,13 +88,17 @@ public class PlayerPane extends VBox {
                 alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
             }
         }
-        return map.get(sel);
+        return sel == null ? null : map.get(sel);
     }
 
     private void setDefaultFlip (String urlName){
         boolean skip = false;
+        if (urlName == null){
+            flip.setSelected(false);
+            return;
+        }
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream("assets/config/flip.txt"), StandardCharsets.UTF_8))) {
+                new FileInputStream(flipFile), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (urlName == "falco" && !skip && line.contains(urlName)){
@@ -110,8 +131,36 @@ public class PlayerPane extends VBox {
         fighter.setOnAction(actionEvent -> {
             urlName = getSelectionName();
             setDefaultFlip(urlName);
+            updateFighterIcon();
         });
 
+        alt.valueProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
+        //alt.getEditor().textProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
+    }
+
+    private void updateFighterIcon(){
+        try {
+            iconLink.setDisable(false);
+            iconLink.setOnAction(event -> {
+                String url = DownloadFighterURL.generateFighterURL(urlName, alt.getValue());
+                if(Desktop.isDesktopSupported()) {
+                    try {
+                        if ("http".equals(url.substring(0,4))){
+                            Desktop.getDesktop().browse(new URI(url));
+                        } else {
+                            Desktop.getDesktop().open(new File(url));
+                        }
+                    }catch(URISyntaxException | IOException e ){
+                        alertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
+                    }
+                }
+            });
+            icon.setImage(new Image(PlayerPane.class.getResourceAsStream("/icons/" + urlName + "/" + alt.getValue() + ".png")));
+        }catch (NullPointerException e){
+            iconLink.setDisable(true);
+            iconLink.setText(null);
+            icon.setImage(null);
+        }
     }
 
     public Fighter generateFighter(){
@@ -119,7 +168,7 @@ public class PlayerPane extends VBox {
     }
 
     public String getPlayer(){
-        return this.player.getText().toUpperCase();
+        return this.player.getText();
     }
 
     public void setPlayer(String player){

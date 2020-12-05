@@ -90,6 +90,7 @@ public class Names {
         map.put("Terry", "terry");
         map.put("Byleth", "byleth");
         map.put("Min Min", "minmin");
+        map.put("Steve", "steve");
 
         //echoes
         map.put("Dark Pit", "dark_pit");
