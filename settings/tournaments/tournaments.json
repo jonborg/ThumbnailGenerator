@@ -1,0 +1,32 @@
+[
+	{
+		"id": "tdlx",
+		"name": "Throwdown Lx",
+		"logo": "assets/tournaments/logos/tdlx.png",
+		"foreground": "assets/tournaments/foregrounds/tdlx.png"
+	},
+	{
+		"id": "invicta",
+		"name": "Smash Invicta",
+		"logo": "assets/tournaments/logos/invicta.png",
+		"foreground": "assets/tournaments/foregrounds/invicta.png"
+	},
+	{
+		"id": "sop",
+		"name": "Smash or Pass",
+		"logo": "assets/tournaments/logos/sop.png",
+		"foreground": "assets/tournaments/foregrounds/sop.png"
+	},
+	{
+		"id": "tiamat",
+		"name": "Tiamat",
+		"logo": "assets/tournaments/logos/tiamat.png",
+		"foreground": "assets/tournaments/foregrounds/tiamat.png"
+	},
+	{
+		"id": "alph",
+		"name": "Alph Apparition",
+		"logo": "assets/tournaments/logos/alph.png",
+		"foreground": "assets/tournaments/foregrounds/alph.png"
+	}
+]

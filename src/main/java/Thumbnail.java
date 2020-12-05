@@ -5,36 +5,37 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 
-import java.nio.Buffer;
-import java.util.List;
-import java.util.ArrayList;
-
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import fighter.Fighter;
-import ui.factory.alert.AlertFactory;
+import json.JSONProcessor;
+import org.json.simple.JSONObject;
+import thumbnail.text.TextSettings;
+import thumbnail.text.TextToImage;
+import ui.tournament.Tournament;
 
 
 public class Thumbnail {
-    static int WIDTH = 1280;
-    static int HEIGHT = 720;
+    private static int WIDTH = 1280;
+    private static int HEIGHT = 720;
 
-    static BufferedImage thumbnail;
-    static Graphics2D g2d;
+    private static BufferedImage thumbnail;
+    private static Graphics2D g2d;
 
-    static String FIGHTERS_URL = "https://www.smashbros.com/assets_v2/img/fighter/";
-    static String FIGHTERS_URL_2 = "https://raw.githubusercontent.com/marcrd/smash-ultimate-assets/master/renders/";
-    static String SANS_URL = "https://i.redd.it/n2tcplon8qk31.png";
+    private static String FIGHTERS_URL = "https://www.smashbros.com/assets_v2/img/fighter/";
+    private static String FIGHTERS_URL_2 = "https://raw.githubusercontent.com/marcrd/smash-ultimate-assets/master/renders/";
+    private static String SANS_URL = "https://i.redd.it/n2tcplon8qk31.png";
 
-    static String foregroundPath = "assets/images/others/";
-    static String backgroundPath = foregroundPath + "background.png";
-    static String localFightersPath = "assets/fighters/";
+    private static String localFightersPath = "assets/fighters/";
 
-    static String saveThumbnailsPath = "thumbnails/";
-    boolean saveLocally;
+    private static String saveThumbnailsPath = "thumbnails/";
+    private boolean saveLocally;
 
-    public void generateThumbnail(String foreground, boolean saveLocally, String round, String date, Fighter... fighters)
+    private TextSettings textSettings;
+    private String textFile = "settings/thumbnails/text/text.json";
+
+    public void generateThumbnail(Tournament tournament, boolean saveLocally, String round, String date, Fighter... fighters)
             throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException {
 
         String thumbnailFileName = fighters[0].getPlayerName().replace("|","_")+"-"+fighters[0].getUrlName()+fighters[0].getAlt()+"--"+
@@ -47,7 +48,7 @@ public class Thumbnail {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-        drawElement(backgroundPath);
+        drawElement(tournament.getThumbnailBackground());
         int port = 0;
         for (Fighter f : fighters) {
             port++;
@@ -62,14 +63,20 @@ public class Thumbnail {
 
         }
 
-        drawElement(foregroundPath+foreground);
+        drawElement(tournament.getThumbnailForeground());
 
-        g2d.drawImage(TextToImage.convert(fighters[0].getPlayerName(), 90), 0, 10, null);
-        g2d.drawImage(TextToImage.convert(fighters[1].getPlayerName(), 90), WIDTH / 2, 5, null);
+        loadTextSettings(tournament.getTournamentId());
+
+        g2d.drawImage(TextToImage.convert(fighters[0].getPlayerName(), textSettings, true),
+                0, textSettings.getDownOffsetTop()[0], null);
+        g2d.drawImage(TextToImage.convert(fighters[1].getPlayerName(), textSettings, true),
+                WIDTH / 2,  textSettings.getDownOffsetTop()[1], null);
 
 
-        g2d.drawImage(TextToImage.convert(round, 75), 0, HEIGHT - 100, null);
-        g2d.drawImage(TextToImage.convert(date, 75), WIDTH / 2, HEIGHT - 105, null);
+        g2d.drawImage(TextToImage.convert(round, textSettings, false),
+                0, HEIGHT - 100 + textSettings.getDownOffsetBottom()[0], null);
+        g2d.drawImage(TextToImage.convert(date, textSettings, false),
+                WIDTH / 2, HEIGHT - 100 + textSettings.getDownOffsetBottom()[1], null);
 
         File dirThumbnails = new File(saveThumbnailsPath);
         if (!dirThumbnails.exists()) dirThumbnails.mkdir();
@@ -154,5 +161,13 @@ public class Thumbnail {
         }
     }
 
+    private void loadTextSettings(String tournamentId){
+        JSONProcessor.getJSONArray(textFile).forEach(setting -> {
+            JSONObject s =  (JSONObject) setting;
+            if (s.containsKey("id") && s.get("id").equals(tournamentId)) {
+                textSettings = new TextSettings(s);
+            }
+        });
+    }
 }
 
