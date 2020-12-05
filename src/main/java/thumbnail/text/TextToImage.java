@@ -1,15 +1,12 @@
-import com.thoughtworks.xstream.mapper.Mapper;
-import exception.FontNotFoundException;
-import javafx.scene.effect.DropShadow;
-import org.imgscalr.Scalr;
+package thumbnail.text;
 
-import javax.imageio.ImageIO;
+import exception.FontNotFoundException;
+
 import java.awt.*;
 import java.awt.font.FontRenderContext;
-import java.awt.font.TextLayout;
+import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 import java.awt.image.*;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -17,38 +14,46 @@ public class TextToImage {
 
     private static int WIDTH = 640;
     private static int HEIGHT = 110;
-    private static float angle = -2f;
 
-    private static String fontName = "BebasNeue-Regular";
+    private static TextSettings textSettings;
+    private static Font font;
+    private static boolean top;
 
+    public static BufferedImage convert(String text, TextSettings settings, boolean topText) throws FontNotFoundException {
+        textSettings = settings;
+        top=topText;
 
-    public static BufferedImage convert(String text, int fontSize) throws FontNotFoundException {
         if (text.isEmpty()) return null;
         BufferedImage rect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = rect.createGraphics();
 
-        graphics.drawImage(generateText(text,Color.BLACK, fontSize),5,5,null);
-        graphics.drawImage(generateText(text,Color.WHITE, fontSize),0,0,null);
-
+        if (textSettings.hasShadow())
+            graphics.drawImage(generateText(text,Color.BLACK,
+                    top ? textSettings.getSizeTop() : textSettings.getSizeBottom()),5,5,null);
+        graphics.drawImage(generateText(text,Color.WHITE,
+                top ? textSettings.getSizeTop() : textSettings.getSizeBottom()),0,0,null);
         return rect;
     }
 
 
     private static BufferedImage generateText(String text, Color color, int fontSize) throws FontNotFoundException {
-        Font font;
         try {
-            InputStream fontFile = TextToImage.class.getResourceAsStream("/fonts/" + fontName + ".ttf");
-            font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD + Font.ITALIC, fontSize);
+            InputStream fontFile = TextToImage.class.getResourceAsStream("/fonts/" + textSettings.getFont() + ".ttf");
+            if (!textSettings.hasBold() && textSettings.hasItalic())
+                font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.ITALIC, fontSize);
+            if (textSettings.hasBold() && !textSettings.hasItalic())
+                font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD, fontSize);
+            if (textSettings.hasBold() && textSettings.hasItalic())
+                font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD + Font.ITALIC, fontSize);
         }catch (FontFormatException | IOException | NullPointerException e){
-            throw new FontNotFoundException(fontName);
+            throw new FontNotFoundException(textSettings.getFont());
         }
-        //font = new Font ("Bebas Neue",Font.BOLD + Font.ITALIC, fontSize);
 
         BufferedImage rect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = rect.createGraphics();
 
         FontRenderContext frc = graphics.getFontRenderContext();
-        TextLayout textTl = new TextLayout(text, font, frc);
+        font.layoutGlyphVector(frc, text.toCharArray(), 0, text.length(), Font.LAYOUT_LEFT_TO_RIGHT);
 
         // Get the FontMetrics
         FontMetrics metrics = graphics.getFontMetrics(font);
@@ -62,8 +67,10 @@ public class TextToImage {
         graphics.setColor(color);
 
         if (color == Color.BLACK) return blurText(rect,text,graphics,x,y);
+        //else drawOutline(text,graphics);
         graphics.drawString(text, x, y);
-
+        //outline
+        if (textSettings.getContour()>0) drawOutline(graphics, text, x, y);
         return rotateText(rect);
     }
 
@@ -89,7 +96,7 @@ public class TextToImage {
 
     private static BufferedImage rotateText(BufferedImage rect){
         BufferedImage finalRect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
-        double rotationRequired = Math.toRadians (angle);
+        double rotationRequired = Math.toRadians (top ? textSettings.getAngleTop() : textSettings.getAngleBottom());
         double locationX = finalRect.getWidth() / 2;
         double locationY = finalRect.getHeight() / 2;
         AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
@@ -97,6 +104,15 @@ public class TextToImage {
         Graphics2D g2d = finalRect.createGraphics();
         g2d.drawImage(op.filter(rect, null), 0, 0, null);
         return finalRect;
+    }
+
+    private static  void drawOutline(Graphics2D graphics, String text, int x, int y){
+        GlyphVector gv = font.createGlyphVector(graphics.getFontRenderContext(), text);
+        Shape shape = gv.getOutline();
+        graphics.setColor(Color.black);
+        graphics.setStroke(new BasicStroke(textSettings.getContour()));
+        graphics.translate(x,y);
+        graphics.draw(shape);
     }
 
 

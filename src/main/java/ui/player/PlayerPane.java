@@ -39,7 +39,9 @@ public class PlayerPane extends VBox {
     private ImageView icon = new ImageView();
     private Hyperlink iconLink = new Hyperlink();
     private int playerNumber;
-    String urlName;
+    private String urlName;
+
+    private String flipFile = "settings/thumbnails/images/flip.txt";
 
     private PlayerPane(){
         super();
@@ -96,7 +98,7 @@ public class PlayerPane extends VBox {
             return;
         }
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream("assets/config/flip.txt"), StandardCharsets.UTF_8))) {
+                new FileInputStream(flipFile), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (urlName == "falco" && !skip && line.contains(urlName)){
@@ -166,7 +168,7 @@ public class PlayerPane extends VBox {
     }
 
     public String getPlayer(){
-        return this.player.getText().toUpperCase();
+        return this.player.getText();
     }
 
     public void setPlayer(String player){

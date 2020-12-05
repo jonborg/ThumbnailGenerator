@@ -3,8 +3,10 @@ import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
 import fighter.Fighter;
-import javafx.scene.control.Alert;
+import json.JSONProcessor;
+import org.json.simple.JSONObject;
 import ui.factory.alert.AlertFactory;
+import ui.tournament.Tournament;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -13,12 +15,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ThumbnailFromFile extends Thumbnail {
-    AlertFactory alertFactory = new AlertFactory();
+
+    private String flipFile = "settings/thumbnails/images/flip.txt";
+    private String tournamentFile = "settings/tournaments/tournaments.json";
+    private Tournament selectedTournament;
+    private AlertFactory alertFactory = new AlertFactory();
 
     public void generateFromFile(File file, boolean saveLocally)
         throws ThumbnailFromFileException, FontNotFoundException{
+        selectedTournament = null;
         boolean firstLine = true;
-        String foreground = null;
         String date = null;
         String line = null;
 
@@ -32,17 +38,15 @@ public class ThumbnailFromFile extends Thumbnail {
                 List<String> parameters;
                 if (firstLine){
                     parameters = Arrays.asList(line.split(";"));
-                    if ("tdlx".equalsIgnoreCase(parameters.get(0))){
-                        foreground = "foregroundLx.png";
-                    }
-                    if ("invicta".equalsIgnoreCase(parameters.get(0))){
-                        foreground = "foregroundPorto.png";
-                    }
-                    if ("sop".equalsIgnoreCase(parameters.get(0))){
-                        foreground = "foregroundSop.png";
-                    }
-                    if ("tiamat".equalsIgnoreCase(parameters.get(0))){
-                        foreground = "foregroundTiamat.png";
+                    JSONProcessor.getJSONArray(tournamentFile).forEach(tournament -> {
+                        JSONObject t = (JSONObject) tournament;
+                        if (t.containsKey("name") && t.containsKey("id") && t.get("id").equals(parameters.get(0))) {
+                            selectedTournament = new Tournament(t);
+                        }
+                    });
+                    if (selectedTournament == null){
+                        alertFactory.displayError("Could not find tournament with id '{}'",parameters.get(0));
+                        return;
                     }
                     date=parameters.get(1);
                     firstLine = false;
@@ -50,13 +54,13 @@ public class ThumbnailFromFile extends Thumbnail {
                 }
                 parameters = Arrays.asList(line.split(";"));
                 parameters.replaceAll(String::trim);
-                parameters.replaceAll(String::toLowerCase);
+                //parameters.replaceAll(String::toLowerCase);
                 try {
                     Fighter p1 = new Fighter(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
                     Fighter p2 = new Fighter(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
                     p1.setFlip(readFlipFile(p1));
                     p2.setFlip(!readFlipFile(p2));
-                    generateThumbnail(foreground, saveLocally, parameters.get(6), date, p1, p2);
+                    generateThumbnail(selectedTournament, saveLocally, parameters.get(6), date, p1, p2);
                 }catch(OnlineImageNotFoundException e) {
                     invalidLines.add(e.getMessage() + " -> " + line);
                 }catch(LocalImageNotFoundException e) {
@@ -90,7 +94,7 @@ public class ThumbnailFromFile extends Thumbnail {
         boolean result = false;
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream("assets/config/flip.txt"), StandardCharsets.UTF_8))) {
+                new FileInputStream(flipFile), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.contains(fighter.getUrlName())){

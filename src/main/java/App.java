@@ -14,9 +14,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import json.JSONProcessor;
+import org.json.simple.JSONObject;
 import ui.factory.alert.AlertFactory;
-import ui.league.LeagueButton;
 import ui.player.PlayerPane;
+import ui.tournament.Tournament;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -24,19 +26,17 @@ import java.util.List;
 
 public class App extends Application {
 
-    Button fromFile = new Button("Generate from file");
+    private String tournamentFile = "settings/tournaments/tournaments.json";
 
-    TextField round = new TextField();
-    TextField date = new TextField();
+    private Button fromFile = new Button("Generate from file");
+    private TextField round = new TextField();
+    private TextField date = new TextField();
+    private  PlayerPane p1 = new PlayerPane(1);
+    private PlayerPane p2 = new PlayerPane(2);
+    private Button flipPlayer = new Button();
+    private Tournament selectedTournament = null;
 
-    PlayerPane p1 = new PlayerPane(1);
-    PlayerPane p2 = new PlayerPane(2);
-
-    String foreground;
-
-    Button flipPlayer = new Button();
-
-    AlertFactory alertFactory = new AlertFactory();
+    private AlertFactory alertFactory = new AlertFactory();
 
 
     public static void main(String[] args) {
@@ -49,8 +49,8 @@ public class App extends Application {
         primaryStage.getIcons().add(new Image(App.class.getResourceAsStream("/logo/smash_ball.png")));
         primaryStage.setTitle("Smash Bros. VOD Thumbnail Generator");
 
-        //Leagues UI
-        Pane allLeaguesBox = generateLeaguesButtons();
+        //Tournaments UI
+        Pane allTournamentsBox = generateTournamentsButtons();
 
         //Date and Round UI
         VBox roundBox = new VBox(new Label("Round:"), round);
@@ -61,7 +61,7 @@ public class App extends Application {
 
 
         //Players UI
-        flipPlayer.setGraphic(new ImageView(new Image(new File("assets/images/ui/flip.png").toURI().toString())));
+        flipPlayer.setGraphic(new ImageView(new Image(App.class.getResourceAsStream("/ui/flip.png"))));
         Pane allPlayersBox = generatePlayersPane();
 
 
@@ -82,7 +82,7 @@ public class App extends Application {
 
 
         // Combining all UIs
-        VBox allInfoBox = new VBox(allLeaguesBox, dateRoundBox, allPlayersBox);
+        VBox allInfoBox = new VBox(allTournamentsBox, dateRoundBox, allPlayersBox);
         allInfoBox.setSpacing(20);
 
         VBox allContentBox = new VBox(allInfoBox, saveBox);
@@ -106,15 +106,15 @@ public class App extends Application {
                 return;
             }
 
-            if (foreground == null){
-                System.out.println("League was not chosen");
-                alertFactory.displayWarning("A league must be chosen before generating the thumbnail.");
+            if (selectedTournament == null){
+                System.out.println("Tournament was not chosen");
+                alertFactory.displayWarning("A tournament must be chosen before generating the thumbnail.");
                 return;
             }
 
             Thumbnail t = new Thumbnail();
             try {
-                t.generateThumbnail(foreground, saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
+                t.generateThumbnail(selectedTournament, saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
                         p1.generateFighter(),
                         p2.generateFighter());
                 alertFactory.displayInfo("Thumbnail was successfully generated and saved!");
@@ -171,43 +171,45 @@ public class App extends Application {
     }
 
 
-    private Pane generateLeaguesButtons(){
-        Label leagueLabel = new Label("League:");
-        File[] leaguesImages = new File("assets/images/leagues/").listFiles();
-        ToggleGroup leaguesGroup = new ToggleGroup();
-        List<LeagueButton> leaguesButtons = new ArrayList<>();
+    private Pane generateTournamentsButtons(){
 
-        HBox leaguesBox = new HBox();
-        leaguesBox.setSpacing(10);
-        leaguesBox.setAlignment(Pos.CENTER);
+        Label tournamentLabel = new Label("Tournament:");
+        ToggleGroup tournamentsGroup = new ToggleGroup();
+        List<Tournament> tournamentsButtons = new ArrayList<>();
 
-        for(File image : leaguesImages){
-            LeagueButton league = new LeagueButton(image);
-            league.setToggleGroup(leaguesGroup);
-            leaguesButtons.add(league);
-            leaguesBox.getChildren().add(league);
-        }
+        HBox tournamentsBox = new HBox();
+        tournamentsBox.setSpacing(10);
+        tournamentsBox.setAlignment(Pos.CENTER);
 
-        leaguesGroup.selectedToggleProperty().addListener((obs,oldToggle,newToggle)->{
+        JSONProcessor.getJSONArray(tournamentFile).forEach(tournament -> {
+            JSONObject t =  (JSONObject) tournament;
+            if (t.containsKey("name")) {
+                Tournament tournamentButton = new Tournament(t);
+                tournamentButton.setToggleGroup(tournamentsGroup);
+                tournamentsButtons.add(tournamentButton);
+                tournamentsBox.getChildren().add(tournamentButton);
+            }
+        });
+
+        tournamentsGroup.selectedToggleProperty().addListener((obs,oldToggle,newToggle)->{
             if (newToggle == null){
-                foreground = null;
+                selectedTournament = null;
             }else{
-                for(LeagueButton league : leaguesButtons){
-                    if (league.isSelected()){
-                        foreground = league.getForeground();
-                        leagueLabel.setText("League: " + league.getLeague());
+                for(Tournament tournament : tournamentsButtons){
+                    if (tournament.isSelected()){
+                        selectedTournament = tournament;
+                        tournamentLabel.setText("Tournament: " + tournament.getName());
                     }
                 }
             }
-
         });
 
 
-        VBox allLeaguesBox = new VBox(leagueLabel,leaguesBox);
-        allLeaguesBox.setSpacing(5);
-        allLeaguesBox.setAlignment(Pos.CENTER);
+        VBox allTournamentsBox = new VBox(tournamentLabel,tournamentsBox);
+        allTournamentsBox.setSpacing(5);
+        allTournamentsBox.setAlignment(Pos.CENTER);
 
-        return allLeaguesBox;
+        return allTournamentsBox;
     }
 
 
