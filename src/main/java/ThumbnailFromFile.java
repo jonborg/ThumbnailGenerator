@@ -6,7 +6,7 @@ import fighter.Fighter;
 import json.JSONProcessor;
 import org.json.simple.JSONObject;
 import ui.factory.alert.AlertFactory;
-import ui.tournament.Tournament;
+import ui.tournament.TournamentButton;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -18,7 +18,7 @@ public class ThumbnailFromFile extends Thumbnail {
 
     private String flipFile = "settings/thumbnails/images/flip.txt";
     private String tournamentFile = "settings/tournaments/tournaments.json";
-    private Tournament selectedTournament;
+    private TournamentButton selectedTournament;
     private AlertFactory alertFactory = new AlertFactory();
 
     public void generateFromFile(File file, boolean saveLocally)
@@ -41,7 +41,7 @@ public class ThumbnailFromFile extends Thumbnail {
                     JSONProcessor.getJSONArray(tournamentFile).forEach(tournament -> {
                         JSONObject t = (JSONObject) tournament;
                         if (t.containsKey("name") && t.containsKey("id") && t.get("id").equals(parameters.get(0))) {
-                            selectedTournament = new Tournament(t);
+                            selectedTournament = new TournamentButton(t);
                         }
                     });
                     if (selectedTournament == null){
