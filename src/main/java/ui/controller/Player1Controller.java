@@ -1,8 +1,8 @@
-package ui.player;
+package ui.controller;
 
 import fighter.DownloadFighterURL;
+import fighter.Fighter;
 import javafx.application.Platform;
-import javafx.beans.NamedArg;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -10,72 +10,68 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import ui.factory.alert.AlertFactory;
+import ui.player.Names;
 
 import java.awt.*;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.ResourceBundle;
 
-import fighter.Fighter;
-import ui.factory.alert.AlertFactory;
-
-public class PlayerPane extends VBox {
-    AlertFactory alertFactory = new AlertFactory();
+public class Player1Controller implements Initializable {
+    @FXML
+    private TextField player;
+    @FXML
+    private ComboBox<String> fighter;
+    @FXML
+    private CheckBox flip;
+    @FXML
+    private Spinner<Integer> alt;
+    @FXML
+    private Hyperlink iconLink;
+    @FXML
+    private ImageView icon;
 
     private Map<String,String> map = Names.map;
-
-    private TextField player = new TextField();
-    private ComboBox<String> fighter = new ComboBox<>();
-    private CheckBox flip = new CheckBox();
-    private Spinner<Integer> alt = new Spinner<>();
-    private ImageView icon = new ImageView();
-    private Hyperlink iconLink = new Hyperlink();
-    private int playerNumber;
+    private String flipFile = "settings/thumbnails/images/flip.txt";
     private String urlName;
 
-    private String flipFile = "settings/thumbnails/images/flip.txt";
+    private AlertFactory alertFactory = new AlertFactory();
 
-    private PlayerPane(){
-        super();
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initFighters();
+        initAlts();
     }
 
-    public PlayerPane(@NamedArg("playerNumber") int playerNumber){
-        this();
-        this.playerNumber = playerNumber;
-        icon.setPreserveRatio(true);
-        icon.setFitHeight(64);
-        iconLink.setGraphic(icon);
-        iconLink.setDisable(true);
+    private void initFighters(){
+        ObservableList<String> items = FXCollections.observableArrayList(map.keySet());
+        FilteredList<String> filteredItems = new FilteredList<>(items);
 
-        initFighterSelection();
-        alt.setMaxWidth(80);
-        alt.setEditable(true);
-        alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
+        fighter.getEditor().textProperty().addListener(new InputFilter(fighter, filteredItems, false));
+        fighter.setItems(filteredItems);
+    }
 
-        VBox playerBox = new VBox(new Label("Player "+ playerNumber + ":"), player);
-        VBox charBox = new VBox (new Label("Character:"), fighter);
-        VBox flipBox = new VBox(new Label ("Flip?"), flip);
-        HBox CharBox = new HBox(charBox,flipBox);
-        CharBox.setSpacing(5);
+    private void initAlts(){
+        alt.valueProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
+    }
 
-        HBox colorBox = new HBox(alt, iconLink);
-        colorBox.setSpacing(30);
-        VBox altBox = new VBox(new Label("Alt nº:"), colorBox);
 
-        VBox fullCharBox = new VBox(CharBox, altBox);
-
-        this.getChildren().addAll(playerBox,fullCharBox);
-        this.setSpacing(10);
-
+    public void selectFighter(ActionEvent actionEvent) {
+        urlName = getSelectionName();
+        setDefaultFlip(urlName);
+        updateFighterIcon();
     }
 
     private String getSelectionName() {
@@ -109,8 +105,7 @@ public class PlayerPane extends VBox {
                 if (line.contains(urlName)){
                     String[] words = line.split(" ");
                     if (words.length>1)
-                        if (playerNumber == 1) flip.setSelected(Boolean.parseBoolean(words[1]));
-                        else flip.setSelected(!Boolean.parseBoolean(words[1]));
+                        flip.setSelected(Boolean.parseBoolean(words[1]));
                     break;
                 }
             }
@@ -120,47 +115,29 @@ public class PlayerPane extends VBox {
 
     }
 
-    private void initFighterSelection(){
-        fighter.setEditable(true);
-        fighter.setMaxWidth(180);
-        ObservableList<String> items = FXCollections.observableArrayList(map.keySet());
-        FilteredList<String> filteredItems = new FilteredList<>(items);
-
-        fighter.getEditor().textProperty().addListener(new InputFilter(fighter, filteredItems, false));
-        fighter.setItems(filteredItems);
-
-        fighter.setOnAction(actionEvent -> {
-            urlName = getSelectionName();
-            setDefaultFlip(urlName);
-            updateFighterIcon();
-        });
-
-        alt.valueProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
-        //alt.getEditor().textProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
-    }
-
     private void updateFighterIcon(){
         try {
             iconLink.setDisable(false);
-            iconLink.setOnAction(event -> {
-                String url = DownloadFighterURL.generateFighterURL(urlName, alt.getValue());
-                if(Desktop.isDesktopSupported()) {
-                    try {
-                        if ("http".equals(url.substring(0,4))){
-                            Desktop.getDesktop().browse(new URI(url));
-                        } else {
-                            Desktop.getDesktop().open(new File(url));
-                        }
-                    }catch(URISyntaxException | IOException e ){
-                        alertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
-                    }
-                }
-            });
-            icon.setImage(new Image(PlayerPane.class.getResourceAsStream("/icons/" + urlName + "/" + alt.getValue() + ".png")));
+            icon.setImage(new Image(getClass().getResourceAsStream("/icons/" + urlName + "/" + alt.getValue() + ".png")));
         }catch (NullPointerException e){
             iconLink.setDisable(true);
             iconLink.setText(null);
             icon.setImage(null);
+        }
+    }
+
+    public void previewFighter(ActionEvent actionEvent) {
+        String url = DownloadFighterURL.generateFighterURL(urlName, alt.getValue());
+        if(Desktop.isDesktopSupported()) {
+            try {
+                if ("http".equals(url.substring(0,4))){
+                    Desktop.getDesktop().browse(new URI(url));
+                } else {
+                    Desktop.getDesktop().open(new File(url));
+                }
+            }catch(URISyntaxException | IOException e ){
+                alertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
+            }
         }
     }
 
@@ -207,6 +184,7 @@ public class PlayerPane extends VBox {
     public void setFlip(boolean flip){
         this.flip.setSelected(flip);
     }
+
 
 
 

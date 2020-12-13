@@ -10,7 +10,6 @@ import fighter.FighterImage;
 import json.JSONReader;
 import ui.factory.alert.AlertFactory;
 import ui.tournament.Tournament;
-import ui.tournament.TournamentButton;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -62,11 +61,11 @@ public class ThumbnailFromFile extends Thumbnail {
                 parameters.replaceAll(String::trim);
                 //parameters.replaceAll(String::toLowerCase);
                 try {
-                    Fighter p1 = new Fighter(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
-                    Fighter p2 = new Fighter(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
-                    p1.setFlip(readFlipFile(p1));
-                    p2.setFlip(!readFlipFile(p2));
-                    generateThumbnail(selectedTournament, saveLocally, parameters.get(6), date, p1, p2);
+                    Fighter player1 = new Fighter(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
+                    Fighter player2 = new Fighter(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
+                    player1.setFlip(readFlipFile(player1));
+                    player2.setFlip(!readFlipFile(player2));
+                    generateThumbnail(selectedTournament, saveLocally, parameters.get(6), date, player1, player2);
                 }catch(OnlineImageNotFoundException e) {
                     invalidLines.add(e.getMessage() + " -> " + line);
                 }catch(LocalImageNotFoundException e) {

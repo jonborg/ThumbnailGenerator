@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import ui.player.PlayerPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import ui.tournament.TournamentPane?>
@@ -18,6 +14,7 @@
             stylesheets="@../styles/thumbnailGenerator.css">
 
     <VBox spacing="30">
+
         <!--Menu Bar-->
         <MenuBar styleClass="menuBar">
             <Menu styleClass="menu" text="File">
@@ -30,6 +27,7 @@
             </Menu>
         </MenuBar>
         <VBox spacing="20" alignment="CENTER">
+
             <!--Tournament UI-->
             <HBox alignment="CENTER">
                 <TournamentPane fx:id="tournamentPane"/>
@@ -49,7 +47,10 @@
 
             <!--PlayersUI-->
             <HBox spacing="50" alignment="CENTER">
-                <PlayerPane fx:id="p1" playerNumber="1"/>
+                <VBox>
+                    <Label text="Player 1:"/>
+                    <fx:include fx:id="player1" source="player1.fxml" />
+                </VBox>
                 <Button fx:id="flipPlayer" onAction="#flipPlayers">
                     <graphic>
                         <ImageView>
@@ -57,8 +58,12 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <PlayerPane fx:id="p2" playerNumber="2"/>
+                <VBox>
+                    <Label text="Player 2:"/>
+                    <fx:include fx:id="player2" source="player2.fxml"/>
+                </VBox>
             </HBox>
+
             <!--Save UI-->
             <VBox spacing="10" alignment="CENTER">
                 <CheckBox fx:id="saveLocally" text="Save/Load fighters' image locally"/>

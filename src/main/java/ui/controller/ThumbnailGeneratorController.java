@@ -7,73 +7,82 @@ import exception.ThumbnailFromFileException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
 import ui.factory.alert.AlertFactory;
-import ui.player.PlayerPane;
 import ui.tournament.Tournament;
 import ui.tournament.TournamentPane;
 import ui.window.EditTournamentWindow;
 
 import java.io.File;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class ThumbnailGeneratorController {
+public class ThumbnailGeneratorController implements Initializable {
     @FXML
-    public TournamentPane tournamentPane;
+    private TournamentPane tournamentPane;
     @FXML
-    public TextField round;
+    private TextField round;
     @FXML
-    public TextField date;
+    private TextField date;
     @FXML
-    public PlayerPane p1;
+    private AnchorPane player1;
     @FXML
-    public PlayerPane p2;
+    private Player1Controller player1Controller;
     @FXML
-    public Button flipPlayer;
+    private AnchorPane player2;
     @FXML
-    public CheckBox saveLocally;
+    private Player2Controller player2Controller;
     @FXML
-    public Button saveButton;
+    private Button flipPlayer;
     @FXML
-    public Button fromFile;
+    private CheckBox saveLocally;
+    @FXML
+    private Button saveButton;
+    @FXML
+    private Button fromFile;
 
     private static String tournamentFile = "settings/tournaments/tournaments.json";
     private AlertFactory alertFactory = new AlertFactory();
     private List<Tournament> tournaments;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    }
+
     public void flipPlayers(ActionEvent actionEvent) {
-        String nameAux = p1.getPlayer();
-        p1.setPlayer(p2.getPlayer());
-        p2.setPlayer(nameAux);
+        String nameAux = player1Controller.getPlayer();
+        player1Controller.setPlayer(player2Controller.getPlayer());
+        player2Controller.setPlayer(nameAux);
 
         int auxAlt1 = 1;
         int auxAlt2 = 1;
 
-        if (p1.getUrlName() != null)    {
-            auxAlt1 = p1.getAlt();
+        if (player1Controller.getUrlName() != null)    {
+            auxAlt1 = player1Controller.getAlt();
         }
-        if (p2.getUrlName() != null) {
-            auxAlt2 = p2.getAlt();
+        if (player2Controller.getUrlName() != null) {
+            auxAlt2 = player2Controller.getAlt();
         }
 
-        String auxSel = p1.getFighter();
-        p1.setFighter(p2.getFighter());
-        p2.setFighter(auxSel);
+        String auxSel = player1Controller.getFighter();
+        player1Controller.setFighter(player2Controller.getFighter());
+        player2Controller.setFighter(auxSel);
 
-        p1.setAlt(auxAlt2);
-        p2.setAlt(auxAlt1);
+        player1Controller.setAlt(auxAlt2);
+        player2Controller.setAlt(auxAlt1);
+
     }
 
-
-
     public void createThumbnail(ActionEvent actionEvent) {
-        if (p1.getUrlName() == null || p2.getUrlName() == null){
+        if (player1Controller.getUrlName() == null || player2Controller.getUrlName() == null){
             System.out.println("Missing fighters");
             alertFactory.displayWarning("2 fighters must be chosen before generating the thumbnail.");
             return;
@@ -88,8 +97,8 @@ public class ThumbnailGeneratorController {
         Thumbnail t = new Thumbnail();
         try {
             t.generateThumbnail(tournamentPane.getSelectedTournament(), saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
-                    p1.generateFighter(),
-                    p2.generateFighter());
+                    player1Controller.generateFighter(),
+                    player2Controller.generateFighter());
             alertFactory.displayInfo("Thumbnail was successfully generated and saved!");
         }catch (LocalImageNotFoundException e){
             alertFactory.displayError(e.getMessage());
@@ -124,5 +133,4 @@ public class ThumbnailGeneratorController {
     public void openEditTournaments(ActionEvent actionEvent) {
         new EditTournamentWindow(tournaments);
     }
-
 }
