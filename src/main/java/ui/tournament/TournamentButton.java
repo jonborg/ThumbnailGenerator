@@ -1,64 +1,48 @@
 package ui.tournament;
 
-import javafx.geometry.Insets;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.json.simple.JSONObject;
 
 
 public class TournamentButton extends ToggleButton {
 
-    private String tournamentId;
-    private String name;
-    private String image;
-    private String foreground;
-    private String background;
+    private Tournament tournament;
 
-    private static String defaultBackground= "assets/tournaments/backgrounds/default.png";
 
-    public TournamentButton(){
+    public TournamentButton(Tournament tournament) {
         super();
-    }
+        this.tournament = tournament;
 
-    public TournamentButton(String id, String name, String image, String foreground, String background){
-        this.tournamentId = id;
-        this.name = name;
-        this.image = image;
-        this.foreground = foreground;
-        this.background = background;
-
-        if (this.image == null) {
-            this.setText(this.name);
+        if (this.getImage() == null) {
+            this.setText(this.getName());
         } else {
-            this.setGraphic(new ImageView(new Image("file:"+this.image)));
+            this.setGraphic(new ImageView(new Image("file:"+this.getImage())));
         }
         this.setPrefSize(110,110);
     }
 
-    public TournamentButton(JSONObject tournament){
-        this((String) tournament.get("id"), (String) tournament.get("name"),
-            tournament.containsKey("logo") ? (String) tournament.get("logo") : null,
-            tournament.containsKey("foreground") ? (String) tournament.get("foreground") : null,
-            tournament.containsKey("background") ? (String) tournament.get("background") : defaultBackground
-            );
+    public Tournament getTournament() {
+        return this.tournament;
     }
 
     public String getTournamentId() {
-        return tournamentId;
+        return this.getTournament().getTournamentId();
     }
 
     public String getName() {
-        return name;
+        return this.getTournament().getName();
     }
 
-    public String getImage() {
-        return image;
+    public String getImage(){
+        return this.getTournament().getImage();
     }
 
-    public String getThumbnailForeground() { return foreground; }
+    public String getThumbnailForeground() {
+        return this.getTournament().getThumbnailForeground();
+    }
 
-    public String getThumbnailBackground() { return background; }
-
-
+    public String getThumbnailBackground() {
+        return this.getTournament().getThumbnailBackground();
+    }
 }

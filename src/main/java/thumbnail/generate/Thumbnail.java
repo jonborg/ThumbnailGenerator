@@ -1,18 +1,23 @@
+package thumbnail.generate;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.google.gson.reflect.TypeToken;
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import fighter.Fighter;
-import json.JSONProcessor;
-import org.json.simple.JSONObject;
+import fighter.FighterImage;
+import json.JSONReader;
 import thumbnail.text.TextSettings;
 import thumbnail.text.TextToImage;
+import ui.tournament.Tournament;
 import ui.tournament.TournamentButton;
 
 
@@ -35,7 +40,7 @@ public class Thumbnail {
     private TextSettings textSettings;
     private String textFile = "settings/thumbnails/text/text.json";
 
-    public void generateThumbnail(TournamentButton tournament, boolean saveLocally, String round, String date, Fighter... fighters)
+    public void generateThumbnail(Tournament tournament, boolean saveLocally, String round, String date, Fighter... fighters)
             throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException {
 
         String thumbnailFileName = fighters[0].getPlayerName().replace("|","_")+"-"+fighters[0].getUrlName()+fighters[0].getAlt()+"--"+
@@ -162,12 +167,14 @@ public class Thumbnail {
     }
 
     private void loadTextSettings(String tournamentId){
-        JSONProcessor.getJSONArray(textFile).forEach(setting -> {
-            JSONObject s =  (JSONObject) setting;
-            if (s.containsKey("id") && s.get("id").equals(tournamentId)) {
-                textSettings = new TextSettings(s);
+        List<TextSettings> textSettingsList =
+                JSONReader.getJSONArray(textFile, new TypeToken<ArrayList<TextSettings>>(){}.getType());
+        for (TextSettings s : textSettingsList){
+            if (s.getTournamentId().equals(tournamentId)) {
+                textSettings = s;
+                break;
             }
-        });
+        }
     }
 }
 

@@ -1,11 +1,15 @@
+package thumbnail.generate;
+
+import com.google.gson.reflect.TypeToken;
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
 import fighter.Fighter;
-import json.JSONProcessor;
-import org.json.simple.JSONObject;
+import fighter.FighterImage;
+import json.JSONReader;
 import ui.factory.alert.AlertFactory;
+import ui.tournament.Tournament;
 import ui.tournament.TournamentButton;
 
 import java.io.*;
@@ -18,7 +22,7 @@ public class ThumbnailFromFile extends Thumbnail {
 
     private String flipFile = "settings/thumbnails/images/flip.txt";
     private String tournamentFile = "settings/tournaments/tournaments.json";
-    private TournamentButton selectedTournament;
+    private Tournament selectedTournament;
     private AlertFactory alertFactory = new AlertFactory();
 
     public void generateFromFile(File file, boolean saveLocally)
@@ -38,12 +42,14 @@ public class ThumbnailFromFile extends Thumbnail {
                 List<String> parameters;
                 if (firstLine){
                     parameters = Arrays.asList(line.split(";"));
-                    JSONProcessor.getJSONArray(tournamentFile).forEach(tournament -> {
-                        JSONObject t = (JSONObject) tournament;
-                        if (t.containsKey("name") && t.containsKey("id") && t.get("id").equals(parameters.get(0))) {
-                            selectedTournament = new TournamentButton(t);
+                    List<Tournament> tournaments =
+                            JSONReader.getJSONArray(tournamentFile, new TypeToken<ArrayList<Tournament>>(){}.getType());
+                    for (Tournament t : tournaments){
+                        if (t.getTournamentId().equals(parameters.get(0))) {
+                            selectedTournament = t;
+                            break;
                         }
-                    });
+                    };
                     if (selectedTournament == null){
                         alertFactory.displayError("Could not find tournament with id '{}'",parameters.get(0));
                         return;

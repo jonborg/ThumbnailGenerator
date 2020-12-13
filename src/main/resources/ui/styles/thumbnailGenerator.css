@@ -1,0 +1,13 @@
+.menuBar{
+    -fx-padding: 0;
+    -fx-spacing: 0;
+    -fx-font-size:15;
+}
+
+.menu{
+    -fx-padding: 2 7 2 7;
+}
+
+.menuItem{
+    -fx-padding: 0 50 0 20;
+}

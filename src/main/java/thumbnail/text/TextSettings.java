@@ -1,42 +1,54 @@
 package thumbnail.text;
 
-import json.JSONProcessor;
-import org.json.simple.JSONObject;
+import com.google.gson.annotations.SerializedName;
 
 public class TextSettings {
+    @SerializedName("id")
+    private String tournamentId;
+    @SerializedName("font")
     private String font;
+    @SerializedName("bold")
     private boolean bold;
+    @SerializedName("italic")
     private boolean italic;
-
+    @SerializedName("shadow")
     private boolean shadow;
+    @SerializedName("contour")
     private float contour;
-
+    @SerializedName("sizeTop")
     private int sizeTop;
+    @SerializedName("sizeBottom")
     private int sizeBottom;
-
+    @SerializedName("angleTop")
     private float angleTop;
+    @SerializedName("angleBottom")
     private float angleBottom;
-
+    @SerializedName("downOffsetTop")
     private int[] downOffsetTop;
+    @SerializedName("downOffsetBottom")
     private int[] downOffsetBottom;
 
+    public TextSettings(String tournamentId, String font, boolean bold, boolean italic, boolean shadow, float contour, int sizeTop, int sizeBottom, float angleTop, float angleBottom, int[] downOffsetTop, int[] downOffsetBottom) {
+        this.tournamentId = tournamentId;
+        this.font = font;
+        this.bold = bold;
+        this.italic = italic;
+        this.shadow = shadow;
+        this.contour = contour;
+        this.sizeTop = sizeTop;
+        this.sizeBottom = sizeBottom;
+        this.angleTop = angleTop;
+        this.angleBottom = angleBottom;
+        this.downOffsetTop = downOffsetTop;
+        this.downOffsetBottom = downOffsetBottom;
+    }
 
-    public TextSettings(JSONObject settings){
-        this.font = settings.containsKey("font") ? (String) settings.get("font") : "BebasNeue-Regular";
-        this.bold = JSONProcessor.toBoolean(settings,"bold");
-        this.italic = JSONProcessor.toBoolean(settings,"italic");
+    public String getTournamentId() {
+        return tournamentId;
+    }
 
-        this.shadow = JSONProcessor.toBoolean(settings,"shadow");
-        this.contour = JSONProcessor.toFloat(settings,"contour");
-
-        this.sizeTop = JSONProcessor.toInt(settings,"sizeTop");
-        this.sizeBottom = JSONProcessor.toInt(settings,"sizeBottom");
-
-        this.angleTop = JSONProcessor.toFloat(settings,"angleTop");
-        this.angleBottom = JSONProcessor.toFloat(settings,"angleBottom");
-
-        this.downOffsetTop = JSONProcessor.toIntArray(settings,"downOffsetTop");
-        this.downOffsetBottom = JSONProcessor.toIntArray(settings,"downOffsetBottom");
+    public void setTournamentId(String tournamentId) {
+        this.tournamentId = tournamentId;
     }
 
     public String getFont() {

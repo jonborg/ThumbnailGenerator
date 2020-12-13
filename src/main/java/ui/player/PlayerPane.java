@@ -2,6 +2,7 @@ package ui.player;
 
 import fighter.DownloadFighterURL;
 import javafx.application.Platform;
+import javafx.beans.NamedArg;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -47,7 +48,7 @@ public class PlayerPane extends VBox {
         super();
     }
 
-    public PlayerPane(int playerNumber){
+    public PlayerPane(@NamedArg("playerNumber") int playerNumber){
         this();
         this.playerNumber = playerNumber;
         icon.setPreserveRatio(true);
@@ -70,7 +71,7 @@ public class PlayerPane extends VBox {
         colorBox.setSpacing(30);
         VBox altBox = new VBox(new Label("Alt nº:"), colorBox);
 
-        VBox fullCharBox= new VBox(CharBox, altBox);
+        VBox fullCharBox = new VBox(CharBox, altBox);
 
         this.getChildren().addAll(playerBox,fullCharBox);
         this.setSpacing(10);
