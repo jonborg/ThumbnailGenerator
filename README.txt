@@ -11,8 +11,10 @@
 - Added "Pikmin Normal.tf" to allow creation of Alph Apparition thumbnails.
 
 
+
 ----------Added features on v1.2.2-----------
 - Min Min is added to the roster.
+- Added Tiamat as a league
 
 
 
