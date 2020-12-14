@@ -39,6 +39,10 @@ public class LeagueButton extends ToggleButton {
             this.foreground = "foregroundSop.png";
             this.league = "Smash or Pass";
         }
+        if (image.getName().contains("tiamat.png")) {
+            this.foreground = "foregroundTiamat.png";
+            this.league = "Tiamat";
+        }
     }
 
 
