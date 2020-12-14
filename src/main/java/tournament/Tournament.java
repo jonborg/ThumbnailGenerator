@@ -1,4 +1,4 @@
-package ui.tournament;
+package tournament;
 
 import com.google.gson.annotations.SerializedName;
 

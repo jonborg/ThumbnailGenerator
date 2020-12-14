@@ -13,7 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import ui.tournament.Tournament;
+import tournament.Tournament;
 
 import java.util.List;
 

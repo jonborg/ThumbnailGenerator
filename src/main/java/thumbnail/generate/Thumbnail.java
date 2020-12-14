@@ -17,8 +17,7 @@ import fighter.FighterImage;
 import json.JSONReader;
 import thumbnail.text.TextSettings;
 import thumbnail.text.TextToImage;
-import ui.tournament.Tournament;
-import ui.tournament.TournamentButton;
+import tournament.Tournament;
 
 
 public class Thumbnail {

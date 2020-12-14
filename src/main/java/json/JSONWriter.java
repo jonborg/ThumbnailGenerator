@@ -3,11 +3,9 @@ package json;
 
 import com.google.gson.*;
 import ui.factory.alert.AlertFactory;
-import ui.tournament.Tournament;
-import ui.tournament.TournamentButton;
+import tournament.Tournament;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;

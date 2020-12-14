@@ -3,6 +3,7 @@ package ui.tournament;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import tournament.Tournament;
 
 
 public class TournamentButton extends ToggleButton {

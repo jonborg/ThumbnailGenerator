@@ -16,8 +16,7 @@ import javafx.stage.FileChooser;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
 import ui.factory.alert.AlertFactory;
-import ui.tournament.Tournament;
-import ui.tournament.TournamentPane;
+import tournament.Tournament;
 import ui.window.EditTournamentWindow;
 
 import java.io.File;
@@ -26,8 +25,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ThumbnailGeneratorController implements Initializable {
+
     @FXML
-    private TournamentPane tournamentPane;
+    private AnchorPane tournaments;
+    @FXML
+    private TournamentsController tournamentsController;
     @FXML
     private TextField round;
     @FXML
@@ -51,7 +53,8 @@ public class ThumbnailGeneratorController implements Initializable {
 
     private static String tournamentFile = "settings/tournaments/tournaments.json";
     private AlertFactory alertFactory = new AlertFactory();
-    private List<Tournament> tournaments;
+
+    private List<Tournament> tournamentsList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -88,7 +91,7 @@ public class ThumbnailGeneratorController implements Initializable {
             return;
         }
 
-        if (tournamentPane.getSelectedTournament() == null){
+        if (tournamentsController.getSelectedTournament() == null){
             System.out.println("Tournament was not chosen");
             alertFactory.displayWarning("A tournament must be chosen before generating the thumbnail.");
             return;
@@ -96,7 +99,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
         Thumbnail t = new Thumbnail();
         try {
-            t.generateThumbnail(tournamentPane.getSelectedTournament(), saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
+            t.generateThumbnail(tournamentsController.getSelectedTournament(), saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
                     player1Controller.generateFighter(),
                     player2Controller.generateFighter());
             alertFactory.displayInfo("Thumbnail was successfully generated and saved!");
@@ -131,6 +134,6 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public void openEditTournaments(ActionEvent actionEvent) {
-        new EditTournamentWindow(tournaments);
+        new EditTournamentWindow(tournamentsList);
     }
 }

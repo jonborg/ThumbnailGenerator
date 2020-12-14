@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import ui.factory.alert.AlertFactory;
-import ui.player.Names;
+import fighter.Names;
 
 import java.awt.*;
 import java.io.*;

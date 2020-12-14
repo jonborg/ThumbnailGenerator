@@ -9,7 +9,7 @@ import fighter.Fighter;
 import fighter.FighterImage;
 import json.JSONReader;
 import ui.factory.alert.AlertFactory;
-import ui.tournament.Tournament;
+import tournament.Tournament;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

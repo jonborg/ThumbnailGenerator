@@ -1,0 +1,10 @@
+.scrollPane{
+    -fx-pref-width: 530;
+    -fx-max-width: 530;
+
+    -fx-min-height: 150;
+    -fx-pref-height: 150;
+    -fx-max-height: 150;
+
+    -fx-padding: 10 10 10 10;
+}
