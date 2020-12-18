@@ -1,0 +1,12 @@
+.listView{
+    -fx-pref-width: 300;
+    -fx-max-width: 300;
+
+    -fx-pref-height: 300;
+    -fx-max-height: 300;
+}
+
+.button{
+    -fx-pref-height: 20;
+    -fx-pref-width: 80;
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.controller.TournamentsSettingsController"
+            prefHeight="420.0" prefWidth="500.0"
+            stylesheets="@../styles/tournamentsSettings.css">
+
+    <HBox spacing="30" alignment="CENTER">
+        <VBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Tournaments' list:"/>
+            <ListView fx:id="tournamentsListView" styleClass="listView"/>
+        </VBox>
+        <VBox spacing="80" alignment="CENTER">
+            <VBox spacing="10" alignment="CENTER">
+                <Button fx:id="addButton" styleClass="button" text="Add"/>
+                <Button fx:id="editButton" styleClass="button" text="Edit"/>
+                <Button fx:id="deleteButton" styleClass="button" text="Delete"
+                onAction="#delete"/>
+            </VBox>
+            <VBox spacing="10" alignment="CENTER">
+                <Button fx:id="saveButton" styleClass="button" text="Save"/>
+                <Button fx:id="cancelButton" styleClass="button" text="Cancel"
+                onAction="#cancel"/>
+            </VBox>
+        </VBox>
+    </HBox>
+</StackPane>

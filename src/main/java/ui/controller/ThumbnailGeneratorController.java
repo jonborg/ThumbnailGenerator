@@ -7,12 +7,16 @@ import exception.ThumbnailFromFileException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
 import ui.factory.alert.AlertFactory;
@@ -20,6 +24,7 @@ import tournament.Tournament;
 import ui.window.EditTournamentWindow;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -53,8 +58,6 @@ public class ThumbnailGeneratorController implements Initializable {
 
     private static String tournamentFile = "settings/tournaments/tournaments.json";
     private AlertFactory alertFactory = new AlertFactory();
-
-    private List<Tournament> tournamentsList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -134,6 +137,23 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public void openEditTournaments(ActionEvent actionEvent) {
-        new EditTournamentWindow(tournamentsList);
+        try{
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsSettings.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Edit Tournaments");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
+
+    public static List<Tournament> getTournamentsList() {
+        return TournamentsController.getTournamentsList();
+    }
+
+    public static void updateTournamentsList(List<Tournament> newTournamentsList) {
+        TournamentsController.updateTournamentsList(newTournamentsList);
+    }
+
 }

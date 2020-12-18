@@ -74,4 +74,11 @@ public class TournamentsController implements Initializable {
     public static Tournament getSelectedTournament() {
         return selectedTournament;
     }
+    public static List<Tournament> getTournamentsList() {
+        return tournamentsList;
+    }
+
+    public static void updateTournamentsList(List<Tournament> newTournamentsList){
+        tournamentsList = newTournamentsList;
+    }
 }
