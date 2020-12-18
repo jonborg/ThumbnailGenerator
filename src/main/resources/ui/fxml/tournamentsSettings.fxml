@@ -18,14 +18,15 @@
             <ListView fx:id="tournamentsListView" styleClass="listView"/>
         </VBox>
         <VBox spacing="80" alignment="CENTER">
-            <VBox spacing="10" alignment="CENTER">
+            <VBox spacing="10" alignment="CENTER" >
                 <Button fx:id="addButton" styleClass="button" text="Add"/>
                 <Button fx:id="editButton" styleClass="button" text="Edit"/>
                 <Button fx:id="deleteButton" styleClass="button" text="Delete"
                 onAction="#delete"/>
             </VBox>
             <VBox spacing="10" alignment="CENTER">
-                <Button fx:id="saveButton" styleClass="button" text="Save"/>
+                <Button fx:id="saveButton" styleClass="button" text="Save"
+                onAction="#save"/>
                 <Button fx:id="cancelButton" styleClass="button" text="Cancel"
                 onAction="#cancel"/>
             </VBox>

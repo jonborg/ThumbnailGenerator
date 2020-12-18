@@ -14,9 +14,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import json.JSONWriter;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
 import ui.factory.alert.AlertFactory;
@@ -58,6 +60,8 @@ public class ThumbnailGeneratorController implements Initializable {
 
     private static String tournamentFile = "settings/tournaments/tournaments.json";
     private AlertFactory alertFactory = new AlertFactory();
+
+    private static Stage stage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -153,7 +157,28 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public static void updateTournamentsList(List<Tournament> newTournamentsList) {
-        TournamentsController.updateTournamentsList(newTournamentsList);
+        JSONWriter.updateTournamentsFile(newTournamentsList);
+        startApp(stage);
     }
+
+    public static void startApp(Stage primaryStage){
+        try {
+            FXMLLoader loader = new FXMLLoader(ThumbnailGeneratorController.class.getClassLoader().getResource("ui/fxml/thumbnailGenerator.fxml"));
+            Parent root = (Parent) loader.load();
+            ((ThumbnailGeneratorController) loader.getController()).setStage(primaryStage);
+
+            //primaryStage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
+            primaryStage.setTitle("Smash Bros. VOD Thumbnail Generator");
+            primaryStage.setScene(new Scene(root, 800, 660));
+            primaryStage.show();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void setStage(Stage stage){
+        this.stage=stage;
+    }
+
 
 }

@@ -59,11 +59,11 @@ public class TournamentsSettingsController implements Initializable {
             int i = tournamentsListView.getSelectionModel().getSelectedIndex();
             tournamentsListView.getItems().remove(i);
             tournamentsList.remove(i);
-            System.out.println(tournamentsList);
         }
     }
 
-    public static void save (ActionEvent actionEvent){
+    public void save (ActionEvent actionEvent){
+        cancel(actionEvent);
         ThumbnailGeneratorController.updateTournamentsList(tournamentsList);
     }
 
@@ -71,6 +71,4 @@ public class TournamentsSettingsController implements Initializable {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-
-
 }
