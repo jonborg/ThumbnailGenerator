@@ -1,0 +1,72 @@
+[
+	{
+		"id": "tdlx",
+		"font": "BebasNeue-Regular",
+		"bold": true,
+		"italic": true,
+		"shadow": true,
+		"contour": 0,
+		"sizeTop": 85,
+		"sizeBottom": 75,
+		"angleTop": -2,
+		"angleBottom": -2,
+		"downOffsetTop": [10, 5],
+		"downOffsetBottom": [0, -5]
+	},
+	{
+		"id": "invicta",
+		"font": "BebasNeue-Regular",
+		"bold": true,
+		"italic": true,
+		"shadow": true,
+		"contour": 0,
+		"sizeTop": 90,
+		"sizeBottom": 75,
+		"angleTop": -2,
+		"angleBottom": -2,
+		"downOffsetTop": [10, 5],
+		"downOffsetBottom": [0, -5]
+	},
+	{
+		"id": "sop",
+		"font": "BebasNeue-Regular",
+		"bold": true,
+		"italic": true,
+		"shadow": true,
+		"contour": 0,
+		"sizeTop": 90,
+		"sizeBottom": 75,
+		"angleTop": -2,
+		"angleBottom": -2,
+		"downOffsetTop": [10, 5],
+		"downOffsetBottom": [0, -5]
+	},
+	{
+		"id": "tiamat",
+		"font": "BebasNeue-Regular",
+		"bold": true,
+		"italic": true,
+		"shadow": true,
+		"contour": 0,
+		"sizeTop": 90,
+		"sizeBottom": 75,
+		"angleTop": -2,
+		"angleBottom": -2,
+		"downOffsetTop": [10, 5],
+		"downOffsetBottom": [0, -5]
+	},
+	{
+		"id": "alph",
+		"font": "Pikmin-Normal",
+		"bold": true,
+		"italic": false,
+		"shadow": false,
+		"contour": 3,
+		"sizeTop": 85,
+		"sizeBottom": 75,
+		"angleTop": -2,
+		"angleBottom": -2,
+		"downOffsetTop": [0, 0],
+		"downOffsetBottom": [-20, -15]
+	}
+]
