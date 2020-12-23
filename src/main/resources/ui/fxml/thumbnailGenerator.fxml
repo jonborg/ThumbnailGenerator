@@ -39,7 +39,7 @@
                     <TextField fx:id="round"/>
                 </VBox>
                 <VBox>
-                    <Label text="Date:"/>
+                    <Label text="Event/Date:"/>
                     <TextField fx:id="date"/>
                 </VBox>
             </HBox>

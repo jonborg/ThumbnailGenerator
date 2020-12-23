@@ -9,7 +9,7 @@
 <StackPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="ui.controller.TournamentsSettingsController"
-            prefHeight="420.0" prefWidth="500.0"
+            prefHeight="400.0" prefWidth="500.0"
             stylesheets="@../styles/tournamentsSettings.css">
 
     <HBox spacing="30" alignment="CENTER">
@@ -20,7 +20,8 @@
         <VBox spacing="80" alignment="CENTER">
             <VBox spacing="10" alignment="CENTER" >
                 <Button fx:id="addButton" styleClass="button" text="Add"/>
-                <Button fx:id="editButton" styleClass="button" text="Edit"/>
+                <Button fx:id="editButton" styleClass="button" text="Edit"
+                onAction="#edit"/>
                 <Button fx:id="deleteButton" styleClass="button" text="Delete"
                 onAction="#delete"/>
             </VBox>

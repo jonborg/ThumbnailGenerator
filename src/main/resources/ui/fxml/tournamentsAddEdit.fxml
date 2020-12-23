@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.controller.TournamentsAddEditController"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@../styles/tournamentsAddEdit.css">
+
+    <HBox spacing="20">
+        <VBox spacing="15">
+            <VBox>
+                <Label text="Tournament Name*:"/>
+                <TextField fx:id="name"/>
+            </VBox>
+            <VBox>
+                <Label text="Diminute Name*:"/>
+                <TextField fx:id="id"/>
+            </VBox>
+            <TitledPane text="Image Directories" collapsible="false">
+                <VBox spacing="15">
+                    <VBox>
+                        <Label text="Logo*:"/>
+                        <TextField fx:id="logo"/>
+                    </VBox>
+                    <VBox>
+                        <Label text="Foreground*:"/>
+                        <TextField fx:id="foreground"/>
+                    </VBox>
+                    <VBox>
+                        <Label text="Background:"/>
+                        <TextField fx:id="background"/>
+                    </VBox>
+                </VBox>
+            </TitledPane>
+        </VBox>
+        <VBox spacing="15">
+            <VBox>
+                <Label text="Font:"/>
+                <TextField styleClass="medium-textfield" fx:id="font"/>
+            </VBox>
+
+            <TitledPane text="Font Size" collapsible="false">
+                <HBox spacing="60">
+                    <VBox>
+                        <Label text="Top"/>
+                        <TextField styleClass="small-textfield" fx:id="sizeTop"/>
+                    </VBox>
+                    <VBox>
+                        <Label text="Bottom:"/>
+                        <TextField styleClass="small-textfield" fx:id="sizeBottom"/>
+                    </VBox>
+                </HBox>
+            </TitledPane>
+
+            <TitledPane text="Font Settings" collapsible="false" >
+                <VBox spacing="10">
+                    <HBox spacing="40">
+                        <VBox>
+                            <Label text="Bold:"/>
+                            <CheckBox fx:id="bold"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Italic:"/>
+                            <CheckBox fx:id="italic"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Shadow:"/>
+                            <CheckBox fx:id="shadow"/>
+                        </VBox>
+                    </HBox>
+                    <VBox>
+                        <Label text="Contour Length:"/>
+                        <TextField styleClass="small-textfield" fx:id="contour"/>
+                    </VBox>
+                </VBox>
+            </TitledPane>
+
+            <TitledPane text="Text Angle" collapsible="false">
+                <HBox spacing="60">
+                    <VBox>
+                        <Label text="Top"/>
+                        <TextField styleClass="small-textfield" fx:id="angleTop"/>
+                    </VBox>
+                    <VBox>
+                        <Label text="Bottom:"/>
+                        <TextField styleClass="small-textfield" fx:id="angleBottom"/>
+                    </VBox>
+                </HBox>
+            </TitledPane>
+
+            <TitledPane text="Text Vertical Offset" collapsible="false" >
+                <VBox>
+                    <HBox spacing="40">
+                        <VBox>
+                            <Label text="Bottom Left"/>
+                            <TextField styleClass="small-textfield" fx:id="downOffsetTopLeft"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Top Right"/>
+                            <TextField styleClass="small-textfield" fx:id="downOffsetTopRight"/>
+                        </VBox>
+                    </HBox>
+                    <HBox spacing="40">
+                        <VBox>
+                            <Label text="Bottom Left"/>
+                            <TextField styleClass="small-textfield" fx:id="downOffsetBottomLeft"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Bottom Right"/>
+                            <TextField styleClass="small-textfield" fx:id="downOffsetBottomRight"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </TitledPane>
+        </VBox>
+        <BorderPane prefHeight="360" prefWidth="640">
+            <ImageView fx:id="preview"/>
+        </BorderPane>
+    </HBox>
+</AnchorPane>

@@ -1,0 +1,9 @@
+.small-textfield {
+    -fx-pref-width: 10;
+    -fx-max-width: 10;
+}
+
+.small-textfield {
+    -fx-pref-width: 60;
+    -fx-max-width: 60;
+}
