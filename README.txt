@@ -1,9 +1,16 @@
 ///////////////////////////////////////
 //          0.Release Notes          //
 ///////////////////////////////////////
+----------Added features on v1.4.0-----------
+- Scroll pane added to tournament list
+- Updated Falco horizontal offset from -10 to 60
+- Sephiroth added to the roster.
+- Pyra/Mythra added to the roster.
+
+
 
 ----------Added features on v1.3.0-----------
-- Steve is added to the roster;
+- Steve added to the roster;
 - Character icons appear when selecting a character and alt;
 - A preview image of the chosen fighter and alt appears when clicking on character icon;
 - Tournaments are now loaded from file "settings/tournaments/tournaments.json" to personalize available tournaments;
@@ -11,8 +18,10 @@
 - Added "Pikmin Normal.tf" to allow creation of Alph Apparition thumbnails.
 
 
+
 ----------Added features on v1.2.2-----------
-- Min Min is added to the roster.
+- Min Min added to the roster.
+- Added Tiamat as a league
 
 
 

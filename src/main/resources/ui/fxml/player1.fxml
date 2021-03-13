@@ -26,18 +26,24 @@
             </HBox>
             <VBox>
                 <Label text="Alt:"/>
-                <HBox spacing="30">
+                <HBox fx:id="colorBox" spacing="30">
                     <Spinner fx:id="alt" styleClass="alt" editable="true">
                         <valueFactory>
                             <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="8"/>
                         </valueFactory>
                     </Spinner>
-
-                    <Hyperlink fx:id="iconLink" disable="true" onAction="#previewFighter" >
-                        <graphic>
-                            <ImageView fx:id="icon" preserveRatio="true"/>
-                        </graphic>
-                    </Hyperlink>
+                    <HBox>
+                        <Hyperlink fx:id="iconLink" disable="true" onAction="#previewFighter" >
+                            <graphic>
+                                <ImageView fx:id="icon" preserveRatio="true"/>
+                            </graphic>
+                        </Hyperlink>
+                        <Hyperlink fx:id="icon2Link" disable="true" onAction="#previewFighter" >
+                            <graphic>
+                                <ImageView fx:id="icon2" preserveRatio="true"/>
+                            </graphic>
+                        </Hyperlink>
+                    </HBox>
                 </HBox>
             </VBox>
         </VBox>

@@ -105,6 +105,9 @@ bylethM true
 bylethF false
 minmin false
 steve false
+sephiroth1 true
+sephiroth2 false
+pyra false
 
 //echoese outros ds
 dark_pit true

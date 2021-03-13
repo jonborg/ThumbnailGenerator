@@ -105,6 +105,9 @@ bylethM 1
 bylethF 1
 minmin 1.1
 steve 0.5
+sephiroth1 1
+sephiroth2 0.82
+pyra 0.5
 
 //echoes
 dark_pit 1.25

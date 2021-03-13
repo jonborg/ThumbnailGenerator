@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import ui.factory.alert.AlertFactory;
 import fighter.Names;
 
@@ -31,23 +32,30 @@ import java.util.ResourceBundle;
 
 public class Player1Controller implements Initializable {
     @FXML
-    private TextField player;
+    protected TextField player;
     @FXML
-    private ComboBox<String> fighter;
+    protected ComboBox<String> fighter;
     @FXML
-    private CheckBox flip;
+    protected CheckBox flip;
     @FXML
-    private Spinner<Integer> alt;
+    protected Spinner<Integer> alt;
     @FXML
-    private Hyperlink iconLink;
+    protected Hyperlink iconLink;
     @FXML
-    private ImageView icon;
+    protected ImageView icon;
+    @FXML
+    protected Hyperlink icon2Link;
+    @FXML
+    protected ImageView icon2;
+    @FXML
+    protected HBox colorBox;
 
-    private Map<String,String> map = Names.map;
-    private String flipFile = "settings/thumbnails/images/flip.txt";
-    private String urlName;
 
-    private AlertFactory alertFactory = new AlertFactory();
+    protected Map<String,String> map = Names.map;
+    protected String flipFile = "settings/thumbnails/images/flip.txt";
+    protected String urlName;
+
+    protected AlertFactory alertFactory = new AlertFactory();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -55,7 +63,7 @@ public class Player1Controller implements Initializable {
         initAlts();
     }
 
-    private void initFighters(){
+    protected void initFighters(){
         ObservableList<String> items = FXCollections.observableArrayList(map.keySet());
         FilteredList<String> filteredItems = new FilteredList<>(items);
 
@@ -63,7 +71,7 @@ public class Player1Controller implements Initializable {
         fighter.setItems(filteredItems);
     }
 
-    private void initAlts(){
+    protected void initAlts(){
         alt.valueProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
     }
 
@@ -74,7 +82,7 @@ public class Player1Controller implements Initializable {
         updateFighterIcon();
     }
 
-    private String getSelectionName() {
+    protected String getSelectionName() {
         String sel = fighter.getSelectionModel().getSelectedItem();
         if (sel == null || sel.equals("Mii Brawler") || sel.equals("Mii Swordfighter")) {
             alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
@@ -88,7 +96,7 @@ public class Player1Controller implements Initializable {
         return sel == null ? null : map.get(sel);
     }
 
-    private void setDefaultFlip (String urlName){
+    protected void setDefaultFlip (String urlName){
         boolean skip = false;
         if (urlName == null){
             flip.setSelected(false);
@@ -115,16 +123,65 @@ public class Player1Controller implements Initializable {
 
     }
 
-    private void updateFighterIcon(){
+    protected void updateFighterIcon(){
         try {
             iconLink.setDisable(false);
             icon.setImage(new Image(getClass().getResourceAsStream("/icons/" + urlName + "/" + alt.getValue() + ".png")));
+            if ("pyra".equals(urlName)){
+                icon2Link.setDisable(false);
+                Image imageIcon2 = new Image(getClass().getResourceAsStream("/icons/mythra/" + alt.getValue() + ".png"));
+                icon2.setImage(imageIcon2);
+                colorBox.setSpacing(0);
+            }else{
+                icon2Link.setDisable(true);
+                icon2.setImage(null);
+                colorBox.setSpacing(30);
+            }
         }catch (NullPointerException e){
             iconLink.setDisable(true);
             iconLink.setText(null);
             icon.setImage(null);
         }
     }
+
+/*    private void initFighterSelection(){
+        fighter.setEditable(true);
+        fighter.setMaxWidth(185);
+        ObservableList<String> items = FXCollections.observableArrayList(map.keySet());
+        FilteredList<String> filteredItems = new FilteredList<>(items);
+
+        fighter.getEditor().textProperty().addListener(new InputFilter(fighter, filteredItems, false));
+        fighter.setItems(filteredItems);
+
+        fighter.setOnAction(actionEvent -> {
+            urlName = getSelectionName();
+            setDefaultFlip(urlName);
+            updateFighterIcon();
+        });
+
+        alt.valueProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
+        //alt.getEditor().textProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
+    }
+
+    private void updateFighterIcon(){
+        try {
+            iconLink.setDisable(false);
+            iconLink.setOnAction(event -> initIconListener());
+            Image imageIcon = new Image(PlayerPane.class.getResourceAsStream("/icons/" + urlName + "/" + alt.getValue() + ".png"));
+            icon.setImage(imageIcon);
+
+            if ("pyra".equals(urlName)){
+                icon2Link.setDisable(false);
+                icon2Link.setOnAction(event -> initIconListener());
+                Image imageIcon2 = new Image(PlayerPane.class.getResourceAsStream("/icons/mythra/" + alt.getValue() + ".png"));
+                icon2.setImage(imageIcon2);
+                colorBox.setSpacing(0);
+            }else{
+                icon2Link.setDisable(true);
+                icon2.setImage(null);
+                colorBox.setSpacing(30);
+            }
+*/
 
     public void previewFighter(ActionEvent actionEvent) {
         String url = DownloadFighterURL.generateFighterURL(urlName, alt.getValue());
@@ -189,7 +246,7 @@ public class Player1Controller implements Initializable {
 
 
 
-    private class InputFilter implements ChangeListener<String> {
+    protected class InputFilter implements ChangeListener<String> {
 
         private ComboBox<String> box;
         private FilteredList<String> items;
@@ -303,4 +360,6 @@ public class Player1Controller implements Initializable {
             box.getEditor().setText(value.get());
         }
     }
+
+
 }
