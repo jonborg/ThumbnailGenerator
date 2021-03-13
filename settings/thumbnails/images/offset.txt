@@ -20,7 +20,7 @@ sheik 70 50
 zelda 60 60
 dr_mario 40 60
 pichu 55 -40
-falco -10 0
+falco 60 0
 marth -20 50
 young_link -130 -20
 ganondorf 20 60
@@ -105,6 +105,9 @@ bylethM -20 50
 bylethF -10 10
 minmin 140 -270
 steve -150 90
+sephiroth1 -140 -160
+sephiroth2 -220 -90
+pyra 50 90
 
 //echoes
 dark_pit -10 -130

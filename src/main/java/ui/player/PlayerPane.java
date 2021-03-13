@@ -37,11 +37,15 @@ public class PlayerPane extends VBox {
     private CheckBox flip = new CheckBox();
     private Spinner<Integer> alt = new Spinner<>();
     private ImageView icon = new ImageView();
+    private ImageView icon2 = new ImageView();
     private Hyperlink iconLink = new Hyperlink();
+    private Hyperlink icon2Link = new Hyperlink();
     private int playerNumber;
     private String urlName;
 
     private String flipFile = "settings/thumbnails/images/flip.txt";
+
+    private HBox colorBox;
 
     private PlayerPane(){
         super();
@@ -50,13 +54,20 @@ public class PlayerPane extends VBox {
     public PlayerPane(int playerNumber){
         this();
         this.playerNumber = playerNumber;
+
+
         icon.setPreserveRatio(true);
         icon.setFitHeight(64);
         iconLink.setGraphic(icon);
         iconLink.setDisable(true);
 
+        icon2.setPreserveRatio(true);
+        icon2.setFitHeight(64);
+        icon2Link.setGraphic(icon2);
+        icon2Link.setDisable(true);
+
         initFighterSelection();
-        alt.setMaxWidth(80);
+        alt.setMaxWidth(70);
         alt.setEditable(true);
         alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
 
@@ -66,8 +77,10 @@ public class PlayerPane extends VBox {
         HBox CharBox = new HBox(charBox,flipBox);
         CharBox.setSpacing(5);
 
-        HBox colorBox = new HBox(alt, iconLink);
+        HBox iconBox = new HBox(iconLink, icon2Link);
+        colorBox = new HBox(alt, iconBox);
         colorBox.setSpacing(30);
+
         VBox altBox = new VBox(new Label("Alt nº:"), colorBox);
 
         VBox fullCharBox= new VBox(CharBox, altBox);
@@ -121,7 +134,7 @@ public class PlayerPane extends VBox {
 
     private void initFighterSelection(){
         fighter.setEditable(true);
-        fighter.setMaxWidth(180);
+        fighter.setMaxWidth(185);
         ObservableList<String> items = FXCollections.observableArrayList(map.keySet());
         FilteredList<String> filteredItems = new FilteredList<>(items);
 
@@ -141,27 +154,44 @@ public class PlayerPane extends VBox {
     private void updateFighterIcon(){
         try {
             iconLink.setDisable(false);
-            iconLink.setOnAction(event -> {
-                String url = DownloadFighterURL.generateFighterURL(urlName, alt.getValue());
-                if(Desktop.isDesktopSupported()) {
-                    try {
-                        if ("http".equals(url.substring(0,4))){
-                            Desktop.getDesktop().browse(new URI(url));
-                        } else {
-                            Desktop.getDesktop().open(new File(url));
-                        }
-                    }catch(URISyntaxException | IOException e ){
-                        alertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
-                    }
-                }
-            });
-            icon.setImage(new Image(PlayerPane.class.getResourceAsStream("/icons/" + urlName + "/" + alt.getValue() + ".png")));
+            iconLink.setOnAction(event -> initIconListener());
+            Image imageIcon = new Image(PlayerPane.class.getResourceAsStream("/icons/" + urlName + "/" + alt.getValue() + ".png"));
+            icon.setImage(imageIcon);
+
+            if ("pyra".equals(urlName)){
+                icon2Link.setDisable(false);
+                icon2Link.setOnAction(event -> initIconListener());
+                Image imageIcon2 = new Image(PlayerPane.class.getResourceAsStream("/icons/mythra/" + alt.getValue() + ".png"));
+                icon2.setImage(imageIcon2);
+                colorBox.setSpacing(0);
+            }else{
+                icon2Link.setDisable(true);
+                icon2.setImage(null);
+                colorBox.setSpacing(30);
+            }
+
         }catch (NullPointerException e){
             iconLink.setDisable(true);
             iconLink.setText(null);
             icon.setImage(null);
         }
     }
+
+    private void initIconListener() {
+        String url = DownloadFighterURL.generateFighterURL(urlName, alt.getValue());
+        if(Desktop.isDesktopSupported()) {
+            try {
+                if ("http".equals(url.substring(0,4))){
+                    Desktop.getDesktop().browse(new URI(url));
+                } else {
+                    Desktop.getDesktop().open(new File(url));
+                }
+            }catch(URISyntaxException | IOException e ){
+                alertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
+            }
+        }
+    }
+
 
     public Fighter generateFighter(){
         return new Fighter(getPlayer(), getFighter() ,getUrlName(), getAlt(), isFlip());
@@ -324,4 +354,6 @@ public class PlayerPane extends VBox {
             box.getEditor().setText(value.get());
         }
     }
+
+
 }
