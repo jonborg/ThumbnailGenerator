@@ -45,7 +45,7 @@ public class TournamentsController implements Initializable {
     private void initTournamentList(){
         List<TournamentButton> tournamentsButtons = new ArrayList<>();
         tournamentsGroup = new ToggleGroup();
-        tournamentsList = JSONReader.getJSONArray(tournamentsFile, new TypeToken<ArrayList<Tournament>>(){}.getType());
+        tournamentsList = getTournamentsList();
         if (tournamentsList == null || tournamentsList.isEmpty()){
             return;
         }
@@ -81,6 +81,6 @@ public class TournamentsController implements Initializable {
         return selectedTournament;
     }
     public static List<Tournament> getTournamentsList() {
-        return tournamentsList;
+        return JSONReader.getJSONArray(tournamentsFile, new TypeToken<ArrayList<Tournament>>(){}.getType());
     }
 }

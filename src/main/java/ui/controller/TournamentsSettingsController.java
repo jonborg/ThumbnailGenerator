@@ -37,10 +37,11 @@ public class TournamentsSettingsController implements Initializable {
 
 
 
-    private static List<Tournament> tournamentsList = ThumbnailGeneratorController.getTournamentsList();
+    private static List<Tournament> tournamentsList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        tournamentsList = ThumbnailGeneratorController.getTournamentsList();
         ObservableList<Tournament> observableList = FXCollections.observableArrayList();
         observableList.addAll(tournamentsList);
         tournamentsListView.setItems(observableList);
