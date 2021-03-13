@@ -13,7 +13,7 @@ import json.JSONProcessor;
 import org.json.simple.JSONObject;
 import thumbnail.text.TextSettings;
 import thumbnail.text.TextToImage;
-import ui.tournament.Tournament;
+import ui.tournament.TournamentButton;
 
 
 public class Thumbnail {
@@ -35,7 +35,7 @@ public class Thumbnail {
     private TextSettings textSettings;
     private String textFile = "settings/thumbnails/text/text.json";
 
-    public void generateThumbnail(Tournament tournament, boolean saveLocally, String round, String date, Fighter... fighters)
+    public void generateThumbnail(TournamentButton tournament, boolean saveLocally, String round, String date, Fighter... fighters)
             throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException {
 
         String thumbnailFileName = fighters[0].getPlayerName().replace("|","_")+"-"+fighters[0].getUrlName()+fighters[0].getAlt()+"--"+

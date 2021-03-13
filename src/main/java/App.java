@@ -3,22 +3,21 @@ import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
 import javafx.application.Application;
+import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import json.JSONProcessor;
 import org.json.simple.JSONObject;
 import ui.factory.alert.AlertFactory;
 import ui.player.PlayerPane;
-import ui.tournament.Tournament;
+import ui.tournament.TournamentButton;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class App extends Application {
     private  PlayerPane p1 = new PlayerPane(1);
     private PlayerPane p2 = new PlayerPane(2);
     private Button flipPlayer = new Button();
-    private Tournament selectedTournament = null;
+    private TournamentButton selectedTournament = null;
 
     private AlertFactory alertFactory = new AlertFactory();
 
@@ -59,11 +58,9 @@ public class App extends Application {
         dateRoundBox.setSpacing(20);
         dateRoundBox.setAlignment(Pos.CENTER);
 
-
         //Players UI
         flipPlayer.setGraphic(new ImageView(new Image(App.class.getResourceAsStream("/ui/flip.png"))));
         Pane allPlayersBox = generatePlayersPane();
-
 
         //Save UI
         CheckBox saveLocally = new CheckBox("Save/Load fighters' image locally");
@@ -86,12 +83,12 @@ public class App extends Application {
         allInfoBox.setSpacing(20);
 
         VBox allContentBox = new VBox(allInfoBox, saveBox);
-        allContentBox.setSpacing(40);
+        allContentBox.setSpacing(20);
         allContentBox.setAlignment(Pos.CENTER);
 
         StackPane root = new StackPane();
         root.getChildren().add(allContentBox);
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 800, 640));
         primaryStage.show();
 
 
@@ -173,18 +170,21 @@ public class App extends Application {
 
     private Pane generateTournamentsButtons(){
 
-        Label tournamentLabel = new Label("Tournament:");
+        String tournamentLabelTitle = "Tournament:";
+        Label tournamentLabel = new Label(tournamentLabelTitle);
         ToggleGroup tournamentsGroup = new ToggleGroup();
-        List<Tournament> tournamentsButtons = new ArrayList<>();
+        List<TournamentButton> tournamentsButtons = new ArrayList<>();
+
+        int buttonSpacing = 10;
 
         HBox tournamentsBox = new HBox();
-        tournamentsBox.setSpacing(10);
+        tournamentsBox.setSpacing(buttonSpacing);
         tournamentsBox.setAlignment(Pos.CENTER);
 
         JSONProcessor.getJSONArray(tournamentFile).forEach(tournament -> {
             JSONObject t =  (JSONObject) tournament;
             if (t.containsKey("name")) {
-                Tournament tournamentButton = new Tournament(t);
+                TournamentButton tournamentButton = new TournamentButton(t);
                 tournamentButton.setToggleGroup(tournamentsGroup);
                 tournamentsButtons.add(tournamentButton);
                 tournamentsBox.getChildren().add(tournamentButton);
@@ -193,20 +193,33 @@ public class App extends Application {
 
         tournamentsGroup.selectedToggleProperty().addListener((obs,oldToggle,newToggle)->{
             if (newToggle == null){
+                tournamentLabel.setText(tournamentLabelTitle);
                 selectedTournament = null;
             }else{
-                for(Tournament tournament : tournamentsButtons){
+                for(TournamentButton tournament : tournamentsButtons){
                     if (tournament.isSelected()){
                         selectedTournament = tournament;
-                        tournamentLabel.setText("Tournament: " + tournament.getName());
+                        tournamentLabel.setText(tournamentLabelTitle + " " + tournament.getName());
                     }
                 }
             }
         });
 
+        double buttonWidth = tournamentsButtons.get(0).getPrefWidth();
+        double buttonHeight = tournamentsButtons.get(0).getPrefHeight();
 
-        VBox allTournamentsBox = new VBox(tournamentLabel,tournamentsBox);
-        allTournamentsBox.setSpacing(5);
+        ScrollPane scrollTournamentsBox = new ScrollPane();
+        scrollTournamentsBox.setPrefWidth(4*buttonWidth + 9*buttonSpacing);
+        scrollTournamentsBox.setMaxWidth(4*buttonWidth + 9*buttonSpacing);
+        scrollTournamentsBox.setPadding(new Insets(buttonSpacing,buttonSpacing,buttonSpacing,buttonSpacing));
+        scrollTournamentsBox.setPrefHeight(buttonHeight + 4*buttonSpacing);
+
+        scrollTournamentsBox.setContent(tournamentsBox);
+        //scrollTournamentsBox.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollTournamentsBox.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+        VBox allTournamentsBox = new VBox(tournamentLabel, scrollTournamentsBox);
+        allTournamentsBox.setSpacing(buttonSpacing);
         allTournamentsBox.setAlignment(Pos.CENTER);
 
         return allTournamentsBox;

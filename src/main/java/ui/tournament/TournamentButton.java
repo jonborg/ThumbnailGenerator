@@ -1,11 +1,13 @@
 package ui.tournament;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.json.simple.JSONObject;
 
-public class Tournament extends ToggleButton {
+
+public class TournamentButton extends ToggleButton {
 
     private String tournamentId;
     private String name;
@@ -15,11 +17,11 @@ public class Tournament extends ToggleButton {
 
     private static String defaultBackground= "assets/tournaments/backgrounds/default.png";
 
-    public Tournament(){
+    public TournamentButton(){
         super();
     }
 
-    public Tournament(String id, String name, String image, String foreground, String background){
+    public TournamentButton(String id, String name, String image, String foreground, String background){
         this.tournamentId = id;
         this.name = name;
         this.image = image;
@@ -31,9 +33,10 @@ public class Tournament extends ToggleButton {
         } else {
             this.setGraphic(new ImageView(new Image("file:"+this.image)));
         }
+        this.setPrefSize(110,110);
     }
 
-    public Tournament(JSONObject tournament){
+    public TournamentButton(JSONObject tournament){
         this((String) tournament.get("id"), (String) tournament.get("name"),
             tournament.containsKey("logo") ? (String) tournament.get("logo") : null,
             tournament.containsKey("foreground") ? (String) tournament.get("foreground") : null,
