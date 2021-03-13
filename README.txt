@@ -7,6 +7,8 @@
 - Sephiroth added to the roster.
 - Pyra/Mythra added to the roster.
 
+
+
 ----------Added features on v1.3.0-----------
 - Steve added to the roster;
 - Character icons appear when selecting a character and alt;
