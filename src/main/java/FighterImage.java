@@ -256,6 +256,14 @@ public class FighterImage {
             return;
         }
 
+        if ("sephiroth".contains(fighter.getUrlName())) {
+            //1 to 6
+            if (fighter.getAlt()<7) fighter.setUrlName("sephiroth1");
+            //7 and 8
+            else fighter.setUrlName("sephiroth2");
+            return;
+        }
+
         if ("falco".contains(fighter.getUrlName())) {
             fighter.setUrlName("falco ");
         }
