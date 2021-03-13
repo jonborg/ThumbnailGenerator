@@ -3,12 +3,16 @@ package ui.controller;
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,11 +20,14 @@ import javafx.stage.Stage;
 import thumbnail.generate.Thumbnail;
 import thumbnail.text.TextSettings;
 import tournament.Tournament;
+import ui.combobox.InputFilter;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
-import java.nio.Buffer;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class TournamentsAddEditController implements Initializable {
 
@@ -36,7 +43,7 @@ public class TournamentsAddEditController implements Initializable {
     private TextField background;
 
     @FXML
-    private TextField font;
+    private ComboBox<String> font;
     @FXML
     private  TextField sizeTop;
     @FXML
@@ -69,6 +76,8 @@ public class TournamentsAddEditController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initFontDropdown();
+
         Tournament tournament = TournamentsSettingsController.getSelectedTournament();
         id.setText(tournament.getTournamentId());
         name.setText(tournament.getName());
@@ -77,7 +86,7 @@ public class TournamentsAddEditController implements Initializable {
         background.setText(tournament.getThumbnailBackground());
 
         TextSettings textSettings = TextSettings.loadTextSettings(tournament.getTournamentId());
-        font.setText(textSettings.getFont());
+        font.getSelectionModel().select(textSettings.getFont());
         sizeTop.setText(String.valueOf(textSettings.getSizeTop()));
         sizeBottom.setText(String.valueOf(textSettings.getSizeBottom()));
         angleTop.setText(String.valueOf(textSettings.getAngleTop()));
@@ -94,11 +103,10 @@ public class TournamentsAddEditController implements Initializable {
 
 
     public void previewThumbnail(ActionEvent actionEvent) {
-
         Tournament tournament = new Tournament(id.getText(), name.getText(),
                 logo.getText(), foreground.getText(), background.getText());
 
-        TextSettings textSettings = new TextSettings(id.getText(), font.getText(),
+        TextSettings textSettings = new TextSettings(id.getText(), font.getSelectionModel().getSelectedItem(),
                 bold.isSelected(), italic.isSelected(), shadow.isSelected(), Float.parseFloat(contour.getText()),
                 Integer.parseInt(sizeTop.getText()), Integer.parseInt(sizeBottom.getText()),
                 Float.parseFloat(angleTop.getText()), Float.parseFloat(angleBottom.getText()),
@@ -114,7 +122,23 @@ public class TournamentsAddEditController implements Initializable {
         }
     }
 
-    public void cancel(ActionEvent actionEvent) {
+    private void initFontDropdown(){
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        String[] fontFamilies = ge.getAvailableFontFamilyNames();
+        String[] allCompatibleFonts =  Stream.concat(Arrays.stream(fontFamilies),
+                Arrays.stream(new String[]{"BebasNeue-Regular","Pikmin-Normal"})).sorted()
+                .toArray(String[]::new);
+
+        ObservableList<String> items = FXCollections.observableArrayList(allCompatibleFonts);
+        FilteredList<String> filteredItems = new FilteredList<>(items);
+
+        font.getEditor().textProperty().addListener(new InputFilter(font, filteredItems, false));
+        font.setItems(filteredItems);
+    }
+
+    public void cancel(ActionEvent actionEvent)  {
+
+
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }

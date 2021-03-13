@@ -25,7 +25,7 @@
                         </VBox>
                         <VBox>
                             <Label text="Font:"/>
-                            <TextField styleClass="medium-textfield" fx:id="font"/>
+                            <ComboBox fx:id="font" styleClass="medium-textfield" editable="true"/>
                         </VBox>
                     </VBox>
                 </TitledPane>
