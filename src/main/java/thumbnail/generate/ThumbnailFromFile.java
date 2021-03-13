@@ -65,7 +65,7 @@ public class ThumbnailFromFile extends Thumbnail {
                     Fighter player2 = new Fighter(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
                     player1.setFlip(readFlipFile(player1));
                     player2.setFlip(!readFlipFile(player2));
-                    generateThumbnail(selectedTournament, saveLocally, parameters.get(6), date, player1, player2);
+                    generateAndSaveThumbnail(selectedTournament, saveLocally, parameters.get(6), date, player1, player2);
                 }catch(OnlineImageNotFoundException e) {
                     invalidLines.add(e.getMessage() + " -> " + line);
                 }catch(LocalImageNotFoundException e) {

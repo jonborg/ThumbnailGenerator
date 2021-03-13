@@ -104,9 +104,8 @@ public class ThumbnailGeneratorController implements Initializable {
             return;
         }
 
-        Thumbnail t = new Thumbnail();
         try {
-            t.generateThumbnail(tournamentsController.getSelectedTournament(), saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
+            Thumbnail.generateAndSaveThumbnail(tournamentsController.getSelectedTournament(), saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
                     player1Controller.generateFighter(),
                     player2Controller.generateFighter());
             alertFactory.displayInfo("Thumbnail was successfully generated and saved!");

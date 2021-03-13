@@ -38,6 +38,7 @@ public class TournamentsSettingsController implements Initializable {
 
 
     private static List<Tournament> tournamentsList;
+    private static Tournament selectedTournament;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,14 +62,17 @@ public class TournamentsSettingsController implements Initializable {
 
 
     public void edit(ActionEvent actionEvent) {
-        try{
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsAddEdit.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Edit Tournament");
-            stage.setScene(new Scene(root));
-            stage.show();
-        }catch (IOException e){
-            e.printStackTrace();
+        if (tournamentsListView.getSelectionModel().getSelectedItem() != null) {
+            selectedTournament = (Tournament) tournamentsListView.getSelectionModel().getSelectedItem();
+            try {
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsAddEdit.fxml"));
+                Stage stage = new Stage();
+                stage.setTitle("Edit Tournament");
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -90,5 +94,7 @@ public class TournamentsSettingsController implements Initializable {
         stage.close();
     }
 
-
+    public static Tournament getSelectedTournament() {
+        return selectedTournament;
+    }
 }

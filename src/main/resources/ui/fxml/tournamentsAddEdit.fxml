@@ -10,7 +10,7 @@
             prefHeight="400.0" prefWidth="600.0"
             stylesheets="@../styles/tournamentsAddEdit.css">
 
-    <HBox styleClass="mainBox" spacing="20" >
+    <HBox styleClass="mainBox" spacing="15" >
         <VBox spacing="40">
             <VBox spacing="15">
                 <TitledPane text="General Settings" collapsible="false">
@@ -47,10 +47,10 @@
                 </TitledPane>
             </VBox>
             <VBox spacing="10" alignment="CENTER">
-                <Button fx:id="previewButton" styleClass="bigButton" text="Preview"/>
+                <Button fx:id="previewButton" styleClass="bigButton" text="Preview" onAction="#previewThumbnail"/>
                 <HBox spacing="10" alignment="CENTER">
                     <Button fx:id="saveButton" styleClass="button" text="Save"/>
-                    <Button fx:id="cancelButton" styleClass="button" text="Cancel"/>
+                    <Button fx:id="cancelButton" styleClass="button" text="Cancel" onAction="#cancel"/>
                 </HBox>
             </VBox>
         </VBox>

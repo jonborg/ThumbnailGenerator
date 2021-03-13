@@ -1,6 +1,11 @@
 package thumbnail.text;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+import json.JSONReader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TextSettings {
     @SerializedName("id")
@@ -28,6 +33,8 @@ public class TextSettings {
     @SerializedName("downOffsetBottom")
     private int[] downOffsetBottom;
 
+    private static String textFile = "settings/thumbnails/text/text.json";
+
     public TextSettings(String tournamentId, String font, boolean bold, boolean italic, boolean shadow, float contour, int sizeTop, int sizeBottom, float angleTop, float angleBottom, int[] downOffsetTop, int[] downOffsetBottom) {
         this.tournamentId = tournamentId;
         this.font = font;
@@ -41,6 +48,19 @@ public class TextSettings {
         this.angleBottom = angleBottom;
         this.downOffsetTop = downOffsetTop;
         this.downOffsetBottom = downOffsetBottom;
+    }
+
+    public static TextSettings loadTextSettings(String tournamentId) {
+
+        List<TextSettings> textSettingsList =
+                JSONReader.getJSONArray(textFile, new TypeToken<ArrayList<TextSettings>>() {
+                }.getType());
+        for (TextSettings textSettings : textSettingsList) {
+            if (textSettings.getTournamentId().equals(tournamentId)) {
+                return textSettings;
+            }
+        }
+        return null;
     }
 
     public String getTournamentId() {

@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,19 +35,31 @@ public class Thumbnail {
     private static String localFightersPath = "assets/fighters/";
 
     private static String saveThumbnailsPath = "thumbnails/";
-    private boolean saveLocally;
+    private static boolean saveLocally;
 
-    private TextSettings textSettings;
-    private String textFile = "settings/thumbnails/text/text.json";
+    private static TextSettings textSettings;
 
-    public void generateThumbnail(Tournament tournament, boolean saveLocally, String round, String date, Fighter... fighters)
+    public static void generateAndSaveThumbnail(Tournament tournament, boolean locally, String round, String date, Fighter... fighters)
+            throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException{
+        TextSettings.loadTextSettings(tournament.getTournamentId());
+        generateThumbnail(tournament, locally,round ,date, fighters);
+        saveThumbnail(round, date, fighters);
+    }
+
+    public static BufferedImage generatePreview(Tournament tournament, TextSettings ts)
+            throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException {
+        textSettings = ts;
+        List<Fighter> fighters = Fighter.generatePreviewFighters();
+        return generateThumbnail(tournament, false, "Pools Round 1" ,"07/12/2018",
+                fighters.get(0), fighters.get(1));
+    }
+
+
+
+    private static BufferedImage generateThumbnail(Tournament tournament, boolean locally, String round, String date, Fighter... fighters)
             throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException {
 
-        String thumbnailFileName = fighters[0].getPlayerName().replace("|","_")+"-"+fighters[0].getUrlName()+fighters[0].getAlt()+"--"+
-                fighters[1].getPlayerName().replace("|","_")+"-"+fighters[1].getUrlName()+fighters[1].getAlt()+"--"+
-                round+"-"+date.replace("/","_")+".png";
-
-        this.saveLocally = saveLocally;
+        saveLocally = locally;
         thumbnail = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         g2d = thumbnail.createGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -69,8 +82,6 @@ public class Thumbnail {
 
         drawElement(tournament.getThumbnailForeground());
 
-        loadTextSettings(tournament.getTournamentId());
-
         g2d.drawImage(TextToImage.convert(fighters[0].getPlayerName(), textSettings, true),
                 0, textSettings.getDownOffsetTop()[0], null);
         g2d.drawImage(TextToImage.convert(fighters[1].getPlayerName(), textSettings, true),
@@ -81,15 +92,21 @@ public class Thumbnail {
                 0, HEIGHT - 100 + textSettings.getDownOffsetBottom()[0], null);
         g2d.drawImage(TextToImage.convert(date, textSettings, false),
                 WIDTH / 2, HEIGHT - 100 + textSettings.getDownOffsetBottom()[1], null);
+        return thumbnail;
+    }
+
+    private static void saveThumbnail(String round, String date, Fighter... fighters){
+        String thumbnailFileName = fighters[0].getPlayerName().replace("|","_")+"-"+fighters[0].getUrlName()+fighters[0].getAlt()+"--"+
+                fighters[1].getPlayerName().replace("|","_")+"-"+fighters[1].getUrlName()+fighters[1].getAlt()+"--"+
+                round+"-"+date.replace("/","_")+".png";
 
         File dirThumbnails = new File(saveThumbnailsPath);
         if (!dirThumbnails.exists()) dirThumbnails.mkdir();
         saveImage(thumbnail, new File(saveThumbnailsPath +
                 thumbnailFileName));
-}
+    }
 
-
-    private void drawElement(String pathname) throws LocalImageNotFoundException {
+    private static void drawElement(String pathname) throws LocalImageNotFoundException {
         try {
             g2d.drawImage(ImageIO.read(new FileInputStream(pathname)), 0, 0, null);
         } catch (IOException e) {
@@ -97,7 +114,7 @@ public class Thumbnail {
         }
     }
 
-    void saveImage(BufferedImage image, File file) {
+    static void saveImage(BufferedImage image, File file) {
         try {
             ImageIO.write(image, "png", file);
             System.out.println("Image saved!");
@@ -106,7 +123,7 @@ public class Thumbnail {
         }
     }
 
-    BufferedImage getFighterImage(Fighter fighter) throws OnlineImageNotFoundException {
+    static BufferedImage getFighterImage(Fighter fighter) throws OnlineImageNotFoundException {
         if (saveLocally) {
             File directory = new File(localFightersPath);
             String fighterDirPath = localFightersPath + fighter.getUrlName() + "/";
@@ -133,7 +150,7 @@ public class Thumbnail {
         }
     }
 
-    private  BufferedImage getFighterImageOnline(Fighter fighter) throws OnlineImageNotFoundException {
+    private static BufferedImage getFighterImageOnline(Fighter fighter) throws OnlineImageNotFoundException {
         String urlString = null;
         try {
             if (fighter.getAlt() == 1) {
@@ -162,17 +179,6 @@ public class Thumbnail {
 
         } catch (IOException e) {
             throw new OnlineImageNotFoundException(urlString);
-        }
-    }
-
-    private void loadTextSettings(String tournamentId){
-        List<TextSettings> textSettingsList =
-                JSONReader.getJSONArray(textFile, new TypeToken<ArrayList<TextSettings>>(){}.getType());
-        for (TextSettings s : textSettingsList){
-            if (s.getTournamentId().equals(tournamentId)) {
-                textSettings = s;
-                break;
-            }
         }
     }
 }
