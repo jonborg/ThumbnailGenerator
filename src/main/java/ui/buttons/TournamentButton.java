@@ -18,9 +18,18 @@ public class TournamentButton extends ToggleButton {
         if (this.getImage() == null) {
             this.setText(this.getName());
         } else {
-            this.setGraphic(new ImageView(new Image("file:"+this.getImage())));
+            ImageView imageView = new ImageView(new Image("file:"+this.getImage()));
+            if(imageView.getImage().getWidth() > imageView.getImage().getHeight()){
+                imageView.setFitWidth(100);
+            }else{
+                imageView.setFitHeight(100);
+            }
+            imageView.setPreserveRatio(true);
+            this.setGraphic(imageView);
         }
+        this.setMinSize(110,110);
         this.setPrefSize(110,110);
+        this.setMaxSize(110,110);
     }
 
     public Tournament getTournament() {

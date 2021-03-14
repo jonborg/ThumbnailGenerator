@@ -1,8 +1,5 @@
 package ui.controller;
 
-import exception.FontNotFoundException;
-import exception.LocalImageNotFoundException;
-import exception.OnlineImageNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import json.JSONWriter;
 import thumbnail.generate.Thumbnail;
 import thumbnail.text.TextSettings;
 import tournament.Tournament;
@@ -27,80 +23,58 @@ import ui.textfield.ChosenFileField;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
-import java.util.*;
-import java.util.List;
+import java.util.Arrays;
+import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
-public class TournamentsAddEditController implements Initializable {
+public class TournamentsCreateController implements Initializable {
 
     @FXML
-    private TextField name;
+    protected TextField name;
     @FXML
-    private TextField id;
+    protected TextField id;
     @FXML
-    private ChosenFileField logo;
+    protected ChosenFileField logo;
     @FXML
-    private ChosenFileField foreground;
+    protected ChosenFileField foreground;
     @FXML
-    private ChosenFileField background;
+    protected ChosenFileField background;
 
     @FXML
-    private ComboBox<String> font;
+    protected ComboBox<String> font;
     @FXML
-    private  TextField sizeTop;
+    protected  TextField sizeTop;
     @FXML
-    private  TextField angleTop;
+    protected  TextField angleTop;
     @FXML
-    private  TextField sizeBottom;
+    protected  TextField sizeBottom;
     @FXML
-    private  TextField angleBottom;
+    protected  TextField angleBottom;
     @FXML
-    private  CheckBox bold;
+    protected  CheckBox bold;
     @FXML
-    private  CheckBox italic;
+    protected  CheckBox italic;
     @FXML
-    private  CheckBox shadow;
+    protected  CheckBox shadow;
     @FXML
-    private  TextField contour;
+    protected  TextField contour;
     @FXML
-    private  TextField downOffsetTopLeft;
+    protected  TextField downOffsetTopLeft;
     @FXML
-    private  TextField downOffsetTopRight;
+    protected  TextField downOffsetTopRight;
     @FXML
-    private  TextField downOffsetBottomLeft;
+    protected  TextField downOffsetBottomLeft;
     @FXML
-    private  TextField downOffsetBottomRight;
+    protected  TextField downOffsetBottomRight;
 
     @FXML
-    private Button cancelButton;
+    protected Button cancelButton;
     @FXML
-    private ImageView preview;
+    protected ImageView preview;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initFontDropdown();
-
-        Tournament tournament = ThumbnailGeneratorController.getTournamentsSelectedEdit();
-        id.setText(tournament.getTournamentId());
-        name.setText(tournament.getName());
-        logo.setText(tournament.getImage());
-        foreground.setText(tournament.getThumbnailForeground());
-        background.setText(tournament.getThumbnailBackground());
-
-        TextSettings textSettings = tournament.getTextSettings();
-        font.getSelectionModel().select(textSettings.getFont());
-        sizeTop.setText(String.valueOf(textSettings.getSizeTop()));
-        sizeBottom.setText(String.valueOf(textSettings.getSizeBottom()));
-        angleTop.setText(String.valueOf(textSettings.getAngleTop()));
-        angleBottom.setText(String.valueOf(textSettings.getAngleBottom()));
-        bold.setSelected(textSettings.hasBold());
-        italic.setSelected(textSettings.hasItalic());
-        shadow.setSelected(textSettings.hasShadow());
-        contour.setText(String.valueOf(textSettings.getContour()));
-        downOffsetTopLeft.setText(String.valueOf(textSettings.getDownOffsetTop()[0]));
-        downOffsetTopRight.setText(String.valueOf(textSettings.getDownOffsetTop()[1]));
-        downOffsetBottomLeft.setText(String.valueOf(textSettings.getDownOffsetBottom()[0]));
-        downOffsetBottomRight.setText(String.valueOf(textSettings.getDownOffsetBottom()[1]));
     }
 
 
@@ -116,7 +90,7 @@ public class TournamentsAddEditController implements Initializable {
         }
     }
 
-    private Tournament generateTournamentWithCurrentSettings(){
+    protected Tournament generateTournamentWithCurrentSettings(){
         Tournament tournament =  new Tournament(id.getText(), name.getText(),
                 logo.getText(), foreground.getText(), background.getText());
         TextSettings textSettings = new TextSettings(id.getText(), font.getSelectionModel().getSelectedItem(),
@@ -130,7 +104,7 @@ public class TournamentsAddEditController implements Initializable {
         return tournament;
     }
 
-    private void initFontDropdown(){
+    protected void initFontDropdown(){
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         String[] fontFamilies = ge.getAvailableFontFamilyNames();
         String[] allCompatibleFonts =  Stream.concat(Arrays.stream(fontFamilies),
@@ -146,9 +120,7 @@ public class TournamentsAddEditController implements Initializable {
 
     public void save(ActionEvent actionEvent) {
         Tournament currentTournament = generateTournamentWithCurrentSettings();
-        if(!ThumbnailGeneratorController.getTournamentsSelectedEdit().updateDifferences(currentTournament)){
-            ThumbnailGeneratorController.updateTournamentsList();
-        }
+        ThumbnailGeneratorController.updateTournamentsList(currentTournament);
         cancel(actionEvent);
     }
 

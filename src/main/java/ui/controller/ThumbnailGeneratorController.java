@@ -139,13 +139,24 @@ public class ThumbnailGeneratorController implements Initializable {
         Platform.exit();
     }
 
+    public void createNewTournament(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsCreate.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Create New Tournament");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void initMenuBars(){
         for (Tournament tournament : getTournamentsList()){
             MenuItem editOption = new MenuItem(tournament.getName());
             editOption.setOnAction(event -> {
                 tournamentSelectedEdit = tournament;
                 try {
-                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsAddEdit.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsEdit.fxml"));
                     Stage stage = new Stage();
                     stage.setTitle("Edit Tournament " + tournament.getName());
                     stage.setScene(new Scene(root));
@@ -170,11 +181,12 @@ public class ThumbnailGeneratorController implements Initializable {
         return tournamentSelectedEdit;
     }
 
-    public static void setTournamentsSelectedEdit(Tournament tournament) {
-        tournamentSelectedEdit = tournament;
-    }
-
-    public static void updateTournamentsList() {
+    public static void updateTournamentsList(Tournament... tournamentList) {
+        if (tournamentList != null){
+            for (Tournament tournament:tournamentList) {
+                getTournamentsList().add(tournament);
+            }
+        }
         JSONWriter.updateTournamentsFile(getTournamentsList());
         JSONWriter.updateTextSettingsFile(TextSettings.getAllTextSettings(getTournamentsList()));
         startApp(stage);
@@ -199,6 +211,4 @@ public class ThumbnailGeneratorController implements Initializable {
     public void setStage(Stage stage){
         this.stage=stage;
     }
-
-
 }

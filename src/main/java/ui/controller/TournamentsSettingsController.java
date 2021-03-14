@@ -81,7 +81,7 @@ public class TournamentsSettingsController implements Initializable {
         if (tournamentsListView.getSelectionModel().getSelectedItem() != null) {
             selectedTournament = (Tournament) tournamentsListView.getSelectionModel().getSelectedItem();
             try {
-                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsAddEdit.fxml"));
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsEdit.fxml"));
                 Stage stage = new Stage();
                 stage.setTitle("Edit Tournament");
                 stage.setScene(new Scene(root));

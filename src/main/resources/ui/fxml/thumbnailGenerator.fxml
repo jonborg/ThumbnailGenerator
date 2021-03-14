@@ -22,7 +22,7 @@
                 <MenuItem styleClass="menuItem" text="Close" onAction="#close"/>
             </Menu>
             <Menu styleClass="menu" text="Edit">
-                <MenuItem styleClass="menuItem" text="Create New Tournament"/>
+                <MenuItem styleClass="menuItem" text="Create New Tournament" onAction="#createNewTournament"/>
                 <Menu fx:id="menuEdit" styleClass="menuItem" text="Edit Tournament"/>
             </Menu>
         </MenuBar>

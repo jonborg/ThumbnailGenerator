@@ -7,7 +7,7 @@
 <?import ui.textfield.ChosenFileField?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ui.controller.TournamentsAddEditController"
+            fx:controller="ui.controller.TournamentsCreateController"
             prefHeight="400.0" prefWidth="600.0"
             stylesheets="@../styles/tournamentsAddEdit.css">
 
