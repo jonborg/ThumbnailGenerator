@@ -46,7 +46,14 @@ public class TextToImage {
             if (textSettings.hasBold() && textSettings.hasItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD + Font.ITALIC, fontSize);
         }catch (FontFormatException | IOException | NullPointerException e){
-            throw new FontNotFoundException(textSettings.getFont());
+            System.out.println("Could not find font " + textSettings.getFont() + " on resources. Checking system fonts...");
+            if (!textSettings.hasBold() && textSettings.hasItalic())
+                font = new Font(textSettings.getFont(), Font.ITALIC,fontSize);
+            if (textSettings.hasBold() && !textSettings.hasItalic())
+                font = new Font(textSettings.getFont(), Font.BOLD,fontSize);
+            if (textSettings.hasBold() && textSettings.hasItalic())
+                font = new Font(textSettings.getFont(), Font.BOLD+Font.ITALIC, fontSize);
+            //throw new FontNotFoundException(textSettings.getFont());
         }
 
         BufferedImage rect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);

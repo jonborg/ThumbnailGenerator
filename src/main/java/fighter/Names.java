@@ -1,10 +1,10 @@
-package ui.player;
+package fighter;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Names {
-    static Map<String,String> map = new TreeMap<>();
+    public static Map<String,String> map = new TreeMap<>();
 
     static{
         //64

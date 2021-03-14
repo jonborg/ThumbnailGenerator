@@ -1,12 +1,17 @@
+package thumbnail.generate;
+
+import com.google.gson.reflect.TypeToken;
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
 import fighter.Fighter;
-import json.JSONProcessor;
-import org.json.simple.JSONObject;
+import fighter.FighterImage;
+import file.FileUtils;
+import file.json.JSONReader;
+import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
-import ui.tournament.TournamentButton;
+import tournament.Tournament;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -16,14 +21,12 @@ import java.util.List;
 
 public class ThumbnailFromFile extends Thumbnail {
 
-    private String flipFile = "settings/thumbnails/images/flip.txt";
-    private String tournamentFile = "settings/tournaments/tournaments.json";
-    private TournamentButton selectedTournament;
-    private AlertFactory alertFactory = new AlertFactory();
+    private String flipFile = FileUtils.getFlipFile();
+    private String tournamentFile = FileUtils.getTournamentFile();
 
     public void generateFromFile(File file, boolean saveLocally)
         throws ThumbnailFromFileException, FontNotFoundException{
-        selectedTournament = null;
+        Tournament selectedTournament = null;
         boolean firstLine = true;
         String date = null;
         String line = null;
@@ -38,14 +41,14 @@ public class ThumbnailFromFile extends Thumbnail {
                 List<String> parameters;
                 if (firstLine){
                     parameters = Arrays.asList(line.split(";"));
-                    JSONProcessor.getJSONArray(tournamentFile).forEach(tournament -> {
-                        JSONObject t = (JSONObject) tournament;
-                        if (t.containsKey("name") && t.containsKey("id") && t.get("id").equals(parameters.get(0))) {
-                            selectedTournament = new TournamentButton(t);
+                    for (Tournament t : TournamentUtils.getTournamentsList()){
+                        if (t.getTournamentId().equals(parameters.get(0))) {
+                            selectedTournament = t;
+                            break;
                         }
-                    });
+                    };
                     if (selectedTournament == null){
-                        alertFactory.displayError("Could not find tournament with id '{}'",parameters.get(0));
+                        AlertFactory.displayError("Could not find tournament with id '{}'",parameters.get(0));
                         return;
                     }
                     date=parameters.get(1);
@@ -56,15 +59,15 @@ public class ThumbnailFromFile extends Thumbnail {
                 parameters.replaceAll(String::trim);
                 //parameters.replaceAll(String::toLowerCase);
                 try {
-                    Fighter p1 = new Fighter(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
-                    Fighter p2 = new Fighter(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
-                    p1.setFlip(readFlipFile(p1));
-                    p2.setFlip(!readFlipFile(p2));
-                    generateThumbnail(selectedTournament, saveLocally, parameters.get(6), date, p1, p2);
+                    Fighter player1 = new Fighter(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
+                    Fighter player2 = new Fighter(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
+                    player1.setFlip(readFlipFile(player1));
+                    player2.setFlip(!readFlipFile(player2));
+                    generateAndSaveThumbnail(selectedTournament, saveLocally, parameters.get(6), date, player1, player2);
                 }catch(OnlineImageNotFoundException e) {
                     invalidLines.add(e.getMessage() + " -> " + line);
                 }catch(LocalImageNotFoundException e) {
-                    alertFactory.displayError(e.getMessage());
+                    AlertFactory.displayError(e.getMessage());
                     throw new ThumbnailFromFileException();
                 }catch(FontNotFoundException e){
                     throw e;
@@ -73,9 +76,9 @@ public class ThumbnailFromFile extends Thumbnail {
                 }
             }
         }catch (FileNotFoundException e){
-            alertFactory.displayError("Could not file: " + file.getPath());
+            AlertFactory.displayError("Could not file: " + file.getPath());
         }catch (IOException e){
-            alertFactory.displayError("Could not correctly parse line: "+line);
+            AlertFactory.displayError("Could not correctly parse line: "+line);
         }
 
         if (!invalidLines.isEmpty()){
@@ -83,7 +86,7 @@ public class ThumbnailFromFile extends Thumbnail {
             for (String  l :invalidLines){
                 details += l + System.lineSeparator() + System.lineSeparator();
             }
-            alertFactory.displayError("Thumbnails could not be generated from these lines: ", details);
+            AlertFactory.displayError("Thumbnails could not be generated from these lines: ", details);
             throw new ThumbnailFromFileException();
         }
     }

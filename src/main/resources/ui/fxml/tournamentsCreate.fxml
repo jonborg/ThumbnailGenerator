@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import ui.textfield.ChosenFileField?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.controller.TournamentsCreateController"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@../styles/tournamentsAddEdit.css">
+
+    <HBox styleClass="mainBox" spacing="15" >
+        <VBox spacing="40">
+            <VBox spacing="15">
+                <TitledPane text="General Settings" collapsible="false">
+                    <VBox spacing="15">
+                        <VBox>
+                            <Label text="Tournament Name*:"/>
+                            <TextField fx:id="name" styleClass="textfield"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Tournament Diminutive*:"/>
+                            <TextField fx:id="id" styleClass="textfield"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Font*:"/>
+                            <ComboBox fx:id="font" styleClass="textfield" editable="true"/>
+                        </VBox>
+                    </VBox>
+                </TitledPane>
+                <TitledPane text="Image Directories" collapsible="false">
+                    <VBox spacing="15">
+                        <VBox>
+                            <Label text="Button Logo:"/>
+                            <ChosenFileField fx:id="logo"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Foreground*:"/>
+                            <ChosenFileField fx:id="foreground"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Background:"/>
+                            <ChosenFileField fx:id="background"/>
+                        </VBox>
+                    </VBox>
+                </TitledPane>
+            </VBox>
+            <VBox spacing="10" alignment="CENTER">
+                <Button id="previewButton" styleClass="bigButton" text="Preview" onAction="#previewThumbnail"/>
+                <HBox spacing="10" alignment="CENTER">
+                    <Button id="saveButton" styleClass="button" text="Save" onAction="#save"/>
+                    <Button fx:id="cancelButton" styleClass="button" text="Cancel" onAction="#cancel"/>
+                </HBox>
+            </VBox>
+        </VBox>
+        <VBox spacing="15">
+            <HBox spacing="15">
+                <TitledPane text="Font Dimensions" collapsible="false">
+                    <VBox>
+                        <HBox spacing="63">
+                            <VBox>
+                                <Label text="Top Size:"/>
+                                <TextField fx:id="sizeTop" styleClass="small-textfield"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Top Angle:"/>
+                                <TextField fx:id="angleTop" styleClass="small-textfield"/>
+                            </VBox>
+                        </HBox>
+                        <HBox spacing="40">
+                            <VBox>
+                                <Label text="Bottom Size:"/>
+                                <TextField fx:id="sizeBottom" styleClass="small-textfield"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Bottom Angle:"/>
+                                <TextField fx:id="angleBottom" styleClass="small-textfield" />
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+
+                <TitledPane text="Font Styling" collapsible="false" >
+                    <VBox spacing="10">
+                        <HBox spacing="40">
+                            <VBox>
+                                <Label text="Bold:"/>
+                                <CheckBox fx:id="bold"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Italic:"/>
+                                <CheckBox fx:id="italic"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Shadow:"/>
+                                <CheckBox fx:id="shadow"/>
+                            </VBox>
+                        </HBox>
+                        <VBox>
+                            <Label text="Contour Length:"/>
+                            <TextField styleClass="small-textfield" fx:id="contour"/>
+                        </VBox>
+                    </VBox>
+                </TitledPane>
+
+                <TitledPane text="Text Vertical Offset" collapsible="false" >
+                    <VBox>
+                        <HBox spacing="61">
+                            <VBox>
+                                <Label text="Top Left:"/>
+                                <TextField fx:id="downOffsetTopLeft" styleClass="small-textfield"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Top Right:"/>
+                                <TextField fx:id="downOffsetTopRight" styleClass="small-textfield"/>
+                            </VBox>
+                        </HBox>
+                        <HBox spacing="40">
+                            <VBox>
+                                <Label text="Bottom Left:"/>
+                                <TextField fx:id="downOffsetBottomLeft" styleClass="small-textfield"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Bottom Right:"/>
+                                <TextField fx:id="downOffsetBottomRight" styleClass="small-textfield"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+            </HBox>
+
+            <BorderPane styleClass="previewPane">
+                <center>
+                    <ImageView fx:id="preview" preserveRatio="true" fitWidth="720"/>
+                </center>
+            </BorderPane>
+        </VBox>
+    </HBox>
+</AnchorPane>

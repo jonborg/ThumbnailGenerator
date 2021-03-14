@@ -1,13 +1,13 @@
 package ui.factory.alert;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 
 public class AlertFactory {
-    Alert alert;
-    private TextArea textArea;
-    private GridPane gridPane;
+    static private Alert alert;
+    static private TextArea textArea;
 
     public AlertFactory(){
         super();
@@ -20,7 +20,7 @@ public class AlertFactory {
         gridPane.add(textArea, 0, 0);
     }
 
-    public void displayInfo(String contextText){
+    public static void displayInfo(String contextText){
         alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText("Info");
@@ -28,7 +28,7 @@ public class AlertFactory {
         alert.showAndWait();
     }
 
-    public void displayWarning(String contextText){
+    public static void displayWarning(String contextText){
         alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
         alert.setHeaderText("Warning");
@@ -36,7 +36,20 @@ public class AlertFactory {
         alert.showAndWait();
     }
 
-    public void displayError(String ... contextText){
+    public static boolean displayConfirmation(String contextText){
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Confirmation");
+        alert.setContentText(contextText);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static void displayError(String ... contextText){
         alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Error");
@@ -46,7 +59,7 @@ public class AlertFactory {
         alert.showAndWait();
     }
 
-    private void writeAdditionalText(String additionalText){
+    private static void writeAdditionalText(String additionalText){
 
         textArea = new TextArea(additionalText);
         textArea.setEditable(false);
