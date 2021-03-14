@@ -6,6 +6,7 @@ import file.json.JSONReader;
 import file.json.JSONWriter;
 import thumbnail.text.TextSettings;
 import ui.controller.ThumbnailGeneratorController;
+import ui.factory.alert.AlertFactory;
 
 
 import java.util.ArrayList;
@@ -71,9 +72,13 @@ public class TournamentUtils {
     }
 
     public static void deleteTournament(Tournament tournament) {
-        tournamentsList.removeIf(t -> tournament.getTournamentId() == t.getTournamentId());
-        JSONWriter.updateTournamentsFile(tournamentsList);
-        JSONWriter.updateTournamentsFile(tournamentsList);
-        ThumbnailGeneratorController.reloadPage();
+        boolean delete = AlertFactory.displayConfirmation(
+                "Are you sure that you want to eliminate tournament " + tournament.getName());
+        if(delete) {
+            tournamentsList.removeIf(t -> tournament.getTournamentId() == t.getTournamentId());
+            JSONWriter.updateTournamentsFile(tournamentsList);
+            JSONWriter.updateTextSettingsFile(TextSettings.getAllTextSettings(tournamentsList));
+            ThumbnailGeneratorController.reloadPage();
+        }
     }
 }

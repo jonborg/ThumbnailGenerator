@@ -1,13 +1,13 @@
 package ui.factory.alert;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 
 public class AlertFactory {
     static private Alert alert;
     static private TextArea textArea;
-    static private GridPane gridPane;
 
     public AlertFactory(){
         super();
@@ -34,6 +34,19 @@ public class AlertFactory {
         alert.setHeaderText("Warning");
         alert.setContentText(contextText);
         alert.showAndWait();
+    }
+
+    public static boolean displayConfirmation(String contextText){
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Confirmation");
+        alert.setContentText(contextText);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public static void displayError(String ... contextText){

@@ -3,6 +3,7 @@ package file.json;
 
 import com.google.gson.*;
 import file.FileUtils;
+import org.codehaus.plexus.util.ExceptionUtils;
 import thumbnail.text.TextSettings;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
@@ -28,9 +29,9 @@ public class JSONWriter {
             System.out.println(json);
             writer.write(json);
         } catch (FileNotFoundException e) {
-            AlertFactory.displayError("FileNotFoundException", e.getStackTrace().toString());
+            AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
         } catch (IOException e) {
-            AlertFactory.displayError("IOException", e.getStackTrace().toString());
+            AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -43,9 +44,9 @@ public class JSONWriter {
             System.out.println(json);
             writer.write(json);
         } catch (FileNotFoundException e) {
-            AlertFactory.displayError("FileNotFoundException", e.getStackTrace().toString());
+            AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
         } catch (IOException e) {
-            AlertFactory.displayError("IOException", e.getStackTrace().toString());
+            AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
         }
     }
 }

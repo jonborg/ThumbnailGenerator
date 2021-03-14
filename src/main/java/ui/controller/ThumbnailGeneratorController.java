@@ -152,12 +152,15 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
     public void initMenuBars(){
+        String style = "-fx-padding: 0 100 0 20";
         for (Tournament tournament : getTournamentsList()){
             MenuItem copyOption = new MenuItem(tournament.getName());
+            copyOption.setStyle(style);
             copyOption.setOnAction(event -> updateTournamentsList(tournament));
             menuCopy.getItems().add(copyOption);
 
             MenuItem editOption = new MenuItem(tournament.getName());
+            editOption.setStyle(style);
             editOption.setOnAction(event -> {
                 setSelectedEdit(tournament);
                 try {
@@ -173,6 +176,7 @@ public class ThumbnailGeneratorController implements Initializable {
             menuEdit.getItems().add(editOption);
 
             MenuItem deleteOption = new MenuItem(tournament.getName());
+            deleteOption.setStyle(style);
             deleteOption.setOnAction(event -> deleteTournament(tournament));
             menuDelete.getItems().add(deleteOption);
 
@@ -180,19 +184,11 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
 
-    public static void loadTournamentsList() {
-         TournamentUtils.loadTournamentsList();
-    }
 
     private static List<Tournament> getTournamentsList(){
         return TournamentUtils.getTournamentsList();
     }
-    private static Tournament getSelectedTournament() {
-        return TournamentUtils.getSelectedTournament();
-    }
-    private static Tournament getSelectedEdit() {
-        return TournamentUtils.getSelectedEdit();
-    }
+    private static Tournament getSelectedTournament() { return TournamentUtils.getSelectedTournament(); }
     private static void setSelectedEdit(Tournament tournament){
         TournamentUtils.setSelectedEdit(tournament);
     }
@@ -200,12 +196,9 @@ public class ThumbnailGeneratorController implements Initializable {
         TournamentUtils.updateTournamentsList(list);
     }
 
-    private static void updateTournamentsListAndSettings(Tournament... list) {
-        TournamentUtils.updateTournamentsListAndSettings(list);
-    }
 
     private static void deleteTournament(Tournament tournament) {
-       TournamentUtils.deleteTournament(tournament);
+        TournamentUtils.deleteTournament(tournament);
     }
 
 
