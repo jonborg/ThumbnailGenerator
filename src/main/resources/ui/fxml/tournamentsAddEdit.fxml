@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.image.ImageView?>
+<?import ui.textfield.ChosenFileField?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="ui.controller.TournamentsAddEditController"
@@ -17,31 +18,31 @@
                     <VBox spacing="15">
                         <VBox>
                             <Label text="Tournament Name*:"/>
-                            <TextField fx:id="name"/>
+                            <TextField fx:id="name" styleClass="textfield"/>
                         </VBox>
                         <VBox>
                             <Label text="Diminute Name*:"/>
-                            <TextField fx:id="id"/>
+                            <TextField fx:id="id" styleClass="textfield"/>
                         </VBox>
                         <VBox>
-                            <Label text="Font:"/>
-                            <ComboBox fx:id="font" styleClass="medium-textfield" editable="true"/>
+                            <Label text="Font*:"/>
+                            <ComboBox fx:id="font" styleClass="textfield" editable="true"/>
                         </VBox>
                     </VBox>
                 </TitledPane>
                 <TitledPane text="Image Directories" collapsible="false">
                     <VBox spacing="15">
                         <VBox>
-                            <Label text="Logo*:"/>
-                            <TextField fx:id="logo"/>
+                            <Label text="Button Logo*:"/>
+                            <ChosenFileField fx:id="logo"/>
                         </VBox>
                         <VBox>
                             <Label text="Foreground*:"/>
-                            <TextField fx:id="foreground"/>
+                            <ChosenFileField fx:id="foreground"/>
                         </VBox>
                         <VBox>
                             <Label text="Background:"/>
-                            <TextField fx:id="background"/>
+                            <ChosenFileField fx:id="background"/>
                         </VBox>
                     </VBox>
                 </TitledPane>
@@ -49,7 +50,7 @@
             <VBox spacing="10" alignment="CENTER">
                 <Button fx:id="previewButton" styleClass="bigButton" text="Preview" onAction="#previewThumbnail"/>
                 <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="saveButton" styleClass="button" text="Save"/>
+                    <Button fx:id="saveButton" styleClass="button" text="Save" onAction="#save"/>
                     <Button fx:id="cancelButton" styleClass="button" text="Cancel" onAction="#cancel"/>
                 </HBox>
             </VBox>
@@ -60,7 +61,7 @@
                     <VBox>
                         <HBox spacing="63">
                             <VBox>
-                                <Label text="Top Size:"/>
+                                <Label text="Top Size*:"/>
                                 <TextField styleClass="small-textfield" fx:id="sizeTop"/>
                             </VBox>
                             <VBox>
@@ -70,7 +71,7 @@
                         </HBox>
                         <HBox spacing="40">
                             <VBox>
-                                <Label text="Bottom Size:"/>
+                                <Label text="Bottom Size*:"/>
                                 <TextField styleClass="small-textfield" fx:id="sizeBottom"/>
                             </VBox>
                             <VBox>

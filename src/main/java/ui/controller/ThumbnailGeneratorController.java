@@ -11,23 +11,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import json.JSONWriter;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
+import thumbnail.text.TextSettings;
 import ui.factory.alert.AlertFactory;
 import tournament.Tournament;
-import ui.window.EditTournamentWindow;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -57,14 +55,16 @@ public class ThumbnailGeneratorController implements Initializable {
     private Button saveButton;
     @FXML
     private Button fromFile;
+    @FXML
+    private Menu menuEdit;
 
-    private static String tournamentFile = "settings/tournaments/tournaments.json";
-    private AlertFactory alertFactory = new AlertFactory();
+    private static Tournament tournamentSelectedEdit;
 
     private static Stage stage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initMenuBars();
     }
 
     public void flipPlayers(ActionEvent actionEvent) {
@@ -94,13 +94,13 @@ public class ThumbnailGeneratorController implements Initializable {
     public void createThumbnail(ActionEvent actionEvent) {
         if (player1Controller.getUrlName() == null || player2Controller.getUrlName() == null){
             System.out.println("Missing fighters");
-            alertFactory.displayWarning("2 fighters must be chosen before generating the thumbnail.");
+            AlertFactory.displayWarning("2 fighters must be chosen before generating the thumbnail.");
             return;
         }
 
         if (tournamentsController.getSelectedTournament() == null){
             System.out.println("Tournament was not chosen");
-            alertFactory.displayWarning("A tournament must be chosen before generating the thumbnail.");
+            AlertFactory.displayWarning("A tournament must be chosen before generating the thumbnail.");
             return;
         }
 
@@ -108,13 +108,13 @@ public class ThumbnailGeneratorController implements Initializable {
             Thumbnail.generateAndSaveThumbnail(tournamentsController.getSelectedTournament(), saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
                     player1Controller.generateFighter(),
                     player2Controller.generateFighter());
-            alertFactory.displayInfo("Thumbnail was successfully generated and saved!");
+            AlertFactory.displayInfo("Thumbnail was successfully generated and saved!");
         }catch (LocalImageNotFoundException e){
-            alertFactory.displayError(e.getMessage());
+            AlertFactory.displayError(e.getMessage());
         }catch (OnlineImageNotFoundException e){
-            alertFactory.displayError(e.getMessage());
+            AlertFactory.displayError(e.getMessage());
         }catch (FontNotFoundException e){
-            alertFactory.displayError(e.getMessage());
+            AlertFactory.displayError(e.getMessage());
         }
     }
 
@@ -125,11 +125,11 @@ public class ThumbnailGeneratorController implements Initializable {
             ThumbnailFromFile tbf = new ThumbnailFromFile();
             try {
                 tbf.generateFromFile(selectedFile, saveLocally.isSelected());
-                alertFactory.displayInfo("Thumbnails were successfully generated and saved!");
+                AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
             }catch(ThumbnailFromFileException e){
-                //alertFactory already thrown inside tbf.generateFromFile
+                //AlertFactory already thrown inside tbf.generateFromFile
             }catch(FontNotFoundException e){
-                alertFactory.displayError(e.getMessage());
+                AlertFactory.displayError(e.getMessage());
             }
         }
     }
@@ -139,26 +139,47 @@ public class ThumbnailGeneratorController implements Initializable {
         Platform.exit();
     }
 
-    public void openEditTournaments(ActionEvent actionEvent) {
-        try{
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsSettings.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Edit Tournaments");
-            stage.setScene(new Scene(root));
-            stage.show();
-        }catch (IOException e){
-            e.printStackTrace();
+    public void initMenuBars(){
+        for (Tournament tournament : getTournamentsList()){
+            MenuItem editOption = new MenuItem(tournament.getName());
+            editOption.setOnAction(event -> {
+                tournamentSelectedEdit = tournament;
+                try {
+                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsAddEdit.fxml"));
+                    Stage stage = new Stage();
+                    stage.setTitle("Edit Tournament " + tournament.getName());
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            menuEdit.getItems().add(editOption);
         }
     }
 
-    public static List<Tournament> getTournamentsList() {
-        return TournamentsController.getTournamentsList();
+
+    public static List<Tournament> loadTournamentsList() {
+        return TournamentsController.loadTournamentsList();
     }
 
-    public static void updateTournamentsList(List<Tournament> newTournamentsList) {
-        JSONWriter.updateTournamentsFile(newTournamentsList);
+    public static List<Tournament> getTournamentsList(){
+        return TournamentsController.getTournamentsList();
+    }
+    public static Tournament getTournamentsSelectedEdit() {
+        return tournamentSelectedEdit;
+    }
+
+    public static void setTournamentsSelectedEdit(Tournament tournament) {
+        tournamentSelectedEdit = tournament;
+    }
+
+    public static void updateTournamentsList() {
+        JSONWriter.updateTournamentsFile(getTournamentsList());
+        JSONWriter.updateTextSettingsFile(TextSettings.getAllTextSettings(getTournamentsList()));
         startApp(stage);
     }
+
 
     public static void startApp(Stage primaryStage){
         try {

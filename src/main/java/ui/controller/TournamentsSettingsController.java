@@ -14,7 +14,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import thumbnail.text.TextSettings;
 import tournament.Tournament;
+import ui.factory.alert.AlertFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +44,9 @@ public class TournamentsSettingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tournamentsList = ThumbnailGeneratorController.getTournamentsList();
+        tournamentsList = ThumbnailGeneratorController.loadTournamentsList();
+        tournamentsList.forEach(tournament -> tournament.setTextSettings(
+                TextSettings.loadTextSettings(tournament.getTournamentId())));
         ObservableList<Tournament> observableList = FXCollections.observableArrayList();
         observableList.addAll(tournamentsList);
         tournamentsListView.setItems(observableList);
@@ -60,6 +64,18 @@ public class TournamentsSettingsController implements Initializable {
         });
     }
 
+    public void copy(ActionEvent actionEvent) {
+        if (tournamentsListView.getSelectionModel().getSelectedItem() != null) {
+            Tournament tournament = (Tournament) tournamentsListView.getSelectionModel().getSelectedItem();
+            try {
+                Tournament copyTournament = (Tournament) tournament.clone();
+                tournamentsListView.getItems().add(copyTournament);
+                tournamentsList.add(copyTournament);
+            }catch (CloneNotSupportedException e){
+                AlertFactory.displayError("Could not copy tournament " + tournament.getName());
+            }
+        }
+    }
 
     public void edit(ActionEvent actionEvent) {
         if (tournamentsListView.getSelectionModel().getSelectedItem() != null) {
@@ -85,8 +101,8 @@ public class TournamentsSettingsController implements Initializable {
     }
 
     public void save (ActionEvent actionEvent){
+        ThumbnailGeneratorController.updateTournamentsList();
         cancel(actionEvent);
-        ThumbnailGeneratorController.updateTournamentsList(tournamentsList);
     }
 
     public void cancel(ActionEvent actionEvent) {
@@ -94,7 +110,4 @@ public class TournamentsSettingsController implements Initializable {
         stage.close();
     }
 
-    public static Tournament getSelectedTournament() {
-        return selectedTournament;
-    }
 }

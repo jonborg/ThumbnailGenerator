@@ -35,3 +35,7 @@
     -fx-pref-height: 20;
     -fx-pref-width: 210;
 }
+
+.textfield{
+    -fx-pref-width: 210;
+}

@@ -17,10 +17,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import json.JSONWriter;
 import thumbnail.generate.Thumbnail;
 import thumbnail.text.TextSettings;
 import tournament.Tournament;
 import ui.combobox.InputFilter;
+import ui.textfield.ChosenFileField;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,11 +38,11 @@ public class TournamentsAddEditController implements Initializable {
     @FXML
     private TextField id;
     @FXML
-    private TextField logo;
+    private ChosenFileField logo;
     @FXML
-    private TextField foreground;
+    private ChosenFileField foreground;
     @FXML
-    private TextField background;
+    private ChosenFileField background;
 
     @FXML
     private ComboBox<String> font;
@@ -78,14 +80,14 @@ public class TournamentsAddEditController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initFontDropdown();
 
-        Tournament tournament = TournamentsSettingsController.getSelectedTournament();
+        Tournament tournament = ThumbnailGeneratorController.getTournamentsSelectedEdit();
         id.setText(tournament.getTournamentId());
         name.setText(tournament.getName());
         logo.setText(tournament.getImage());
         foreground.setText(tournament.getThumbnailForeground());
         background.setText(tournament.getThumbnailBackground());
 
-        TextSettings textSettings = TextSettings.loadTextSettings(tournament.getTournamentId());
+        TextSettings textSettings = tournament.getTextSettings();
         font.getSelectionModel().select(textSettings.getFont());
         sizeTop.setText(String.valueOf(textSettings.getSizeTop()));
         sizeBottom.setText(String.valueOf(textSettings.getSizeBottom()));
@@ -103,23 +105,29 @@ public class TournamentsAddEditController implements Initializable {
 
 
     public void previewThumbnail(ActionEvent actionEvent) {
-        Tournament tournament = new Tournament(id.getText(), name.getText(),
-                logo.getText(), foreground.getText(), background.getText());
+        Tournament tournament = generateTournamentWithCurrentSettings();
 
+        try{
+            BufferedImage previewImage = Thumbnail.generatePreview(tournament);
+            Image image = SwingFXUtils.toFXImage(previewImage, null);
+            preview.setImage(image);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
+    private Tournament generateTournamentWithCurrentSettings(){
+        Tournament tournament =  new Tournament(id.getText(), name.getText(),
+                logo.getText(), foreground.getText(), background.getText());
         TextSettings textSettings = new TextSettings(id.getText(), font.getSelectionModel().getSelectedItem(),
                 bold.isSelected(), italic.isSelected(), shadow.isSelected(), Float.parseFloat(contour.getText()),
                 Integer.parseInt(sizeTop.getText()), Integer.parseInt(sizeBottom.getText()),
                 Float.parseFloat(angleTop.getText()), Float.parseFloat(angleBottom.getText()),
                 new int[]{Integer.parseInt(downOffsetTopLeft.getText()), Integer.parseInt(downOffsetTopRight.getText())},
                 new int[]{Integer.parseInt(downOffsetBottomLeft.getText()), Integer.parseInt(downOffsetBottomRight.getText())});
+        tournament.setTextSettings(textSettings);
 
-        try{
-            BufferedImage previewImage = Thumbnail.generatePreview(tournament, textSettings);
-            Image image = SwingFXUtils.toFXImage(previewImage, null);
-            preview.setImage(image);
-        }catch(Exception e){
-            System.out.println(e);
-        }
+        return tournament;
     }
 
     private void initFontDropdown(){
@@ -136,9 +144,15 @@ public class TournamentsAddEditController implements Initializable {
         font.setItems(filteredItems);
     }
 
+    public void save(ActionEvent actionEvent) {
+        Tournament currentTournament = generateTournamentWithCurrentSettings();
+        if(!ThumbnailGeneratorController.getTournamentsSelectedEdit().updateDifferences(currentTournament)){
+            ThumbnailGeneratorController.updateTournamentsList();
+        }
+        cancel(actionEvent);
+    }
+
     public void cancel(ActionEvent actionEvent)  {
-
-
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }

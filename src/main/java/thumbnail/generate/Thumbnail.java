@@ -9,14 +9,11 @@ import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.reflect.TypeToken;
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import fighter.Fighter;
 import fighter.FighterImage;
-import json.JSONReader;
-import thumbnail.text.TextSettings;
 import thumbnail.text.TextToImage;
 import tournament.Tournament;
 
@@ -37,18 +34,15 @@ public class Thumbnail {
     private static String saveThumbnailsPath = "thumbnails/";
     private static boolean saveLocally;
 
-    private static TextSettings textSettings;
 
     public static void generateAndSaveThumbnail(Tournament tournament, boolean locally, String round, String date, Fighter... fighters)
             throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException{
-        TextSettings.loadTextSettings(tournament.getTournamentId());
         generateThumbnail(tournament, locally,round ,date, fighters);
         saveThumbnail(round, date, fighters);
     }
 
-    public static BufferedImage generatePreview(Tournament tournament, TextSettings ts)
+    public static BufferedImage generatePreview(Tournament tournament)
             throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException {
-        textSettings = ts;
         List<Fighter> fighters = Fighter.generatePreviewFighters();
         return generateThumbnail(tournament, false, "Pools Round 1" ,"07/12/2018",
                 fighters.get(0), fighters.get(1));
@@ -82,16 +76,16 @@ public class Thumbnail {
 
         drawElement(tournament.getThumbnailForeground());
 
-        g2d.drawImage(TextToImage.convert(fighters[0].getPlayerName(), textSettings, true),
-                0, textSettings.getDownOffsetTop()[0], null);
-        g2d.drawImage(TextToImage.convert(fighters[1].getPlayerName(), textSettings, true),
-                WIDTH / 2,  textSettings.getDownOffsetTop()[1], null);
+        g2d.drawImage(TextToImage.convert(fighters[0].getPlayerName(), tournament.getTextSettings(), true),
+                0, tournament.getTextSettings().getDownOffsetTop()[0], null);
+        g2d.drawImage(TextToImage.convert(fighters[1].getPlayerName(), tournament.getTextSettings(), true),
+                WIDTH / 2,  tournament.getTextSettings().getDownOffsetTop()[1], null);
 
 
-        g2d.drawImage(TextToImage.convert(round, textSettings, false),
-                0, HEIGHT - 100 + textSettings.getDownOffsetBottom()[0], null);
-        g2d.drawImage(TextToImage.convert(date, textSettings, false),
-                WIDTH / 2, HEIGHT - 100 + textSettings.getDownOffsetBottom()[1], null);
+        g2d.drawImage(TextToImage.convert(round, tournament.getTextSettings(), false),
+                0, HEIGHT - 100 + tournament.getTextSettings().getDownOffsetBottom()[0], null);
+        g2d.drawImage(TextToImage.convert(date, tournament.getTextSettings(), false),
+                WIDTH / 2, HEIGHT - 100 + tournament.getTextSettings().getDownOffsetBottom()[1], null);
         return thumbnail;
     }
 

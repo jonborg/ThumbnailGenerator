@@ -1,23 +1,17 @@
 package ui.controller;
 
 import com.google.gson.reflect.TypeToken;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import json.JSONReader;
-import json.JSONWriter;
+import thumbnail.text.TextSettings;
 import tournament.Tournament;
-import ui.tournament.TournamentButton;
+import ui.buttons.TournamentButton;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,11 +39,12 @@ public class TournamentsController implements Initializable {
     private void initTournamentList(){
         List<TournamentButton> tournamentsButtons = new ArrayList<>();
         tournamentsGroup = new ToggleGroup();
-        tournamentsList = getTournamentsList();
+        tournamentsList = loadTournamentsList();
         if (tournamentsList == null || tournamentsList.isEmpty()){
             return;
         }
         tournamentsList.forEach(tournament -> {
+            tournament.setTextSettings(TextSettings.loadTextSettings(tournament.getTournamentId()));
             TournamentButton button = new TournamentButton(tournament);
             button.setToggleGroup(tournamentsGroup);
             tournamentsButtons.add(button);
@@ -80,7 +75,11 @@ public class TournamentsController implements Initializable {
     public static Tournament getSelectedTournament() {
         return selectedTournament;
     }
-    public static List<Tournament> getTournamentsList() {
+    public static List<Tournament> loadTournamentsList() {
         return JSONReader.getJSONArray(tournamentsFile, new TypeToken<ArrayList<Tournament>>(){}.getType());
+    }
+
+    public static List<Tournament> getTournamentsList() {
+        return tournamentsList;
     }
 }

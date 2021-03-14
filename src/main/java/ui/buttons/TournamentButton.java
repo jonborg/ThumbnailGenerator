@@ -1,4 +1,4 @@
-package ui.tournament;
+package ui.buttons;
 
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;

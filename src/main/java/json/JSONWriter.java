@@ -2,6 +2,7 @@ package json;
 
 
 import com.google.gson.*;
+import thumbnail.text.TextSettings;
 import ui.factory.alert.AlertFactory;
 import tournament.Tournament;
 
@@ -13,12 +14,29 @@ import java.util.List;
 public class JSONWriter {
     private static AlertFactory alertFactory = new AlertFactory();
     private static String tournamentFile = "settings/tournaments/tournaments.json";
-
+    private static String textSettingsFile = "settings/thumbnails/text/text.json";
 
 
     public static void updateTournamentsFile(List<Tournament> list){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().setPrettyPrinting()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
         try (FileWriter writer = new FileWriter(tournamentFile)) {
+            String json = gson.toJson(list);
+            System.out.println(json);
+            writer.write(json);
+        } catch (FileNotFoundException e) {
+            alertFactory.displayError("FileNotFoundException", e.getStackTrace().toString());
+        } catch (IOException e) {
+            alertFactory.displayError("IOException", e.getStackTrace().toString());
+        }
+    }
+
+    public static void updateTextSettingsFile(List<TextSettings> list){
+        Gson gson = new GsonBuilder().setPrettyPrinting()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        try (FileWriter writer = new FileWriter(textSettingsFile)) {
             String json = gson.toJson(list);
             System.out.println(json);
             writer.write(json);

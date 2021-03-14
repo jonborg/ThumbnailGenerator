@@ -20,6 +20,8 @@
         <VBox spacing="80" alignment="CENTER">
             <VBox spacing="10" alignment="CENTER" >
                 <Button fx:id="addButton" styleClass="button" text="Add"/>
+                <Button fx:id="copyButton" styleClass="button" text="Copy"
+                onAction="#copy"/>
                 <Button fx:id="editButton" styleClass="button" text="Edit"
                 onAction="#edit"/>
                 <Button fx:id="deleteButton" styleClass="button" text="Delete"
