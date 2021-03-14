@@ -1,15 +1,13 @@
 package ui.controller;
 
-import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-import json.JSONReader;
-import thumbnail.text.TextSettings;
 import tournament.Tournament;
+import tournament.TournamentUtils;
 import ui.buttons.TournamentButton;
 
 import java.net.URL;
@@ -24,9 +22,6 @@ public class TournamentsController implements Initializable {
     @FXML
     private HBox tournamentsBox;
 
-    private static List<Tournament> tournamentsList;
-    private static String tournamentsFile = "settings/tournaments/tournaments.json";
-    private static Tournament selectedTournament;
     private static ToggleGroup tournamentsGroup;
 
 
@@ -39,12 +34,10 @@ public class TournamentsController implements Initializable {
     private void initTournamentList(){
         List<TournamentButton> tournamentsButtons = new ArrayList<>();
         tournamentsGroup = new ToggleGroup();
-        tournamentsList = loadTournamentsList();
-        if (tournamentsList == null || tournamentsList.isEmpty()){
+        if ( getTournamentsList() == null || getTournamentsList().isEmpty()){
             return;
         }
-        tournamentsList.forEach(tournament -> {
-            tournament.setTextSettings(TextSettings.loadTextSettings(tournament.getTournamentId()));
+        getTournamentsList().forEach(tournament -> {
             TournamentButton button = new TournamentButton(tournament);
             button.setToggleGroup(tournamentsGroup);
             tournamentsButtons.add(button);
@@ -57,13 +50,13 @@ public class TournamentsController implements Initializable {
         tournamentsGroup.selectedToggleProperty().addListener((obs,oldToggle,newToggle)->{
             if (newToggle == null){
                 tournamentsLabel.setText(tournamentsLabelTitle);
-                selectedTournament = null;
+                setSelectedTournament(null);
             }else{
                 for(Node node :  tournamentsBox.getChildren()){
                     if (node instanceof TournamentButton) {
                         TournamentButton tournamentButton = (TournamentButton) node;
                         if (tournamentButton.isSelected()) {
-                            selectedTournament = tournamentButton.getTournament();
+                            setSelectedTournament(tournamentButton.getTournament());
                             tournamentsLabel.setText(tournamentsLabelTitle + " " + tournamentButton.getName());
                         }
                     }
@@ -72,14 +65,10 @@ public class TournamentsController implements Initializable {
         });
     }
 
-    public static Tournament getSelectedTournament() {
-        return selectedTournament;
+    private static List<Tournament> getTournamentsList() {
+        return TournamentUtils.getTournamentsList();
     }
-    public static List<Tournament> loadTournamentsList() {
-        return JSONReader.getJSONArray(tournamentsFile, new TypeToken<ArrayList<Tournament>>(){}.getType());
-    }
-
-    public static List<Tournament> getTournamentsList() {
-        return tournamentsList;
+    private static void setSelectedTournament(Tournament tournament) {
+        TournamentUtils.setSelectedTournament(tournament);
     }
 }

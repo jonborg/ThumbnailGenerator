@@ -1,20 +1,22 @@
-package json;
+package file.json;
 
 
 import com.google.gson.*;
+import file.FileUtils;
 import thumbnail.text.TextSettings;
+import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
 import tournament.Tournament;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
 public class JSONWriter {
-    private static AlertFactory alertFactory = new AlertFactory();
-    private static String tournamentFile = "settings/tournaments/tournaments.json";
-    private static String textSettingsFile = "settings/thumbnails/text/text.json";
+    private static String tournamentFile = FileUtils.getTournamentFile();
+    private static String textSettingsFile = FileUtils.getTextSettingsFile();
 
 
     public static void updateTournamentsFile(List<Tournament> list){
@@ -26,9 +28,9 @@ public class JSONWriter {
             System.out.println(json);
             writer.write(json);
         } catch (FileNotFoundException e) {
-            alertFactory.displayError("FileNotFoundException", e.getStackTrace().toString());
+            AlertFactory.displayError("FileNotFoundException", e.getStackTrace().toString());
         } catch (IOException e) {
-            alertFactory.displayError("IOException", e.getStackTrace().toString());
+            AlertFactory.displayError("IOException", e.getStackTrace().toString());
         }
     }
 
@@ -41,9 +43,9 @@ public class JSONWriter {
             System.out.println(json);
             writer.write(json);
         } catch (FileNotFoundException e) {
-            alertFactory.displayError("FileNotFoundException", e.getStackTrace().toString());
+            AlertFactory.displayError("FileNotFoundException", e.getStackTrace().toString());
         } catch (IOException e) {
-            alertFactory.displayError("IOException", e.getStackTrace().toString());
+            AlertFactory.displayError("IOException", e.getStackTrace().toString());
         }
     }
 }

@@ -2,6 +2,7 @@ package ui.controller;
 
 import fighter.DownloadFighterURL;
 import fighter.Fighter;
+import file.FileUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -48,10 +49,8 @@ public class Player1Controller implements Initializable {
 
 
     protected Map<String,String> map = Names.map;
-    protected String flipFile = "settings/thumbnails/images/flip.txt";
+    protected String flipFile = FileUtils.getFlipFile();
     protected String urlName;
-
-    protected AlertFactory alertFactory = new AlertFactory();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -114,7 +113,7 @@ public class Player1Controller implements Initializable {
                 }
             }
         }catch(IOException e){
-            alertFactory.displayError("Could not detect flip.txt");
+            AlertFactory.displayError("Could not detect flip.txt");
         }
 
     }
@@ -140,45 +139,6 @@ public class Player1Controller implements Initializable {
         }
     }
 
-/*    private void initFighterSelection(){
-        fighter.setEditable(true);
-        fighter.setMaxWidth(185);
-        ObservableList<String> items = FXCollections.observableArrayList(map.keySet());
-        FilteredList<String> filteredItems = new FilteredList<>(items);
-
-        fighter.getEditor().textProperty().addListener(new InputFilter(fighter, filteredItems, false));
-        fighter.setItems(filteredItems);
-
-        fighter.setOnAction(actionEvent -> {
-            urlName = getSelectionName();
-            setDefaultFlip(urlName);
-            updateFighterIcon();
-        });
-
-        alt.valueProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
-        //alt.getEditor().textProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
-    }
-
-    private void updateFighterIcon(){
-        try {
-            iconLink.setDisable(false);
-            iconLink.setOnAction(event -> initIconListener());
-            Image imageIcon = new Image(PlayerPane.class.getResourceAsStream("/icons/" + urlName + "/" + alt.getValue() + ".png"));
-            icon.setImage(imageIcon);
-
-            if ("pyra".equals(urlName)){
-                icon2Link.setDisable(false);
-                icon2Link.setOnAction(event -> initIconListener());
-                Image imageIcon2 = new Image(PlayerPane.class.getResourceAsStream("/icons/mythra/" + alt.getValue() + ".png"));
-                icon2.setImage(imageIcon2);
-                colorBox.setSpacing(0);
-            }else{
-                icon2Link.setDisable(true);
-                icon2.setImage(null);
-                colorBox.setSpacing(30);
-            }
-*/
-
     public void previewFighter(ActionEvent actionEvent) {
         String url = DownloadFighterURL.generateFighterURL(urlName, alt.getValue());
         if(Desktop.isDesktopSupported()) {
@@ -189,7 +149,7 @@ public class Player1Controller implements Initializable {
                     Desktop.getDesktop().open(new File(url));
                 }
             }catch(URISyntaxException | IOException e ){
-                alertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
+                AlertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
             }
         }
     }

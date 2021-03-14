@@ -98,25 +98,5 @@
       -20,
       -15
     ]
-  },
-  {
-    "id": "sop2",
-    "font": "Comic Sans MS",
-    "bold": true,
-    "italic": true,
-    "shadow": true,
-    "contour": 0.0,
-    "sizeTop": 90,
-    "sizeBottom": 75,
-    "angleTop": -2.0,
-    "angleBottom": -2.0,
-    "downOffsetTop": [
-      10,
-      5
-    ],
-    "downOffsetBottom": [
-      0,
-      -5
-    ]
   }
 ]

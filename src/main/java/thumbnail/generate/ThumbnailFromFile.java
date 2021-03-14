@@ -7,7 +7,9 @@ import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
 import fighter.Fighter;
 import fighter.FighterImage;
-import json.JSONReader;
+import file.FileUtils;
+import file.json.JSONReader;
+import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
 import tournament.Tournament;
 
@@ -19,14 +21,12 @@ import java.util.List;
 
 public class ThumbnailFromFile extends Thumbnail {
 
-    private String flipFile = "settings/thumbnails/images/flip.txt";
-    private String tournamentFile = "settings/tournaments/tournaments.json";
-    private Tournament selectedTournament;
-    private AlertFactory alertFactory = new AlertFactory();
+    private String flipFile = FileUtils.getFlipFile();
+    private String tournamentFile = FileUtils.getTournamentFile();
 
     public void generateFromFile(File file, boolean saveLocally)
         throws ThumbnailFromFileException, FontNotFoundException{
-        selectedTournament = null;
+        Tournament selectedTournament = null;
         boolean firstLine = true;
         String date = null;
         String line = null;
@@ -41,16 +41,14 @@ public class ThumbnailFromFile extends Thumbnail {
                 List<String> parameters;
                 if (firstLine){
                     parameters = Arrays.asList(line.split(";"));
-                    List<Tournament> tournaments =
-                            JSONReader.getJSONArray(tournamentFile, new TypeToken<ArrayList<Tournament>>(){}.getType());
-                    for (Tournament t : tournaments){
+                    for (Tournament t : TournamentUtils.getTournamentsList()){
                         if (t.getTournamentId().equals(parameters.get(0))) {
                             selectedTournament = t;
                             break;
                         }
                     };
                     if (selectedTournament == null){
-                        alertFactory.displayError("Could not find tournament with id '{}'",parameters.get(0));
+                        AlertFactory.displayError("Could not find tournament with id '{}'",parameters.get(0));
                         return;
                     }
                     date=parameters.get(1);
@@ -69,7 +67,7 @@ public class ThumbnailFromFile extends Thumbnail {
                 }catch(OnlineImageNotFoundException e) {
                     invalidLines.add(e.getMessage() + " -> " + line);
                 }catch(LocalImageNotFoundException e) {
-                    alertFactory.displayError(e.getMessage());
+                    AlertFactory.displayError(e.getMessage());
                     throw new ThumbnailFromFileException();
                 }catch(FontNotFoundException e){
                     throw e;
@@ -78,9 +76,9 @@ public class ThumbnailFromFile extends Thumbnail {
                 }
             }
         }catch (FileNotFoundException e){
-            alertFactory.displayError("Could not file: " + file.getPath());
+            AlertFactory.displayError("Could not file: " + file.getPath());
         }catch (IOException e){
-            alertFactory.displayError("Could not correctly parse line: "+line);
+            AlertFactory.displayError("Could not correctly parse line: "+line);
         }
 
         if (!invalidLines.isEmpty()){
@@ -88,7 +86,7 @@ public class ThumbnailFromFile extends Thumbnail {
             for (String  l :invalidLines){
                 details += l + System.lineSeparator() + System.lineSeparator();
             }
-            alertFactory.displayError("Thumbnails could not be generated from these lines: ", details);
+            AlertFactory.displayError("Thumbnails could not be generated from these lines: ", details);
             throw new ThumbnailFromFileException();
         }
     }

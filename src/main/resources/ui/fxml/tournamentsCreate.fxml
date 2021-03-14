@@ -21,7 +21,7 @@
                             <TextField fx:id="name" styleClass="textfield"/>
                         </VBox>
                         <VBox>
-                            <Label text="Diminute Name*:"/>
+                            <Label text="Tournament Diminutive*:"/>
                             <TextField fx:id="id" styleClass="textfield"/>
                         </VBox>
                         <VBox>
@@ -33,7 +33,7 @@
                 <TitledPane text="Image Directories" collapsible="false">
                     <VBox spacing="15">
                         <VBox>
-                            <Label text="Button Logo*:"/>
+                            <Label text="Button Logo:"/>
                             <ChosenFileField fx:id="logo"/>
                         </VBox>
                         <VBox>
@@ -48,9 +48,9 @@
                 </TitledPane>
             </VBox>
             <VBox spacing="10" alignment="CENTER">
-                <Button fx:id="previewButton" styleClass="bigButton" text="Preview" onAction="#previewThumbnail"/>
+                <Button id="previewButton" styleClass="bigButton" text="Preview" onAction="#previewThumbnail"/>
                 <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="saveButton" styleClass="button" text="Save" onAction="#save"/>
+                    <Button id="saveButton" styleClass="button" text="Save" onAction="#save"/>
                     <Button fx:id="cancelButton" styleClass="button" text="Cancel" onAction="#cancel"/>
                 </HBox>
             </VBox>
@@ -61,22 +61,22 @@
                     <VBox>
                         <HBox spacing="63">
                             <VBox>
-                                <Label text="Top Size*:"/>
-                                <TextField styleClass="small-textfield" fx:id="sizeTop"/>
+                                <Label text="Top Size:"/>
+                                <TextField fx:id="sizeTop" styleClass="small-textfield"/>
                             </VBox>
                             <VBox>
                                 <Label text="Top Angle:"/>
-                                <TextField styleClass="small-textfield" fx:id="angleTop"/>
+                                <TextField fx:id="angleTop" styleClass="small-textfield"/>
                             </VBox>
                         </HBox>
                         <HBox spacing="40">
                             <VBox>
-                                <Label text="Bottom Size*:"/>
-                                <TextField styleClass="small-textfield" fx:id="sizeBottom"/>
+                                <Label text="Bottom Size:"/>
+                                <TextField fx:id="sizeBottom" styleClass="small-textfield"/>
                             </VBox>
                             <VBox>
                                 <Label text="Bottom Angle:"/>
-                                <TextField styleClass="small-textfield" fx:id="angleBottom"/>
+                                <TextField fx:id="angleBottom" styleClass="small-textfield" />
                             </VBox>
                         </HBox>
                     </VBox>
@@ -110,21 +110,21 @@
                         <HBox spacing="61">
                             <VBox>
                                 <Label text="Top Left:"/>
-                                <TextField styleClass="small-textfield" fx:id="downOffsetTopLeft"/>
+                                <TextField fx:id="downOffsetTopLeft" styleClass="small-textfield"/>
                             </VBox>
                             <VBox>
                                 <Label text="Top Right:"/>
-                                <TextField styleClass="small-textfield" fx:id="downOffsetTopRight"/>
+                                <TextField fx:id="downOffsetTopRight" styleClass="small-textfield"/>
                             </VBox>
                         </HBox>
                         <HBox spacing="40">
                             <VBox>
                                 <Label text="Bottom Left:"/>
-                                <TextField styleClass="small-textfield" fx:id="downOffsetBottomLeft"/>
+                                <TextField fx:id="downOffsetBottomLeft" styleClass="small-textfield"/>
                             </VBox>
                             <VBox>
                                 <Label text="Bottom Right:"/>
-                                <TextField styleClass="small-textfield" fx:id="downOffsetBottomRight"/>
+                                <TextField fx:id="downOffsetBottomRight" styleClass="small-textfield"/>
                             </VBox>
                         </HBox>
                     </VBox>

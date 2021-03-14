@@ -1,5 +1,7 @@
 package ui.controller;
 
+import ui.factory.alert.AlertFactory;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
@@ -28,7 +30,7 @@ public class Player2Controller extends Player1Controller {
                 }
             }
         }catch(IOException e){
-            alertFactory.displayError("Could not detect flip.txt");
+            AlertFactory.displayError("Could not find flip file");
         }
     }
 }

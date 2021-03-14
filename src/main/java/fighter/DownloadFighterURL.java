@@ -1,6 +1,7 @@
 package fighter;
 
 import exception.OnlineImageNotFoundException;
+import file.FileUtils;
 
 import java.io.File;
 public class DownloadFighterURL {
@@ -9,18 +10,19 @@ public class DownloadFighterURL {
     static String FIGHTERS_URL_2 = "https://raw.githubusercontent.com/marcrd/smash-ultimate-assets/master/renders/";
     static String SANS_URL = "https://i.redd.it/n2tcplon8qk31.png";
 
-    static String localFightersPath = "/assets/fighters/";
+    static String localFightersPath = FileUtils.getLocalFightersPath();
 
-    static public String generateFighterURL(String urlName, int alt) {
+    public static String generateFighterURL(String urlName, int alt) {
         String fighterPath = System.getProperty("user.dir") + localFightersPath + urlName + "/" + alt +".png";
         File file = new File(fighterPath);
         if (!file.exists()){
+            System.out.println("Image for " + urlName + alt + " does not exist locally. Will try finding online");
             return getOnlineURL(urlName,alt);
         }
         return fighterPath;
     }
 
-    static private  String getOnlineURL(String urlName, int alt) {
+    public static String getOnlineURL(String urlName, int alt) {
         String urlString;
         if (alt == 1) {
             urlString = FIGHTERS_URL + urlName + "/main.png";

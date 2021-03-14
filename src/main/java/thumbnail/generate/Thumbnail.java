@@ -5,15 +5,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
-import java.nio.Buffer;
-import java.util.ArrayList;
 import java.util.List;
 
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
+import fighter.DownloadFighterURL;
 import fighter.Fighter;
 import fighter.FighterImage;
+import file.FileUtils;
 import thumbnail.text.TextToImage;
 import tournament.Tournament;
 
@@ -25,13 +25,9 @@ public class Thumbnail {
     private static BufferedImage thumbnail;
     private static Graphics2D g2d;
 
-    private static String FIGHTERS_URL = "https://www.smashbros.com/assets_v2/img/fighter/";
-    private static String FIGHTERS_URL_2 = "https://raw.githubusercontent.com/marcrd/smash-ultimate-assets/master/renders/";
-    private static String SANS_URL = "https://i.redd.it/n2tcplon8qk31.png";
+    private static String localFightersPath = FileUtils.getLocalFightersPath();
+    private static String saveThumbnailsPath = FileUtils.getSaveThumbnailsPath();
 
-    private static String localFightersPath = "assets/fighters/";
-
-    private static String saveThumbnailsPath = "thumbnails/";
     private static boolean saveLocally;
 
 
@@ -49,7 +45,6 @@ public class Thumbnail {
     }
 
 
-
     private static BufferedImage generateThumbnail(Tournament tournament, boolean locally, String round, String date, Fighter... fighters)
             throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException {
 
@@ -63,15 +58,15 @@ public class Thumbnail {
         int port = 0;
         for (Fighter f : fighters) {
             port++;
-            BufferedImage image = getFighterImage(f);
+            BufferedImage image;
+            image = getFighterImage(f);
             FighterImage fighterImage = new FighterImage(f, image);
-            fighterImage.editImage(port);
+            fighterImage.editImage();
             if (fighterImage.getImage().getWidth() < WIDTH / 2 && fighterImage.getFighter().isFlip()) {
                 g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * port - fighterImage.getImage().getWidth(), 0);
             } else {
                 g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * (port - 1), 0);
             }
-
         }
 
         drawElement(tournament.getThumbnailForeground());
@@ -145,35 +140,12 @@ public class Thumbnail {
     }
 
     private static BufferedImage getFighterImageOnline(Fighter fighter) throws OnlineImageNotFoundException {
-        String urlString = null;
-        try {
-            if (fighter.getAlt() == 1) {
-                urlString = FIGHTERS_URL + fighter.getUrlName() + "/main.png";
-            } else {
-                urlString = FIGHTERS_URL + fighter.getUrlName() + "/main" + fighter.getAlt() + ".png";
+            try {
+                URL url = new URL(DownloadFighterURL.getOnlineURL(fighter.getUrlName(), fighter.getAlt()));
+                return ImageIO.read(url);
+            }catch(IOException e){
+                throw new OnlineImageNotFoundException();
             }
-
-            if (fighter.getUrlName().contains("pokemon_trainer")) {
-                urlString = FIGHTERS_URL_2 + "misc/pokemon-trainer-0" + fighter.getAlt() + ".png";
-            }
-            if (fighter.getUrlName().contains("mii_brawler")) {
-                urlString = FIGHTERS_URL_2 + "fighters/51/01.png";
-            }
-            if (fighter.getUrlName().contains("mii_swordfighter")) {
-                urlString = FIGHTERS_URL_2 + "fighters/52/01.png";
-            }
-            if (fighter.getUrlName().contains("mii_gunner")) {
-                if (fighter.getAlt() == 1) urlString = FIGHTERS_URL_2 + "fighters/53/01.png";
-                if (fighter.getAlt() == 2) urlString = SANS_URL;
-            }
-
-
-            URL url = new URL(urlString);
-            return ImageIO.read(url);
-
-        } catch (IOException e) {
-            throw new OnlineImageNotFoundException(urlString);
-        }
     }
 }
 
