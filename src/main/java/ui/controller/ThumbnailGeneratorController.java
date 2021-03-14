@@ -56,7 +56,11 @@ public class ThumbnailGeneratorController implements Initializable {
     @FXML
     private Button fromFile;
     @FXML
+    private Menu menuCopy;
+    @FXML
     private Menu menuEdit;
+    @FXML
+    private Menu menuDelete;
 
     private static Tournament tournamentSelectedEdit;
 
@@ -152,6 +156,10 @@ public class ThumbnailGeneratorController implements Initializable {
     }
     public void initMenuBars(){
         for (Tournament tournament : getTournamentsList()){
+            MenuItem copyOption = new MenuItem(tournament.getName());
+            copyOption.setOnAction(event -> updateTournamentsList(tournament));
+            menuCopy.getItems().add(copyOption);
+
             MenuItem editOption = new MenuItem(tournament.getName());
             editOption.setOnAction(event -> {
                 tournamentSelectedEdit = tournament;
@@ -166,6 +174,11 @@ public class ThumbnailGeneratorController implements Initializable {
                 }
             });
             menuEdit.getItems().add(editOption);
+
+            MenuItem deleteOption = new MenuItem(tournament.getName());
+            deleteOption.setOnAction(event -> deleteTournament(tournament));
+            menuDelete.getItems().add(deleteOption);
+
         }
     }
 
@@ -188,10 +201,26 @@ public class ThumbnailGeneratorController implements Initializable {
             }
         }
         JSONWriter.updateTournamentsFile(getTournamentsList());
-        JSONWriter.updateTextSettingsFile(TextSettings.getAllTextSettings(getTournamentsList()));
         startApp(stage);
     }
 
+    public static void deleteTournament(Tournament tournament) {
+        getTournamentsList().removeIf(t -> tournament.getTournamentId() == t.getTournamentId());
+        JSONWriter.updateTournamentsFile(getTournamentsList());
+        JSONWriter.updateTournamentsFile(getTournamentsList());
+        startApp(stage);
+    }
+
+    public static void updateTournamentsListAndSettings(Tournament... tournamentList) {
+        if (tournamentList != null){
+            for (Tournament tournament:tournamentList) {
+                getTournamentsList().add(tournament);
+            }
+        }
+        JSONWriter.updateTournamentsFile(getTournamentsList());
+        JSONWriter.updateTextSettingsFile(TextSettings.getAllTextSettings(getTournamentsList()));
+        startApp(stage);
+    }
 
     public static void startApp(Stage primaryStage){
         try {

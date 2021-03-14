@@ -64,7 +64,7 @@ public class TournamentsEditController extends TournamentsCreateController {
     public void save(ActionEvent actionEvent) {
         Tournament currentTournament = generateTournamentWithCurrentSettings();
         if(!ThumbnailGeneratorController.getTournamentsSelectedEdit().updateDifferences(currentTournament)){
-            ThumbnailGeneratorController.updateTournamentsList();
+            ThumbnailGeneratorController.updateTournamentsListAndSettings();
         }
         cancel(actionEvent);
     }

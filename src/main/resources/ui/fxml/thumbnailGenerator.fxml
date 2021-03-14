@@ -22,8 +22,11 @@
                 <MenuItem styleClass="menuItem" text="Close" onAction="#close"/>
             </Menu>
             <Menu styleClass="menu" text="Edit">
-                <MenuItem styleClass="menuItem" text="Create New Tournament" onAction="#createNewTournament"/>
-                <Menu fx:id="menuEdit" styleClass="menuItem" text="Edit Tournament"/>
+                <MenuItem styleClass="menuItem" text="Create new tournament" onAction="#createNewTournament"/>
+                <Menu fx:id="menuCopy" styleClass="menuItem" text="Create copy of..."/>
+                <Menu fx:id="menuEdit" styleClass="menuItem" text="Edit tournament"/>
+                <Menu fx:id="menuDelete" styleClass="menuItem" text="Delete tournament"/>
+
             </Menu>
         </MenuBar>
         <VBox spacing="20" alignment="CENTER">

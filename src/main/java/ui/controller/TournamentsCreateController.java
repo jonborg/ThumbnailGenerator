@@ -120,7 +120,7 @@ public class TournamentsCreateController implements Initializable {
 
     public void save(ActionEvent actionEvent) {
         Tournament currentTournament = generateTournamentWithCurrentSettings();
-        ThumbnailGeneratorController.updateTournamentsList(currentTournament);
+        ThumbnailGeneratorController.updateTournamentsListAndSettings(currentTournament);
         cancel(actionEvent);
     }
 
