@@ -6,6 +6,7 @@ public class FileUtils {
 
     private final static String tournamentFile = "settings/tournaments/tournaments.json";
     private final static String textSettingsFile = "settings/thumbnails/text/text.json";
+    public final static String imageSettingsFile = "settings/thumbnails/images/fighter_image.json";
 
     private final static String scaleFile = "settings/thumbnails/images/scale.txt";
     private final static String offsetFile = "settings/thumbnails/images/offset.txt";
