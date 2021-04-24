@@ -2,7 +2,6 @@ package smashgg.tournament;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import org.apache.maven.plugin.lifecycle.Phase;
 
 import java.util.List;
 

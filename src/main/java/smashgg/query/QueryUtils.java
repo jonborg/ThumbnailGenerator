@@ -2,41 +2,37 @@ package smashgg.query;
 
 import com.github.gpluscb.ggjava.api.GGClient;
 import com.github.gpluscb.ggjava.api.RateLimiter;
-import com.github.gpluscb.ggjava.entity.object.response.GGResponse;
-import com.github.gpluscb.ggjava.entity.object.response.objects.QueryResponse;
 import com.google.gson.JsonObject;
 import org.codehaus.plexus.util.ExceptionUtils;
 import ui.factory.alert.AlertFactory;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class QueryUtils {
 
     private static GGClient client;
 
-    public static void initClient(){
-        client = GGClient.builder("a6d3c28a0118d864897a0c6efac41dc1")
+    public static void initClient(String authToken){
+        client = GGClient.builder(authToken)
                 .limiter(RateLimiter.bucketBuilder().tasksPerPeriod(70).period(60000L).build()).build();
     }
 
     public static void closeClient(){
-        if (!client.isShutDown()) {
+        if (client != null && !client.isShutDown()) {
             client.shutdown();
         }
     }
 
-    public static JsonObject runQuery(String query){
+    public static JsonObject runQuery(String query) throws ExecutionException, InterruptedException {
         CompletableFuture<JsonObject> future = client.request(query);
         future.exceptionally(t -> {
-            t.printStackTrace();
+            AlertFactory.displayError("An issue has occurred when trying to use Smash.gg",
+                    ExceptionUtils.getStackTrace(t));
             return null;
         });
-        try{
-            return future.get();
-        } catch (Exception e) {
-            AlertFactory.displayError("An error has occurred", ExceptionUtils.getStackTrace(e));
-        }
-        return null;
+
+        return future.get();
     }
 
     public static String tournamentDetailsQuery(String tournamentURL){
@@ -71,7 +67,7 @@ public class QueryUtils {
     }
 
     private static String setPagesAndMatchesSubQuery(int currentPage){
-        return "sets(page: " + currentPage + " perPage: 20){ " +
+        return "sets(page: " + currentPage + " perPage: 20 sortType: RECENT){ " +
                 "pageInfo { totalPages } " +
                 matchDetailsSubQuery() +
                 "}";
@@ -79,9 +75,9 @@ public class QueryUtils {
 
 
     private static String matchDetailsSubQuery(){
-        return "nodes { fullRoundText games{ " +
-                "selections{ entrant { name } selectionValue selectionType} " +
-                "} " +
+        return "nodes { fullRoundText " +
+                "slots{ entrant{ name } } " +
+                "games{ selections{ entrant { name } selectionValue selectionType} } " +
                 "stream{ streamName } " +
                 "}";
     }

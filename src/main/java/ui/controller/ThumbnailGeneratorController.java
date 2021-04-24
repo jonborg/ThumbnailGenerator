@@ -19,9 +19,9 @@ import javafx.stage.Stage;
 import smashgg.query.QueryUtils;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
+import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
-import tournament.Tournament;
 
 import java.io.File;
 import java.io.IOException;
@@ -136,13 +136,14 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
 
-    public void createFileSmashGG(ActionEvent actionEvent) {
+    public void createFromSmashGG(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/fxml/fileFromSmashGG.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/fxml/fromSmashGG.fxml"));
             Parent root = loader.load();
-            FileFromSmashGGController controller = loader.getController();
+            root.setOnMousePressed(e -> root.requestFocus());
+            FromSmashGGController controller = loader.getController();
             Stage stage = new Stage();
-            stage.setTitle("Create file from Smash.gg");
+            stage.setTitle("Create thumbnails from Smash.gg");
             stage.setScene(new Scene(root));
             stage.setOnHidden(e -> {
                 QueryUtils.closeClient();

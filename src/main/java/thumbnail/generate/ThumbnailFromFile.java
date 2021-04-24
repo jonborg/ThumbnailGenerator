@@ -1,6 +1,5 @@
 package thumbnail.generate;
 
-import com.google.gson.reflect.TypeToken;
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
@@ -8,10 +7,9 @@ import exception.ThumbnailFromFileException;
 import fighter.Fighter;
 import fighter.FighterImage;
 import file.FileUtils;
-import file.json.JSONReader;
+import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
-import tournament.Tournament;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

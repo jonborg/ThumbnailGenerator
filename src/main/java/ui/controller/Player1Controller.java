@@ -2,6 +2,7 @@ package ui.controller;
 
 import fighter.DownloadFighterURL;
 import fighter.Fighter;
+import fighter.Names;
 import file.FileUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,14 +10,13 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import ui.combobox.InputFilter;
 import ui.factory.alert.AlertFactory;
-import fighter.Names;
 
 import java.awt.*;
 import java.io.*;

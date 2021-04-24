@@ -1,12 +1,5 @@
 package thumbnail.generate;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.net.URL;
-import java.util.List;
-
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
@@ -16,6 +9,15 @@ import fighter.FighterImage;
 import file.FileUtils;
 import thumbnail.text.TextToImage;
 import tournament.Tournament;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
 
 
 public class Thumbnail {

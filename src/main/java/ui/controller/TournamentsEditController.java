@@ -8,7 +8,7 @@ import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
 
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
 
 public class TournamentsEditController extends TournamentsCreateController {
 

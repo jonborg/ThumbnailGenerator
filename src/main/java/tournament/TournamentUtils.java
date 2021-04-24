@@ -8,7 +8,6 @@ import thumbnail.text.TextSettings;
 import ui.controller.ThumbnailGeneratorController;
 import ui.factory.alert.AlertFactory;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

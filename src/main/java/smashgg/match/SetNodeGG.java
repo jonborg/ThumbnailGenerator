@@ -12,6 +12,9 @@ public class SetNodeGG{
     @SerializedName("fullRoundText")
     private String roundName;
     @Expose
+    @SerializedName("slots")
+    private List<SlotGG> slots;
+    @Expose
     @SerializedName("games")
     private List<GameGG> games;
     @Expose
@@ -26,6 +29,10 @@ public class SetNodeGG{
             return roundName + "s";
         }
         return roundName;
+    }
+
+    public List<SlotGG> getSlots() {
+        return slots;
     }
 
     public List<GameGG> getGames() {
@@ -45,7 +52,7 @@ public class SetNodeGG{
     }
 
     public EntrantGG getEntrant(int entrantIndex){
-        return games.get(0).getSelections().get(entrantIndex).getEntrant();
+        return slots.get(entrantIndex).getEntrant();
     }
 
     public String getEntrantCharacter(String entrantName){
@@ -79,8 +86,16 @@ public class SetNodeGG{
         String player1NoTeam = getEntrateNameWithNoTeam(player1);
         String player2NoTeam = getEntrateNameWithNoTeam(player2);
 
+        String characters;
+
+        if (games == null){
+            characters = "CHAR1;CHAR2";
+        }else{
+            characters = getEntrantCharacter(player1) + ";" + getEntrantCharacter(player2);
+        }
+
         return player1NoTeam + ";" + player2NoTeam + ";"
-                + getEntrantCharacter(player1) + ";" + getEntrantCharacter(player2) + ";"
+                + characters + ";"
                 + "1;1;"
                 + getRoundName()
                 + System.lineSeparator();
