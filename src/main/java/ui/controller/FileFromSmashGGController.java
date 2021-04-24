@@ -1,11 +1,5 @@
 package ui.controller;
 
-import com.github.gpluscb.ggjava.api.GGClient;
-import com.github.gpluscb.ggjava.api.RateLimiter;
-import com.github.gpluscb.ggjava.entity.object.response.GGResponse;
-import com.github.gpluscb.ggjava.entity.object.response.ListResponse;
-import com.github.gpluscb.ggjava.entity.object.response.objects.QueryResponse;
-import com.github.gpluscb.ggjava.entity.object.response.objects.SetResponse;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import exception.FontNotFoundException;
@@ -17,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import org.codehaus.plexus.util.ExceptionUtils;
 import smashgg.match.SetGG;
 import smashgg.query.QueryUtils;
 import smashgg.tournament.EventGG;
@@ -25,17 +18,12 @@ import smashgg.tournament.PhaseGG;
 import smashgg.tournament.PhaseGroupNodeGG;
 import smashgg.tournament.TournamentGG;
 import thumbnail.generate.ThumbnailFromFile;
-import smashgg.match.SetNodeGG;
 import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
 
 public class FileFromSmashGGController implements Initializable {
 
@@ -75,30 +63,75 @@ public class FileFromSmashGGController implements Initializable {
             return;
         }
 
-        EventGG selection = eventSelect.getSelectionModel().getSelectedItem();
+        if (phaseGroupSelect.getSelectionModel().getSelectedItem() !=null
+                && !phaseGroupSelect.getSelectionModel().getSelectedItem().isNull()){
+            readSetsFromSmashGG(2);
+            return;
+        }
+
+        if (phaseSelect.getSelectionModel().getSelectedItem() !=null
+                && !phaseSelect.getSelectionModel().getSelectedItem().isNull()){
+            readSetsFromSmashGG(1);
+            return;
+        }
+
         if (eventSelect.getSelectionModel().getSelectedItem() !=null
                 && !eventSelect.getSelectionModel().getSelectedItem().isNull()){
-            int totalPages=-1;
-            int readPages=0;
-            do {
-                JsonObject result = QueryUtils.runQuery(QueryUtils.getSetsByEvents(selection.getId(),++readPages));
-                if (totalPages < 0){
-                    totalPages = result.getAsJsonObject("data").getAsJsonObject("event").getAsJsonObject("sets")
-                            .getAsJsonObject("pageInfo").getAsJsonPrimitive("totalPages").getAsInt();
-                    foundSets.setText(TournamentUtils.getSelectedTournament().getTournamentId() + ";" + selection.getName() + System.lineSeparator());
-                }
-
-                SetGG set = (SetGG) JSONReader.getJSONObject(result.getAsJsonObject("data").getAsJsonObject("event")
-                        .getAsJsonObject("sets").toString(), new TypeToken<SetGG>() {}.getType());
-                set.getSetNodes().forEach(setNodeGG -> {
-                    if(setNodeGG.hasStream()){
-                        foundSets.appendText(setNodeGG.toString());
-                    }
-                });
-
-            }while(readPages<totalPages);
+            readSetsFromSmashGG(0);
+            return;
         }
     }
+
+    private void test(){}
+
+    private void readSetsFromSmashGG(int mode){
+        int totalPages=-1;
+        int readPages=0;
+
+        String query;
+        String mainBody;
+        String eventName = eventSelect.getSelectionModel().getSelectedItem().getName();
+
+        do{
+            switch (mode) {
+                case 0:
+                    query= QueryUtils.getSetsByEvent(
+                        eventSelect.getSelectionModel().getSelectedItem().getId(), ++readPages);
+                    mainBody = "event";
+                    break;
+
+                case 1:
+                    query= QueryUtils.getSetsByPhase(
+                        phaseSelect.getSelectionModel().getSelectedItem().getId(), ++readPages);
+                    mainBody = "phase";
+                    break;
+
+                case 2:
+                    query= QueryUtils.getSetsByPhaseGroup(
+                        phaseGroupSelect.getSelectionModel().getSelectedItem().getId(), ++readPages);
+                    mainBody = "phaseGroup";
+                    break;
+                default:
+                    return;
+            }
+
+            JsonObject result = QueryUtils.runQuery(query);
+            if (totalPages < 0){
+                System.out.println("Query ran: "+query);
+                totalPages = result.getAsJsonObject("data").getAsJsonObject(mainBody).getAsJsonObject("sets")
+                        .getAsJsonObject("pageInfo").getAsJsonPrimitive("totalPages").getAsInt();
+                foundSets.setText(TournamentUtils.getSelectedTournament().getTournamentId() + ";" + eventName + System.lineSeparator());
+            }
+            SetGG set = (SetGG) JSONReader.getJSONObject(result.getAsJsonObject("data").getAsJsonObject(mainBody)
+                    .getAsJsonObject("sets").toString(), new TypeToken<SetGG>() {}.getType());
+            set.getSetNodes().forEach(setNodeGG -> {
+                if(setNodeGG.hasStream()){
+                    foundSets.appendText(setNodeGG.toString());
+                }
+            });
+        }while(readPages<totalPages);
+
+}
 
     public void generateThumbnails(){
         if (foundSets.getText()==null || foundSets.getText().isEmpty()){
@@ -134,7 +167,6 @@ public class FileFromSmashGGController implements Initializable {
             eventSelect.getItems().clear();
             phaseSelect.getItems().clear();
             phaseGroupSelect.getItems().clear();
-            eventSelect.getItems().add(new EventGG());
         }
     }
 
@@ -183,7 +215,9 @@ public class FileFromSmashGGController implements Initializable {
                 TournamentGG tournamentGG = (TournamentGG) JSONReader.getJSONObject(result.get("data")
                         .getAsJsonObject().get("tournament").toString(), new TypeToken<TournamentGG>() {}.getType());
                 eventSelect.getItems().addAll(tournamentGG.getEvents());
-
+                if (eventSelect.getItems().size() > 0){
+                    eventSelect.getSelectionModel().select(0);
+                }
             }
         });
     }

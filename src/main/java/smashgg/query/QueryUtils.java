@@ -49,20 +49,41 @@ public class QueryUtils {
                 "}}}}}}";
     }
 
-    public static String getSetsByEvents(int eventId, int currentPage){
+    public static String getSetsByEvent(int eventId, int currentPage){
         return "query {" +
                 "event(id: " + eventId + ") { id name " +
-                "sets(page: " + currentPage + " perPage: 20){ " +
-                "pageInfo { totalPages }" +
-                "nodes {" + matchDetailsSubQuery() +
-                "}}}}";
+                setPagesAndMatchesSubQuery(currentPage) +
+                "}}";
     }
 
+    public static String getSetsByPhase(int phaseId, int currentPage){
+        return "query {" +
+                "phase(id: " + phaseId + ") { id name " +
+                setPagesAndMatchesSubQuery(currentPage) +
+                "}}";
+    }
+
+    public static String getSetsByPhaseGroup(int phaseGroupId, int currentPage){
+        return "query {" +
+                "phaseGroup(id: " + phaseGroupId + ") { id displayIdentifier " +
+                setPagesAndMatchesSubQuery(currentPage) +
+                "}}";
+    }
+
+    private static String setPagesAndMatchesSubQuery(int currentPage){
+        return "sets(page: " + currentPage + " perPage: 20){ " +
+                "pageInfo { totalPages } " +
+                matchDetailsSubQuery() +
+                "}";
+    }
+
+
     private static String matchDetailsSubQuery(){
-        return "fullRoundText games{ " +
-                "selections{ entrant { name } selectionValue selectionType}" +
+        return "nodes { fullRoundText games{ " +
+                "selections{ entrant { name } selectionValue selectionType} " +
                 "} " +
-                "stream{ streamName }";
+                "stream{ streamName } " +
+                "}";
     }
 
 }
