@@ -10,7 +10,7 @@
             prefHeight="400.0" prefWidth="800.0"
             stylesheets="@../styles/fromSmashGG.css">
 
-    <HBox spacing="50" alignment="CENTER">
+    <HBox spacing="30" alignment="CENTER">
         <VBox spacing="20" alignment="CENTER" styleClass="side">
             <!--Tournament UI-->
             <HBox>

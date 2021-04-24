@@ -201,8 +201,6 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
 
-
-
     private static List<Tournament> getTournamentsList(){
         return TournamentUtils.getTournamentsList();
     }
@@ -213,17 +211,12 @@ public class ThumbnailGeneratorController implements Initializable {
     private static void updateTournamentsList(Tournament... list) {
         TournamentUtils.updateTournamentsList(list);
     }
-
-
     private static void deleteTournament(Tournament tournament) {
         TournamentUtils.deleteTournament(tournament);
     }
-
-
     public static void reloadPage(){
         App.startApp(stage);
     }
-
     public void setStage(Stage stage){
         this.stage=stage;
     }

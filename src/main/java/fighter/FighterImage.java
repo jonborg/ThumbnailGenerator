@@ -267,7 +267,6 @@ public class FighterImage {
 
     }
 
-
     public Fighter getFighter(){
         return this.fighter;
     }
@@ -283,7 +282,5 @@ public class FighterImage {
     public void setFighter(BufferedImage image){
         this.image = image;
     }
-
-
 
 }

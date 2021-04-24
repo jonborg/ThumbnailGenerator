@@ -144,7 +144,7 @@ public class FromSmashGGController implements Initializable {
                 });
             }while(readPages<totalPages);
             genStart.setDisable(false);
-        }catch (ExecutionException | InterruptedException e){
+        }catch (ExecutionException | InterruptedException | NullPointerException e){
             AlertFactory.displayError("An issue occurred when executing query",
                     ExceptionUtils.getStackTrace(e));
             return;
@@ -219,40 +219,45 @@ public class FromSmashGGController implements Initializable {
     private void initTournamentFieldListener() {
         tournamentURL.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue){
-                if (tournamentURL.getText().isEmpty()){
-                    return;
-                }
-                if (!tournamentURL.getText().contains("smash.gg/tournament")){
-                    AlertFactory.displayError(tournamentURL.getText() + " is not a valid Smash.gg tournament URL. " +
-                            "Ex.:https://smash.gg/tournament/swt-europe-ultimate-online-qualifier");
-                    return;
-                }
-                resetComboBoxes(false);
-                try {
-                    QueryUtils.initClient(authToken.getText());
-                    JsonObject result = QueryUtils.runQuery(QueryUtils.tournamentDetailsQuery(tournamentURL.getText()));
-                    TournamentGG tournamentGG = (TournamentGG) JSONReader.getJSONObject(result.get("data")
-                            .getAsJsonObject().get("tournament").toString(), new TypeToken<TournamentGG>() {}.getType());
-                    eventSelect.getItems().addAll(tournamentGG.getEvents());
-                    if (eventSelect.getItems().size() > 0){
-                        eventSelect.getSelectionModel().select(0);
-                    }
-                    genText.setDisable(false);
-                }catch (IllegalArgumentException e){
-                    AlertFactory.displayError("Could not connect to Smash.gg due to a authorization token issue",
-                            ExceptionUtils.getStackTrace(e));
-                    genText.setDisable(true);
-                    return;
-                }catch (ExecutionException | InterruptedException e){
-                    AlertFactory.displayError("An issue occurred when executing query",
-                            ExceptionUtils.getStackTrace(e));
-                    genText.setDisable(true);
-                    return;
-                }finally {
-                    QueryUtils.closeClient();
-                }
+                getTournamentInfo();
             }
         });
+    }
+
+    private void getTournamentInfo(){
+        if (tournamentURL.getText().isEmpty()){
+            return;
+        }
+        if (!tournamentURL.getText().contains("smash.gg/tournament")){
+            AlertFactory.displayError(tournamentURL.getText() + " is not a valid Smash.gg tournament URL. " +
+                    "Ex.:https://smash.gg/tournament/swt-europe-ultimate-online-qualifier");
+            return;
+        }
+        resetComboBoxes(false);
+        try {
+            QueryUtils.initClient(authToken.getText());
+            JsonObject result = QueryUtils.runQuery(QueryUtils.tournamentDetailsQuery(tournamentURL.getText()));
+            TournamentGG tournamentGG = (TournamentGG) JSONReader.getJSONObject(result.get("data")
+                    .getAsJsonObject().get("tournament").toString(), new TypeToken<TournamentGG>() {}.getType());
+            eventSelect.getItems().addAll(tournamentGG.getEvents());
+            if (eventSelect.getItems().size() > 0){
+                eventSelect.getSelectionModel().select(0);
+            }
+            genText.setDisable(false);
+        }catch (IllegalArgumentException e){
+            AlertFactory.displayError("Could not connect to Smash.gg due to a authorization token issue",
+                    ExceptionUtils.getStackTrace(e));
+            genText.setDisable(true);
+
+            return;
+        }catch (ExecutionException | InterruptedException | NullPointerException e){
+            AlertFactory.displayError("An issue occurred when executing query",
+                    ExceptionUtils.getStackTrace(e));
+            genText.setDisable(true);
+            return;
+        }finally {
+            QueryUtils.closeClient();
+        }
     }
 
     private void initFoundSetsListener() {
