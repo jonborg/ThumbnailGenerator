@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -144,6 +145,7 @@ public class ThumbnailGeneratorController implements Initializable {
             FromSmashGGController controller = loader.getController();
             Stage stage = new Stage();
             stage.setTitle("Create thumbnails from Smash.gg");
+            stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
             stage.setScene(new Scene(root));
             stage.setOnHidden(e -> {
                 QueryUtils.closeClient();
@@ -163,6 +165,7 @@ public class ThumbnailGeneratorController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsCreate.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Create New Tournament");
+            stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -185,6 +188,7 @@ public class ThumbnailGeneratorController implements Initializable {
                     Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsEdit.fxml"));
                     Stage stage = new Stage();
                     stage.setTitle("Edit Tournament " + tournament.getName());
+                    stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
                     stage.setScene(new Scene(root));
                     stage.show();
                 } catch (IOException e) {

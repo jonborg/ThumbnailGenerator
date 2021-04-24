@@ -144,6 +144,7 @@ public class FromSmashGGController implements Initializable {
                 });
             }while(readPages<totalPages);
             genStart.setDisable(false);
+            AlertFactory.displayInfo("Successfully generated multi generation commands");
         }catch (ExecutionException | InterruptedException | NullPointerException e){
             AlertFactory.displayError("An issue occurred when executing query",
                     ExceptionUtils.getStackTrace(e));
