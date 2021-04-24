@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import smashgg.query.QueryUtils;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
 import tournament.TournamentUtils;
@@ -119,13 +120,13 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
 
+    //MenuBar
     public void createMultipleThumbnails(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
-            ThumbnailFromFile tbf = new ThumbnailFromFile();
             try {
-                tbf.generateFromFile(selectedFile, saveLocally.isSelected());
+                ThumbnailFromFile.generateFromFile(selectedFile, saveLocally.isSelected());
                 AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
             }catch(ThumbnailFromFileException e){
                 //AlertFactory already thrown inside tbf.generateFromFile
@@ -135,7 +136,23 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
 
-    //MenuBar
+    public void createFileSmashGG(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/fxml/fileFromSmashGG.fxml"));
+            Parent root = loader.load();
+            FileFromSmashGGController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.setTitle("Create file from Smash.gg");
+            stage.setScene(new Scene(root));
+            stage.setOnHidden(e -> {
+                QueryUtils.closeClient();
+                TournamentUtils.setSelectedTournament(controller.getBackupTournament());});
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void close(ActionEvent actionEvent) {
         Platform.exit();
     }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import org.controlsfx.control.CheckComboBox?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.controller.FileFromSmashGGController"
+            prefHeight="400.0" prefWidth="800.0">
+    <HBox alignment="CENTER" spacing="15">
+        <VBox spacing="10" alignment="CENTER_LEFT">
+            <!--Tournament UI-->
+            <HBox alignment="CENTER">
+                <fx:include fx:id="tournaments" source="tournaments.fxml" />
+            </HBox>
+
+            <HBox>
+                <Label text="Tournament URL*:"/>
+                <TextField fx:id="tournamentURL" styleClass="textfield"/>
+            </HBox>
+            <HBox>
+                <Label text="Event*:"/>
+                <ComboBox fx:id="eventSelect" styleClass="textfield" onAction="#eventListener"/>
+            </HBox>
+            <HBox>
+                <Label text="Phase*:"/>
+                <ComboBox fx:id="phaseSelect" styleClass="textfield" onAction="#phaseListener"/>
+            </HBox>
+            <HBox>
+                <Label text="Phase Group*:"/>
+                <ComboBox fx:id="phaseGroupSelect" styleClass="textfield"/>
+            </HBox>
+            <HBox>
+                <Label text="Output file name*:"/>
+                <TextField fx:id="fileName" styleClass="textfield"/>
+            </HBox>
+
+        </VBox>
+        <Button onAction="#generateCommands"> <graphic>
+            <ImageView>
+                <Image url="@../images/arrow.png"/>
+            </ImageView>
+        </graphic></Button>
+
+        <VBox alignment="CENTER" spacing="10">
+            <TextArea fx:id="foundSets" prefWidth="300" prefHeight="300"/>
+            <HBox alignment="CENTER" spacing="5">
+                <Button>Save to file</Button>
+                <Button onAction="#generateThumbnails">Generate thumbnails</Button>
+            </HBox>
+        </VBox>
+    </HBox>
+</AnchorPane>

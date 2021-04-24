@@ -2,61 +2,66 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.sbpt.apps</groupId>
-  <artifactId>thumbnail-generator</artifactId>
-  <version>${project.version}</version>
+    <groupId>com.sbpt.apps</groupId>
+    <artifactId>thumbnail-generator</artifactId>
+    <version>${project.version}</version>
 
-  <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-      <jdk.version>1.8</jdk.version>
-      <project.version>1.4.0</project.version>
-      <file.version>${project.version}.0</file.version>
-      <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <jdk.version>1.8</jdk.version>
+        <project.version>1.4.0</project.version>
+        <file.version>${project.version}.0</file.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+    </properties>
 
 
-  <dependencies>
-	<!-- https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib -->
-	<dependency>
-		<groupId>org.imgscalr</groupId>
-		<artifactId>imgscalr-lib</artifactId>
-		<version>4.2</version>
-	</dependency>
-		<dependency>
-		<groupId>org.openjfx</groupId>
-		<artifactId>javafx-controls</artifactId>
-		<version>11</version>
-	</dependency>
-    <!-- https://mvnrepository.com/artifact/com.akathist.maven.plugins.launch4j/launch4j-maven-plugin -->
-    <dependency>
-        <groupId>com.akathist.maven.plugins.launch4j</groupId>
-        <artifactId>launch4j-maven-plugin</artifactId>
-        <version>1.7.25</version>
-    </dependency>
-     <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-     <dependency>
-         <groupId>com.google.code.gson</groupId>
-         <artifactId>gson</artifactId>
-         <version>2.8.6</version>
-     </dependency>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib -->
+        <dependency>
+            <groupId>org.imgscalr</groupId>
+            <artifactId>imgscalr-lib</artifactId>
+            <version>4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>11</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.akathist.maven.plugins.launch4j/launch4j-maven-plugin -->
+        <dependency>
+            <groupId>com.akathist.maven.plugins.launch4j</groupId>
+            <artifactId>launch4j-maven-plugin</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+             <groupId>com.google.code.gson</groupId>
+             <artifactId>gson</artifactId>
+             <version>2.8.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.gpluscb</groupId>
+            <artifactId>gg-java</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
 
-  </dependencies>
-  
-  <build>
-      <resources>
-          <resource>
-              <directory>src/main/resources</directory>
-          </resource>
-      </resources>
-        <plugins>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
-                <configuration>
+    </dependencies>
+
+    <build>
+    <resources>
+      <resource>
+          <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+    <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${maven.compiler.plugin.version}</version>
+            <configuration>
                   <source>${jdk.version}</source>
                   <target>${jdk.version}</target>
                 </configuration>
@@ -130,6 +135,19 @@
                 </executions>
             </plugin>
         </plugins>
-  </build>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>oss.sonatype.org-snapshot</id>
+            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
   
 </project>
