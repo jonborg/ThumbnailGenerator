@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import tournament.TournamentUtils;
 import ui.controller.ThumbnailGeneratorController;
@@ -27,8 +28,7 @@ public class App extends Application {
             FXMLLoader loader = new FXMLLoader(ThumbnailGeneratorController.class.getClassLoader().getResource("ui/fxml/thumbnailGenerator.fxml"));
             Parent root = (Parent) loader.load();
             ((ThumbnailGeneratorController) loader.getController()).setStage(primaryStage);
-
-            //primaryStage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
+            primaryStage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
             primaryStage.setTitle("Smash Bros. VOD Thumbnail Generator");
             primaryStage.setScene(new Scene(root, 800, 660));
             primaryStage.show();

@@ -8,7 +8,10 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public class FighterImage {
@@ -264,7 +267,6 @@ public class FighterImage {
 
     }
 
-
     public Fighter getFighter(){
         return this.fighter;
     }
@@ -280,7 +282,5 @@ public class FighterImage {
     public void setFighter(BufferedImage image){
         this.image = image;
     }
-
-
 
 }

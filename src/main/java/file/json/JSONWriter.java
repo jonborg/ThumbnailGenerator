@@ -1,16 +1,16 @@
 package file.json;
 
 
-import com.google.gson.*;
+
 import fighter.FighterImageSettings;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import file.FileUtils;
 import org.codehaus.plexus.util.ExceptionUtils;
 import thumbnail.text.TextSettings;
-import tournament.TournamentUtils;
-import ui.factory.alert.AlertFactory;
 import tournament.Tournament;
+import ui.factory.alert.AlertFactory;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;

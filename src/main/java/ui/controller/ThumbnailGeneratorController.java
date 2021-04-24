@@ -13,14 +13,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import smashgg.query.QueryUtils;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
+import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
-import tournament.Tournament;
 
 import java.io.File;
 import java.io.IOException;
@@ -119,13 +121,13 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
 
+    //MenuBar
     public void createMultipleThumbnails(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
-            ThumbnailFromFile tbf = new ThumbnailFromFile();
             try {
-                tbf.generateFromFile(selectedFile, saveLocally.isSelected());
+                ThumbnailFromFile.generateFromFile(selectedFile, saveLocally.isSelected());
                 AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
             }catch(ThumbnailFromFileException e){
                 //AlertFactory already thrown inside tbf.generateFromFile
@@ -135,7 +137,25 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
 
-    //MenuBar
+    public void createFromSmashGG(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/fxml/fromSmashGG.fxml"));
+            Parent root = loader.load();
+            root.setOnMousePressed(e -> root.requestFocus());
+            FromSmashGGController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.setTitle("Create thumbnails from Smash.gg");
+            stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
+            stage.setScene(new Scene(root));
+            stage.setOnHidden(e -> {
+                QueryUtils.closeClient();
+                TournamentUtils.setSelectedTournament(controller.getBackupTournament());});
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void close(ActionEvent actionEvent) {
         Platform.exit();
     }
@@ -145,6 +165,7 @@ public class ThumbnailGeneratorController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsCreate.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Create New Tournament");
+            stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -167,6 +188,7 @@ public class ThumbnailGeneratorController implements Initializable {
                     Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsEdit.fxml"));
                     Stage stage = new Stage();
                     stage.setTitle("Edit Tournament " + tournament.getName());
+                    stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
                     stage.setScene(new Scene(root));
                     stage.show();
                 } catch (IOException e) {
@@ -183,8 +205,6 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
 
-
-
     private static List<Tournament> getTournamentsList(){
         return TournamentUtils.getTournamentsList();
     }
@@ -195,17 +215,12 @@ public class ThumbnailGeneratorController implements Initializable {
     private static void updateTournamentsList(Tournament... list) {
         TournamentUtils.updateTournamentsList(list);
     }
-
-
     private static void deleteTournament(Tournament tournament) {
         TournamentUtils.deleteTournament(tournament);
     }
-
-
     public static void reloadPage(){
         App.startApp(stage);
     }
-
     public void setStage(Stage stage){
         this.stage=stage;
     }

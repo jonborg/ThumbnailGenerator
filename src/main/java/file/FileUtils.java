@@ -1,7 +1,5 @@
 package file;
 
-import tournament.TournamentUtils;
-
 public class FileUtils {
 
     private final static String tournamentFile = "settings/tournaments/tournaments.json";
