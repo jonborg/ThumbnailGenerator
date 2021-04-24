@@ -1,6 +1,5 @@
 package fighter;
 
-import exception.OnlineImageNotFoundException;
 import file.FileUtils;
 
 import java.io.File;

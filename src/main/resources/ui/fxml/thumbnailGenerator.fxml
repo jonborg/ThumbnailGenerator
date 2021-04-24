@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 <StackPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ui.controller.ThumbnailGeneratorController"
-            prefHeight="800.0" prefWidth="660.0"
-            stylesheets="@../styles/thumbnailGenerator.css">
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="ui.controller.ThumbnailGeneratorController"
+           prefHeight="800.0" prefWidth="660.0"
+           stylesheets="@../styles/thumbnailGenerator.css">
 
     <VBox spacing="30">
 
         <!--Menu Bar-->
         <MenuBar styleClass="menuBar">
             <Menu styleClass="menu" text="File">
-                <MenuItem styleClass="menuItem" text="Generate Thumbnails from..." onAction="#createMultipleThumbnails"/>
+                <MenuItem styleClass="menuItem" text="Generate thumbnails from file" onAction="#createMultipleThumbnails"/>
+                <MenuItem styleClass="menuItem" text="Generate thumbnails from Smash.gg" onAction="#createFromSmashGG"/>
                 <SeparatorMenuItem/>
                 <MenuItem styleClass="menuItem" text="Close" onAction="#close"/>
             </Menu>

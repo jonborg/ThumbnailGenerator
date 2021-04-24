@@ -27,4 +27,14 @@ public class JSONReader {
         }
         return null;
     }
+
+    public static <T> Object getJSONObject(String jsonText, Type type){
+        Gson gson = new Gson();
+        try {
+            return gson.fromJson(jsonText, type);
+        } catch (JsonSyntaxException e){
+            AlertFactory.displayError("JsonSyntaxException", ExceptionUtils.getStackTrace(e));
+        }
+        return null;
+    }
 }
