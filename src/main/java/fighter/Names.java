@@ -1,10 +1,10 @@
-package ui.player;
+package fighter;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Names {
-    static Map<String,String> map = new TreeMap<>();
+    public static Map<String,String> map = new TreeMap<>();
 
     static{
         //64
@@ -92,7 +92,7 @@ public class Names {
         map.put("Min Min", "minmin");
         map.put("Steve", "steve");
         map.put("Sephiroth", "sephiroth");
-        map.put("Pyra/Mythra", "pyra");
+        map.put("Pyra & Mythra", "pyra");
 
         //echoes
         map.put("Dark Pit", "dark_pit");

@@ -1,0 +1,41 @@
+.mainBox {
+    -fx-padding: 30 30 30 30;
+}
+
+.small-textfield {
+    -fx-pref-width: 10;
+    -fx-max-width: 10;
+}
+
+.small-textfield {
+    -fx-pref-width: 60;
+    -fx-max-width: 60;
+}
+
+.previewPane{
+    -fx-min-width: 746;
+    -fx-pref-width: 746;
+    -fx-max-width: 746;
+
+    -fx-min-height: 436;
+    -fx-pref-height: 436;
+    -fx-max-height: 426;
+
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+}
+
+.button{
+    -fx-pref-height: 20;
+    -fx-pref-width: 100;
+}
+
+.bigButton{
+    -fx-pref-height: 20;
+    -fx-pref-width: 210;
+}
+
+.textfield{
+    -fx-pref-width: 210;
+}

@@ -96,7 +96,7 @@ piranha_plant -140 110
 joker1 60 20
 joker2 30 50
 dq_hero1 -170 -50
-dq_hero2 -150 -80
+dq_hero2 -200 -80
 dq_hero3 -80 -70
 dq_hero4 -200 -20
 banjo_and_kazooie 40 -50

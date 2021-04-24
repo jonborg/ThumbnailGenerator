@@ -1,4 +1,6 @@
-import fighter.Fighter;
+package fighter;
+
+import file.FileUtils;
 import org.imgscalr.Scalr;
 import ui.factory.alert.AlertFactory;
 
@@ -6,18 +8,15 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public class FighterImage {
     private Fighter fighter;
     private BufferedImage image;
-
-    private final String scalerPath = "settings/thumbnails/images/scale.txt";
-    private final String offsetPath = "settings/thumbnails/images/offset.txt";
-
-
-    AlertFactory alertFactory = new AlertFactory();
 
     public FighterImage(Fighter fighter, BufferedImage image){
         this.fighter = fighter;
@@ -25,16 +24,13 @@ public class FighterImage {
         MultiFighters(fighter);
     }
 
-    public BufferedImage editImage( int port){
-        image = this.resizeImage(fighter.getUrlName()); //later, use urlname to find mult in a file
+    public BufferedImage editImage(){
+        image = this.resizeImage(fighter.getUrlName());
         image = this.offsetImage(fighter.getUrlName());
         image = this.flipImage(fighter.isFlip());
         image = this.cropImage(1280/2,720);
         return image;
     }
-
-
-
 
     private  BufferedImage flipImage(boolean flip){
         if (flip) {
@@ -54,7 +50,7 @@ public class FighterImage {
 
         double mult = 1;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream(scalerPath), StandardCharsets.UTF_8))) {
+                new FileInputStream(FileUtils.getScaleFile()), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.contains(urlName)){
@@ -65,7 +61,7 @@ public class FighterImage {
                 }
             }
         }catch(IOException e){
-            alertFactory.displayError("Could not detect scaler.txt");
+            AlertFactory.displayError("Could not find scale file");
         }
 
         int width = (int) (mult * image.getWidth());
@@ -84,7 +80,7 @@ public class FighterImage {
         int offsetX = 0;
         int offsetY = 0;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream(offsetPath), StandardCharsets.UTF_8))) {
+                new FileInputStream(FileUtils.getOffsetFile()), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.contains(urlName)){
@@ -97,7 +93,7 @@ public class FighterImage {
                 }
             }
         }catch(IOException e){
-            alertFactory.displayError("Could not detect offset.txt");
+            AlertFactory.displayError("Could not find offset file");
         }
 
 
@@ -271,7 +267,6 @@ public class FighterImage {
 
     }
 
-
     public Fighter getFighter(){
         return this.fighter;
     }
@@ -287,7 +282,5 @@ public class FighterImage {
     public void setFighter(BufferedImage image){
         this.image = image;
     }
-
-
 
 }

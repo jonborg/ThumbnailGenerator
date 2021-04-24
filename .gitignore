@@ -32,4 +32,4 @@ hs_err_pid*
 #folders
 target/
 assets/fighters/*
-thumbnail/
+generated_thumbnails/

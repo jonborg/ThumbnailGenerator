@@ -1,6 +1,7 @@
 package fighter;
 
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Fighter  {
 
@@ -22,6 +23,13 @@ public class Fighter  {
         this.urlName = urlName;
         this.alt = alt;
         this.flip = flip;
+    }
+
+    public static List<Fighter> generatePreviewFighters(){
+        List<Fighter> list = new ArrayList<>();
+        list.add(new Fighter("Player 1","Mario", "mario", 1, false));
+        list.add(new Fighter("Player 2","Sonic", "sonic", 1, false));
+        return list;
     }
 
 
