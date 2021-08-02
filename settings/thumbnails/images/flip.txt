@@ -108,6 +108,8 @@ steve false
 sephiroth1 true
 sephiroth2 false
 pyra false
+kazuya1 false
+kazuya2 false
 
 //echoese outros ds
 dark_pit true

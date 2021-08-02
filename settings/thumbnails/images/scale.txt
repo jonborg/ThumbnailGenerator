@@ -108,6 +108,8 @@ steve 0.5
 sephiroth1 1
 sephiroth2 0.82
 pyra 0.5
+kazuya1 0.75
+kazuya2 0.75
 
 //echoes
 dark_pit 1.25
