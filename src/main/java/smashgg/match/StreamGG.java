@@ -11,4 +11,12 @@ public class StreamGG {
     public String getStreamName() {
         return streamName;
     }
+
+    public String toString(){
+        return streamName == null ? "-" : streamName;
+    }
+
+    public boolean isNull(){
+        return streamName == null;
+    }
 }

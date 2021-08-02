@@ -21,7 +21,7 @@ public class PhaseGG {
     }
 
     public String getName() {
-        return name == null ? "-" : name;
+        return name;
     }
 
     public PhaseGroupGG getPhaseGroup() {
@@ -35,7 +35,7 @@ public class PhaseGG {
 
     @Override
     public String toString() {
-        return getName();
+        return name == null ? "-" : name;
     }
 
     public boolean isNull(){

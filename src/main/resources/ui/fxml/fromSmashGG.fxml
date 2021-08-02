@@ -55,6 +55,10 @@
                     <ComboBox fx:id="phaseGroupSelect" styleClass="filter"
                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
+                    <Label text="Stream:"
+                           GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <ComboBox fx:id="streamSelect" styleClass="filter"
+                              GridPane.columnIndex="1" GridPane.rowIndex="3"/>
                 </GridPane>
             </VBox>
 
@@ -69,7 +73,7 @@
             </Button>
         </VBox>
         <VBox alignment="CENTER" spacing="10" styleClass="side">
-            <TextArea fx:id="foundSets" prefWidth="500" prefHeight="380" />
+            <TextArea fx:id="foundSets" prefWidth="500" prefHeight="420" />
             <HBox alignment="CENTER" spacing="5">
                 <Button fx:id="genStart" disable="true" onAction="#generateThumbnails">Generate thumbnails</Button>
             </HBox>
