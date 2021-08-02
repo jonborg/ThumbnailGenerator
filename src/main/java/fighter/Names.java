@@ -93,6 +93,7 @@ public class Names {
         map.put("Steve", "steve");
         map.put("Sephiroth", "sephiroth");
         map.put("Pyra & Mythra", "pyra");
+        map.put("Kazuya", "kazuya");
 
         //echoes
         map.put("Dark Pit", "dark_pit");

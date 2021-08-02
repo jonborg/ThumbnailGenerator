@@ -108,6 +108,8 @@ steve -150 90
 sephiroth1 -140 -160
 sephiroth2 -220 -90
 pyra 50 90
+kazuya1 -50 0
+kazuya2 -110 10
 
 //echoes
 dark_pit -10 -130

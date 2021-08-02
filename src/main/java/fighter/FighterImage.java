@@ -232,6 +232,15 @@ public class FighterImage {
             return;
         }
 
+        if ("kazuya".contains(fighter.getUrlName())) {
+            if (fighter.getAlt() % 2==0){
+                fighter.setUrlName("kazuya2");
+            }else{
+                fighter.setUrlName("kazuya1");
+            }
+            return;
+        }
+
         if ("dq_hero".contains(fighter.getUrlName())) {
             //1 and 5
             if (fighter.getAlt() % 4 == 1) fighter.setUrlName("dq_hero1");
