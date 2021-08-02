@@ -21,7 +21,7 @@ public class EventGG {
     }
 
     public String getName() {
-        return name == null ? "-" : name;
+        return name;
     }
 
     public List<PhaseGG> getPhases() {
@@ -30,7 +30,8 @@ public class EventGG {
 
     @Override
     public String toString() {
-        return getName();
+        return name == null ? "-" : name;
+
     }
 
     public boolean isNull(){

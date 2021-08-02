@@ -16,12 +16,12 @@ public class PhaseGroupNodeGG {
     }
 
     public String getIdentifier() {
-        return identifier == null ? "-" : identifier;
+        return identifier;
     }
 
     @Override
     public String toString() {
-        return getIdentifier();
+        return identifier == null ? "-" : identifier;
     }
 
     public boolean isNull(){

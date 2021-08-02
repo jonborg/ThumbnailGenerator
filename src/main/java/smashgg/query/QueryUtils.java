@@ -39,6 +39,7 @@ public class QueryUtils {
         String[] urlSplit = tournamentURL.split("/");
         return "query{ " +
                 "tournament(slug:  \""+ urlSplit[3] + "/" + urlSplit[4] + "\") {id " +
+                "streams{ streamName }" +
                 "events{ id name " +
                 "phases{ id name " +
                 "phaseGroups{ nodes{ id displayIdentifier " +

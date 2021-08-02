@@ -14,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.codehaus.plexus.util.ExceptionUtils;
 import smashgg.match.SetGG;
+import smashgg.match.StreamGG;
 import smashgg.query.QueryUtils;
 import smashgg.tournament.EventGG;
 import smashgg.tournament.PhaseGG;
@@ -50,6 +51,8 @@ public class FromSmashGGController implements Initializable {
     private ComboBox<PhaseGG> phaseSelect;
     @FXML
     private ComboBox<PhaseGroupNodeGG> phaseGroupSelect;
+    @FXML
+    private ComboBox<StreamGG> streamSelect;
 
     private Tournament backupTournament;
 
@@ -79,19 +82,19 @@ public class FromSmashGGController implements Initializable {
                     ExceptionUtils.getStackTrace(e));
             return;
         }
-        if (phaseGroupSelect.getSelectionModel().getSelectedItem() !=null
+        if (phaseGroupSelect.getSelectionModel().getSelectedItem() != null
                 && !phaseGroupSelect.getSelectionModel().getSelectedItem().isNull()){
             readSetsFromSmashGG(2);
             return;
         }
 
-        if (phaseSelect.getSelectionModel().getSelectedItem() !=null
+        if (phaseSelect.getSelectionModel().getSelectedItem() != null
                 && !phaseSelect.getSelectionModel().getSelectedItem().isNull()){
             readSetsFromSmashGG(1);
             return;
         }
 
-        if (eventSelect.getSelectionModel().getSelectedItem() !=null
+        if (eventSelect.getSelectionModel().getSelectedItem() != null
                 && !eventSelect.getSelectionModel().getSelectedItem().isNull()){
             readSetsFromSmashGG(0);
             return;
@@ -138,8 +141,11 @@ public class FromSmashGGController implements Initializable {
                 SetGG set = (SetGG) JSONReader.getJSONObject(result.getAsJsonObject("data").getAsJsonObject(mainBody)
                         .getAsJsonObject("sets").toString(), new TypeToken<SetGG>() {}.getType());
                 set.getSetNodes().forEach(setNodeGG -> {
-                    if(setNodeGG.hasStream()){
-                        foundSets.appendText(setNodeGG.toString());
+                    if(setNodeGG.hasStream()) {
+                        StreamGG selectedStream = streamSelect.getSelectionModel().getSelectedItem();
+                        if(selectedStream == null || selectedStream.isNull() || selectedStream.getStreamName().equals(setNodeGG.getStreamName())) {
+                            foundSets.appendText(setNodeGG.toString());
+                        }
                     }
                 });
             }while(readPages<totalPages);
@@ -182,9 +188,11 @@ public class FromSmashGGController implements Initializable {
             eventSelect.getSelectionModel().clearSelection();
             phaseSelect.getSelectionModel().clearSelection();
             phaseGroupSelect.getSelectionModel().clearSelection();
+            streamSelect.getSelectionModel().clearSelection();
             eventSelect.getItems().clear();
             phaseSelect.getItems().clear();
             phaseGroupSelect.getItems().clear();
+            streamSelect.getItems().clear();
         }
     }
 
@@ -241,6 +249,8 @@ public class FromSmashGGController implements Initializable {
             TournamentGG tournamentGG = (TournamentGG) JSONReader.getJSONObject(result.get("data")
                     .getAsJsonObject().get("tournament").toString(), new TypeToken<TournamentGG>() {}.getType());
             eventSelect.getItems().addAll(tournamentGG.getEvents());
+            streamSelect.getItems().addAll(new StreamGG());
+            streamSelect.getItems().addAll(tournamentGG.getStreams());
             if (eventSelect.getItems().size() > 0){
                 eventSelect.getSelectionModel().select(0);
             }
