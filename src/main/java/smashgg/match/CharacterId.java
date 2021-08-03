@@ -93,6 +93,7 @@ public class CharacterId {
         map.put(1766, "steve");
         map.put(1777, "sephiroth");
         map.put(1795, "pyra");
+        map.put(1846, "kazuya");
 
         //echoes
         map.put(1278, "dark_pit");
