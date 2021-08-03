@@ -21,7 +21,8 @@ import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.combobox.InputFilter;
 import ui.factory.alert.AlertFactory;
-import ui.textfield.ChosenFileField;
+import ui.textfield.ChosenImageField;
+import ui.textfield.ChosenJsonField;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -40,11 +41,13 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected TextField id;
     @FXML
-    protected ChosenFileField logo;
+    protected ChosenImageField logo;
     @FXML
-    protected ChosenFileField foreground;
+    protected ChosenImageField foreground;
     @FXML
-    protected ChosenFileField background;
+    protected ChosenImageField background;
+    @FXML
+    protected ChosenJsonField fighterImageSettingsFile;
 
     @FXML
     protected ComboBox<String> font;
@@ -159,7 +162,7 @@ public class TournamentsCreateController implements Initializable {
 
     protected Tournament generateTournamentWithCurrentSettings(){
         Tournament tournament =  new Tournament(id.getText(), name.getText(),
-                logo.getText(), foreground.getText(), background.getText());
+                logo.getText(), foreground.getText(), background.getText(), fighterImageSettingsFile.getText());
         TextSettings textSettings = new TextSettings(id.getText(), font.getSelectionModel().getSelectedItem(),
                 bold.isSelected(), italic.isSelected(), shadow.isSelected(), Float.parseFloat(contour.getText()),
                 Integer.parseInt(sizeTop.getText()), Integer.parseInt(sizeBottom.getText()),

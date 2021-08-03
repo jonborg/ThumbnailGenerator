@@ -1,27 +1,21 @@
 package fighter;
 
-import file.FileUtils;
 import org.imgscalr.Scalr;
-import ui.factory.alert.AlertFactory;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 
 public class FighterImage {
     private Fighter fighter;
     private BufferedImage image;
+    private FighterImageSettings imageSettings;
 
     public FighterImage(Fighter fighter, BufferedImage image){
         this.fighter = fighter;
         this.image = image;
-        MultiFighters(fighter);
+        convertToAlternateRender(fighter);
     }
 
     public BufferedImage editImage(){
@@ -48,26 +42,12 @@ public class FighterImage {
     private BufferedImage resizeImage(String urlName) {
         System.out.println("Performing resize of image with size: "+image.getWidth()+ " "+ image.getWidth());
 
-        double mult = 1;
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream(FileUtils.getScaleFile()), StandardCharsets.UTF_8))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.contains(urlName)){
-                    String[] words = line.split(" ");
-                    if (words.length>1)
-                        mult = Double.parseDouble(words[1]);
-                    break;
-                }
-            }
-        }catch(IOException e){
-            AlertFactory.displayError("Could not find scale file");
-        }
+        double scale = imageSettings.getScale();
 
-        int width = (int) (mult * image.getWidth());
-        int height = (int) (mult * image.getHeight());
+        int width = (int) (scale * image.getWidth());
+        int height = (int) (scale * image.getHeight());
 
-        System.out.println("Resize complete "+image.getWidth() + " "+ image.getHeight());
+        System.out.println("Resize complete " + image.getWidth() + " " + image.getHeight());
 
         return Scalr.resize(image, Scalr.Method.ULTRA_QUALITY, image.getHeight() < image.getWidth() ? Scalr.Mode.FIT_TO_HEIGHT : Scalr.Mode.FIT_TO_WIDTH,
                 Math.max(width, height), Math.max(width, height), Scalr.OP_ANTIALIAS);
@@ -77,25 +57,8 @@ public class FighterImage {
 
 
     private BufferedImage offsetImage(String urlName){
-        int offsetX = 0;
-        int offsetY = 0;
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream(FileUtils.getOffsetFile()), StandardCharsets.UTF_8))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.contains(urlName)){
-                    String[] words = line.split(" ");
-                    if (words.length>1)
-                        offsetX = 2* Integer.parseInt(words[1]);
-                    if (words.length>2)
-                        offsetY = Integer.parseInt(words[2]);
-                    break;
-                }
-            }
-        }catch(IOException e){
-            AlertFactory.displayError("Could not find offset file");
-        }
-
+        int offsetX = 2 * imageSettings.getOffset()[0];
+        int offsetY = imageSettings.getOffset()[1];
 
         BufferedImage img = new BufferedImage(image.getWidth() + Math.abs(offsetX),
                                                 image.getHeight() + Math.abs(offsetY),
@@ -141,7 +104,7 @@ public class FighterImage {
         return Scalr.crop(img,0,y,width,height-y,null);
     }
 
-    static public void MultiFighters(Fighter fighter){
+    static public void convertToAlternateRender(Fighter fighter){
         if ("pokemon_trainer".contains(fighter.getUrlName())) {
             if (fighter.getAlt() % 2 == 0) fighter.setUrlName("pokemon_trainerF");
             else fighter.setUrlName("pokemon_trainerM");
@@ -292,4 +255,11 @@ public class FighterImage {
         this.image = image;
     }
 
+    public FighterImageSettings getImageSettings() {
+        return imageSettings;
+    }
+
+    public void setImageSettings(FighterImageSettings imageSettings) {
+        this.imageSettings = imageSettings;
+    }
 }

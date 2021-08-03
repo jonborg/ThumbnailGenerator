@@ -3,30 +3,35 @@
     "id": "tdlx",
     "name": "Throwdown Lx",
     "logo": "assets/tournaments/logos/tdlx.png",
-    "foreground": "assets/tournaments/foregrounds/tdlx.png"
+    "foreground": "assets/tournaments/foregrounds/tdlx.png",
+    "fighterImageSettings": "settings/thumbnails/images/mirrorPlayer2.json"
   },
   {
     "id": "invicta",
     "name": "Smash Invicta",
     "logo": "assets/tournaments/logos/invicta.png",
-    "foreground": "assets/tournaments/foregrounds/invicta.png"
+    "foreground": "assets/tournaments/foregrounds/invicta.png",
+    "fighterImageSettings": "settings/thumbnails/images/mirrorPlayer2.json"
   },
   {
     "id": "sop",
     "name": "Smash or Pass",
     "logo": "assets/tournaments/logos/sop.png",
-    "foreground": "assets/tournaments/foregrounds/sop.png"
+    "foreground": "assets/tournaments/foregrounds/sop.png",
+    "fighterImageSettings": "settings/thumbnails/images/mirrorPlayer2.json"
   },
   {
     "id": "tiamat",
     "name": "Tiamat",
     "logo": "assets/tournaments/logos/tiamat.png",
-    "foreground": "assets/tournaments/foregrounds/tiamat.png"
+    "foreground": "assets/tournaments/foregrounds/tiamat.png",
+    "fighterImageSettings": "settings/thumbnails/images/mirrorPlayer2.json"
   },
   {
     "id": "alph",
     "name": "Alph Apparition",
     "logo": "assets/tournaments/logos/alph.png",
-    "foreground": "assets/tournaments/foregrounds/alph.png"
+    "foreground": "assets/tournaments/foregrounds/alph.png",
+    "fighterImageSettings": "settings/thumbnails/images/mirrorPlayer2.json"
   }
 ]

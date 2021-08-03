@@ -1,12 +1,17 @@
 package thumbnail.generate;
 
+import com.google.gson.reflect.TypeToken;
+import exception.FighterImageSettingsNotFoundException;
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import fighter.DownloadFighterURL;
 import fighter.Fighter;
 import fighter.FighterImage;
+import fighter.FighterImageSettings;
 import file.FileUtils;
+import file.json.JSONReader;
+import thumbnail.image.ImageSettings;
 import thumbnail.text.TextToImage;
 import tournament.Tournament;
 
@@ -17,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,23 +38,29 @@ public class Thumbnail {
 
     private static boolean saveLocally;
 
+    public static void generateAndSaveThumbnail(Tournament tournament, ImageSettings imageSettings, boolean locally, String round, String date, Fighter... fighters)
+            throws LocalImageNotFoundException, OnlineImageNotFoundException,
+            FontNotFoundException, FighterImageSettingsNotFoundException{
 
-    public static void generateAndSaveThumbnail(Tournament tournament, boolean locally, String round, String date, Fighter... fighters)
-            throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException{
-        generateThumbnail(tournament, locally,round ,date, fighters);
+        generateThumbnail(tournament, imageSettings, locally,round ,date, fighters);
         saveThumbnail(round, date, fighters);
     }
 
     public static BufferedImage generatePreview(Tournament tournament)
-            throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException {
+            throws LocalImageNotFoundException, OnlineImageNotFoundException,
+            FontNotFoundException, FighterImageSettingsNotFoundException {
         List<Fighter> fighters = Fighter.generatePreviewFighters();
-        return generateThumbnail(tournament, false, "Pools Round 1" ,"07/12/2018",
+        ImageSettings imageSettings = (ImageSettings)
+                JSONReader.getJSONArray(tournament.getFighterImageSettingsFile(), new TypeToken<ArrayList<ImageSettings>>() {
+                }.getType()).get(0);
+        return generateThumbnail(tournament, imageSettings, false, "Pools Round 1" ,"07/12/2018",
                 fighters.get(0), fighters.get(1));
     }
 
 
-    private static BufferedImage generateThumbnail(Tournament tournament, boolean locally, String round, String date, Fighter... fighters)
-            throws LocalImageNotFoundException, OnlineImageNotFoundException, FontNotFoundException {
+    private static BufferedImage generateThumbnail(Tournament tournament, ImageSettings imageSettings, boolean locally, String round, String date, Fighter... fighters)
+            throws LocalImageNotFoundException, OnlineImageNotFoundException,
+            FontNotFoundException, FighterImageSettingsNotFoundException {
 
         saveLocally = locally;
         thumbnail = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
@@ -60,9 +72,11 @@ public class Thumbnail {
         int port = 0;
         for (Fighter f : fighters) {
             port++;
-            BufferedImage image;
-            image = getFighterImage(f);
+            BufferedImage image = getFighterImage(f);
             FighterImage fighterImage = new FighterImage(f, image);
+            FighterImageSettings fighterImageSettings = imageSettings
+                    .findFighterImageSettings(fighterImage.getFighter().getUrlName());
+            fighterImage.setImageSettings(fighterImageSettings);
             fighterImage.editImage();
             if (fighterImage.getImage().getWidth() < WIDTH / 2 && fighterImage.getFighter().isFlip()) {
                 g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * port - fighterImage.getImage().getWidth(), 0);

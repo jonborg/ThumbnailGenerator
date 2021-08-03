@@ -18,8 +18,6 @@ import java.util.List;
 public class JSONWriter {
     private static String tournamentFile = FileUtils.getTournamentFile();
     private static String textSettingsFile = FileUtils.getTextSettingsFile();
-    private static String imageSettingsFile = FileUtils.imageSettingsFile;
-
 
     public static void updateTournamentsFile(List<Tournament> list){
         Gson gson = new GsonBuilder().setPrettyPrinting()
@@ -41,21 +39,6 @@ public class JSONWriter {
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
         try (FileWriter writer = new FileWriter(textSettingsFile)) {
-            String json = gson.toJson(list);
-            System.out.println(json);
-            writer.write(json);
-        } catch (FileNotFoundException e) {
-            AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
-        } catch (IOException e) {
-            AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
-        }
-    }
-
-    public static void updateFighterImageSettingsFile(List<FighterImageSettings> list){
-        Gson gson = new GsonBuilder().setPrettyPrinting()
-                .excludeFieldsWithoutExposeAnnotation()
-                .create();
-        try (FileWriter writer = new FileWriter(imageSettingsFile)) {
             String json = gson.toJson(list);
             System.out.println(json);
             writer.write(json);

@@ -11,27 +11,15 @@ public class FighterImageSettings {
 
     @Expose
     @SerializedName("offset")
-    private int[] offset;
+    private int[] offset = new int[] {0, 0};
 
     @Expose
     @SerializedName("scale")
-    private float scale;
+    private float scale = 1.0f;
 
     @Expose
     @SerializedName("flip")
-    private boolean flip;
-
-    public FighterImageSettings(String fighter, int[] offset, float scale, boolean flip) {
-        this.fighter = fighter;
-        this.offset = offset;
-        this.scale = scale;
-        this.flip = flip;
-    }
-
-    public FighterImageSettings(String fighter, int[] offset) {
-        this.fighter = fighter;
-        this.offset = offset;
-    }
+    private boolean flip = false;
 
     public String getFighter() {
         return fighter;
