@@ -9,7 +9,7 @@ public class Names {
     static{
         //64
         map.put("Mario", "mario");
-        map.put("DonKey Kong", "donkey_kong");
+        map.put("Donkey Kong", "donkey_kong");
         map.put("Link", "link");
         map.put("Samus", "samus");
         map.put("Yoshi", "yoshi");

@@ -19,9 +19,6 @@ import java.util.List;
 
 public class ThumbnailFromFile extends Thumbnail {
 
-    private static String flipFile = FileUtils.getFlipFile();
-    private static String tournamentFile = FileUtils.getTournamentFile();
-
     private static String date = null;
     private static List<String> parameters;
     private static Tournament selectedTournament;
@@ -109,6 +106,14 @@ public class ThumbnailFromFile extends Thumbnail {
             }catch (Exception e){
                 invalidLines.add("Invalid line -> "+ command);
             }
+        }
+        if (!invalidLines.isEmpty()){
+            String details = "";
+            for (String  l :invalidLines){
+                details += l + System.lineSeparator() + System.lineSeparator();
+            }
+            AlertFactory.displayError("Thumbnails could not be generated from these lines: ", details);
+            throw new ThumbnailFromFileException();
         }
     }
 

@@ -101,8 +101,8 @@ public class Thumbnail {
     }
 
     private static void saveThumbnail(String round, String date, Fighter... fighters){
-        String thumbnailFileName = fighters[0].getPlayerName().replace("|","_")+"-"+fighters[0].getUrlName()+fighters[0].getAlt()+"--"+
-                fighters[1].getPlayerName().replace("|","_")+"-"+fighters[1].getUrlName()+fighters[1].getAlt()+"--"+
+        String thumbnailFileName = fighters[0].getPlayerName().replace("|","_").replace("/","_")+"-"+fighters[0].getUrlName()+fighters[0].getAlt()+"--"+
+                fighters[1].getPlayerName().replace("|","_").replace("/","_")+"-"+fighters[1].getUrlName()+fighters[1].getAlt()+"--"+
                 round+"-"+date.replace("/","_")+".png";
 
         File dirThumbnails = new File(saveThumbnailsPath);

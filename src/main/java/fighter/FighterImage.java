@@ -231,12 +231,6 @@ public class FighterImage {
             else fighter.setUrlName("sephiroth2");
             return;
         }
-
-        if ("falco".contains(fighter.getUrlName())) {
-            fighter.setUrlName("falco ");
-        }
-
-
     }
 
     public Fighter getFighter(){

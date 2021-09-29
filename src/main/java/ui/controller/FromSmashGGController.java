@@ -169,7 +169,7 @@ public class FromSmashGGController implements Initializable {
             ThumbnailFromFile.generateFromSmashGG(foundSets.getText());
             AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
         }catch(ThumbnailFromFileException e){
-            //AlertFactory already thrown inside tbf.generateFromFile
+            //AlertFactory already thrown inside ThumbnailFromFile.generateFromSmashGG
         }catch(FontNotFoundException e){
             AlertFactory.displayError(e.getMessage());
         }

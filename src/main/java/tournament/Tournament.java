@@ -68,6 +68,10 @@ public class Tournament implements Cloneable{
             this.background = tournament.getThumbnailBackground();
             equal = false;
         }
+        if (!this.getFighterImageSettingsFile().equals(tournament.getFighterImageSettingsFile())){
+            this.fighterImageSettingsFile = tournament.getFighterImageSettingsFile();
+            equal = false;
+        }
         if (!this.textSettings.updateDifferences(tournament.getTextSettings())){
             this.textSettings = tournament.getTextSettings();
             equal = false;

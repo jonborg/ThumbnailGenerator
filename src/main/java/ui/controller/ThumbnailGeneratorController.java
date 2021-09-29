@@ -44,11 +44,11 @@ public class ThumbnailGeneratorController implements Initializable {
     @FXML
     private AnchorPane player1;
     @FXML
-    private Player1Controller player1Controller;
+    private PlayerController player1Controller;
     @FXML
     private AnchorPane player2;
     @FXML
-    private Player2Controller player2Controller;
+    private PlayerController player2Controller;
     @FXML
     private Button flipPlayer;
     @FXML
@@ -137,7 +137,7 @@ public class ThumbnailGeneratorController implements Initializable {
                 ThumbnailFromFile.generateFromFile(selectedFile, saveLocally.isSelected());
                 AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
             }catch(ThumbnailFromFileException e){
-                //AlertFactory already thrown inside tbf.generateFromFile
+                //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
             }catch(FontNotFoundException e){
                 AlertFactory.displayError(e.getMessage());
             }
