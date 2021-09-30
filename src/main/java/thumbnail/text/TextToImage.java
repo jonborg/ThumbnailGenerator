@@ -39,6 +39,7 @@ public class TextToImage {
     private static BufferedImage generateText(String text, Color color, int fontSize) throws FontNotFoundException {
         try {
             InputStream fontFile = TextToImage.class.getResourceAsStream("/fonts/" + textSettings.getFont() + ".ttf");
+            font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, fontSize);
             if (!textSettings.hasBold() && textSettings.hasItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.ITALIC, fontSize);
             if (textSettings.hasBold() && !textSettings.hasItalic())
@@ -47,10 +48,11 @@ public class TextToImage {
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD + Font.ITALIC, fontSize);
         }catch (FontFormatException | IOException | NullPointerException e){
             System.out.println("Could not find font " + textSettings.getFont() + " on resources. Checking system fonts...");
+            font = new Font(textSettings.getFont(), Font.PLAIN, fontSize);
             if (!textSettings.hasBold() && textSettings.hasItalic())
-                font = new Font(textSettings.getFont(), Font.ITALIC,fontSize);
+                font = new Font(textSettings.getFont(), Font.ITALIC, fontSize);
             if (textSettings.hasBold() && !textSettings.hasItalic())
-                font = new Font(textSettings.getFont(), Font.BOLD,fontSize);
+                font = new Font(textSettings.getFont(), Font.BOLD, fontSize);
             if (textSettings.hasBold() && textSettings.hasItalic())
                 font = new Font(textSettings.getFont(), Font.BOLD+Font.ITALIC, fontSize);
             //throw new FontNotFoundException(textSettings.getFont());

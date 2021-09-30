@@ -364,101 +364,90 @@
 	  {
 		"fighter": "villagerM",
 		"offset": [
-		  0,
+		  50,
 		  0
 		],
-		"scale": 0.65,
-		"flip": false
+		"scale": 0.65
 	  },
 	  {
 		"fighter": "villagerF",
 		"offset": [
-		  0,
+		  50,
 		  0
 		],
-		"scale": 0.65,
-		"flip": false
+		"scale": 0.65 
 	  },
 	  {
 		"fighter": "mega_man",
 		"offset": [
-		  80,
-		  15
+		  85,
+		  60
 		],
-		"scale": 0.67,
-		"flip": false
+		"scale": 0.60 
 	  },
 	  {
 		"fighter": "wii_fit_trainerF",
 		"offset": [
 		  -100,
-		  90
+		  120
 		],
-		"scale": 0.5,
-		"flip": false
+		"scale": 0.4 
 	  },
 	  {
 		"fighter": "wii_fit_trainerM",
 		"offset": [
 		  -100,
-		  90
+		  120
 		],
-		"scale": 0.5,
-		"flip": false
+		"scale": 0.4 
 	  },
 	  {
 		"fighter": "rosalina_and_luma",
 		"offset": [
-		  70,
-		  25
+		  190,
+		  50
 		],
-		"scale": 0.8,
-		"flip": false
+		"scale": 0.8 
 	  },
 	  {
 		"fighter": "little_mac",
 		"offset": [
-		  80,
-		  80
+		  220,
+		  30
 		],
-		"scale": 0.65,
-		"flip": false
+		"scale": 0.70 
 	  },
 	  {
 		"fighter": "greninja",
 		"offset": [
-		  100,
-		  0
+		  60,
+		  10
 		],
-		"scale": 0.75,
-		"flip": true
+		"scale": 0.65
 	  },
 	  {
 		"fighter": "mii_brawler",
 		"offset": [
-		  -50,
-		  50
+		  0,
+		  70
 		],
-		"scale": 0.7,
-		"flip": false
+		"scale": 0.6 
 	  },
 	  {
 		"fighter": "mii_swordfighter",
 		"offset": [
 		  20,
-		  25
+		  60
 		],
-		"scale": 0.6,
-		"flip": false
+		"scale": 0.5
 	  },
 	  {
 		"fighter": "mii_gunner",
 		"offset": [
-		  30,
-		  50
+		  40,
+		  80
 		],
-		"scale": 0.6,
-		"flip": true
+		"scale": 0.5
 	  },
 	  {
 		"fighter": "sans",
@@ -466,8 +455,7 @@
 		  -20,
 		  5
 		],
-		"scale": 0.67,
-		"flip": true
+		"scale": 0.67 
 	  },
 	  {
 		"fighter": "palutena",
@@ -475,8 +463,7 @@
 		  0,
 		  -150
 		],
-		"scale": 1.2,
-		"flip": false
+		"scale": 1.2 
 	  },
 	  {
 		"fighter": "pac_man",
@@ -484,17 +471,15 @@
 		  50,
 		  80
 		],
-		"scale": 0.65,
-		"flip": true
+		"scale": 0.65 
 	  },
 	  {
 		"fighter": "robinM",
 		"offset": [
-		  70,
-		  -80
+		  30,
+		  -60
 		],
-		"scale": 0.95,
-		"flip": true
+		"scale": 0.9
 	  },
 	  {
 		"fighter": "robinF",
@@ -502,8 +487,7 @@
 		  120,
 		  -100
 		],
-		"scale": 1.05,
-		"flip": true
+		"scale": 1.05 
 	  },
 	  {
 		"fighter": "shulk",
@@ -511,8 +495,7 @@
 		  220,
 		  -190
 		],
-		"scale": 0.9,
-		"flip": true
+		"scale": 0.9 
 	  },
 	  {
 		"fighter": "bowser_jr1",
@@ -520,8 +503,7 @@
 		  0,
 		  -130
 		],
-		"scale": 0.5,
-		"flip": true
+		"scale": 0.5 
 	  },
 	  {
 		"fighter": "bowser_jr2",
@@ -529,8 +511,7 @@
 		  -10,
 		  -130
 		],
-		"scale": 0.5,
-		"flip": true
+		"scale": 0.5 
 	  },
 	  {
 		"fighter": "bowser_jr3",
@@ -538,8 +519,7 @@
 		  20,
 		  -100
 		],
-		"scale": 0.5,
-		"flip": false
+		"scale": 0.5 
 	  },
 	  {
 		"fighter": "bowser_jr4",
@@ -547,8 +527,7 @@
 		  30,
 		  -100
 		],
-		"scale": 0.5,
-		"flip": true
+		"scale": 0.5 
 	  },
 	  {
 		"fighter": "bowser_jr5",
@@ -556,8 +535,7 @@
 		  40,
 		  -80
 		],
-		"scale": 0.5,
-		"flip": true
+		"scale": 0.5 
 	  },
 	  {
 		"fighter": "bowser_jr6",
@@ -565,8 +543,7 @@
 		  10,
 		  -130
 		],
-		"scale": 0.5,
-		"flip": false
+		"scale": 0.5 
 	  },
 	  {
 		"fighter": "bowser_jr7",
@@ -574,8 +551,7 @@
 		  -10,
 		  -150
 		],
-		"scale": 0.6,
-		"flip": true
+		"scale": 0.6 
 	  },
 	  {
 		"fighter": "bowser_jr8",
@@ -583,8 +559,7 @@
 		  20,
 		  -150
 		],
-		"scale": 0.6,
-		"flip": true
+		"scale": 0.6 
 	  },
 	  {
 		"fighter": "duck_hunt",
@@ -592,8 +567,7 @@
 		  60,
 		  -40
 		],
-		"scale": 0.4,
-		"flip": true
+		"scale": 0.4 
 	  },
 	  {
 		"fighter": "ryu",
@@ -601,8 +575,7 @@
 		  30,
 		  70
 		],
-		"scale": 0.7,
-		"flip": true
+		"scale": 0.7 
 	  },
 	  {
 		"fighter": "cloud",
@@ -610,8 +583,7 @@
 		  270,
 		  -50
 		],
-		"scale": 1.0,
-		"flip": false
+		"scale": 1.0 
 	  },
 	  {
 		"fighter": "cloudAC",
@@ -619,8 +591,7 @@
 		  -30,
 		  -120
 		],
-		"scale": 1.0,
-		"flip": true
+		"scale": 1.0 
 	  },
 	  {
 		"fighter": "corrinM",
@@ -628,8 +599,7 @@
 		  -160,
 		  70
 		],
-		"scale": 0.9,
-		"flip": false
+		"scale": 0.9 
 	  },
 	  {
 		"fighter": "corrinF",
@@ -637,8 +607,7 @@
 		  -60,
 		  30
 		],
-		"scale": 0.9,
-		"flip": true
+		"scale": 0.9 
 	  },
 	  {
 		"fighter": "bayonetta2",
@@ -646,8 +615,7 @@
 		  60,
 		  -100
 		],
-		"scale": 1.0,
-		"flip": false
+		"scale": 1.0 
 	  },
 	  {
 		"fighter": "bayonetta1",
@@ -655,8 +623,7 @@
 		  60,
 		  -100
 		],
-		"scale": 1.0,
-		"flip": true
+		"scale": 1.0 
 	  },
 	  {
 		"fighter": "inklingF",
@@ -664,8 +631,7 @@
 		  10,
 		  -50
 		],
-		"scale": 0.5,
-		"flip": true
+		"scale": 0.5 
 	  },
 	  {
 		"fighter": "inklingM",
@@ -673,8 +639,7 @@
 		  0,
 		  -20
 		],
-		"scale": 0.45,
-		"flip": false
+		"scale": 0.45 
 	  },
 	  {
 		"fighter": "ridley",
@@ -682,8 +647,7 @@
 		  300,
 		  -250
 		],
-		"scale": 0.75,
-		"flip": true
+		"scale": 0.75 
 	  },
 	  {
 		"fighter": "simon",
@@ -691,8 +655,7 @@
 		  50,
 		  -30
 		],
-		"scale": 0.9,
-		"flip": false
+		"scale": 0.9 
 	  },
 	  {
 		"fighter": "king_k_rool",
@@ -700,8 +663,7 @@
 		  -40,
 		  -10
 		],
-		"scale": 0.7,
-		"flip": false
+		"scale": 0.7 
 	  },
 	  {
 		"fighter": "isabelle",
@@ -709,8 +671,7 @@
 		  -30,
 		  -70
 		],
-		"scale": 0.55,
-		"flip": false
+		"scale": 0.55 
 	  },
 	  {
 		"fighter": "incineroar",
@@ -718,8 +679,7 @@
 		  180,
 		  70
 		],
-		"scale": 0.7,
-		"flip": false
+		"scale": 0.7 
 	  },
 	  {
 		"fighter": "piranha_plant",
@@ -727,8 +687,7 @@
 		  -140,
 		  110
 		],
-		"scale": 0.5,
-		"flip": false
+		"scale": 0.5 
 	  },
 	  {
 		"fighter": "joker1",
@@ -736,8 +695,7 @@
 		  60,
 		  20
 		],
-		"scale": 0.8,
-		"flip": true
+		"scale": 0.8 
 	  },
 	  {
 		"fighter": "joker2",
@@ -745,8 +703,7 @@
 		  30,
 		  50
 		],
-		"scale": 0.8,
-		"flip": false
+		"scale": 0.8 
 	  },
 	  {
 		"fighter": "dq_hero1",
@@ -754,8 +711,7 @@
 		  -170,
 		  -50
 		],
-		"scale": 1.1,
-		"flip": false
+		"scale": 1.1 
 	  },
 	  {
 		"fighter": "dq_hero2",
@@ -763,8 +719,7 @@
 		  -200,
 		  -80
 		],
-		"scale": 1.05,
-		"flip": false
+		"scale": 1.05 
 	  },
 	  {
 		"fighter": "dq_hero3",
@@ -772,8 +727,7 @@
 		  -80,
 		  -70
 		],
-		"scale": 0.95,
-		"flip": false
+		"scale": 0.95 
 	  },
 	  {
 		"fighter": "dq_hero4",
@@ -781,8 +735,7 @@
 		  -200,
 		  -20
 		],
-		"scale": 1.0,
-		"flip": true
+		"scale": 1.0 
 	  },
 	  {
 		"fighter": "banjo_and_kazooie",
@@ -790,8 +743,7 @@
 		  40,
 		  -50
 		],
-		"scale": 0.55,
-		"flip": false
+		"scale": 0.55 
 	  },
 	  {
 		"fighter": "terry",
@@ -799,8 +751,7 @@
 		  80,
 		  0
 		],
-		"scale": 1.2,
-		"flip": false
+		"scale": 1.2 
 	  },
 	  {
 		"fighter": "bylethM",
@@ -808,8 +759,7 @@
 		  -20,
 		  50
 		],
-		"scale": 1.0,
-		"flip": true
+		"scale": 1.0 
 	  },
 	  {
 		"fighter": "bylethF",
@@ -817,8 +767,7 @@
 		  -10,
 		  10
 		],
-		"scale": 1.0,
-		"flip": false
+		"scale": 1.0 
 	  },
 	  {
 		"fighter": "minmin",
@@ -826,8 +775,7 @@
 		  140,
 		  -270
 		],
-		"scale": 1.1,
-		"flip": false
+		"scale": 1.1 
 	  },
 	  {
 		"fighter": "steve",
@@ -835,8 +783,7 @@
 		  -150,
 		  90
 		],
-		"scale": 0.5,
-		"flip": false
+		"scale": 0.5 
 	  },
 	  {
 		"fighter": "sephiroth1",
@@ -844,8 +791,7 @@
 		  -140,
 		  -160
 		],
-		"scale": 1.0,
-		"flip": true
+		"scale": 1.0 
 	  },
 	  {
 		"fighter": "sephiroth2",
@@ -853,8 +799,7 @@
 		  -220,
 		  -90
 		],
-		"scale": 0.82,
-		"flip": false
+		"scale": 0.82 
 	  },
 	  {
 		"fighter": "pyra",
@@ -862,8 +807,7 @@
 		  50,
 		  90
 		],
-		"scale": 0.5,
-		"flip": false
+		"scale": 0.5 
 	  },
 	  {
 		"fighter": "kazuya1",
@@ -871,8 +815,7 @@
 		  -50,
 		  0
 		],
-		"scale": 0.75,
-		"flip": false
+		"scale": 0.75 
 	  },
 	  {
 		"fighter": "kazuya2",
@@ -880,8 +823,7 @@
 		  -110,
 		  10
 		],
-		"scale": 0.75,
-		"flip": false
+		"scale": 0.75 
 	  },
 	  {
 		"fighter": "dark_pit",
@@ -889,8 +831,7 @@
 		  -10,
 		  -130
 		],
-		"scale": 1.25,
-		"flip": true
+		"scale": 1.25 
 	  },
 	  {
 		"fighter": "lucina",
@@ -898,8 +839,7 @@
 		  20,
 		  50
 		],
-		"scale": 1.3,
-		"flip": true
+		"scale": 1.3 
 	  },
 	  {
 		"fighter": "daisy",
@@ -907,8 +847,7 @@
 		  100,
 		  -25
 		],
-		"scale": 0.85,
-		"flip": true
+		"scale": 0.85 
 	  },
 	  {
 		"fighter": "chrom",
@@ -916,8 +855,7 @@
 		  150,
 		  -40
 		],
-		"scale": 0.95,
-		"flip": false
+		"scale": 0.95 
 	  },
 	  {
 		"fighter": "dark_samus",
@@ -925,8 +863,7 @@
 		  -50,
 		  65
 		],
-		"scale": 0.55,
-		"flip": true
+		"scale": 0.55 
 	  },
 	  {
 		"fighter": "richter",
@@ -934,8 +871,7 @@
 		  60,
 		  -220
 		],
-		"scale": 0.85,
-		"flip": false
+		"scale": 0.85 
 	  },
 	  {
 		"fighter": "ken",
@@ -943,8 +879,7 @@
 		  -150,
 		  60
 		],
-		"scale": 0.6,
-		"flip": true
+		"scale": 0.6 
 	  }
 	]
 }]

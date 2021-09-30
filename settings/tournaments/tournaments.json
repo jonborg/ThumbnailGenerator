@@ -4,14 +4,14 @@
     "name": "Throwdown Lx",
     "logo": "assets/tournaments/logos/tdlx.png",
     "foreground": "assets/tournaments/foregrounds/tdlx.png",
-    "fighterImageSettings": "settings/thumbnails/images/mirrorPlayer2.json"
+    "fighterImageSettings": "settings/thumbnails/images/default.json"
   },
   {
     "id": "invicta",
     "name": "Smash Invicta",
     "logo": "assets/tournaments/logos/invicta.png",
     "foreground": "assets/tournaments/foregrounds/invicta.png",
-    "fighterImageSettings": "settings/thumbnails/images/mirrorPlayer2.json"
+    "fighterImageSettings": "settings/thumbnails/images/default.json"
   },
   {
     "id": "sop",
@@ -25,7 +25,7 @@
     "name": "Tiamat",
     "logo": "assets/tournaments/logos/tiamat.png",
     "foreground": "assets/tournaments/foregrounds/tiamat.png",
-    "fighterImageSettings": "settings/thumbnails/images/mirrorPlayer2.json"
+    "fighterImageSettings": "settings/thumbnails/images/default.json"
   },
   {
     "id": "alph",
