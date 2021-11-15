@@ -564,7 +564,7 @@
 	  {
 		"fighter": "duck_hunt",
 		"offset": [
-		  60,
+		  15,
 		  -40
 		],
 		"scale": 0.4 
@@ -572,15 +572,15 @@
 	  {
 		"fighter": "ryu",
 		"offset": [
-		  30,
+		  15,
 		  70
 		],
-		"scale": 0.7 
+		"scale": 0.75
 	  },
 	  {
 		"fighter": "cloud",
 		"offset": [
-		  270,
+		  300,
 		  -50
 		],
 		"scale": 1.0 
@@ -588,7 +588,7 @@
 	  {
 		"fighter": "cloudAC",
 		"offset": [
-		  -30,
+		  -60,
 		  -120
 		],
 		"scale": 1.0 
@@ -596,10 +596,10 @@
 	  {
 		"fighter": "corrinM",
 		"offset": [
-		  -160,
-		  70
+		  -130,
+		  50
 		],
-		"scale": 0.9 
+		"scale": 1.0 
 	  },
 	  {
 		"fighter": "corrinF",
@@ -613,25 +613,25 @@
 		"fighter": "bayonetta2",
 		"offset": [
 		  60,
-		  -100
+		  -140
 		],
-		"scale": 1.0 
+		"scale": 1.1 
 	  },
 	  {
 		"fighter": "bayonetta1",
 		"offset": [
-		  60,
-		  -100
+		  100,
+		  -200
 		],
-		"scale": 1.0 
+		"scale": 1.2
 	  },
 	  {
 		"fighter": "inklingF",
 		"offset": [
-		  10,
-		  -50
+		  -10,
+		  -60
 		],
-		"scale": 0.5 
+		"scale": 0.52 
 	  },
 	  {
 		"fighter": "inklingM",
@@ -652,23 +652,23 @@
 	  {
 		"fighter": "simon",
 		"offset": [
-		  50,
-		  -30
+		  120,
+		  -60
 		],
-		"scale": 0.9 
+		"scale": 1.1
 	  },
 	  {
 		"fighter": "king_k_rool",
 		"offset": [
 		  -40,
-		  -10
+		  50
 		],
-		"scale": 0.7 
+		"scale": 0.6 
 	  },
 	  {
 		"fighter": "isabelle",
 		"offset": [
-		  -30,
+		  0,
 		  -70
 		],
 		"scale": 0.55 
@@ -676,15 +676,15 @@
 	  {
 		"fighter": "incineroar",
 		"offset": [
-		  180,
-		  70
+		  210,
+		  50
 		],
 		"scale": 0.7 
 	  },
 	  {
 		"fighter": "piranha_plant",
 		"offset": [
-		  -140,
+		  -90,
 		  110
 		],
 		"scale": 0.5 
@@ -692,24 +692,24 @@
 	  {
 		"fighter": "joker1",
 		"offset": [
-		  60,
+		  50,
 		  20
 		],
-		"scale": 0.8 
+		"scale": 1 
 	  },
 	  {
 		"fighter": "joker2",
 		"offset": [
-		  30,
-		  50
+		  80,
+		  60
 		],
-		"scale": 0.8 
+		"scale": 1.0
 	  },
 	  {
 		"fighter": "dq_hero1",
 		"offset": [
-		  -170,
-		  -50
+		  -150,
+		  -40
 		],
 		"scale": 1.1 
 	  },
@@ -717,30 +717,30 @@
 		"fighter": "dq_hero2",
 		"offset": [
 		  -200,
-		  -80
+		  -60
 		],
-		"scale": 1.05 
+		"scale": 1.1 
 	  },
 	  {
 		"fighter": "dq_hero3",
 		"offset": [
-		  -80,
-		  -70
+		  -60,
+		  -50
 		],
-		"scale": 0.95 
+		"scale": 1.1
 	  },
 	  {
 		"fighter": "dq_hero4",
 		"offset": [
-		  -200,
-		  -20
+		  -240,
+		  -10
 		],
-		"scale": 1.0 
+		"scale": 1.1
 	  },
 	  {
 		"fighter": "banjo_and_kazooie",
 		"offset": [
-		  40,
+		  60,
 		  -50
 		],
 		"scale": 0.55 
@@ -748,39 +748,39 @@
 	  {
 		"fighter": "terry",
 		"offset": [
-		  80,
+		  120,
 		  0
 		],
-		"scale": 1.2 
+		"scale": 1.3
 	  },
 	  {
 		"fighter": "bylethM",
 		"offset": [
-		  -20,
-		  50
+		  -60,
+		  60
 		],
-		"scale": 1.0 
+		"scale": 1.2
 	  },
 	  {
 		"fighter": "bylethF",
 		"offset": [
 		  -10,
-		  10
+		  20
 		],
-		"scale": 1.0 
+		"scale": 1.2
 	  },
 	  {
 		"fighter": "minmin",
 		"offset": [
 		  140,
-		  -270
+		  -180
 		],
 		"scale": 1.1 
 	  },
 	  {
 		"fighter": "steve",
 		"offset": [
-		  -150,
+		  -130,
 		  90
 		],
 		"scale": 0.5 
@@ -788,23 +788,23 @@
 	  {
 		"fighter": "sephiroth1",
 		"offset": [
-		  -140,
-		  -160
+		  -170,
+		  -130
 		],
 		"scale": 1.0 
 	  },
 	  {
 		"fighter": "sephiroth2",
 		"offset": [
-		  -220,
+		  -230,
 		  -90
 		],
-		"scale": 0.82 
+		"scale": 0.9
 	  },
 	  {
 		"fighter": "pyra",
 		"offset": [
-		  50,
+		  60,
 		  90
 		],
 		"scale": 0.5 
@@ -813,22 +813,22 @@
 		"fighter": "kazuya1",
 		"offset": [
 		  -50,
-		  0
+		  20
 		],
-		"scale": 0.75 
+		"scale": 0.8 
 	  },
 	  {
 		"fighter": "kazuya2",
 		"offset": [
-		  -110,
+		  -120,
 		  10
 		],
-		"scale": 0.75 
+		"scale": 0.8
 	  },
 	  {
 		"fighter": "dark_pit",
 		"offset": [
-		  -10,
+		  -70,
 		  -130
 		],
 		"scale": 1.25 
@@ -836,10 +836,10 @@
 	  {
 		"fighter": "lucina",
 		"offset": [
-		  20,
+		  -10,
 		  50
 		],
-		"scale": 1.3 
+		"scale": 1.4 
 	  },
 	  {
 		"fighter": "daisy",
@@ -852,34 +852,34 @@
 	  {
 		"fighter": "chrom",
 		"offset": [
-		  150,
+		  140,
 		  -40
 		],
-		"scale": 0.95 
+		"scale": 1.0
 	  },
 	  {
 		"fighter": "dark_samus",
 		"offset": [
-		  -50,
-		  65
+		  -130,
+		  50
 		],
-		"scale": 0.55 
+		"scale": 0.60
 	  },
 	  {
 		"fighter": "richter",
 		"offset": [
-		  60,
-		  -220
+		  80,
+		  -200
 		],
 		"scale": 0.85 
 	  },
 	  {
 		"fighter": "ken",
 		"offset": [
-		  -150,
+		  -200,
 		  60
 		],
-		"scale": 0.6 
+		"scale": 0.65
 	  }
 	]
 }]
