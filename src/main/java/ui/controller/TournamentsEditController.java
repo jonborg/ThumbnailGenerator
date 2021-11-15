@@ -24,6 +24,7 @@ public class TournamentsEditController extends TournamentsCreateController {
         logo.setText(tournament.getImage());
         foreground.setText(tournament.getThumbnailForeground());
         background.setText(tournament.getThumbnailBackground());
+        fighterImageSettingsFile.setText(tournament.getFighterImageSettingsFile());
 
         TextSettings textSettings = tournament.getTextSettings();
         try {

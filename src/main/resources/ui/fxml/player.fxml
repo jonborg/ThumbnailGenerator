@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ui.controller.Player1Controller"
+            fx:controller="ui.controller.PlayerController"
             prefHeight="200.0" prefWidth="200.0"
             stylesheets="@../styles/player.css">
 

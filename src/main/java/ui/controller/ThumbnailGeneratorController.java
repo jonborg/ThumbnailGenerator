@@ -1,10 +1,9 @@
 package ui.controller;
 
 import app.App;
-import exception.FontNotFoundException;
-import exception.LocalImageNotFoundException;
-import exception.OnlineImageNotFoundException;
-import exception.ThumbnailFromFileException;
+import com.google.gson.reflect.TypeToken;
+import exception.*;
+import file.json.JSONReader;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +19,7 @@ import javafx.stage.Stage;
 import smashgg.query.QueryUtils;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
+import thumbnail.image.ImageSettings;
 import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
@@ -27,6 +27,7 @@ import ui.factory.alert.AlertFactory;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -43,11 +44,11 @@ public class ThumbnailGeneratorController implements Initializable {
     @FXML
     private AnchorPane player1;
     @FXML
-    private Player1Controller player1Controller;
+    private PlayerController player1Controller;
     @FXML
     private AnchorPane player2;
     @FXML
-    private Player2Controller player2Controller;
+    private PlayerController player2Controller;
     @FXML
     private Button flipPlayer;
     @FXML
@@ -107,16 +108,22 @@ public class ThumbnailGeneratorController implements Initializable {
             return;
         }
 
+        ImageSettings imageSettings = (ImageSettings) JSONReader.getJSONArray(
+                getSelectedTournament().getFighterImageSettingsFile(),
+                new TypeToken<ArrayList<ImageSettings>>() {}.getType())
+                .get(0);
         try {
-            Thumbnail.generateAndSaveThumbnail(getSelectedTournament(), saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
+            Thumbnail.generateAndSaveThumbnail(getSelectedTournament(), imageSettings, saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
                     player1Controller.generateFighter(),
                     player2Controller.generateFighter());
             AlertFactory.displayInfo("Thumbnail was successfully generated and saved!");
-        }catch (LocalImageNotFoundException e){
+        } catch (LocalImageNotFoundException e){
             AlertFactory.displayError(e.getMessage());
-        }catch (OnlineImageNotFoundException e){
+        } catch (OnlineImageNotFoundException e){
             AlertFactory.displayError(e.getMessage());
-        }catch (FontNotFoundException e){
+        } catch (FontNotFoundException e){
+            AlertFactory.displayError(e.getMessage());
+        } catch (FighterImageSettingsNotFoundException e){
             AlertFactory.displayError(e.getMessage());
         }
     }
@@ -130,7 +137,7 @@ public class ThumbnailGeneratorController implements Initializable {
                 ThumbnailFromFile.generateFromFile(selectedFile, saveLocally.isSelected());
                 AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
             }catch(ThumbnailFromFileException e){
-                //AlertFactory already thrown inside tbf.generateFromFile
+                //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
             }catch(FontNotFoundException e){
                 AlertFactory.displayError(e.getMessage());
             }

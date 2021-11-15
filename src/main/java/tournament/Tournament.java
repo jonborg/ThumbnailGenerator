@@ -21,17 +21,21 @@ public class Tournament implements Cloneable{
     @Expose
     @SerializedName("background")
     private String background;
+    @Expose
+    @SerializedName("fighterImageSettings")
+    private String fighterImageSettingsFile;
 
     private TextSettings textSettings;
 
     private static String defaultBackground= "assets/tournaments/backgrounds/default.png";
 
-    public Tournament(String id, String name, String image, String foreground, String background){
+    public Tournament(String id, String name, String image, String foreground, String background, String fighterImageSettingsFile){
         this.tournamentId = id;
         this.name = name;
         this.image = image;
         this.foreground = foreground;
         this.background = background;
+        this.fighterImageSettingsFile = fighterImageSettingsFile;
     }
 
     public Object clone() throws CloneNotSupportedException{
@@ -64,6 +68,10 @@ public class Tournament implements Cloneable{
             this.background = tournament.getThumbnailBackground();
             equal = false;
         }
+        if (!this.getFighterImageSettingsFile().equals(tournament.getFighterImageSettingsFile())){
+            this.fighterImageSettingsFile = tournament.getFighterImageSettingsFile();
+            equal = false;
+        }
         if (!this.textSettings.updateDifferences(tournament.getTextSettings())){
             this.textSettings = tournament.getTextSettings();
             equal = false;
@@ -91,6 +99,8 @@ public class Tournament implements Cloneable{
         }
         return background;
     }
+
+    public String getFighterImageSettingsFile(){ return fighterImageSettingsFile; }
 
     public TextSettings getTextSettings(){
         return this.textSettings;

@@ -3,6 +3,7 @@ package file.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import fighter.FighterImageSettings;
 import file.FileUtils;
 import org.codehaus.plexus.util.ExceptionUtils;
 import thumbnail.text.TextSettings;
@@ -17,7 +18,6 @@ import java.util.List;
 public class JSONWriter {
     private static String tournamentFile = FileUtils.getTournamentFile();
     private static String textSettingsFile = FileUtils.getTextSettingsFile();
-
 
     public static void updateTournamentsFile(List<Tournament> list){
         Gson gson = new GsonBuilder().setPrettyPrinting()

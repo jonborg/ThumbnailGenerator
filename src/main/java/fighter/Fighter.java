@@ -5,8 +5,6 @@ import java.util.List;
 
 public class Fighter  {
 
-
-
     private String  playerName;
     private String  name;
     private String  urlName;

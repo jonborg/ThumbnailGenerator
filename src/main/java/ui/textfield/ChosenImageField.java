@@ -9,14 +9,27 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class ChosenFileField extends StackPane {
-    private TextField textField;
-    private Button button;
+public class ChosenImageField extends StackPane {
+    protected TextField textField;
+    protected Button button;
+    protected String description;
+    protected List<String> extensions;
 
-    public ChosenFileField(){
+    public ChosenImageField(){
         super();
+        description = "Image Files";
+        extensions = new ArrayList<>();
+        extensions.add("*.jpg");
+        extensions.add("*.png");
+
+        initComponents();
+    }
+
+    protected void initComponents(){
         initTextField();
         initButton();
 
@@ -24,14 +37,14 @@ public class ChosenFileField extends StackPane {
         this.getChildren().addAll(hbox);
     }
 
-    private void initTextField(){
+    protected void initTextField(){
         textField = new TextField();
         textField.setMinWidth(180);
         textField.setPrefWidth(180);
         textField.setMaxWidth(180);
     }
 
-    private void initButton(){
+    protected void initButton(){
         button = new Button();
 
         button.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/ui/images/folder.png"))));
@@ -45,7 +58,7 @@ public class ChosenFileField extends StackPane {
         button.setOnAction(action -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png"));
+                    new FileChooser.ExtensionFilter(description, extensions));
 
             File file = fileChooser.showOpenDialog(null);
             if (file != null) {

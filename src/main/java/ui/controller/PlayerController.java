@@ -27,7 +27,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class Player1Controller implements Initializable {
+public class PlayerController implements Initializable {
     @FXML
     protected TextField player;
     @FXML
@@ -49,7 +49,6 @@ public class Player1Controller implements Initializable {
 
 
     protected Map<String,String> map = Names.map;
-    protected String flipFile = FileUtils.getFlipFile();
     protected String urlName;
 
     @Override
@@ -73,7 +72,6 @@ public class Player1Controller implements Initializable {
 
     public void selectFighter(ActionEvent actionEvent) {
         urlName = getSelectionName();
-        setDefaultFlip(urlName);
         updateFighterIcon();
     }
 
@@ -89,33 +87,6 @@ public class Player1Controller implements Initializable {
             }
         }
         return sel == null ? null : map.get(sel);
-    }
-
-    protected void setDefaultFlip (String urlName){
-        boolean skip = false;
-        if (urlName == null){
-            flip.setSelected(false);
-            return;
-        }
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream(flipFile), StandardCharsets.UTF_8))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (urlName == "falco" && !skip && line.contains(urlName)){
-                    skip = true;
-                    continue;
-                }
-                if (line.contains(urlName)){
-                    String[] words = line.split(" ");
-                    if (words.length>1)
-                        flip.setSelected(Boolean.parseBoolean(words[1]));
-                    break;
-                }
-            }
-        }catch(IOException e){
-            AlertFactory.displayError("Could not detect flip.txt");
-        }
-
     }
 
     protected void updateFighterIcon(){
