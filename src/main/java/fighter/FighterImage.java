@@ -216,6 +216,18 @@ public class FighterImage {
             return;
         }
 
+        if ("sora".contains(fighter.getUrlName())) {
+            //1 and 5
+            if (fighter.getAlt() % 4 == 1) fighter.setUrlName("sora1");
+            //2 and 6
+            if (fighter.getAlt() % 4 == 2) fighter.setUrlName("sora2");
+            //3 and 7
+            if (fighter.getAlt() % 4 == 3) fighter.setUrlName("sora3");
+            //4 and 8
+            if (fighter.getAlt() % 4 == 0) fighter.setUrlName("sora4");
+            return;
+        }
+
         if ("joker".contains(fighter.getUrlName())) {
             //1 to 6
             if (fighter.getAlt()<7) fighter.setUrlName("joker1");
