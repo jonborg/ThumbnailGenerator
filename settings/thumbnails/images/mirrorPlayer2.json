@@ -929,6 +929,42 @@
 		"flip": false
 	  },
 	  {
+		"fighter": "sora1",
+		"offset": [
+		  -20,
+		  -200
+		],
+		"scale": 0.9,
+		"flip": true
+	  },
+	  {
+		"fighter": "sora2",
+		"offset": [
+		  20,
+		  -250
+		],
+		"scale": 0.95,
+		"flip": true
+	  },
+	  {
+		"fighter": "sora3",
+		"offset": [
+		  -40,
+		  -330
+		],
+		"scale": 0.95,
+		"flip": true
+	  },
+	  {
+		"fighter": "sora4",
+		"offset": [
+		  0,
+		  -160
+		],
+		"scale": 0.95,
+		"flip": true
+	  },
+	  {
 		"fighter": "dark_pit",
 		"offset": [
 		  -10,
