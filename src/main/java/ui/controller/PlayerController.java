@@ -3,29 +3,30 @@ package ui.controller;
 import fighter.DownloadFighterURL;
 import fighter.Fighter;
 import fighter.Names;
-import file.FileUtils;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
-import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import ui.combobox.InputFilter;
 import ui.factory.alert.AlertFactory;
-
-import java.awt.*;
-import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.ResourceBundle;
 
 public class PlayerController implements Initializable {
     @FXML
@@ -47,8 +48,6 @@ public class PlayerController implements Initializable {
     @FXML
     protected HBox colorBox;
 
-
-    protected Map<String,String> map = Names.map;
     protected String urlName;
 
     @Override
@@ -58,7 +57,7 @@ public class PlayerController implements Initializable {
     }
 
     protected void initFighters(){
-        ObservableList<String> items = FXCollections.observableArrayList(map.keySet());
+        ObservableList<String> items = FXCollections.observableArrayList(Names.getKeySet());
         FilteredList<String> filteredItems = new FilteredList<>(items);
 
         fighter.getEditor().textProperty().addListener(new InputFilter(fighter, filteredItems, false));
@@ -86,7 +85,7 @@ public class PlayerController implements Initializable {
                 alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
             }
         }
-        return sel == null ? null : map.get(sel);
+        return sel == null ? null : Names.getValue(sel);
     }
 
     protected void updateFighterIcon(){

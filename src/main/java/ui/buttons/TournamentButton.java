@@ -3,13 +3,13 @@ package ui.buttons;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import lombok.Getter;
 import tournament.Tournament;
 
-
+@Getter
 public class TournamentButton extends ToggleButton {
 
     private Tournament tournament;
-
 
     public TournamentButton(Tournament tournament) {
         super();
@@ -32,10 +32,6 @@ public class TournamentButton extends ToggleButton {
         this.setMaxSize(110,110);
     }
 
-    public Tournament getTournament() {
-        return this.tournament;
-    }
-
     public String getTournamentId() {
         return this.getTournament().getTournamentId();
     }
@@ -49,10 +45,10 @@ public class TournamentButton extends ToggleButton {
     }
 
     public String getThumbnailForeground() {
-        return this.getTournament().getThumbnailForeground();
+        return this.getTournament().getForeground();
     }
 
     public String getThumbnailBackground() {
-        return this.getTournament().getThumbnailBackground();
+        return this.getTournament().getBackground();
     }
 }

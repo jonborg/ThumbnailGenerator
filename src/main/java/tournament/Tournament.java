@@ -2,8 +2,10 @@ package tournament;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 import thumbnail.text.TextSettings;
 
+@Getter
 public class Tournament implements Cloneable{
 
     @Expose
@@ -34,7 +36,7 @@ public class Tournament implements Cloneable{
         this.name = name;
         this.image = image;
         this.foreground = foreground;
-        this.background = background;
+        this.background = background == null ? defaultBackground : background;
         this.fighterImageSettingsFile = fighterImageSettingsFile;
     }
 
@@ -60,12 +62,12 @@ public class Tournament implements Cloneable{
             this.image = tournament.getImage();
             equal = false;
         }
-        if (!this.foreground.equals(tournament.getThumbnailForeground())){
-            this.foreground = tournament.getThumbnailForeground();
+        if (!this.foreground.equals(tournament.getForeground())){
+            this.foreground = tournament.getForeground();
             equal = false;
         }
-        if (!this.getThumbnailBackground().equals(tournament.getThumbnailBackground())){
-            this.background = tournament.getThumbnailBackground();
+        if (!this.getBackground().equals(tournament.getBackground())){
+            this.background = tournament.getBackground();
             equal = false;
         }
         if (!this.getFighterImageSettingsFile().equals(tournament.getFighterImageSettingsFile())){
@@ -77,33 +79,6 @@ public class Tournament implements Cloneable{
             equal = false;
         }
         return equal;
-    }
-
-    public String getTournamentId() {
-        return tournamentId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public String getThumbnailForeground() { return foreground; }
-
-    public String getThumbnailBackground() {
-        if (this.background == null){
-            return defaultBackground;
-        }
-        return background;
-    }
-
-    public String getFighterImageSettingsFile(){ return fighterImageSettingsFile; }
-
-    public TextSettings getTextSettings(){
-        return this.textSettings;
     }
 
     public void setTextSettings(TextSettings textSettings) {

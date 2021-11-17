@@ -299,7 +299,7 @@
 		"flip": false
 	  },
 	  {
-		"fighter": "pokemon_trainerM",
+		"fighter": "pokemon_trainer1",
 		"offset": [
 		  20,
 		  80
@@ -308,7 +308,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "pokemon_trainerF",
+		"fighter": "pokemon_trainer2",
 		"offset": [
 		  10,
 		  80
@@ -353,7 +353,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "olimar",
+		"fighter": "olimar1",
 		"offset": [
 		  -20,
 		  -70
@@ -362,7 +362,7 @@
 		"flip": false
 	  },
 	  {
-		"fighter": "alph",
+		"fighter": "olimar2",
 		"offset": [
 		  -20,
 		  -70
@@ -407,7 +407,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "villagerM",
+		"fighter": "villager1",
 		"offset": [
 		  0,
 		  0
@@ -416,7 +416,7 @@
 		"flip": false
 	  },
 	  {
-		"fighter": "villagerF",
+		"fighter": "villager2",
 		"offset": [
 		  0,
 		  0
@@ -434,7 +434,7 @@
 		"flip": false
 	  },
 	  {
-		"fighter": "wii_fit_trainerF",
+		"fighter": "wii_fit_trainer1",
 		"offset": [
 		  -100,
 		  90
@@ -443,7 +443,7 @@
 		"flip": false
 	  },
 	  {
-		"fighter": "wii_fit_trainerM",
+		"fighter": "wii_fit_trainer2",
 		"offset": [
 		  -100,
 		  90
@@ -497,7 +497,7 @@
 		"flip": false
 	  },
 	  {
-		"fighter": "mii_gunner",
+		"fighter": "mii_gunner1",
 		"offset": [
 		  30,
 		  50
@@ -506,7 +506,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "sans",
+		"fighter": "mii_gunner2",
 		"offset": [
 		  -20,
 		  5
@@ -533,7 +533,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "robinM",
+		"fighter": "robin1",
 		"offset": [
 		  70,
 		  -80
@@ -542,7 +542,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "robinF",
+		"fighter": "robin2",
 		"offset": [
 		  120,
 		  -100
@@ -650,7 +650,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "cloud",
+		"fighter": "cloud1",
 		"offset": [
 		  270,
 		  -50
@@ -659,7 +659,7 @@
 		"flip": false
 	  },
 	  {
-		"fighter": "cloudAC",
+		"fighter": "cloud2",
 		"offset": [
 		  -30,
 		  -120
@@ -668,7 +668,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "corrinM",
+		"fighter": "corrin1",
 		"offset": [
 		  -160,
 		  70
@@ -677,7 +677,7 @@
 		"flip": false
 	  },
 	  {
-		"fighter": "corrinF",
+		"fighter": "corrin2",
 		"offset": [
 		  -60,
 		  30
@@ -686,7 +686,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "bayonetta2",
+		"fighter": "bayonetta1",
 		"offset": [
 		  60,
 		  -100
@@ -695,7 +695,7 @@
 		"flip": false
 	  },
 	  {
-		"fighter": "bayonetta1",
+		"fighter": "bayonetta2",
 		"offset": [
 		  60,
 		  -100
@@ -704,7 +704,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "inklingF",
+		"fighter": "inkling1",
 		"offset": [
 		  10,
 		  -50
@@ -713,7 +713,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "inklingM",
+		"fighter": "inkling2",
 		"offset": [
 		  0,
 		  -20
@@ -848,7 +848,7 @@
 		"flip": false
 	  },
 	  {
-		"fighter": "bylethM",
+		"fighter": "byleth1",
 		"offset": [
 		  -20,
 		  50
@@ -857,7 +857,7 @@
 		"flip": true
 	  },
 	  {
-		"fighter": "bylethF",
+		"fighter": "byleth2",
 		"offset": [
 		  -10,
 		  10

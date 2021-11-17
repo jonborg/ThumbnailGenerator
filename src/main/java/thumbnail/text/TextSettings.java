@@ -4,11 +4,14 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import file.json.JSONReader;
-import tournament.Tournament;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import tournament.Tournament;
 
+@Getter
+@Setter
 public class TextSettings {
     @Expose
     @SerializedName("id")
@@ -101,16 +104,16 @@ public class TextSettings {
             this.font = ts.getFont();
             equal = false;
         }
-        if (this.bold != ts.hasBold()){
-            this.bold = ts.hasBold();
+        if (this.bold != ts.isBold()){
+            this.bold = ts.isBold();
             equal = false;
         }
-        if (this.italic != ts.hasItalic()){
-            this.italic = ts.hasItalic();
+        if (this.italic != ts.isItalic()){
+            this.italic = ts.isItalic();
             equal = false;
         }
-        if (this.shadow != ts.hasShadow()){
-            this.shadow = ts.hasShadow();
+        if (this.shadow != ts.isShadow()){
+            this.shadow = ts.isShadow();
             equal = false;
         }
         if (this.contour != ts.getContour()){
@@ -150,100 +153,5 @@ public class TextSettings {
             equal = false;
         }
         return equal;
-    }
-    public String getTournamentId() {
-        return tournamentId;
-    }
-
-    public void setTournamentId(String tournamentId) {
-        this.tournamentId = tournamentId;
-    }
-
-    public String getFont() {
-        return font;
-    }
-
-    public void setFont(String font) {
-        this.font = font;
-    }
-
-    public boolean hasBold() {
-        return bold;
-    }
-
-    public void setBold(boolean bold) {
-        this.bold = bold;
-    }
-
-    public boolean hasItalic() {
-        return italic;
-    }
-
-    public void setItalic(boolean italic) {
-        this.italic = italic;
-    }
-
-    public boolean hasShadow() {
-        return shadow;
-    }
-
-    public void setShadow(boolean shadow) {
-        this.shadow = shadow;
-    }
-
-    public float getContour() {
-        return contour;
-    }
-
-    public void setContour(float contour) {
-        this.contour = contour;
-    }
-
-    public int getSizeTop() {
-        return sizeTop;
-    }
-
-    public void setSizeTop(int sizeTop) {
-        this.sizeTop = sizeTop;
-    }
-
-    public int getSizeBottom() {
-        return sizeBottom;
-    }
-
-    public void setSizeBottom(int sizeBottom) {
-        this.sizeBottom = sizeBottom;
-    }
-
-    public float getAngleTop() {
-        return angleTop;
-    }
-
-    public void setAngleTop(float angleTop) {
-        this.angleTop = angleTop;
-    }
-
-    public float getAngleBottom() {
-        return angleBottom;
-    }
-
-    public void setAngleBottom(float angleBottom) {
-        this.angleBottom = angleBottom;
-    }
-
-    public int[] getDownOffsetTop() {
-        return downOffsetTop;
-    }
-
-    public void setDownOffsetTop(int[] downOffsetTop) {
-        this.downOffsetTop = downOffsetTop;
-    }
-
-    public int[] getDownOffsetBottom() {
-        return downOffsetBottom;
-    }
-
-    public void setDownOffsetBottom(int[] downOffsetBottom) {
-        this.downOffsetBottom = downOffsetBottom;
     }
 }

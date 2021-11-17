@@ -2,10 +2,11 @@ package smashgg.tournament;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
+import lombok.Getter;
 import smashgg.match.StreamGG;
 
-import java.util.List;
-
+@Getter
 public class TournamentGG {
     @Expose
     @SerializedName("id")
@@ -16,17 +17,4 @@ public class TournamentGG {
     @Expose
     @SerializedName("events")
     private List<EventGG> events;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public List<StreamGG> getStreams() {
-        return streams;
-    }
-
-    public List<EventGG> getEvents() {
-        return events;
-    }
 }

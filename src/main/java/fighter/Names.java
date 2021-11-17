@@ -1,10 +1,11 @@
 package fighter;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class Names {
-    public static Map<String,String> map = new TreeMap<>();
+    private final static Map<String,String> map = new TreeMap<>();
 
     static{
         //64
@@ -104,5 +105,13 @@ public class Names {
         map.put("Dark Samus", "dark_samus");
         map.put("Richter", "richter");
         map.put("Ken", "ken");
+    }
+
+    public static String getValue(String key){
+        return map.get(key);
+    }
+
+    public static Set<String> getKeySet(){
+        return map.keySet();
     }
 }

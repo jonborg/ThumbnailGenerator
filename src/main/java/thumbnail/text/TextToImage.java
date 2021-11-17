@@ -1,7 +1,6 @@
 package thumbnail.text;
 
 import exception.FontNotFoundException;
-
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
@@ -27,7 +26,7 @@ public class TextToImage {
         BufferedImage rect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = rect.createGraphics();
 
-        if (textSettings.hasShadow())
+        if (textSettings.isShadow())
             graphics.drawImage(generateText(text,Color.BLACK,
                     top ? textSettings.getSizeTop() : textSettings.getSizeBottom()),5,5,null);
         graphics.drawImage(generateText(text,Color.WHITE,
@@ -40,20 +39,20 @@ public class TextToImage {
         try {
             InputStream fontFile = TextToImage.class.getResourceAsStream("/fonts/" + textSettings.getFont() + ".ttf");
             font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, fontSize);
-            if (!textSettings.hasBold() && textSettings.hasItalic())
+            if (!textSettings.isBold() && textSettings.isItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.ITALIC, fontSize);
-            if (textSettings.hasBold() && !textSettings.hasItalic())
+            if (textSettings.isBold() && !textSettings.isItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD, fontSize);
-            if (textSettings.hasBold() && textSettings.hasItalic())
+            if (textSettings.isBold() && textSettings.isItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD + Font.ITALIC, fontSize);
         }catch (FontFormatException | IOException | NullPointerException e){
             System.out.println("Could not find font " + textSettings.getFont() + " on resources. Checking system fonts...");
             font = new Font(textSettings.getFont(), Font.PLAIN, fontSize);
-            if (!textSettings.hasBold() && textSettings.hasItalic())
+            if (!textSettings.isBold() && textSettings.isItalic())
                 font = new Font(textSettings.getFont(), Font.ITALIC, fontSize);
-            if (textSettings.hasBold() && !textSettings.hasItalic())
+            if (textSettings.isBold() && !textSettings.isItalic())
                 font = new Font(textSettings.getFont(), Font.BOLD, fontSize);
-            if (textSettings.hasBold() && textSettings.hasItalic())
+            if (textSettings.isBold() && textSettings.isItalic())
                 font = new Font(textSettings.getFont(), Font.BOLD+Font.ITALIC, fontSize);
             //throw new FontNotFoundException(textSettings.getFont());
         }
@@ -94,12 +93,8 @@ public class TextToImage {
                         6/33f, 4/33f, 2/33f,
                         4/33f, 2/33f, 1/33f});
 
-
-
         BufferedImageOp op = new ConvolveOp(kernel);
-
         BufferedImage image = op.filter(rect, null);
-
         return rotateText(image);
     }
 

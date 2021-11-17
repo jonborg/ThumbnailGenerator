@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class CharacterId {
-    public static Map<Integer,String> map = new TreeMap<>();
+    private static Map<Integer,String> map = new TreeMap<>();
 
     static{
         //64
@@ -106,5 +106,9 @@ public class CharacterId {
         map.put(1410, "ken");
 
         map.put(1749, "RANDOM");
+    }
+
+    public static String getValue(int key){
+        return map.get(key);
     }
 }

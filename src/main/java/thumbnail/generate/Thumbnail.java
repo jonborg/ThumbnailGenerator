@@ -68,16 +68,15 @@ public class Thumbnail {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-        drawElement(tournament.getThumbnailBackground());
+        drawElement(tournament.getBackground());
         int port = 0;
         for (Fighter f : fighters) {
             port++;
             BufferedImage image = getFighterImage(f);
-            FighterImage fighterImage = new FighterImage(f, image);
             FighterImageSettings fighterImageSettings = imageSettings
-                    .findFighterImageSettings(fighterImage.getFighter().getUrlName());
-            fighterImage.setImageSettings(fighterImageSettings);
-            fighterImage.editImage();
+                    .findFighterImageSettings(f.getUrlName());
+            FighterImage fighterImage = new FighterImage(f, fighterImageSettings, image);
+
             if (fighterImage.getImage().getWidth() < WIDTH / 2 && fighterImage.getFighter().isFlip()) {
                 g2d.drawImage(fighterImage.getImage(), null, WIDTH / 2 * port - fighterImage.getImage().getWidth(), 0);
             } else {
@@ -85,7 +84,7 @@ public class Thumbnail {
             }
         }
 
-        drawElement(tournament.getThumbnailForeground());
+        drawElement(tournament.getForeground());
 
         g2d.drawImage(TextToImage.convert(fighters[0].getPlayerName(), tournament.getTextSettings(), true),
                 0, tournament.getTextSettings().getDownOffsetTop()[0], null);

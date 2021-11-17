@@ -22,8 +22,8 @@ public class TournamentsEditController extends TournamentsCreateController {
         id.setText(tournament.getTournamentId());
         name.setText(tournament.getName());
         logo.setText(tournament.getImage());
-        foreground.setText(tournament.getThumbnailForeground());
-        background.setText(tournament.getThumbnailBackground());
+        foreground.setText(tournament.getForeground());
+        background.setText(tournament.getBackground());
         fighterImageSettingsFile.setText(tournament.getFighterImageSettingsFile());
 
         TextSettings textSettings = tournament.getTextSettings();
@@ -33,9 +33,9 @@ public class TournamentsEditController extends TournamentsCreateController {
             sizeBottom.setText(String.valueOf(textSettings.getSizeBottom()));
             angleTop.setText(String.valueOf(textSettings.getAngleTop()));
             angleBottom.setText(String.valueOf(textSettings.getAngleBottom()));
-            bold.setSelected(textSettings.hasBold());
-            italic.setSelected(textSettings.hasItalic());
-            shadow.setSelected(textSettings.hasShadow());
+            bold.setSelected(textSettings.isBold());
+            italic.setSelected(textSettings.isItalic());
+            shadow.setSelected(textSettings.isShadow());
             contour.setText(String.valueOf(textSettings.getContour()));
             downOffsetTopLeft.setText(String.valueOf(textSettings.getDownOffsetTop()[0]));
             downOffsetTopRight.setText(String.valueOf(textSettings.getDownOffsetTop()[1]));
