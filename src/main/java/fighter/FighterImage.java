@@ -1,14 +1,18 @@
 package fighter;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.imgscalr.Scalr;
 
 @Getter
 public class FighterImage {
+    private final Logger LOGGER = LogManager.getLogger(FighterImage.class);
+
     private final Fighter fighter;
     private final FighterImageSettings imageSettings;
     private final BufferedImage image;
@@ -17,7 +21,6 @@ public class FighterImage {
         this.fighter = fighter;
         this.imageSettings = imageSettings;
         this.image = editImage(image);
-        convertToAlternateRender(fighter);
     }
 
     private BufferedImage editImage(BufferedImage bufferedImage){
@@ -30,6 +33,7 @@ public class FighterImage {
 
     private  BufferedImage flipImage(BufferedImage bufferedImage, boolean flip){
         if (flip) {
+            LOGGER.info("Flipping character image.");
             AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
             tx.translate(-bufferedImage.getWidth(null), 0);
             AffineTransformOp op = new AffineTransformOp(tx,
@@ -42,15 +46,12 @@ public class FighterImage {
 
 
     private BufferedImage resizeImage(BufferedImage bufferedImage, String urlName) {
-        System.out.println("Performing resize of image with size: "+bufferedImage.getWidth()+ " "+ bufferedImage.getWidth());
-
+        LOGGER.info("Performing resize of image with width {} and height {}.", bufferedImage.getWidth(), bufferedImage.getHeight());
         double scale = this.imageSettings.getScale();
-
         int width = (int) (scale * bufferedImage.getWidth());
         int height = (int) (scale * bufferedImage.getHeight());
 
-        System.out.println("Resize complete " + bufferedImage.getWidth() + " " + bufferedImage.getHeight());
-
+        LOGGER.info("Resize complete to width {} and height {}.", bufferedImage.getWidth(), bufferedImage.getHeight());
         return Scalr.resize(bufferedImage, Scalr.Method.ULTRA_QUALITY, bufferedImage.getHeight() < bufferedImage.getWidth() ? Scalr.Mode.FIT_TO_HEIGHT : Scalr.Mode.FIT_TO_WIDTH,
                 Math.max(width, height), Math.max(width, height), Scalr.OP_ANTIALIAS);
     }
@@ -80,6 +81,7 @@ public class FighterImage {
     }
 
     private BufferedImage cropImage(BufferedImage bufferedImage, int widthLimit, int heightLimit){
+        LOGGER.info("Cropping character image to fit in thumbnail half.");
         int width = bufferedImage.getWidth();
         int height = bufferedImage.getHeight();
         int marginX = 0;
@@ -88,10 +90,7 @@ public class FighterImage {
         if (width>widthLimit) {
             marginX = (width-widthLimit)/2;
         }
-        System.out.println(bufferedImage.getWidth()+" "+bufferedImage.getHeight());
-        if (height>heightLimit) {
-
-        }
+        LOGGER.info("Character image crop to width {} and height{}.", bufferedImage.getWidth(), bufferedImage.getHeight());
         return Scalr.crop(bufferedImage, marginX,marginY,Math.min(width,widthLimit), Math.min(height,heightLimit), null);
     }
 

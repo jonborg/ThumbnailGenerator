@@ -26,6 +26,8 @@ import thumbnail.image.ImageSettings;
 import thumbnail.text.TextToImage;
 import tournament.Tournament;
 
+import static fighter.FighterImage.convertToAlternateRender;
+
 public class Thumbnail {
     private static final Logger LOGGER = LogManager.getLogger(Thumbnail.class);
 
@@ -84,6 +86,7 @@ public class Thumbnail {
             port++;
             LOGGER.info("Drawing player {} information.", port);
             BufferedImage image = getFighterImage(f);
+            convertToAlternateRender(f);
             FighterImageSettings fighterImageSettings = imageSettings
                     .findFighterImageSettings(f.getUrlName());
             FighterImage fighterImage = new FighterImage(f, fighterImageSettings, image);

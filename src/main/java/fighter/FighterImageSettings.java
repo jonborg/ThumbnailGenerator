@@ -4,8 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 @AllArgsConstructor
 public class FighterImageSettings {
 
@@ -19,7 +21,7 @@ public class FighterImageSettings {
 
     @Expose
     @SerializedName("scale")
-    private final float scale = 1.0f;
+    private final float scale;
 
     @Expose
     @SerializedName("flip")
