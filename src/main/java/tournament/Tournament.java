@@ -82,7 +82,7 @@ public class Tournament implements Cloneable{
     }
 
     public String getBackground() {
-        return background == null ? background : background;
+        return background == null ? defaultBackground : background;
     }
 
     public void setTextSettings(TextSettings textSettings) {
