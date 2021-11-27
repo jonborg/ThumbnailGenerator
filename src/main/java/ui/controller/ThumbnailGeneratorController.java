@@ -142,9 +142,11 @@ public class ThumbnailGeneratorController implements Initializable {
 
     //MenuBar
     public void createMultipleThumbnails(ActionEvent actionEvent) {
+        LOGGER.info("User chose to generate multiple thumbnails at once.");
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
+            LOGGER.info("User loaded file {}.", selectedFile.getPath());
             try {
                 ThumbnailFromFile.generateFromFile(selectedFile, saveLocally.isSelected());
                 AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
