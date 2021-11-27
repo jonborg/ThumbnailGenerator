@@ -4,6 +4,8 @@ import com.google.gson.reflect.TypeToken;
 import file.FileUtils;
 import file.json.JSONReader;
 import file.json.JSONWriter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import thumbnail.text.TextSettings;
 import ui.controller.ThumbnailGeneratorController;
 import ui.factory.alert.AlertFactory;
@@ -13,12 +15,15 @@ import java.util.List;
 
 public class TournamentUtils {
 
+    private static final Logger LOGGER = LogManager.getLogger(TournamentUtils.class);
+
     private static List<Tournament> tournamentsList;
     private static Tournament selectedTournament;
     private static Tournament selectedEdit;
 
 
     public static void initTournamentsListAndSettings(){
+        LOGGER.info("Loading saved tournament list.");
         loadTournamentsList();
         tournamentsList.forEach(tournament ->
             tournament.setTextSettings(TextSettings.loadTextSettings(tournament.getTournamentId())));

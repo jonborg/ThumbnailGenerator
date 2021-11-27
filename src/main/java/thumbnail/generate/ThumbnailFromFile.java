@@ -4,7 +4,6 @@ import com.google.gson.reflect.TypeToken;
 import exception.*;
 import fighter.Fighter;
 import fighter.FighterImage;
-import file.FileUtils;
 import file.json.JSONReader;
 import thumbnail.image.ImageSettings;
 import tournament.Tournament;

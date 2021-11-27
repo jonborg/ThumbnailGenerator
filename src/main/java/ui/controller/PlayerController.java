@@ -128,6 +128,12 @@ public class PlayerController implements Initializable {
         return new Fighter(getPlayer(), getFighter() ,getUrlName(), getAlt(), isFlip());
     }
 
+    public String toString(){
+        return "Name: " + this.player.getText() +
+                " | Character: " + this.fighter.getSelectionModel().getSelectedItem() +
+                " | Alt: " + this.alt.getValue();
+    }
+
     public String getPlayer(){
         return this.player.getText();
     }
