@@ -75,7 +75,7 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public void flipPlayers(ActionEvent actionEvent) {
-        LOGGER.debug("User clicked on flip players button.");
+        LOGGER.info("User clicked on flip players button.");
         LOGGER.debug("Player 1 - " + player1Controller.toString() + " is now Player 2");
         LOGGER.debug("Player 2 - " + player2Controller.toString() + " is now Player 1");
         String nameAux = player1Controller.getPlayer();
@@ -101,8 +101,9 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public void createThumbnail(ActionEvent actionEvent) {
+        LOGGER.info("Creating a single thumbnail.");
         if (player1Controller.getUrlName() == null || player2Controller.getUrlName() == null){
-            LOGGER.error("User did not select characters for all players");
+            LOGGER.error("User did not select characters for all players.");
             AlertFactory.displayWarning("It is required to select a character for all players before generating the thumbnail.");
             return;
         }
@@ -113,7 +114,7 @@ public class ThumbnailGeneratorController implements Initializable {
             return;
         }
 
-        LOGGER.debug("Loading image settings of tournament {} " + getSelectedTournament().getName());
+        LOGGER.info("Loading image settings of tournament {} " + getSelectedTournament().getName());
         ImageSettings imageSettings = (ImageSettings) JSONReader.getJSONArray(
                 getSelectedTournament().getFighterImageSettingsFile(),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())

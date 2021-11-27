@@ -6,9 +6,12 @@ import exception.FighterImageSettingsNotFoundException;
 import fighter.FighterImageSettings;
 import java.util.List;
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
 
 @Getter
 public class ImageSettings {
+    private final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger(ImageSettings.class);
+
     @Expose
     @SerializedName("mirrorPlayer2")
     private boolean mirrorPlayer2;
@@ -28,9 +31,11 @@ public class ImageSettings {
             throws FighterImageSettingsNotFoundException{
         for (FighterImageSettings fighterImage : fighterImages){
             if (fighterUrl.equals(fighterImage.getFighter())){
+                LOGGER.info("Loaded image settings for {}", fighterUrl);
                 return fighterImage;
             }
         }
+        LOGGER.error("Could not find image settings for {}", fighterUrl);
         throw new FighterImageSettingsNotFoundException(fighterUrl);
     }
 }

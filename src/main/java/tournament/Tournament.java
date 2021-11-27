@@ -81,9 +81,11 @@ public class Tournament implements Cloneable{
         return equal;
     }
 
+    public String getBackground() {
+        return background == null ? background : background;
+    }
+
     public void setTextSettings(TextSettings textSettings) {
         this.textSettings = textSettings;
     }
-
-
 }
