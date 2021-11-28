@@ -2,54 +2,28 @@ package fighter;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
+@Getter
+@ToString
+@AllArgsConstructor
 public class FighterImageSettings {
 
     @Expose
     @SerializedName("fighter")
-    private String fighter;
+    private final String fighter;
 
     @Expose
     @SerializedName("offset")
-    private int[] offset = new int[] {0, 0};
+    private final  int[] offset = new int[] {0, 0};
 
     @Expose
     @SerializedName("scale")
-    private float scale = 1.0f;
+    private final float scale;
 
     @Expose
     @SerializedName("flip")
-    private boolean flip = false;
-
-    public String getFighter() {
-        return fighter;
-    }
-
-    public void setFighter(String fighter) {
-        this.fighter = fighter;
-    }
-
-    public void setOffset(int[] offset) {
-        this.offset = offset;
-    }
-
-    public int[] getOffset() {
-        return offset;
-    }
-
-    public float getScale() {
-        return scale;
-    }
-
-    public void setScale(float scale) {
-        this.scale = scale;
-    }
-
-    public boolean isFlip() {
-        return flip;
-    }
-
-    public void setFlip(boolean flip) {
-        this.flip = flip;
-    }
+    private final boolean flip = false;
 }

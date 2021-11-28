@@ -2,9 +2,11 @@ package smashgg.tournament;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class PhaseGG {
     @Expose
     @SerializedName("id")
@@ -16,22 +18,9 @@ public class PhaseGG {
     @SerializedName("phaseGroups")
     private PhaseGroupGG phaseGroup;
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public PhaseGroupGG getPhaseGroup() {
-        return phaseGroup;
-    }
-
     public List<PhaseGroupNodeGG> getPhaseGroups() {
         return phaseGroup.getNodes();
     }
-
 
     @Override
     public String toString() {

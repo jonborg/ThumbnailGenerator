@@ -266,7 +266,7 @@
 		"scale": 0.97
 	  },
 	  {
-		"fighter": "pokemon_trainerM",
+		"fighter": "pokemon_trainer1",
 		"offset": [
 		  20,
 		  80
@@ -274,7 +274,7 @@
 		"scale": 1.1
 	  },
 	  {
-		"fighter": "pokemon_trainerF",
+		"fighter": "pokemon_trainer2",
 		"offset": [
 		  10,
 		  80
@@ -314,7 +314,7 @@
 		"scale": 0.65
 	  },
 	  {
-		"fighter": "olimar",
+		"fighter": "olimar1",
 		"offset": [
 		  0,
 		  -50
@@ -322,7 +322,7 @@
 		"scale": 0.73
 	  },
 	  {
-		"fighter": "alph",
+		"fighter": "olimar2",
 		"offset": [
 		  0,
 		  -50
@@ -362,7 +362,7 @@
 		"scale": 0.75
 	  },
 	  {
-		"fighter": "villagerM",
+		"fighter": "villager1",
 		"offset": [
 		  50,
 		  0
@@ -370,7 +370,7 @@
 		"scale": 0.65
 	  },
 	  {
-		"fighter": "villagerF",
+		"fighter": "villager2",
 		"offset": [
 		  50,
 		  0
@@ -386,7 +386,7 @@
 		"scale": 0.60 
 	  },
 	  {
-		"fighter": "wii_fit_trainerF",
+		"fighter": "wii_fit_trainer1",
 		"offset": [
 		  -100,
 		  120
@@ -394,7 +394,7 @@
 		"scale": 0.4 
 	  },
 	  {
-		"fighter": "wii_fit_trainerM",
+		"fighter": "wii_fit_trainer2",
 		"offset": [
 		  -100,
 		  120
@@ -474,7 +474,7 @@
 		"scale": 0.65 
 	  },
 	  {
-		"fighter": "robinM",
+		"fighter": "robin1",
 		"offset": [
 		  30,
 		  -60
@@ -482,7 +482,7 @@
 		"scale": 0.9
 	  },
 	  {
-		"fighter": "robinF",
+		"fighter": "robin2",
 		"offset": [
 		  120,
 		  -100
@@ -578,7 +578,7 @@
 		"scale": 0.75
 	  },
 	  {
-		"fighter": "cloud",
+		"fighter": "cloud1",
 		"offset": [
 		  300,
 		  -50
@@ -586,7 +586,7 @@
 		"scale": 1.0 
 	  },
 	  {
-		"fighter": "cloudAC",
+		"fighter": "cloud2",
 		"offset": [
 		  -60,
 		  -120
@@ -610,7 +610,7 @@
 		"scale": 0.9 
 	  },
 	  {
-		"fighter": "bayonetta2",
+		"fighter": "bayonetta1",
 		"offset": [
 		  60,
 		  -140
@@ -618,7 +618,7 @@
 		"scale": 1.1 
 	  },
 	  {
-		"fighter": "bayonetta1",
+		"fighter": "bayonetta2",
 		"offset": [
 		  100,
 		  -200
@@ -626,7 +626,7 @@
 		"scale": 1.2
 	  },
 	  {
-		"fighter": "inklingF",
+		"fighter": "inkling1",
 		"offset": [
 		  -10,
 		  -60
@@ -634,7 +634,7 @@
 		"scale": 0.52 
 	  },
 	  {
-		"fighter": "inklingM",
+		"fighter": "inkling2",
 		"offset": [
 		  0,
 		  -20
@@ -754,7 +754,7 @@
 		"scale": 1.3
 	  },
 	  {
-		"fighter": "bylethM",
+		"fighter": "byleth1",
 		"offset": [
 		  -60,
 		  60
@@ -762,7 +762,7 @@
 		"scale": 1.2
 	  },
 	  {
-		"fighter": "bylethF",
+		"fighter": "byleth2",
 		"offset": [
 		  -10,
 		  20

@@ -2,7 +2,13 @@ package fighter;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 public class Fighter  {
 
     private String  playerName;
@@ -28,44 +34,5 @@ public class Fighter  {
         list.add(new Fighter("Player 1","Mario", "mario", 1, false));
         list.add(new Fighter("Player 2","Sonic", "sonic", 1, false));
         return list;
-    }
-
-
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
-    public String getName() { return name; }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUrlName() {
-        return urlName;
-    }
-
-    public void setUrlName(String urlName) {
-        this.urlName = urlName;
-    }
-
-    public int getAlt() {
-        return alt;
-    }
-
-    public void setAlt(int alt) {
-        this.alt = alt;
-    }
-
-    public boolean isFlip() {
-        return flip;
-    }
-
-    public void setFlip(boolean flip) {
-        this.flip = flip;
     }
 }

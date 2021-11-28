@@ -2,7 +2,9 @@ package smashgg.match;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
+@Getter
 public class SelectionGG {
     @Expose
     @SerializedName("entrant")
@@ -13,16 +15,4 @@ public class SelectionGG {
     @Expose
     @SerializedName("selectionType")
     private String selectionType;
-
-    public EntrantGG getEntrant() {
-        return entrant;
-    }
-
-    public int getSelectionValue() {
-        return selectionValue;
-    }
-
-    public String getSelectionType() {
-        return selectionType;
-    }
 }

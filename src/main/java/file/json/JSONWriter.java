@@ -3,8 +3,10 @@ package file.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import fighter.FighterImageSettings;
+import fighter.DownloadFighterURL;
 import file.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
 import thumbnail.text.TextSettings;
 import tournament.Tournament;
@@ -16,6 +18,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class JSONWriter {
+    private static final Logger LOGGER = LogManager.getLogger(JSONWriter.class);
+
     private static String tournamentFile = FileUtils.getTournamentFile();
     private static String textSettingsFile = FileUtils.getTextSettingsFile();
 
@@ -25,7 +29,7 @@ public class JSONWriter {
                 .create();
         try (FileWriter writer = new FileWriter(tournamentFile)) {
             String json = gson.toJson(list);
-            System.out.println(json);
+            LOGGER.debug("Writing json to file {} -> {}", tournamentFile, json);
             writer.write(json);
         } catch (FileNotFoundException e) {
             AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
@@ -40,7 +44,7 @@ public class JSONWriter {
                 .create();
         try (FileWriter writer = new FileWriter(textSettingsFile)) {
             String json = gson.toJson(list);
-            System.out.println(json);
+            LOGGER.debug("Writing json to file {} -> {}", textSettingsFile, json);
             writer.write(json);
         } catch (FileNotFoundException e) {
             AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));

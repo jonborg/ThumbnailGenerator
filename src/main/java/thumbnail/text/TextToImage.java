@@ -1,16 +1,30 @@
 package thumbnail.text;
 
 import exception.FontNotFoundException;
-
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
-import java.awt.image.*;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
 import java.io.IOException;
 import java.io.InputStream;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TextToImage {
+    private static final Logger LOGGER = LogManager.getLogger(TextToImage.class);
 
     private static int WIDTH = 640;
     private static int HEIGHT = 110;
@@ -27,8 +41,8 @@ public class TextToImage {
         BufferedImage rect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = rect.createGraphics();
 
-        if (textSettings.hasShadow())
-            graphics.drawImage(generateText(text,Color.BLACK,
+        if (textSettings.isShadow())
+            graphics.drawImage(generateText(text, Color.BLACK,
                     top ? textSettings.getSizeTop() : textSettings.getSizeBottom()),5,5,null);
         graphics.drawImage(generateText(text,Color.WHITE,
                 top ? textSettings.getSizeTop() : textSettings.getSizeBottom()),0,0,null);
@@ -37,24 +51,32 @@ public class TextToImage {
 
 
     private static BufferedImage generateText(String text, Color color, int fontSize) throws FontNotFoundException {
+        if (color.equals(Color.BLACK)){
+            LOGGER.debug("Loading font {} for text {}", textSettings.getFont(), text);
+        } else {
+            LOGGER.debug("Loading font {} for text {}'s shadow", textSettings.getFont(), text);
+        }
         try {
             InputStream fontFile = TextToImage.class.getResourceAsStream("/fonts/" + textSettings.getFont() + ".ttf");
-            font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, fontSize);
-            if (!textSettings.hasBold() && textSettings.hasItalic())
+            if (!textSettings.isBold() && textSettings.isItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.ITALIC, fontSize);
-            if (textSettings.hasBold() && !textSettings.hasItalic())
+            else if (textSettings.isBold() && !textSettings.isItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD, fontSize);
-            if (textSettings.hasBold() && textSettings.hasItalic())
+            else if (textSettings.isBold() && textSettings.isItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD + Font.ITALIC, fontSize);
+            else
+                font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, fontSize);
         }catch (FontFormatException | IOException | NullPointerException e){
-            System.out.println("Could not find font " + textSettings.getFont() + " on resources. Checking system fonts...");
-            font = new Font(textSettings.getFont(), Font.PLAIN, fontSize);
-            if (!textSettings.hasBold() && textSettings.hasItalic())
+            LOGGER.debug("Could not find font {} on resources. Checking system fonts.", textSettings.getFont());
+            LOGGER.catching(e);
+            if (!textSettings.isBold() && textSettings.isItalic())
                 font = new Font(textSettings.getFont(), Font.ITALIC, fontSize);
-            if (textSettings.hasBold() && !textSettings.hasItalic())
+            else if (textSettings.isBold() && !textSettings.isItalic())
                 font = new Font(textSettings.getFont(), Font.BOLD, fontSize);
-            if (textSettings.hasBold() && textSettings.hasItalic())
+            else if (textSettings.isBold() && textSettings.isItalic())
                 font = new Font(textSettings.getFont(), Font.BOLD+Font.ITALIC, fontSize);
+            else
+                font = new Font(textSettings.getFont(), Font.PLAIN, fontSize);
             //throw new FontNotFoundException(textSettings.getFont());
         }
 
@@ -75,11 +97,20 @@ public class TextToImage {
         graphics.setFont(font);
         graphics.setColor(color);
 
-        if (color == Color.BLACK) return blurText(rect,text,graphics,x,y);
+        if (color == Color.BLACK) {
+            LOGGER.debug("Drawing shadow of text {}.", text);
+            return blurText(rect,text,graphics,x,y);
+        }
         //else drawOutline(text,graphics);
+        LOGGER.debug("Drawing text {}.", text);
         graphics.drawString(text, x, y);
         //outline
-        if (textSettings.getContour()>0) drawOutline(graphics, text, x, y);
+        if (textSettings.getContour()>0) {
+            LOGGER.debug("Drawing text {}'s contour", text);
+            drawOutline(graphics, text, x, y);
+        }
+
+        LOGGER.debug("Rotate text {}.", text);
         return rotateText(rect);
     }
 
@@ -94,12 +125,8 @@ public class TextToImage {
                         6/33f, 4/33f, 2/33f,
                         4/33f, 2/33f, 1/33f});
 
-
-
         BufferedImageOp op = new ConvolveOp(kernel);
-
         BufferedImage image = op.filter(rect, null);
-
         return rotateText(image);
     }
 

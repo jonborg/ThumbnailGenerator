@@ -1,67 +1,70 @@
 package fighter;
 
-import org.imgscalr.Scalr;
-
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.imgscalr.Scalr;
 
+@Getter
 public class FighterImage {
-    private Fighter fighter;
-    private BufferedImage image;
-    private FighterImageSettings imageSettings;
+    private final Logger LOGGER = LogManager.getLogger(FighterImage.class);
 
-    public FighterImage(Fighter fighter, BufferedImage image){
+    private final Fighter fighter;
+    private final FighterImageSettings imageSettings;
+    private final BufferedImage image;
+
+    public FighterImage(Fighter fighter, FighterImageSettings imageSettings, BufferedImage image){
         this.fighter = fighter;
-        this.image = image;
-        convertToAlternateRender(fighter);
+        this.imageSettings = imageSettings;
+        this.image = editImage(image);
     }
 
-    public BufferedImage editImage(){
-        image = this.resizeImage(fighter.getUrlName());
-        image = this.offsetImage(fighter.getUrlName());
-        image = this.flipImage(fighter.isFlip());
-        image = this.cropImage(1280/2,720);
-        return image;
+    private BufferedImage editImage(BufferedImage bufferedImage){
+        bufferedImage = this.resizeImage(bufferedImage, fighter.getUrlName());
+        bufferedImage = this.offsetImage(bufferedImage, fighter.getUrlName());
+        bufferedImage = this.flipImage(bufferedImage, fighter.isFlip());
+        bufferedImage = this.cropImage(bufferedImage, 1280/2,720);
+        return bufferedImage;
     }
 
-    private  BufferedImage flipImage(boolean flip){
+    private  BufferedImage flipImage(BufferedImage bufferedImage, boolean flip){
         if (flip) {
+            LOGGER.info("Flipping character image.");
             AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-            tx.translate(-image.getWidth(null), 0);
+            tx.translate(-bufferedImage.getWidth(null), 0);
             AffineTransformOp op = new AffineTransformOp(tx,
                     AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-            return op.filter(image, null);
+            return op.filter(bufferedImage, null);
         }
-        return image;
+        return bufferedImage;
     }
 
 
 
-    private BufferedImage resizeImage(String urlName) {
-        System.out.println("Performing resize of image with size: "+image.getWidth()+ " "+ image.getWidth());
+    private BufferedImage resizeImage(BufferedImage bufferedImage, String urlName) {
+        LOGGER.info("Performing resize of image with width {} and height {}.", bufferedImage.getWidth(), bufferedImage.getHeight());
+        double scale = this.imageSettings.getScale();
+        int width = (int) (scale * bufferedImage.getWidth());
+        int height = (int) (scale * bufferedImage.getHeight());
 
-        double scale = imageSettings.getScale();
-
-        int width = (int) (scale * image.getWidth());
-        int height = (int) (scale * image.getHeight());
-
-        System.out.println("Resize complete " + image.getWidth() + " " + image.getHeight());
-
-        return Scalr.resize(image, Scalr.Method.ULTRA_QUALITY, image.getHeight() < image.getWidth() ? Scalr.Mode.FIT_TO_HEIGHT : Scalr.Mode.FIT_TO_WIDTH,
+        LOGGER.info("Resize complete to width {} and height {}.", bufferedImage.getWidth(), bufferedImage.getHeight());
+        return Scalr.resize(bufferedImage, Scalr.Method.ULTRA_QUALITY, bufferedImage.getHeight() < bufferedImage.getWidth() ? Scalr.Mode.FIT_TO_HEIGHT : Scalr.Mode.FIT_TO_WIDTH,
                 Math.max(width, height), Math.max(width, height), Scalr.OP_ANTIALIAS);
     }
 
 
 
 
-    private BufferedImage offsetImage(String urlName){
-        int offsetX = 2 * imageSettings.getOffset()[0];
-        int offsetY = imageSettings.getOffset()[1];
+    private BufferedImage offsetImage(BufferedImage bufferedImage, String urlName){
+        int offsetX = 2 * this.imageSettings.getOffset()[0];
+        int offsetY = this.imageSettings.getOffset()[1];
 
-        BufferedImage img = new BufferedImage(image.getWidth() + Math.abs(offsetX),
-                                                image.getHeight() + Math.abs(offsetY),
+        BufferedImage img = new BufferedImage(bufferedImage.getWidth() + Math.abs(offsetX),
+                                                bufferedImage.getHeight() + Math.abs(offsetY),
                                                     BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();
         int inputX=0;
@@ -70,32 +73,26 @@ public class FighterImage {
         if(offsetX>0) inputX=offsetX;
         if(offsetY>0) {
             inputY=offsetY;
-            g2d.drawImage(image,inputX,inputY,null);
+            g2d.drawImage(bufferedImage,inputX,inputY,null);
         }else{
-            g2d.drawImage(cropImageY(image,-offsetY),inputX,0,null);
+            g2d.drawImage(cropImageY(bufferedImage,-offsetY),inputX,0,null);
         }
         return img;
     }
 
-
-
-
-    private BufferedImage cropImage(int widthLimit, int heightLimit){
-        int width = image.getWidth();
-        int height = image.getHeight();
+    private BufferedImage cropImage(BufferedImage bufferedImage, int widthLimit, int heightLimit){
+        LOGGER.info("Cropping character image to fit in thumbnail half.");
+        int width = bufferedImage.getWidth();
+        int height = bufferedImage.getHeight();
         int marginX = 0;
         int marginY= 0;
 
         if (width>widthLimit) {
             marginX = (width-widthLimit)/2;
         }
-        System.out.println(image.getWidth()+" "+image.getHeight());
-        if (height>heightLimit) {
-
-        }
-        return Scalr.crop(image, marginX,marginY,Math.min(width,widthLimit), Math.min(height,heightLimit), null);
+        LOGGER.info("Character image crop to width {} and height{}.", bufferedImage.getWidth(), bufferedImage.getHeight());
+        return Scalr.crop(bufferedImage, marginX,marginY,Math.min(width,widthLimit), Math.min(height,heightLimit), null);
     }
-
 
     private BufferedImage cropImageY(BufferedImage img, int y){
         int width = img.getWidth();
@@ -105,167 +102,47 @@ public class FighterImage {
     }
 
     static public void convertToAlternateRender(Fighter fighter){
-        if ("pokemon_trainer".contains(fighter.getUrlName())) {
-            if (fighter.getAlt() % 2 == 0) fighter.setUrlName("pokemon_trainerF");
-            else fighter.setUrlName("pokemon_trainerM");
-            return;
-        }
-
-        if ("villager".contains(fighter.getUrlName())){
-            if (fighter.getAlt() % 2==0)  fighter.setUrlName("villagerF");
-            else fighter.setUrlName("villagerM");
-            return;
-        }
-
-        if ("robin".contains(fighter.getUrlName()) && !"rob".equals(fighter.getUrlName())){
-            if (fighter.getAlt() % 2==0)  fighter.setUrlName("robinF");
-            else fighter.setUrlName("robinM");
-            return;
-        }
-
-        if ("corrin".contains(fighter.getUrlName())){
-            if (fighter.getAlt() % 2==0)  fighter.setUrlName("corrinF");
-            else fighter.setUrlName("corrinM");
-            return;
-        }
-
-        if ("byleth".contains(fighter.getUrlName())) {
-            if (fighter.getAlt() % 2 == 0) fighter.setUrlName("bylethF");
-            else fighter.setUrlName("bylethM");
-            return;
-        }
-
-
-
-        if ("wii_fit_trainer".contains(fighter.getUrlName())) {
-            if (fighter.getAlt() % 2 == 0) fighter.setUrlName("wii_fit_trainerM");
-            else fighter.setUrlName("wii_fit_trainerF");
-            return;
-        }
-
-        if ("inkling".contains(fighter.getUrlName())) {
-            if (fighter.getAlt() % 2 == 0) fighter.setUrlName("inklingM");
-            else fighter.setUrlName("inklingF");
-            return;
-        }
-
-
-
-        if ("cloud".contains(fighter.getUrlName())) {
-            if (fighter.getAlt() % 2==0){
-                fighter.setUrlName("cloudAC");
+        if (fighter.getUrlName() != null){
+            switch(fighter.getUrlName().toLowerCase()){
+                case "ike":
+                case "pokemon_trainer":
+                case "villager":
+                case "wii_fit_trainer":
+                case "robin":
+                case "cloud":
+                case "corrin":
+                case "bayonetta":
+                case "inkling":
+                case "byleth":
+                case "kazuya":
+                    if (fighter.getAlt() % 2 == 0) fighter.setUrlName(fighter.getUrlName() + "2");
+                    else fighter.setUrlName(fighter.getUrlName() + "1");
+                    break;
+                case "olimar":
+                    if (fighter.getAlt() > 4 ) fighter.setUrlName(fighter.getUrlName() + "2");
+                    else fighter.setUrlName(fighter.getUrlName() + "1");
+                    break;
+                case "mii_gunner":
+                    if (fighter.getAlt() == 2) fighter.setUrlName(fighter.getUrlName() + "2");
+                    else fighter.setUrlName(fighter.getUrlName() + "1");
+                    break;
+                case "bowser_jr":
+                    fighter.setUrlName(fighter.getUrlName() + fighter.getAlt());
+                    break;
+                case "joker":
+                case "sephiroth":
+                    if (fighter.getAlt()<7) fighter.setUrlName(fighter.getUrlName() + "1");
+                    else fighter.setUrlName(fighter.getUrlName() + "2");
+                    break;
+                case "dq_hero":
+                case "sora":
+                    if (fighter.getAlt() % 4 == 1) fighter.setUrlName(fighter.getUrlName() + "1");
+                    if (fighter.getAlt() % 4 == 2) fighter.setUrlName(fighter.getUrlName() + "2");
+                    if (fighter.getAlt() % 4 == 3) fighter.setUrlName(fighter.getUrlName() + "3");
+                    if (fighter.getAlt() % 4 == 0) fighter.setUrlName(fighter.getUrlName() + "4");
+                    break;
+                default:
             }
-            return;
         }
-
-        if ("ike".contains(fighter.getUrlName())) {
-            if (fighter.getAlt() % 2==0){
-                fighter.setUrlName("ike2");
-            }else{
-                fighter.setUrlName("ike1");
-            }
-            return;
-        }
-
-        if ("olimar".contains(fighter.getUrlName())) {
-            if (fighter.getAlt() > 4 ){
-                fighter.setUrlName("alph");
-            }
-            return;
-        }
-
-        if ("mii_gunner".contains(fighter.getUrlName())) {
-            if (fighter.getAlt() == 2){
-                fighter.setUrlName("sans");
-            }
-            return;
-        }
-
-        if (!"bowser".equals(fighter.getUrlName()) && "bowser_jr".contains(fighter.getUrlName())) {
-            fighter.setUrlName("bowser_jr"+fighter.getAlt());
-            return;
-        }
-
-        if ("bayonetta".contains(fighter.getUrlName())) {
-            if (fighter.getAlt() % 2==0){
-                fighter.setUrlName("bayonetta1");
-            }else{
-                fighter.setUrlName("bayonetta2");
-            }
-            return;
-        }
-
-        if ("kazuya".contains(fighter.getUrlName())) {
-            if (fighter.getAlt() % 2==0){
-                fighter.setUrlName("kazuya2");
-            }else{
-                fighter.setUrlName("kazuya1");
-            }
-            return;
-        }
-
-        if ("dq_hero".contains(fighter.getUrlName())) {
-            //1 and 5
-            if (fighter.getAlt() % 4 == 1) fighter.setUrlName("dq_hero1");
-            //2 and 6
-            if (fighter.getAlt() % 4 == 2) fighter.setUrlName("dq_hero2");
-            //3 and 7
-            if (fighter.getAlt() % 4 == 3) fighter.setUrlName("dq_hero3");
-            //4 and 8
-            if (fighter.getAlt() % 4 == 0) fighter.setUrlName("dq_hero4");
-            return;
-        }
-
-        if ("sora".contains(fighter.getUrlName())) {
-            //1 and 5
-            if (fighter.getAlt() % 4 == 1) fighter.setUrlName("sora1");
-            //2 and 6
-            if (fighter.getAlt() % 4 == 2) fighter.setUrlName("sora2");
-            //3 and 7
-            if (fighter.getAlt() % 4 == 3) fighter.setUrlName("sora3");
-            //4 and 8
-            if (fighter.getAlt() % 4 == 0) fighter.setUrlName("sora4");
-            return;
-        }
-
-        if ("joker".contains(fighter.getUrlName())) {
-            //1 to 6
-            if (fighter.getAlt()<7) fighter.setUrlName("joker1");
-            //7 and 8
-            else fighter.setUrlName("joker2");
-            return;
-        }
-
-        if ("sephiroth".contains(fighter.getUrlName())) {
-            //1 to 6
-            if (fighter.getAlt()<7) fighter.setUrlName("sephiroth1");
-            //7 and 8
-            else fighter.setUrlName("sephiroth2");
-            return;
-        }
-    }
-
-    public Fighter getFighter(){
-        return this.fighter;
-    }
-
-    public void setFighter(Fighter fighter){
-        this.fighter = fighter;
-    }
-
-    public BufferedImage getImage(){
-        return this.image;
-    }
-
-    public void setFighter(BufferedImage image){
-        this.image = image;
-    }
-
-    public FighterImageSettings getImageSettings() {
-        return imageSettings;
-    }
-
-    public void setImageSettings(FighterImageSettings imageSettings) {
-        this.imageSettings = imageSettings;
     }
 }
