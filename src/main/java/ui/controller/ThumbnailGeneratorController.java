@@ -1,10 +1,19 @@
 package ui.controller;
 
 import app.App;
+import com.google.gson.reflect.TypeToken;
+import exception.FighterImageSettingsNotFoundException;
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
+import file.json.JSONReader;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,25 +21,27 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import smashgg.query.QueryUtils;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
+import thumbnail.image.ImageSettings;
 import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-
 public class ThumbnailGeneratorController implements Initializable {
+    private final Logger LOGGER = LogManager.getLogger(ThumbnailGeneratorController.class);
 
     @FXML
     private AnchorPane tournaments;
@@ -43,11 +54,11 @@ public class ThumbnailGeneratorController implements Initializable {
     @FXML
     private AnchorPane player1;
     @FXML
-    private Player1Controller player1Controller;
+    private PlayerController player1Controller;
     @FXML
     private AnchorPane player2;
     @FXML
-    private Player2Controller player2Controller;
+    private PlayerController player2Controller;
     @FXML
     private Button flipPlayer;
     @FXML
@@ -71,6 +82,9 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public void flipPlayers(ActionEvent actionEvent) {
+        LOGGER.info("User clicked on flip players button.");
+        LOGGER.debug("Player 1 -> {} is now Player 2", player1Controller.toString());
+        LOGGER.debug("Player 2 -> {} is now Player 1", player2Controller.toString());
         String nameAux = player1Controller.getPlayer();
         player1Controller.setPlayer(player2Controller.getPlayer());
         player2Controller.setPlayer(nameAux);
@@ -91,46 +105,60 @@ public class ThumbnailGeneratorController implements Initializable {
 
         player1Controller.setAlt(auxAlt2);
         player2Controller.setAlt(auxAlt1);
-
     }
 
     public void createThumbnail(ActionEvent actionEvent) {
+        LOGGER.info("Creating a single thumbnail.");
         if (player1Controller.getUrlName() == null || player2Controller.getUrlName() == null){
-            System.out.println("Missing fighters");
-            AlertFactory.displayWarning("2 fighters must be chosen before generating the thumbnail.");
+            LOGGER.error("User did not select characters for all players.");
+            AlertFactory.displayWarning("It is required to select a character for all players before generating the thumbnail.");
             return;
         }
 
         if (getSelectedTournament() == null){
-            System.out.println("Tournament was not chosen");
+            LOGGER.error("User did not select a tournament");
             AlertFactory.displayWarning("A tournament must be chosen before generating the thumbnail.");
             return;
         }
 
+        LOGGER.info("Loading image settings of tournament {} ", getSelectedTournament().getName());
+        ImageSettings imageSettings = (ImageSettings) JSONReader.getJSONArray(
+                getSelectedTournament().getFighterImageSettingsFile(),
+                new TypeToken<ArrayList<ImageSettings>>() {}.getType())
+                .get(0);
         try {
-            Thumbnail.generateAndSaveThumbnail(getSelectedTournament(), saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
+            Thumbnail.generateAndSaveThumbnail(getSelectedTournament(), imageSettings, saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
                     player1Controller.generateFighter(),
                     player2Controller.generateFighter());
+            LOGGER.info("Thumbnail was successfully generated and saved!");
             AlertFactory.displayInfo("Thumbnail was successfully generated and saved!");
-        }catch (LocalImageNotFoundException e){
+        } catch (LocalImageNotFoundException e){
+            LOGGER.error("An issue occurred when loading an image. {}", e.getMessage());
             AlertFactory.displayError(e.getMessage());
-        }catch (OnlineImageNotFoundException e){
+        } catch (OnlineImageNotFoundException e){
+            LOGGER.error("An issue occurred when loading an image online. {}", e.getMessage());
             AlertFactory.displayError(e.getMessage());
-        }catch (FontNotFoundException e){
+        } catch (FontNotFoundException e){
+            LOGGER.error("An issue occurred when loading a font. {}", e.getMessage());
+            AlertFactory.displayError(e.getMessage());
+        } catch (FighterImageSettingsNotFoundException e){
+            LOGGER.error("An issue occurred when loading image settings of a character. {}", e.getMessage());
             AlertFactory.displayError(e.getMessage());
         }
     }
 
     //MenuBar
     public void createMultipleThumbnails(ActionEvent actionEvent) {
+        LOGGER.info("User chose to generate multiple thumbnails at once.");
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
+            LOGGER.info("User loaded file {}.", selectedFile.getPath());
             try {
                 ThumbnailFromFile.generateFromFile(selectedFile, saveLocally.isSelected());
                 AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
             }catch(ThumbnailFromFileException e){
-                //AlertFactory already thrown inside tbf.generateFromFile
+                //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
             }catch(FontNotFoundException e){
                 AlertFactory.displayError(e.getMessage());
             }
@@ -157,6 +185,7 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public void close(ActionEvent actionEvent) {
+        LOGGER.info("Closing application");
         Platform.exit();
     }
 
@@ -177,7 +206,10 @@ public class ThumbnailGeneratorController implements Initializable {
         for (Tournament tournament : getTournamentsList()){
             MenuItem copyOption = new MenuItem(tournament.getName());
             copyOption.setStyle(style);
-            copyOption.setOnAction(event -> updateTournamentsList(tournament));
+            copyOption.setOnAction(event -> {
+                LOGGER.info("Creating copy of tournament {}.", tournament.toString());
+                updateTournamentsList(tournament);
+            });
             menuCopy.getItems().add(copyOption);
 
             MenuItem editOption = new MenuItem(tournament.getName());
@@ -185,6 +217,7 @@ public class ThumbnailGeneratorController implements Initializable {
             editOption.setOnAction(event -> {
                 setSelectedEdit(tournament);
                 try {
+                    LOGGER.info("Selected tournament {} for editing.", tournament.getName());
                     Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsEdit.fxml"));
                     Stage stage = new Stage();
                     stage.setTitle("Edit Tournament " + tournament.getName());

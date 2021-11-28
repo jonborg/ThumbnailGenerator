@@ -3,13 +3,15 @@ package smashgg.query;
 import com.github.gpluscb.ggjava.api.GGClient;
 import com.github.gpluscb.ggjava.api.RateLimiter;
 import com.google.gson.JsonObject;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
 import ui.factory.alert.AlertFactory;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-
 public class QueryUtils {
+    private static final Logger LOGGER = LogManager.getLogger(QueryUtils.class);
 
     private static GGClient client;
 
@@ -27,7 +29,9 @@ public class QueryUtils {
     public static JsonObject runQuery(String query) throws ExecutionException, InterruptedException {
         CompletableFuture<JsonObject> future = client.request(query);
         future.exceptionally(t -> {
-            AlertFactory.displayError("An issue has occurred when trying to use Smash.gg",
+            LOGGER.error("An issue has occurred when trying to use Smash.gg API");
+            LOGGER.catching(t);
+            AlertFactory.displayError("An issue has occurred when trying to use Smash.gg API",
                     ExceptionUtils.getStackTrace(t));
             return null;
         });
@@ -39,6 +43,7 @@ public class QueryUtils {
         String[] urlSplit = tournamentURL.split("/");
         return "query{ " +
                 "tournament(slug:  \""+ urlSplit[3] + "/" + urlSplit[4] + "\") {id " +
+                "streams{ streamName }" +
                 "events{ id name " +
                 "phases{ id name " +
                 "phaseGroups{ nodes{ id displayIdentifier " +

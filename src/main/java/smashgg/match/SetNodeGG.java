@@ -2,11 +2,13 @@ package smashgg.match;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+@Getter
 public class SetNodeGG{
     @Expose
     @SerializedName("fullRoundText")
@@ -29,18 +31,6 @@ public class SetNodeGG{
             return roundName + "s";
         }
         return roundName;
-    }
-
-    public List<SlotGG> getSlots() {
-        return slots;
-    }
-
-    public List<GameGG> getGames() {
-        return games;
-    }
-
-    public StreamGG getStream() {
-        return stream;
     }
 
     public String getStreamName() {
@@ -71,7 +61,7 @@ public class SetNodeGG{
             }
         }
         int mostUsedCharacter = Collections.max(charSel.entrySet(), HashMap.Entry.comparingByValue()).getKey();
-        return CharacterId.map.get(mostUsedCharacter);
+        return CharacterId.getValue(mostUsedCharacter);
     }
 
     private String getEntrateNameWithNoTeam(String name){
@@ -97,8 +87,7 @@ public class SetNodeGG{
         return player1NoTeam + ";" + player2NoTeam + ";"
                 + characters + ";"
                 + "1;1;"
-                + getRoundName()
-                + System.lineSeparator();
+                + getRoundName();
     }
 }
 

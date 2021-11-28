@@ -51,7 +51,7 @@
             <HBox spacing="50" alignment="CENTER">
                 <VBox>
                     <Label text="Player 1:"/>
-                    <fx:include fx:id="player1" source="player1.fxml" />
+                    <fx:include fx:id="player1" source="player.fxml" />
                 </VBox>
                 <Button fx:id="flipPlayer" onAction="#flipPlayers">
                     <graphic>
@@ -62,7 +62,7 @@
                 </Button>
                 <VBox>
                     <Label text="Player 2:"/>
-                    <fx:include fx:id="player2" source="player2.fxml"/>
+                    <fx:include fx:id="player2" source="player.fxml"/>
                 </VBox>
             </HBox>
 

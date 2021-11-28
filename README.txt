@@ -2,17 +2,28 @@
 //          0.Release Notes          //
 ///////////////////////////////////////
 
+----------Added features on v2.1.0-----------
+- Added Stream filte for Smash.gg thumbnail generation;
+- Can assign different fighter image settings for each tournament;
+- Added log support to track application usage for debug analysis;
+- Fixed issue were Rosalina, Young Link and Incineroar would not show their preview icons;
+- Fixed issue with fonts when no font styling (bold and italic) was selected, which would not allow thumbnail generation;
+- Kazuya added to the roster;
+- Sora added to the roster.
+
+
+
 ----------Added features on v2.0.0-----------
-- Thumbnails can now be generated for Smash.gg tournaments
-- Tournament settings can be created, edited or deleted.
-- Menu bar added to initial page to select Thumbnail Generator's functionalities
+- Thumbnails can now be generated for Smash.gg tournaments;
+- Tournament settings can be created, edited or deleted;
+- Menu bar added to initial page to select Thumbnail Generator's functionalities.
 
 
 
 ----------Added features on v1.4.0-----------
-- Scroll pane added to tournament list
-- Updated Falco horizontal offset from -10 to 60
-- Sephiroth added to the roster.
+- Scroll pane added to tournament list;
+- Updated Falco horizontal offset from -10 to 60;
+- Sephiroth added to the roster;
 - Pyra/Mythra added to the roster.
 
 
@@ -28,8 +39,8 @@
 
 
 ----------Added features on v1.2.2-----------
-- Min Min added to the roster.
-- Added Tiamat as a league
+- Min Min added to the roster;
+- Added Tiamat as a league.
 
 
 

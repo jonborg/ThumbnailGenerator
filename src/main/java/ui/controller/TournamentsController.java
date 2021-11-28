@@ -1,21 +1,23 @@
 package ui.controller;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.buttons.TournamentButton;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
 public class TournamentsController implements Initializable {
+    private static final Logger LOGGER = LogManager.getLogger(TournamentsController.class);
 
     @FXML
     private  Label tournamentsLabel;
@@ -56,6 +58,7 @@ public class TournamentsController implements Initializable {
                     if (node instanceof TournamentButton) {
                         TournamentButton tournamentButton = (TournamentButton) node;
                         if (tournamentButton.isSelected()) {
+                            LOGGER.info("User selected tournament {}", tournamentButton.getName());
                             setSelectedTournament(tournamentButton.getTournament());
                             tournamentsLabel.setText(tournamentsLabelTitle + " " + tournamentButton.getName());
                         }

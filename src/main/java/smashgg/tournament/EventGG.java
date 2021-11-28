@@ -2,9 +2,11 @@ package smashgg.tournament;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class EventGG {
     @Expose
     @SerializedName("id")
@@ -16,21 +18,10 @@ public class EventGG {
     @SerializedName("phases")
     private List<PhaseGG> phases;
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name == null ? "-" : name;
-    }
-
-    public List<PhaseGG> getPhases() {
-        return phases;
-    }
-
     @Override
     public String toString() {
-        return getName();
+        return name == null ? "-" : name;
+
     }
 
     public boolean isNull(){

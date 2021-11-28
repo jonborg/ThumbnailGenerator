@@ -3,7 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import ui.textfield.ChosenFileField?>
+<?import ui.textfield.ChosenImageField?>
+<?import ui.textfield.ChosenJsonField?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="ui.controller.TournamentsEditController"
@@ -11,7 +12,7 @@
             stylesheets="@../styles/tournamentsAddEdit.css">
 
     <HBox styleClass="mainBox" spacing="15" >
-        <VBox spacing="40">
+        <VBox spacing="29">
             <VBox spacing="15">
                 <TitledPane text="General Settings" collapsible="false">
                     <VBox spacing="15">
@@ -33,31 +34,33 @@
                     <VBox spacing="15">
                         <VBox>
                             <Label text="Button Logo:"/>
-                            <ChosenFileField fx:id="logo"/>
+                            <ChosenImageField fx:id="logo"/>
                         </VBox>
                         <VBox>
                             <Label text="Foreground*:"/>
-                            <ChosenFileField fx:id="foreground"/>
+                            <ChosenImageField fx:id="foreground"/>
                         </VBox>
                         <VBox>
                             <Label text="Background:"/>
-                            <ChosenFileField fx:id="background"/>
+                            <ChosenImageField fx:id="background"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Fighter Image Settings File:"/>
+                            <ChosenJsonField fx:id="fighterImageSettingsFile"/>
                         </VBox>
                     </VBox>
                 </TitledPane>
             </VBox>
             <VBox spacing="10" alignment="CENTER">
-                <Button id="previewButton" styleClass="bigButton" text="Preview" onAction="#previewThumbnail"/>
-                <HBox spacing="10" alignment="CENTER">
-                    <Button id="saveButton" styleClass="button" text="Save" onAction="#save"/>
-                    <Button fx:id="cancelButton" styleClass="button" text="Cancel" onAction="#cancel"/>
-                </HBox>
+                <Button id="saveButton" styleClass="button" text="Save" onAction="#save"/>
+                <Button fx:id="cancelButton" styleClass="button" text="Cancel" onAction="#cancel"/>
             </VBox>
         </VBox>
+
         <VBox spacing="15">
             <HBox spacing="15">
                 <TitledPane text="Font Dimensions" collapsible="false">
-                    <VBox>
+                    <VBox spacing="15">
                         <HBox spacing="63">
                             <VBox>
                                 <Label text="Top Size:"/>
@@ -82,7 +85,7 @@
                 </TitledPane>
 
                 <TitledPane text="Font Styling" collapsible="false" >
-                    <VBox spacing="10">
+                    <VBox spacing="25">
                         <HBox spacing="40">
                             <VBox>
                                 <Label text="Bold:"/>
@@ -105,7 +108,7 @@
                 </TitledPane>
 
                 <TitledPane text="Text Vertical Offset" collapsible="false" >
-                    <VBox>
+                    <VBox spacing="15">
                         <HBox spacing="61">
                             <VBox>
                                 <Label text="Top Left:"/>
@@ -129,12 +132,16 @@
                     </VBox>
                 </TitledPane>
             </HBox>
+            <VBox spacing="10" alignment="CENTER">
+                <BorderPane styleClass="previewPane">
+                    <center>
+                        <ImageView fx:id="preview" preserveRatio="true" fitWidth="720"/>
+                    </center>
+                </BorderPane>
+                <Button id="previewButton" styleClass="bigButton" text="Preview" onAction="#previewThumbnail"/>
+            </VBox>
 
-            <BorderPane styleClass="previewPane">
-                <center>
-                    <ImageView fx:id="preview" preserveRatio="true" fitWidth="720"/>
-                </center>
-            </BorderPane>
+
         </VBox>
     </HBox>
 </AnchorPane>

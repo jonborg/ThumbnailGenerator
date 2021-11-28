@@ -1,15 +1,16 @@
 package fighter;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class Names {
-    public static Map<String,String> map = new TreeMap<>();
+    private final static Map<String,String> map = new TreeMap<>();
 
     static{
         //64
         map.put("Mario", "mario");
-        map.put("DonKey Kong", "donkey_kong");
+        map.put("Donkey Kong", "donkey_kong");
         map.put("Link", "link");
         map.put("Samus", "samus");
         map.put("Yoshi", "yoshi");
@@ -93,6 +94,8 @@ public class Names {
         map.put("Steve", "steve");
         map.put("Sephiroth", "sephiroth");
         map.put("Pyra & Mythra", "pyra");
+        map.put("Kazuya", "kazuya");
+        map.put("Sora", "sora");
 
         //echoes
         map.put("Dark Pit", "dark_pit");
@@ -102,5 +105,13 @@ public class Names {
         map.put("Dark Samus", "dark_samus");
         map.put("Richter", "richter");
         map.put("Ken", "ken");
+    }
+
+    public static String getValue(String key){
+        return map.get(key);
+    }
+
+    public static Set<String> getKeySet(){
+        return map.keySet();
     }
 }

@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class CharacterId {
-    public static Map<Integer,String> map = new TreeMap<>();
+    private static Map<Integer,String> map = new TreeMap<>();
 
     static{
         //64
@@ -93,6 +93,8 @@ public class CharacterId {
         map.put(1766, "steve");
         map.put(1777, "sephiroth");
         map.put(1795, "pyra");
+        map.put(1846, "kazuya");
+        map.put(1897, "sora");
 
         //echoes
         map.put(1278, "dark_pit");
@@ -104,5 +106,9 @@ public class CharacterId {
         map.put(1410, "ken");
 
         map.put(1749, "RANDOM");
+    }
+
+    public static String getValue(int key){
+        return map.get(key);
     }
 }

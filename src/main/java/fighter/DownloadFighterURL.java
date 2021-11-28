@@ -1,9 +1,13 @@
 package fighter;
 
 import file.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ui.controller.ThumbnailGeneratorController;
 
 import java.io.File;
 public class DownloadFighterURL {
+    private static final Logger LOGGER = LogManager.getLogger(DownloadFighterURL.class);
 
     static String FIGHTERS_URL = "https://www.smashbros.com/assets_v2/img/fighter/";
     static String FIGHTERS_URL_2 = "https://raw.githubusercontent.com/marcrd/smash-ultimate-assets/master/renders/";
@@ -15,7 +19,7 @@ public class DownloadFighterURL {
         String fighterPath = System.getProperty("user.dir") + localFightersPath + urlName + "/" + alt +".png";
         File file = new File(fighterPath);
         if (!file.exists()){
-            System.out.println("Image for " + urlName + alt + " does not exist locally. Will try finding online");
+            LOGGER.debug("Image for {}{} does not exist locally. Will try finding online", urlName, alt);
             return getOnlineURL(urlName,alt);
         }
         return fighterPath;

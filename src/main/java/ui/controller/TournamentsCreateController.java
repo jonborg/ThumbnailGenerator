@@ -1,29 +1,6 @@
 package ui.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import javafx.util.converter.FloatStringConverter;
-import javafx.util.converter.IntegerStringConverter;
-import thumbnail.generate.Thumbnail;
-import thumbnail.text.TextSettings;
-import tournament.Tournament;
-import tournament.TournamentUtils;
-import ui.combobox.InputFilter;
-import ui.factory.alert.AlertFactory;
-import ui.textfield.ChosenFileField;
-
-import java.awt.*;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,20 +9,49 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import javafx.util.converter.FloatStringConverter;
+import javafx.util.converter.IntegerStringConverter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import thumbnail.generate.Thumbnail;
+import thumbnail.text.TextSettings;
+import tournament.Tournament;
+import tournament.TournamentUtils;
+import ui.combobox.InputFilter;
+import ui.factory.alert.AlertFactory;
+import ui.textfield.ChosenImageField;
+import ui.textfield.ChosenJsonField;
 
 public class TournamentsCreateController implements Initializable {
+    private static final Logger LOGGER = LogManager.getLogger(TournamentsCreateController.class);
 
     @FXML
     protected TextField name;
     @FXML
     protected TextField id;
     @FXML
-    protected ChosenFileField logo;
+    protected ChosenImageField logo;
     @FXML
-    protected ChosenFileField foreground;
+    protected ChosenImageField foreground;
     @FXML
-    protected ChosenFileField background;
-
+    protected ChosenImageField background;
+    @FXML
+    protected ChosenJsonField fighterImageSettingsFile;
     @FXML
     protected ComboBox<String> font;
     @FXML
@@ -72,7 +78,8 @@ public class TournamentsCreateController implements Initializable {
     protected TextField downOffsetBottomLeft;
     @FXML
     protected TextField downOffsetBottomRight;
-
+    @FXML
+    protected Button saveButton;
     @FXML
     protected Button cancelButton;
     @FXML
@@ -80,6 +87,7 @@ public class TournamentsCreateController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LOGGER.info("Creating new tournament.");
         initNumberTextFields();
         initFontDropdown();
     }
@@ -152,14 +160,14 @@ public class TournamentsCreateController implements Initializable {
             Image image = SwingFXUtils.toFXImage(previewImage, null);
             preview.setImage(image);
         }catch(Exception e){
-            System.out.println(e);
+            LOGGER.catching(e);
         }
     }
 
 
     protected Tournament generateTournamentWithCurrentSettings(){
         Tournament tournament =  new Tournament(id.getText(), name.getText(),
-                logo.getText(), foreground.getText(), background.getText());
+                logo.getText(), foreground.getText(), background.getText(), fighterImageSettingsFile.getText());
         TextSettings textSettings = new TextSettings(id.getText(), font.getSelectionModel().getSelectedItem(),
                 bold.isSelected(), italic.isSelected(), shadow.isSelected(), Float.parseFloat(contour.getText()),
                 Integer.parseInt(sizeTop.getText()), Integer.parseInt(sizeBottom.getText()),
@@ -175,6 +183,7 @@ public class TournamentsCreateController implements Initializable {
     protected boolean validateParameters(){
         String missingParameters = missingParameters();
         if (!missingParameters.isEmpty()){
+            LOGGER.error("There are missing obligatory parameters.");
             AlertFactory.displayError("There are missing obligatory parameters:", missingParameters);
             return false;
         }
@@ -185,27 +194,33 @@ public class TournamentsCreateController implements Initializable {
         StringBuffer missingParameters = new StringBuffer();
 
         if (name.getText().isEmpty()){
+            LOGGER.error("Missing parameter -> Tournament Name");
             missingParameters.append("Tournament Name");
         }
         if (id.getText().isEmpty()){
+            LOGGER.error("Missing parameter -> Tournament Diminutive");
             if (!missingParameters.toString().isEmpty()){
                 missingParameters.append(", ");
             }
             missingParameters.append("Tournament Diminutive");
         }
-        if (font.getSelectionModel().getSelectedItem().isEmpty()){
+        if (font.getSelectionModel().getSelectedItem() == null ||
+                font.getSelectionModel().getSelectedItem().isEmpty()){
+            LOGGER.error("Missing parameter -> Font");
             if (!missingParameters.toString().isEmpty()){
                 missingParameters.append(", ");
             }
             missingParameters.append("Font");
         }
         if (foreground.getText().isEmpty()){
+            LOGGER.error("Missing parameter -> Foreground");
             if (!missingParameters.toString().isEmpty()){
                 missingParameters.append(", ");
             }
             missingParameters.append("Foreground");
         }
         if (background.getText().isEmpty()){
+            LOGGER.error("Missing parameter -> Background");
             if (!missingParameters.toString().isEmpty()){
                 missingParameters.append(", ");
             }
@@ -221,15 +236,19 @@ public class TournamentsCreateController implements Initializable {
 
 
     public void save(ActionEvent actionEvent) {
+        LOGGER.info("Saving new tournament.");
         if (!validateParameters()){
             return;
         }
         Tournament currentTournament = generateTournamentWithCurrentSettings();
+        LOGGER.debug("Saving new tournament -> {}", currentTournament.toString());
         updateTournamentsListAndSettings(currentTournament);
-        cancel(actionEvent);
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 
     public void cancel(ActionEvent actionEvent)  {
+        LOGGER.info("User cancelled tournament creation. Tournament will not be saved.");
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
