@@ -3,7 +3,7 @@
 ///////////////////////////////////////
 
 ----------Added features on v2.1.0-----------
-- Added Stream filte for Smash.gg thumbnail generation;
+- Added Stream filter for Smash.gg thumbnail generation;
 - Can assign different fighter image settings for each tournament;
 - Added log support to track application usage for debug analysis;
 - Fixed issue were Rosalina, Young Link and Incineroar would not show their preview icons;
