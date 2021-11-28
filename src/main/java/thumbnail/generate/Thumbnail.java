@@ -66,13 +66,14 @@ public class Thumbnail {
     private static BufferedImage generateThumbnail(Tournament tournament, ImageSettings imageSettings, boolean locally, String round, String date, Fighter... fighters)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException {
-
+        LOGGER.debug("*********************************************************************************************");
         LOGGER.debug("Creating thumbnail with following parameters:");
         LOGGER.debug("Tournament -> {}", tournament.getName());
         LOGGER.debug("Player 1 -> {}", fighters[0].toString());
         LOGGER.debug("Player 2 -> {}", fighters[1].toString());
         LOGGER.debug("Round -> {}", round);
         LOGGER.debug("Date -> {}", date);
+        LOGGER.debug("*********************************************************************************************");
 
         saveLocally = locally;
         thumbnail = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
