@@ -5,6 +5,13 @@ import com.google.gson.reflect.TypeToken;
 import exception.FontNotFoundException;
 import exception.ThumbnailFromFileException;
 import file.json.JSONReader;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,12 +19,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
 import smashgg.match.SetGG;
 import smashgg.match.StreamGG;
 import smashgg.query.QueryUtils;
 import smashgg.tournament.EventGG;
 import smashgg.tournament.PhaseGG;
+import smashgg.tournament.PhaseGroupGG;
 import smashgg.tournament.PhaseGroupNodeGG;
 import smashgg.tournament.TournamentGG;
 import thumbnail.generate.ThumbnailFromFile;
@@ -25,15 +35,8 @@ import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.concurrent.ExecutionException;
-
 public class FromSmashGGController implements Initializable {
+    private final Logger LOGGER = LogManager.getLogger(FromSmashGGController.class);
 
     @FXML
     private TextField authToken;
@@ -58,6 +61,7 @@ public class FromSmashGGController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LOGGER.info("User selected thumbnail generation with Smash.gg tournament information.");
         removeSelectedTournament();
         resetComboBoxes(true);
         initTournamentFieldListener();
@@ -71,31 +75,39 @@ public class FromSmashGGController implements Initializable {
 
 
     public void generateCommands() {
+        LOGGER.info("Generating commands for thumbnail generation.");
         if (TournamentUtils.getSelectedTournament() == null){
+            LOGGER.error("User did not select a tournament.");
             AlertFactory.displayWarning("A tournament must be chosen before generating thumbnails.");
             return;
         }
         try {
+            LOGGER.debug("Loading provided authorization token.");
             QueryUtils.initClient(authToken.getText());
         }catch (IllegalArgumentException e){
+            LOGGER.error("Could not connect to Smash.gg due to a authorization token issue.");
+            LOGGER.catching(e);
             AlertFactory.displayError("Could not connect to Smash.gg due to a authorization token issue",
                     ExceptionUtils.getStackTrace(e));
             return;
         }
         if (phaseGroupSelect.getSelectionModel().getSelectedItem() != null
                 && !phaseGroupSelect.getSelectionModel().getSelectedItem().isNull()){
+            LOGGER.debug("Reading sets of phase group {}",phaseGroupSelect.getSelectionModel().getSelectedItem().getIdentifier());
             readSetsFromSmashGG(2);
             return;
         }
 
         if (phaseSelect.getSelectionModel().getSelectedItem() != null
                 && !phaseSelect.getSelectionModel().getSelectedItem().isNull()){
+            LOGGER.debug("Reading sets of phase {}",phaseSelect.getSelectionModel().getSelectedItem().getName());
             readSetsFromSmashGG(1);
             return;
         }
 
         if (eventSelect.getSelectionModel().getSelectedItem() != null
                 && !eventSelect.getSelectionModel().getSelectedItem().isNull()){
+            LOGGER.debug("Reading sets of event {}",eventSelect.getSelectionModel().getSelectedItem().getName());
             readSetsFromSmashGG(0);
             return;
         }
@@ -131,9 +143,11 @@ public class FromSmashGGController implements Initializable {
                     default:
                         return;
                 }
+                LOGGER.debug("Running query -> {}", query);
                 JsonObject result = QueryUtils.runQuery(query);
+                LOGGER.debug("Result -> {}", result.toString());
+
                 if (totalPages < 0){
-                    System.out.println("Query ran: "+query);
                     totalPages = result.getAsJsonObject("data").getAsJsonObject(mainBody).getAsJsonObject("sets")
                             .getAsJsonObject("pageInfo").getAsJsonPrimitive("totalPages").getAsInt();
                     foundSets.setText(TournamentUtils.getSelectedTournament().getTournamentId() + ";" + eventName + System.lineSeparator());
@@ -143,15 +157,25 @@ public class FromSmashGGController implements Initializable {
                 set.getSetNodes().forEach(setNodeGG -> {
                     if(setNodeGG.hasStream()) {
                         StreamGG selectedStream = streamSelect.getSelectionModel().getSelectedItem();
-                        if(selectedStream == null || selectedStream.isNull() || selectedStream.getStreamName().equals(setNodeGG.getStreamName())) {
-                            foundSets.appendText(setNodeGG.toString());
+                        if(selectedStream == null || selectedStream.isNull()) {
+                            LOGGER.debug("Found set -> {}", setNodeGG.toString());
+                            foundSets.appendText(setNodeGG.toString()+System.lineSeparator());
+                        } else {
+                            LOGGER.info("Filtering sets by stream {}.", selectedStream.getStreamName());
+                            if(selectedStream.getStreamName().equals(setNodeGG.getStreamName())){
+                                LOGGER.debug("Found set -> {}", setNodeGG.toString());
+                                foundSets.appendText(setNodeGG.toString()+System.lineSeparator());
+                            }
                         }
                     }
                 });
             }while(readPages<totalPages);
             genStart.setDisable(false);
-            AlertFactory.displayInfo("Successfully generated multi generation commands");
+            LOGGER.info("Finished generating multiple thumbnails generation commands.");
+            AlertFactory.displayInfo("Finished generating multiple thumbnails generation commands.");
         }catch (ExecutionException | InterruptedException | NullPointerException e){
+            LOGGER.error("An issue occurred when executing query");
+            LOGGER.catching(e);
             AlertFactory.displayError("An issue occurred when executing query",
                     ExceptionUtils.getStackTrace(e));
             return;
@@ -161,12 +185,15 @@ public class FromSmashGGController implements Initializable {
     }
 
     public void generateThumbnails(){
+        LOGGER.info("Starting multiple thumbnails generation.");
         if (foundSets.getText()==null || foundSets.getText().isEmpty()){
+            LOGGER.error("No commands were generated to create thumbnails.");
             AlertFactory.displayWarning("No commands were generated to create thumbnails");
             return;
         }
         try {
             ThumbnailFromFile.generateFromSmashGG(foundSets.getText());
+            LOGGER.info("Thumbnails were successfully generated and saved.");
             AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
         }catch(ThumbnailFromFileException e){
             //AlertFactory already thrown inside ThumbnailFromFile.generateFromSmashGG
@@ -174,8 +201,6 @@ public class FromSmashGGController implements Initializable {
             AlertFactory.displayError(e.getMessage());
         }
     }
-
-
 
     public Tournament getBackupTournament(){
         return this.backupTournament;
@@ -203,9 +228,11 @@ public class FromSmashGGController implements Initializable {
         phaseSelect.getItems().clear();
         phaseGroupSelect.getItems().clear();
         if (selection == null || selection.isNull()){
+            LOGGER.info("Event selection was removed. Resetting phase and phase group lists.");
             phaseSelect.setDisable(true);
             phaseGroupSelect.setDisable(true);
         }else{
+            LOGGER.info("Event {} was selected. Setting phase list.", selection.getName());
             phaseSelect.setDisable(false);
             phaseSelect.getItems().add(new PhaseGG());
             phaseSelect.getItems().addAll(selection.getPhases());
@@ -217,11 +244,22 @@ public class FromSmashGGController implements Initializable {
         phaseGroupSelect.getSelectionModel().clearSelection();
         phaseGroupSelect.getItems().clear();
         if (selection == null || selection.isNull()){
+            LOGGER.info("Phase selection was removed. Resetting phase group lists.");
             phaseGroupSelect.setDisable(true);
         }else{
+            LOGGER.info("Phase {} was selected. Setting phase groups list.", selection);
             phaseGroupSelect.setDisable(false);
             phaseGroupSelect.getItems().add(new PhaseGroupNodeGG());
             phaseGroupSelect.getItems().addAll(selection.getPhaseGroups());
+        }
+    }
+
+    public void phaseGroupListener(ActionEvent actionEvent) {
+        PhaseGroupNodeGG selection = phaseGroupSelect.getSelectionModel().getSelectedItem();
+        if (selection == null || selection.isNull()){
+            LOGGER.info("Phase Group selection was removed.");
+        }else {
+            LOGGER.info("Phase Group {} was selected.", selection);
         }
     }
 
@@ -238,30 +276,45 @@ public class FromSmashGGController implements Initializable {
             return;
         }
         if (!tournamentURL.getText().contains("smash.gg/tournament")){
+            LOGGER.error("User provided a not valid Smash.gg tournament URL -> {}", tournamentURL.getText());
             AlertFactory.displayError(tournamentURL.getText() + " is not a valid Smash.gg tournament URL. " +
                     "Ex.:https://smash.gg/tournament/swt-europe-ultimate-online-qualifier");
             return;
         }
         resetComboBoxes(false);
         try {
+            LOGGER.debug("Loading provided authorization token.");
             QueryUtils.initClient(authToken.getText());
+            LOGGER.info("Loading tournament details from Smash.gg.");
+            LOGGER.debug("Running query -> {}", QueryUtils.tournamentDetailsQuery(tournamentURL.getText()));
             JsonObject result = QueryUtils.runQuery(QueryUtils.tournamentDetailsQuery(tournamentURL.getText()));
+            LOGGER.debug("Result -> {}", result.toString());
+
             TournamentGG tournamentGG = (TournamentGG) JSONReader.getJSONObject(result.get("data")
                     .getAsJsonObject().get("tournament").toString(), new TypeToken<TournamentGG>() {}.getType());
+            LOGGER.debug("Setting events list.");
             eventSelect.getItems().addAll(tournamentGG.getEvents());
+
             streamSelect.getItems().addAll(new StreamGG());
-            streamSelect.getItems().addAll(tournamentGG.getStreams());
+            LOGGER.debug("Setting streams list.");
+            if(tournamentGG.getStreams()!=null) {
+                streamSelect.getItems().addAll(tournamentGG.getStreams());
+            }
             if (eventSelect.getItems().size() > 0){
                 eventSelect.getSelectionModel().select(0);
             }
             genText.setDisable(false);
         }catch (IllegalArgumentException e){
+            LOGGER.error("Could not connect to Smash.gg due to a authorization token issue.");
+            LOGGER.catching(e);
             AlertFactory.displayError("Could not connect to Smash.gg due to a authorization token issue",
                     ExceptionUtils.getStackTrace(e));
             genText.setDisable(true);
 
             return;
         }catch (ExecutionException | InterruptedException | NullPointerException e){
+            LOGGER.error("An issue occurred when executing query");
+            LOGGER.catching(e);
             AlertFactory.displayError("An issue occurred when executing query",
                     ExceptionUtils.getStackTrace(e));
             genText.setDisable(true);
@@ -282,12 +335,15 @@ public class FromSmashGGController implements Initializable {
     }
 
 
-        public void showAuthTokenPage(ActionEvent actionEvent) {
+    public void showAuthTokenPage(ActionEvent actionEvent) {
+        LOGGER.info("User loaded authorization token instructions' page.");
         String url ="https://developer.smash.gg/docs/authentication/";
         if(Desktop.isDesktopSupported()) {
             try {
                 Desktop.getDesktop().browse(new URI(url));
             }catch(URISyntaxException | IOException e ){
+                LOGGER.error("Could not open {}", url);
+                LOGGER.catching(e);
                 AlertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
             }
         }

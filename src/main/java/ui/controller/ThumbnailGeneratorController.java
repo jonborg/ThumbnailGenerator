@@ -2,8 +2,18 @@ package ui.controller;
 
 import app.App;
 import com.google.gson.reflect.TypeToken;
-import exception.*;
+import exception.FighterImageSettingsNotFoundException;
+import exception.FontNotFoundException;
+import exception.LocalImageNotFoundException;
+import exception.OnlineImageNotFoundException;
+import exception.ThumbnailFromFileException;
 import file.json.JSONReader;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +21,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -25,13 +39,6 @@ import thumbnail.image.ImageSettings;
 import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class ThumbnailGeneratorController implements Initializable {
     private final Logger LOGGER = LogManager.getLogger(ThumbnailGeneratorController.class);
@@ -76,8 +83,8 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public void flipPlayers(ActionEvent actionEvent) {
         LOGGER.info("User clicked on flip players button.");
-        LOGGER.debug("Player 1 - " + player1Controller.toString() + " is now Player 2");
-        LOGGER.debug("Player 2 - " + player2Controller.toString() + " is now Player 1");
+        LOGGER.debug("Player 1 -> {} is now Player 2", player1Controller.toString());
+        LOGGER.debug("Player 2 -> {} is now Player 1", player2Controller.toString());
         String nameAux = player1Controller.getPlayer();
         player1Controller.setPlayer(player2Controller.getPlayer());
         player2Controller.setPlayer(nameAux);
@@ -114,7 +121,7 @@ public class ThumbnailGeneratorController implements Initializable {
             return;
         }
 
-        LOGGER.info("Loading image settings of tournament {} " + getSelectedTournament().getName());
+        LOGGER.info("Loading image settings of tournament {} ", getSelectedTournament().getName());
         ImageSettings imageSettings = (ImageSettings) JSONReader.getJSONArray(
                 getSelectedTournament().getFighterImageSettingsFile(),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
@@ -178,6 +185,7 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public void close(ActionEvent actionEvent) {
+        LOGGER.info("Closing application");
         Platform.exit();
     }
 
@@ -198,7 +206,10 @@ public class ThumbnailGeneratorController implements Initializable {
         for (Tournament tournament : getTournamentsList()){
             MenuItem copyOption = new MenuItem(tournament.getName());
             copyOption.setStyle(style);
-            copyOption.setOnAction(event -> updateTournamentsList(tournament));
+            copyOption.setOnAction(event -> {
+                LOGGER.info("Creating copy of tournament {}.", tournament.toString());
+                updateTournamentsList(tournament);
+            });
             menuCopy.getItems().add(copyOption);
 
             MenuItem editOption = new MenuItem(tournament.getName());

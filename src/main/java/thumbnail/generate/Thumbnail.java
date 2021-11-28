@@ -53,6 +53,7 @@ public class Thumbnail {
     public static BufferedImage generatePreview(Tournament tournament)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException {
+        LOGGER.info("Generating thumbnail preview.");
         List<Fighter> fighters = Fighter.generatePreviewFighters();
         ImageSettings imageSettings = (ImageSettings)
                 JSONReader.getJSONArray(tournament.getFighterImageSettingsFile(), new TypeToken<ArrayList<ImageSettings>>() {
@@ -67,11 +68,11 @@ public class Thumbnail {
             FontNotFoundException, FighterImageSettingsNotFoundException {
 
         LOGGER.debug("Creating thumbnail with following parameters:");
-        LOGGER.debug("Tournament: {}", tournament.getName());
-        LOGGER.debug("Player 1: {}", fighters[0].toString());
-        LOGGER.debug("Player 2: {}", fighters[1].toString());
-        LOGGER.debug("Round: {}", round);
-        LOGGER.debug("Date: {}", date);
+        LOGGER.debug("Tournament -> {}", tournament.getName());
+        LOGGER.debug("Player 1 -> {}", fighters[0].toString());
+        LOGGER.debug("Player 2 -> {}", fighters[1].toString());
+        LOGGER.debug("Round -> {}", round);
+        LOGGER.debug("Date -> {}", date);
 
         saveLocally = locally;
         thumbnail = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);

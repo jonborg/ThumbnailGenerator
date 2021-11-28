@@ -3,9 +3,11 @@ package tournament;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
+import lombok.ToString;
 import thumbnail.text.TextSettings;
 
 @Getter
+@ToString
 public class Tournament implements Cloneable{
 
     @Expose
@@ -31,13 +33,15 @@ public class Tournament implements Cloneable{
 
     private static String defaultBackground= "assets/tournaments/backgrounds/default.png";
 
+    private static String defaultFighterImageSettingsFile= "settings/thumbnails/images/default.json";
+
     public Tournament(String id, String name, String image, String foreground, String background, String fighterImageSettingsFile){
         this.tournamentId = id;
         this.name = name;
         this.image = image;
         this.foreground = foreground;
         this.background = background == null ? defaultBackground : background;
-        this.fighterImageSettingsFile = fighterImageSettingsFile;
+        this.fighterImageSettingsFile = fighterImageSettingsFile == null ? defaultFighterImageSettingsFile : fighterImageSettingsFile;
     }
 
     public Object clone() throws CloneNotSupportedException{
@@ -83,6 +87,10 @@ public class Tournament implements Cloneable{
 
     public String getBackground() {
         return background == null ? defaultBackground : background;
+    }
+
+    public String getFighterImageSettingsFile() {
+        return fighterImageSettingsFile == null ? defaultFighterImageSettingsFile : fighterImageSettingsFile;
     }
 
     public void setTextSettings(TextSettings textSettings) {

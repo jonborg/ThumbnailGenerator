@@ -52,7 +52,7 @@
 
                     <Label text="Phase Group:"
                            GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                    <ComboBox fx:id="phaseGroupSelect" styleClass="filter"
+                    <ComboBox fx:id="phaseGroupSelect" styleClass="filter" onAction="#phaseGroupListener"
                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
                     <Label text="Stream:"

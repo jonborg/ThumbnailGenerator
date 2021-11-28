@@ -58,22 +58,25 @@ public class TextToImage {
         }
         try {
             InputStream fontFile = TextToImage.class.getResourceAsStream("/fonts/" + textSettings.getFont() + ".ttf");
-            font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, fontSize);
             if (!textSettings.isBold() && textSettings.isItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.ITALIC, fontSize);
-            if (textSettings.isBold() && !textSettings.isItalic())
+            else if (textSettings.isBold() && !textSettings.isItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD, fontSize);
-            if (textSettings.isBold() && textSettings.isItalic())
+            else if (textSettings.isBold() && textSettings.isItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD + Font.ITALIC, fontSize);
+            else
+                font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, fontSize);
         }catch (FontFormatException | IOException | NullPointerException e){
             LOGGER.debug("Could not find font {} on resources. Checking system fonts.", textSettings.getFont());
-            font = new Font(textSettings.getFont(), Font.PLAIN, fontSize);
+            LOGGER.catching(e);
             if (!textSettings.isBold() && textSettings.isItalic())
                 font = new Font(textSettings.getFont(), Font.ITALIC, fontSize);
-            if (textSettings.isBold() && !textSettings.isItalic())
+            else if (textSettings.isBold() && !textSettings.isItalic())
                 font = new Font(textSettings.getFont(), Font.BOLD, fontSize);
-            if (textSettings.isBold() && textSettings.isItalic())
+            else if (textSettings.isBold() && textSettings.isItalic())
                 font = new Font(textSettings.getFont(), Font.BOLD+Font.ITALIC, fontSize);
+            else
+                font = new Font(textSettings.getFont(), Font.PLAIN, fontSize);
             //throw new FontNotFoundException(textSettings.getFont());
         }
 

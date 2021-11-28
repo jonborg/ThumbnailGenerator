@@ -4,17 +4,17 @@ import com.google.gson.reflect.TypeToken;
 import file.FileUtils;
 import file.json.JSONReader;
 import file.json.JSONWriter;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thumbnail.text.TextSettings;
 import ui.controller.ThumbnailGeneratorController;
 import ui.factory.alert.AlertFactory;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class TournamentUtils {
-
     private static final Logger LOGGER = LogManager.getLogger(TournamentUtils.class);
 
     private static List<Tournament> tournamentsList;
@@ -25,8 +25,11 @@ public class TournamentUtils {
     public static void initTournamentsListAndSettings(){
         LOGGER.info("Loading saved tournament list.");
         loadTournamentsList();
-        tournamentsList.forEach(tournament ->
-            tournament.setTextSettings(TextSettings.loadTextSettings(tournament.getTournamentId())));
+        tournamentsList.forEach(tournament ->{
+            var textSettings = TextSettings.loadTextSettings(tournament.getTournamentId());
+            LOGGER.debug("{} -> {}.", tournament.getName(), textSettings);
+            tournament.setTextSettings(textSettings);
+        });
     }
 
     public static void loadTournamentsList(){
@@ -55,8 +58,10 @@ public class TournamentUtils {
     }
 
     public static void updateTournamentsList(Tournament... list) {
+        LOGGER.info("Saving updated tournament list.");
         if (list != null){
             for (Tournament tournament:list) {
+                LOGGER.info("{} -> {}", tournament.getName(), tournament.toString());
                 tournamentsList.add(tournament);
             }
         }
@@ -65,8 +70,10 @@ public class TournamentUtils {
     }
 
     public static void updateTournamentsListAndSettings(Tournament... list) {
+        LOGGER.info("Saving updated tournament list.");
         if (list != null){
             for (Tournament tournament:list) {
+                LOGGER.info("{} -> {}", tournament.getName(), tournament.toString());
                 tournamentsList.add(tournament);
             }
         }
@@ -79,6 +86,7 @@ public class TournamentUtils {
         boolean delete = AlertFactory.displayConfirmation(
                 "Are you sure that you want to eliminate tournament " + tournament.getName());
         if(delete) {
+            LOGGER.info("Deleting tournament {}.", tournament.getName());
             tournamentsList.removeIf(t -> tournament.getTournamentId() == t.getTournamentId());
             JSONWriter.updateTournamentsFile(tournamentsList);
             JSONWriter.updateTextSettingsFile(TextSettings.getAllTextSettings(tournamentsList));

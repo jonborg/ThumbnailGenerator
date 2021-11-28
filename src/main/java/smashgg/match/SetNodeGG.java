@@ -87,8 +87,7 @@ public class SetNodeGG{
         return player1NoTeam + ";" + player2NoTeam + ";"
                 + characters + ";"
                 + "1;1;"
-                + getRoundName()
-                + System.lineSeparator();
+                + getRoundName();
     }
 }
 
