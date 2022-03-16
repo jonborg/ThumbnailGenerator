@@ -31,15 +31,14 @@ public class ImageSettings {
 
     public FighterImageSettings findFighterImageSettings(String fighterUrl)
             throws FighterImageSettingsNotFoundException{
-        var fighterImageOptional = fighterImages.stream()
+        var fighterImage = fighterImages.stream()
                      .filter(f -> fighterUrl.equals(f.getFighter()))
-                     .findFirst();
-        if (fighterImageOptional == null){
+                     .findFirst()
+                     .orElse(null);
+        if (fighterImage == null){
             LOGGER.error("Could not find image settings for {}", fighterUrl);
             throw new FighterImageSettingsNotFoundException(fighterUrl);
         }
-
-        var fighterImage = fighterImageOptional.get();
         LOGGER.info("Loaded image settings for {}", fighterUrl);
         LOGGER.debug(fighterImage.toString());
         return fighterImage;

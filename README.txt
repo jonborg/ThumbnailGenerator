@@ -2,6 +2,13 @@
 //          0.Release Notes          //
 ///////////////////////////////////////
 
+----------Added features on v2.1.1-----------
+- Increased log4j version to 2.17.1;
+- Fixed issue when no image settings is found for a character, no message is shown to the user telling that;
+- Fixed image settings names for Mii Gunner and Corrin.
+
+
+
 ----------Added features on v2.1.0-----------
 - Added Stream filter for Smash.gg thumbnail generation;
 - Can assign different fighter image settings for each tournament;
