@@ -442,7 +442,7 @@
 		"scale": 0.5
 	  },
 	  {
-		"fighter": "mii_gunner",
+		"fighter": "mii_gunner1",
 		"offset": [
 		  40,
 		  80
@@ -450,7 +450,7 @@
 		"scale": 0.5
 	  },
 	  {
-		"fighter": "sans",
+		"fighter": "mii_gunner2",
 		"offset": [
 		  -20,
 		  5
@@ -594,7 +594,7 @@
 		"scale": 1.0 
 	  },
 	  {
-		"fighter": "corrinM",
+		"fighter": "corrin1",
 		"offset": [
 		  -130,
 		  50
@@ -602,7 +602,7 @@
 		"scale": 1.0 
 	  },
 	  {
-		"fighter": "corrinF",
+		"fighter": "corrin2",
 		"offset": [
 		  -60,
 		  30
