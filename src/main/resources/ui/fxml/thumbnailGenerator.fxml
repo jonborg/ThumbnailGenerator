@@ -16,7 +16,7 @@
         <MenuBar styleClass="menuBar">
             <Menu styleClass="menu" text="File">
                 <MenuItem styleClass="menuItem" text="Generate thumbnails from file" onAction="#createMultipleThumbnails"/>
-                <MenuItem styleClass="menuItem" text="Generate thumbnails from Smash.gg" onAction="#createFromSmashGG"/>
+                <MenuItem styleClass="menuItem" text="Generate thumbnails from Start.gg" onAction="#createFromSmashGG"/>
                 <SeparatorMenuItem/>
                 <MenuItem styleClass="menuItem" text="Close" onAction="#close"/>
             </Menu>

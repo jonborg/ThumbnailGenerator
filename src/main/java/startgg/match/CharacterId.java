@@ -1,4 +1,4 @@
-package smashgg.match;
+package startgg.match;
 
 import java.util.Map;
 import java.util.TreeMap;

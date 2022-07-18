@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ui.controller.FromSmashGGController"
+            fx:controller="ui.controller.FromStartGGController"
             prefHeight="400.0" prefWidth="800.0"
-            stylesheets="@../styles/fromSmashGG.css">
+            stylesheets="@../styles/fromStartGG.css">
 
     <HBox spacing="30" alignment="CENTER">
         <VBox spacing="20" alignment="CENTER" styleClass="side">
