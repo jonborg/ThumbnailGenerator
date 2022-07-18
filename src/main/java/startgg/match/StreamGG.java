@@ -1,4 +1,4 @@
-package smashgg.match;
+package startgg.match;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

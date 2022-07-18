@@ -32,7 +32,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import smashgg.query.QueryUtils;
+import startgg.query.QueryUtils;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
 import thumbnail.image.ImageSettings;
@@ -167,12 +167,12 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public void createFromSmashGG(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/fxml/fromSmashGG.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/fxml/fromStartGG.fxml"));
             Parent root = loader.load();
             root.setOnMousePressed(e -> root.requestFocus());
-            FromSmashGGController controller = loader.getController();
+            FromStartGGController controller = loader.getController();
             Stage stage = new Stage();
-            stage.setTitle("Create thumbnails from Smash.gg");
+            stage.setTitle("Create thumbnails from Start.gg");
             stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
             stage.setScene(new Scene(root));
             stage.setOnHidden(e -> {

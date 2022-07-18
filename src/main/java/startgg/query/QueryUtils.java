@@ -1,4 +1,4 @@
-package smashgg.query;
+package startgg.query;
 
 import com.github.gpluscb.ggjava.api.GGClient;
 import com.github.gpluscb.ggjava.api.RateLimiter;
@@ -29,9 +29,9 @@ public class QueryUtils {
     public static JsonObject runQuery(String query) throws ExecutionException, InterruptedException {
         CompletableFuture<JsonObject> future = client.request(query);
         future.exceptionally(t -> {
-            LOGGER.error("An issue has occurred when trying to use Smash.gg API");
+            LOGGER.error("An issue has occurred when trying to use Start.gg API");
             LOGGER.catching(t);
-            AlertFactory.displayError("An issue has occurred when trying to use Smash.gg API",
+            AlertFactory.displayError("An issue has occurred when trying to use Start.gg API",
                     ExceptionUtils.getStackTrace(t));
             return null;
         });

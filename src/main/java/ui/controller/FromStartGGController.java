@@ -22,21 +22,20 @@ import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
-import smashgg.match.SetGG;
-import smashgg.match.StreamGG;
-import smashgg.query.QueryUtils;
-import smashgg.tournament.EventGG;
-import smashgg.tournament.PhaseGG;
-import smashgg.tournament.PhaseGroupGG;
-import smashgg.tournament.PhaseGroupNodeGG;
-import smashgg.tournament.TournamentGG;
+import startgg.match.SetGG;
+import startgg.match.StreamGG;
+import startgg.query.QueryUtils;
+import startgg.tournament.EventGG;
+import startgg.tournament.PhaseGG;
+import startgg.tournament.PhaseGroupNodeGG;
+import startgg.tournament.TournamentGG;
 import thumbnail.generate.ThumbnailFromFile;
 import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
 
-public class FromSmashGGController implements Initializable {
-    private final Logger LOGGER = LogManager.getLogger(FromSmashGGController.class);
+public class FromStartGGController implements Initializable {
+    private final Logger LOGGER = LogManager.getLogger(FromStartGGController.class);
 
     @FXML
     private TextField authToken;
@@ -61,7 +60,7 @@ public class FromSmashGGController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LOGGER.info("User selected thumbnail generation with Smash.gg tournament information.");
+        LOGGER.info("User selected thumbnail generation with Start.gg tournament information.");
         removeSelectedTournament();
         resetComboBoxes(true);
         initTournamentFieldListener();
@@ -85,9 +84,9 @@ public class FromSmashGGController implements Initializable {
             LOGGER.debug("Loading provided authorization token.");
             QueryUtils.initClient(authToken.getText());
         }catch (IllegalArgumentException e){
-            LOGGER.error("Could not connect to Smash.gg due to a authorization token issue.");
+            LOGGER.error("Could not connect to Start.gg due to a authorization token issue.");
             LOGGER.catching(e);
-            AlertFactory.displayError("Could not connect to Smash.gg due to a authorization token issue",
+            AlertFactory.displayError("Could not connect to Start.gg due to a authorization token issue",
                     ExceptionUtils.getStackTrace(e));
             return;
         }
@@ -275,17 +274,17 @@ public class FromSmashGGController implements Initializable {
         if (tournamentURL.getText().isEmpty()){
             return;
         }
-        if (!tournamentURL.getText().contains("smash.gg/tournament")){
-            LOGGER.error("User provided a not valid Smash.gg tournament URL -> {}", tournamentURL.getText());
-            AlertFactory.displayError(tournamentURL.getText() + " is not a valid Smash.gg tournament URL. " +
-                    "Ex.:https://smash.gg/tournament/swt-europe-ultimate-online-qualifier");
+        if (!tournamentURL.getText().contains("start.gg/tournament")){
+            LOGGER.error("User provided a not valid Start.gg tournament URL -> {}", tournamentURL.getText());
+            AlertFactory.displayError(tournamentURL.getText() + " is not a valid Start.gg tournament URL. " +
+                    "Ex.:https://start.gg/tournament/swt-europe-ultimate-online-qualifier");
             return;
         }
         resetComboBoxes(false);
         try {
             LOGGER.debug("Loading provided authorization token.");
             QueryUtils.initClient(authToken.getText());
-            LOGGER.info("Loading tournament details from Smash.gg.");
+            LOGGER.info("Loading tournament details from Start.gg.");
             LOGGER.debug("Running query -> {}", QueryUtils.tournamentDetailsQuery(tournamentURL.getText()));
             JsonObject result = QueryUtils.runQuery(QueryUtils.tournamentDetailsQuery(tournamentURL.getText()));
             LOGGER.debug("Result -> {}", result.toString());
@@ -305,9 +304,9 @@ public class FromSmashGGController implements Initializable {
             }
             genText.setDisable(false);
         }catch (IllegalArgumentException e){
-            LOGGER.error("Could not connect to Smash.gg due to a authorization token issue.");
+            LOGGER.error("Could not connect to Start.gg due to a authorization token issue.");
             LOGGER.catching(e);
-            AlertFactory.displayError("Could not connect to Smash.gg due to a authorization token issue",
+            AlertFactory.displayError("Could not connect to Start.gg due to a authorization token issue",
                     ExceptionUtils.getStackTrace(e));
             genText.setDisable(true);
 

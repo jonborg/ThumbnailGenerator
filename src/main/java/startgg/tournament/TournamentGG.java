@@ -1,10 +1,10 @@
-package smashgg.tournament;
+package startgg.tournament;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import lombok.Getter;
-import smashgg.match.StreamGG;
+import startgg.match.StreamGG;
 
 @Getter
 public class TournamentGG {
