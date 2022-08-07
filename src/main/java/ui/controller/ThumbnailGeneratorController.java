@@ -7,6 +7,7 @@ import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
+import fighter.FighterArtType;
 import file.json.JSONReader;
 import java.io.File;
 import java.io.IOException;
@@ -30,11 +31,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import startgg.query.QueryUtils;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
+import thumbnail.generate.ThumbnailSettings;
 import thumbnail.image.ImageSettings;
 import tournament.Tournament;
 import tournament.TournamentUtils;
@@ -64,6 +67,8 @@ public class ThumbnailGeneratorController implements Initializable {
     @FXML
     private CheckBox saveLocally;
     @FXML
+    private CheckBox muralArt;
+    @FXML
     private Button saveButton;
     @FXML
     private Button fromFile;
@@ -78,6 +83,8 @@ public class ThumbnailGeneratorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        player1Controller.setParentController(this);
+        player2Controller.setParentController(this);
         initMenuBars();
     }
 
@@ -122,14 +129,27 @@ public class ThumbnailGeneratorController implements Initializable {
         }
 
         LOGGER.info("Loading image settings of tournament {} ", getSelectedTournament().getName());
-        ImageSettings imageSettings = (ImageSettings) JSONReader.getJSONArray(
+        var imageSettings = (ImageSettings) JSONReader.getJSONArray(
                 getSelectedTournament().getFighterImageSettingsFile(),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
+
         try {
-            Thumbnail.generateAndSaveThumbnail(getSelectedTournament(), imageSettings, saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
-                    player1Controller.generateFighter(),
-                    player2Controller.generateFighter());
+            Thumbnail.generateAndSaveThumbnail(ThumbnailSettings.builder()
+                                                                .tournament(getSelectedTournament())
+                                                                .imageSettings(imageSettings)
+                                                                .locally(saveLocally.isSelected())
+                                                                .round(round.getText().toUpperCase())
+                                                                .date(date.getText())
+                                                                .fighters(ThumbnailSettings.
+                                                                        createFighterList(
+                                                                                player1Controller.generateFighter(),
+                                                                                player2Controller.generateFighter()))
+                                                                .artType(
+                                                                        muralArt.isSelected() ?
+                                                                        FighterArtType.MURAL :
+                                                                        FighterArtType.RENDER)
+                                                                .build());
             LOGGER.info("Thumbnail was successfully generated and saved!");
             AlertFactory.displayInfo("Thumbnail was successfully generated and saved!");
         } catch (LocalImageNotFoundException e){
@@ -155,7 +175,7 @@ public class ThumbnailGeneratorController implements Initializable {
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
             try {
-                ThumbnailFromFile.generateFromFile(selectedFile, saveLocally.isSelected());
+                ThumbnailFromFile.generateFromFile(selectedFile, saveLocally.isSelected(), muralArt.isSelected());
                 AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
             }catch(ThumbnailFromFileException e){
                 //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
@@ -256,5 +276,9 @@ public class ThumbnailGeneratorController implements Initializable {
     }
     public void setStage(Stage stage){
         this.stage=stage;
+    }
+
+    public FighterArtType getFighterArtType(){
+        return muralArt.isSelected() ? FighterArtType.MURAL : FighterArtType.RENDER;
     }
 }

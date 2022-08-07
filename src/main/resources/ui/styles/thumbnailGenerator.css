@@ -11,3 +11,11 @@
 .menuItem{
     -fx-padding: 4 10 4 20;
 }
+
+.additionalOptionsSection{
+    -fx-padding: 10;
+
+    -fx-border-color: #d3d3d3;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+}

@@ -28,7 +28,7 @@
 
             </Menu>
         </MenuBar>
-        <VBox spacing="20" alignment="CENTER">
+        <VBox spacing="10" alignment="CENTER">
 
             <!--Tournament UI-->
             <HBox alignment="CENTER">
@@ -67,13 +67,18 @@
             </HBox>
 
             <!--Save UI-->
-            <VBox spacing="10" alignment="CENTER">
-                <CheckBox fx:id="saveLocally" text="Save/Load fighters' image locally"/>
-                <HBox alignment="CENTER" spacing="10">
-                    <Button fx:id="saveButton" text="Save" minWidth="100" onAction="#createThumbnail"/>
-                    <Button fx:id="fromFile" text="Generate from file" minWidth="100" onAction="#createMultipleThumbnails"/>
+            <HBox spacing="10" alignment="CENTER">
+                <HBox spacing="10" alignment="CENTER" >
+                    <VBox spacing="10" styleClass="additionalOptionsSection">
+                        <CheckBox fx:id="saveLocally" text="Save/Load fighters' image locally"/>
+                        <CheckBox fx:id="muralArt" text="Use fighters' mural art"/>
+                    </VBox>
                 </HBox>
-            </VBox>
+                <VBox alignment="CENTER" spacing="10">
+                    <Button fx:id="saveButton" text="Save" minWidth="140" onAction="#createThumbnail"/>
+                    <Button fx:id="fromFile" text="Generate from file" minWidth="115" onAction="#createMultipleThumbnails"/>
+                </VBox>
+            </HBox>
         </VBox>
     </VBox>
 </StackPane>

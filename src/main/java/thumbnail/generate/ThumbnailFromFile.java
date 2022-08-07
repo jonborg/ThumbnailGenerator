@@ -7,6 +7,7 @@ import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
 import fighter.Fighter;
+import fighter.FighterArtType;
 import fighter.FighterImage;
 import file.json.JSONReader;
 import java.io.BufferedReader;
@@ -19,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thumbnail.image.ImageSettings;
@@ -30,12 +32,13 @@ import ui.factory.alert.AlertFactory;
 public class ThumbnailFromFile extends Thumbnail {
     private static final Logger LOGGER = LogManager.getLogger(ThumbnailGeneratorController.class);
 
-    private static String date = null;
-    private static List<String> parameters;
     private static Tournament selectedTournament;
+    private static String date = null;
+
+    private static List<String> parameters;
     private static ImageSettings imageSettings;
 
-    public static void generateFromFile(File file, boolean saveLocally)
+    public static void generateFromFile(File file, boolean saveLocally, boolean muralArt)
         throws ThumbnailFromFileException, FontNotFoundException {
 
         initMultiGeneration();
@@ -57,7 +60,7 @@ public class ThumbnailFromFile extends Thumbnail {
                 }
 
                 try {
-                   generateThumbnail(saveLocally);
+                   generateThumbnail(saveLocally, muralArt);
                 }catch(OnlineImageNotFoundException | FighterImageSettingsNotFoundException e) {
                     invalidLines.add(e.getMessage() + " -> " + line);
                 }catch(LocalImageNotFoundException e) {
@@ -95,8 +98,6 @@ public class ThumbnailFromFile extends Thumbnail {
 
         initMultiGeneration();
 
-        boolean saveLocally=false;
-
         boolean firstLine = true;
         List<String> invalidLines = new ArrayList<>();
 
@@ -111,9 +112,8 @@ public class ThumbnailFromFile extends Thumbnail {
                 firstLine = false;
                 continue;
             }
-
             try {
-                generateThumbnail(saveLocally);
+                generateThumbnail(false, false);
             }catch(OnlineImageNotFoundException | FighterImageSettingsNotFoundException e) {
                 invalidLines.add(e.getMessage() + " -> " + command);
             }catch(LocalImageNotFoundException e) {
@@ -172,18 +172,27 @@ public class ThumbnailFromFile extends Thumbnail {
     }
 
 
-    private static void generateThumbnail(Boolean saveLocally)
+    private static void generateThumbnail(Boolean saveLocally, Boolean muralArt)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException {
-        Fighter player1 = new Fighter(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
-        Fighter player2 = new Fighter(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
+        var player1 = new Fighter(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
+        var player2 = new Fighter(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
         player1.setFlip(readFlipFile(player1));
         if (imageSettings.isMirrorPlayer2()) {
             player2.setFlip(!readFlipFile(player2));
         } else {
             player2.setFlip(readFlipFile(player2));
         }
-        generateAndSaveThumbnail(selectedTournament, imageSettings, saveLocally, parameters.get(6), date, player1, player2);
+
+        generateAndSaveThumbnail(ThumbnailSettings.builder()
+                                                .tournament(selectedTournament)
+                                                .imageSettings(imageSettings)
+                                                .locally(saveLocally)
+                                                .round(parameters.get(6))
+                                                .date(date)
+                                                .fighters(ThumbnailSettings.createFighterList(player1, player2))
+                                                .artType(muralArt ? FighterArtType.MURAL : FighterArtType.RENDER)
+                                                .build());
     }
 
     private static boolean readFlipFile(Fighter fighter) throws FighterImageSettingsNotFoundException {

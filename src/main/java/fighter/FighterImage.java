@@ -90,7 +90,7 @@ public class FighterImage {
         if (width>widthLimit) {
             marginX = (width-widthLimit)/2;
         }
-        LOGGER.info("Character image crop to width {} and height{}.", bufferedImage.getWidth(), bufferedImage.getHeight());
+        LOGGER.info("Character image crop to width {} and height {}.", bufferedImage.getWidth(), bufferedImage.getHeight());
         return Scalr.crop(bufferedImage, marginX,marginY,Math.min(width,widthLimit), Math.min(height,heightLimit), null);
     }
 
