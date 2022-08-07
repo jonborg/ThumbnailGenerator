@@ -8,6 +8,7 @@ import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
 import fighter.FighterArtType;
+import fighter.FighterArtTypeConverter;
 import file.json.JSONReader;
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -55,6 +57,8 @@ public class ThumbnailGeneratorController implements Initializable {
     @FXML
     private TextField date;
     @FXML
+    private ComboBox<FighterArtType> artType;
+    @FXML
     private AnchorPane player1;
     @FXML
     private PlayerController player1Controller;
@@ -66,8 +70,6 @@ public class ThumbnailGeneratorController implements Initializable {
     private Button flipPlayer;
     @FXML
     private CheckBox saveLocally;
-    @FXML
-    private CheckBox muralArt;
     @FXML
     private Button saveButton;
     @FXML
@@ -86,6 +88,7 @@ public class ThumbnailGeneratorController implements Initializable {
         player1Controller.setParentController(this);
         player2Controller.setParentController(this);
         initMenuBars();
+        initArtDropdown();
     }
 
     public void flipPlayers(ActionEvent actionEvent) {
@@ -130,7 +133,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
         LOGGER.info("Loading image settings of tournament {} ", getSelectedTournament().getName());
         var imageSettings = (ImageSettings) JSONReader.getJSONArray(
-                getSelectedTournament().getFighterImageSettingsFile(),
+                getSelectedTournament().getFighterImageSettingsFile(FighterArtType.RENDER),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
 
@@ -145,10 +148,7 @@ public class ThumbnailGeneratorController implements Initializable {
                                                                         createFighterList(
                                                                                 player1Controller.generateFighter(),
                                                                                 player2Controller.generateFighter()))
-                                                                .artType(
-                                                                        muralArt.isSelected() ?
-                                                                        FighterArtType.MURAL :
-                                                                        FighterArtType.RENDER)
+                                                                .artType(getFighterArtType())
                                                                 .build());
             LOGGER.info("Thumbnail was successfully generated and saved!");
             AlertFactory.displayInfo("Thumbnail was successfully generated and saved!");
@@ -175,7 +175,7 @@ public class ThumbnailGeneratorController implements Initializable {
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
             try {
-                ThumbnailFromFile.generateFromFile(selectedFile, saveLocally.isSelected(), muralArt.isSelected());
+                ThumbnailFromFile.generateFromFile(selectedFile, saveLocally.isSelected());
                 AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
             }catch(ThumbnailFromFileException e){
                 //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
@@ -258,6 +258,12 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
 
+    private void initArtDropdown(){
+        artType.getItems().addAll(FighterArtType.values());
+        artType.setConverter(new FighterArtTypeConverter());
+        artType.getSelectionModel().select(FighterArtType.RENDER);
+    }
+
     private static List<Tournament> getTournamentsList(){
         return TournamentUtils.getTournamentsList();
     }
@@ -279,6 +285,6 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public FighterArtType getFighterArtType(){
-        return muralArt.isSelected() ? FighterArtType.MURAL : FighterArtType.RENDER;
+        return artType.getSelectionModel().getSelectedItem();
     }
 }

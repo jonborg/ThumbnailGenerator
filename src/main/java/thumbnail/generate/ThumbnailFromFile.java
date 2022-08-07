@@ -34,11 +34,12 @@ public class ThumbnailFromFile extends Thumbnail {
 
     private static Tournament selectedTournament;
     private static String date = null;
+    private static FighterArtType artType;
 
     private static List<String> parameters;
     private static ImageSettings imageSettings;
 
-    public static void generateFromFile(File file, boolean saveLocally, boolean muralArt)
+    public static void generateFromFile(File file, boolean saveLocally)
         throws ThumbnailFromFileException, FontNotFoundException {
 
         initMultiGeneration();
@@ -60,7 +61,7 @@ public class ThumbnailFromFile extends Thumbnail {
                 }
 
                 try {
-                   generateThumbnail(saveLocally, muralArt);
+                   generateThumbnail(saveLocally);
                 }catch(OnlineImageNotFoundException | FighterImageSettingsNotFoundException e) {
                     invalidLines.add(e.getMessage() + " -> " + line);
                 }catch(LocalImageNotFoundException e) {
@@ -94,7 +95,8 @@ public class ThumbnailFromFile extends Thumbnail {
         }
     }
 
-    public static void generateFromSmashGG(String commands) throws ThumbnailFromFileException, FontNotFoundException {
+    public static void generateFromSmashGG(String commands, boolean saveLocally)
+            throws ThumbnailFromFileException, FontNotFoundException {
 
         initMultiGeneration();
 
@@ -113,7 +115,7 @@ public class ThumbnailFromFile extends Thumbnail {
                 continue;
             }
             try {
-                generateThumbnail(false, false);
+                generateThumbnail(saveLocally);
             }catch(OnlineImageNotFoundException | FighterImageSettingsNotFoundException e) {
                 invalidLines.add(e.getMessage() + " -> " + command);
             }catch(LocalImageNotFoundException e) {
@@ -160,11 +162,17 @@ public class ThumbnailFromFile extends Thumbnail {
                 return;
             }
             date=parameters.get(1);
+            if(parameters.size()>2
+                    && !parameters.get(2).isEmpty()){
+                readArtType(parameters.get(2));
+            } else {
+                artType = FighterArtType.RENDER;
+            }
             return;
         }
         LOGGER.info("Loading image settings for tournament {}.", selectedTournament.getName());
         imageSettings = (ImageSettings) JSONReader.getJSONArray(
-                selectedTournament.getFighterImageSettingsFile(),
+                selectedTournament.getFighterImageSettingsFile(artType),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
         parameters = Arrays.asList(line.split(";"));
@@ -172,7 +180,7 @@ public class ThumbnailFromFile extends Thumbnail {
     }
 
 
-    private static void generateThumbnail(Boolean saveLocally, Boolean muralArt)
+    private static void generateThumbnail(Boolean saveLocally)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException {
         var player1 = new Fighter(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
@@ -191,7 +199,7 @@ public class ThumbnailFromFile extends Thumbnail {
                                                 .round(parameters.get(6))
                                                 .date(date)
                                                 .fighters(ThumbnailSettings.createFighterList(player1, player2))
-                                                .artType(muralArt ? FighterArtType.MURAL : FighterArtType.RENDER)
+                                                .artType(artType)
                                                 .build());
     }
 
@@ -205,5 +213,8 @@ public class ThumbnailFromFile extends Thumbnail {
         return result;
     }
 
+    private static void readArtType(String art){
+        artType = FighterArtType.valueOf(art.toUpperCase());
+    }
 
 }

@@ -38,4 +38,5 @@
 
 .textfield{
     -fx-pref-width: 210;
+    -fx-min-width: 210;
 }

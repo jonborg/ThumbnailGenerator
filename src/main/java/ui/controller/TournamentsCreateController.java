@@ -1,5 +1,8 @@
 package ui.controller;
 
+import fighter.FighterArtSettingsFile;
+import fighter.FighterArtType;
+import fighter.FighterArtTypeConverter;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.net.URL;
@@ -26,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thumbnail.generate.Thumbnail;
@@ -50,6 +54,8 @@ public class TournamentsCreateController implements Initializable {
     protected ChosenImageField foreground;
     @FXML
     protected ChosenImageField background;
+    @FXML
+    protected ComboBox<FighterArtType> artType;
     @FXML
     protected ChosenJsonField fighterImageSettingsFile;
     @FXML
@@ -85,11 +91,14 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ImageView preview;
 
+    protected List<FighterArtSettingsFile> artTypeDir = new ArrayList<>();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LOGGER.info("Creating new tournament.");
         initNumberTextFields();
         initFontDropdown();
+        initFighterArtTypeDropdown(null);
     }
 
     protected void initNumberTextFields(){
@@ -142,6 +151,37 @@ public class TournamentsCreateController implements Initializable {
         font.setItems(filteredItems);
     }
 
+    protected void initFighterArtTypeDropdown(String deprecatedRenderSettings){
+        for (var v: FighterArtType.values()) {
+            var settingsFile = FighterArtSettingsFile.builder()
+                    .artType(v)
+                    .build();
+            if(deprecatedRenderSettings != null
+                    && v.equals(FighterArtType.RENDER)){
+                settingsFile.setFighterImageSettingsPath(deprecatedRenderSettings);
+            }
+            artTypeDir.add(settingsFile);
+        }
+
+        artType.getItems().addAll(FighterArtType.values());
+        artType.setConverter(new FighterArtTypeConverter());
+        artType.getSelectionModel().select(FighterArtType.RENDER);
+        artType.getSelectionModel().selectedItemProperty()
+                .addListener((options, oldValue, newValue) -> {
+                    for (var dir : artTypeDir){
+                        if (oldValue.equals(dir.getArtType())){
+                            dir.setFighterImageSettingsPath(
+                                    fighterImageSettingsFile.getText());
+                        }
+                    }
+                    for (var dir : artTypeDir){
+                        if (newValue.equals(dir.getArtType())){
+                            fighterImageSettingsFile.setText(dir.getFighterImageSettingsPath());
+                        }
+                    }
+                });
+    }
+
     private void emptyTextField(TextField tf){
         if (!tf.isFocused() && tf.getText().isEmpty()){
             tf.setText("0");
@@ -166,8 +206,14 @@ public class TournamentsCreateController implements Initializable {
 
 
     protected Tournament generateTournamentWithCurrentSettings(){
+        var lastSelectedArt = artType.getSelectionModel().getSelectedItem();
+        for (var dir : artTypeDir){
+            if(lastSelectedArt.equals(dir.getArtType())){
+                dir.setFighterImageSettingsPath(fighterImageSettingsFile.getText());
+            }
+        }
         Tournament tournament =  new Tournament(id.getText(), name.getText(),
-                logo.getText(), foreground.getText(), background.getText(), fighterImageSettingsFile.getText());
+                logo.getText(), foreground.getText(), background.getText(), artTypeDir);
         TextSettings textSettings = new TextSettings(id.getText(), font.getSelectionModel().getSelectedItem(),
                 bold.isSelected(), italic.isSelected(), shadow.isSelected(), Float.parseFloat(contour.getText()),
                 Integer.parseInt(sizeTop.getText()), Integer.parseInt(sizeBottom.getText()),

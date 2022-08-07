@@ -58,8 +58,6 @@ public class FromStartGGController implements Initializable {
     private ComboBox<StreamGG> streamSelect;
     @FXML
     private CheckBox saveLocally;
-    @FXML
-    private CheckBox muralArt;
 
     private Tournament backupTournament;
 
@@ -154,7 +152,7 @@ public class FromStartGGController implements Initializable {
                 if (totalPages < 0){
                     totalPages = result.getAsJsonObject("data").getAsJsonObject(mainBody).getAsJsonObject("sets")
                             .getAsJsonObject("pageInfo").getAsJsonPrimitive("totalPages").getAsInt();
-                    foundSets.setText(TournamentUtils.getSelectedTournament().getTournamentId() + ";" + eventName + System.lineSeparator());
+                    foundSets.setText(TournamentUtils.getSelectedTournament().getTournamentId() + ";" + eventName + ";RENDER"+ System.lineSeparator());
                 }
                 SetGG set = (SetGG) JSONReader.getJSONObject(result.getAsJsonObject("data").getAsJsonObject(mainBody)
                         .getAsJsonObject("sets").toString(), new TypeToken<SetGG>() {}.getType());
@@ -196,7 +194,7 @@ public class FromStartGGController implements Initializable {
             return;
         }
         try {
-            ThumbnailFromFile.generateFromSmashGG(foundSets.getText());
+            ThumbnailFromFile.generateFromSmashGG(foundSets.getText(), saveLocally.isSelected());
             LOGGER.info("Thumbnails were successfully generated and saved.");
             AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
         }catch(ThumbnailFromFileException e){
@@ -356,6 +354,5 @@ public class FromStartGGController implements Initializable {
     private void setDisableGeneration(boolean disable){
         genStart.setDisable(disable);
         saveLocally.setDisable(disable);
-        muralArt.setDisable(disable);
     }
 }

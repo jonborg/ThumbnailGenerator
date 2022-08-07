@@ -1,8 +1,11 @@
 package fighter;
 
+import lombok.Getter;
+
+@Getter
 public enum FighterArtType {
-    RENDER("Render"),
-    MURAL("Mural Art");
+    RENDER("Renders"),
+    MURAL("Mural Arts");
 
     private String name;
 

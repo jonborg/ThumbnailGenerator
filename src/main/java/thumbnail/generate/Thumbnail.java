@@ -57,8 +57,8 @@ public class Thumbnail {
         LOGGER.info("Generating thumbnail preview.");
         List<Fighter> fighters = Fighter.generatePreviewFighters();
         ImageSettings imageSettings = (ImageSettings)
-                JSONReader.getJSONArray(ts.getTournament().getFighterImageSettingsFile(), new TypeToken<ArrayList<ImageSettings>>() {
-                }.getType()).get(0);
+                JSONReader.getJSONArray(ts.getTournament().getFighterImageSettingsFile(ts.getArtType()),
+                        new TypeToken<ArrayList<ImageSettings>>() {}.getType()).get(0);
         return generateThumbnail(ThumbnailSettings.builder()
                                                 .tournament(tournament)
                                                 .imageSettings(imageSettings)

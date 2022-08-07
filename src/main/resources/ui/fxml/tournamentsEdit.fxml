@@ -46,6 +46,7 @@
                         </VBox>
                         <VBox>
                             <Label text="Fighter Image Settings File:"/>
+                            <ComboBox fx:id="artType" styleClass="textfield"/>
                             <ChosenJsonField fx:id="fighterImageSettingsFile"/>
                         </VBox>
                     </VBox>

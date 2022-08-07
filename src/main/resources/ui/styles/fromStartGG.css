@@ -29,11 +29,3 @@
 .side{
     -fx-padding:30 30 30 30;
 }
-
-.additionalOptionsSection{
-    -fx-padding: 10;
-
-    -fx-border-color: #d3d3d3;
-    -fx-border-width: 1;
-    -fx-border-style: solid;
-}
