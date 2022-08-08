@@ -72,11 +72,12 @@
                 </graphic>
             </Button>
         </VBox>
-        <VBox alignment="CENTER" spacing="10" styleClass="side">
-            <TextArea fx:id="foundSets" prefWidth="500" prefHeight="420" />
-            <HBox alignment="CENTER" spacing="5">
-                <Button fx:id="genStart" disable="true" onAction="#generateThumbnails">Generate thumbnails</Button>
-            </HBox>
+        <VBox alignment="CENTER" spacing="20" styleClass="side">
+            <TextArea fx:id="foundSets" prefWidth="500" prefHeight="380" />
+            <VBox alignment="CENTER" spacing="5">
+                <CheckBox fx:id="saveLocally" text="Save/Load fighters' image locally" disable="true"/>
+                <Button fx:id="genStart" disable="true" onAction="#generateThumbnails" text="Generate thumbnails"/>
+            </VBox>
         </VBox>
     </HBox>
 </AnchorPane>

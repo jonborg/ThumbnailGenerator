@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -55,6 +56,8 @@ public class FromStartGGController implements Initializable {
     private ComboBox<PhaseGroupNodeGG> phaseGroupSelect;
     @FXML
     private ComboBox<StreamGG> streamSelect;
+    @FXML
+    private CheckBox saveLocally;
 
     private Tournament backupTournament;
 
@@ -149,7 +152,7 @@ public class FromStartGGController implements Initializable {
                 if (totalPages < 0){
                     totalPages = result.getAsJsonObject("data").getAsJsonObject(mainBody).getAsJsonObject("sets")
                             .getAsJsonObject("pageInfo").getAsJsonPrimitive("totalPages").getAsInt();
-                    foundSets.setText(TournamentUtils.getSelectedTournament().getTournamentId() + ";" + eventName + System.lineSeparator());
+                    foundSets.setText(TournamentUtils.getSelectedTournament().getTournamentId() + ";" + eventName + ";RENDER"+ System.lineSeparator());
                 }
                 SetGG set = (SetGG) JSONReader.getJSONObject(result.getAsJsonObject("data").getAsJsonObject(mainBody)
                         .getAsJsonObject("sets").toString(), new TypeToken<SetGG>() {}.getType());
@@ -169,7 +172,7 @@ public class FromStartGGController implements Initializable {
                     }
                 });
             }while(readPages<totalPages);
-            genStart.setDisable(false);
+            setDisableGeneration(false);
             LOGGER.info("Finished generating multiple thumbnails generation commands.");
             AlertFactory.displayInfo("Finished generating multiple thumbnails generation commands.");
         }catch (ExecutionException | InterruptedException | NullPointerException e){
@@ -191,7 +194,7 @@ public class FromStartGGController implements Initializable {
             return;
         }
         try {
-            ThumbnailFromFile.generateFromSmashGG(foundSets.getText());
+            ThumbnailFromFile.generateFromSmashGG(foundSets.getText(), saveLocally.isSelected());
             LOGGER.info("Thumbnails were successfully generated and saved.");
             AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
         }catch(ThumbnailFromFileException e){
@@ -326,9 +329,9 @@ public class FromStartGGController implements Initializable {
     private void initFoundSetsListener() {
         foundSets.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (foundSets.getText() == null || foundSets.getText().isEmpty()) {
-                genStart.setDisable(true);
+                setDisableGeneration(true);
             } else {
-                genStart.setDisable(false);
+                setDisableGeneration(false);
             }
         });
     }
@@ -346,5 +349,10 @@ public class FromStartGGController implements Initializable {
                 AlertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
             }
         }
+    }
+
+    private void setDisableGeneration(boolean disable){
+        genStart.setDisable(disable);
+        saveLocally.setDisable(disable);
     }
 }

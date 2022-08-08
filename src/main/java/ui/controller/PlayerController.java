@@ -50,6 +50,8 @@ public class PlayerController implements Initializable {
 
     protected String urlName;
 
+    private ThumbnailGeneratorController parentController;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initFighters();
@@ -110,7 +112,7 @@ public class PlayerController implements Initializable {
     }
 
     public void previewFighter(ActionEvent actionEvent) {
-        String url = DownloadFighterURL.generateFighterURL(urlName, alt.getValue());
+        String url = DownloadFighterURL.generateFighterURL(urlName, alt.getValue(), parentController.getFighterArtType());
         if(Desktop.isDesktopSupported()) {
             try {
                 if ("http".equals(url.substring(0,4))){
@@ -172,6 +174,10 @@ public class PlayerController implements Initializable {
 
     public void setFlip(boolean flip){
         this.flip.setSelected(flip);
+    }
+
+    public void setParentController(ThumbnailGeneratorController parentController) {
+        this.parentController = parentController;
     }
 
 }

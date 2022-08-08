@@ -33,7 +33,7 @@ public class App extends Application {
             ((ThumbnailGeneratorController) loader.getController()).setStage(primaryStage);
             primaryStage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
             primaryStage.setTitle("Smash Bros. VOD Thumbnail Generator");
-            primaryStage.setScene(new Scene(root, 800, 660));
+            primaryStage.setScene(new Scene(root, 740, 680));
             primaryStage.show();
         }catch(IOException e){
             e.printStackTrace();

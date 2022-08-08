@@ -35,6 +35,7 @@ public class TournamentUtils {
     public static void loadTournamentsList(){
         tournamentsList = JSONReader.getJSONArray(FileUtils.getTournamentFile(),
                 new TypeToken<ArrayList<Tournament>>(){}.getType());
+        tournamentsList.size();
     }
 
     public static List<Tournament> getTournamentsList(){

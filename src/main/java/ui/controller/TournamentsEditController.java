@@ -1,9 +1,12 @@
 package ui.controller;
 
+import fighter.FighterArtType;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
@@ -17,17 +20,25 @@ public class TournamentsEditController extends TournamentsCreateController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Tournament tournament = getSelectedEdit();
+        var renderSettingsFile = tournament.getFighterImageSettingsFile(FighterArtType.RENDER);
+        LOGGER.info("Editing tournament -> {}", tournament.toString());
+
         initNumberTextFields();
         initFontDropdown();
-        Tournament tournament = getSelectedEdit();
+        initFighterArtTypeDropdown(renderSettingsFile);
 
-        LOGGER.info("Editing tournament -> {}", tournament.toString());
         id.setText(tournament.getTournamentId());
         name.setText(tournament.getName());
         logo.setText(tournament.getImage());
         foreground.setText(tournament.getForeground());
         background.setText(tournament.getBackground());
-        fighterImageSettingsFile.setText(tournament.getFighterImageSettingsFile());
+        fighterImageSettingsFile.setText(renderSettingsFile);
+        if(tournament.getArtTypeDir() != null
+                && !tournament.getArtTypeDir().isEmpty()) {
+            artTypeDir = new ArrayList<>();
+            tournament.getArtTypeDir().forEach(dir -> artTypeDir.add(dir.clone()));
+        }
 
         TextSettings textSettings = tournament.getTextSettings();
         try {

@@ -7,11 +7,10 @@
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="ui.controller.ThumbnailGeneratorController"
-           prefHeight="800.0" prefWidth="660.0"
+           prefHeight="680.0" prefWidth="740.0"
            stylesheets="@../styles/thumbnailGenerator.css">
 
-    <VBox spacing="30">
-
+    <VBox spacing="20">
         <!--Menu Bar-->
         <MenuBar styleClass="menuBar">
             <Menu styleClass="menu" text="File">
@@ -28,28 +27,32 @@
 
             </Menu>
         </MenuBar>
-        <VBox spacing="20" alignment="CENTER">
+        <VBox spacing="40" alignment="CENTER" >
+            <VBox spacing="10">
+                <!--Tournament UI-->
+                <HBox alignment="CENTER">
+                    <fx:include fx:id="tournaments" source="tournaments.fxml" />
+                </HBox>
 
-            <!--Tournament UI-->
-            <HBox alignment="CENTER">
-                <fx:include fx:id="tournaments" source="tournaments.fxml" />
-            </HBox>
-
-            <!--Date and Round UI-->
-            <HBox spacing="20" alignment="CENTER">
-                <VBox>
-                    <Label text="Round:"/>
-                    <TextField fx:id="round"/>
-                </VBox>
-                <VBox>
-                    <Label text="Event/Date:"/>
-                    <TextField fx:id="date"/>
-                </VBox>
-            </HBox>
-
+                <!--Date Round and Art UI-->
+                <HBox spacing="20" alignment="CENTER">
+                    <VBox>
+                        <Label text="Round:"/>
+                        <TextField fx:id="round" styleClass="generalTextfield"/>
+                    </VBox>
+                    <VBox>
+                        <Label text="Character art:"/>
+                        <ComboBox fx:id="artType" styleClass="artDropdown"/>
+                    </VBox>
+                    <VBox>
+                        <Label text="Event/Date:"/>
+                        <TextField fx:id="date" styleClass="generalTextfield"/>
+                    </VBox>
+                </HBox>
+            </VBox>
             <!--PlayersUI-->
-            <HBox spacing="50" alignment="CENTER">
-                <VBox>
+            <HBox spacing="30" alignment="CENTER">
+                <VBox styleClass="playerSection">
                     <Label text="Player 1:"/>
                     <fx:include fx:id="player1" source="player.fxml" />
                 </VBox>
@@ -60,7 +63,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <VBox>
+                <VBox styleClass="playerSection">
                     <Label text="Player 2:"/>
                     <fx:include fx:id="player2" source="player.fxml"/>
                 </VBox>
@@ -70,8 +73,8 @@
             <VBox spacing="10" alignment="CENTER">
                 <CheckBox fx:id="saveLocally" text="Save/Load fighters' image locally"/>
                 <HBox alignment="CENTER" spacing="10">
-                    <Button fx:id="saveButton" text="Save" minWidth="100" onAction="#createThumbnail"/>
-                    <Button fx:id="fromFile" text="Generate from file" minWidth="100" onAction="#createMultipleThumbnails"/>
+                    <Button fx:id="saveButton" text="Save" minWidth="140" onAction="#createThumbnail"/>
+                    <Button fx:id="fromFile" text="Generate from file" minWidth="115" onAction="#createMultipleThumbnails"/>
                 </HBox>
             </VBox>
         </VBox>

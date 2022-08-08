@@ -1,0 +1,917 @@
+[{
+	"mirrorPlayer2": false,
+	"fighters":[
+	  {
+		"fighter": "mario",
+		"offset": [
+		  -40,
+		  40
+		],
+		"scale": 0.3
+	  },
+	  {
+		"fighter": "donkey_kong",
+		"offset": [
+		  0,
+		  -180
+		],
+		"scale": 1.1
+	  },
+	  {
+		"fighter": "link",
+		"offset": [
+		  -90,
+		  -20
+		],
+		"scale": 0.40
+	  },
+	  {
+		"fighter": "samus",
+		"offset": [
+		  -70,
+		  140
+		],
+		"scale": 0.60
+	  },
+	  {
+		"fighter": "yoshi",
+		"offset": [
+		  60,
+		  20
+		],
+		"scale": 0.80
+	  },
+	  {
+		"fighter": "kirby",
+		"offset": [
+		  20,
+		  140
+		],
+		"scale": 0.50
+	  },
+	  {
+		"fighter": "fox",
+		"offset": [
+		  150,
+		  70
+		],
+		"scale": 0.85
+	  },
+	  {
+		"fighter": "pikachu",
+		"offset": [
+		  50,
+		  -80
+		],
+		"scale": 0.4
+	  },
+	  {
+		"fighter": "luigi",
+		"offset": [
+		  800,
+		  150
+		],
+		"scale": 0.3
+	  },
+	  {
+		"fighter": "ness",
+		"offset": [
+		  60,
+		  100
+		],
+		"scale": 0.5
+	  },
+	  {
+		"fighter": "captain_falcon",
+		"offset": [
+		  -70,
+		  80
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "jigglypuff",
+		"offset": [
+		  40,
+		  30
+		],
+		"scale": 0.9
+	  },
+	  {
+		"fighter": "peach",
+		"offset": [
+		  200,
+		  -180
+		],
+		"scale": 0.8
+	  },
+	  {
+		"fighter": "bowser",
+		"offset": [
+		  100,
+		  -200
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "ice_climbers",
+		"offset": [
+		  -20,
+		  -50
+		],
+		"scale": 0.25
+	  },
+	  {
+		"fighter": "sheik",
+		"offset": [
+		  70,
+		  70
+		],
+		"scale": 0.7
+	  },
+	  {
+		"fighter": "zelda",
+		"offset": [
+		  -200,
+		  80
+		],
+		"scale": 0.7
+	  },
+	  {
+		"fighter": "dr_mario",
+		"offset": [
+		  30,
+		  60
+		],
+		"scale": 0.4
+	  },
+	  {
+		"fighter": "pichu",
+		"offset": [
+		  20,
+		  40
+		],
+		"scale": 0.65
+	  },
+	  {
+		"fighter": "falco",
+		"offset": [
+		  260,
+		  120
+		],
+		"scale": 0.50
+	  },
+	  {
+		"fighter": "marth",
+		"offset": [
+		  -250,
+		  120
+		],
+		"scale": 1.3
+	  },
+	  {
+		"fighter": "young_link",
+		"offset": [
+		  -60,
+		  10
+		],
+		"scale": 0.4
+	  },
+	  {
+		"fighter": "ganondorf",
+		"offset": [
+		  200,
+		  60
+		],
+		"scale": 0.8
+	  },
+	  {
+		"fighter": "mewtwo",
+		"offset": [
+		  -200,
+		  50
+		],
+		"scale": 0.75
+	  },
+	  {
+		"fighter": "roy",
+		"offset": [
+		  -100,
+		  100
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "mr_game_and_watch",
+		"offset": [
+		  50,
+		  140
+		],
+		"scale": 0.4
+	  },
+	  {
+		"fighter": "meta_knight",
+		"offset": [
+		  30,
+		  -190
+		],
+		"scale": 0.9
+	  },
+	  {
+		"fighter": "pit",
+		"offset": [
+		  10,
+		  -50
+		],
+		"scale": 0.7
+	  },
+	  {
+		"fighter": "zero_suit_samus",
+		"offset": [
+		  -400,
+		  20
+		],
+		"scale": 0.85
+	  },
+	  {
+		"fighter": "wario",
+		"offset": [
+		  80,
+		  90
+		],
+		"scale": 0.8
+	  },
+	  {
+		"fighter": "snake",
+		"offset": [
+		  180,
+		  70
+		],
+		"scale": 0.5
+	  },
+	  {
+		"fighter": "ike1",
+		"offset": [
+		  -200,
+		  20
+		],
+		"scale": 1
+	  },
+	  {
+		"fighter": "ike2",
+		"offset": [
+		  170,
+		  20
+		],
+		"scale": 0.97
+	  },
+	  {
+		"fighter": "pokemon_trainer1",
+		"offset": [
+		  60,
+		  80
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "pokemon_trainer2",
+		"offset": [
+		  10,
+		  80
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "diddy_kong",
+		"offset": [
+		  100,
+		  40
+		],
+		"scale": 0.65
+	  },
+	  {
+		"fighter": "lucas",
+		"offset": [
+		  -20,
+		  30
+		],
+		"scale": 0.40
+	  },
+	  {
+		"fighter": "sonic",
+		"offset": [
+		  130,
+		  20
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "king_dedede",
+		"offset": [
+		  40,
+		  60
+		],
+		"scale": 0.35
+	  },
+	  {
+		"fighter": "olimar1",
+		"offset": [
+		  -50,
+		  50
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "olimar2",
+		"offset": [
+		  0,
+		  -100
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "lucario",
+		"offset": [
+		  20,
+		  0
+		],
+		"scale": 0.65
+	  },
+	  {
+		"fighter": "rob",
+		"offset": [
+		  160,
+		  70
+		],
+		"scale": 1.1
+	  },
+	  {
+		"fighter": "toon_link",
+		"offset": [
+		  -20,
+		  70
+		],
+		"scale": 0.9
+	  },
+	  {
+		"fighter": "wolf",
+		"offset": [
+		  -100,
+		  70
+		],
+		"scale": 0.85
+	  },
+	  {
+		"fighter": "villager1",
+		"offset": [
+		  100,
+		  30
+		],
+		"scale": 0.65
+	  },
+	  {
+		"fighter": "villager2",
+		"offset": [
+		  100,
+		  30
+		],
+		"scale": 0.65
+	  },
+	  {
+		"fighter": "mega_man",
+		"offset": [
+		  -200,
+		  60
+		],
+		"scale": 0.80 
+	  },
+	  {
+		"fighter": "wii_fit_trainer1",
+		"offset": [
+		  -100,
+		  -220
+		],
+		"scale": 0.3 
+	  },
+	  {
+		"fighter": "wii_fit_trainer2",
+		"offset": [
+		  -100,
+		  -220
+		],
+		"scale": 0.3  
+	  },
+	  {
+		"fighter": "rosalina_and_luma",
+		"offset": [
+		  0,
+		  50
+		],
+		"scale": 0.7 
+	  },
+	  {
+		"fighter": "little_mac",
+		"offset": [
+		  0,
+		  70
+		],
+		"scale": 0.50 
+	  },
+	  {
+		"fighter": "greninja",
+		"offset": [
+		  200,
+		  -40
+		],
+		"scale": 0.5
+	  },
+	  {
+		"fighter": "mii_brawler",
+		"offset": [
+		  -30,
+		  120
+		],
+		"scale": 0.5
+	  },
+	  {
+		"fighter": "mii_swordfighter",
+		"offset": [
+		  -130,
+		  60
+		],
+		"scale": 0.8
+	  },
+	  {
+		"fighter": "mii_gunner1",
+		"offset": [
+		  -140,
+		  130
+		],
+		"scale": 1.0
+	  },
+	  {
+		"fighter": "mii_gunner2",
+		"offset": [
+		  -140,
+		  130
+		],
+		"scale": 1.0
+	  },
+	  {
+		"fighter": "palutena",
+		"offset": [
+		  60,
+		  -150
+		],
+		"scale": 0.75
+	  },
+	  {
+		"fighter": "pac_man",
+		"offset": [
+		  10,
+		  -20
+		],
+		"scale": 0.48
+	  },
+	  {
+		"fighter": "robin1",
+		"offset": [
+		  100,
+		  60
+		],
+		"scale": 0.8
+	  },
+	  {
+		"fighter": "robin2",
+		"offset": [
+		  100,
+		  60
+		],
+		"scale": 0.8
+	  },
+	  {
+		"fighter": "shulk",
+		"offset": [
+		  120,
+		  -400
+		],
+		"scale": 0.55
+	  },
+	  {
+		"fighter": "bowser_jr1",
+		"offset": [
+		  -40,
+		  120
+		],
+		"scale": 0.9 
+	  },
+	  {
+		"fighter": "bowser_jr2",
+		"offset": [
+		  -40,
+		  -50
+		],
+		"scale": 0.9
+	  },
+	  {
+		"fighter": "bowser_jr3",
+		"offset": [
+		  -40,
+		  120
+		],
+		"scale": 0.9 
+	  },
+	  {
+		"fighter": "bowser_jr4",
+		"offset": [
+		  -40,
+		  120
+		],
+		"scale": 0.9 
+	  },
+	  {
+		"fighter": "bowser_jr5",
+		"offset": [
+		  -40,
+		  120
+		],
+		"scale": 0.9 
+	  },
+	  {
+		"fighter": "bowser_jr6",
+		"offset": [
+		  -40,
+		  120
+		],
+		"scale": 0.9 
+	  },
+	  {
+		"fighter": "bowser_jr7",
+		"offset": [
+		  -10,
+		  -20
+		],
+		"scale": 1.7
+	  },
+	  {
+		"fighter": "bowser_jr8",
+		"offset": [
+		  -40,
+		  -50
+		],
+		"scale": 0.9
+	  },
+	  {
+		"fighter": "duck_hunt",
+		"offset": [
+		  150,
+		  -350
+		],
+		"scale": 0.45
+	  },
+	  {
+		"fighter": "ryu",
+		"offset": [
+		  -175,
+		  70
+		],
+		"scale": 0.75
+	  },
+	  {
+		"fighter": "cloud1",
+		"offset": [
+		  -5,
+		  -70
+		],
+		"scale": 0.52 
+	  },
+	  {
+		"fighter": "cloud2",
+		"offset": [
+		  60,
+		  -110
+		],
+		"scale": 0.5  
+	  },
+	  {
+		"fighter": "corrin1",
+		"offset": [
+		  160,
+		  100
+		],
+		"scale": 0.6 
+	  },
+	  {
+		"fighter": "corrin2",
+		"offset": [
+		  160,
+		  100
+		],
+		"scale": 1
+	  },
+	  {
+		"fighter": "bayonetta1",
+		"offset": [
+		  600,
+		  -50
+		],
+		"scale": 1.0
+	  },
+	  {
+		"fighter": "bayonetta2",
+		"offset": [
+		  450,
+		  -60
+		],
+		"scale": 0.9
+	  },
+	  {
+		"fighter": "inkling1",
+		"offset": [
+		  50,
+		  130
+		],
+		"scale": 0.35 
+	  },
+	  {
+		"fighter": "inkling2",
+		"offset": [
+		  40,
+		  -20
+		],
+		"scale": 0.45 
+	  },
+	  {
+		"fighter": "ridley",
+		"offset": [
+		  -150,
+		  0
+		],
+		"scale": 0.6 
+	  },
+	  {
+		"fighter": "simon",
+		"offset": [
+		  300,
+		  -250
+		],
+		"scale": 0.65
+	  },
+	  {
+		"fighter": "king_k_rool",
+		"offset": [
+		  140,
+		  0
+		],
+		"scale": 0.4 
+	  },
+	  {
+		"fighter": "isabelle",
+		"offset": [
+		  100,
+		  -70
+		],
+		"scale": 0.3
+	  },
+	  {
+		"fighter": "incineroar",
+		"offset": [
+		  70,
+		  50
+		],
+		"scale": 0.4
+	  },
+	  {
+		"fighter": "piranha_plant",
+		"offset": [
+		  100,
+		  70
+		],
+		"scale": 0.4
+	  },
+	  {
+		"fighter": "joker1",
+		"offset": [
+		  -220,
+		  70
+		],
+		"scale": 0.55
+	  },
+	  {
+		"fighter": "joker2",
+		"offset": [
+		  -220,
+		  70
+		],
+		"scale": 0.55
+	  },
+	  {
+		"fighter": "dq_hero1",
+		"offset": [
+		  170,
+		  -40
+		],
+		"scale": 0.55
+	  },
+	  {
+		"fighter": "dq_hero2",
+		"offset": [
+		  50,
+		  -860
+		],
+		"scale": 0.85
+	  },
+	  {
+		"fighter": "dq_hero3",
+		"offset": [
+		  170,
+		  -40
+		],
+		"scale": 0.55
+	  },
+	  {
+		"fighter": "dq_hero4",
+		"offset": [
+		  170,
+		  -40
+		],
+		"scale": 0.55
+	  },
+	  {
+		"fighter": "banjo_and_kazooie",
+		"offset": [
+		  60,
+		  -50
+		],
+		"scale": 0.9
+	  },
+	  {
+		"fighter": "terry",
+		"offset": [
+		  -30,
+		  120
+		],
+		"scale": 0.4
+	  },
+	  {
+		"fighter": "byleth1",
+		"offset": [
+		  20,
+		  -330
+		],
+		"scale": 0.4
+	  },
+	  {
+		"fighter": "byleth2",
+		"offset": [
+		  20,
+		  -330
+		],
+		"scale": 0.45
+	  },
+	  {
+		"fighter": "minmin",
+		"offset": [
+		  720,
+		  -240
+		],
+		"scale": 0.35
+	  },
+	  {
+		"fighter": "steve",
+		"offset": [
+		  10,
+		  120
+		],
+		"scale": 0.3
+	  },
+	  {
+		"fighter": "sephiroth1",
+		"offset": [
+		  -300,
+		  -820
+		],
+		"scale":0.4
+	  },
+	  {
+		"fighter": "sephiroth2",
+		"offset": [
+		  -300,
+		  -820
+		],
+		"scale":0.4
+	  },
+	  {
+		"fighter": "pyra",
+		"offset": [
+		  0,
+		  50
+		],
+		"scale": 1.1
+	  },
+	  {
+		"fighter": "kazuya1",
+		"offset": [
+		  30,
+		  130
+		],
+		"scale": 0.5
+	  },
+	  {
+		"fighter": "kazuya2",
+		"offset": [
+		  170,
+		  60
+		],
+		"scale": 0.5
+	  },
+	  {
+		"fighter": "sora1",
+		"offset": [
+		  -20,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "sora2",
+		"offset": [
+		  -20,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+	  	"fighter": "sora3",
+		"offset": [
+		  -20,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+	  	"fighter": "sora4",
+		"offset": [
+		  -20,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "dark_pit",
+		"offset": [
+			250,
+			-100
+		],
+		"scale": 0.85
+	  },
+	  {
+		"fighter": "lucina",
+		"offset": [
+		  -200,
+		  -300
+		],
+		"scale": 0.9
+	  },
+	  {
+		"fighter": "daisy",
+		"offset": [
+		  -50,
+		  80
+		],
+		"scale": 0.6 
+	  },
+	  {
+		"fighter": "chrom",
+		"offset": [
+		  140,
+		  -40
+		],
+		"scale": 1.0
+	  },
+	  {
+		"fighter": "dark_samus",
+		"offset": [
+		  0,
+		  120
+		],
+		"scale": 0.40
+	  },
+	  {
+		"fighter": "richter",
+		"offset": [
+		  0,
+		  -600
+		],
+		"scale": 1.1 
+	  },
+	  {
+		"fighter": "ken",
+		"offset": [
+		  0,
+		  -270
+		],
+		"scale": 0.60
+	  }
+	]
+}]
