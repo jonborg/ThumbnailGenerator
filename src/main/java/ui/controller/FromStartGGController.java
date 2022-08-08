@@ -339,7 +339,7 @@ public class FromStartGGController implements Initializable {
 
     public void showAuthTokenPage(ActionEvent actionEvent) {
         LOGGER.info("User loaded authorization token instructions' page.");
-        String url ="https://developer.smash.gg/docs/authentication/";
+        String url ="https://developer.start.gg/docs/authentication/";
         if(Desktop.isDesktopSupported()) {
             try {
                 Desktop.getDesktop().browse(new URI(url));
