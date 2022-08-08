@@ -668,10 +668,10 @@
 	  {
 		"fighter": "isabelle",
 		"offset": [
-		  0,
+		  100,
 		  -70
 		],
-		"scale": 0.55 
+		"scale": 0.3
 	  },
 	  {
 		"fighter": "incineroar",
