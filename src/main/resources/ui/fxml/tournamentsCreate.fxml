@@ -12,7 +12,7 @@
             stylesheets="@../styles/tournamentsAddEdit.css">
 
     <HBox styleClass="mainBox" spacing="15" >
-        <VBox spacing="29">
+        <VBox spacing="10">
             <VBox spacing="15">
                 <TitledPane text="General Settings" collapsible="false">
                     <VBox spacing="15">
@@ -58,7 +58,7 @@
             </VBox>
         </VBox>
 
-        <VBox spacing="15">
+        <VBox spacing="27">
             <HBox spacing="15">
                 <TitledPane text="Font Dimensions" collapsible="false">
                     <VBox spacing="15">

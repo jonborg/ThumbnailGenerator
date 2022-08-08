@@ -51,13 +51,13 @@ public class Thumbnail {
         saveThumbnail();
     }
 
-    public static BufferedImage generatePreview(Tournament tournament)
+    public static BufferedImage generatePreview(Tournament tournament, FighterArtType artType)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException {
         LOGGER.info("Generating thumbnail preview.");
         List<Fighter> fighters = Fighter.generatePreviewFighters();
         ImageSettings imageSettings = (ImageSettings)
-                JSONReader.getJSONArray(ts.getTournament().getFighterImageSettingsFile(ts.getArtType()),
+                JSONReader.getJSONArray(tournament.getFighterImageSettingsFile(artType),
                         new TypeToken<ArrayList<ImageSettings>>() {}.getType()).get(0);
         return generateThumbnail(ThumbnailSettings.builder()
                                                 .tournament(tournament)
@@ -66,7 +66,7 @@ public class Thumbnail {
                                                 .round("Pools Round 1")
                                                 .date("07/12/2018")
                                                 .fighters(fighters)
-                                                .artType(FighterArtType.RENDER)
+                                                .artType(artType)
                                                 .build());
     }
 

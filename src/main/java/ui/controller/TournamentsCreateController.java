@@ -196,7 +196,7 @@ public class TournamentsCreateController implements Initializable {
         Tournament tournament = generateTournamentWithCurrentSettings();
 
         try{
-            BufferedImage previewImage = Thumbnail.generatePreview(tournament);
+            BufferedImage previewImage = Thumbnail.generatePreview(tournament, artType.getSelectionModel().getSelectedItem());
             Image image = SwingFXUtils.toFXImage(previewImage, null);
             preview.setImage(image);
         }catch(Exception e){
