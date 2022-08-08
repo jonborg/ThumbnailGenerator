@@ -1,0 +1,2 @@
+userAgent="Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.71 Mobile Safari/537.36"
+wget --user-agent="$userAgent" "https://www.deviantart.com/elevenzm/art/01-Mario-Super-Smash-Bros-Ultimate-809554218" -q -O "assets/mural/mario/1.png"

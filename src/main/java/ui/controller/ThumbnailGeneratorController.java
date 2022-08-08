@@ -7,6 +7,8 @@ import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
+import fighter.FighterArtType;
+import fighter.FighterArtTypeConverter;
 import file.json.JSONReader;
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -30,11 +33,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import smashgg.query.QueryUtils;
+import startgg.query.QueryUtils;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
+import thumbnail.generate.ThumbnailSettings;
 import thumbnail.image.ImageSettings;
 import tournament.Tournament;
 import tournament.TournamentUtils;
@@ -51,6 +56,8 @@ public class ThumbnailGeneratorController implements Initializable {
     private TextField round;
     @FXML
     private TextField date;
+    @FXML
+    private ComboBox<FighterArtType> artType;
     @FXML
     private AnchorPane player1;
     @FXML
@@ -78,7 +85,10 @@ public class ThumbnailGeneratorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        player1Controller.setParentController(this);
+        player2Controller.setParentController(this);
         initMenuBars();
+        initArtDropdown();
     }
 
     public void flipPlayers(ActionEvent actionEvent) {
@@ -122,14 +132,24 @@ public class ThumbnailGeneratorController implements Initializable {
         }
 
         LOGGER.info("Loading image settings of tournament {} ", getSelectedTournament().getName());
-        ImageSettings imageSettings = (ImageSettings) JSONReader.getJSONArray(
-                getSelectedTournament().getFighterImageSettingsFile(),
+        var imageSettings = (ImageSettings) JSONReader.getJSONArray(
+                getSelectedTournament().getFighterImageSettingsFile(getFighterArtType()),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
+
         try {
-            Thumbnail.generateAndSaveThumbnail(getSelectedTournament(), imageSettings, saveLocally.isSelected(), round.getText().toUpperCase(), date.getText(),
-                    player1Controller.generateFighter(),
-                    player2Controller.generateFighter());
+            Thumbnail.generateAndSaveThumbnail(ThumbnailSettings.builder()
+                                                                .tournament(getSelectedTournament())
+                                                                .imageSettings(imageSettings)
+                                                                .locally(saveLocally.isSelected())
+                                                                .round(round.getText().toUpperCase())
+                                                                .date(date.getText())
+                                                                .fighters(ThumbnailSettings.
+                                                                        createFighterList(
+                                                                                player1Controller.generateFighter(),
+                                                                                player2Controller.generateFighter()))
+                                                                .artType(getFighterArtType())
+                                                                .build());
             LOGGER.info("Thumbnail was successfully generated and saved!");
             AlertFactory.displayInfo("Thumbnail was successfully generated and saved!");
         } catch (LocalImageNotFoundException e){
@@ -167,12 +187,12 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public void createFromSmashGG(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/fxml/fromSmashGG.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/fxml/fromStartGG.fxml"));
             Parent root = loader.load();
             root.setOnMousePressed(e -> root.requestFocus());
-            FromSmashGGController controller = loader.getController();
+            FromStartGGController controller = loader.getController();
             Stage stage = new Stage();
-            stage.setTitle("Create thumbnails from Smash.gg");
+            stage.setTitle("Create thumbnails from Start.gg");
             stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
             stage.setScene(new Scene(root));
             stage.setOnHidden(e -> {
@@ -238,6 +258,12 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
 
+    private void initArtDropdown(){
+        artType.getItems().addAll(FighterArtType.values());
+        artType.setConverter(new FighterArtTypeConverter());
+        artType.getSelectionModel().select(FighterArtType.RENDER);
+    }
+
     private static List<Tournament> getTournamentsList(){
         return TournamentUtils.getTournamentsList();
     }
@@ -256,5 +282,9 @@ public class ThumbnailGeneratorController implements Initializable {
     }
     public void setStage(Stage stage){
         this.stage=stage;
+    }
+
+    public FighterArtType getFighterArtType(){
+        return artType.getSelectionModel().getSelectedItem();
     }
 }
