@@ -1,5 +1,6 @@
 package thumbnail.generate;
 
+import fighter.Player;
 import com.google.gson.reflect.TypeToken;
 import exception.FighterImageSettingsNotFoundException;
 import exception.FontNotFoundException;
@@ -183,13 +184,14 @@ public class ThumbnailFromFile extends Thumbnail {
     private static void generateThumbnail(Boolean saveLocally)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException {
-        var player1 = new Fighter(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
-        var player2 = new Fighter(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
-        player1.setFlip(readFlipFile(player1));
+
+        var player1 = new Player(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
+        var player2 = new Player(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
+        player1.setFighterFlip(0, readFlipFile(player1.getFighter(0)));
         if (imageSettings.isMirrorPlayer2()) {
-            player2.setFlip(!readFlipFile(player2));
+            player2.setFighterFlip(0, !readFlipFile(player2.getFighter(0)));
         } else {
-            player2.setFlip(readFlipFile(player2));
+            player2.setFighterFlip(0, readFlipFile(player2.getFighter(0)));
         }
 
         generateAndSaveThumbnail(ThumbnailSettings.builder()
@@ -198,7 +200,7 @@ public class ThumbnailFromFile extends Thumbnail {
                                                 .locally(saveLocally)
                                                 .round(parameters.get(6))
                                                 .date(date)
-                                                .fighters(ThumbnailSettings.createFighterList(player1, player2))
+                                                .players(ThumbnailSettings.createPlayerList(player1, player2))
                                                 .artType(artType)
                                                 .build());
     }

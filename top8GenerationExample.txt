@@ -1,9 +1,8 @@
-weeklyl;20/02/20XX;render
-Iberyes;Iberyes;pokemon_trainer;6
-ace;aceness_;ness;7
-B&B | BigLord;BiigLord;mii_gunner;1
-Suplex;_Suplex_The_Lex;terry;5
-7G | Avifor;Aviffor;banjo_and_kazooie;1
-7G | Snoopy;FilipeSnoops;king_k_rool;7
-Storm;StormofThunder;zero_suit_samus;1
-SlickMick;DaSlickMick;piranha_plant;6
+sephiroth;1;sephiroth;2;sephiroth;3;sephiroth;4;sephiroth;5;sephiroth;6;sephiroth;7;sephiroth;8
+marth;1;marth;2;marth;3;marth;4;marth;5;marth;6;marth;7;marth;8
+terry;1;terry;2;terry;3;terry;4;terry;5;terry;6;terry;7;terry;8
+kazuya;1;kazuya;2;kazuya;3;kazuya;4;kazuya;5;kazuya;6;kazuya;7;kazuya;8
+piranha_plant;1;piranha_plant;2;piranha_plant;3;piranha_plant;4;piranha_plant;5;piranha_plant;6;piranha_plant;7;piranha_plant;8
+king_k_rool;1;king_k_rool;2;king_k_rool;3;king_k_rool;4;king_k_rool;5;king_k_rool;6;king_k_rool;7;king_k_rool;8
+steve;1;steve;2;steve;3;steve;4;steve;5;steve;6;steve;7;steve;8
+banjo_and_kazooie;1;banjo_and_kazooie;2;banjo_and_kazooie;3;banjo_and_kazooie;4;banjo_and_kazooie;5;banjo_and_kazooie;6;banjo_and_kazooie;7;banjo_and_kazooie;8

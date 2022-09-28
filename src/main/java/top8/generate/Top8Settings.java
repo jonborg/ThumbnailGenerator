@@ -1,7 +1,7 @@
-package thumbnail.generate;
+package top8.generate;
 
-import fighter.Player;
 import fighter.FighterArtType;
+import fighter.Player;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Builder;
@@ -12,25 +12,14 @@ import tournament.Tournament;
 
 @Getter
 @Builder
-public class ThumbnailSettings {
+public class Top8Settings {
     private Tournament tournament;
     private ImageSettings imageSettings;
     private boolean locally;
-    private String round;
     private String date;
+    private String edition;
     private List<Player> players;
     private FighterArtType artType;
 
-    public static List<Player> createPlayerList(Player... players){
-        var result = new ArrayList<Player>();
-        for (var p: players){
-            result.add(p);
-        }
-        return result;
-    }
 }
-
-
-
-
 
