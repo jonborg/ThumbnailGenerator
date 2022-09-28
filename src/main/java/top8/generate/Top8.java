@@ -113,8 +113,6 @@ public class Top8 {
 
     }
 
-
-
     static void saveImage(BufferedImage image, File file) {
         try {
             LOGGER.info("Saving thumbnail {} on {}", file.getName(), file.getAbsolutePath());

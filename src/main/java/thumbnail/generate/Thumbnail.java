@@ -1,7 +1,5 @@
 package thumbnail.generate;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import fighter.Player;
 import com.google.gson.reflect.TypeToken;
 import exception.FighterImageSettingsNotFoundException;
@@ -18,25 +16,17 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import file.json.JSONWriter;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.codehaus.plexus.util.ExceptionUtils;
 import thumbnail.image.FighterImageThumbnail;
 import thumbnail.image.settings.ImageSettings;
 import thumbnail.text.TextToImage;
-import top8.image.settings.FighterImageTop8Settings;
-import top8.image.settings.SlotImageTop8Settings;
 import tournament.Tournament;
-import ui.factory.alert.AlertFactory;
 
 import static fighter.image.FighterImage.convertToAlternateRender;
 
@@ -117,7 +107,6 @@ public class Thumbnail {
             var f = player.getFighter(0);
             var image = getFighterImage(f);
             convertToAlternateRender(f);
-           // test(ts.getImageSettings());
             var fighterImageSettings = ts.getImageSettings()
                     .findFighterImageSettings(f.getUrlName());
             var fighterImage = new FighterImageThumbnail(f, fighterImageSettings, image);
@@ -221,39 +210,5 @@ public class Thumbnail {
             return DownloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
         }
     }
-
-  /*  private static void test(ImageSettings imageSettings){
-        var list = imageSettings.getFighterImages();
-        top8.image.settings.ImageSettings top8ImageSettings = new top8.image.settings.ImageSettings();
-        List<FighterImageTop8Settings> fighterImages = new ArrayList<>();
-        for (var el: list){
-            List<SlotImageTop8Settings> slotlist = new ArrayList<>();
-            for (int i=1;i<=8; i++){
-                var a = el.getOffset();
-                for (int j = 0; j < a.length; j++){
-                    a[j] *= 0.4f;
-                }
-                SlotImageTop8Settings slot = new SlotImageTop8Settings(a, 0.4f, el.isFlip(), i);
-                slotlist.add(slot);
-            }
-            FighterImageTop8Settings fighterImageTop8Settings =
-                    new FighterImageTop8Settings(el.getFighter(), slotlist);
-            fighterImages.add(fighterImageTop8Settings);
-        }
-        top8ImageSettings.setFighterImages(fighterImages);
-        Gson gson = new GsonBuilder().setPrettyPrinting()
-                .excludeFieldsWithoutExposeAnnotation()
-                .create();
-        try (FileWriter writer = new FileWriter("settings/top8/images/icarus.json")) {
-            String json = gson.toJson(top8ImageSettings);
-            LOGGER.debug("Writing json to file {} -> {}", "settings/top8/images/icarus.json", json);
-            writer.write(json);
-        } catch (FileNotFoundException e) {
-            AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
-        } catch (IOException e) {
-            AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
-        }
-
-    }*/
 }
 

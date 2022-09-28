@@ -2,7 +2,6 @@ package top8.generate;
 
 import fighter.FighterArtType;
 import fighter.Player;
-
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
