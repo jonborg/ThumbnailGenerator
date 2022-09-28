@@ -52,7 +52,7 @@ public class Top8 {
         var foreground = ImageIO.read(new File("assets/tournaments/foregrounds/top8/weeklyl.png"));
 
         Graphics2D g2d = top8.createGraphics();
-        g2d.drawImage(background, 0, 0, null);
+        //g2d.drawImage(background, 0, 0, null);
 
         List<PlayerSlot> slots = JSONReader.getJSONArray("settings/top8/slot/weeklyL_player_slots.json",
                 new TypeToken<ArrayList<PlayerSlot>>() {}.getType());
@@ -87,21 +87,14 @@ public class Top8 {
                BufferedImage maskedImage;
                if (slots.get(i).getShadow() != null) {
                    var shadowSettings = slot.getShadow();
-                   var shadowedImage =
-                           addShadow(fighterImage.getImage(),
-                                   shadowSettings.getColor(),
-                                   (int) Math.floor(
-                                           shadowSettings.getCoordinateX() *
-                                                   fighterImageSettings
-                                                           .getSlotImageSettings(
-                                                                   place)
-                                                           .getScale()),
-                                   (int) Math.floor(
-                                           shadowSettings.getCoordinateY() *
-                                                   fighterImageSettings
-                                                           .getSlotImageSettings(
-                                                                   place)
-                                                           .getScale()));
+                   var offsetX = shadowSettings.getScaledX(fighterImageSettings
+                                   .getSlotImageSettings(place)
+                                   .getScale());
+                   var offsetY = shadowSettings.getScaledY(fighterImageSettings
+                                   .getSlotImageSettings(place)
+                                   .getScale());
+                   var shadowedImage = addShadow(fighterImage.getImage(),
+                           shadowSettings.getColor(), offsetX, offsetY);
                    maskedImage = applyMask(shadowedImage, mask);
                } else {
                    maskedImage = applyMask(fighterImage.getImage(), mask);
@@ -113,7 +106,7 @@ public class Top8 {
                LOGGER.error("Error occurred when generating top8.", e);
            }
         }
-        g2d.drawImage(foreground, 0, 0, null);
+        //g2d.drawImage(foreground, 0, 0, null);
 
         var dir = new File("generated_top8/");
         if (!dir.exists()) dir.mkdir();
@@ -123,7 +116,6 @@ public class Top8 {
     }
 
     public static BufferedImage applyMask(BufferedImage image, BufferedImage mask) {
-
         BufferedImage dest = new BufferedImage(mask.getWidth(), mask.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = dest.createGraphics();
         g2.drawImage(image, 0, 0, null);
@@ -170,7 +162,8 @@ public class Top8 {
     }
 
     private static BufferedImage addShadow(BufferedImage image, int shadowColor, int offsetX, int offsetY){
-        var result = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        var result = new BufferedImage(image.getWidth(),
+                image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         var g2 = result.createGraphics();
 
         var filter = new ShadowFilter(shadowColor);
@@ -179,19 +172,6 @@ public class Top8 {
         g2.drawImage(shadow, offsetX, offsetY, null);
         g2.drawImage(image, 0, 0, null);
         g2.dispose();
-
-        BufferedImage newImage = new BufferedImage(
-                shadow.getWidth(null), shadow.getHeight(null),
-                BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = newImage.createGraphics();
-        g.drawImage(shadow, 0, 0, null);
-        g.dispose();
-        try {
-            ImageIO.write(newImage, ".png",
-                    new File("generated_top8/shadow.png"));
-        }catch (Exception e){
-            System.out.println("Exception: " + e.getMessage());
-        }
 
         return result;
     }

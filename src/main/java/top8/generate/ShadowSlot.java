@@ -34,4 +34,12 @@ public class ShadowSlot {
         return ((00) << 24) | ((r & 255) << 16) | ((g & 255) << 8) | (b & 255);
     }
 
+    public int getScaledX(float scale){
+        return (int) Math.floor(coordinateX * scale);
+    }
+
+    public int getScaledY(float scale){
+        return (int) Math.floor(coordinateY * scale);
+    }
+
 }
