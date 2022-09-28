@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CharacterSlot {
+public class PlayerSlot {
     @Expose
     @SerializedName("place")
     private int place;
@@ -27,5 +27,17 @@ public class CharacterSlot {
     @Expose
     @SerializedName("coordinate_x")
     private int coordinateY;
+
+    @Expose
+    @SerializedName("shadow")
+    private ShadowSlot shadow;
+
+    @Expose
+    @SerializedName("additionalFightersPosition_x")
+    private String addFighterPosX;
+
+    @Expose
+    @SerializedName("additionalFightersPosition_y")
+    private String addFighterPosY;
 }
 

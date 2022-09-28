@@ -16,6 +16,7 @@
             <Menu styleClass="menu" text="File">
                 <MenuItem styleClass="menuItem" text="Generate thumbnails from file" onAction="#createMultipleThumbnails"/>
                 <MenuItem styleClass="menuItem" text="Generate thumbnails from Start.gg" onAction="#createFromSmashGG"/>
+                <MenuItem styleClass="menuItem" text="Generate Top 8 from file" onAction="#generateTop8"/>
                 <SeparatorMenuItem/>
                 <MenuItem styleClass="menuItem" text="Close" onAction="#close"/>
             </Menu>
@@ -24,7 +25,6 @@
                 <Menu fx:id="menuCopy" styleClass="menuItem" text="Create copy of..."/>
                 <Menu fx:id="menuEdit" styleClass="menuItem" text="Edit tournament"/>
                 <Menu fx:id="menuDelete" styleClass="menuItem" text="Delete tournament"/>
-
             </Menu>
         </MenuBar>
         <VBox spacing="40" alignment="CENTER" >
