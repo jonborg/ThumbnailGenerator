@@ -67,7 +67,7 @@ public class Top8 {
         }
 
         Graphics2D g2d = top8.createGraphics();
-        g2d.drawImage(background, 0, 0, null);
+        //g2d.drawImage(background, 0, 0, null);
 
         var slots = fullSlot.getSlots();
         for (int i = 0; i < slots.size(); i++){
@@ -104,7 +104,7 @@ public class Top8 {
                LOGGER.error("Error occurred when generating top8.", e);
            }
         }
-        g2d.drawImage(foreground, 0, 0, null);
+        //g2d.drawImage(foreground, 0, 0, null);
 
         var dir = new File("generated_top8/");
         if (!dir.exists()) dir.mkdir();

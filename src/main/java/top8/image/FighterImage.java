@@ -64,7 +64,7 @@ public class FighterImage {
         int offsetX = 2 * this.imageSettings.getOffset()[0];
         int offsetY = this.imageSettings.getOffset()[1];
 
-        BufferedImage img = new BufferedImage(bufferedImage.getWidth() + Math.abs(offsetX),
+        BufferedImage img = new BufferedImage(bufferedImage.getWidth() + Math.abs(offsetX) +1000,
                 bufferedImage.getHeight() + Math.abs(offsetY),
                 BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();
