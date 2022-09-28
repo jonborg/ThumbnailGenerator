@@ -5,7 +5,7 @@
 		"coordinate_x": 40,
 		"coordinate_y": 40,
 		"shadow":{"rgbColor": "725cad", "coordinate_x": -100,"coordinate_y": 0},
-		"additionalFightersPosition_x":"64i",		
+		"additionalFightersPosition_x":"10+64i",		
 		"additionalFightersPosition_y":"150"
 	},{
 		"place": 2,
@@ -21,15 +21,15 @@
 		"coordinate_x": 994,
 		"coordinate_y": 40,
 		"shadow":{"rgbColor": "725cad", "coordinate_x": -100,"coordinate_y": -100},
-		"additionalFightersPosition_x":"64i",		
-		"additionalFightersPosition_y":"110"
+		"additionalFightersPosition_x":"10+64i",		
+		"additionalFightersPosition_y":"120"
 	},{
 		"place": 4,
 		"mask": "assets/masks/quadri4.png",
 		"coordinate_x": 995,
 		"coordinate_y": 283,
 		"shadow":{"rgbColor": "725cad", "coordinate_x": 100,"coordinate_y": 100},
-		"additionalFightersPosition_x":"64i",
+		"additionalFightersPosition_x":"10+64i",
 		"additionalFightersPosition_y":"80"
 	},{
 		"place": 5,
@@ -45,7 +45,7 @@
 		"coordinate_x": 772,
 		"coordinate_y": 579,
 		"shadow":{"rgbColor": "725cad", "coordinate_x": 0,"coordinate_y": 100},
-		"additionalFightersPosition_x":"64i",		
+		"additionalFightersPosition_x":"10+64i",		
 		"additionalFightersPosition_y":"175"
 	},{
 		"place": 7,
@@ -53,7 +53,7 @@
 		"coordinate_x": 1050,
 		"coordinate_y": 579,
 		"shadow":{"rgbColor": "725cad", "coordinate_x": -100,"coordinate_y": 100},
-		"additionalFightersPosition_x":"20+64i",		
+		"additionalFightersPosition_x":"10+64i",		
 		"additionalFightersPosition_y":"70"
 	},{
 		"place": 8,
