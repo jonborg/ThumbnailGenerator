@@ -3,26 +3,26 @@
 	  {
 		"fighter": "mario",
 		"slots":[
-		  {"slot": 1, "offset": [-60,100], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [30,0], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [60,0], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [60,-50], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [30,-20], "scale": 0.3, "flip":false},
+		  {"slot": 1, "offset": [-30,100], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [60,0], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [120,0], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [120,-50], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [60,-20], "scale": 0.3, "flip":false},
 		  {"slot": 6, "offset": [0,-20], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [60,0], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [60,-50], "scale": 0.25, "flip":false}
+		  {"slot": 7, "offset": [120,0], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [120,-50], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "donkey_kong",
 		"slots":[
-		  {"slot": 1, "offset": [-350,150], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-20,10], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [30,40], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [30,-20], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-50,10], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-110,10], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [40,0], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [30,-30], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-175,150], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-10,10], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [60,40], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [60,-20], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-25,10], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-65,10], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [80,0], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [60,-30], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "link",
@@ -39,38 +39,38 @@
 	  },{
 		"fighter": "samus",
 		"slots":[
-		  {"slot": 1, "offset": [-180,100], "scale": 0.3, "flip":false},
+		  {"slot": 1, "offset": [-90,100], "scale": 0.3, "flip":false},
 		  {"slot": 2, "offset": [0,0], "scale": 0.25, "flip":false},
-		  {"slot": 3, "offset": [30,50], "scale": 0.2, "flip":false},
-		  {"slot": 4, "offset": [30,-40], "scale": 0.2, "flip":false},
-		  {"slot": 5, "offset": [-80,0], "scale": 0.2, "flip":false},
-		  {"slot": 6, "offset": [-130,0], "scale": 0.2, "flip":false},
-		  {"slot": 7, "offset": [20,0], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [10,-50], "scale": 0.2, "flip":false}
+		  {"slot": 3, "offset": [60,50], "scale": 0.2, "flip":false},
+		  {"slot": 4, "offset": [60,-40], "scale": 0.2, "flip":false},
+		  {"slot": 5, "offset": [-40,0], "scale": 0.2, "flip":false},
+		  {"slot": 6, "offset": [-65,0], "scale": 0.2, "flip":false},
+		  {"slot": 7, "offset": [40,0], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [20,-50], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "yoshi",
 		"slots":[
-		  {"slot": 1, "offset": [-250,150], "scale": 0.55, "flip":false},
-		  {"slot": 2, "offset": [10,20], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [50,70], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [50,0], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [10,20], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-40,20], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [60,40], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [50,0], "scale": 0.2, "flip":false}
+		  {"slot": 1, "offset": [-125,150], "scale": 0.55, "flip":false},
+		  {"slot": 2, "offset": [20,20], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [100,70], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [100,0], "scale": 0.25, "flip":false},
+		  {"slot": 5, "offset": [20,20], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-20,20], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [120,40], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [100,0], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "kirby",
 		"slots":[
-		  {"slot": 1, "offset": [-100,200], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [30,10], "scale": 0.3, "flip":false},
-		  {"slot": 3, "offset": [70,40], "scale": 0.2, "flip":false},
-		  {"slot": 4, "offset": [70,-10], "scale": 0.2, "flip":false},
-		  {"slot": 5, "offset": [20,10], "scale": 0.2, "flip":false},
+		  {"slot": 1, "offset": [-50,200], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [60,10], "scale": 0.3, "flip":false},
+		  {"slot": 3, "offset": [140,40], "scale": 0.2, "flip":false},
+		  {"slot": 4, "offset": [140,-10], "scale": 0.2, "flip":false},
+		  {"slot": 5, "offset": [40,10], "scale": 0.2, "flip":false},
 		  {"slot": 6, "offset": [0,10], "scale": 0.2, "flip":false},
-		  {"slot": 7, "offset": [60,20], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [60,-40], "scale": 0.2, "flip":false}
+		  {"slot": 7, "offset": [120,20], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [120,-40], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "fox",
@@ -99,14 +99,14 @@
 	  },{
 		"fighter": "luigi",
 		"slots":[
-		  {"slot": 1, "offset": [-300,180], "scale": 0.6, "flip":false},
+		  {"slot": 1, "offset": [-150,180], "scale": 0.6, "flip":false},
 		  {"slot": 2, "offset": [0,20], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [40,50], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [40,01], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-20,20], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-90,20], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [40,20], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [30,-10], "scale": 0.25, "flip":false}
+		  {"slot": 3, "offset": [80,50], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [80,01], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-40,20], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-180,20], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [80,20], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [60,-10], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "ness",
@@ -135,14 +135,14 @@
 	  },{
 		"fighter": "jigglypuff",
 		"slots":[
-		  {"slot": 1, "offset": [-200,200], "scale": 0.7, "flip":false},
-		  {"slot": 2, "offset": [10,20], "scale": 0.5, "flip":false},
-		  {"slot": 3, "offset": [60,30], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [60,-10], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [20,20], "scale": 0.3, "flip":false},
+		  {"slot": 1, "offset": [-100,200], "scale": 0.7, "flip":false},
+		  {"slot": 2, "offset": [20,20], "scale": 0.5, "flip":false},
+		  {"slot": 3, "offset": [120,30], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [120,-10], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [40,20], "scale": 0.3, "flip":false},
 		  {"slot": 6, "offset": [0,20], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [60,0], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [60,-30], "scale": 0.25, "flip":false}
+		  {"slot": 7, "offset": [120,0], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [120,-30], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "peach",
@@ -243,14 +243,14 @@
 	  },{
 		"fighter": "marth",
 		"slots":[
-		  {"slot": 1, "offset": [-650,150], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-200,20], "scale": 0.4, "flip":false},
+		  {"slot": 1, "offset": [-325,150], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-100,20], "scale": 0.4, "flip":false},
 		  {"slot": 3, "offset": [0,80], "scale": 0.3, "flip":false},
 		  {"slot": 4, "offset": [0,10], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-200,20], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-250,20], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [-30,50], "scale": 0.3, "flip":false},
-		  {"slot": 8, "offset": [-80,0], "scale": 0.3, "flip":false}
+		  {"slot": 5, "offset": [-100,20], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-125,20], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [-15,50], "scale": 0.3, "flip":false},
+		  {"slot": 8, "offset": [-40,0], "scale": 0.3, "flip":false}
 		]
 	  },{
 		"fighter": "young_link",
@@ -267,14 +267,14 @@
 	  },{
 		"fighter": "ganondorf",
 		"slots":[
-		  {"slot": 1, "offset": [-600,150], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-200,20], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [-20,70], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [-20,0], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-160,20], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-230,20], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [20,40], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [20,0], "scale": 0.2, "flip":false}
+		  {"slot": 1, "offset": [-300,150], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-100,20], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [-10,70], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [-10,0], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-80,20], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-115,20], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [40,40], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [40,0], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "mewtwo",
@@ -291,14 +291,14 @@
 	  },{
 		"fighter": "roy",
 		"slots":[
-		  {"slot": 1, "offset": [-400,100], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-70,0], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [10,40], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [10,-10], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-100,0], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-170,0], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [20,20], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [10,-20], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-200,100], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-35,0], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [20,40], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [20,-10], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-50,0], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-85,0], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [40,20], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [20,-20], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "mr_game_and_watch",
@@ -339,26 +339,26 @@
 	  },{
 		"fighter": "zero_suit_samus",
 		"slots":[
-		  {"slot": 1, "offset": [-400,150], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-250,20], "scale": 0.35, "flip":false},
-		  {"slot": 3, "offset": [-70,50], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [-70,0], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-320,20], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-380,20], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [-10,20], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [-20,-20], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-200,150], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-125,20], "scale": 0.35, "flip":false},
+		  {"slot": 3, "offset": [-35,50], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [-35,0], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-160,20], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-190,20], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [-5,20], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [-10,-20], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "wario",
 		"slots":[
-		  {"slot": 1, "offset": [-330,180], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-30,20], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [20,50], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [20,0], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-60,20], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-110,20], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [30,10], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [20,-10], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-165,180], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-15,20], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [40,50], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [40,0], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-30,20], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-55,20], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [15,10], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [10,-10], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "snake",
@@ -399,26 +399,26 @@
 	  },{
 		"fighter": "pokemon_trainer1",
 		"slots":[
-		  {"slot": 1, "offset": [-500,200], "scale": 0.7, "flip":false},
-		  {"slot": 2, "offset": [-150,30], "scale": 0.5, "flip":false},
-		  {"slot": 3, "offset": [10,80], "scale": 0.4, "flip":false},
-		  {"slot": 4, "offset": [10,0], "scale": 0.4, "flip":false},
-		  {"slot": 5, "offset": [-150,30], "scale": 0.4, "flip":false},
-		  {"slot": 6, "offset": [-230,30], "scale": 0.4, "flip":false},
-		  {"slot": 7, "offset": [30,40], "scale": 0.3, "flip":false},
-		  {"slot": 8, "offset": [20,0], "scale": 0.3, "flip":false}
+		  {"slot": 1, "offset": [-250,200], "scale": 0.7, "flip":false},
+		  {"slot": 2, "offset": [-75,30], "scale": 0.5, "flip":false},
+		  {"slot": 3, "offset": [20,80], "scale": 0.4, "flip":false},
+		  {"slot": 4, "offset": [20,0], "scale": 0.4, "flip":false},
+		  {"slot": 5, "offset": [-75,30], "scale": 0.4, "flip":false},
+		  {"slot": 6, "offset": [-115,30], "scale": 0.4, "flip":false},
+		  {"slot": 7, "offset": [15,40], "scale": 0.3, "flip":false},
+		  {"slot": 8, "offset": [10,0], "scale": 0.3, "flip":false}
 		]
 	  },{
 		"fighter": "pokemon_trainer2",
 		"slots":[
-		  {"slot": 1, "offset": [-500,200], "scale": 0.8, "flip":false},
-		  {"slot": 2, "offset": [-150,30], "scale": 0.6, "flip":false},
+		  {"slot": 1, "offset": [-250,200], "scale": 0.8, "flip":false},
+		  {"slot": 2, "offset": [-75,30], "scale": 0.6, "flip":false},
 		  {"slot": 3, "offset": [0,80], "scale": 0.5, "flip":false},
-		  {"slot": 4, "offset": [-10,0], "scale": 0.5, "flip":false},
-		  {"slot": 5, "offset": [-200,30], "scale": 0.5, "flip":false},
-		  {"slot": 6, "offset": [-280,30], "scale": 0.5, "flip":false},
-		  {"slot": 7, "offset": [20,40], "scale": 0.4, "flip":false},
-		  {"slot": 8, "offset": [10,0], "scale": 0.4, "flip":false}
+		  {"slot": 4, "offset": [-5,0], "scale": 0.5, "flip":false},
+		  {"slot": 5, "offset": [-100,30], "scale": 0.5, "flip":false},
+		  {"slot": 6, "offset": [-140,30], "scale": 0.5, "flip":false},
+		  {"slot": 7, "offset": [40,40], "scale": 0.4, "flip":false},
+		  {"slot": 8, "offset": [20,0], "scale": 0.4, "flip":false}
 		]
 	  },{
 		"fighter": "diddy_kong",
@@ -447,26 +447,26 @@
 	  },{
 		"fighter": "sonic",
 		"slots":[
-		  {"slot": 1, "offset": [-260,160], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-80,10], "scale": 0.3, "flip":false},
-		  {"slot": 3, "offset": [40,60], "scale": 0.2, "flip":false},
-		  {"slot": 4, "offset": [50,-20], "scale": 0.2, "flip":false},
-		  {"slot": 5, "offset": [-50,10], "scale": 0.2, "flip":false},
-		  {"slot": 6, "offset": [-100,10], "scale": 0.2, "flip":false},
-		  {"slot": 7, "offset": [50,30], "scale": 0.15, "flip":false},
-		  {"slot": 8, "offset": [50,-20], "scale": 0.15, "flip":false}
+		  {"slot": 1, "offset": [-130,160], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-40,10], "scale": 0.3, "flip":false},
+		  {"slot": 3, "offset": [80,60], "scale": 0.2, "flip":false},
+		  {"slot": 4, "offset": [100,-20], "scale": 0.2, "flip":false},
+		  {"slot": 5, "offset": [-25,10], "scale": 0.2, "flip":false},
+		  {"slot": 6, "offset": [-50,10], "scale": 0.2, "flip":false},
+		  {"slot": 7, "offset": [100,30], "scale": 0.15, "flip":false},
+		  {"slot": 8, "offset": [100,-20], "scale": 0.15, "flip":false}
 		]
 	  },{
 		"fighter": "king_dedede",
 		"slots":[
-		  {"slot": 1, "offset": [-200,200], "scale": 0.55, "flip":false},
+		  {"slot": 1, "offset": [-100,200], "scale": 0.55, "flip":false},
 		  {"slot": 2, "offset": [0,0], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [30,30], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [30,0], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-30,0], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-90,0], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [40,0], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [30,-10], "scale": 0.25, "flip":false}
+		  {"slot": 3, "offset": [60,30], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [60,0], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-15,0], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-45,0], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [80,0], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [60,-10], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "olimar1",
@@ -615,14 +615,14 @@
 	  },{
 		"fighter": "little_mac",
 		"slots":[
-		  {"slot": 1, "offset": [-200,150], "scale": 0.5, "flip":false},
+		  {"slot": 1, "offset": [-100,150], "scale": 0.5, "flip":false},
 		  {"slot": 2, "offset": [0,20], "scale": 0.35, "flip":false},
-		  {"slot": 3, "offset": [40,50], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [40,0], "scale": 0.25, "flip":false},
+		  {"slot": 3, "offset": [80,50], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [80,0], "scale": 0.25, "flip":false},
 		  {"slot": 5, "offset": [0,20], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-50,20], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [40,20], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [40,0], "scale": 0.2, "flip":false}
+		  {"slot": 6, "offset": [-25,20], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [80,20], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [80,0], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "greninja",
@@ -639,50 +639,50 @@
 	  },{
 		"fighter": "mii_brawler",
 		"slots":[
-		  {"slot": 1, "offset": [-400,150], "scale": 0.5, "flip":false},
-		  {"slot": 2, "offset": [-150,0], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [10,80], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [10,-30], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-160,0], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-240,0], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [10,20], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [10,-40], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-200,150], "scale": 0.5, "flip":false},
+		  {"slot": 2, "offset": [-75,0], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [20,80], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [20,-30], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-80,0], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-120,0], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [20,20], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [20,-40], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "mii_swordfighter",
 		"slots":[
-		  {"slot": 1, "offset": [-300,150], "scale": 0.5, "flip":false},
-		  {"slot": 2, "offset": [-140,10], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [30,50], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [30,-20], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-150,10], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-190,10], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [10,10], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [10,-65], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-150,150], "scale": 0.5, "flip":false},
+		  {"slot": 2, "offset": [-70,10], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [60,50], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [60,-20], "scale": 0.25, "flip":false},
+		  {"slot": 5, "offset": [-75,10], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-95,10], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [20,10], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [20,-65], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "mii_gunner1",
 		"slots":[
-		  {"slot": 1, "offset": [-400,150], "scale": 0.5, "flip":false},
-		  {"slot": 2, "offset": [-170,10], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [10,50], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [20,-20], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-200,10], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-240,10], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [10,20], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [10,-30], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-200,150], "scale": 0.5, "flip":false},
+		  {"slot": 2, "offset": [-85,10], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [20,50], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [40,-20], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-100,10], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-120,10], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [20,20], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [20,-30], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "mii_gunner2",
 		"slots":[
-		  {"slot": 1, "offset": [-300,150], "scale": 0.5, "flip":false},
-		  {"slot": 2, "offset": [-100,-10], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [20,40], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [20,-40], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-140,-10], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-210,-10], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [30,20], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [30,-40], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-150,150], "scale": 0.5, "flip":false},
+		  {"slot": 2, "offset": [-50,-10], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [40,40], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [40,-40], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-70,-10], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-105,-10], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [60,20], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [60,-40], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "palutena",
@@ -747,26 +747,26 @@
 	  },{
 		"fighter": "bowser_jr1",
 		"slots":[
-		  {"slot": 1, "offset": [-300,10], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-100,-130], "scale": 0.35, "flip":false},
-		  {"slot": 3, "offset": [20,-50], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [20,-120], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-110,-80], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-170,-80], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [30,-50], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [30,-110], "scale": 0.2, "flip":false}
+		  {"slot": 1, "offset": [-150,10], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-50,-130], "scale": 0.35, "flip":false},
+		  {"slot": 3, "offset": [40,-50], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [40,-120], "scale": 0.25, "flip":false},
+		  {"slot": 5, "offset": [-55,-80], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-85,-80], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [60,-50], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [60,-110], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "bowser_jr2",
 		"slots":[
-		  {"slot": 1, "offset": [-250,10], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-100,-130], "scale": 0.35, "flip":false},
-		  {"slot": 3, "offset": [20,-50], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [20,-120], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-110,-80], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-170,-80], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [30,-50], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [30,-110], "scale": 0.2, "flip":false}
+		  {"slot": 1, "offset": [-125,10], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-50,-130], "scale": 0.35, "flip":false},
+		  {"slot": 3, "offset": [40,-50], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [40,-120], "scale": 0.25, "flip":false},
+		  {"slot": 5, "offset": [-55,-80], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-85,-80], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [60,-50], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [60,-110], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "bowser_jr3",
@@ -775,70 +775,70 @@
 		  {"slot": 2, "offset": [-100,-130], "scale": 0.35, "flip":false},
 		  {"slot": 3, "offset": [20,-40], "scale": 0.25, "flip":false},
 		  {"slot": 4, "offset": [20,-110], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-110,-80], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-170,-80], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [30,-40], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [30,-100], "scale": 0.2, "flip":false}
+		  {"slot": 5, "offset": [-55,-80], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-85,-80], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [60,-40], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [60,-100], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "bowser_jr4",
 		"slots":[
-		  {"slot": 1, "offset": [-250,10], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-100,-130], "scale": 0.35, "flip":false},
-		  {"slot": 3, "offset": [20,-40], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [20,-110], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-110,-80], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-170,-80], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [30,-40], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [30,-100], "scale": 0.2, "flip":false}
+		  {"slot": 1, "offset": [-125,10], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-50,-130], "scale": 0.35, "flip":false},
+		  {"slot": 3, "offset": [40,-40], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [40,-110], "scale": 0.25, "flip":false},
+		  {"slot": 5, "offset": [-55,-80], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-85,-80], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [60,-40], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [60,-100], "scale": 0.2, "flip":false}
 	    ]
 	  },{
 		"fighter": "bowser_jr5",
 		"slots":[
-		  {"slot": 1, "offset": [-250,10], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-100,-130], "scale": 0.35, "flip":false},
-		  {"slot": 3, "offset": [30,-40], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [30,-110], "scale": 0.25, "flip":false},
+		  {"slot": 1, "offset": [-125,10], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-50,-130], "scale": 0.35, "flip":false},
+		  {"slot": 3, "offset": [60,-40], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [60,-110], "scale": 0.25, "flip":false},
 		  {"slot": 5, "offset": [-90,-80], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-130,-80], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [30,-40], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [30,-100], "scale": 0.2, "flip":false}
+		  {"slot": 6, "offset": [-65,-80], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [60,-40], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [60,-100], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "bowser_jr6",
 		"slots":[
-		  {"slot": 1, "offset": [-250,10], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-100,-130], "scale": 0.35, "flip":false},
-		  {"slot": 3, "offset": [20,-50], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [20,-120], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-110,-80], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-170,-80], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [30,-50], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [30,-110], "scale": 0.2, "flip":false}
+		  {"slot": 1, "offset": [-125,10], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-50,-130], "scale": 0.35, "flip":false},
+		  {"slot": 3, "offset": [40,-50], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [40,-120], "scale": 0.25, "flip":false},
+		  {"slot": 5, "offset": [-55,-80], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-85,-80], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [60,-50], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [60,-110], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "bowser_jr7",
 		"slots":[
-		  {"slot": 1, "offset": [-350,50], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-130,-130], "scale": 0.35, "flip":false},
-		  {"slot": 3, "offset": [10,-50], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [10,-120], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-110,-80], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-170,-80], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [20,-50], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [10,-110], "scale": 0.2, "flip":false}
+		  {"slot": 1, "offset": [-175,50], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-65,-130], "scale": 0.35, "flip":false},
+		  {"slot": 3, "offset": [20,-50], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [20,-120], "scale": 0.25, "flip":false},
+		  {"slot": 5, "offset": [-55,-80], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-85,-80], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [40,-50], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [20,-110], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "bowser_jr8",
 		"slots":[
-		  {"slot": 1, "offset": [-250,10], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-100,-110], "scale": 0.35, "flip":false},
-		  {"slot": 3, "offset": [20,-20], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [20,-80], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-90,-80], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-150,-80], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [30,-30], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [30,-90], "scale": 0.2, "flip":false}
+		  {"slot": 1, "offset": [-125,10], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-50,-110], "scale": 0.35, "flip":false},
+		  {"slot": 3, "offset": [40,-20], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [40,-80], "scale": 0.25, "flip":false},
+		  {"slot": 5, "offset": [-45,-80], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-75,-80], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [60,-30], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [60,-90], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "duck_hunt",
@@ -867,48 +867,48 @@
 	  },{
 		"fighter": "cloud1",
 		"slots":[
-		  {"slot": 1, "offset": [-400,100], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-50,0], "scale": 0.4, "flip":false},
+		  {"slot": 1, "offset": [-200,100], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-25,0], "scale": 0.4, "flip":false},
 		  {"slot": 3, "offset": [0,20], "scale": 0.3, "flip":false},
 		  {"slot": 4, "offset": [0,-30], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-100,0], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-160,0], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-50,0], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-80,0], "scale": 0.3, "flip":false},
 		  {"slot": 7, "offset": [0,10], "scale": 0.25, "flip":false},
 		  {"slot": 8, "offset": [0,-30], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "cloud2",
 		"slots":[
-		  {"slot": 1, "offset": [-800,100], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-300,-20], "scale": 0.4, "flip":false},
+		  {"slot": 1, "offset": [-400,100], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-150,-20], "scale": 0.4, "flip":false},
 		  {"slot": 3, "offset": [0,20], "scale": 0.3, "flip":false},
 		  {"slot": 4, "offset": [0,-30], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-250,-20], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-320,-20], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-125,-20], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-160,-20], "scale": 0.3, "flip":false},
 		  {"slot": 7, "offset": [0,10], "scale": 0.25, "flip":false},
 		  {"slot": 8, "offset": [0,-30], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "corrin1",
 		"slots":[
-		  {"slot": 1, "offset": [-900,100], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-400,0], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [-100,60], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [-100,-20], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-300,0], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-360,0], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [-80,30], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [-90,-20], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-450,100], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-200,0], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [-50,60], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [-50,-20], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-150,0], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-80,0], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [-40,30], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [-45,-20], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "corrin2",
 		"slots":[
-		  {"slot": 1, "offset": [-750,100], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-300,0], "scale": 0.4, "flip":false},
+		  {"slot": 1, "offset": [-375,100], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-150,0], "scale": 0.4, "flip":false},
 		  {"slot": 3, "offset": [0,60], "scale": 0.3, "flip":false},
 		  {"slot": 4, "offset": [0,-20], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-300,0], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-330,0], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-150,0], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-165,0], "scale": 0.3, "flip":false},
 		  {"slot": 7, "offset": [0,30], "scale": 0.25, "flip":false},
 		  {"slot": 8, "offset": [0,-20], "scale": 0.25, "flip":false}
 		]
@@ -963,14 +963,14 @@
 	  },{
 		"fighter": "ridley",
 		"slots":[
-		  {"slot": 1, "offset": [-100,0], "scale": 0.5, "flip":false},
+		  {"slot": 1, "offset": [-50,0], "scale": 0.5, "flip":false},
 		  {"slot": 2, "offset": [0,0], "scale": 0.3, "flip":false},
-		  {"slot": 3, "offset": [30,-10], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [20,-100], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-20,-20], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-70,-20], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [40,-20], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [30,-100], "scale": 0.2, "flip":false}
+		  {"slot": 3, "offset": [60,-10], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [40,-100], "scale": 0.25, "flip":false},
+		  {"slot": 5, "offset": [-10,-20], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-35,-20], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [80,-20], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [60,-100], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "simon",
@@ -987,14 +987,14 @@
 	  },{
 		"fighter": "king_k_rool",
 		"slots":[
-		  {"slot": 1, "offset": [-450,150], "scale": 0.45, "flip":false},
-		  {"slot": 2, "offset": [-150,0], "scale": 0.35, "flip":false},
-		  {"slot": 3, "offset": [20,70], "scale": 0.25, "flip":false},
-		  {"slot": 4, "offset": [30,-20], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-130,0], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-150,0], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [20,30], "scale": 0.20, "flip":false},
-		  {"slot": 8, "offset": [30,-20], "scale": 0.20, "flip":false}
+		  {"slot": 1, "offset": [-225,150], "scale": 0.45, "flip":false},
+		  {"slot": 2, "offset": [-75,0], "scale": 0.35, "flip":false},
+		  {"slot": 3, "offset": [40,70], "scale": 0.25, "flip":false},
+		  {"slot": 4, "offset": [60,-20], "scale": 0.25, "flip":false},
+		  {"slot": 5, "offset": [-60,0], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-75,0], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [40,30], "scale": 0.20, "flip":false},
+		  {"slot": 8, "offset": [60,-20], "scale": 0.20, "flip":false}
 		]
 	  },{
 		"fighter": "isabelle",
@@ -1023,38 +1023,38 @@
 	  },{
 		"fighter": "piranha_plant",
 		"slots":[
-		  {"slot": 1, "offset": [-250,200], "scale": 0.45, "flip":false},
-		  {"slot": 2, "offset": [30,20], "scale": 0.3, "flip":false},
-		  {"slot": 3, "offset": [50,80], "scale": 0.2, "flip":false},
-		  {"slot": 4, "offset": [60,0], "scale": 0.2, "flip":false},
-		  {"slot": 5, "offset": [10,20], "scale": 0.2, "flip":false},
-		  {"slot": 6, "offset": [-20,20], "scale": 0.2, "flip":false},
-		  {"slot": 7, "offset": [40,40], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [30,0], "scale": 0.2, "flip":false}
+		  {"slot": 1, "offset": [-125,200], "scale": 0.45, "flip":false},
+		  {"slot": 2, "offset": [60,20], "scale": 0.3, "flip":false},
+		  {"slot": 3, "offset": [100,80], "scale": 0.2, "flip":false},
+		  {"slot": 4, "offset": [120,0], "scale": 0.2, "flip":false},
+		  {"slot": 5, "offset": [20,20], "scale": 0.2, "flip":false},
+		  {"slot": 6, "offset": [-10,20], "scale": 0.2, "flip":false},
+		  {"slot": 7, "offset": [80,40], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [60,0], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "joker1",
 		"slots":[
-		  {"slot": 1, "offset": [-500,140], "scale": 0.5, "flip":false},
-		  {"slot": 2, "offset": [-250,0], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [-30,70], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [-30,0], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-230,0], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-300,0], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [-10,40], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [-30,-10], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-250,140], "scale": 0.5, "flip":false},
+		  {"slot": 2, "offset": [-125,0], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [-15,70], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [-15,0], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-115,0], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-150,0], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [-5,40], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [-15,-10], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "joker2",
 		"slots":[
-		  {"slot": 1, "offset": [-470,140], "scale": 0.5, "flip":false},
-		  {"slot": 2, "offset": [-200,20], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [-20,70], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [-20,0], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-200,20], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-270,20], "scale": 0.3, "flip":false},
+		  {"slot": 1, "offset": [-235,140], "scale": 0.5, "flip":false},
+		  {"slot": 2, "offset": [-100,20], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [-10,70], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [-10,0], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-100,20], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-135,20], "scale": 0.3, "flip":false},
 		  {"slot": 7, "offset": [0,40], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [-20,-10], "scale": 0.25, "flip":false}
+		  {"slot": 8, "offset": [-10,-10], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "dq_hero1",
@@ -1107,25 +1107,25 @@
 	  },{
 		"fighter": "banjo_and_kazooie",
 		"slots":[
-		  {"slot": 1, "offset": [-100,0], "scale": 0.5, "flip":false},
+		  {"slot": 1, "offset": [-50,0], "scale": 0.5, "flip":false},
 		  {"slot": 2, "offset": [0,-100], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [30,-70], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [50,-160], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-30,-80], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-70,-80], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [40,-90], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [40,-150], "scale": 0.25, "flip":false}		]
+		  {"slot": 3, "offset": [60,-70], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [100,-160], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-15,-80], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-35,-80], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [80,-90], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [80,-150], "scale": 0.25, "flip":false}		]
 	  },{
 		"fighter": "terry",
 		"slots":[
-		  {"slot": 1, "offset": [-600,130], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-170,0], "scale": 0.4, "flip":false},
+		  {"slot": 1, "offset": [-300,130], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-850,0], "scale": 0.4, "flip":false},
 		  {"slot": 3, "offset": [0,80], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [10,10], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-190,0], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-260,0], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [20,40], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [10,-10], "scale": 0.25, "flip":false}
+		  {"slot": 4, "offset": [20,10], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-95,0], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-130,0], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [40,40], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [20,-10], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "byleth1",
@@ -1166,74 +1166,74 @@
 	  },{
 		"fighter": "steve",
 		"slots":[
-		  {"slot": 1, "offset": [-350,170], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-100,20], "scale": 0.3, "flip":false},
-		  {"slot": 3, "offset": [30,70], "scale": 0.2, "flip":false},
-		  {"slot": 4, "offset": [30,-10], "scale": 0.2, "flip":false},
-		  {"slot": 5, "offset": [-40,20], "scale": 0.2, "flip":false},
-		  {"slot": 6, "offset": [-100,20], "scale": 0.2, "flip":false},
-		  {"slot": 7, "offset": [20,20], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [10,0], "scale": 0.2, "flip":false}
+		  {"slot": 1, "offset": [-175,170], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-50,20], "scale": 0.3, "flip":false},
+		  {"slot": 3, "offset": [60,70], "scale": 0.2, "flip":false},
+		  {"slot": 4, "offset": [60,-10], "scale": 0.2, "flip":false},
+		  {"slot": 5, "offset": [-20,20], "scale": 0.2, "flip":false},
+		  {"slot": 6, "offset": [-50,20], "scale": 0.2, "flip":false},
+		  {"slot": 7, "offset": [40,20], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [20,0], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "sephiroth1",
 		"slots":[
-		  {"slot": 1, "offset": [-1300,0], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-700,-60], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [-400,0], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [-400,-30], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-600,-40], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-650,-40], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [-250,0], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [-300,-50], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-650,0], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-350,-60], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [-200,0], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [-200,-30], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-300,-40], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-325,-40], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [-125,0], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [-150,-50], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "sephiroth2",
 		"slots":[
-		  {"slot": 1, "offset": [-1400,0], "scale": 0.6, "flip":false},
-		  {"slot": 2, "offset": [-700,-60], "scale": 0.4, "flip":false},
-		  {"slot": 3, "offset": [-400,0], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [-400,-30], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-600,-40], "scale": 0.3, "flip":false},
-		  {"slot": 6, "offset": [-650,-40], "scale": 0.3, "flip":false},
-		  {"slot": 7, "offset": [-250,0], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [-300,-50], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-700,0], "scale": 0.6, "flip":false},
+		  {"slot": 2, "offset": [-350,-60], "scale": 0.4, "flip":false},
+		  {"slot": 3, "offset": [-200,0], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [-200,-30], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-300,-40], "scale": 0.3, "flip":false},
+		  {"slot": 6, "offset": [-325,-40], "scale": 0.3, "flip":false},
+		  {"slot": 7, "offset": [-125,0], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [-150,-50], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "pyra",
 		"slots":[
-		  {"slot": 1, "offset": [-600,180], "scale": 0.35, "flip":false},
-		  {"slot": 2, "offset": [-400,10], "scale": 0.3, "flip":false},
-		  {"slot": 3, "offset": [-360,60], "scale": 0.3, "flip":false},
-		  {"slot": 4, "offset": [-400,-10], "scale": 0.3, "flip":false},
-		  {"slot": 5, "offset": [-420,10], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-500,10], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [-270,30], "scale": 0.25, "flip":false},
-		  {"slot": 8, "offset": [-300,-20], "scale": 0.25, "flip":false}
+		  {"slot": 1, "offset": [-300,180], "scale": 0.35, "flip":false},
+		  {"slot": 2, "offset": [-200,10], "scale": 0.3, "flip":false},
+		  {"slot": 3, "offset": [-180,60], "scale": 0.3, "flip":false},
+		  {"slot": 4, "offset": [-200,-10], "scale": 0.3, "flip":false},
+		  {"slot": 5, "offset": [-210,10], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-250,10], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [-135,30], "scale": 0.25, "flip":false},
+		  {"slot": 8, "offset": [-150,-20], "scale": 0.25, "flip":false}
 		]
 	  },{
 		"fighter": "kazuya1",
 		"slots":[
-		  {"slot": 1, "offset": [-360,120], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-120,0], "scale": 0.3, "flip":false},
+		  {"slot": 1, "offset": [-180,120], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-60,0], "scale": 0.3, "flip":false},
 		  {"slot": 3, "offset": [0,60], "scale": 0.25, "flip":false},
 		  {"slot": 4, "offset": [0,-10], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-150,0], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-200,0], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [20,30], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [10,0], "scale": 0.2, "flip":false}
+		  {"slot": 5, "offset": [-75,0], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-100,0], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [40,30], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [20,0], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "kazuya2",
 		"slots":[
-		  {"slot": 1, "offset": [-360,120], "scale": 0.4, "flip":false},
-		  {"slot": 2, "offset": [-120,0], "scale": 0.3, "flip":false},
+		  {"slot": 1, "offset": [-180,120], "scale": 0.4, "flip":false},
+		  {"slot": 2, "offset": [-60,0], "scale": 0.3, "flip":false},
 		  {"slot": 3, "offset": [0,60], "scale": 0.25, "flip":false},
 		  {"slot": 4, "offset": [0,-10], "scale": 0.25, "flip":false},
-		  {"slot": 5, "offset": [-150,0], "scale": 0.25, "flip":false},
-		  {"slot": 6, "offset": [-200,0], "scale": 0.25, "flip":false},
-		  {"slot": 7, "offset": [20,30], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [10,0], "scale": 0.2, "flip":false}
+		  {"slot": 5, "offset": [-75,0], "scale": 0.25, "flip":false},
+		  {"slot": 6, "offset": [-100,0], "scale": 0.25, "flip":false},
+		  {"slot": 7, "offset": [40,30], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [20,0], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "sora1",
@@ -1334,14 +1334,14 @@
 	  },{
 		"fighter": "dark_samus",
 		"slots":[
-		  {"slot": 1, "offset": [-400,100], "scale": 0.3, "flip":false},
-		  {"slot": 2, "offset": [-150,0], "scale": 0.25, "flip":false},
+		  {"slot": 1, "offset": [-200,100], "scale": 0.3, "flip":false},
+		  {"slot": 2, "offset": [-75,0], "scale": 0.25, "flip":false},
 		  {"slot": 3, "offset": [0,70], "scale": 0.2, "flip":false},
 		  {"slot": 4, "offset": [0,-20], "scale": 0.2, "flip":false},
-		  {"slot": 5, "offset": [-230,0], "scale": 0.2, "flip":false},
-		  {"slot": 6, "offset": [-300,0], "scale": 0.2, "flip":false},
-		  {"slot": 7, "offset": [-80,40], "scale": 0.2, "flip":false},
-		  {"slot": 8, "offset": [-90,-20], "scale": 0.2, "flip":false}
+		  {"slot": 5, "offset": [-115,0], "scale": 0.2, "flip":false},
+		  {"slot": 6, "offset": [-150,0], "scale": 0.2, "flip":false},
+		  {"slot": 7, "offset": [-40,40], "scale": 0.2, "flip":false},
+		  {"slot": 8, "offset": [-45,-20], "scale": 0.2, "flip":false}
 		]
 	  },{
 		"fighter": "richter",

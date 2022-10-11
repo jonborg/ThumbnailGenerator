@@ -7,7 +7,7 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.var;
-import thumbnail.image.ImageSettings;
+import thumbnail.image.settings.ImageSettings;
 import tournament.Tournament;
 
 @Getter

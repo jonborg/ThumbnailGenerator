@@ -9,7 +9,6 @@ import exception.OnlineImageNotFoundException;
 import fighter.DownloadFighterURL;
 import fighter.Fighter;
 import fighter.FighterArtType;
-import fighter.FighterImage;
 import file.FileUtils;
 import file.json.JSONReader;
 import javax.imageio.ImageIO;
@@ -24,11 +23,12 @@ import java.util.List;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import thumbnail.image.ImageSettings;
+import thumbnail.image.FighterImageThumbnail;
+import thumbnail.image.settings.ImageSettings;
 import thumbnail.text.TextToImage;
 import tournament.Tournament;
 
-import static fighter.FighterImage.convertToAlternateRender;
+import static fighter.image.FighterImage.convertToAlternateRender;
 
 public class Thumbnail {
     private static final Logger LOGGER = LogManager.getLogger(Thumbnail.class);
@@ -104,7 +104,7 @@ public class Thumbnail {
             convertToAlternateRender(f);
             var fighterImageSettings = ts.getImageSettings()
                     .findFighterImageSettings(f.getUrlName());
-            FighterImage fighterImage = new FighterImage(f, fighterImageSettings, image);
+            var fighterImage = new FighterImageThumbnail(f, fighterImageSettings, image);
 
             LOGGER.info("Drawing player {}'s character: {}", port, f.getName());
             if (fighterImage.getImage().getWidth() < WIDTH / 2 && fighterImage.getFighter().isFlip()) {

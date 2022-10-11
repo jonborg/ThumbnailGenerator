@@ -2,7 +2,7 @@ package tournament;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import fighter.FighterArtSettingsFile;
+import fighter.image.settings.FighterArtSettings;
 import fighter.FighterArtType;
 import java.util.List;
 import lombok.Getter;
@@ -30,7 +30,7 @@ public class Tournament implements Cloneable{
     private String background;
     @Expose
     @SerializedName("artSettings")
-    private List<FighterArtSettingsFile> artTypeDir;
+    private List<FighterArtSettings> artTypeDir;
     @Expose(serialize = false)
     @SerializedName("fighterImageSettings")
     private String deprecatedImageSettings;
@@ -45,7 +45,7 @@ public class Tournament implements Cloneable{
 
     public Tournament(String id, String name, String image,
                       String foreground, String background,
-                      List<FighterArtSettingsFile> artTypeDir, String...additional){
+                      List<FighterArtSettings> artTypeDir, String...additional){
         this.tournamentId = id;
         this.name = name;
         this.image = image;

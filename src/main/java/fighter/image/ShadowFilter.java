@@ -1,4 +1,4 @@
-package top8.generate;
+package fighter.image;
 
 import lombok.AllArgsConstructor;
 

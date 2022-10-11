@@ -1,8 +1,10 @@
-package fighter;
+package fighter.image.settings;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
+
+import fighter.FighterArtType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +14,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FighterArtSettingsFile implements Cloneable {
+public class FighterArtSettings implements Cloneable {
 
     @Expose
     @SerializedName("artType")
@@ -26,20 +28,20 @@ public class FighterArtSettingsFile implements Cloneable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof FighterArtSettingsFile)) {
+        if (!(o instanceof FighterArtSettings)) {
             return false;
         }
-        FighterArtSettingsFile that = (FighterArtSettingsFile) o;
+        FighterArtSettings that = (FighterArtSettings) o;
         return artType == that.artType &&
                 Objects.equals(fighterImageSettingsPath,
                         that.fighterImageSettingsPath);
     }
 
     @Override
-    public FighterArtSettingsFile clone() {
-        FighterArtSettingsFile clone = null;
+    public FighterArtSettings clone() {
+        FighterArtSettings clone = null;
         try {
-            clone = (FighterArtSettingsFile) super.clone();
+            clone = (FighterArtSettings) super.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
