@@ -1,6 +1,6 @@
 package ui.controller;
 
-import fighter.FighterArtSettingsFile;
+import fighter.image.settings.FighterArtSettings;
 import fighter.FighterArtType;
 import fighter.FighterArtTypeConverter;
 import java.awt.GraphicsEnvironment;
@@ -91,7 +91,7 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ImageView preview;
 
-    protected List<FighterArtSettingsFile> artTypeDir = new ArrayList<>();
+    protected List<FighterArtSettings> artTypeDir = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -153,7 +153,7 @@ public class TournamentsCreateController implements Initializable {
 
     protected void initFighterArtTypeDropdown(String deprecatedRenderSettings){
         for (var v: FighterArtType.values()) {
-            var settingsFile = FighterArtSettingsFile.builder()
+            var settingsFile = FighterArtSettings.builder()
                     .artType(v)
                     .build();
             if(deprecatedRenderSettings != null

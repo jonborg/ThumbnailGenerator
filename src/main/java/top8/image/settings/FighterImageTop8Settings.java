@@ -1,4 +1,4 @@
-package top8.image;
+package top8.image.settings;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @AllArgsConstructor
-public class FighterImageSettings {
+public class FighterImageTop8Settings {
 
     @Expose
     @SerializedName("fighter")
@@ -20,10 +20,10 @@ public class FighterImageSettings {
 
     @Expose
     @SerializedName("slots")
-    private List<SlotImageSettings> slotImageSettings;
+    private List<SlotImageTop8Settings> slotImageTop8Settings;
 
-    public SlotImageSettings getSlotImageSettings(int slotIndex){
-        return slotImageSettings.stream()
+    public SlotImageTop8Settings getSlotImageTop8Settings(int slotIndex){
+        return slotImageTop8Settings.stream()
                 .filter(s -> Objects.equals(slotIndex, s.getSlot()))
                 .findFirst()
                 .orElse(null);

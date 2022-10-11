@@ -4,7 +4,6 @@ import fighter.Fighter;
 import fighter.Player;
 import com.google.gson.reflect.TypeToken;
 import exception.FighterImageSettingsNotFoundException;
-import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
@@ -23,7 +22,7 @@ import java.util.List;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import thumbnail.image.ImageSettings;
+import thumbnail.image.settings.ImageSettings;
 import tournament.Tournament;
 import ui.factory.alert.AlertFactory;
 

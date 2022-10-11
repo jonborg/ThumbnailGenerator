@@ -1,4 +1,4 @@
-package top8.generate;
+package top8.image.slot;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
