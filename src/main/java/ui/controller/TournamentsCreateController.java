@@ -102,7 +102,6 @@ public class TournamentsCreateController implements Initializable {
     protected Button cancelButton;
     @FXML
     protected ImageView preview;
-
     protected List<FighterArtSettings> artTypeDir = new ArrayList<>();
     protected List<FighterArtSettings> artTypeDirTop8 = new ArrayList<>();
 
@@ -278,8 +277,7 @@ public class TournamentsCreateController implements Initializable {
         var top8Settings = new Top8Settings(foregroundTop8.getText(),
                 backgroundTop8.getText(), artTypeDirTop8, slotSettingsFileTop8.getText());
         var tournament = new Tournament(id.getText(), name.getText(),
-                logo.getText(), foreground.getText(), background.getText(), artTypeDir,
-                thumbnailSettings, top8Settings);
+                logo.getText(), thumbnailSettings, top8Settings);
 
         return tournament;
     }

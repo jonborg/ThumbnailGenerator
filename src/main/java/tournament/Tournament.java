@@ -35,8 +35,6 @@ public class Tournament implements Cloneable{
     private Top8Settings top8Settings;
 
     public Tournament(String id, String name, String image,
-                      String foreground, String background,
-                      List<FighterArtSettings> artTypeDir,
                       ThumbnailSettings thumbnailSettings, Top8Settings top8Settings){
         this.tournamentId = id;
         this.name = name;
