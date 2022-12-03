@@ -45,10 +45,10 @@ public class TournamentButton extends ToggleButton {
     }
 
     public String getThumbnailForeground() {
-        return this.getTournament().getForeground();
+        return this.getTournament().getThumbnailSettings().getForeground();
     }
 
     public String getThumbnailBackground() {
-        return this.getTournament().getBackground();
+        return this.getTournament().getThumbnailSettings().getBackground();
     }
 }

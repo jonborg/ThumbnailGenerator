@@ -1,12 +1,10 @@
 package top8.generate;
 
 import com.google.gson.reflect.TypeToken;
-import exception.FighterImageSettingsNotFoundException;
 import exception.OnlineImageNotFoundException;
 import fighter.DownloadFighterURL;
 import fighter.Fighter;
 import fighter.image.FighterImage;
-import fighter.image.ImageUtils;
 import file.FileUtils;
 import file.json.JSONReader;
 import javax.imageio.ImageIO;
@@ -15,14 +13,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
 import lombok.var;
-import net.objecthunter.exp4j.ExpressionBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import top8.image.FighterImageTop8;
 import top8.image.settings.ImageSettings;
-import top8.image.slot.PlayerSlot;
+import top8.image.slot.FullSlot;
+import ui.factory.alert.AlertFactory;
 
 public class Top8 {
 
@@ -38,15 +36,39 @@ public class Top8 {
         ts = top8Settings;
         localFightersPath = FileUtils.getLocalFightersPath(ts.getArtType());
 
-        var top8 = new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_ARGB);
-        var background = ImageIO.read(new File("assets/tournaments/backgrounds/top8/weeklyl.png"));
-        var foreground = ImageIO.read(new File("assets/tournaments/foregrounds/top8/weeklyl.png"));
+        var fullSlot = (FullSlot) JSONReader.getJSONObjectFromFile(ts.getTournament()
+                        .getTop8Settings().getSlotSettingsFile(),
+                new TypeToken<FullSlot>() {}.getType());
+
+        var top8 = new BufferedImage(fullSlot.getWidth(), fullSlot.getHeight(), BufferedImage.TYPE_INT_ARGB);
+
+        BufferedImage background = null;
+        BufferedImage foreground = null;
+        if(ts.getTournament().getTop8Settings().getBackground() != null &&
+                !ts.getTournament().getTop8Settings().getBackground().isEmpty()) {
+            try {
+                background = ImageIO.read(new File(
+                        ts.getTournament().getTop8Settings().getBackground()));
+            } catch (Exception e) {
+                LOGGER.warn("Could not load background image for top8.", e);
+                AlertFactory.displayWarning("Could not load background image for top8.");
+            }
+        }
+        if(ts.getTournament().getTop8Settings().getForeground() != null &&
+                !ts.getTournament().getTop8Settings().getForeground().isEmpty()) {
+            try {
+                foreground = ImageIO.read(new File(
+                        ts.getTournament().getTop8Settings().getForeground()));
+            } catch (Exception e) {
+                LOGGER.warn("Could not load foreground image for top8.", e);
+                AlertFactory.displayWarning("Could not load foreground image for top8.");
+            }
+        }
 
         Graphics2D g2d = top8.createGraphics();
         g2d.drawImage(background, 0, 0, null);
 
-        List<PlayerSlot> slots = JSONReader.getJSONArray("settings/top8/slot/weeklyL_player_slots.json",
-                new TypeToken<ArrayList<PlayerSlot>>() {}.getType());
+        var slots = fullSlot.getSlots();
         for (int i = 0; i < 8; i++){
            try {
                var place = i + 1;
@@ -60,8 +82,9 @@ public class Top8 {
                FighterImage.convertToAlternateRender(player.getFighter(0));
 
                ImageSettings imageSettings = (ImageSettings)
-                       JSONReader.getJSONArray(
-                               "settings/top8/images/default.json",
+                       JSONReader.getJSONArrayFromFile(
+                               ts.getTournament().getTop8Settings()
+                                       .getFighterImageSettingsFile(ts.getArtType()),
                                new TypeToken<ArrayList<ImageSettings>>() {
                                }.getType()).get(0);
                var fighterImageSettings = imageSettings

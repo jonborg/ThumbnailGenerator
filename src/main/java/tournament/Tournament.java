@@ -5,9 +5,14 @@ import com.google.gson.annotations.SerializedName;
 import fighter.image.settings.FighterArtSettings;
 import fighter.FighterArtType;
 import java.util.List;
+import java.util.Objects;
+
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import thumbnail.text.TextSettings;
+import tournament.settings.ThumbnailSettings;
+import tournament.settings.Top8Settings;
 
 @Getter
 @ToString
@@ -23,51 +28,21 @@ public class Tournament implements Cloneable{
     @SerializedName("logo")
     private String image;
     @Expose
-    @SerializedName("foreground")
-    private String foreground;
+    @SerializedName("thumbnailSettings")
+    private ThumbnailSettings thumbnailSettings;
     @Expose
-    @SerializedName("background")
-    private String background;
-    @Expose
-    @SerializedName("artSettings")
-    private List<FighterArtSettings> artTypeDir;
-    @Expose(serialize = false)
-    @SerializedName("fighterImageSettings")
-    private String deprecatedImageSettings;
-
-    private TextSettings textSettings;
-
-    private static String defaultBackground= "assets/tournaments/backgrounds/default.png";
-
-    private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/default.json";
-
-    private static String defaultMuralImageSettingsFile= "settings/thumbnails/images/defaultMural.json";
+    @SerializedName("top8Settings")
+    private Top8Settings top8Settings;
 
     public Tournament(String id, String name, String image,
                       String foreground, String background,
-                      List<FighterArtSettings> artTypeDir, String...additional){
+                      List<FighterArtSettings> artTypeDir,
+                      ThumbnailSettings thumbnailSettings, Top8Settings top8Settings){
         this.tournamentId = id;
         this.name = name;
         this.image = image;
-        this.foreground = foreground;
-        this.background = background == null ? defaultBackground : background;
-        this.artTypeDir = artTypeDir;
-        this.artTypeDir.forEach(dir -> {
-            if(dir.getFighterImageSettingsPath() == null
-                    || dir.getFighterImageSettingsPath().isEmpty()) {
-                switch (dir.getArtType()) {
-                    case MURAL:
-                        dir.setFighterImageSettingsPath(
-                                defaultMuralImageSettingsFile);
-                        break;
-                    case RENDER:
-                    default:
-                        dir.setFighterImageSettingsPath(
-                                defaultRenderImageSettingsFile);
-                        break;
-                }
-            }
-        });
+        this.thumbnailSettings = thumbnailSettings;
+        this.top8Settings = top8Settings;
     }
 
     public Object clone() throws CloneNotSupportedException{
@@ -92,56 +67,16 @@ public class Tournament implements Cloneable{
             this.image = tournament.getImage();
             equal = false;
         }
-        if (!this.foreground.equals(tournament.getForeground())){
-            this.foreground = tournament.getForeground();
+        if (!Objects.equals(this.thumbnailSettings,
+                tournament.getThumbnailSettings())){
+            this.thumbnailSettings = tournament.getThumbnailSettings();
             equal = false;
         }
-        if (!this.getBackground().equals(tournament.getBackground())){
-            this.background = tournament.getBackground();
-            equal = false;
-        }
-        if (this.getArtTypeDir() == null
-                || !this.getArtTypeDir().equals(tournament.getArtTypeDir())){
-            this.artTypeDir = tournament.getArtTypeDir();
-            equal = false;
-        }
-        if (!this.textSettings.updateDifferences(tournament.getTextSettings())){
-            this.textSettings = tournament.getTextSettings();
+        if (!Objects.equals(this.top8Settings,
+                tournament.getTop8Settings())){
+            this.top8Settings = tournament.getTop8Settings();
             equal = false;
         }
         return equal;
-    }
-
-    public String getBackground() {
-        return background == null ? defaultBackground : background;
-    }
-
-    public void setTextSettings(TextSettings textSettings) {
-        this.textSettings = textSettings;
-    }
-
-    public String getDeprecatedImageSettings(){
-        return deprecatedImageSettings;
-    }
-
-    public String getFighterImageSettingsFile(FighterArtType artType){
-        if (this.artTypeDir == null){
-            switch (artType){
-                case MURAL:
-                    return defaultMuralImageSettingsFile;
-                case RENDER:
-                default:
-                    return deprecatedImageSettings == null || deprecatedImageSettings
-                            .isEmpty() ?
-                            defaultRenderImageSettingsFile :
-                            deprecatedImageSettings;
-            }
-        }
-        return this.artTypeDir
-                    .stream()
-                    .filter(dir -> artType.equals(dir.getArtType()))
-                    .findFirst()
-                    .get()
-                    .getFighterImageSettingsPath();
     }
 }

@@ -40,7 +40,7 @@
     ]
   },
   {
-    "id": "sop",
+    "id": "weeklyl",
     "font": "BebasNeue-Regular",
     "bold": true,
     "italic": true,
@@ -60,7 +60,7 @@
     ]
   },
   {
-    "id": "tiamat",
+    "id": "stier",
     "font": "BebasNeue-Regular",
     "bold": true,
     "italic": true,
@@ -80,23 +80,63 @@
     ]
   },
   {
-    "id": "alph",
-    "font": "Pikmin-Normal",
+    "id": "crystal",
+    "font": "BebasNeue-Regular",
     "bold": true,
-    "italic": false,
-    "shadow": false,
-    "contour": 3.0,
-    "sizeTop": 85,
+    "italic": true,
+    "shadow": true,
+    "contour": 0.0,
+    "sizeTop": 90,
     "sizeBottom": 75,
     "angleTop": -2.0,
     "angleBottom": -2.0,
     "downOffsetTop": [
-      0,
-      0
+      10,
+      5
     ],
     "downOffsetBottom": [
-      -20,
-      -15
+      0,
+      -5
+    ]
+  },
+  {
+    "id": "tryhard",
+    "font": "BebasNeue-Regular",
+    "bold": true,
+    "italic": true,
+    "shadow": true,
+    "contour": 0.0,
+    "sizeTop": 90,
+    "sizeBottom": 75,
+    "angleTop": -2.0,
+    "angleBottom": -2.0,
+    "downOffsetTop": [
+      10,
+      5
+    ],
+    "downOffsetBottom": [
+      0,
+      -5
+    ]
+  },
+  {
+    "id": "dq",
+    "font": "BebasNeue-Regular",
+    "bold": true,
+    "italic": true,
+    "shadow": true,
+    "contour": 0.0,
+    "sizeTop": 90,
+    "sizeBottom": 75,
+    "angleTop": -2.0,
+    "angleBottom": -2.0,
+    "downOffsetTop": [
+      10,
+      5
+    ],
+    "downOffsetBottom": [
+      0,
+      -5
     ]
   }
 ]

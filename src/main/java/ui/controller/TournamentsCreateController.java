@@ -36,6 +36,8 @@ import thumbnail.generate.Thumbnail;
 import thumbnail.text.TextSettings;
 import tournament.Tournament;
 import tournament.TournamentUtils;
+import tournament.settings.ThumbnailSettings;
+import tournament.settings.Top8Settings;
 import ui.combobox.InputFilter;
 import ui.factory.alert.AlertFactory;
 import ui.textfield.ChosenImageField;
@@ -58,6 +60,16 @@ public class TournamentsCreateController implements Initializable {
     protected ComboBox<FighterArtType> artType;
     @FXML
     protected ChosenJsonField fighterImageSettingsFile;
+    @FXML
+    protected ChosenImageField foregroundTop8;
+    @FXML
+    protected ChosenImageField backgroundTop8;
+    @FXML
+    protected ComboBox<FighterArtType> artTypeTop8;
+    @FXML
+    protected ChosenJsonField slotSettingsFileTop8;
+    @FXML
+    protected ChosenJsonField fighterImageSettingsFileTop8;
     @FXML
     protected ComboBox<String> font;
     @FXML
@@ -92,6 +104,7 @@ public class TournamentsCreateController implements Initializable {
     protected ImageView preview;
 
     protected List<FighterArtSettings> artTypeDir = new ArrayList<>();
+    protected List<FighterArtSettings> artTypeDirTop8 = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -151,14 +164,15 @@ public class TournamentsCreateController implements Initializable {
         font.setItems(filteredItems);
     }
 
-    protected void initFighterArtTypeDropdown(String deprecatedRenderSettings){
+    protected void initFighterArtTypeDropdown(String renderSettings){
         for (var v: FighterArtType.values()) {
             var settingsFile = FighterArtSettings.builder()
                     .artType(v)
+                    .fighterImageSettingsPath("")
                     .build();
-            if(deprecatedRenderSettings != null
+            if(renderSettings != null
                     && v.equals(FighterArtType.RENDER)){
-                settingsFile.setFighterImageSettingsPath(deprecatedRenderSettings);
+                settingsFile.setFighterImageSettingsPath(renderSettings);
             }
             artTypeDir.add(settingsFile);
         }
@@ -177,6 +191,31 @@ public class TournamentsCreateController implements Initializable {
                     for (var dir : artTypeDir){
                         if (newValue.equals(dir.getArtType())){
                             fighterImageSettingsFile.setText(dir.getFighterImageSettingsPath());
+                        }
+                    }
+                });
+        for (var v: FighterArtType.values()) {
+            var settingsFile = FighterArtSettings.builder()
+                    .artType(v)
+                    .fighterImageSettingsPath("")
+                    .build();
+            artTypeDirTop8.add(settingsFile);
+        }
+
+        artTypeTop8.getItems().addAll(FighterArtType.values());
+        artTypeTop8.setConverter(new FighterArtTypeConverter());
+        artTypeTop8.getSelectionModel().select(FighterArtType.RENDER);
+        artTypeTop8.getSelectionModel().selectedItemProperty()
+                .addListener((options, oldValue, newValue) -> {
+                    for (var dir : artTypeDirTop8){
+                        if (oldValue.equals(dir.getArtType())){
+                            dir.setFighterImageSettingsPath(
+                                    fighterImageSettingsFileTop8.getText());
+                        }
+                    }
+                    for (var dir : artTypeDirTop8){
+                        if (newValue.equals(dir.getArtType())){
+                            fighterImageSettingsFileTop8.setText(dir.getFighterImageSettingsPath());
                         }
                     }
                 });
@@ -209,18 +248,38 @@ public class TournamentsCreateController implements Initializable {
         var lastSelectedArt = artType.getSelectionModel().getSelectedItem();
         for (var dir : artTypeDir){
             if(lastSelectedArt.equals(dir.getArtType())){
-                dir.setFighterImageSettingsPath(fighterImageSettingsFile.getText());
+                var result = fighterImageSettingsFile.getText();
+                if (result == null){
+                    result = "";
+                }
+                dir.setFighterImageSettingsPath(result);
             }
         }
-        Tournament tournament =  new Tournament(id.getText(), name.getText(),
-                logo.getText(), foreground.getText(), background.getText(), artTypeDir);
-        TextSettings textSettings = new TextSettings(id.getText(), font.getSelectionModel().getSelectedItem(),
+        var lastSelectedArtTop8 = artTypeTop8.getSelectionModel().getSelectedItem();
+        for (var dir : artTypeDirTop8){
+            if(lastSelectedArtTop8.equals(dir.getArtType())){
+                var result = fighterImageSettingsFileTop8.getText();
+                if (result == null){
+                    result = "";
+                }
+                dir.setFighterImageSettingsPath(result);
+            }
+        }
+
+        var textSettings = new TextSettings(id.getText(), font.getSelectionModel().getSelectedItem(),
                 bold.isSelected(), italic.isSelected(), shadow.isSelected(), Float.parseFloat(contour.getText()),
                 Integer.parseInt(sizeTop.getText()), Integer.parseInt(sizeBottom.getText()),
                 Float.parseFloat(angleTop.getText()), Float.parseFloat(angleBottom.getText()),
                 new int[]{Integer.parseInt(downOffsetTopLeft.getText()), Integer.parseInt(downOffsetTopRight.getText())},
                 new int[]{Integer.parseInt(downOffsetBottomLeft.getText()), Integer.parseInt(downOffsetBottomRight.getText())});
-        tournament.setTextSettings(textSettings);
+
+        var thumbnailSettings = new ThumbnailSettings(foreground.getText(),
+                background.getText(), artTypeDir, textSettings);
+        var top8Settings = new Top8Settings(foregroundTop8.getText(),
+                backgroundTop8.getText(), artTypeDirTop8, slotSettingsFileTop8.getText());
+        var tournament = new Tournament(id.getText(), name.getText(),
+                logo.getText(), foreground.getText(), background.getText(), artTypeDir,
+                thumbnailSettings, top8Settings);
 
         return tournament;
     }

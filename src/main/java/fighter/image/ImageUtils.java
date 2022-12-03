@@ -56,7 +56,7 @@ public class ImageUtils {
         int offsetY = (int) Math.floor(WEIGHT_Y * offset[1]);
 
         BufferedImage img =
-                new BufferedImage(bufferedImage.getWidth() + Math.abs(offsetX) + 1000,
+                new BufferedImage(bufferedImage.getWidth() + Math.abs(offsetX),
                         bufferedImage.getHeight() + Math.abs(offsetY),
                         BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();

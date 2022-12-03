@@ -172,8 +172,9 @@ public class ThumbnailFromFile extends Thumbnail {
             return;
         }
         LOGGER.info("Loading image settings for tournament {}.", selectedTournament.getName());
-        imageSettings = (ImageSettings) JSONReader.getJSONArray(
-                selectedTournament.getFighterImageSettingsFile(artType),
+        imageSettings = (ImageSettings) JSONReader.getJSONArrayFromFile(
+                selectedTournament.getThumbnailSettings()
+                        .getFighterImageSettingsFile(artType),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
         parameters = Arrays.asList(line.split(";"));
