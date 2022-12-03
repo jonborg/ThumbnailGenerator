@@ -1,0 +1,79 @@
+{	
+	"width": 1920,
+	"height": 1080,
+	"slots":[
+		{
+			"place": 1,
+			"mask": "assets/masks/quadri1.png",
+			"scale": 1.0,
+			"coordinate_x": 40,
+			"coordinate_y": 40,
+			"shadow":{"rgbColor": "725cad", "coordinate_x": -20,"coordinate_y": 0},
+			"additionalFightersPosition_x":"10+64i",		
+			"additionalFightersPosition_y":"150"
+		},{
+			"place": 2,
+			"mask": "assets/masks/quadri2.png",
+			"scale": 1.0,
+			"coordinate_x": 502,
+			"coordinate_y": 40,
+			"shadow":{"rgbColor": "725cad", "coordinate_x": 20,"coordinate_y": 0},
+			"additionalFightersPosition_x":"30+64i",		
+			"additionalFightersPosition_y":"300"
+		},{
+			"place": 3,
+			"mask": "assets/masks/quadri3.png",
+			"scale": 1.0,
+			"coordinate_x": 994,
+			"coordinate_y": 40,
+			"shadow":{"rgbColor": "725cad", "coordinate_x": -20,"coordinate_y": -20},
+			"additionalFightersPosition_x":"10+64i",		
+			"additionalFightersPosition_y":"120"
+		},{
+			"place": 4,
+			"mask": "assets/masks/quadri4.png",
+			"scale": 1.0,
+			"coordinate_x": 995,
+			"coordinate_y": 283,
+			"shadow":{"rgbColor": "725cad", "coordinate_x": 20,"coordinate_y": 20},
+			"additionalFightersPosition_x":"10+64i",
+			"additionalFightersPosition_y":"80"
+		},{
+			"place": 5,
+			"mask": "assets/masks/quadri5.png",
+			"scale": 1.0,
+			"coordinate_x": 450,
+			"coordinate_y": 579,
+			"shadow":{"rgbColor": "725cad", "coordinate_x": 0,"coordinate_y": -20},
+			"additionalFightersPosition_x":"30+64i",		
+			"additionalFightersPosition_y":"175"
+		},{
+			"place": 6,
+			"mask": "assets/masks/quadri6.png",
+			"scale": 1.0,
+			"coordinate_x": 772,
+			"coordinate_y": 579,
+			"shadow":{"rgbColor": "725cad", "coordinate_x": 0,"coordinate_y": 20},
+			"additionalFightersPosition_x":"10+64i",		
+			"additionalFightersPosition_y":"175"
+		},{
+			"place": 7,
+			"mask": "assets/masks/quadri7.png",
+			"scale": 1.0,
+			"coordinate_x": 1050,
+			"coordinate_y": 579,
+			"shadow":{"rgbColor": "725cad", "coordinate_x": -20,"coordinate_y": 20},
+			"additionalFightersPosition_x":"10+64i",		
+			"additionalFightersPosition_y":"70"
+		},{
+			"place": 8,
+			"mask": "assets/masks/quadri8.png",
+			"scale": 1.0,
+			"coordinate_x": 1078,
+			"coordinate_y": 764,
+			"shadow":{"rgbColor": "725cad", "coordinate_x": 20,"coordinate_y": -20},
+			"additionalFightersPosition_x":"10+64i",		
+			"additionalFightersPosition_y":"30"
+		}
+	]
+}

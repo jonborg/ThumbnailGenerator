@@ -72,7 +72,7 @@ public class TextSettings {
     public static TextSettings loadTextSettings(String tournamentId) {
 
         List<TextSettings> textSettingsList =
-                JSONReader.getJSONArray(textSettingsFile, new TypeToken<ArrayList<TextSettings>>() {
+                JSONReader.getJSONArrayFromFile(textSettingsFile, new TypeToken<ArrayList<TextSettings>>() {
                 }.getType());
         for (TextSettings textSettings : textSettingsList) {
             if (textSettings.getTournamentId().equals(tournamentId)) {
@@ -84,12 +84,12 @@ public class TextSettings {
 
     public static List<TextSettings> getAllTextSettings(List<Tournament> tournamentList) {
         List<TextSettings> textSettingsList = new ArrayList<>();
-        tournamentList.forEach(tournament -> textSettingsList.add(tournament.getTextSettings()));
+        tournamentList.forEach(tournament -> textSettingsList.add(tournament.getThumbnailSettings().getTextSettings()));
         return textSettingsList;
     }
 
     public static List<TextSettings> loadAllTextSettings() {
-        return JSONReader.getJSONArray(textSettingsFile, new TypeToken<ArrayList<Tournament>>(){}.getType());
+        return JSONReader.getJSONArrayFromFile(textSettingsFile, new TypeToken<ArrayList<Tournament>>(){}.getType());
     }
 
     public boolean updateDifferences(Object obj){

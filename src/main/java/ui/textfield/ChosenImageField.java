@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
+import lombok.var;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,16 +45,17 @@ public class ChosenImageField extends StackPane {
     }
 
     protected void initButton(){
+        var buttonSideLength = 25;
         button = new Button();
 
         button.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/ui/images/folder.png"))));
-        button.setMinWidth(30);
-        button.setPrefWidth(30);
-        button.setMaxWidth(30);
+        button.setMinWidth(buttonSideLength);
+        button.setPrefWidth(buttonSideLength);
+        button.setMaxWidth(buttonSideLength);
 
-        button.setMinHeight(30);
-        button.setPrefHeight(30);
-        button.setMaxHeight(30);
+        button.setMinHeight(buttonSideLength);
+        button.setPrefHeight(buttonSideLength);
+        button.setMaxHeight(buttonSideLength);
         button.setOnAction(action -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(

@@ -24,15 +24,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thumbnail.image.settings.ImageSettings;
 import tournament.Tournament;
+import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
 
 public class Top8FromFile extends Top8 {
     private static final Logger LOGGER = LogManager.getLogger(Top8FromFile.class);
 
     private static Tournament selectedTournament;
-    private static ImageSettings imageSettings;
-    private static String date;
-    private static String edition;
     private static List<Player> players;
     private static FighterArtType artType;
 
@@ -73,7 +71,10 @@ public class Top8FromFile extends Top8 {
         }catch(LocalImageNotFoundException e) {
             AlertFactory.displayError(e.getMessage());
             throw new ThumbnailFromFileException();
+        }catch (NullPointerException e){
+            e.printStackTrace();
         }catch (Exception e){
+            AlertFactory.displayError(e.getMessage());
             invalidLines.add("Invalid line -> "+ line);
         }
 
@@ -81,15 +82,12 @@ public class Top8FromFile extends Top8 {
 
     private static void initMultiGeneration(){
         selectedTournament= null;
-        imageSettings = null;
-        date = null;
-        edition = null;
         players = new ArrayList<>();
         artType = FighterArtType.RENDER;
     }
 
     private static void getParameters(String line, Boolean firstLine){
-        /*if (firstLine){
+        if (firstLine){
             var parameters = Arrays.asList(line.split(";"));
             for (Tournament t : TournamentUtils.getTournamentsList()){
                 if (t.getTournamentId().equals(parameters.get(0))) {
@@ -103,23 +101,17 @@ public class Top8FromFile extends Top8 {
                 AlertFactory.displayError("Could not find tournament with id '{}'",parameters.get(0));
                 return;
             }
-            edition=parameters.get(1);
-            date=parameters.get(2);
-            if(parameters.size()>3
-                    && !parameters.get(3).isEmpty()){
-                readArtType(parameters.get(3));
+            if(parameters.size()>1
+                    && !parameters.get(1).isEmpty()){
+                readArtType(parameters.get(1));
             } else {
                 artType = FighterArtType.RENDER;
             }
-            return;
-        }*/
-        LOGGER.info("Loading image settings for top 8");
-        imageSettings = (ImageSettings)
-                    JSONReader.getJSONArray("settings/top8/images/default.json",
-                            new TypeToken<ArrayList<ImageSettings>>() {}.getType()).get(0);
-        var parameters = Arrays.asList(line.split(";"));
-        parameters.replaceAll(String::trim);
-        processSlotData(parameters);
+        } else {
+            var parameters = Arrays.asList(line.split(";"));
+            parameters.replaceAll(String::trim);
+            processSlotData(parameters);
+        }
     }
 
     private static void processSlotData(List<String> parameters){
@@ -136,10 +128,7 @@ public class Top8FromFile extends Top8 {
             throws IOException, FighterImageSettingsNotFoundException {
         generateTop8(Top8Settings.builder()
                 .tournament(selectedTournament)
-                .imageSettings(imageSettings)
                 .locally(saveLocally)
-                .date(date)
-                .edition(edition)
                 .players(players)
                 .artType(artType)
                 .build());

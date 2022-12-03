@@ -20,27 +20,41 @@ public class TournamentsEditController extends TournamentsCreateController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Tournament tournament = getSelectedEdit();
-        var renderSettingsFile = tournament.getFighterImageSettingsFile(FighterArtType.RENDER);
+        var tournament = getSelectedEdit();
+        var thumbnailRenderSettings = tournament.getThumbnailSettings()
+                .getFighterImageSettingsFile(FighterArtType.RENDER);
+        var top8RenderSettings = tournament.getTop8Settings()
+                .getFighterImageSettingsFile(FighterArtType.RENDER);
         LOGGER.info("Editing tournament -> {}", tournament.toString());
 
         initNumberTextFields();
         initFontDropdown();
-        initFighterArtTypeDropdown(renderSettingsFile);
+        initFighterArtTypeDropdown(thumbnailRenderSettings);
 
         id.setText(tournament.getTournamentId());
         name.setText(tournament.getName());
         logo.setText(tournament.getImage());
-        foreground.setText(tournament.getForeground());
-        background.setText(tournament.getBackground());
-        fighterImageSettingsFile.setText(renderSettingsFile);
-        if(tournament.getArtTypeDir() != null
-                && !tournament.getArtTypeDir().isEmpty()) {
+        foreground.setText(tournament.getThumbnailSettings().getForeground());
+        background.setText(tournament.getThumbnailSettings().getBackground());
+        fighterImageSettingsFile.setText(thumbnailRenderSettings);
+        if(tournament.getThumbnailSettings().getArtTypeDir() != null
+                && !tournament.getThumbnailSettings().getArtTypeDir().isEmpty()) {
             artTypeDir = new ArrayList<>();
-            tournament.getArtTypeDir().forEach(dir -> artTypeDir.add(dir.clone()));
+            tournament.getThumbnailSettings()
+                    .getArtTypeDir().forEach(dir -> artTypeDir.add(dir.clone()));
+        }
+        foregroundTop8.setText(tournament.getTop8Settings().getForeground());
+        backgroundTop8.setText(tournament.getTop8Settings().getBackground());
+        slotSettingsFileTop8.setText(tournament.getTop8Settings().getSlotSettingsFile());
+        fighterImageSettingsFileTop8.setText(top8RenderSettings);
+        if(tournament.getTop8Settings().getArtTypeDir() != null
+                && !tournament.getTop8Settings().getArtTypeDir().isEmpty()) {
+            artTypeDirTop8 = new ArrayList<>();
+            tournament.getTop8Settings()
+                    .getArtTypeDir().forEach(dir -> artTypeDirTop8.add(dir.clone()));
         }
 
-        TextSettings textSettings = tournament.getTextSettings();
+        TextSettings textSettings = tournament.getThumbnailSettings().getTextSettings();
         try {
             font.getSelectionModel().select(textSettings.getFont());
             sizeTop.setText(String.valueOf(textSettings.getSizeTop()));

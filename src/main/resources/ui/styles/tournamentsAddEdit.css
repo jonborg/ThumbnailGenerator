@@ -40,3 +40,7 @@
     -fx-pref-width: 210;
     -fx-min-width: 210;
 }
+
+.settingsBox{
+    -fx-padding: 10 10 10 10;
+}

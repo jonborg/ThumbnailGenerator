@@ -3,80 +3,202 @@
     "id": "tdlx",
     "name": "Throwdown Lx",
     "logo": "assets/tournaments/logos/tdlx.png",
-    "foreground": "assets/tournaments/foregrounds/tdlx.png",
-    "artSettings": [
-      {
-        "artType": "RENDER",
-        "fighterImageSettings": "settings/thumbnails/images/default.json"
-      },
-      {
-        "artType": "MURAL",
-        "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-      }
-    ]
+    "thumbnailSettings": {
+      "foreground": "assets/tournaments/foregrounds/tdlx.png",
+      "background": "assets/tournaments/backgrounds/default.png",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/thumbnails/images/default.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+        }
+      ]
+    },
+    "top8Settings": {
+      "slotSettingsFile": "",
+      "foreground": "",
+      "background": "",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": ""
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": ""
+        }
+      ]
+    }
   },
   {
     "id": "invicta",
     "name": "Smash Invicta",
     "logo": "assets/tournaments/logos/invicta.png",
-    "foreground": "assets/tournaments/foregrounds/invicta.png",
-    "artSettings": [
-      {
-        "artType": "RENDER",
-        "fighterImageSettings": "settings/thumbnails/images/default.json"
-      },
-      {
-        "artType": "MURAL",
-        "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-      }
-    ]
+    "thumbnailSettings": {
+      "foreground": "assets/tournaments/foregrounds/invicta.png",
+      "background": "assets/tournaments/backgrounds/default.png",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/thumbnails/images/default.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+        }
+      ]
+    },
+    "top8Settings": {
+      "slotSettingsFile": "settings/top8/slot/icarus_slots.json",
+      "foreground": "",
+      "background": "",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/top8/images/icarus.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": ""
+        }
+      ]
+    }
   },
   {
-    "id": "sop",
-    "name": "Smash or Pass",
-    "logo": "assets/tournaments/logos/sop.png",
-    "foreground": "assets/tournaments/foregrounds/sop.png",
-    "artSettings": [
-      {
-        "artType": "RENDER",
-        "fighterImageSettings": "settings/thumbnails/images/mirrorPlayer2.json"
-      },
-      {
-        "artType": "MURAL",
-        "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-      }
-    ]
+    "id": "weeklyl",
+    "name": "Weekly L",
+    "logo": "assets/tournaments/logos/weeklyl.png",
+    "thumbnailSettings": {
+      "foreground": "",
+      "background": "assets/tournaments/backgrounds/default.png",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/thumbnails/images/default.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+        }
+      ]
+    },
+    "top8Settings": {
+      "slotSettingsFile": "settings/top8/slot/weeklyL_player_slots.json",
+      "foreground": "",
+      "background": "",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/top8/images/default.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": ""
+        }
+      ]
+    }
   },
   {
-    "id": "tiamat",
-    "name": "Tiamat",
-    "logo": "assets/tournaments/logos/tiamat.png",
-    "foreground": "assets/tournaments/foregrounds/tiamat.png",
-    "artSettings": [
-      {
-        "artType": "RENDER",
-        "fighterImageSettings": "settings/thumbnails/images/default.json"
-      },
-      {
-        "artType": "MURAL",
-        "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-      }
-    ]
+    "id": "stier",
+    "name": "S Tier",
+    "logo": "assets/tournaments/logos/stier.png",
+    "thumbnailSettings": {
+      "foreground": "",
+      "background": "assets/tournaments/backgrounds/default.png",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/thumbnails/images/default.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+        }
+      ]
+    },
+    "top8Settings": {
+      "slotSettingsFile": "",
+      "foreground": "",
+      "background": "",
+      "artSettings": []
+    }
   },
   {
-    "id": "alph",
-    "name": "Alph Apparition",
-    "logo": "assets/tournaments/logos/alph.png",
-    "foreground": "assets/tournaments/foregrounds/alph.png",
-    "artSettings": [
-      {
-        "artType": "RENDER",
-        "fighterImageSettings": "settings/thumbnails/images/default.json"
-      },
-      {
-        "artType": "MURAL",
-        "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-      }
-    ]
+    "id": "crystal",
+    "name": "Crystal Weekly",
+    "logo": "assets/tournaments/logos/crystal.png",
+    "thumbnailSettings": {
+      "foreground": "",
+      "background": "assets/tournaments/backgrounds/default.png",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/thumbnails/images/default.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+        }
+      ]
+    },
+    "top8Settings": {
+      "slotSettingsFile": "",
+      "foreground": "",
+      "background": "",
+      "artSettings": []
+    }
+  },
+  {
+    "id": "tryhard",
+    "name": "Try Hard Series",
+    "logo": "assets/tournaments/logos/tryhard.png",
+    "thumbnailSettings": {
+      "foreground": "",
+      "background": "assets/tournaments/backgrounds/default.png",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/thumbnails/images/default.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+        }
+      ]
+    },
+    "top8Settings": {
+      "slotSettingsFile": "",
+      "foreground": "",
+      "background": "",
+      "artSettings": []
+    }
+  },
+  {
+    "id": "dq",
+    "name": "Disjointed Qonnections",
+    "logo": "assets/tournaments/logos/dq.png",
+    "thumbnailSettings": {
+      "foreground": "",
+      "background": "assets/tournaments/backgrounds/default.png",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/thumbnails/images/default.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+        }
+      ]
+    },
+    "top8Settings": {
+      "slotSettingsFile": "",
+      "foreground": "",
+      "background": "",
+      "artSettings": []
+    }
   }
 ]

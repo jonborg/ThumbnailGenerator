@@ -13,7 +13,22 @@ import java.util.List;
 
 public class JSONReader {
 
-    public static <T> List<T> getJSONArray(String jsonFile, Type type){
+    public static <T> List<T> getJSONArrayFromFile(String jsonFile, Type type){
+        Gson gson = new Gson();
+        try (FileReader reader = new FileReader(jsonFile))
+        {
+            return gson.fromJson(reader, type);
+        } catch (FileNotFoundException e) {
+            AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
+        } catch (IOException e) {
+            AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
+        } catch (JsonSyntaxException e){
+            AlertFactory.displayError("JsonSyntaxException", ExceptionUtils.getStackTrace(e));
+        }
+        return null;
+    }
+
+    public static <T> Object getJSONObjectFromFile(String jsonFile, Type type){
         Gson gson = new Gson();
         try (FileReader reader = new FileReader(jsonFile))
         {
