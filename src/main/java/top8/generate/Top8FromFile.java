@@ -2,13 +2,12 @@ package top8.generate;
 
 import fighter.Fighter;
 import fighter.Player;
-import com.google.gson.reflect.TypeToken;
 import exception.FighterImageSettingsNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
-import fighter.FighterArtType;
-import file.json.JSONReader;
+import fighter.SmashUltimateFighterArtType;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,10 +18,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import fighter.name.Game;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import thumbnail.image.settings.ImageSettings;
 import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
@@ -31,8 +31,9 @@ public class Top8FromFile extends Top8 {
     private static final Logger LOGGER = LogManager.getLogger(Top8FromFile.class);
 
     private static Tournament selectedTournament;
+    private static Game selectedGame;
     private static List<Player> players;
-    private static FighterArtType artType;
+    private static SmashUltimateFighterArtType artType;
 
     public static void generateFromFile(File file,  boolean saveLocally)
         throws ThumbnailFromFileException {
@@ -83,7 +84,7 @@ public class Top8FromFile extends Top8 {
     private static void initMultiGeneration(){
         selectedTournament= null;
         players = new ArrayList<>();
-        artType = FighterArtType.RENDER;
+        artType = SmashUltimateFighterArtType.RENDER;
     }
 
     private static void getParameters(String line, Boolean firstLine){
@@ -105,7 +106,7 @@ public class Top8FromFile extends Top8 {
                     && !parameters.get(1).isEmpty()){
                 readArtType(parameters.get(1));
             } else {
-                artType = FighterArtType.RENDER;
+                artType = SmashUltimateFighterArtType.RENDER;
             }
         } else {
             var parameters = Arrays.asList(line.split(";"));
@@ -128,6 +129,7 @@ public class Top8FromFile extends Top8 {
             throws IOException, FighterImageSettingsNotFoundException {
         generateTop8(Top8Settings.builder()
                 .tournament(selectedTournament)
+                .game(selectedGame)
                 .locally(saveLocally)
                 .players(players)
                 .artType(artType)
@@ -135,7 +137,7 @@ public class Top8FromFile extends Top8 {
     }
 
     private static void readArtType(String art){
-        artType = FighterArtType.valueOf(art.toUpperCase());
+        artType = SmashUltimateFighterArtType.valueOf(art.toUpperCase());
     }
 
 }

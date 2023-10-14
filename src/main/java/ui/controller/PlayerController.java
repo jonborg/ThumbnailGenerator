@@ -1,7 +1,8 @@
 package ui.controller;
 
-import fighter.Player;
 import fighter.DownloadFighterURL;
+import fighter.Player;
+import fighter.SmashUltimateDownloadFighterURL;
 import fighter.Fighter;
 
 import java.awt.Desktop;
@@ -95,7 +96,14 @@ public class PlayerController implements Initializable {
                 alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
             }
         }
-        return sel == null ? null : SmashUltimateNameMap.getValue(sel);
+
+        if (sel == null){
+            return null;
+        } else if (Game.SF6.equals(parentController.getGame())){
+            return StreetFighter6NameMap.getValue(sel);
+        } else {
+            return SmashUltimateNameMap.getValue(sel);
+        }
     }
 
     protected void updateFighterIcon(){
@@ -135,7 +143,9 @@ public class PlayerController implements Initializable {
     }
 
     public void previewFighter(ActionEvent actionEvent) {
-        String url = DownloadFighterURL.generateFighterURL(urlName, alt.getValue(), parentController.getFighterArtType());
+        DownloadFighterURL downloadFighterURL = new SmashUltimateDownloadFighterURL();
+        String url = downloadFighterURL
+                .generateFighterURL(urlName, alt.getValue(), parentController.getFighterArtType());
         if(Desktop.isDesktopSupported()) {
             try {
                 if ("http".equals(url.substring(0,4))){

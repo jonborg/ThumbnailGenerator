@@ -1,9 +1,11 @@
 package thumbnail.generate;
 
 import fighter.Player;
-import fighter.FighterArtType;
+import fighter.SmashUltimateFighterArtType;
 import java.util.ArrayList;
 import java.util.List;
+
+import fighter.name.Game;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.var;
@@ -14,12 +16,13 @@ import tournament.Tournament;
 @Builder
 public class ThumbnailSettings {
     private Tournament tournament;
+    private Game game;
     private ImageSettings imageSettings;
     private boolean locally;
     private String round;
     private String date;
     private List<Player> players;
-    private FighterArtType artType;
+    private SmashUltimateFighterArtType artType;
 
     public static List<Player> createPlayerList(Player... players){
         var result = new ArrayList<Player>();

@@ -7,8 +7,8 @@ import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
-import fighter.FighterArtType;
-import fighter.FighterArtTypeConverter;
+import fighter.SmashUltimateFighterArtType;
+import fighter.SmashUltimateFighterArtTypeConverter;
 import fighter.name.Game;
 import fighter.name.GameConverter;
 import file.json.JSONReader;
@@ -60,7 +60,7 @@ public class ThumbnailGeneratorController implements Initializable {
     @FXML
     private TextField date;
     @FXML
-    private ComboBox<FighterArtType> artTypeComboBox;
+    private ComboBox<SmashUltimateFighterArtType> artTypeComboBox;
     @FXML
     private ComboBox<Game> gameComboBox;
     @FXML
@@ -136,7 +136,7 @@ public class ThumbnailGeneratorController implements Initializable {
             return;
         }
 
-        LOGGER.info("Loading image settings of tournament {} ", getSelectedTournament().getName());
+        LOGGER.info("Loading image settings of tournament {} for game {}", getSelectedTournament().getName(), getGame());
         var imageSettings = (ImageSettings) JSONReader.getJSONArrayFromFile(
                 getSelectedTournament().getThumbnailSettings()
                         .getFighterImageSettingsFile(getFighterArtType()),
@@ -146,6 +146,7 @@ public class ThumbnailGeneratorController implements Initializable {
         try {
             Thumbnail.generateAndSaveThumbnail(ThumbnailSettings.builder()
                                                                 .tournament(getSelectedTournament())
+                                                                .game(getGame())
                                                                 .imageSettings(imageSettings)
                                                                 .locally(saveLocally.isSelected())
                                                                 .round(round.getText().toUpperCase())
@@ -266,9 +267,9 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     private void initArtDropdown(){
-        artTypeComboBox.getItems().addAll(FighterArtType.values());
-        artTypeComboBox.setConverter(new FighterArtTypeConverter());
-        artTypeComboBox.getSelectionModel().select(FighterArtType.RENDER);
+        artTypeComboBox.getItems().addAll(SmashUltimateFighterArtType.values());
+        artTypeComboBox.setConverter(new SmashUltimateFighterArtTypeConverter());
+        artTypeComboBox.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
 
         gameComboBox.getItems().addAll(Game.values());
         gameComboBox.setConverter(new GameConverter());
@@ -305,7 +306,7 @@ public class ThumbnailGeneratorController implements Initializable {
         this.stage=stage;
     }
 
-    public FighterArtType getFighterArtType(){
+    public SmashUltimateFighterArtType getFighterArtType(){
         return artTypeComboBox.getSelectionModel().getSelectedItem();
     }
 

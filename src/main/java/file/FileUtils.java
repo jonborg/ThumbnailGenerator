@@ -1,6 +1,6 @@
 package file;
 
-import fighter.FighterArtType;
+import fighter.SmashUltimateFighterArtType;
 
 public class FileUtils {
 
@@ -32,7 +32,8 @@ public class FileUtils {
         return saveThumbnailsPath;
     }
 
-    public static String getLocalFightersPath(FighterArtType artType){
+    public static String getLocalFightersPath(
+            SmashUltimateFighterArtType artType){
         switch(artType){
             case MURAL:
                 return getLocalMuralPath();

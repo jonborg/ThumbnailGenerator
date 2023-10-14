@@ -1,6 +1,6 @@
 package ui.controller;
 
-import fighter.FighterArtType;
+import fighter.SmashUltimateFighterArtType;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -22,9 +22,9 @@ public class TournamentsEditController extends TournamentsCreateController {
     public void initialize(URL location, ResourceBundle resources) {
         var tournament = getSelectedEdit();
         var thumbnailRenderSettings = tournament.getThumbnailSettings()
-                .getFighterImageSettingsFile(FighterArtType.RENDER);
+                .getFighterImageSettingsFile(SmashUltimateFighterArtType.RENDER);
         var top8RenderSettings = tournament.getTop8Settings()
-                .getFighterImageSettingsFile(FighterArtType.RENDER);
+                .getFighterImageSettingsFile(SmashUltimateFighterArtType.RENDER);
         LOGGER.info("Editing tournament -> {}", tournament.toString());
 
         initNumberTextFields();

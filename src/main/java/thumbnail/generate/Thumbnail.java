@@ -1,16 +1,17 @@
 package thumbnail.generate;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import fighter.DownloadFighterURL;
 import fighter.Player;
 import com.google.gson.reflect.TypeToken;
 import exception.FighterImageSettingsNotFoundException;
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
-import fighter.DownloadFighterURL;
+import fighter.SmashUltimateDownloadFighterURL;
 import fighter.Fighter;
-import fighter.FighterArtType;
+import fighter.SmashUltimateFighterArtType;
+import fighter.StreetFighter6DownloadFighterURL;
+import fighter.name.Game;
 import file.FileUtils;
 import file.json.JSONReader;
 import javax.imageio.ImageIO;
@@ -18,25 +19,17 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import file.json.JSONWriter;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.codehaus.plexus.util.ExceptionUtils;
 import thumbnail.image.FighterImageThumbnail;
 import thumbnail.image.settings.ImageSettings;
 import thumbnail.text.TextToImage;
-import top8.image.settings.FighterImageTop8Settings;
-import top8.image.settings.SlotImageTop8Settings;
 import tournament.Tournament;
-import ui.factory.alert.AlertFactory;
 
 import static fighter.image.FighterImage.convertToAlternateRender;
 
@@ -62,7 +55,7 @@ public class Thumbnail {
         saveThumbnail();
     }
 
-    public static BufferedImage generatePreview(Tournament tournament, FighterArtType artType)
+    public static BufferedImage generatePreview(Tournament tournament, SmashUltimateFighterArtType artType)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException {
         LOGGER.info("Generating thumbnail preview.");
@@ -73,6 +66,7 @@ public class Thumbnail {
                         new TypeToken<ArrayList<ImageSettings>>() {}.getType()).get(0);
         return generateThumbnail(ThumbnailSettings.builder()
                                                 .tournament(tournament)
+                                                .game(Game.SMASH_ULTIMATE)
                                                 .imageSettings(imageSettings)
                                                 .locally(false)
                                                 .round("Pools Round 1")
@@ -111,7 +105,7 @@ public class Thumbnail {
             port++;
             LOGGER.info("Drawing player {} information.", port);
             var f = player.getFighter(0);
-            var image = getFighterImage(f);
+            var image = getFighterImage(f, thumbnailSettings.getGame());
             convertToAlternateRender(f);
            // test(ts.getImageSettings());
             var fighterImageSettings = ts.getImageSettings()
@@ -186,7 +180,13 @@ public class Thumbnail {
         }
     }
 
-    static BufferedImage getFighterImage(Fighter fighter) throws OnlineImageNotFoundException {
+    static BufferedImage getFighterImage(Fighter fighter, Game game) throws OnlineImageNotFoundException {
+        DownloadFighterURL downloadFighterURL;
+        if (Game.SF6.equals(game)){
+            downloadFighterURL = new StreetFighter6DownloadFighterURL();
+        } else {
+            downloadFighterURL = new SmashUltimateDownloadFighterURL();
+        }
         if (ts.isLocally()) {
             File directory = new File(localFightersPath);
             String fighterDirPath = localFightersPath + fighter.getUrlName() + "/";
@@ -206,11 +206,12 @@ public class Thumbnail {
             }
 
             //if cannot find locally, will try to find online
-            image = DownloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
+            image = downloadFighterURL
+                    .getFighterImageOnline(fighter, ts.getArtType());
             saveImage(image, localImage);
             return image;
         } else {
-            return DownloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
+            return downloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
         }
     }
 

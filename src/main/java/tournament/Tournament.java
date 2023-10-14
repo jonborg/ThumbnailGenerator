@@ -3,14 +3,12 @@ package tournament;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import fighter.image.settings.FighterArtSettings;
-import fighter.FighterArtType;
+
 import java.util.List;
 import java.util.Objects;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-import thumbnail.text.TextSettings;
 import tournament.settings.ThumbnailSettings;
 import tournament.settings.Top8Settings;
 
