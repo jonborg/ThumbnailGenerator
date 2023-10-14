@@ -75,7 +75,7 @@ public class TournamentsEditController extends TournamentsCreateController {
             AlertFactory.displayError("Could not load text settings for tournament " + tournament.getName()
                             + ". Please check text settings file for setting for tournament with id of "
                             + tournament.getTournamentId(), ExceptionUtils.getStackTrace(e));
-            throw e;
+            //throw e;
         }
     }
 

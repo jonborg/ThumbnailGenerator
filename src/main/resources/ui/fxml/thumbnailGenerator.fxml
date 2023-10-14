@@ -42,7 +42,9 @@
                     </VBox>
                     <VBox>
                         <Label text="Character art:"/>
-                        <ComboBox fx:id="artType" styleClass="artDropdown"/>
+                        <ComboBox fx:id="artTypeComboBox" styleClass="artTypeComboBox"/>
+                        <Label text="Game:"/>
+                        <ComboBox fx:id="gameComboBox" styleClass="gameComboBox"/>
                     </VBox>
                     <VBox>
                         <Label text="Event/Date:"/>

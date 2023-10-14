@@ -22,7 +22,7 @@ public class FighterImageThumbnail extends FighterImage {
 
     @Override
     protected BufferedImage editImage(BufferedImage bufferedImage) {
-        bufferedImage = ImageUtils.resizeImage(bufferedImage, fighter.getUrlName(), fighterImageSettings.getScale());
+        bufferedImage = ImageUtils.resizeImage(bufferedImage, fighterImageSettings.getScale());
         bufferedImage = ImageUtils.offsetImage(bufferedImage, fighterImageSettings.getOffset());
         bufferedImage = ImageUtils.flipImage(bufferedImage, fighter.isFlip());
         bufferedImage = ImageUtils.cropImage(bufferedImage, THUMBNAIL_WIDTH/2,THUMBNAIL_HEIGHT);

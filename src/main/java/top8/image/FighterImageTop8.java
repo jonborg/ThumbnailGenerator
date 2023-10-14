@@ -40,19 +40,22 @@ public class FighterImageTop8 extends FighterImage {
 
     protected BufferedImage editImage(BufferedImage bufferedImage){
         LOGGER.info(fighterImageSettings.getOffset()[0]+ " "+ fighterImageSettings.getOffset()[1]);
-        bufferedImage = ImageUtils.flipImage(bufferedImage, fighter.isFlip());
-        bufferedImage = ImageUtils.resizeImage(bufferedImage, fighter.getUrlName(), fighterImageSettings.getScale());
+        bufferedImage = ImageUtils.resizeImage(bufferedImage, fighterImageSettings.getScale());
 
         try {
             var mask = ImageIO.read(new File(playerSlot.getMask()));
             var maskedImage = ImageUtils.applyMask(bufferedImage, mask, fighterImageSettings.getOffset());
             if(playerSlot.getShadow()!=null) {
                 var shadowSettings = playerSlot.getShadow();
+                var offsetX = fighter.isFlip() ?
+                        fighterImageSettings.getOffset()[0]
+                                - shadowSettings.getCoordinateX() :
+                        fighterImageSettings.getOffset()[0]
+                                + shadowSettings.getCoordinateX();
+                var offsetY = fighterImageSettings.getOffset()[1]
+                        + shadowSettings.getCoordinateY();
                 var offset = new int[] {
-                        shadowSettings.getCoordinateX()
-                        + fighterImageSettings.getOffset()[0],
-                        shadowSettings.getCoordinateY()
-                        + fighterImageSettings.getOffset()[1]};
+                        offsetX, offsetY};
                 var shadowImage = ImageUtils
                         .createShadow(bufferedImage, shadowSettings.getColor());
                 shadowImage = ImageUtils.applyMask(shadowImage, mask, offset);
@@ -62,7 +65,7 @@ public class FighterImageTop8 extends FighterImage {
             LOGGER.error("Could not find image mask in directory " + playerSlot.getMask());
             AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
         }
-
+        bufferedImage = ImageUtils.flipImage(bufferedImage, fighter.isFlip());
         bufferedImage = addAdditionalFighters(bufferedImage, playerSlot, secondaryFighters);
         return bufferedImage;
     }
@@ -70,12 +73,13 @@ public class FighterImageTop8 extends FighterImage {
     public BufferedImage addAdditionalFighters(BufferedImage imageSlot, PlayerSlot playerSlot, List<Fighter> fighters) {
         for (int i = 0; i< fighters.size(); i++){
             var fighter = fighters.get(i);
-            var posX = new ExpressionBuilder(playerSlot.getAddFighterPosX())
+            var scale = playerSlot.getAdditionalFighters().getScale();
+            var posX = new ExpressionBuilder(playerSlot.getAdditionalFighters().getCoordinateX())
                     .variable("i")
                     .build()
                     .setVariable("i", i)
                     .evaluate();
-            var posY = new ExpressionBuilder(playerSlot.getAddFighterPosY())
+            var posY = new ExpressionBuilder(playerSlot.getAdditionalFighters().getCoordinateY())
                     .variable("i")
                     .build()
                     .setVariable("i", i)
@@ -84,7 +88,7 @@ public class FighterImageTop8 extends FighterImage {
                 var icon = ImageIO.read(Top8.class.getResourceAsStream(
                         "/icons/" + fighter.getUrlName() + "/" + fighter.getAlt() +
                                 ".png"));
-
+                icon = ImageUtils.resizeImage(icon, scale);
                 var g2d = imageSlot.createGraphics();
                 g2d.drawImage(icon, (int) posX, (int) posY, null);
                 g2d.dispose();

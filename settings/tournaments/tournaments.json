@@ -1,39 +1,5 @@
 [
   {
-    "id": "tdlx",
-    "name": "Throwdown Lx",
-    "logo": "assets/tournaments/logos/tdlx.png",
-    "thumbnailSettings": {
-      "foreground": "assets/tournaments/foregrounds/tdlx.png",
-      "background": "assets/tournaments/backgrounds/default.png",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": "settings/thumbnails/images/default.json"
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-        }
-      ]
-    },
-    "top8Settings": {
-      "slotSettingsFile": "",
-      "foreground": "",
-      "background": "",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": ""
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": ""
-        }
-      ]
-    }
-  },
-  {
     "id": "invicta",
     "name": "Smash Invicta",
     "logo": "assets/tournaments/logos/invicta.png",
@@ -86,13 +52,13 @@
       ]
     },
     "top8Settings": {
-      "slotSettingsFile": "settings/top8/slot/weeklyL_player_slots.json",
+      "slotSettingsFile": "settings/top8/slot/locus_slots.json",
       "foreground": "",
       "background": "",
       "artSettings": [
         {
           "artType": "RENDER",
-          "fighterImageSettings": "settings/top8/images/default.json"
+          "fighterImageSettings": "settings/top8/images/locus.json"
         },
         {
           "artType": "MURAL",
@@ -120,10 +86,19 @@
       ]
     },
     "top8Settings": {
-      "slotSettingsFile": "",
+      "slotSettingsFile": "settings/top8/slot/locus_slots.json",
       "foreground": "",
       "background": "",
-      "artSettings": []
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/top8/images/locus.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": ""
+        }
+      ]
     }
   },
   {
@@ -170,35 +145,19 @@
       ]
     },
     "top8Settings": {
-      "slotSettingsFile": "",
+      "slotSettingsFile": "settings/top8/slot/tryhard_slots.json",
       "foreground": "",
-      "background": "",
-      "artSettings": []
-    }
-  },
-  {
-    "id": "dq",
-    "name": "Disjointed Qonnections",
-    "logo": "assets/tournaments/logos/dq.png",
-    "thumbnailSettings": {
-      "foreground": "",
-      "background": "assets/tournaments/backgrounds/default.png",
+      "background": "assets/tournaments/backgrounds/top8/tryhardTop8.png",
       "artSettings": [
         {
           "artType": "RENDER",
-          "fighterImageSettings": "settings/thumbnails/images/default.json"
+          "fighterImageSettings": "settings/top8/images/icarus.json"
         },
         {
           "artType": "MURAL",
-          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          "fighterImageSettings": ""
         }
       ]
-    },
-    "top8Settings": {
-      "slotSettingsFile": "",
-      "foreground": "",
-      "background": "",
-      "artSettings": []
     }
   }
 ]

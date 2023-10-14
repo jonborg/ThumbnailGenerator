@@ -1,10 +1,11 @@
-package fighter;
+package fighter.name;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class Names {
+public class SmashUltimateNameMap {
+
     private final static Map<String,String> map = new TreeMap<>();
 
     static{
