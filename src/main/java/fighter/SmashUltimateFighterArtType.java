@@ -3,13 +3,13 @@ package fighter;
 import lombok.Getter;
 
 @Getter
-public enum FighterArtType {
+public enum SmashUltimateFighterArtType {
     RENDER("Renders"),
     MURAL("Mural Arts");
 
     private String name;
 
-    private FighterArtType(String name) {
+    private SmashUltimateFighterArtType(String name) {
         this.name = name;
     }
 }

@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
-import fighter.FighterArtType;
+import fighter.SmashUltimateFighterArtType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +18,7 @@ public class FighterArtSettings implements Cloneable {
 
     @Expose
     @SerializedName("artType")
-    private FighterArtType artType;
+    private SmashUltimateFighterArtType artType;
     @Expose
     @SerializedName("fighterImageSettings")
     private String fighterImageSettingsPath;

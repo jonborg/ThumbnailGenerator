@@ -13,7 +13,7 @@ public class Fighter  {
 
     private String  name;
     private String  urlName;
-    private int     alt=1;
+    private int     alt = 1;
     private boolean flip = false;
 
     public Fighter(){

@@ -8,8 +8,9 @@ import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
 import fighter.Fighter;
-import fighter.FighterArtType;
+import fighter.SmashUltimateFighterArtType;
 import fighter.image.FighterImage;
+import fighter.name.Game;
 import file.json.JSONReader;
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,7 +36,7 @@ public class ThumbnailFromFile extends Thumbnail {
 
     private static Tournament selectedTournament;
     private static String date = null;
-    private static FighterArtType artType;
+    private static SmashUltimateFighterArtType artType;
 
     private static List<String> parameters;
     private static ImageSettings imageSettings;
@@ -172,7 +173,7 @@ public class ThumbnailFromFile extends Thumbnail {
                     && !parameters.get(2).isEmpty()){
                 readArtType(parameters.get(2));
             } else {
-                artType = FighterArtType.RENDER;
+                artType = SmashUltimateFighterArtType.RENDER;
             }
             return;
         }
@@ -202,6 +203,7 @@ public class ThumbnailFromFile extends Thumbnail {
 
         generateAndSaveThumbnail(ThumbnailSettings.builder()
                                                 .tournament(selectedTournament)
+                                                .game(Game.SMASH_ULTIMATE)
                                                 .imageSettings(imageSettings)
                                                 .locally(saveLocally)
                                                 .round(parameters.get(6))
@@ -222,7 +224,7 @@ public class ThumbnailFromFile extends Thumbnail {
     }
 
     private static void readArtType(String art){
-        artType = FighterArtType.valueOf(art.toUpperCase());
+        artType = SmashUltimateFighterArtType.valueOf(art.toUpperCase());
     }
 
 }

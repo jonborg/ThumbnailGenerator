@@ -3,7 +3,6 @@ package file.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import fighter.DownloadFighterURL;
 import file.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

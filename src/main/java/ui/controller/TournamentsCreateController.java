@@ -1,8 +1,8 @@
 package ui.controller;
 
 import fighter.image.settings.FighterArtSettings;
-import fighter.FighterArtType;
-import fighter.FighterArtTypeConverter;
+import fighter.SmashUltimateFighterArtType;
+import fighter.SmashUltimateFighterArtTypeConverter;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.net.URL;
@@ -57,7 +57,7 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField background;
     @FXML
-    protected ComboBox<FighterArtType> artType;
+    protected ComboBox<SmashUltimateFighterArtType> artType;
     @FXML
     protected ChosenJsonField fighterImageSettingsFile;
     @FXML
@@ -65,7 +65,7 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField backgroundTop8;
     @FXML
-    protected ComboBox<FighterArtType> artTypeTop8;
+    protected ComboBox<SmashUltimateFighterArtType> artTypeTop8;
     @FXML
     protected ChosenJsonField slotSettingsFileTop8;
     @FXML
@@ -164,21 +164,21 @@ public class TournamentsCreateController implements Initializable {
     }
 
     protected void initFighterArtTypeDropdown(String renderSettings){
-        for (var v: FighterArtType.values()) {
+        for (var v: SmashUltimateFighterArtType.values()) {
             var settingsFile = FighterArtSettings.builder()
                     .artType(v)
                     .fighterImageSettingsPath("")
                     .build();
             if(renderSettings != null
-                    && v.equals(FighterArtType.RENDER)){
+                    && v.equals(SmashUltimateFighterArtType.RENDER)){
                 settingsFile.setFighterImageSettingsPath(renderSettings);
             }
             artTypeDir.add(settingsFile);
         }
 
-        artType.getItems().addAll(FighterArtType.values());
-        artType.setConverter(new FighterArtTypeConverter());
-        artType.getSelectionModel().select(FighterArtType.RENDER);
+        artType.getItems().addAll(SmashUltimateFighterArtType.values());
+        artType.setConverter(new SmashUltimateFighterArtTypeConverter());
+        artType.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
         artType.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
                     for (var dir : artTypeDir){
@@ -193,7 +193,7 @@ public class TournamentsCreateController implements Initializable {
                         }
                     }
                 });
-        for (var v: FighterArtType.values()) {
+        for (var v: SmashUltimateFighterArtType.values()) {
             var settingsFile = FighterArtSettings.builder()
                     .artType(v)
                     .fighterImageSettingsPath("")
@@ -201,9 +201,9 @@ public class TournamentsCreateController implements Initializable {
             artTypeDirTop8.add(settingsFile);
         }
 
-        artTypeTop8.getItems().addAll(FighterArtType.values());
-        artTypeTop8.setConverter(new FighterArtTypeConverter());
-        artTypeTop8.getSelectionModel().select(FighterArtType.RENDER);
+        artTypeTop8.getItems().addAll(SmashUltimateFighterArtType.values());
+        artTypeTop8.setConverter(new SmashUltimateFighterArtTypeConverter());
+        artTypeTop8.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
         artTypeTop8.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
                     for (var dir : artTypeDirTop8){

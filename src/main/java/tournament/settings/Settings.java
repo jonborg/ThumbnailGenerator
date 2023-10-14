@@ -2,7 +2,7 @@ package tournament.settings;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import fighter.FighterArtType;
+import fighter.SmashUltimateFighterArtType;
 import fighter.image.settings.FighterArtSettings;
 import java.util.List;
 import lombok.Getter;
@@ -28,7 +28,8 @@ public class Settings {
         this.artTypeDir = artTypeDir;
     }
 
-    public String getFighterImageSettingsFile(FighterArtType artType){
+    public String getFighterImageSettingsFile(
+            SmashUltimateFighterArtType artType){
         var result = this.getArtTypeDir()
                 .stream()
                 .filter(dir -> artType.equals(dir.getArtType()))

@@ -1,6 +1,6 @@
 package tournament.settings;
 
-import fighter.FighterArtType;
+import fighter.SmashUltimateFighterArtType;
 import fighter.image.settings.FighterArtSettings;
 import java.util.List;
 import lombok.Getter;
@@ -41,7 +41,8 @@ public class ThumbnailSettings extends Settings {
     }
 
     @Override
-    public String getFighterImageSettingsFile(FighterArtType artType){
+    public String getFighterImageSettingsFile(
+            SmashUltimateFighterArtType artType){
         if (this.getArtTypeDir() == null){
             switch (artType){
                 case MURAL:

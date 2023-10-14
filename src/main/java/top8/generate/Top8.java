@@ -3,8 +3,11 @@ package top8.generate;
 import com.google.gson.reflect.TypeToken;
 import exception.OnlineImageNotFoundException;
 import fighter.DownloadFighterURL;
+import fighter.SmashUltimateDownloadFighterURL;
 import fighter.Fighter;
+import fighter.StreetFighter6DownloadFighterURL;
 import fighter.image.FighterImage;
+import fighter.name.Game;
 import file.FileUtils;
 import file.json.JSONReader;
 import javax.imageio.ImageIO;
@@ -79,7 +82,7 @@ public class Top8 {
                if (slot == null) {
                    return;
                }
-               var fighter = getFighterImage(player.getFighter(0));
+               var fighter = getFighterImage(player.getFighter(0), top8Settings.getGame());
                FighterImage.convertToAlternateRender(player.getFighter(0));
 
                ImageSettings imageSettings = (ImageSettings)
@@ -124,8 +127,14 @@ public class Top8 {
         }
     }
 
-    static BufferedImage getFighterImage(Fighter fighter) throws
+    static BufferedImage getFighterImage(Fighter fighter, Game game) throws
             OnlineImageNotFoundException {
+        DownloadFighterURL downloadFighterURL;
+        if (Game.SF6.equals(game)){
+            downloadFighterURL = new StreetFighter6DownloadFighterURL();
+        } else {
+            downloadFighterURL = new SmashUltimateDownloadFighterURL();
+        }
         if (ts.isLocally()) {
             File directory = new File(localFightersPath);
             String fighterDirPath = localFightersPath + fighter.getUrlName() + "/";
@@ -145,11 +154,11 @@ public class Top8 {
             }
 
             //if cannot find locally, will try to find online
-            image = DownloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
+            image = downloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
             saveImage(image, localImage);
             return image;
         } else {
-            return DownloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
+            return downloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
         }
     }
 }
