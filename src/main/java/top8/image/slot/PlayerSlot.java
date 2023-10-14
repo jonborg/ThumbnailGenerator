@@ -33,11 +33,8 @@ public class PlayerSlot {
     private ShadowSlot shadow;
 
     @Expose
-    @SerializedName("additionalFightersPosition_x")
-    private String addFighterPosX;
+    @SerializedName("additionalFighters")
+    private AdditionalFighters additionalFighters;
 
-    @Expose
-    @SerializedName("additionalFightersPosition_y")
-    private String addFighterPosY;
 }
 

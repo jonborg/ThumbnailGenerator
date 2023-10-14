@@ -10,6 +10,8 @@ import exception.ThumbnailFromFileException;
 import exception.Top8FromFileException;
 import fighter.FighterArtType;
 import fighter.FighterArtTypeConverter;
+import fighter.name.Game;
+import fighter.name.GameConverter;
 import file.json.JSONReader;
 import java.io.File;
 import java.io.IOException;
@@ -59,7 +61,9 @@ public class ThumbnailGeneratorController implements Initializable {
     @FXML
     private TextField date;
     @FXML
-    private ComboBox<FighterArtType> artType;
+    private ComboBox<FighterArtType> artTypeComboBox;
+    @FXML
+    private ComboBox<Game> gameComboBox;
     @FXML
     private AnchorPane player1;
     @FXML
@@ -224,6 +228,7 @@ public class ThumbnailGeneratorController implements Initializable {
             e.printStackTrace();
         }
     }
+
     public void initMenuBars(){
         String style = "-fx-padding: 0 100 0 20";
         for (Tournament tournament : getTournamentsList()){
@@ -262,33 +267,51 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     private void initArtDropdown(){
-        artType.getItems().addAll(FighterArtType.values());
-        artType.setConverter(new FighterArtTypeConverter());
-        artType.getSelectionModel().select(FighterArtType.RENDER);
+        artTypeComboBox.getItems().addAll(FighterArtType.values());
+        artTypeComboBox.setConverter(new FighterArtTypeConverter());
+        artTypeComboBox.getSelectionModel().select(FighterArtType.RENDER);
+
+        gameComboBox.getItems().addAll(Game.values());
+        gameComboBox.setConverter(new GameConverter());
+        gameComboBox.getSelectionModel().select(Game.SMASH_ULTIMATE);
+        gameComboBox.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    player1Controller.updateGameData(newValue);
+                    player2Controller.updateGameData(newValue);
+                });
     }
 
     private static List<Tournament> getTournamentsList(){
         return TournamentUtils.getTournamentsList();
     }
+
     private static Tournament getSelectedTournament() { return TournamentUtils.getSelectedTournament(); }
+
     private static void setSelectedEdit(Tournament tournament){
         TournamentUtils.setSelectedEdit(tournament);
     }
     private static void updateTournamentsList(Tournament... list) {
         TournamentUtils.updateTournamentsList(list);
     }
+
     private static void deleteTournament(Tournament tournament) {
         TournamentUtils.deleteTournament(tournament);
     }
+
     public static void reloadPage(){
         App.startApp(stage);
     }
+
     public void setStage(Stage stage){
         this.stage=stage;
     }
 
     public FighterArtType getFighterArtType(){
-        return artType.getSelectionModel().getSelectedItem();
+        return artTypeComboBox.getSelectionModel().getSelectedItem();
+    }
+
+    public Game getGame(){
+        return gameComboBox.getSelectionModel().getSelectedItem();
     }
 
     public void generateTop8(ActionEvent actionEvent) {

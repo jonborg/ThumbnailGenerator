@@ -32,8 +32,7 @@ public class ImageUtils {
     }
 
 
-    public static BufferedImage resizeImage(BufferedImage bufferedImage,
-                                            String urlName, double scale) {
+    public static BufferedImage resizeImage(BufferedImage bufferedImage, double scale) {
         LOGGER.info("Performing resize of image with width {} and height {}.",
                 bufferedImage.getWidth(), bufferedImage.getHeight());
         int width = (int) (scale * bufferedImage.getWidth());

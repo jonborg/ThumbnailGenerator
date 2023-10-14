@@ -3,7 +3,7 @@ package ui.controller;
 import fighter.Player;
 import fighter.DownloadFighterURL;
 import fighter.Fighter;
-import fighter.Names;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +12,11 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Set;
+
+import fighter.name.Game;
+import fighter.name.SmashUltimateNameMap;
+import fighter.name.StreetFighter6NameMap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -57,20 +62,20 @@ public class PlayerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initFighters();
-        initAlts();
+        initFightersComboBox(fighter, SmashUltimateNameMap.getKeySet());
+        initFighterAltsSpinner(alt);
     }
 
-    protected void initFighters(){
-        ObservableList<String> items = FXCollections.observableArrayList(Names.getKeySet());
-        FilteredList<String> filteredItems = new FilteredList<>(items);
+    protected void initFightersComboBox(ComboBox<String> fighterComboBox, Set<String> fighterList){
+        ObservableList<String> observableList = FXCollections.observableArrayList(fighterList);
+        FilteredList<String> filteredItems = new FilteredList<>(observableList);
 
-        fighter.getEditor().textProperty().addListener(new InputFilter(fighter, filteredItems, false));
-        fighter.setItems(filteredItems);
+        fighterComboBox.getEditor().textProperty().addListener(new InputFilter(fighterComboBox, filteredItems, false));
+        fighterComboBox.setItems(filteredItems);
     }
 
-    protected void initAlts(){
-        alt.valueProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
+    protected void initFighterAltsSpinner(Spinner<Integer> spinner){
+        spinner.valueProperty().addListener(((observable, oldValue, newValue) -> updateFighterIcon()));
     }
 
 
@@ -90,7 +95,7 @@ public class PlayerController implements Initializable {
                 alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
             }
         }
-        return sel == null ? null : Names.getValue(sel);
+        return sel == null ? null : SmashUltimateNameMap.getValue(sel);
     }
 
     protected void updateFighterIcon(){
@@ -111,6 +116,21 @@ public class PlayerController implements Initializable {
             iconLink.setDisable(true);
             iconLink.setText(null);
             icon.setImage(null);
+        }
+    }
+
+    protected void clearFighterComboBox(){
+        fighter.getItems().clear();
+    }
+
+    protected void updateGameData(Game game){
+        if (Game.SF6.equals(game)){
+            initFightersComboBox(fighter, StreetFighter6NameMap.getKeySet());
+            alt.setDisable(true);
+        }
+        if (Game.SMASH_ULTIMATE.equals(game)) {
+            initFightersComboBox(fighter, SmashUltimateNameMap.getKeySet());
+            alt.setDisable(false);
         }
     }
 
