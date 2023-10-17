@@ -21,10 +21,6 @@
 }
 
 .generalTextfield{
-    -fx-pref-width: 200;
-    -fx-min-width: 200;
-}
-.artDropdown{
-    -fx-pref-width: 125;
-    -fx-min-width: 125;
+    -fx-pref-width: 225;
+    -fx-min-width: 225;
 }
