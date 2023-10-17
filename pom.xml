@@ -118,7 +118,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>app.App</mainClass>
+                            <mainClass>App</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -142,7 +142,7 @@
                             <jar>${project.build.directory}/${project.artifactId}-${project.version}-jar-with-dependencies.jar</jar>
                             <outfile>Thumbnail Generator.exe</outfile>
                             <classPath>
-                                <mainClass>app.App</mainClass>
+                                <mainClass>App</mainClass>
                                 <preCp>anything</preCp>
                             </classPath>
                             <jre>
