@@ -7,6 +7,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;;
 import javafx.collections.FXCollections;
@@ -28,12 +29,13 @@ import lombok.var;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Player;
+import thumbnailgenerator.enums.SmashUltimateEnum;
+import thumbnailgenerator.enums.StreetFighter6Enum;
 import thumbnailgenerator.service.DownloadFighterURL;
 import thumbnailgenerator.service.SmashUltimateDownloadFighterURL;
 import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-import thumbnailgenerator.utils.mapper.SmashUltimateMapper;
-import thumbnailgenerator.utils.mapper.StreetFighter6Mapper;
+import thumbnailgenerator.utils.enums.EnumUtils;
 
 public class PlayerController implements Initializable {
     @FXML
@@ -61,11 +63,11 @@ public class PlayerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initFightersComboBox(fighter, SmashUltimateMapper.getKeySet());
+        initFightersComboBox(fighter, EnumUtils.getAllNames(SmashUltimateEnum.class));
         initFighterAltsSpinner(alt);
     }
 
-    protected void initFightersComboBox(ComboBox<String> fighterComboBox, Set<String> fighterList){
+    protected void initFightersComboBox(ComboBox<String> fighterComboBox, List<String> fighterList){
         ObservableList<String> observableList = FXCollections.observableArrayList(fighterList);
         FilteredList<String> filteredItems = new FilteredList<>(observableList);
 
@@ -85,10 +87,12 @@ public class PlayerController implements Initializable {
 
     protected String getSelectionName() {
         String sel = fighter.getSelectionModel().getSelectedItem();
-        if (sel == null || sel.equals("Mii Brawler") || sel.equals("Mii Swordfighter")) {
+        if (sel == null || sel.equals(SmashUltimateEnum.MII_BRAWLER.getName())
+                || sel.equals(SmashUltimateEnum.MII_SWORDFIGHTER.getName())) {
             alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
         } else {
-            if (sel.equals("Mii Gunner") || sel.equals("Random")) {
+            if (sel.equals(SmashUltimateEnum.MII_GUNNER.getName())
+                    || sel.equals(SmashUltimateEnum.RANDOM.getName())) {
                 alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2));
             } else {
                 alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
@@ -98,9 +102,9 @@ public class PlayerController implements Initializable {
         if (sel == null){
             return null;
         } else if (Game.SF6.equals(parentController.getGame())){
-            return StreetFighter6Mapper.getValue(sel);
+            return EnumUtils.findCodeByName(StreetFighter6Enum.class, sel);
         } else {
-            return SmashUltimateMapper.getValue(sel);
+            return EnumUtils.findCodeByName(SmashUltimateEnum.class, sel);
         }
     }
 
@@ -108,7 +112,7 @@ public class PlayerController implements Initializable {
         try {
             iconLink.setDisable(false);
             icon.setImage(new Image(getClass().getResourceAsStream("/icons/" + urlName + "/" + alt.getValue() + ".png")));
-            if ("pyra".equals(urlName)){
+            if (SmashUltimateEnum.PYRA.getName().equals(urlName)){
                 icon2Link.setDisable(false);
                 Image imageIcon2 = new Image(getClass().getResourceAsStream("/icons/mythra/" + alt.getValue() + ".png"));
                 icon2.setImage(imageIcon2);
@@ -131,11 +135,11 @@ public class PlayerController implements Initializable {
 
     protected void updateGameData(Game game){
         if (Game.SF6.equals(game)){
-            initFightersComboBox(fighter, StreetFighter6Mapper.getKeySet());
+            initFightersComboBox(fighter, EnumUtils.getAllNames(StreetFighter6Enum.class));
             alt.setDisable(true);
         }
         if (Game.SMASH_ULTIMATE.equals(game)) {
-            initFightersComboBox(fighter, SmashUltimateMapper.getKeySet());
+            initFightersComboBox(fighter, EnumUtils.getAllNames(SmashUltimateEnum.class));
             alt.setDisable(false);
         }
     }

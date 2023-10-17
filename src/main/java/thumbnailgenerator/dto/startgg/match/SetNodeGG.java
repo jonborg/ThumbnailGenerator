@@ -3,7 +3,8 @@ package thumbnailgenerator.dto.startgg.match;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
-import thumbnailgenerator.utils.mapper.CharacterIdGGMapper;
+import thumbnailgenerator.enums.SmashUltimateEnum;
+import thumbnailgenerator.utils.enums.EnumUtils;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -62,7 +63,7 @@ public class SetNodeGG{
             }
         }
         int mostUsedCharacter = Collections.max(charSel.entrySet(), HashMap.Entry.comparingByValue()).getKey();
-        return CharacterIdGGMapper.getValue(mostUsedCharacter);
+        return EnumUtils.findCodeByStartggId(SmashUltimateEnum.class, mostUsedCharacter);
     }
 
     private String getEntrateNameWithNoTeam(String name){
