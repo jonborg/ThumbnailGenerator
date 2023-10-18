@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,13 +15,16 @@ import java.util.List;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.FighterImage;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
-import thumbnailgenerator.dto.ThumbnailSettings;
+import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
@@ -30,7 +34,8 @@ import thumbnailgenerator.ui.controller.ThumbnailGeneratorController;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.json.JSONReader;
 
-public class ThumbnailFromFile extends Thumbnail {
+@Service
+public class ThumbnailFromFileService extends ThumbnailService {
     private static final Logger LOGGER = LogManager.getLogger(
             ThumbnailGeneratorController.class);
 
@@ -41,7 +46,9 @@ public class ThumbnailFromFile extends Thumbnail {
     private static List<String> parameters;
     private static ImageSettings imageSettings;
 
-    public static void generateFromFile(File file, boolean saveLocally)
+    private @Autowired ThumbnailService thumbnailService;
+
+    public void generateFromFile(File file, boolean saveLocally)
         throws ThumbnailFromFileException, FontNotFoundException {
 
         initMultiGeneration();
@@ -102,7 +109,7 @@ public class ThumbnailFromFile extends Thumbnail {
         }
     }
 
-    public static void generateFromSmashGG(String commands, boolean saveLocally)
+    public void generateFromSmashGG(String commands, boolean saveLocally)
             throws ThumbnailFromFileException, FontNotFoundException {
 
         initMultiGeneration();
@@ -146,14 +153,14 @@ public class ThumbnailFromFile extends Thumbnail {
         }
     }
 
-    private static void initMultiGeneration(){
+    private void initMultiGeneration(){
         parameters = new ArrayList<>();
         selectedTournament= null;
         imageSettings = null;
         date = null;
     }
 
-    private static void getParameters(String line, Boolean firstLine){
+    private void getParameters(String line, Boolean firstLine){
         if (firstLine){
             parameters = Arrays.asList(line.split(";"));
             for (Tournament t : TournamentUtils.getTournamentsList()){
@@ -188,9 +195,10 @@ public class ThumbnailFromFile extends Thumbnail {
     }
 
 
-    private static void generateThumbnail(Boolean saveLocally)
+    private void generateThumbnail(Boolean saveLocally)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
-            FontNotFoundException, FighterImageSettingsNotFoundException {
+            FontNotFoundException, FighterImageSettingsNotFoundException,
+            MalformedURLException {
 
         var player1 = new Player(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
         var player2 = new Player(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
@@ -201,14 +209,14 @@ public class ThumbnailFromFile extends Thumbnail {
             player2.setFighterFlip(0, readFlipFile(player2.getFighter(0)));
         }
 
-        generateAndSaveThumbnail(ThumbnailSettings.builder()
+        generateAndSaveThumbnail(Thumbnail.builder()
                                                 .tournament(selectedTournament)
                                                 .game(Game.SMASH_ULTIMATE)
                                                 .imageSettings(imageSettings)
                                                 .locally(saveLocally)
                                                 .round(parameters.get(6))
                                                 .date(date)
-                                                .players(ThumbnailSettings.createPlayerList(player1, player2))
+                                                .players(Thumbnail.createPlayerList(player1, player2))
                                                 .artType(artType)
                                                 .build());
     }

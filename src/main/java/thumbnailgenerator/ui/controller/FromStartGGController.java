@@ -20,6 +20,8 @@ import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.dto.startgg.match.SetGG;
 import thumbnailgenerator.dto.startgg.match.StreamGG;
@@ -30,11 +32,12 @@ import thumbnailgenerator.dto.startgg.tournament.TournamentGG;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.service.QueryUtils;
-import thumbnailgenerator.service.ThumbnailFromFile;
+import thumbnailgenerator.service.ThumbnailFromFileService;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.json.JSONReader;
 
+@Controller
 public class FromStartGGController implements Initializable {
     private final Logger LOGGER = LogManager.getLogger(FromStartGGController.class);
 
@@ -58,8 +61,8 @@ public class FromStartGGController implements Initializable {
     private ComboBox<StreamGG> streamSelect;
     @FXML
     private CheckBox saveLocally;
-
     private Tournament backupTournament;
+    private @Autowired ThumbnailFromFileService thumbnailFromFileService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -195,7 +198,7 @@ public class FromStartGGController implements Initializable {
             return;
         }
         try {
-            ThumbnailFromFile
+            thumbnailFromFileService
                     .generateFromSmashGG(foundSets.getText(), saveLocally.isSelected());
             LOGGER.info("Thumbnails were successfully generated and saved.");
             AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");

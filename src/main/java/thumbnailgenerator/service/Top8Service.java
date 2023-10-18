@@ -11,37 +11,37 @@ import javax.imageio.ImageIO;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import thumbnailgenerator.dto.Fighter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.FighterImage;
-import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Top8ImageSettings;
 import thumbnailgenerator.dto.FullSlot;
-import thumbnailgenerator.dto.Top8Settings;
-import thumbnailgenerator.exception.OnlineImageNotFoundException;
+import thumbnailgenerator.dto.Top8;
+import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.file.FileUtils;
 import thumbnailgenerator.utils.json.JSONReader;
 
-public class Top8 {
+@Service
+public class Top8Service {
 
-    private static final Logger LOGGER = LogManager.getLogger(Top8.class);
-
+    private static final Logger LOGGER = LogManager.getLogger(Top8Service.class);
     private static String localFightersPath;
+    private static Top8 ts;
+    private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
 
-    private static Top8Settings ts;
-
-    public static void generateTop8(Top8Settings top8Settings)
+    public void generateTop8(Top8 top8Settings)
             throws IOException {
 
         ts = top8Settings;
-        localFightersPath = FileUtils.getLocalFightersPath(ts.getArtType());
+        localFightersPath = FileUtils.getLocalFightersPath(top8Settings);
 
         var fullSlot = (FullSlot) JSONReader.getJSONObjectFromFile(ts.getTournament()
                         .getTop8Settings().getSlotSettingsFile(),
                 new TypeToken<FullSlot>() {}.getType());
 
         var top8 = new BufferedImage(fullSlot.getWidth(), fullSlot.getHeight(), BufferedImage.TYPE_INT_ARGB);
-
+        var characterImageFetcher = characterImageFetcherFactory.getCharacterImageFetcher(ts.getGame());
         BufferedImage background = null;
         BufferedImage foreground = null;
         if(ts.getTournament().getTop8Settings().getBackground() != null &&
@@ -78,7 +78,8 @@ public class Top8 {
                if (slot == null) {
                    return;
                }
-               var fighter = getFighterImage(player.getFighter(0), top8Settings.getGame());
+               BufferedImage characterImage = characterImageFetcher
+                       .getCharacterImage(player.getFighter(0), top8Settings);
                FighterImage.convertToAlternateRender(player.getFighter(0));
 
                Top8ImageSettings top8ImageSettings = (Top8ImageSettings)
@@ -94,9 +95,9 @@ public class Top8 {
                        fighterImageSettings.getSlotImageTop8Settings(place)
                                .isFlip());
 
-               var fighterImage = new FighterImageTop8(player.getFighterList(),
+               FighterImageTop8 fighterImage = new FighterImageTop8(player.getFighterList(),
                        fighterImageSettings.getSlotImageTop8Settings(place), slot,
-                       fighter);
+                       characterImage);
                g2d.drawImage(fighterImage.getImage(), slot.getCoordinateY(),
                        slot.getCoordinateX(), null);
            } catch (Exception e){
@@ -110,51 +111,5 @@ public class Top8 {
         var file = new File("generated_top8/top8_"+ Instant.now().toEpochMilli() +".png");
         ImageIO.write(top8, "png", file);
 
-    }
-
-    static void saveImage(BufferedImage image, File file) {
-        try {
-            LOGGER.info("Saving thumbnail {} on {}", file.getName(), file.getAbsolutePath());
-            ImageIO.write(image, "png", file);
-            LOGGER.info("Thumbnail saved successfully.");
-        } catch (IOException e) {
-            LOGGER.error("Thumbnail could not be saved.");
-            LOGGER.catching(e);
-        }
-    }
-
-    static BufferedImage getFighterImage(Fighter fighter, Game game) throws
-            OnlineImageNotFoundException {
-        DownloadFighterURL downloadFighterURL;
-        if (Game.SF6.equals(game)){
-            downloadFighterURL = new StreetFighter6DownloadFighterURL();
-        } else {
-            downloadFighterURL = new SmashUltimateDownloadFighterURL();
-        }
-        if (ts.isLocally()) {
-            File directory = new File(localFightersPath);
-            String fighterDirPath = localFightersPath + fighter.getUrlName() + "/";
-            File fighterDir = new File(fighterDirPath);
-            BufferedImage image;
-
-            if (!directory.exists()) directory.mkdir();
-            if (!fighterDir.exists()) fighterDir.mkdir();
-
-            File localImage = new File(fighterDirPath + fighter.getAlt()+".png");
-            try {
-                LOGGER.debug("Trying to find local image for alt {} of {}.", fighter.getAlt(), fighter.getName());
-                image = ImageIO.read(localImage);
-                return image;
-            } catch (IOException e) {
-                LOGGER.debug("Image for {} does not exist locally. Will now try finding it online.", fighter.getUrlName());
-            }
-
-            //if cannot find locally, will try to find online
-            image = downloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
-            saveImage(image, localImage);
-            return image;
-        } else {
-            return downloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
-        }
     }
 }

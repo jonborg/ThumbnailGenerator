@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import exception.Top8FromFileException;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,27 +29,31 @@ import javafx.stage.Stage;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import thumbnailgenerator.App;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import thumbnailgenerator.JavaFxApplication;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
-import thumbnailgenerator.dto.ThumbnailSettings;
+import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
+import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.service.QueryUtils;
-import thumbnailgenerator.service.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.service.ThumbnailService;
+import thumbnailgenerator.service.ThumbnailFromFileService;
 import thumbnailgenerator.utils.converter.SmashUltimateFighterArtTypeConverter;
-import thumbnailgenerator.service.Thumbnail;
-import thumbnailgenerator.service.ThumbnailFromFile;
-import thumbnailgenerator.service.Top8FromFile;
+import thumbnailgenerator.service.Top8ServiceFromFile;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.converter.GameConverter;
 import thumbnailgenerator.utils.json.JSONReader;
 
+@Controller
 public class ThumbnailGeneratorController implements Initializable {
     private final Logger LOGGER = LogManager.getLogger(ThumbnailGeneratorController.class);
 
@@ -88,6 +93,11 @@ public class ThumbnailGeneratorController implements Initializable {
     private Menu menuDelete;
 
     private static Stage stage;
+
+    private @Autowired ThumbnailService thumbnailService;
+    private @Autowired ThumbnailFromFileService thumbnailFromFileService;
+    private @Autowired Top8ServiceFromFile top8ServiceFromFile;
+    private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -145,14 +155,16 @@ public class ThumbnailGeneratorController implements Initializable {
                 .get(0);
 
         try {
-            Thumbnail.generateAndSaveThumbnail(ThumbnailSettings.builder()
+            thumbnailService.generateAndSaveThumbnail(Thumbnail.builder()
                                                                 .tournament(getSelectedTournament())
                                                                 .game(getGame())
                                                                 .imageSettings(imageSettings)
                                                                 .locally(saveLocally.isSelected())
                                                                 .round(round.getText().toUpperCase())
                                                                 .date(date.getText())
-                                                                .players(ThumbnailSettings.
+                                                                .players(
+                                                                        Thumbnail
+                                                                                .
                                                                         createPlayerList(
                                                                                 player1Controller.generatePlayer(),
                                                                                 player2Controller.generatePlayer()))
@@ -172,6 +184,9 @@ public class ThumbnailGeneratorController implements Initializable {
         } catch (FighterImageSettingsNotFoundException e){
             LOGGER.error("An issue occurred when loading image settings of a character. {}", e.getMessage());
             AlertFactory.displayError(e.getMessage());
+        }  catch (MalformedURLException e){
+            LOGGER.error("An issue occurred when getting image online. {}", e.getMessage());
+            AlertFactory.displayError(e.getMessage());
         }
     }
 
@@ -183,7 +198,8 @@ public class ThumbnailGeneratorController implements Initializable {
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
             try {
-                ThumbnailFromFile.generateFromFile(selectedFile, saveLocally.isSelected());
+                thumbnailFromFileService
+                        .generateFromFile(selectedFile, saveLocally.isSelected());
                 AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
             }catch(ThumbnailFromFileException e){
                 //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
@@ -300,7 +316,7 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public static void reloadPage(){
-        App.startApp(stage);
+        JavaFxApplication.startApp(stage);
     }
 
     public void setStage(Stage stage){
@@ -324,7 +340,7 @@ public class ThumbnailGeneratorController implements Initializable {
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
             try {
-                Top8FromFile.generateFromFile(selectedFile, saveLocally.isSelected());
+                top8ServiceFromFile.generateFromFile(selectedFile, saveLocally.isSelected());
                 AlertFactory.displayInfo("Top 8 was successfully generated and saved!");
             }catch(Top8FromFileException e){
                 //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile

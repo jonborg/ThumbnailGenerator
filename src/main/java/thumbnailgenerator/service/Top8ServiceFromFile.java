@@ -15,19 +15,23 @@ import exception.Top8FromFileException;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Player;
-import thumbnailgenerator.dto.Top8Settings;
+import thumbnailgenerator.dto.Top8;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
-public class Top8FromFile extends Top8 {
-    private static final Logger LOGGER = LogManager.getLogger(Top8FromFile.class);
+@Service
+public class Top8ServiceFromFile extends Top8Service {
+    private static final Logger LOGGER = LogManager.getLogger(
+            Top8ServiceFromFile.class);
 
     private static Tournament selectedTournament;
     private static Game selectedGame;
@@ -86,13 +90,13 @@ public class Top8FromFile extends Top8 {
 
     }
 
-    private static void initMultiGeneration(){
+    private void initMultiGeneration(){
         selectedTournament= null;
         players = new ArrayList<>();
         artType = SmashUltimateFighterArtType.RENDER;
     }
 
-    private static void getParameters(String line, Boolean firstLine){
+    private void getParameters(String line, Boolean firstLine){
         if (firstLine){
             var parameters = Arrays.asList(line.split(";"));
             for (Tournament t : TournamentUtils.getTournamentsList()){
@@ -120,7 +124,7 @@ public class Top8FromFile extends Top8 {
         }
     }
 
-    private static void processSlotData(List<String> parameters){
+    private void processSlotData(List<String> parameters){
         var fighters = new ArrayList<Fighter>();
         var nFighters = parameters.size()/2;
         for (int i = 0; i<nFighters; i++) {
@@ -130,9 +134,9 @@ public class Top8FromFile extends Top8 {
         players.add(new Player("", fighters));
     }
 
-    private static void generateTop8FromFile(boolean saveLocally)
+    private void generateTop8FromFile(boolean saveLocally)
             throws IOException, FighterImageSettingsNotFoundException {
-        generateTop8(Top8Settings.builder()
+        generateTop8(Top8.builder()
                 .tournament(selectedTournament)
                 .game(selectedGame)
                 .locally(saveLocally)

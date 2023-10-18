@@ -83,7 +83,7 @@ public class FighterImageTop8 extends FighterImage {
                     .setVariable("i", i)
                     .evaluate();
             try {
-                var icon = ImageIO.read(Top8.class.getResourceAsStream(
+                var icon = ImageIO.read(Top8Service.class.getResourceAsStream(
                         "/icons/" + fighter.getUrlName() + "/" + fighter.getAlt() +
                                 ".png"));
                 icon = ImageUtils.resizeImage(icon, scale);

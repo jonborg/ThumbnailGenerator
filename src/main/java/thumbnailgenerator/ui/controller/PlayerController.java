@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;;
+;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,17 +26,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import lombok.var;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
-import thumbnailgenerator.service.DownloadFighterURL;
-import thumbnailgenerator.service.SmashUltimateDownloadFighterURL;
+import thumbnailgenerator.factory.CharacterImageFetcherFactory;
+import thumbnailgenerator.service.CharacterImageFetcher;
+import thumbnailgenerator.service.SmashUltimateCharacterImageFetcher;
 import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-import thumbnailgenerator.utils.enums.EnumUtils;
+import thumbnailgenerator.utils.enums.CharacterEnumUtils;
 
+@Component
+@Scope("prototype")
 public class PlayerController implements Initializable {
     @FXML
     protected TextField player;
@@ -56,14 +63,13 @@ public class PlayerController implements Initializable {
     protected ImageView icon2;
     @FXML
     protected HBox colorBox;
-
     protected String urlName;
-
     private ThumbnailGeneratorController parentController;
+    private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initFightersComboBox(fighter, EnumUtils.getAllNames(SmashUltimateEnum.class));
+        initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(SmashUltimateEnum.class));
         initFighterAltsSpinner(alt);
     }
 
@@ -102,9 +108,11 @@ public class PlayerController implements Initializable {
         if (sel == null){
             return null;
         } else if (Game.SF6.equals(parentController.getGame())){
-            return EnumUtils.findCodeByName(StreetFighter6Enum.class, sel);
+            return CharacterEnumUtils
+                    .findCodeByName(StreetFighter6Enum.class, sel);
         } else {
-            return EnumUtils.findCodeByName(SmashUltimateEnum.class, sel);
+            return CharacterEnumUtils
+                    .findCodeByName(SmashUltimateEnum.class, sel);
         }
     }
 
@@ -135,19 +143,20 @@ public class PlayerController implements Initializable {
 
     protected void updateGameData(Game game){
         if (Game.SF6.equals(game)){
-            initFightersComboBox(fighter, EnumUtils.getAllNames(StreetFighter6Enum.class));
+            initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(StreetFighter6Enum.class));
             alt.setDisable(true);
         }
         if (Game.SMASH_ULTIMATE.equals(game)) {
-            initFightersComboBox(fighter, EnumUtils.getAllNames(SmashUltimateEnum.class));
+            initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(SmashUltimateEnum.class));
             alt.setDisable(false);
         }
     }
 
     public void previewFighter(ActionEvent actionEvent) {
-        DownloadFighterURL downloadFighterURL = new SmashUltimateDownloadFighterURL();
-        String url = downloadFighterURL
-                .generateFighterURL(urlName, alt.getValue(), parentController.getFighterArtType());
+        SmashUltimateCharacterImageFetcher
+                downloadFighterURL = new SmashUltimateCharacterImageFetcher();
+        //String url = downloadFighterURL.generateFighterURL(urlName, alt.getValue(), parentController.getFighterArtType());
+        String url = "";
         if(Desktop.isDesktopSupported()) {
             try {
                 if ("http".equals(url.substring(0,4))){

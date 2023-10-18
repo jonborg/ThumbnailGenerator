@@ -4,7 +4,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import thumbnailgenerator.service.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 
 @Getter
 @Setter

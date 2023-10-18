@@ -8,29 +8,34 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import thumbnailgenerator.dto.Fighter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.FighterImage;
 import thumbnailgenerator.dto.FighterImageThumbnail;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
-import thumbnailgenerator.dto.ThumbnailSettings;
+import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
+import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.utils.file.FileUtils;
 import thumbnailgenerator.utils.json.JSONReader;
 
-public class Thumbnail {
-    private static final Logger LOGGER = LogManager.getLogger(Thumbnail.class);
+@Service
+public class ThumbnailService {
+    private static final Logger LOGGER = LogManager.getLogger(ThumbnailService.class);
 
     private static int WIDTH = 1280;
     private static int HEIGHT = 720;
@@ -41,26 +46,29 @@ public class Thumbnail {
     private static String localFightersPath;
     private static String saveThumbnailsPath = FileUtils.getSaveThumbnailsPath();
     
-    private static ThumbnailSettings ts;
+    private static Thumbnail ts;
+    private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
 
-    public static void generateAndSaveThumbnail(ThumbnailSettings thumbnailSettings)
+    public void generateAndSaveThumbnail(Thumbnail thumbnail)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
-            FontNotFoundException, FighterImageSettingsNotFoundException {
+            FontNotFoundException, FighterImageSettingsNotFoundException,
+            MalformedURLException {
 
-        generateThumbnail(thumbnailSettings);
+        generateThumbnail(thumbnail);
         saveThumbnail();
     }
 
-    public static BufferedImage generatePreview(Tournament tournament, SmashUltimateFighterArtType artType)
+    public BufferedImage generatePreview(Tournament tournament, SmashUltimateFighterArtType artType)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
-            FontNotFoundException, FighterImageSettingsNotFoundException {
+            FontNotFoundException, FighterImageSettingsNotFoundException,
+            MalformedURLException {
         LOGGER.info("Generating thumbnail preview.");
         List<Player> players = Player.generatePreviewPlayers();
         ImageSettings imageSettings = (ImageSettings)
                 JSONReader.getJSONArrayFromFile(tournament.getThumbnailSettings()
                                 .getFighterImageSettingsFile(artType),
                         new TypeToken<ArrayList<ImageSettings>>() {}.getType()).get(0);
-        return generateThumbnail(ThumbnailSettings.builder()
+        return generateThumbnail(Thumbnail.builder()
                                                 .tournament(tournament)
                                                 .game(Game.SMASH_ULTIMATE)
                                                 .imageSettings(imageSettings)
@@ -73,10 +81,11 @@ public class Thumbnail {
     }
 
 
-    private static BufferedImage generateThumbnail(ThumbnailSettings thumbnailSettings)
+    private BufferedImage generateThumbnail(Thumbnail thumbnail)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
-            FontNotFoundException, FighterImageSettingsNotFoundException {
-        ts = thumbnailSettings;
+            FontNotFoundException, FighterImageSettingsNotFoundException,
+            MalformedURLException {
+        ts = thumbnail;
         LOGGER.debug("*********************************************************************************************");
         LOGGER.debug("Creating thumbnail with following parameters:");
         LOGGER.debug("Tournament -> {}", ts.getTournament().getName());
@@ -87,29 +96,28 @@ public class Thumbnail {
         LOGGER.debug("Art used -> {}", ts.getArtType());
         LOGGER.debug("*********************************************************************************************");
 
-        localFightersPath = FileUtils.getLocalFightersPath(ts.getArtType());
+        localFightersPath = FileUtils.getLocalFightersPath(thumbnail);
 
-        thumbnail = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
-        g2d = thumbnail.createGraphics();
+        ThumbnailService.thumbnail = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        g2d = ThumbnailService.thumbnail.createGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-        if(!ts.getTournament().getThumbnailSettings().getBackground().isEmpty()) {
-            LOGGER.info("Drawing background in path {}.",
-                    ts.getTournament().getThumbnailSettings().getBackground());
-            drawElement(
-                    ts.getTournament().getThumbnailSettings().getBackground());
-        }
-        int port = 0;
+        LOGGER.info("Drawing background in path {}.", ts.getTournament().getThumbnailSettings().getBackground());
+        drawElement(ts.getTournament().getThumbnailSettings().getBackground());
+        var port = 0;
+        var characterImageFetcher = characterImageFetcherFactory
+                .getCharacterImageFetcher(thumbnail.getGame());
         for (Player player : ts.getPlayers()) {
             port++;
             LOGGER.info("Drawing player {} information.", port);
             var f = player.getFighter(0);
-            var image = getFighterImage(f, thumbnailSettings.getGame());
+            var characterImage = characterImageFetcher.getCharacterImage(f,
+                    thumbnail);
             FighterImage.convertToAlternateRender(f);
             var fighterImageSettings = ts.getImageSettings()
                     .findFighterImageSettings(f.getUrlName());
-            var fighterImage = new FighterImageThumbnail(f, fighterImageSettings, image);
+            var fighterImage = new FighterImageThumbnail(f, fighterImageSettings, characterImage);
 
             LOGGER.info("Drawing player {}'s character: {}", port, f.getName());
             if (fighterImage.getImage().getWidth() < WIDTH / 2 && fighterImage.getFighter().isFlip()) {
@@ -145,10 +153,10 @@ public class Thumbnail {
                         .getThumbnailSettings().getTextSettings(), false),
                 WIDTH / 2, HEIGHT - 100 + ts.getTournament().getThumbnailSettings()
                         .getTextSettings().getDownOffsetBottom()[1], null);
-        return thumbnail;
+        return ThumbnailService.thumbnail;
     }
 
-    private static void saveThumbnail(){
+    private void saveThumbnail(){
         String thumbnailFileName = ts.getPlayers().get(0).getPlayerName().replace("|","_").replace("/","_")+"-"+
                 ts.getPlayers().get(0).getFighter(0).getUrlName()+ts.getPlayers().get(0).getFighter(0).getAlt()+"--"+
                 ts.getPlayers().get(1).getPlayerName().replace("|","_").replace("/","_")+"-"+
@@ -161,7 +169,7 @@ public class Thumbnail {
                 thumbnailFileName));
     }
 
-    private static void drawElement(String pathname) throws LocalImageNotFoundException {
+    private void drawElement(String pathname) throws LocalImageNotFoundException {
         try {
             BufferedImage bufferedImage = ImageIO.read(new FileInputStream(pathname));
             g2d.drawImage(bufferedImage, 0, 0, null);
@@ -180,41 +188,6 @@ public class Thumbnail {
         } catch (IOException e) {
             LOGGER.error("Thumbnail could not be saved.");
             LOGGER.catching(e);
-        }
-    }
-
-    static BufferedImage getFighterImage(Fighter fighter, Game game) throws OnlineImageNotFoundException {
-        DownloadFighterURL downloadFighterURL;
-        if (Game.SF6.equals(game)){
-            downloadFighterURL = new StreetFighter6DownloadFighterURL();
-        } else {
-            downloadFighterURL = new SmashUltimateDownloadFighterURL();
-        }
-        if (ts.isLocally()) {
-            File directory = new File(localFightersPath);
-            String fighterDirPath = localFightersPath + fighter.getUrlName() + "/";
-            File fighterDir = new File(fighterDirPath);
-            BufferedImage image;
-
-            if (!directory.exists()) directory.mkdir();
-            if (!fighterDir.exists()) fighterDir.mkdir();
-
-            File localImage = new File(fighterDirPath + fighter.getAlt()+".png");
-            try {
-                LOGGER.debug("Trying to find local image for alt {} of {}.", fighter.getAlt(), fighter.getName());
-                image = ImageIO.read(localImage);
-                return image;
-            } catch (IOException e) {
-                LOGGER.debug("Image for {} does not exist locally. Will now try finding it online.", fighter.getUrlName());
-            }
-
-            //if cannot find locally, will try to find online
-            image = downloadFighterURL
-                    .getFighterImageOnline(fighter, ts.getArtType());
-            saveImage(image, localImage);
-            return image;
-        } else {
-            return downloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
         }
     }
 }
