@@ -12,10 +12,12 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.buttons.TournamentButton;
 
+@Controller
 public class TournamentsController implements Initializable {
     private static final Logger LOGGER = LogManager.getLogger(TournamentsController.class);
 

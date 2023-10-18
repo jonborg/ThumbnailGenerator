@@ -1,7 +1,7 @@
 package thumbnailgenerator.utils.converter;
 
 import javafx.util.StringConverter;
-import thumbnailgenerator.service.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 
 public class SmashUltimateFighterArtTypeConverter extends StringConverter<SmashUltimateFighterArtType> {
     @Override

@@ -29,20 +29,23 @@ import javafx.util.converter.IntegerStringConverter;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.FighterArtSettings;
 import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.service.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.utils.converter.SmashUltimateFighterArtTypeConverter;
-import thumbnailgenerator.service.Thumbnail;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.ui.textfield.ChosenImageField;
 import thumbnailgenerator.ui.textfield.ChosenJsonField;
 
+@Controller
 public class TournamentsCreateController implements Initializable {
     private static final Logger LOGGER = LogManager.getLogger(TournamentsCreateController.class);
 
@@ -104,6 +107,7 @@ public class TournamentsCreateController implements Initializable {
     protected ImageView preview;
     protected List<FighterArtSettings> artTypeDir = new ArrayList<>();
     protected List<FighterArtSettings> artTypeDirTop8 = new ArrayList<>();
+    private @Autowired ThumbnailService thumbnailService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -234,7 +238,7 @@ public class TournamentsCreateController implements Initializable {
         Tournament tournament = generateTournamentWithCurrentSettings();
 
         try{
-            BufferedImage previewImage = Thumbnail
+            BufferedImage previewImage = thumbnailService
                     .generatePreview(tournament, artType.getSelectionModel().getSelectedItem());
             Image image = SwingFXUtils.toFXImage(previewImage, null);
             preview.setImage(image);

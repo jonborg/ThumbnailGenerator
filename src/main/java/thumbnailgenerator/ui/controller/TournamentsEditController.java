@@ -9,12 +9,14 @@ import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
+import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.service.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
+@Controller
 public class TournamentsEditController extends TournamentsCreateController {
     private static final Logger LOGGER = LogManager.getLogger(TournamentsEditController.class);
 

@@ -2,7 +2,7 @@ package thumbnailgenerator.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import thumbnailgenerator.service.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import java.util.List;
 import lombok.Getter;
 import lombok.ToString;

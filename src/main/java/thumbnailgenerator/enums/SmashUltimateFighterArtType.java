@@ -1,4 +1,4 @@
-package thumbnailgenerator.service;
+package thumbnailgenerator.enums;
 
 import lombok.Getter;
 

@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import thumbnailgenerator.enums.SmashUltimateEnum;
-import thumbnailgenerator.utils.enums.EnumUtils;
+import thumbnailgenerator.utils.enums.CharacterEnumUtils;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -63,7 +63,8 @@ public class SetNodeGG{
             }
         }
         int mostUsedCharacter = Collections.max(charSel.entrySet(), HashMap.Entry.comparingByValue()).getKey();
-        return EnumUtils.findCodeByStartggId(SmashUltimateEnum.class, mostUsedCharacter);
+        return CharacterEnumUtils
+                .findCodeByStartggId(SmashUltimateEnum.class, mostUsedCharacter);
     }
 
     private String getEntrateNameWithNoTeam(String name){

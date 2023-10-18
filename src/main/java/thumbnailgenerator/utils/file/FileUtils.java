@@ -1,13 +1,15 @@
 package thumbnailgenerator.utils.file;
 
-import thumbnailgenerator.service.SmashUltimateFighterArtType;
+import thumbnailgenerator.dto.Game;
+import thumbnailgenerator.dto.GraphicGenerated;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 
 public class FileUtils {
 
     private final static String tournamentFile = "settings/tournaments/tournaments.json";
     private final static String textSettingsFile = "settings/thumbnails/text/text.json";
 
-    private final static String localRenderPath = "assets/fighters/";
+    private final static String localRenderPath = "assets/characters/";
     private final static String localMuralPath = "assets/mural/";
     private final static String saveThumbnailsPath = "generated_thumbnails/";
 
@@ -33,13 +35,16 @@ public class FileUtils {
     }
 
     public static String getLocalFightersPath(
-            SmashUltimateFighterArtType artType){
-        switch(artType){
-            case MURAL:
+            GraphicGenerated graphicGenerated){
+        if(Game.SF6.equals(graphicGenerated.getGame())){
+            return getLocalRenderPath();
+        } else {
+            if (SmashUltimateFighterArtType.MURAL
+                    .equals(graphicGenerated.getArtType())){
                 return getLocalMuralPath();
-            case RENDER:
-            default:
-                return  getLocalRenderPath();
+            } else {
+                return getLocalRenderPath();
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnumUtils {
+public class CharacterEnumUtils {
 
     public static <E extends Enum<E>> String findCodeByName(Class<E> enumClass, String name) {
         return findValue(enumClass, String.valueOf(name), "getName");
