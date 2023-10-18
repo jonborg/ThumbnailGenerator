@@ -1,7 +1,7 @@
 package thumbnailgenerator.utils.file;
 
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.dto.GraphicGenerated;
+import thumbnailgenerator.dto.GeneratedGraphic;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 
 public class FileUtils {
@@ -35,12 +35,12 @@ public class FileUtils {
     }
 
     public static String getLocalFightersPath(
-            GraphicGenerated graphicGenerated){
-        if(Game.SF6.equals(graphicGenerated.getGame())){
+            GeneratedGraphic generatedGraphic){
+        if(Game.SF6.equals(generatedGraphic.getGame())){
             return getLocalRenderPath();
         } else {
             if (SmashUltimateFighterArtType.MURAL
-                    .equals(graphicGenerated.getArtType())){
+                    .equals(generatedGraphic.getArtType())){
                 return getLocalMuralPath();
             } else {
                 return getLocalRenderPath();

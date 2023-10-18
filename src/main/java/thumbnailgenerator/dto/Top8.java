@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class Top8 extends GraphicGenerated {
+public class Top8 extends GeneratedGraphic {
 
     private Tournament tournament;
     private Game game;

@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
-import thumbnailgenerator.dto.GraphicGenerated;
+import thumbnailgenerator.dto.GeneratedGraphic;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.utils.file.FileUtils;
 
@@ -21,23 +21,23 @@ public abstract class CharacterImageFetcher {
     private static final Logger LOGGER = LogManager.getLogger(
             CharacterImageFetcher.class);
 
-    abstract URL getOnlineUrl(Fighter fighter, GraphicGenerated graphicGenerated)
+    abstract URL getOnlineUrl(Fighter fighter, GeneratedGraphic generatedGraphic)
             throws MalformedURLException;
 
-    public BufferedImage getCharacterImage(Fighter fighter, GraphicGenerated graphicGenerated)
+    public BufferedImage getCharacterImage(Fighter fighter, GeneratedGraphic generatedGraphic)
             throws OnlineImageNotFoundException, MalformedURLException {
-        if (graphicGenerated.isLocally()) {
+        if (generatedGraphic.isLocally()) {
             try {
-                return getFighterImageLocally(fighter, graphicGenerated);
+                return getFighterImageLocally(fighter, generatedGraphic);
             }  catch (IOException e) {
                 LOGGER.debug("Image for {} does not exist locally. Will now try finding it online.", fighter.getUrlName());
-                var url = getOnlineUrl(fighter, graphicGenerated);
+                var url = getOnlineUrl(fighter, generatedGraphic);
                 var image = getFighterImageOnline(fighter, url);
-                saveImageLocally(fighter, graphicGenerated, image);
+                saveImageLocally(fighter, generatedGraphic, image);
                 return image;
             }
         } else {
-            var url = getOnlineUrl(fighter, graphicGenerated);
+            var url = getOnlineUrl(fighter, generatedGraphic);
             return getFighterImageOnline(fighter, url);
         }
     }
@@ -53,8 +53,9 @@ public abstract class CharacterImageFetcher {
         }
     }
 
-    private BufferedImage getFighterImageLocally(Fighter fighter, GraphicGenerated graphicGenerated) throws IOException {
-        var localCharacterImageRootPath = FileUtils.getLocalFightersPath(graphicGenerated);
+    private BufferedImage getFighterImageLocally(Fighter fighter, GeneratedGraphic generatedGraphic) throws IOException {
+        var localCharacterImageRootPath = FileUtils.getLocalFightersPath(
+                generatedGraphic);
         var localCharacterImagePath = localCharacterImageRootPath + fighter.getUrlName() + "/";
 
         var rootDirectory = new File(localCharacterImageRootPath);
@@ -69,8 +70,9 @@ public abstract class CharacterImageFetcher {
         return ImageIO.read(localImage);
     }
 
-    private void saveImageLocally(Fighter fighter, GraphicGenerated graphicGenerated, BufferedImage image){
-        var localCharacterImagePath = FileUtils.getLocalFightersPath(graphicGenerated);
+    private void saveImageLocally(Fighter fighter, GeneratedGraphic generatedGraphic, BufferedImage image){
+        var localCharacterImagePath = FileUtils.getLocalFightersPath(
+                generatedGraphic);
         var fighterDirPath = localCharacterImagePath + fighter.getUrlName() + "/";
 
         File localImage = new File(fighterDirPath + fighter.getAlt()+".png");
