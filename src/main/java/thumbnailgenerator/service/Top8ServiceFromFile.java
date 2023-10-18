@@ -87,7 +87,6 @@ public class Top8ServiceFromFile extends Top8Service {
             AlertFactory.displayError(e.getMessage());
             invalidLines.add("Invalid line -> "+ line);
         }
-
     }
 
     private void initMultiGeneration(){

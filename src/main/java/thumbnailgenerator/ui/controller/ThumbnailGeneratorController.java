@@ -3,6 +3,8 @@ package thumbnailgenerator.ui.controller;
 import com.google.gson.reflect.TypeToken;
 import exception.Top8FromFileException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -45,7 +47,6 @@ import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.service.QueryUtils;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.service.ThumbnailService;
-import thumbnailgenerator.service.ThumbnailFromFileService;
 import thumbnailgenerator.utils.converter.SmashUltimateFighterArtTypeConverter;
 import thumbnailgenerator.service.Top8ServiceFromFile;
 import thumbnailgenerator.service.TournamentUtils;
@@ -55,47 +56,27 @@ import thumbnailgenerator.utils.json.JSONReader;
 
 @Controller
 public class ThumbnailGeneratorController implements Initializable {
+
     private final Logger LOGGER = LogManager.getLogger(ThumbnailGeneratorController.class);
-
-    @FXML
-    private AnchorPane tournaments;
-    @FXML
-    private TournamentsController tournamentsController;
-    @FXML
-    private TextField round;
-    @FXML
-    private TextField date;
-    @FXML
-    private ComboBox<SmashUltimateFighterArtType> artTypeComboBox;
-    @FXML
-    private ComboBox<Game> gameComboBox;
-    @FXML
-    private AnchorPane player1;
-    @FXML
-    private PlayerController player1Controller;
-    @FXML
-    private AnchorPane player2;
-    @FXML
-    private PlayerController player2Controller;
-    @FXML
-    private Button flipPlayer;
-    @FXML
-    private CheckBox saveLocally;
-    @FXML
-    private Button saveButton;
-    @FXML
-    private Button fromFile;
-    @FXML
-    private Menu menuCopy;
-    @FXML
-    private Menu menuEdit;
-    @FXML
-    private Menu menuDelete;
-
     private static Stage stage;
-
+    private @FXML AnchorPane tournaments;
+    private @FXML TournamentsController tournamentsController;
+    private @FXML TextField round;
+    private @FXML TextField date;
+    private @FXML ComboBox<SmashUltimateFighterArtType> artTypeComboBox;
+    private @FXML ComboBox<Game> gameComboBox;
+    private @FXML AnchorPane player1;
+    private @FXML PlayerController player1Controller;
+    private @FXML AnchorPane player2;
+    private @FXML PlayerController player2Controller;
+    private @FXML Button flipPlayer;
+    private @FXML CheckBox saveLocally;
+    private @FXML Button saveButton;
+    private @FXML Button fromFile;
+    private @FXML Menu menuCopy;
+    private @FXML Menu menuEdit;
+    private @FXML Menu menuDelete;
     private @Autowired ThumbnailService thumbnailService;
-    private @Autowired ThumbnailFromFileService thumbnailFromFileService;
     private @Autowired Top8ServiceFromFile top8ServiceFromFile;
     private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
 
@@ -198,12 +179,13 @@ public class ThumbnailGeneratorController implements Initializable {
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
             try {
-                thumbnailFromFileService
-                        .generateFromFile(selectedFile, saveLocally.isSelected());
+                var inputStream = new FileInputStream(selectedFile);
+                thumbnailService
+                        .generateAndSaveThumbnailsFromFile(inputStream, saveLocally.isSelected());
                 AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
             }catch(ThumbnailFromFileException e){
                 //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
-            }catch(FontNotFoundException e){
+            }catch(FontNotFoundException | FighterImageSettingsNotFoundException | FileNotFoundException e) {
                 AlertFactory.displayError(e.getMessage());
             }
         }

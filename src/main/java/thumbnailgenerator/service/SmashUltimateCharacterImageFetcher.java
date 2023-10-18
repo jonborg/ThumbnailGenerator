@@ -3,11 +3,9 @@ package thumbnailgenerator.service;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
-import thumbnailgenerator.dto.GraphicGenerated;
+import thumbnailgenerator.dto.GeneratedGraphic;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 
 @Service
@@ -21,10 +19,10 @@ public class SmashUltimateCharacterImageFetcher extends CharacterImageFetcher {
 
 
     @Override
-    URL getOnlineUrl(Fighter fighter, GraphicGenerated graphicGenerated)
+    URL getOnlineUrl(Fighter fighter, GeneratedGraphic generatedGraphic)
             throws MalformedURLException {
         String urlString;
-        switch (graphicGenerated.getArtType()) {
+        switch (generatedGraphic.getArtType()) {
             case MURAL:
                 urlString = MURAL_URL + fighter.getUrlName() + "/" + fighter.getAlt() + ".png";
                 break;

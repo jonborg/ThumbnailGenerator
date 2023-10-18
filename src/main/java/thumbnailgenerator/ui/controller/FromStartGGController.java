@@ -3,6 +3,7 @@ package thumbnailgenerator.ui.controller;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import java.awt.Desktop;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -29,10 +30,11 @@ import thumbnailgenerator.dto.startgg.tournament.EventGG;
 import thumbnailgenerator.dto.startgg.tournament.PhaseGG;
 import thumbnailgenerator.dto.startgg.tournament.PhaseGroupNodeGG;
 import thumbnailgenerator.dto.startgg.tournament.TournamentGG;
+import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.service.QueryUtils;
-import thumbnailgenerator.service.ThumbnailFromFileService;
+import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.json.JSONReader;
@@ -62,7 +64,7 @@ public class FromStartGGController implements Initializable {
     @FXML
     private CheckBox saveLocally;
     private Tournament backupTournament;
-    private @Autowired ThumbnailFromFileService thumbnailFromFileService;
+    private @Autowired ThumbnailService thumbnailService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -198,7 +200,7 @@ public class FromStartGGController implements Initializable {
             return;
         }
         try {
-            thumbnailFromFileService
+            thumbnailService
                     .generateFromSmashGG(foundSets.getText(), saveLocally.isSelected());
             LOGGER.info("Thumbnails were successfully generated and saved.");
             AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
@@ -206,6 +208,8 @@ public class FromStartGGController implements Initializable {
             //AlertFactory already thrown inside ThumbnailFromFile.generateFromSmashGG
         }catch(FontNotFoundException e){
             AlertFactory.displayError(e.getMessage());
+        } catch (FileNotFoundException | FighterImageSettingsNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

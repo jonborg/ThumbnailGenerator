@@ -21,11 +21,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.exception.FontNotFoundException;
 
-public class TextToImage {
-    private static final Logger LOGGER = LogManager.getLogger(TextToImage.class);
+@Service
+public class TextService {
+    private static final Logger LOGGER = LogManager.getLogger(TextService.class);
 
     private static int WIDTH = 640;
     private static int HEIGHT = 110;
@@ -34,7 +36,7 @@ public class TextToImage {
     private static Font font;
     private static boolean top;
 
-    public static BufferedImage convert(String text, TextSettings settings, boolean topText) throws
+    public BufferedImage convert(String text, TextSettings settings, boolean topText) throws
             FontNotFoundException {
         textSettings = settings;
         top=topText;
@@ -52,14 +54,14 @@ public class TextToImage {
     }
 
 
-    private static BufferedImage generateText(String text, Color color, int fontSize) throws FontNotFoundException {
+    private BufferedImage generateText(String text, Color color, int fontSize) throws FontNotFoundException {
         if (color.equals(Color.BLACK)){
             LOGGER.debug("Loading font {} for text {}", textSettings.getFont(), text);
         } else {
             LOGGER.debug("Loading font {} for text {}'s shadow", textSettings.getFont(), text);
         }
         try {
-            InputStream fontFile = TextToImage.class.getResourceAsStream("/fonts/" + textSettings.getFont() + ".ttf");
+            InputStream fontFile = TextService.class.getResourceAsStream("/fonts/" + textSettings.getFont() + ".ttf");
             if (!textSettings.isBold() && textSettings.isItalic())
                 font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.ITALIC, fontSize);
             else if (textSettings.isBold() && !textSettings.isItalic())
@@ -116,7 +118,7 @@ public class TextToImage {
         return rotateText(rect);
     }
 
-    private static BufferedImage blurText(BufferedImage rect, String text,Graphics2D graphics, int x, int y){
+    private BufferedImage blurText(BufferedImage rect, String text,Graphics2D graphics, int x, int y){
 
         graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.3f));
         graphics.drawString(text, x, y);
@@ -132,7 +134,7 @@ public class TextToImage {
         return rotateText(image);
     }
 
-    private static BufferedImage rotateText(BufferedImage rect){
+    private BufferedImage rotateText(BufferedImage rect){
         BufferedImage finalRect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         double rotationRequired = Math.toRadians (top ? textSettings.getAngleTop() : textSettings.getAngleBottom());
         double locationX = finalRect.getWidth() / 2;
@@ -144,7 +146,7 @@ public class TextToImage {
         return finalRect;
     }
 
-    private static  void drawOutline(Graphics2D graphics, String text, int x, int y){
+    private void drawOutline(Graphics2D graphics, String text, int x, int y){
         GlyphVector gv = font.createGlyphVector(graphics.getFontRenderContext(), text);
         Shape shape = gv.getOutline();
         graphics.setColor(Color.black);
