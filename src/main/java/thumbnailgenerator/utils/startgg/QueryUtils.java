@@ -1,43 +1,10 @@
-package thumbnailgenerator.service;
+package thumbnailgenerator.utils.startgg;
 
-import com.github.gpluscb.ggjava.api.GGClient;
-import com.github.gpluscb.ggjava.api.RateLimiter;
-import com.google.gson.JsonObject;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.codehaus.plexus.util.ExceptionUtils;
-import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
 public class QueryUtils {
     private static final Logger LOGGER = LogManager.getLogger(QueryUtils.class);
-
-    private static GGClient client;
-
-    public static void initClient(String authToken){
-        client = GGClient.builder(authToken)
-                .limiter(RateLimiter.bucketBuilder().tasksPerPeriod(70).period(60000L).build()).build();
-    }
-
-    public static void closeClient(){
-        if (client != null && !client.isShutDown()) {
-            client.shutdown();
-        }
-    }
-
-    public static JsonObject runQuery(String query) throws ExecutionException, InterruptedException {
-        CompletableFuture<JsonObject> future = client.request(query);
-        future.exceptionally(t -> {
-            LOGGER.error("An issue has occurred when trying to use Start.gg API");
-            LOGGER.catching(t);
-            AlertFactory.displayError("An issue has occurred when trying to use Start.gg API",
-                    ExceptionUtils.getStackTrace(t));
-            return null;
-        });
-
-        return future.get();
-    }
 
     public static String tournamentDetailsQuery(String tournamentURL){
         String[] urlSplit = tournamentURL.split("/");
@@ -77,7 +44,6 @@ public class QueryUtils {
                 matchDetailsSubQuery() +
                 "}";
     }
-
 
     private static String matchDetailsSubQuery(){
         return "nodes { fullRoundText " +

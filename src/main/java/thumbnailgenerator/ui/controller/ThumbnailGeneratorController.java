@@ -44,7 +44,8 @@ import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.factory.CharacterImageFetcherFactory;
-import thumbnailgenerator.service.QueryUtils;
+import thumbnailgenerator.service.StartGGService;
+import thumbnailgenerator.utils.startgg.QueryUtils;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.Top8Service;
@@ -79,6 +80,7 @@ public class ThumbnailGeneratorController implements Initializable {
     private @Autowired ThumbnailService thumbnailService;
     private @Autowired Top8Service top8Service;
     private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
+    private @Autowired StartGGService startGGService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -193,7 +195,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public void createFromSmashGG(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/fxml/fromStartGG.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("thumbnailgenerator/ui/fxml/fromStartGG.fxml"));
             Parent root = loader.load();
             root.setOnMousePressed(e -> root.requestFocus());
             FromStartGGController controller = loader.getController();
@@ -202,7 +204,7 @@ public class ThumbnailGeneratorController implements Initializable {
             stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
             stage.setScene(new Scene(root));
             stage.setOnHidden(e -> {
-                QueryUtils.closeClient();
+                startGGService.closeClient();
                 TournamentUtils.setSelectedTournament(controller.getBackupTournament());});
             stage.show();
         } catch (IOException e) {
@@ -217,7 +219,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public void createNewTournament(ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsCreate.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("thumbnailgenerator/ui/fxml/tournamentsCreate.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Create New Tournament");
             stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
@@ -245,7 +247,7 @@ public class ThumbnailGeneratorController implements Initializable {
                 setSelectedEdit(tournament);
                 try {
                     LOGGER.info("Selected tournament {} for editing.", tournament.getName());
-                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsEdit.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("thumbnailgenerator/ui/fxml/tournamentsEdit.fxml"));
                     Stage stage = new Stage();
                     stage.setTitle("Edit Tournament " + tournament.getName());
                     stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));

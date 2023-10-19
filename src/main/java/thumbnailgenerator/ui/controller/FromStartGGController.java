@@ -18,14 +18,15 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.dto.startgg.match.SetGG;
 import thumbnailgenerator.dto.startgg.match.StreamGG;
+import thumbnailgenerator.dto.startgg.search.SearchGamesGG;
 import thumbnailgenerator.dto.startgg.tournament.EventGG;
 import thumbnailgenerator.dto.startgg.tournament.PhaseGG;
 import thumbnailgenerator.dto.startgg.tournament.PhaseGroupNodeGG;
@@ -33,7 +34,8 @@ import thumbnailgenerator.dto.startgg.tournament.TournamentGG;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
-import thumbnailgenerator.service.QueryUtils;
+import thumbnailgenerator.service.StartGGService;
+import thumbnailgenerator.utils.startgg.QueryUtils;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
@@ -65,6 +67,7 @@ public class FromStartGGController implements Initializable {
     private CheckBox saveLocally;
     private Tournament backupTournament;
     private @Autowired ThumbnailService thumbnailService;
+    private @Autowired StartGGService startGGService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,7 +93,7 @@ public class FromStartGGController implements Initializable {
         }
         try {
             LOGGER.debug("Loading provided authorization token.");
-            QueryUtils.initClient(authToken.getText());
+            startGGService.initClient(authToken.getText());
         }catch (IllegalArgumentException e){
             LOGGER.error("Could not connect to Start.gg due to a authorization token issue.");
             LOGGER.catching(e);
@@ -126,7 +129,9 @@ public class FromStartGGController implements Initializable {
 
         String query;
         String mainBody;
-        String eventName = eventSelect.getSelectionModel().getSelectedItem().getName();
+        var eventName = eventSelect.getSelectionModel().getSelectedItem().getName();
+        StringBuilder result = new StringBuilder();
+
         try{
             do{
                 switch (mode) {
@@ -150,33 +155,15 @@ public class FromStartGGController implements Initializable {
                     default:
                         return;
                 }
-                LOGGER.debug("Running query -> {}", query);
-                JsonObject result = QueryUtils.runQuery(query);
-                LOGGER.debug("Result -> {}", result.toString());
-
-                if (totalPages < 0){
-                    totalPages = result.getAsJsonObject("data").getAsJsonObject(mainBody).getAsJsonObject("sets")
-                            .getAsJsonObject("pageInfo").getAsJsonPrimitive("totalPages").getAsInt();
-                    foundSets.setText(TournamentUtils.getSelectedTournament().getTournamentId() + ";" + eventName + ";RENDER"+ System.lineSeparator());
-                }
-                SetGG set = (SetGG) JSONReader
-                        .getJSONObject(result.getAsJsonObject("data").getAsJsonObject(mainBody)
-                        .getAsJsonObject("sets").toString(), new TypeToken<SetGG>() {}.getType());
-                set.getSetNodes().forEach(setNodeGG -> {
-                    if(setNodeGG.hasStream()) {
-                        StreamGG selectedStream = streamSelect.getSelectionModel().getSelectedItem();
-                        if(selectedStream == null || selectedStream.isNull()) {
-                            LOGGER.debug("Found set -> {}", setNodeGG.toString());
-                            foundSets.appendText(setNodeGG.toString()+System.lineSeparator());
-                        } else {
-                            LOGGER.info("Filtering sets by stream {}.", selectedStream.getStreamName());
-                            if(selectedStream.getStreamName().equals(setNodeGG.getStreamName())){
-                                LOGGER.debug("Found set -> {}", setNodeGG.toString());
-                                foundSets.appendText(setNodeGG.toString()+System.lineSeparator());
-                            }
-                        }
-                    }
-                });
+                var selectedStream = streamSelect.getSelectionModel().getSelectedItem();
+                var searchGamesGG = SearchGamesGG.builder()
+                                                 .query(query)
+                                                 .eventName(eventName)
+                                                 .searchMode(mainBody)
+                                                 .stream(selectedStream)
+                                                 .build();
+                result.append(startGGService
+                        .readSetsFromSmashGGPage(searchGamesGG, totalPages));
             }while(readPages<totalPages);
             setDisableGeneration(false);
             LOGGER.info("Finished generating multiple thumbnails generation commands.");
@@ -188,7 +175,7 @@ public class FromStartGGController implements Initializable {
                     ExceptionUtils.getStackTrace(e));
             return;
         }finally {
-            QueryUtils.closeClient();
+            startGGService.closeClient();
         }
     }
 
@@ -295,10 +282,10 @@ public class FromStartGGController implements Initializable {
         resetComboBoxes(false);
         try {
             LOGGER.debug("Loading provided authorization token.");
-            QueryUtils.initClient(authToken.getText());
+            startGGService.initClient(authToken.getText());
             LOGGER.info("Loading tournament details from Start.gg.");
             LOGGER.debug("Running query -> {}", QueryUtils.tournamentDetailsQuery(tournamentURL.getText()));
-            JsonObject result = QueryUtils.runQuery(QueryUtils.tournamentDetailsQuery(tournamentURL.getText()));
+            JsonObject result = startGGService.runQuery(QueryUtils.tournamentDetailsQuery(tournamentURL.getText()));
             LOGGER.debug("Result -> {}", result.toString());
 
             TournamentGG tournamentGG = (TournamentGG) JSONReader.getJSONObject(result.get("data")
@@ -331,7 +318,7 @@ public class FromStartGGController implements Initializable {
             genText.setDisable(true);
             return;
         }finally {
-            QueryUtils.closeClient();
+            startGGService.closeClient();
         }
     }
 
