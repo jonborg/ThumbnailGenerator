@@ -19,6 +19,10 @@ public class Thumbnail extends GeneratedGraphic {
     private String date;
     private List<Player> players;
     private SmashUltimateFighterArtType artType;
+
+    public FileThumbnailSettings getFileThumbnailSettings(){
+        return getTournament().getThumbnailSettingsByGame(getGame());
+    }
 }
 
 

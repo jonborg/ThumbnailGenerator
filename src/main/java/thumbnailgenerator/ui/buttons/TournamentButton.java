@@ -4,6 +4,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.Getter;
+import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Tournament;
 
 @Getter
@@ -45,10 +46,10 @@ public class TournamentButton extends ToggleButton {
     }
 
     public String getThumbnailForeground() {
-        return this.getTournament().getThumbnailSettings().getForeground();
+        return this.getTournament().getThumbnailSettingsByGame(Game.SSBU).getForeground();
     }
 
     public String getThumbnailBackground() {
-        return this.getTournament().getThumbnailSettings().getBackground();
+        return this.getTournament().getThumbnailSettingsByGame(Game.SSBU).getBackground();
     }
 }

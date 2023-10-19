@@ -22,15 +22,16 @@ public class Tournament implements Cloneable{
     private String image;
     @Expose
     @SerializedName("thumbnailSettings")
-    private FileThumbnailSettings thumbnailSettings;
+    private List<FileThumbnailSettings> thumbnailSettings;
     @Expose
     @SerializedName("top8Settings")
-    private FileTop8Settings top8Settings;
+    private List<FileTop8Settings> top8Settings;
 
     public Tournament(String id, String name, String image,
                       String foreground, String background,
                       List<FighterArtSettings> artTypeDir,
-                      FileThumbnailSettings thumbnailSettings, FileTop8Settings top8Settings){
+                      List<FileThumbnailSettings> thumbnailSettings,
+                      List<FileTop8Settings> top8Settings){
         this.tournamentId = id;
         this.name = name;
         this.image = image;
@@ -71,5 +72,13 @@ public class Tournament implements Cloneable{
             equal = false;
         }
         return equal;
+    }
+
+    public FileThumbnailSettings getThumbnailSettingsByGame(Game game){
+        return thumbnailSettings.stream().filter(ts -> game.equals(ts.getGame())).findFirst().get();
+    }
+
+    public FileTop8Settings getTop8SettingsByGame(Game game){
+        return top8Settings.stream().filter(ts -> game.equals(ts.getGame())).findFirst().get();
     }
 }

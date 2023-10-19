@@ -1,4 +1,4 @@
-weeklyl;SMASH_ULTIMATE
+weeklyl;SSBU
 pokemon_trainer;6
 kazuya;6
 roy;3;donkey_kong;1

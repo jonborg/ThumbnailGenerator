@@ -1,4 +1,4 @@
-invicta;SMASH_ULTIMATE
+invicta;SSBU
 cloud;2
 cloud;4
 cloud;6

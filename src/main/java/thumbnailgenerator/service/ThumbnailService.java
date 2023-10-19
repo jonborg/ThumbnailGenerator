@@ -108,21 +108,22 @@ public class ThumbnailService {
         LOGGER.debug("*********************************************************************************************");
 
         var result = new BufferedImage(thumbnailWidth, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
+        var thumbnailSettings = thumbnail.getFileThumbnailSettings();
         var g2d = result.createGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-        LOGGER.info("Drawing background in path {}.", thumbnail.getTournament().getThumbnailSettings().getBackground());
-        imageService.drawImageFromPathFile(thumbnail.getTournament().getThumbnailSettings().getBackground(), g2d);
+        LOGGER.info("Drawing background in path {}.", thumbnail.getFileThumbnailSettings().getBackground());
+        imageService.drawImageFromPathFile(thumbnail.getFileThumbnailSettings().getBackground(), g2d);
 
         this.drawCharacters(thumbnail, g2d);
 
-        LOGGER.info("Drawing foreground in path {}.", thumbnail.getTournament().getThumbnailSettings().getForeground());
-        imageService.drawImageFromPathFile(thumbnail.getTournament().getThumbnailSettings().getForeground(), g2d);
+        LOGGER.info("Drawing foreground in path {}.", thumbnail.getFileThumbnailSettings().getForeground());
+        imageService.drawImageFromPathFile(thumbnail.getFileThumbnailSettings().getForeground(), g2d);
 
         LOGGER.info("Drawing thumbnail text");
         LOGGER.debug("Loading {} text settings: {}", thumbnail.getTournament().getName(),
-                thumbnail.getTournament().getThumbnailSettings().getTextSettings());
+                thumbnail.getFileThumbnailSettings().getTextSettings());
         this.drawText(thumbnail, g2d);
 
         return result;
@@ -149,19 +150,19 @@ public class ThumbnailService {
         }
     }
 
-    public BufferedImage generatePreview(Tournament tournament, SmashUltimateFighterArtType artType)
+    public BufferedImage generatePreview(Tournament tournament, Game game, SmashUltimateFighterArtType artType)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException,
             MalformedURLException {
         LOGGER.info("Generating thumbnail preview.");
         List<Player> players = Player.generatePreviewPlayers();
         ImageSettings imageSettings = (ImageSettings)
-                JSONReader.getJSONArrayFromFile(tournament.getThumbnailSettings()
+                JSONReader.getJSONArrayFromFile(tournament.getThumbnailSettingsByGame(game)
                                 .getFighterImageSettingsFile(artType),
                         new TypeToken<ArrayList<ImageSettings>>() {}.getType()).get(0);
         return generateThumbnail(Thumbnail.builder()
                 .tournament(tournament)
-                .game(Game.SMASH_ULTIMATE)
+                .game(game)
                 .imageSettings(imageSettings)
                 .locally(false)
                 .round("Pools Round 1")
@@ -209,22 +210,16 @@ public class ThumbnailService {
     private void drawText(Thumbnail thumbnail, Graphics2D g2d)
             throws FontNotFoundException {
         g2d.drawImage(textService.convert(thumbnail.getPlayers().get(0).getPlayerName(),
-                thumbnail.getTournament().getThumbnailSettings().getTextSettings(), true),
-                0, thumbnail.getTournament().getThumbnailSettings()
-                        .getTextSettings().getDownOffsetTop()[0], null);
+                thumbnail.getFileThumbnailSettings().getTextSettings(), true),
+                0, thumbnail.getFileThumbnailSettings().getTextSettings().getDownOffsetTop()[0], null);
         g2d.drawImage(textService.convert(thumbnail.getPlayers().get(1).getPlayerName(),
-                thumbnail.getTournament().getThumbnailSettings().getTextSettings(), true),
-                thumbnailWidth / 2,  thumbnail.getTournament().getThumbnailSettings()
-                        .getTextSettings().getDownOffsetTop()[1], null);
+                thumbnail.getFileThumbnailSettings().getTextSettings(), true),
+                thumbnailWidth / 2,  thumbnail.getFileThumbnailSettings().getTextSettings().getDownOffsetTop()[1], null);
 
-        g2d.drawImage(textService.convert(thumbnail.getRound(), thumbnail.getTournament()
-                        .getThumbnailSettings().getTextSettings(), false),
-                0, thumbnailHeight - 100 + thumbnail.getTournament().getThumbnailSettings()
-                        .getTextSettings().getDownOffsetBottom()[0], null);
-        g2d.drawImage(textService.convert(thumbnail.getDate(), thumbnail.getTournament()
-                        .getThumbnailSettings().getTextSettings(), false),
-                thumbnailWidth / 2, thumbnailHeight - 100 + thumbnail.getTournament().getThumbnailSettings()
-                        .getTextSettings().getDownOffsetBottom()[1], null);
+        g2d.drawImage(textService.convert(thumbnail.getRound(), thumbnail.getFileThumbnailSettings().getTextSettings(), false),
+                0, thumbnailHeight - 100 + thumbnail.getFileThumbnailSettings().getTextSettings().getDownOffsetBottom()[0], null);
+        g2d.drawImage(textService.convert(thumbnail.getDate(), thumbnail.getFileThumbnailSettings().getTextSettings(), false),
+                thumbnailWidth / 2, thumbnailHeight - 100 + thumbnail.getFileThumbnailSettings().getTextSettings().getDownOffsetBottom()[1], null);
     }
 }
 

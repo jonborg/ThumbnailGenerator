@@ -47,7 +47,7 @@ public class ChosenImageField extends StackPane {
         var buttonSideLength = 25;
         button = new Button();
 
-        button.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/ui/images/folder.png"))));
+        button.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/thumbnailgenerator/ui/images/folder.png"))));
         button.setMinWidth(buttonSideLength);
         button.setPrefWidth(buttonSideLength);
         button.setMaxWidth(buttonSideLength);

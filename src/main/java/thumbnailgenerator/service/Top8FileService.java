@@ -39,7 +39,7 @@ public class Top8FileService extends FileService<Top8, Player>{
     @Override
     protected Top8 initializeGeneratedGraphic(List<String> parameters) {
         var top8 = super.initializeGeneratedGraphic(parameters);
-        if (Game.SMASH_ULTIMATE.equals(top8.getGame())) {
+        if (Game.SSBU.equals(top8.getGame())) {
             if (parameters.size() > 2
                     && !parameters.get(2).isEmpty()) {
                 top8.setArtType(SmashUltimateFighterArtType

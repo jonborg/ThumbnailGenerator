@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
 import org.springframework.stereotype.Controller;
+import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
@@ -23,12 +24,13 @@ public class TournamentsEditController extends TournamentsCreateController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         var tournament = getSelectedEdit();
-        var thumbnailRenderSettings = tournament.getThumbnailSettings()
+        var thumbnailRenderSettings = tournament.getThumbnailSettingsByGame(Game.SSBU)
                 .getFighterImageSettingsFile(SmashUltimateFighterArtType.RENDER);
-        var top8RenderSettings = tournament.getTop8Settings()
+        var top8RenderSettings = tournament.getTop8SettingsByGame(Game.SSBU)
                 .getFighterImageSettingsFile(SmashUltimateFighterArtType.RENDER);
         LOGGER.info("Editing tournament -> {}", tournament.toString());
 
+        initGamesDropdown(tournament);
         initNumberTextFields();
         initFontDropdown();
         initFighterArtTypeDropdown(thumbnailRenderSettings);
@@ -36,27 +38,27 @@ public class TournamentsEditController extends TournamentsCreateController {
         id.setText(tournament.getTournamentId());
         name.setText(tournament.getName());
         logo.setText(tournament.getImage());
-        foreground.setText(tournament.getThumbnailSettings().getForeground());
-        background.setText(tournament.getThumbnailSettings().getBackground());
+        foreground.setText(tournament.getThumbnailSettingsByGame(Game.SSBU).getForeground());
+        background.setText(tournament.getThumbnailSettingsByGame(Game.SSBU).getBackground());
         fighterImageSettingsFile.setText(thumbnailRenderSettings);
-        if(tournament.getThumbnailSettings().getArtTypeDir() != null
-                && !tournament.getThumbnailSettings().getArtTypeDir().isEmpty()) {
+        if(tournament.getThumbnailSettingsByGame(Game.SSBU).getArtTypeDir() != null
+                && !tournament.getThumbnailSettingsByGame(Game.SSBU).getArtTypeDir().isEmpty()) {
             artTypeDir = new ArrayList<>();
-            tournament.getThumbnailSettings()
+            tournament.getThumbnailSettingsByGame(Game.SSBU)
                     .getArtTypeDir().forEach(dir -> artTypeDir.add(dir.clone()));
         }
-        foregroundTop8.setText(tournament.getTop8Settings().getForeground());
-        backgroundTop8.setText(tournament.getTop8Settings().getBackground());
-        slotSettingsFileTop8.setText(tournament.getTop8Settings().getSlotSettingsFile());
+        foregroundTop8.setText(tournament.getTop8SettingsByGame(Game.SSBU).getForeground());
+        backgroundTop8.setText(tournament.getTop8SettingsByGame(Game.SSBU).getBackground());
+        slotSettingsFileTop8.setText(tournament.getTop8SettingsByGame(Game.SSBU).getSlotSettingsFile());
         fighterImageSettingsFileTop8.setText(top8RenderSettings);
-        if(tournament.getTop8Settings().getArtTypeDir() != null
-                && !tournament.getTop8Settings().getArtTypeDir().isEmpty()) {
+        if(tournament.getTop8SettingsByGame(Game.SSBU).getArtTypeDir() != null
+                && !tournament.getTop8SettingsByGame(Game.SSBU).getArtTypeDir().isEmpty()) {
             artTypeDirTop8 = new ArrayList<>();
-            tournament.getTop8Settings()
+            tournament.getTop8SettingsByGame(Game.SSBU)
                     .getArtTypeDir().forEach(dir -> artTypeDirTop8.add(dir.clone()));
         }
 
-        TextSettings textSettings = tournament.getThumbnailSettings().getTextSettings();
+        TextSettings textSettings = tournament.getThumbnailSettingsByGame(Game.SSBU).getTextSettings();
         try {
             font.getSelectionModel().select(textSettings.getFont());
             sizeTop.setText(String.valueOf(textSettings.getSizeTop()));
