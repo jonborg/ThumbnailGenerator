@@ -1,4 +1,4 @@
-invicta;RENDER
+invicta;SMASH_ULTIMATE
 sora;2
 steve;1
 snake;3

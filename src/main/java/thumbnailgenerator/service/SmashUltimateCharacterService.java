@@ -1,28 +1,12 @@
-package thumbnailgenerator.dto;
+package thumbnailgenerator.service;
 
-import java.awt.image.BufferedImage;
-import lombok.Getter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
+import thumbnailgenerator.dto.Fighter;
 
-@Getter
-public abstract class FighterImage {
-    private final Logger LOGGER = LogManager.getLogger(FighterImage.class);
+@Service
+public class SmashUltimateCharacterService {
 
-    protected Fighter fighter;
-    protected FighterImageSettings fighterImageSettings;
-    protected BufferedImage image;
-
-
-    public FighterImage(Fighter fighter, FighterImageSettings slotImageSettings, BufferedImage image){
-        this.fighter = fighter;
-        this.fighterImageSettings = slotImageSettings;
-        this.image = image;
-    }
-
-    protected abstract BufferedImage editImage(BufferedImage bufferedImage);
-
-    static public void convertToAlternateRender(Fighter fighter){
+    public void convertToAlternateRender(Fighter fighter){
         if (fighter.getUrlName() != null){
             switch(fighter.getUrlName().toLowerCase()){
                 case "ike":
@@ -67,4 +51,5 @@ public abstract class FighterImage {
             }
         }
     }
+
 }
