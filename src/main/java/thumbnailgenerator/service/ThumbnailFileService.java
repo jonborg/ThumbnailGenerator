@@ -15,16 +15,14 @@ import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Round;
 import thumbnailgenerator.dto.Thumbnail;
-import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
-import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.json.JSONReader;
 
 @Service
 public class ThumbnailFileService extends FileService<Thumbnail, Round> {
 
-    private static final Logger LOGGER = LogManager.getLogger(ThumbnailService.class);
+    private static final Logger LOGGER = LogManager.getLogger(ThumbnailFileService.class);
 
     public List<Thumbnail> getListThumbnailsFromFile(InputStream inputStream, Boolean saveLocally)
             throws FighterImageSettingsNotFoundException {
@@ -55,25 +53,14 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
     }
 
     @Override
-    protected Thumbnail initializeGeneratedGraphic(List<String> parameters) {
-        var thumbnail = Thumbnail.builder().build();
+    protected Thumbnail createEmptyGeneratedGraphic() {
+        return Thumbnail.builder().build();
+    }
 
-        for (Tournament t : TournamentUtils.getTournamentsList()) {
-            if (t.getTournamentId().equals(parameters.get(0))) {
-                LOGGER.info("Selected tournament {}", t.getName());
-                thumbnail.setTournament(t);
-                break;
-            }
-        }
-        if (thumbnail == null) {
-            LOGGER.error("Could not find tournament with id {}.",
-                    parameters.get(0));
-            AlertFactory.displayError("Could not find tournament with id '{}'",
-                    parameters.get(0));
-            return null;
-        }
-        thumbnail.setDate(parameters.get(1));
-        thumbnail.setGame(Game.valueOf(parameters.get(2).toUpperCase()));
+    @Override
+    protected Thumbnail initializeGeneratedGraphic(List<String> parameters) {
+        var thumbnail = super.initializeGeneratedGraphic(parameters);
+        thumbnail.setDate(parameters.get(2));
         if (Game.SMASH_ULTIMATE.equals(thumbnail.getGame())) {
             if (parameters.size() > 3
                     && !parameters.get(3).isEmpty()) {

@@ -16,6 +16,9 @@ public class ImageService {
 
     public void drawImageFromPathFile(String pathname, Graphics2D g2d) throws
             LocalImageNotFoundException {
+        if (pathname == null || pathname.isEmpty()){
+            return;
+        }
         try {
             g2d.drawImage(ImageIO.read(new FileInputStream(pathname)), 0, 0, null);
         } catch (IOException | NullPointerException e) {
