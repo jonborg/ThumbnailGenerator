@@ -35,6 +35,12 @@
                             </VBox>
                         </VBox>
                     </TitledPane>
+                    <Pane>
+                        <VBox>
+                            <Label text="Select game to edit:"/>
+                            <ComboBox fx:id="gameComboBox" styleClass="textfield"/>
+                        </VBox>
+                    </Pane>
                     <TitledPane text="Thumbnail Image Directories" collapsible="false" styleClass="settingsBox">
                         <VBox spacing="15">
                             <VBox>

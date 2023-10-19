@@ -17,5 +17,8 @@ public class Top8 extends GeneratedGraphic {
     private List<Player> players;
     private SmashUltimateFighterArtType artType;
 
+    public FileTop8Settings getFileTop8Settings(){
+        return getTournament().getTop8SettingsByGame(getGame());
+    }
 }
 

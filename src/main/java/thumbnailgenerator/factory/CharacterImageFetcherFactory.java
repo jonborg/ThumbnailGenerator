@@ -20,7 +20,7 @@ public class CharacterImageFetcherFactory {
         switch (game) {
             case SF6:
                 return streetFighter6CharacterImageFetcher;
-            case SMASH_ULTIMATE:
+            case SSBU:
                 return smashUltimateCharacterImageFetcher;
             default:
                 throw new IllegalArgumentException("Unsupported service type: " + game);

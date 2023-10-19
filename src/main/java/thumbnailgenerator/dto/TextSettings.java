@@ -83,7 +83,7 @@ public class TextSettings {
 
     public static List<TextSettings> getAllTextSettings(List<Tournament> tournamentList) {
         List<TextSettings> textSettingsList = new ArrayList<>();
-        tournamentList.forEach(tournament -> textSettingsList.add(tournament.getThumbnailSettings().getTextSettings()));
+        tournamentList.forEach(tournament -> textSettingsList.add(tournament.getThumbnailSettingsByGame(Game.SSBU).getTextSettings()));
         return textSettingsList;
     }
 

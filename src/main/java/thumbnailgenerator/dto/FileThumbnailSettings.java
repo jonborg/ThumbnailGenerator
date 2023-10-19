@@ -9,16 +9,16 @@ import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 @Getter
 @Setter
 @ToString
-public class FileThumbnailSettings extends Settings {
+public class FileThumbnailSettings extends Settings implements Cloneable{
 
     private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/default.json";
     private static String defaultMuralImageSettingsFile= "settings/thumbnails/images/defaultMural.json";
 
     private TextSettings textSettings;
 
-    public FileThumbnailSettings(String foreground, String background,
+    public FileThumbnailSettings(Game game, String foreground, String background,
                                  List<FighterArtSettings> artTypeDir, TextSettings textSettings){
-        super(foreground, background, artTypeDir);
+        super(game, foreground, background, artTypeDir);
         this.textSettings = textSettings;
         this.artTypeDir.forEach(dir -> {
             if(dir.getFighterImageSettingsPath() == null
@@ -56,5 +56,16 @@ public class FileThumbnailSettings extends Settings {
                 .findFirst()
                 .get()
                 .getFighterImageSettingsPath();
+    }
+
+    @Override
+    public FileThumbnailSettings clone() {
+        FileThumbnailSettings clone = null;
+        try {
+            clone = (FileThumbnailSettings) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return clone;
     }
 }

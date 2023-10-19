@@ -146,7 +146,7 @@ public class PlayerController implements Initializable {
             initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(StreetFighter6Enum.class));
             alt.setDisable(true);
         }
-        if (Game.SMASH_ULTIMATE.equals(game)) {
+        if (Game.SSBU.equals(game)) {
             initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(SmashUltimateEnum.class));
             alt.setDisable(false);
         }

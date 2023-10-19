@@ -31,7 +31,7 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
         var rootThumbnail = tuple.getValue0();
         var roundList = tuple.getValue1();
         var imageSettings = (ImageSettings) JSONReader.getJSONArrayFromFile(
-                rootThumbnail.getTournament().getThumbnailSettings()
+                rootThumbnail.getFileThumbnailSettings()
                         .getFighterImageSettingsFile(rootThumbnail.getArtType()),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
@@ -40,7 +40,7 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
             setPlayerFlip(round.getPlayers(), imageSettings);
             var thumbnail = Thumbnail.builder()
                                      .tournament(rootThumbnail.getTournament())
-                                     .game(Game.SMASH_ULTIMATE)
+                                     .game(rootThumbnail.getGame())
                                      .imageSettings(imageSettings)
                                      .locally(saveLocally)
                                      .round(round.getRoundName())
@@ -62,7 +62,7 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
     protected Thumbnail initializeGeneratedGraphic(List<String> parameters) {
         var thumbnail = super.initializeGeneratedGraphic(parameters);
         thumbnail.setDate(parameters.get(2));
-        if (Game.SMASH_ULTIMATE.equals(thumbnail.getGame())) {
+        if (Game.SSBU.equals(thumbnail.getGame())) {
             if (parameters.size() > 3
                     && !parameters.get(3).isEmpty()) {
                 thumbnail.setArtType(SmashUltimateFighterArtType

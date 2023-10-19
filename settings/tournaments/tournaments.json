@@ -1,95 +1,215 @@
 [
   {
+    "id": "invicta",
+    "name": "Smash Invicta",
+    "logo": "assets/tournaments/logos/invicta.png",
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "assets/tournaments/foregrounds/invicta.png",
+        "background": "assets/tournaments/backgrounds/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/invicta.png",
+        "background": "assets/tournaments/backgrounds/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "slotSettingsFile": "settings/top8/slot/icarus_slots.json",
+        "game": "SSBU",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/icarus.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "slotSettingsFile": "settings/top8/slot/icarus_slots.json",
+        "game": "SF6",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      }
+  },
+  {
     "id": "weeklyl",
     "name": "Weekly L",
     "logo": "assets/tournaments/logos/weeklyl.png",
-    "thumbnailSettings": {
-      "foreground": "",
-      "background": "assets/tournaments/backgrounds/thumbnail/default.png",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": "settings/thumbnails/images/default.json"
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-        }
-      ]
-    },
-    "top8Settings": {
-      "slotSettingsFile": "settings/top8/slot/locus_slots.json",
-      "foreground": "",
-      "background": "",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": "settings/top8/images/locus.json"
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": ""
-        }
-      ]
-    }
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "",
+        "background": "assets/tournaments/backgrounds/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
+        "game": "SSBU",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/locus.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "stier",
     "name": "S Tier",
     "logo": "assets/tournaments/logos/stier.png",
-    "thumbnailSettings": {
-      "foreground": "",
-      "background": "assets/tournaments/backgrounds/thumbnail/default.png",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": "settings/thumbnails/images/default.json"
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-        }
-      ]
-    },
-    "top8Settings": {
-      "slotSettingsFile": "",
-      "foreground": "",
-      "background": "",
-      "artSettings": []
-    }
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "",
+        "background": "assets/tournaments/backgrounds/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
+        "game": "SSBU",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/locus.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      }
+    ]
   },
   {
-    "id": "invicta",
-    "name": "Smash Invicta",
-    "logo": "assets/tournaments/logos/invicta.png",
-    "thumbnailSettings": {
-      "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
-      "background": "assets/tournaments/backgrounds/thumbnail/default.png",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": "settings/thumbnails/images/default.json"
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-        }
-      ]
-    },
-    "top8Settings": {
-      "slotSettingsFile": "settings/top8/slot/icarus_slots.json",
-      "foreground": "",
-      "background": "",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": "settings/top8/images/icarus.json"
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": ""
-        }
-      ]
-    }
+    "id": "crystal",
+    "name": "Crystal Weekly",
+    "logo": "assets/tournaments/logos/crystal.png",
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "",
+        "background": "assets/tournaments/backgrounds/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "slotSettingsFile": "",
+        "game": "SSBU",
+        "foreground": "",
+        "background": "",
+        "artSettings": []
+      }
+    ]
+  },
+  {
+    "id": "tryhard",
+    "name": "Try Hard Series",
+    "logo": "assets/tournaments/logos/tryhard.png",
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "",
+        "background": "assets/tournaments/backgrounds/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "slotSettingsFile": "settings/top8/slot/tryhard_slots.json",
+        "game": "SSBU",
+        "foreground": "",
+        "background": "assets/tournaments/backgrounds/top8/tryhardTop8.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/icarus.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      }
+    ]
   }
 ]

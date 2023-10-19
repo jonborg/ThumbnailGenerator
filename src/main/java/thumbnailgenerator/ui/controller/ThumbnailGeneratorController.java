@@ -45,7 +45,6 @@ import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.service.StartGGService;
-import thumbnailgenerator.utils.startgg.QueryUtils;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.Top8Service;
@@ -132,7 +131,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
         LOGGER.info("Loading image settings of tournament {} for game {}", getSelectedTournament().getName(), getGame());
         var imageSettings = (ImageSettings) JSONReader.getJSONArrayFromFile(
-                getSelectedTournament().getThumbnailSettings()
+                getSelectedTournament().getThumbnailSettingsByGame(getGame())
                         .getFighterImageSettingsFile(getFighterArtType()),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
@@ -274,7 +273,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
         gameComboBox.getItems().addAll(Game.values());
         gameComboBox.setConverter(new GameConverter());
-        gameComboBox.getSelectionModel().select(Game.SMASH_ULTIMATE);
+        gameComboBox.getSelectionModel().select(Game.SSBU);
         gameComboBox.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     player1Controller.updateGameData(newValue);

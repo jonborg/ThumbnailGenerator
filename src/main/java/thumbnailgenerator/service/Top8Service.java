@@ -62,8 +62,7 @@ public class Top8Service {
             throws IOException {
 
         var fullSlot = (FullSlot) JSONReader.getJSONObjectFromFile(
-                top8.getTournament()
-                        .getTop8Settings().getSlotSettingsFile(),
+                top8.getFileTop8Settings().getSlotSettingsFile(),
                 new TypeToken<FullSlot>() {}.getType());
 
         var result = new BufferedImage(fullSlot.getWidth(), fullSlot.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -72,13 +71,13 @@ public class Top8Service {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-        LOGGER.info("Drawing background in path {}.", top8.getTournament().getTop8Settings().getBackground());
-        imageService.drawImageFromPathFile(top8.getTournament().getTop8Settings().getBackground(), g2d);
+        LOGGER.info("Drawing background in path {}.", top8.getFileTop8Settings().getBackground());
+        imageService.drawImageFromPathFile(top8.getFileTop8Settings().getBackground(), g2d);
 
         this.drawCharacters(top8, fullSlot, g2d);
 
-        LOGGER.info("Drawing foreground in path {}.", top8.getTournament().getTop8Settings().getForeground());
-        imageService.drawImageFromPathFile(top8.getTournament().getTop8Settings().getForeground(), g2d);
+        LOGGER.info("Drawing foreground in path {}.", top8.getFileTop8Settings().getForeground());
+        imageService.drawImageFromPathFile(top8.getFileTop8Settings().getForeground(), g2d);
 
         var dir = new File("generated_top8/");
         if (!dir.exists()) dir.mkdir();
@@ -105,7 +104,7 @@ public class Top8Service {
                 smashUltimateCharacterService.convertToAlternateRender(player.getFighter(0));
 
                 Top8ImageSettings top8ImageSettings = (Top8ImageSettings)
-                        JSONReader.getJSONArrayFromFile(top8.getTournament().getTop8Settings()
+                        JSONReader.getJSONArrayFromFile(top8.getFileTop8Settings()
                                         .getFighterImageSettingsFile(top8.getArtType()),
                                 new TypeToken<ArrayList<Top8ImageSettings>>() {}.getType()).get(0);
 
@@ -152,7 +151,7 @@ public class Top8Service {
             AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
         }
         characterImage = imageService.flipImage(characterImage, player.getFighter(0).isFlip());
-        if (Game.SMASH_ULTIMATE.equals(game)) {
+        if (Game.SSBU.equals(game)) {
             characterImage = addAdditionalFighters(characterImage, playerSlot,
                     player.getSecondaryFighters());
         }

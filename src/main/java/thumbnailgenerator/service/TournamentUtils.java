@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.ui.controller.ThumbnailGeneratorController;
@@ -28,7 +29,7 @@ public class TournamentUtils {
         tournamentsList.forEach(tournament ->{
             var textSettings = TextSettings.loadTextSettings(tournament.getTournamentId());
             LOGGER.debug("{} -> {}.", tournament.getName(), textSettings);
-            tournament.getThumbnailSettings().setTextSettings(textSettings);
+            tournament.getThumbnailSettingsByGame(Game.SSBU).setTextSettings(textSettings);
         });
     }
 

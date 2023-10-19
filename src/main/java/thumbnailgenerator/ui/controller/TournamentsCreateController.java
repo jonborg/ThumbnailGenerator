@@ -34,10 +34,12 @@ import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.FighterArtSettings;
 import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.FileTop8Settings;
+import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.service.ThumbnailService;
+import thumbnailgenerator.utils.converter.GameConverter;
 import thumbnailgenerator.utils.converter.SmashUltimateFighterArtTypeConverter;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.combobox.InputFilter;
@@ -48,7 +50,8 @@ import thumbnailgenerator.ui.textfield.ChosenJsonField;
 @Controller
 public class TournamentsCreateController implements Initializable {
     private static final Logger LOGGER = LogManager.getLogger(TournamentsCreateController.class);
-
+    @FXML
+    protected ComboBox<Game> gameComboBox;
     @FXML
     protected TextField name;
     @FXML
@@ -107,14 +110,70 @@ public class TournamentsCreateController implements Initializable {
     protected ImageView preview;
     protected List<FighterArtSettings> artTypeDir = new ArrayList<>();
     protected List<FighterArtSettings> artTypeDirTop8 = new ArrayList<>();
+    protected List<FileThumbnailSettings> fileThumbnailSettingsList;
+    protected List<FileTop8Settings> fileTop8SettingsList;
     private @Autowired ThumbnailService thumbnailService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LOGGER.info("Creating new tournament.");
+        initGamesDropdown(null);
         initNumberTextFields();
         initFontDropdown();
         initFighterArtTypeDropdown(null);
+    }
+
+    private List<FighterArtSettings> initArtType(Game game){
+        List<FighterArtSettings> list = new ArrayList<>();
+        if (Game.SSBU.equals(game)) {
+            for (SmashUltimateFighterArtType artType : SmashUltimateFighterArtType
+                    .values()) {
+                list.add(FighterArtSettings.builder()
+                                            .artType(artType)
+                                            .fighterImageSettingsPath("")
+                                            .build());
+            }
+        } else {
+            list.add(FighterArtSettings.builder()
+                    .artType(SmashUltimateFighterArtType.RENDER)
+                    .fighterImageSettingsPath("")
+                    .build());
+        }
+        return list;
+    }
+
+    protected void initGamesDropdown(Tournament tournament){
+        gameComboBox.getItems().addAll(Game.values());
+        gameComboBox.setConverter(new GameConverter());
+        gameComboBox.getSelectionModel().select(Game.SSBU);
+        fileThumbnailSettingsList = new ArrayList<>();
+        fileTop8SettingsList = new ArrayList<>();
+        for (Game game: Game.values()) {
+            fileThumbnailSettingsList
+                    .add(new FileThumbnailSettings(game,
+                            "", "", initArtType(game), null));
+            fileTop8SettingsList
+                    .add(new FileTop8Settings(game,
+                            "", "", initArtType(game), null));
+        } if (tournament != null) {
+            for (FileThumbnailSettings settings : tournament.getThumbnailSettings()){
+                var settingToUpdate = fileThumbnailSettingsList.stream().filter(s -> s.getGame().equals(settings.getGame()));
+                fileThumbnailSettingsList.remove(settingToUpdate);
+                fileThumbnailSettingsList.add(settings.clone());
+            }
+            for (FileTop8Settings settings : tournament.getTop8Settings()){
+                var settingToUpdate = fileTop8SettingsList.stream().filter(s -> s.getGame().equals(settings.getGame()));
+                fileTop8SettingsList.remove(settingToUpdate);
+                fileTop8SettingsList.add(settings.clone());
+            }
+        }
+
+        gameComboBox.getSelectionModel().selectedItemProperty()
+                .addListener((options, oldValue, newValue) -> {
+                    cacheGeneratedGraphicSettings(oldValue);
+                    loadCachedGeneratedGraphicSettings(newValue);
+                });
+
     }
 
     protected void initNumberTextFields(){
@@ -239,7 +298,7 @@ public class TournamentsCreateController implements Initializable {
 
         try{
             BufferedImage previewImage = thumbnailService
-                    .generatePreview(tournament, artType.getSelectionModel().getSelectedItem());
+                    .generatePreview(tournament, Game.SSBU, artType.getSelectionModel().getSelectedItem());
             Image image = SwingFXUtils.toFXImage(previewImage, null);
             preview.setImage(image);
         }catch(Exception e){
@@ -277,14 +336,15 @@ public class TournamentsCreateController implements Initializable {
                 new int[]{Integer.parseInt(downOffsetTopLeft.getText()), Integer.parseInt(downOffsetTopRight.getText())},
                 new int[]{Integer.parseInt(downOffsetBottomLeft.getText()), Integer.parseInt(downOffsetBottomRight.getText())});
 
-        var thumbnailSettings = new FileThumbnailSettings(foreground.getText(),
-                background.getText(), artTypeDir, textSettings);
-        var top8Settings = new FileTop8Settings(foregroundTop8.getText(),
-                backgroundTop8.getText(), artTypeDirTop8, slotSettingsFileTop8.getText());
-        var tournament = new Tournament(id.getText(), name.getText(),
-                logo.getText(), thumbnailSettings, top8Settings);
+        cacheGeneratedGraphicSettings(gameComboBox.getSelectionModel().getSelectedItem());
+        var newFileThumbnailSettingsList = fileThumbnailSettingsList;
+        var newFileTop8SettingsList = fileTop8SettingsList;
+        for (FileThumbnailSettings settings : newFileThumbnailSettingsList){
+            settings.setTextSettings(textSettings);
+        }
 
-        return tournament;
+        return new Tournament(id.getText(), name.getText(),
+                logo.getText(), newFileThumbnailSettingsList, newFileTop8SettingsList);
     }
 
 
@@ -327,7 +387,61 @@ public class TournamentsCreateController implements Initializable {
         return missingParameters.toString();
     }
 
+    private void cacheGeneratedGraphicSettings(Game game){
+        var thumbnailSettings = fileThumbnailSettingsList.stream()
+                .filter(s -> game.equals(s.getGame()))
+                .findFirst()
+                .get();
+        thumbnailSettings.setBackground(background.getText());
+        thumbnailSettings.setForeground(foreground.getText());
+        thumbnailSettings.getArtTypeDir().stream()
+                .filter(a -> a.getArtType().equals(artType.getSelectionModel().getSelectedItem()))
+                .findFirst()
+                .get()
+                .setFighterImageSettingsPath(fighterImageSettingsFile.getText());
 
+        var top8Settings = fileTop8SettingsList.stream()
+                .filter(s -> game.equals(s.getGame()))
+                .findFirst()
+                .get();
+        top8Settings.setBackground(backgroundTop8.getText());
+        top8Settings.setForeground(foregroundTop8.getText());
+        top8Settings.setSlotSettingsFile(slotSettingsFileTop8.getText());
+        top8Settings.getArtTypeDir().stream()
+                .filter(a -> a.getArtType().equals(artTypeTop8.getSelectionModel().getSelectedItem()))
+                .findFirst()
+                .get()
+                .setFighterImageSettingsPath(fighterImageSettingsFileTop8.getText());
+    }
+
+    private void loadCachedGeneratedGraphicSettings(Game game){
+        var thumbnailSettings = fileThumbnailSettingsList.stream()
+                .filter(s -> game.equals(s.getGame()))
+                .findFirst()
+                .get();
+        background.setText(thumbnailSettings.getBackground());
+        foreground.setText(thumbnailSettings.getBackground());
+        artType.getSelectionModel().select(0);
+        fighterImageSettingsFile.setText(thumbnailSettings.getArtTypeDir().stream()
+                .filter(a -> a.getArtType().equals(artType.getSelectionModel().getSelectedItem()))
+                .findFirst()
+                .get()
+                .getFighterImageSettingsPath());
+
+        var top8Settings = fileTop8SettingsList.stream()
+                .filter(s -> game.equals(s.getGame()))
+                .findFirst()
+                .get();
+        backgroundTop8.setText(top8Settings.getBackground());
+        foregroundTop8.setText(top8Settings.getBackground());
+        slotSettingsFileTop8.setText(top8Settings.getSlotSettingsFile());
+        artTypeTop8.getSelectionModel().select(0);
+        fighterImageSettingsFileTop8.setText(top8Settings.getArtTypeDir().stream()
+                .filter(a -> a.getArtType().equals(artTypeTop8.getSelectionModel().getSelectedItem()))
+                .findFirst()
+                .get()
+                .getFighterImageSettingsPath());
+    }
 
     public void save(ActionEvent actionEvent) {
         LOGGER.info("Saving new tournament.");
