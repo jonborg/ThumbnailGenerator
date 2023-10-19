@@ -3,8 +3,11 @@ package thumbnailgenerator.service;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import javax.imageio.ImageIO;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
@@ -84,7 +87,11 @@ public abstract class CharacterImageFetcher {
         try {
             LOGGER.debug("Trying to find image online for alt {} of {}: {}",
                     fighter.getAlt(), fighter.getName(),url.getHost() + url.getPath());
-            return ImageIO.read(url);
+            HttpURLConnection connection = ((HttpURLConnection)url.openConnection());
+            connection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36");
+            InputStream input;
+            input = connection.getInputStream();
+            return ImageIO.read(input);
         }catch(IOException e){
             LOGGER.error("An issue occurred when finding image for alt {} of {}. URI: {}",
                     fighter.getAlt(), fighter.getName(), url);
