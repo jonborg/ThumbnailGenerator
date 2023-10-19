@@ -7,9 +7,9 @@ import java.util.List;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
-import thumbnailgenerator.dto.FighterImage;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
@@ -23,6 +23,7 @@ import thumbnailgenerator.utils.json.JSONReader;
 public class ThumbnailFileService extends FileService<Thumbnail, Round> {
 
     private static final Logger LOGGER = LogManager.getLogger(ThumbnailFileService.class);
+    private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
 
     public List<Thumbnail> getListThumbnailsFromFile(InputStream inputStream, Boolean saveLocally)
             throws FighterImageSettingsNotFoundException {
@@ -101,7 +102,7 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
             FighterImageSettingsNotFoundException {
         boolean result;
         String urlNameOriginal = fighter.getUrlName();
-        FighterImage.convertToAlternateRender(fighter);
+        smashUltimateCharacterService.convertToAlternateRender(fighter);
 
         result = imageSettings.findFighterImageSettings(fighter.getUrlName()).isFlip();
         fighter.setUrlName(urlNameOriginal);

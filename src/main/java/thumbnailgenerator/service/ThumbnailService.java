@@ -19,8 +19,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import thumbnailgenerator.dto.FighterImage;
-import thumbnailgenerator.dto.FighterImageThumbnail;
+import thumbnailgenerator.dto.FighterImageThumbnailSettings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
@@ -44,6 +43,7 @@ public class ThumbnailService {
     private @Autowired TextService textService;
     private @Autowired ImageService imageService;
     private @Autowired ThumbnailFileService thumbnailFileService;
+    private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
     private @Value("${thumbnail.size.width}") int thumbnailWidth;
     private @Value("${thumbnail.size.height}") int thumbnailHeight;
     private @Value("${thumbnail.path.save}") String saveThumbnailsPath;
@@ -181,21 +181,29 @@ public class ThumbnailService {
         for (Player player : thumbnail.getPlayers()) {
             port++;
             LOGGER.info("Drawing player {} information.", port);
-            var f = player.getFighter(0);
-            var characterImage = characterImageFetcher.getCharacterImage(f,
-                    thumbnail);
-            FighterImage.convertToAlternateRender(f);
-            var fighterImageSettings = thumbnail.getImageSettings()
-                    .findFighterImageSettings(f.getUrlName());
-            var fighterImage = new FighterImageThumbnail(f, fighterImageSettings, characterImage);
+            var fighter = player.getFighter(0);
+            var characterImage = characterImageFetcher.getCharacterImage(fighter, thumbnail);
+            smashUltimateCharacterService.convertToAlternateRender(fighter);
+            var fighterImageThumbnailSettings = thumbnail.getImageSettings()
+                    .findFighterImageSettings(fighter.getUrlName());
 
-            LOGGER.info("Drawing player {}'s character: {}", port, f.getName());
-            if (fighterImage.getImage().getWidth() < thumbnailWidth / 2 && fighterImage.getFighter().isFlip()) {
-                g2d.drawImage(fighterImage.getImage(), null, thumbnailWidth / 2 * port - fighterImage.getImage().getWidth(), 0);
+            characterImage = editCharacterImage(characterImage, fighterImageThumbnailSettings);
+
+            LOGGER.info("Drawing player {}'s character: {}", port, fighter.getName());
+            if (characterImage.getWidth() < thumbnailWidth / 2 && fighter.isFlip()) {
+                g2d.drawImage(characterImage, null, thumbnailWidth / 2 * port - characterImage.getWidth(), 0);
             } else {
-                g2d.drawImage(fighterImage.getImage(), null, thumbnailWidth / 2 * (port - 1), 0);
+                g2d.drawImage(characterImage, null, thumbnailWidth / 2 * (port - 1), 0);
             }
         }
+    }
+
+    public BufferedImage editCharacterImage(BufferedImage characterImage , FighterImageThumbnailSettings fighterImageThumbnailSettings) {
+        characterImage = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
+        characterImage = imageService.offsetImage(characterImage, fighterImageThumbnailSettings.getOffset());
+        characterImage = imageService.flipImage(characterImage, fighterImageThumbnailSettings.isFlip());
+        characterImage = imageService.cropImage(characterImage, thumbnailWidth/2, thumbnailHeight);
+        return characterImage;
     }
 
     private void drawText(Thumbnail thumbnail, Graphics2D g2d)
