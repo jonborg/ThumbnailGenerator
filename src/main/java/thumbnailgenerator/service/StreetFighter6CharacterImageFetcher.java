@@ -16,7 +16,7 @@ public class StreetFighter6CharacterImageFetcher extends CharacterImageFetcher {
     URL getOnlineUrl(Fighter fighter, GeneratedGraphic generatedGraphic)
             throws MalformedURLException {
     String urlString;
-        urlString = FIGHTERS_URL + fighter.getUrlName() + "/" +fighter.getAlt() +".png";
+        urlString = FIGHTERS_URL + fighter.getUrlName() + "/" +fighter.getUrlName() +".png";
         return new URL(urlString);
     }
 }

@@ -27,6 +27,9 @@ public class Top8FileService extends FileService<Top8, Player>{
 
         top8.setPlayers(playerList);
         top8.setLocally(saveLocally);
+        if (top8.getArtType() == null){
+            top8.setArtType(SmashUltimateFighterArtType.RENDER);
+        }
 
         return top8;
     }
