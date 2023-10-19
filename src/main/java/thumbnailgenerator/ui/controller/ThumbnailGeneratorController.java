@@ -47,8 +47,8 @@ import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.service.QueryUtils;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.service.ThumbnailService;
+import thumbnailgenerator.service.Top8Service;
 import thumbnailgenerator.utils.converter.SmashUltimateFighterArtTypeConverter;
-import thumbnailgenerator.service.Top8ServiceFromFile;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.converter.GameConverter;
@@ -77,7 +77,7 @@ public class ThumbnailGeneratorController implements Initializable {
     private @FXML Menu menuEdit;
     private @FXML Menu menuDelete;
     private @Autowired ThumbnailService thumbnailService;
-    private @Autowired Top8ServiceFromFile top8ServiceFromFile;
+    private @Autowired Top8Service top8Service;
     private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
 
     @Override
@@ -322,11 +322,13 @@ public class ThumbnailGeneratorController implements Initializable {
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
             try {
-                top8ServiceFromFile.generateFromFile(selectedFile, saveLocally.isSelected());
+                var inputStream = new FileInputStream(selectedFile);
+                top8Service.generateTop8FromFile(inputStream, saveLocally.isSelected());
                 AlertFactory.displayInfo("Top 8 was successfully generated and saved!");
-            }catch(Top8FromFileException e){
+            }catch(Top8FromFileException | FileNotFoundException e ){
                 //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
-            }
+            } catch (FontNotFoundException | FighterImageSettingsNotFoundException e) {
+                e.printStackTrace();
         }
     }
 }

@@ -1,23 +1,18 @@
 package thumbnailgenerator.service;
 
 import com.google.gson.reflect.TypeToken;
-import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.imageio.ImageIO;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,7 +34,6 @@ import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-import thumbnailgenerator.utils.file.FileUtils;
 import thumbnailgenerator.utils.json.JSONReader;
 
 @Service
@@ -99,8 +93,6 @@ public class ThumbnailService {
         }
     }
 
-
-
     private BufferedImage generateThumbnail(Thumbnail thumbnail)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException,
@@ -115,8 +107,6 @@ public class ThumbnailService {
         LOGGER.debug("Art used -> {}", thumbnail.getArtType());
         LOGGER.debug("*********************************************************************************************");
 
-        var localFightersPath = FileUtils.getLocalFightersPath(thumbnail);
-
         var result = new BufferedImage(thumbnailWidth, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
         var g2d = result.createGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -127,7 +117,7 @@ public class ThumbnailService {
 
         this.drawCharacters(thumbnail, g2d);
 
-        LOGGER.info("Drawing thumbnail foreground");
+        LOGGER.info("Drawing foreground in path {}.", thumbnail.getTournament().getThumbnailSettings().getForeground());
         imageService.drawImageFromPathFile(thumbnail.getTournament().getThumbnailSettings().getForeground(), g2d);
 
         LOGGER.info("Drawing thumbnail text");
