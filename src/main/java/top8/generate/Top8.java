@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.ArrayList;
 
 import lombok.var;
@@ -107,7 +108,7 @@ public class Top8 {
 
         var dir = new File("generated_top8/");
         if (!dir.exists()) dir.mkdir();
-        var file = new File("generated_top8/a_test.png");
+        var file = new File("generated_top8/top8_"+ Instant.now().toEpochMilli() +".png");
         ImageIO.write(top8, "png", file);
 
     }

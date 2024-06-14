@@ -1,45 +1,5 @@
 [
   {
-    "id": "tdlx",
-    "font": "BebasNeue-Regular",
-    "bold": true,
-    "italic": true,
-    "shadow": true,
-    "contour": 0.0,
-    "sizeTop": 90,
-    "sizeBottom": 75,
-    "angleTop": -2.0,
-    "angleBottom": -2.0,
-    "downOffsetTop": [
-      10,
-      5
-    ],
-    "downOffsetBottom": [
-      0,
-      -5
-    ]
-  },
-  {
-    "id": "invicta",
-    "font": "BebasNeue-Regular",
-    "bold": true,
-    "italic": true,
-    "shadow": true,
-    "contour": 0.0,
-    "sizeTop": 90,
-    "sizeBottom": 75,
-    "angleTop": -2.0,
-    "angleBottom": -2.0,
-    "downOffsetTop": [
-      10,
-      5
-    ],
-    "downOffsetBottom": [
-      0,
-      -5
-    ]
-  },
-  {
     "id": "weeklyl",
     "font": "BebasNeue-Regular",
     "bold": true,
@@ -80,47 +40,7 @@
     ]
   },
   {
-    "id": "crystal",
-    "font": "BebasNeue-Regular",
-    "bold": true,
-    "italic": true,
-    "shadow": true,
-    "contour": 0.0,
-    "sizeTop": 90,
-    "sizeBottom": 75,
-    "angleTop": -2.0,
-    "angleBottom": -2.0,
-    "downOffsetTop": [
-      10,
-      5
-    ],
-    "downOffsetBottom": [
-      0,
-      -5
-    ]
-  },
-  {
-    "id": "tryhard",
-    "font": "BebasNeue-Regular",
-    "bold": true,
-    "italic": true,
-    "shadow": true,
-    "contour": 0.0,
-    "sizeTop": 90,
-    "sizeBottom": 75,
-    "angleTop": -2.0,
-    "angleBottom": -2.0,
-    "downOffsetTop": [
-      10,
-      5
-    ],
-    "downOffsetBottom": [
-      0,
-      -5
-    ]
-  },
-  {
-    "id": "dq",
+    "id": "invicta",
     "font": "BebasNeue-Regular",
     "bold": true,
     "italic": true,

@@ -104,8 +104,12 @@ public class Thumbnail {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-        LOGGER.info("Drawing background in path {}.", ts.getTournament().getThumbnailSettings().getBackground());
-        drawElement(ts.getTournament().getThumbnailSettings().getBackground());
+        if(!ts.getTournament().getThumbnailSettings().getBackground().isEmpty()) {
+            LOGGER.info("Drawing background in path {}.",
+                    ts.getTournament().getThumbnailSettings().getBackground());
+            drawElement(
+                    ts.getTournament().getThumbnailSettings().getBackground());
+        }
         int port = 0;
         for (Player player : ts.getPlayers()) {
             port++;
@@ -126,9 +130,12 @@ public class Thumbnail {
             }
         }
 
-        LOGGER.info("Drawing thumbnail foreground");
-        drawElement(ts.getTournament().getThumbnailSettings().getForeground());
-
+        if(!ts.getTournament().getThumbnailSettings().getForeground().isEmpty()) {
+            LOGGER.info("Drawing thumbnail foreground in path {}.",
+                    ts.getTournament().getThumbnailSettings().getForeground());
+            drawElement(
+                    ts.getTournament().getThumbnailSettings().getForeground());
+        }
         LOGGER.info("Drawing thumbnail text");
         LOGGER.debug("Loading {} text settings: {}", ts.getTournament().getName(),
                 ts.getTournament().getThumbnailSettings().getTextSettings());
@@ -167,7 +174,8 @@ public class Thumbnail {
 
     private static void drawElement(String pathname) throws LocalImageNotFoundException {
         try {
-            g2d.drawImage(ImageIO.read(new FileInputStream(pathname)), 0, 0, null);
+            BufferedImage bufferedImage = ImageIO.read(new FileInputStream(pathname));
+            g2d.drawImage(bufferedImage, 0, 0, null);
         } catch (IOException | NullPointerException e) {
             LOGGER.error("An issue occurred when loading image in path {}:", pathname);
             LOGGER.catching(e);
