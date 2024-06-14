@@ -314,7 +314,7 @@ associated to them.
 Additional Notes:
 	- Start.gg does not provide info on used alts and some tournaments may not even provide used characters (ex.: offline tournaments);
 	- Fortunately, users can edit the commands directly on the text area;
-	- Alts are set to the default alt and characters, when missing, are set to CHAR1 or CHAR2;
+	- Alts are set to the default alt and characters, when missing, are set to random;
 	- Round names may also need to be edited in order to be less misleading;
 	- If no commands are printed, it means that the program could not find, on provided list of sets, a set with a stream assigned.
 
