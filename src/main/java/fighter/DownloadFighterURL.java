@@ -57,9 +57,7 @@ public class DownloadFighterURL {
                     if (alt == 2) urlString = SANS_URL;
                 }
                 if (urlName.contains("random")) {
-                    if(alt==1) {
-                        urlString = RENDER_URL + urlName + "/" + alt + ".png";
-                    }
+                    urlString = RENDER_URL + urlName + "/" + alt + ".png";
                 }
                 break;
         }
