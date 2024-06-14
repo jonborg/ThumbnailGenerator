@@ -353,12 +353,13 @@ Version 2.2.0:
     Mario - 8
     Marth - 3, 7
     Pichu - 2
-    Pikachu - 2, 4, 5, 6, 7
+    Pikachu - 4, 5, 6
     Sephiroth - 7, 8
     Shulk - 6, 7, 8
     Sonic - 7
     Sora - 2, 4, 6, 8
     Villager - 2, 3, 4, 6
+    Random - 2 (Sandbag)
 
 
 
