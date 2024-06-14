@@ -81,7 +81,7 @@ public class PlayerController implements Initializable {
         if (sel == null || sel.equals("Mii Brawler") || sel.equals("Mii Swordfighter")) {
             alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
         } else {
-            if (sel.equals("Mii Gunner")) {
+            if (sel.equals("Mii Gunner") || sel.equals("Random")) {
                 alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2));
             } else {
                 alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));

@@ -105,6 +105,9 @@ public class Names {
         map.put("Dark Samus", "dark_samus");
         map.put("Richter", "richter");
         map.put("Ken", "ken");
+
+        //random
+        map.put("Random", "random");
     }
 
     public static String getValue(String key){
