@@ -7,6 +7,7 @@ import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
+import exception.Top8FromFileException;
 import fighter.FighterArtType;
 import fighter.FighterArtTypeConverter;
 import file.json.JSONReader;
@@ -301,7 +302,7 @@ public class ThumbnailGeneratorController implements Initializable {
             try {
                 Top8FromFile.generateFromFile(selectedFile, saveLocally.isSelected());
                 AlertFactory.displayInfo("Top 8 was successfully generated and saved!");
-            }catch(ThumbnailFromFileException e){
+            }catch(Top8FromFileException e){
                 //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
             }
         }

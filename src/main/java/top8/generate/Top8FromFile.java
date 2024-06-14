@@ -1,5 +1,6 @@
 package top8.generate;
 
+import exception.Top8FromFileException;
 import fighter.Fighter;
 import fighter.Player;
 import com.google.gson.reflect.TypeToken;
@@ -35,7 +36,7 @@ public class Top8FromFile extends Top8 {
     private static FighterArtType artType;
 
     public static void generateFromFile(File file,  boolean saveLocally)
-        throws ThumbnailFromFileException {
+        throws Top8FromFileException {
 
         initMultiGeneration();
 
@@ -63,14 +64,20 @@ public class Top8FromFile extends Top8 {
             LOGGER.error("Could not parse line {}.", line);
             LOGGER.catching(e);
             AlertFactory.displayError("Could not parse line: "+line);
+        } catch (Exception e){
+            LOGGER.error("Could not correctly parse provided file");
+            LOGGER.catching(e);
+            AlertFactory.displayError("Could not correctly parse provided file");
+            throw new Top8FromFileException(e);
         }
+
         try {
             generateTop8FromFile(saveLocally);
         }catch(OnlineImageNotFoundException | FighterImageSettingsNotFoundException e) {
             invalidLines.add(e.getMessage() + " -> " + line);
         }catch(LocalImageNotFoundException e) {
             AlertFactory.displayError(e.getMessage());
-            throw new ThumbnailFromFileException();
+            throw new Top8FromFileException();
         }catch (NullPointerException e){
             e.printStackTrace();
         }catch (Exception e){

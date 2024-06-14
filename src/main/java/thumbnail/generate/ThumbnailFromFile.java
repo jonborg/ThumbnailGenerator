@@ -82,6 +82,11 @@ public class ThumbnailFromFile extends Thumbnail {
             LOGGER.error("Could not parse line {}.", line);
             LOGGER.catching(e);
             AlertFactory.displayError("Could not parse line: "+line);
+        }catch (Exception e){
+            LOGGER.error("Could not correctly parse provided file");
+            LOGGER.catching(e);
+            AlertFactory.displayError("Could not correctly parse provided file");
+            throw new ThumbnailFromFileException(e);
         }
 
         if (!invalidLines.isEmpty()){

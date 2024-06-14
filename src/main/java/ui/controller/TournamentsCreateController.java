@@ -317,20 +317,6 @@ public class TournamentsCreateController implements Initializable {
             }
             missingParameters.append("Font");
         }
-        if (foreground.getText().isEmpty()){
-            LOGGER.error("Missing parameter -> Foreground");
-            if (!missingParameters.toString().isEmpty()){
-                missingParameters.append(", ");
-            }
-            missingParameters.append("Foreground");
-        }
-        if (background.getText().isEmpty()){
-            LOGGER.error("Missing parameter -> Background");
-            if (!missingParameters.toString().isEmpty()){
-                missingParameters.append(", ");
-            }
-            missingParameters.append("Background");
-        }
 
         if (!missingParameters.toString().isEmpty()){
             missingParameters.append(System.lineSeparator());
