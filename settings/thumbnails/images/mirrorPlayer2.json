@@ -1026,6 +1026,22 @@
 		],
 		"scale": 0.6,
 		"flip": true
+	  },
+	  {
+		"fighter": "random1",
+		"offset": [
+		  0,
+		  -100
+		],
+		"scale": 2
+	  },
+	  {
+		"fighter": "random2",
+		"offset": [
+		  80,
+		  70
+		],
+		"scale": 0.8
 	  }
 	]
 }]
