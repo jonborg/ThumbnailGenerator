@@ -105,7 +105,7 @@ public class CharacterId {
         map.put(1412, "richter");
         map.put(1410, "ken");
 
-        map.put(1749, "RANDOM");
+        map.put(1749, "random");
     }
 
     public static String getValue(int key){

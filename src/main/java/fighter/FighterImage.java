@@ -123,6 +123,7 @@ public class FighterImage {
                     else fighter.setUrlName(fighter.getUrlName() + "1");
                     break;
                 case "mii_gunner":
+                case "random":
                     if (fighter.getAlt() == 2) fighter.setUrlName(fighter.getUrlName() + "2");
                     else fighter.setUrlName(fighter.getUrlName() + "1");
                     break;

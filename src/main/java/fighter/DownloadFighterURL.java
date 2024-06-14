@@ -13,6 +13,7 @@ public class DownloadFighterURL {
     static String FIGHTERS_URL_2 = "https://raw.githubusercontent.com/marcrd/smash-ultimate-assets/master/renders/";
     static String SANS_URL = "https://i.redd.it/n2tcplon8qk31.png";
     static String MURAL_URL = "https://raw.githubusercontent.com/jonborg/ThumbnailGenerator/dev/assets/mural/";
+    static String RENDER_URL = "https://raw.githubusercontent.com/jonborg/ThumbnailGenerator/dev/assets/render/";
 
     public static String generateFighterURL(String urlName, int alt, FighterArtType artType) {
         var path = FileUtils.getLocalFightersPath(artType) ;
@@ -54,6 +55,11 @@ public class DownloadFighterURL {
                     if (alt == 1)
                         urlString = FIGHTERS_URL_2 + "fighters/53/01.png";
                     if (alt == 2) urlString = SANS_URL;
+                }
+                if (urlName.contains("random")) {
+                    if(alt==1) {
+                        urlString = RENDER_URL + urlName + "/" + alt + ".png";
+                    }
                 }
                 break;
         }
