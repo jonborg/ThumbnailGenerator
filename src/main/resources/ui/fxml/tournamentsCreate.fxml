@@ -63,7 +63,7 @@
                                 <ChosenImageField fx:id="backgroundTop8"/>
                             </VBox>
                             <VBox>
-                                <Label text="Slot Settinngs File:"/>
+                                <Label text="Slot Settings File:"/>
                                 <ChosenJsonField fx:id="slotSettingsFileTop8"/>
                             </VBox>
                             <VBox>

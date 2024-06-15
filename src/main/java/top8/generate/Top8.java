@@ -70,7 +70,7 @@ public class Top8 {
         g2d.drawImage(background, 0, 0, null);
 
         var slots = fullSlot.getSlots();
-        for (int i = 0; i < 8; i++){
+        for (int i = 0; i < slots.size(); i++){
            try {
                var place = i + 1;
                var player = top8Settings.getPlayers().get(i);
