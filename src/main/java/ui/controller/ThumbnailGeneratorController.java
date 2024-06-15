@@ -7,6 +7,7 @@ import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
 import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
+import exception.Top8FromFileException;
 import fighter.FighterArtType;
 import fighter.FighterArtTypeConverter;
 import file.json.JSONReader;
@@ -40,7 +41,8 @@ import startgg.query.QueryUtils;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
 import thumbnail.generate.ThumbnailSettings;
-import thumbnail.image.ImageSettings;
+import thumbnail.image.settings.ImageSettings;
+import top8.generate.Top8FromFile;
 import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
@@ -132,8 +134,9 @@ public class ThumbnailGeneratorController implements Initializable {
         }
 
         LOGGER.info("Loading image settings of tournament {} ", getSelectedTournament().getName());
-        var imageSettings = (ImageSettings) JSONReader.getJSONArray(
-                getSelectedTournament().getFighterImageSettingsFile(getFighterArtType()),
+        var imageSettings = (ImageSettings) JSONReader.getJSONArrayFromFile(
+                getSelectedTournament().getThumbnailSettings()
+                        .getFighterImageSettingsFile(getFighterArtType()),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
 
@@ -144,10 +147,10 @@ public class ThumbnailGeneratorController implements Initializable {
                                                                 .locally(saveLocally.isSelected())
                                                                 .round(round.getText().toUpperCase())
                                                                 .date(date.getText())
-                                                                .fighters(ThumbnailSettings.
-                                                                        createFighterList(
-                                                                                player1Controller.generateFighter(),
-                                                                                player2Controller.generateFighter()))
+                                                                .players(ThumbnailSettings.
+                                                                        createPlayerList(
+                                                                                player1Controller.generatePlayer(),
+                                                                                player2Controller.generatePlayer()))
                                                                 .artType(getFighterArtType())
                                                                 .build());
             LOGGER.info("Thumbnail was successfully generated and saved!");
@@ -286,5 +289,22 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public FighterArtType getFighterArtType(){
         return artType.getSelectionModel().getSelectedItem();
+    }
+
+    public void generateTop8(ActionEvent actionEvent) {
+        LOGGER.info("User chose to generate top8.");
+        File workingDirectory = new File(System.getProperty("user.dir"));
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(workingDirectory);
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            LOGGER.info("User loaded file {}.", selectedFile.getPath());
+            try {
+                Top8FromFile.generateFromFile(selectedFile, saveLocally.isSelected());
+                AlertFactory.displayInfo("Top 8 was successfully generated and saved!");
+            }catch(Top8FromFileException e){
+                //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
+            }
+        }
     }
 }

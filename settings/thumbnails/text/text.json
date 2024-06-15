@@ -1,6 +1,26 @@
 [
   {
-    "id": "tdlx",
+    "id": "weeklyl",
+    "font": "BebasNeue-Regular",
+    "bold": true,
+    "italic": true,
+    "shadow": true,
+    "contour": 0.0,
+    "sizeTop": 90,
+    "sizeBottom": 75,
+    "angleTop": -2.0,
+    "angleBottom": -2.0,
+    "downOffsetTop": [
+      10,
+      5
+    ],
+    "downOffsetBottom": [
+      0,
+      -5
+    ]
+  },
+  {
+    "id": "stier",
     "font": "BebasNeue-Regular",
     "bold": true,
     "italic": true,
@@ -37,66 +57,6 @@
     "downOffsetBottom": [
       0,
       -5
-    ]
-  },
-  {
-    "id": "sop",
-    "font": "BebasNeue-Regular",
-    "bold": true,
-    "italic": true,
-    "shadow": true,
-    "contour": 0.0,
-    "sizeTop": 90,
-    "sizeBottom": 75,
-    "angleTop": -2.0,
-    "angleBottom": -2.0,
-    "downOffsetTop": [
-      10,
-      5
-    ],
-    "downOffsetBottom": [
-      0,
-      -5
-    ]
-  },
-  {
-    "id": "tiamat",
-    "font": "BebasNeue-Regular",
-    "bold": true,
-    "italic": true,
-    "shadow": true,
-    "contour": 0.0,
-    "sizeTop": 90,
-    "sizeBottom": 75,
-    "angleTop": -2.0,
-    "angleBottom": -2.0,
-    "downOffsetTop": [
-      10,
-      5
-    ],
-    "downOffsetBottom": [
-      0,
-      -5
-    ]
-  },
-  {
-    "id": "alph",
-    "font": "Pikmin-Normal",
-    "bold": true,
-    "italic": false,
-    "shadow": false,
-    "contour": 3.0,
-    "sizeTop": 85,
-    "sizeBottom": 75,
-    "angleTop": -2.0,
-    "angleBottom": -2.0,
-    "downOffsetTop": [
-      0,
-      0
-    ],
-    "downOffsetBottom": [
-      -20,
-      -15
     ]
   }
 ]

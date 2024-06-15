@@ -1,11 +1,17 @@
 package fighter;
 
+import exception.OnlineImageNotFoundException;
 import file.FileUtils;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
 public class DownloadFighterURL {
     private static final Logger LOGGER = LogManager.getLogger(DownloadFighterURL.class);
 
@@ -62,5 +68,20 @@ public class DownloadFighterURL {
                 break;
         }
         return urlString;
+    }
+
+    public static BufferedImage getFighterImageOnline(Fighter fighter, FighterArtType artType) throws
+            OnlineImageNotFoundException {
+        try {
+            URL url = new URL(DownloadFighterURL.getOnlineURL(fighter.getUrlName(), fighter.getAlt(), artType));
+            LOGGER.debug("Trying to find image online for alt {} of {}: {}", fighter.getAlt(), fighter.getName(),url.getHost() + url.getPath());
+            return ImageIO.read(url);
+        }catch(IOException e){
+            LOGGER.error("An issue occurred when finding image for alt {} of {}. URI: {}",
+                    fighter.getAlt(), fighter.getName(),
+                    DownloadFighterURL.getOnlineURL(fighter.getUrlName(), fighter.getAlt(), artType));
+            LOGGER.catching(e);
+            throw new OnlineImageNotFoundException();
+        }
     }
 }

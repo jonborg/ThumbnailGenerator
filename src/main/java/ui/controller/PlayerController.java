@@ -1,5 +1,6 @@
 package ui.controller;
 
+import fighter.Player;
 import fighter.DownloadFighterURL;
 import fighter.Fighter;
 import fighter.Names;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import lombok.var;
 import ui.combobox.InputFilter;
 import ui.factory.alert.AlertFactory;
 
@@ -126,8 +129,10 @@ public class PlayerController implements Initializable {
         }
     }
 
-    public Fighter generateFighter(){
-        return new Fighter(getPlayer(), getFighter() ,getUrlName(), getAlt(), isFlip());
+    public Player generatePlayer(){
+        var list = new ArrayList<Fighter>();
+        list.add(new Fighter(getFighter(), getUrlName(), getAlt(), isFlip()));
+        return new Player(getPlayer(), list);
     }
 
     public String toString(){
