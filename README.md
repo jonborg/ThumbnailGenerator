@@ -540,6 +540,11 @@ Thumbnails are saved in **/generated_top8** folder.
 
 
 ### Release Notes
+#### v3.0.0
+- Added option for users to program their Top 8 Generator;
+- Added "Random" to character selection (Question mark, Sandbag);
+- Added mural art for Pikachu's alt 2 and 7.
+
 #### v2.2.0
 - @ElevenZM's and @MuralAltDrive's mural arts can now be selected for thumbnail generation;
 - Fixed compatibility issues with Start.gg (Smash.gg's new name);
@@ -596,7 +601,3 @@ Thumbnails are saved in **/generated_top8** folder.
 - Multi thumbnail generation from 1 file in csv syntax;
 - Switch button that swaps player 1 and player 2 information;
 - Added Smash or Pass online league thumbnail generation.
-
-
-
-
