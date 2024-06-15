@@ -1,5 +1,6 @@
 package thumbnail.generate;
 
+import fighter.Player;
 import com.google.gson.reflect.TypeToken;
 import exception.FighterImageSettingsNotFoundException;
 import exception.FontNotFoundException;
@@ -8,7 +9,7 @@ import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
 import fighter.Fighter;
 import fighter.FighterArtType;
-import fighter.FighterImage;
+import fighter.image.FighterImage;
 import file.json.JSONReader;
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,7 +24,7 @@ import java.util.List;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import thumbnail.image.ImageSettings;
+import thumbnail.image.settings.ImageSettings;
 import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.controller.ThumbnailGeneratorController;
@@ -81,6 +82,11 @@ public class ThumbnailFromFile extends Thumbnail {
             LOGGER.error("Could not parse line {}.", line);
             LOGGER.catching(e);
             AlertFactory.displayError("Could not parse line: "+line);
+        }catch (Exception e){
+            LOGGER.error("Could not correctly parse provided file");
+            LOGGER.catching(e);
+            AlertFactory.displayError("Could not correctly parse provided file");
+            throw new ThumbnailFromFileException(e);
         }
 
         if (!invalidLines.isEmpty()){
@@ -171,8 +177,9 @@ public class ThumbnailFromFile extends Thumbnail {
             return;
         }
         LOGGER.info("Loading image settings for tournament {}.", selectedTournament.getName());
-        imageSettings = (ImageSettings) JSONReader.getJSONArray(
-                selectedTournament.getFighterImageSettingsFile(artType),
+        imageSettings = (ImageSettings) JSONReader.getJSONArrayFromFile(
+                selectedTournament.getThumbnailSettings()
+                        .getFighterImageSettingsFile(artType),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
         parameters = Arrays.asList(line.split(";"));
@@ -183,13 +190,14 @@ public class ThumbnailFromFile extends Thumbnail {
     private static void generateThumbnail(Boolean saveLocally)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException {
-        var player1 = new Fighter(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
-        var player2 = new Fighter(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
-        player1.setFlip(readFlipFile(player1));
+
+        var player1 = new Player(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
+        var player2 = new Player(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
+        player1.setFighterFlip(0, readFlipFile(player1.getFighter(0)));
         if (imageSettings.isMirrorPlayer2()) {
-            player2.setFlip(!readFlipFile(player2));
+            player2.setFighterFlip(0, !readFlipFile(player2.getFighter(0)));
         } else {
-            player2.setFlip(readFlipFile(player2));
+            player2.setFighterFlip(0, readFlipFile(player2.getFighter(0)));
         }
 
         generateAndSaveThumbnail(ThumbnailSettings.builder()
@@ -198,7 +206,7 @@ public class ThumbnailFromFile extends Thumbnail {
                                                 .locally(saveLocally)
                                                 .round(parameters.get(6))
                                                 .date(date)
-                                                .fighters(ThumbnailSettings.createFighterList(player1, player2))
+                                                .players(ThumbnailSettings.createPlayerList(player1, player2))
                                                 .artType(artType)
                                                 .build());
     }

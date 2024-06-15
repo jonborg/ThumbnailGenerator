@@ -79,7 +79,7 @@ public class SetNodeGG{
         String characters;
 
         if (games == null){
-            characters = "CHAR1;CHAR2";
+            characters = "random;random";
         }else{
             characters = getEntrantCharacter(player1) + ";" + getEntrantCharacter(player2);
         }

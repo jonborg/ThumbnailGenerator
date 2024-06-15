@@ -11,7 +11,6 @@ import lombok.ToString;
 @ToString
 public class Fighter  {
 
-    private String  playerName;
     private String  name;
     private String  urlName;
     private int     alt=1;
@@ -21,18 +20,10 @@ public class Fighter  {
         super();
     }
 
-    public Fighter(String playerName, String name, String urlName,int alt, boolean flip){
-        this.playerName = playerName;
+    public Fighter(String name, String urlName,int alt, boolean flip){
         this.name = name;
         this.urlName = urlName;
         this.alt = alt;
         this.flip = flip;
-    }
-
-    public static List<Fighter> generatePreviewFighters(){
-        List<Fighter> list = new ArrayList<>();
-        list.add(new Fighter("Player 1","Mario", "mario", 1, false));
-        list.add(new Fighter("Player 2","Sonic", "sonic", 1, false));
-        return list;
     }
 }

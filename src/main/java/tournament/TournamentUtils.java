@@ -28,12 +28,12 @@ public class TournamentUtils {
         tournamentsList.forEach(tournament ->{
             var textSettings = TextSettings.loadTextSettings(tournament.getTournamentId());
             LOGGER.debug("{} -> {}.", tournament.getName(), textSettings);
-            tournament.setTextSettings(textSettings);
+            tournament.getThumbnailSettings().setTextSettings(textSettings);
         });
     }
 
     public static void loadTournamentsList(){
-        tournamentsList = JSONReader.getJSONArray(FileUtils.getTournamentFile(),
+        tournamentsList = JSONReader.getJSONArrayFromFile(FileUtils.getTournamentFile(),
                 new TypeToken<ArrayList<Tournament>>(){}.getType());
         tournamentsList.size();
     }

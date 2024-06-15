@@ -1,13 +1,13 @@
 package thumbnail.generate;
 
-import fighter.Fighter;
+import fighter.Player;
 import fighter.FighterArtType;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.var;
-import thumbnail.image.ImageSettings;
+import thumbnail.image.settings.ImageSettings;
 import tournament.Tournament;
 
 @Getter
@@ -18,17 +18,16 @@ public class ThumbnailSettings {
     private boolean locally;
     private String round;
     private String date;
-    private List<Fighter> fighters;
+    private List<Player> players;
     private FighterArtType artType;
 
-    public static List<Fighter> createFighterList(Fighter... fighters){
-        var result =new ArrayList<Fighter>();
-        for (var f: fighters){
-            result.add(f);
+    public static List<Player> createPlayerList(Player... players){
+        var result = new ArrayList<Player>();
+        for (var p: players){
+            result.add(p);
         }
         return result;
     }
-
 }
 
 
