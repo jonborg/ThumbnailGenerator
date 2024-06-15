@@ -33,7 +33,7 @@ If you created a tournament in a previous version, you can do one of the followi
  - replace old executable with the new one.
 
 ## Tournament Settings
-#### Creating tournaments 
+### Creating tournaments 
 Tournament settings are save on the following file:
 
 	settings/tournaments/tournaments.json
@@ -65,9 +65,9 @@ None of this fields are mandatory. If no fighter image setting file is used, the
  - **Mural** -  settings/thumbnails/images/defaultMural.json
 
 When adding new foregrounds, backgrounds and logos, make sure they have the following dimensions:	
- - *foregrounds*: 1280x720;
- - *backgrounds*: 1280x720;
- - *logos*: 200x200.
+ - **foregrounds**: 1280x720;
+ - **backgrounds**: 1280x720;
+ - **logos**: 200x200.
  
 Regarding top 8 generation, the following settings can be provided:
  - **Foreground** - Directory of foreground image to place on thumbnail;
@@ -78,17 +78,17 @@ Regarding top 8 generation, the following settings can be provided:
 There is also a **Preview** option that allow users to preview thumbnail generation with current settings.
 To save changes, just click on **Save** button.
  
-#### Copying tournaments
+### Copying tournaments
 As an alternative of creating a tournament from scratch, it is possible to create a duplicated 
 tournament by selecting **Edit** -> **Create copy of...** -> **<Tournament to copy>** and change this 
 copy's settings.
 
-#### Deleting Tournaments 
+### Deleting Tournaments 
 Tournament settings can be deleted in **Edit** -> **Delete tournament** -> <Tournament to delete>.
 A dialog box will appear to confirm whether this deletion is intentional.
 
 ## Character images
-#### Image download
+### Image download
 The majority of the character's images are downloaded directly from the official page of Super Smash Bros. Ultimate [website](https://www.smashbros.com/en_US/fighter/index.html).
 
 As an option, Thumbnail Generator can save those downloaded images to use them for future uses without requiring access to the website. 
@@ -102,7 +102,7 @@ from the "Everyone is here" mural/poster.
 [Character art isolation](https://www.deviantart.com/elevenzm/gallery/70115610/mural-isolations-super-smash-bros-ultimate) was done by @ElevenZM and mural arts for alts have been created by
 @MuralAltDrive team which contains a [GoogleDrive repository](https://drive.google.com/drive/folders/1n4lAP6YB7N-bSSgEDx0OPEI2ykOKSQrM) for these images.
 
-#### Thumbnail Image Settings 
+### Thumbnail Image Settings 
 For thumbnails, images need to be scaled and repositioned in other to be printed 
 correctly on the thumbnail. 
 
@@ -151,7 +151,7 @@ To note that if image is flipped, horizontal offset orientation is also flipped.
 
 All these values can be changed to fit users preferences and can be changed and tested at run time.
 
-#### Top 8 image settings
+### Top 8 image settings
 For top 8 generation, images need to be scaled and repositioned in other to be printed 
 correctly on the graphic. 
 Besides that, the program needs to know how the image will be cropped in the top 8 graphic.
@@ -161,7 +161,7 @@ Therefore 2 sets of Json files are used:
  - Slots settings file - used to indicate area in top 8 that is dedicated to character image
  - Fighter image settings file - sets offsets and scaling for character's image inside each slot.
  
-##### Slot settings
+#### Slot settings
 Here is part of a slot settings file:
 
     {	
@@ -208,7 +208,7 @@ Example files can be found in the following directories:
  - **Slot settings** - settings/top8/slot/
  - **Masks** - assets/masks/
    
-##### Fighter image settings file
+#### Fighter image settings file
 For top 8, these files have similar structure as the same settings file for thumbnail generation.
 However, now it is required to provide character image scaling, offset and flip setting **for each slot** you plan to put on top 8 graphic, **for each character**.
 
@@ -265,7 +265,7 @@ As mentioned in [Introduction](#introduction) section, thumbnails can be generat
  - by batch generation, using a file;
  - by providing Start.gg tournament URL.
  
-#### Single thumbnail generation
+### Single thumbnail generation
 This is the main page of the application. it is currently filled with data for thumbnail generation.
 
 ![tg_main_page_22.png](./assets/documentation/tg_main_page_2.png)
@@ -302,7 +302,7 @@ Thumbnails are saved in **/generated_thumbnails** folder, which is created in th
 
 ![tg_thumbnail_example.png](./assets/documentation/tg_thumbnail_example.png)
 
-#### Multiple thumbnail generation by file
+### Multiple thumbnail generation by file
 Multiple thumbnails can ge generated at once using a file with a list of commands.
 
 To use said file and start multi generation, users can click on **Generate from file** button or on **File** -> **Generate thumbnails from file**
@@ -336,7 +336,7 @@ Flip data is not provided, as it is automated by settings created in respective 
 
 Thumbnails are saved in **/generated_thumbnails** folder
 
-#### Multiple thumbnail generation by Start.gg
+### Multiple thumbnail generation by Start.gg
 Multi thumbnail generation of a Start.gg tournament is available on **File** -> **Generate thumbnails from Start.gg**
 
 ![tg_startgg_generation.png](./assets/documentation/tg_startgg_generation.png)
@@ -368,7 +368,7 @@ Additional Notes:
  - If no commands are printed, it means that the program could not find a set with a stream assigned.
 
 ## Top 8 generation 
-#### Start Top 8 generation
+### Start Top 8 generation
 The program can allow users to **program** their top 8 generator.
 It is not recommended to use said feature alone, as Smash Ultimate has more that 80 characters and each character will require 8 different settings for scaling, offset and flip.
 
@@ -400,7 +400,7 @@ This image can then be placed on Photoshop project between your background and f
 ![tg_top_8_char_only_example.png](./assets/documentation/tg_top_8_char_only_example.png)
 ![tg_top_8_char_ui_example.png](./assets/documentation/tg_top_8_char_ui_example.png)
 
-#### Top 8 generation process
+### Top 8 generation process
 Program will first create an empty image with dimensions specified in selected tournament's slots settings file.
 If a background image is provided, it will be printed on empty image.
 The same goes for foreground image, but is placed at the end of process, just before saving image.
@@ -426,7 +426,7 @@ Position of stock images behave according to equations provided in  slot setting
 Thumbnails are saved in **/generated_top8** folder.
 
 ## Miscellaneous
-#### Missing Mural art
+### Missing Mural art
  - Bowser Jr. - 3, 4, 5
  - Ganondorf - 2, 4, 6
  - Ike - 2, 4, 6, 8
@@ -445,7 +445,7 @@ Thumbnails are saved in **/generated_top8** folder.
  - Villager - 2, 3, 4, 6
  - Random - 2 (Sandbag)
 
-#### Smash Ultimate Character URL names
+### Smash Ultimate Character URL names
 
 | Character          | URL Name           |
 |--------------------|--------------------|
@@ -539,19 +539,19 @@ Thumbnails are saved in **/generated_top8** folder.
 
 
 
-#### Release Notes
-##### v2.2.0
+### Release Notes
+#### v2.2.0
 - @ElevenZM's and @MuralAltDrive's mural arts can now be selected for thumbnail generation;
 - Fixed compatibility issues with Start.gg (Smash.gg's new name);
 - Fixed R.O.B icon colour assignment for alts 1 and 2;
 - Increased gson version to 2.8.9.
 
-##### v2.1.1
+#### v2.1.1
 - Fixed issue when no image settings is found for a character, no message is shown to the user telling that;
 - Fixed image settings names for Mii Gunner and Corrin;
 - Increased log4j version to 2.17.1.
 
-##### v2.1.0
+#### v2.1.0
 - Added Stream filter for Smash.gg thumbnail generation;
 - Can assign different fighter image settings for each tournament;
 - Added log support to track application usage for debug analysis;
@@ -560,18 +560,18 @@ Thumbnails are saved in **/generated_top8** folder.
 - Kazuya added to the roster;
 - Sora added to the roster.
 
-##### v2.0.0
+#### v2.0.0
 - Thumbnails can now be generated for Smash.gg tournaments;
 - Tournament settings can be created, edited or deleted;
 - Menu bar added to initial page to select Thumbnail Generator's functionalities.
 
-##### v1.4.0
+#### v1.4.0
 - Scroll pane added to tournament list;
 - Updated Falco horizontal offset from -10 to 60;
 - Sephiroth added to the roster;
 - Pyra/Mythra added to the roster.
 
-##### v1.3.0
+#### v1.3.0
 - Steve added to the roster;
 - Character icons appear when selecting a character and alt;
 - A preview image of the chosen fighter and alt appears when clicking on character icon;
@@ -579,20 +579,20 @@ Thumbnails are saved in **/generated_top8** folder.
 - Thumbnail settings such as font type and size can de adjusted on file "settings/thumbnail/text/text.json";
 - Added "Pikmin Normal.tf" to allow creation of Alph Apparition thumbnails.
 
-##### v1.2.2
+#### v1.2.2
 - Min Min added to the roster;
 - Added Tiamat as a league.
 
-##### v1.2.1
+#### v1.2.1
 - Thumbnail font is now locally loaded. Now is not required to have the font installed on PC.
 
-##### v1.2.0
+#### v1.2.0
 - Enabled text search when selecting fighters on their dropdowns;
 - Errors during Thumbnail creation via file does not interrupt the parsing of the file anymore;
 - Each cause of errors during Thumbnail creation via file is individually shown to the user;
 - Some code improvements/cleanup was performed (let's see if it didn't break anything).
 
-##### v1.1.0
+#### v1.1.0
 - Multi thumbnail generation from 1 file in csv syntax;
 - Switch button that swaps player 1 and player 2 information;
 - Added Smash or Pass online league thumbnail generation.
