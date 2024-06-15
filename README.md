@@ -368,7 +368,7 @@ Additional Notes:
  - If no commands are printed, it means that the program could not find a set with a stream assigned.
 
 ## Top 8 generation 
-####Start Top 8 generation
+#### Start Top 8 generation
 The program can allow users to **program** their top 8 generator.
 It is not recommended to use said feature alone, as Smash Ultimate has more that 80 characters and each character will require 8 different settings for scaling, offset and flip.
 
