@@ -49,10 +49,10 @@
         ]
       },
       {
-        "slotSettingsFile": "settings/top8/slot/icarus_slots.json",
+        "slotSettingsFile": "settings/top8/slot/sf6/icarus_slots.json",
         "game": "SF6",
         "foreground": "",
-        "background": "",
+        "background": "assets/tournaments/backgrounds/top8/invictaTop8.png",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -87,8 +87,8 @@
       {
         "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "game": "SSBU",
-        "foreground": "",
-        "background": "",
+        "foreground": "assets/tournaments/foregrounds/top8/weeklyl.png",
+        "background": "assets/tournaments/backgrounds/top8/weeklyl.png",
         "artSettings": [
           {
             "artType": "RENDER",

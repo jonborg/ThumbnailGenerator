@@ -81,7 +81,7 @@ public class Top8Service {
 
         var dir = new File("generated_top8/");
         if (!dir.exists()) dir.mkdir();
-        var file = new File("generated_top8/a_test.png");
+        var file = new File("generated_top8/ " + top8.getPlayers().get(0).getFighter(0).getUrlName() + ".png");
         ImageIO.write(result, "png", file);
 
     }
