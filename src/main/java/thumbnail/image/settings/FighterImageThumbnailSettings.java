@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import fighter.image.settings.FighterImageSettings;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter

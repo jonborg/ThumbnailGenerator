@@ -26,6 +26,11 @@
                 <Menu fx:id="menuEdit" styleClass="menuItem" text="Edit tournament"/>
                 <Menu fx:id="menuDelete" styleClass="menuItem" text="Delete tournament"/>
             </Menu>
+            <Menu styleClass="menu" text="Tools">
+                <Menu styleClass="menu" text="Convert from v3.0.0 to v3.1.0">
+                    <MenuItem styleClass="menuItem" text="Thumbnail fighter image settings" onAction="#convertFighterImageSettings"/>
+                </Menu>
+            </Menu>
         </MenuBar>
         <VBox spacing="40" alignment="CENTER" >
             <VBox spacing="10">

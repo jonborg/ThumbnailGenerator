@@ -2,6 +2,7 @@ package ui.controller;
 
 import app.App;
 import com.google.gson.reflect.TypeToken;
+import converter.ThumbnailFighterImageSettingsConverter;
 import exception.FighterImageSettingsNotFoundException;
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -37,6 +39,7 @@ import javafx.stage.Stage;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.codehaus.plexus.util.ExceptionUtils;
 import startgg.query.QueryUtils;
 import thumbnail.generate.Thumbnail;
 import thumbnail.generate.ThumbnailFromFile;
@@ -304,6 +307,24 @@ public class ThumbnailGeneratorController implements Initializable {
                 AlertFactory.displayInfo("Top 8 was successfully generated and saved!");
             }catch(Top8FromFileException e){
                 //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
+            }
+        }
+    }
+
+    public void convertFighterImageSettings(ActionEvent actionEvent) {
+        LOGGER.info("User chose to generate top8.");
+        File workingDirectory = new File(System.getProperty("user.dir"));
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(workingDirectory);
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            LOGGER.info("User loaded file {}.", selectedFile.getPath());
+            try {
+                ThumbnailFighterImageSettingsConverter.convert(selectedFile, FighterArtType.RENDER);
+                AlertFactory.displayInfo("Successfully converted file. Please change tournament settings to use new file.");
+            }catch(IOException e){
+                AlertFactory.displayError("Cound not convert file " + selectedFile.getName() + ". ",
+                        ExceptionUtils.getStackTrace(e));
             }
         }
     }

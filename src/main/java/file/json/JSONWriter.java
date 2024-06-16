@@ -8,6 +8,7 @@ import file.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
+import thumbnail.image.settings.ImageSettings;
 import thumbnail.text.TextSettings;
 import tournament.Tournament;
 import ui.factory.alert.AlertFactory;
@@ -45,6 +46,21 @@ public class JSONWriter {
         try (FileWriter writer = new FileWriter(textSettingsFile)) {
             String json = gson.toJson(list);
             LOGGER.debug("Writing json to file {} -> {}", textSettingsFile, json);
+            writer.write(json);
+        } catch (FileNotFoundException e) {
+            AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
+        } catch (IOException e) {
+            AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
+        }
+    }
+
+    public static void updateThumbnailImageSettingsFile(List<ImageSettings> imageSettings, String filePath){
+        Gson gson = new GsonBuilder().setPrettyPrinting()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        try (FileWriter writer = new FileWriter(filePath)) {
+            String json = gson.toJson(imageSettings);
+            LOGGER.debug("Writing json to file {} -> {}", filePath, json);
             writer.write(json);
         } catch (FileNotFoundException e) {
             AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));

@@ -41,7 +41,7 @@ public class FighterImageTop8 extends FighterImage {
     protected BufferedImage editImage(BufferedImage bufferedImage){
         LOGGER.info(fighterImageSettings.getOffset()[0]+ " "+ fighterImageSettings.getOffset()[1]);
         bufferedImage = ImageUtils.flipImage(bufferedImage, fighter.isFlip());
-        bufferedImage = ImageUtils.resizeImage(bufferedImage, fighter.getUrlName(), fighterImageSettings.getScale());
+        bufferedImage = ImageUtils.resizeImage(bufferedImage, fighterImageSettings.getScale());
 
         try {
             var mask = ImageIO.read(new File(playerSlot.getMask()));
