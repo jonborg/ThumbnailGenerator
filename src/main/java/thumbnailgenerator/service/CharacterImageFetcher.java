@@ -59,12 +59,15 @@ public abstract class CharacterImageFetcher {
     private BufferedImage getFighterImageLocally(Fighter fighter, GeneratedGraphic generatedGraphic) throws IOException {
         var localCharacterImageRootPath = FileUtils.getLocalFightersPath(
                 generatedGraphic);
-        var localCharacterImagePath = localCharacterImageRootPath + fighter.getUrlName() + "/";
+        var localGameCharacterImagePath = localCharacterImageRootPath + generatedGraphic.getGame() + "/";
+        var localCharacterImagePath = localGameCharacterImagePath + fighter.getUrlName() + "/";
 
         var rootDirectory = new File(localCharacterImageRootPath);
+        var gameFighterDirectory = new File(localGameCharacterImagePath);
         var fighterDirectory = new File(localCharacterImagePath);
 
         if (!rootDirectory.exists()) rootDirectory.mkdir();
+        if (!gameFighterDirectory.exists()) gameFighterDirectory.mkdir();
         if (!fighterDirectory.exists()) fighterDirectory.mkdir();
 
         File localImage = new File(localCharacterImagePath + fighter.getAlt()+".png");
@@ -76,7 +79,8 @@ public abstract class CharacterImageFetcher {
     private void saveImageLocally(Fighter fighter, GeneratedGraphic generatedGraphic, BufferedImage image){
         var localCharacterImagePath = FileUtils.getLocalFightersPath(
                 generatedGraphic);
-        var fighterDirPath = localCharacterImagePath + fighter.getUrlName() + "/";
+        var fighterDirPath = localCharacterImagePath + generatedGraphic.getGame() + "/"
+                + fighter.getUrlName() + "/";
 
         File localImage = new File(fighterDirPath + fighter.getAlt()+".png");
         saveImage(image, localImage);
