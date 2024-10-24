@@ -93,7 +93,7 @@ public class TextSettings {
     }
 
     public boolean updateDifferences(Object obj){
-        if (obj == null || !(obj instanceof TextSettings)){
+        if (!(obj instanceof TextSettings)){
             return false;
         }
         boolean equal = true;

@@ -177,9 +177,7 @@ public class TournamentsCreateController implements Initializable {
             artTypeDir.add(settingsFile);
         }
 
-        artType.getItems().addAll(FighterArtType.values());
-        artType.setConverter(new FighterArtTypeConverter());
-        artType.getSelectionModel().select(FighterArtType.RENDER);
+        ControllerUtils.initArtDropdown(artType);
         artType.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
                     for (var dir : artTypeDir){
@@ -202,9 +200,7 @@ public class TournamentsCreateController implements Initializable {
             artTypeDirTop8.add(settingsFile);
         }
 
-        artTypeTop8.getItems().addAll(FighterArtType.values());
-        artTypeTop8.setConverter(new FighterArtTypeConverter());
-        artTypeTop8.getSelectionModel().select(FighterArtType.RENDER);
+        ControllerUtils.initArtDropdown(artTypeTop8);
         artTypeTop8.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
                     for (var dir : artTypeDirTop8){

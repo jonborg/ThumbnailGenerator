@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import lombok.var;
+import ui.filechooser.FileChooserFactory;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class ChosenImageField extends StackPane {
         button.setPrefHeight(buttonSideLength);
         button.setMaxHeight(buttonSideLength);
         button.setOnAction(action -> {
-            FileChooser fileChooser = new FileChooser();
+            FileChooser fileChooser = FileChooserFactory.createDefaultFileChooser();
             fileChooser.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter(description, extensions));
 

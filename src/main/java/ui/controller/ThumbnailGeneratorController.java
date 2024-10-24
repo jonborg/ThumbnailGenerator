@@ -2,7 +2,6 @@ package ui.controller;
 
 import app.App;
 import com.google.gson.reflect.TypeToken;
-import converter.ThumbnailFighterImageSettingsConverter;
 import exception.FighterImageSettingsNotFoundException;
 import exception.FontNotFoundException;
 import exception.LocalImageNotFoundException;
@@ -10,13 +9,11 @@ import exception.OnlineImageNotFoundException;
 import exception.ThumbnailFromFileException;
 import exception.Top8FromFileException;
 import fighter.FighterArtType;
-import fighter.FighterArtTypeConverter;
 import file.json.JSONReader;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -49,6 +46,7 @@ import top8.generate.Top8FromFile;
 import tournament.Tournament;
 import tournament.TournamentUtils;
 import ui.factory.alert.AlertFactory;
+import ui.filechooser.FileChooserFactory;
 
 public class ThumbnailGeneratorController implements Initializable {
     private final Logger LOGGER = LogManager.getLogger(ThumbnailGeneratorController.class);
@@ -93,7 +91,7 @@ public class ThumbnailGeneratorController implements Initializable {
         player1Controller.setParentController(this);
         player2Controller.setParentController(this);
         initMenuBars();
-        initArtDropdown();
+        ControllerUtils.initArtDropdown(artType);
     }
 
     public void flipPlayers(ActionEvent actionEvent) {
@@ -176,7 +174,7 @@ public class ThumbnailGeneratorController implements Initializable {
     //MenuBar
     public void createMultipleThumbnails(ActionEvent actionEvent) {
         LOGGER.info("User chose to generate multiple thumbnails at once.");
-        FileChooser fileChooser = new FileChooser();
+        FileChooser fileChooser = FileChooserFactory.createDefaultFileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
@@ -264,12 +262,6 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
 
-    private void initArtDropdown(){
-        artType.getItems().addAll(FighterArtType.values());
-        artType.setConverter(new FighterArtTypeConverter());
-        artType.getSelectionModel().select(FighterArtType.RENDER);
-    }
-
     private static List<Tournament> getTournamentsList(){
         return TournamentUtils.getTournamentsList();
     }
@@ -296,9 +288,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public void generateTop8(ActionEvent actionEvent) {
         LOGGER.info("User chose to generate top8.");
-        File workingDirectory = new File(System.getProperty("user.dir"));
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(workingDirectory);
+        FileChooser fileChooser = FileChooserFactory.createDefaultFileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
@@ -312,20 +302,15 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public void convertFighterImageSettings(ActionEvent actionEvent) {
-        LOGGER.info("User chose to generate top8.");
-        File workingDirectory = new File(System.getProperty("user.dir"));
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(workingDirectory);
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            LOGGER.info("User loaded file {}.", selectedFile.getPath());
-            try {
-                ThumbnailFighterImageSettingsConverter.convert(selectedFile, FighterArtType.RENDER);
-                AlertFactory.displayInfo("Successfully converted file. Please change tournament settings to use new file.");
-            }catch(IOException e){
-                AlertFactory.displayError("Cound not convert file " + selectedFile.getName() + ". ",
-                        ExceptionUtils.getStackTrace(e));
-            }
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/imageSettingsConverter.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Convert fighter image settings");
+            stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import ui.textfield.ChosenJsonField?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.controller.ImageSettingsConverter"
+            prefHeight="400.0" prefWidth="600.0">
+    <VBox spacing="10">
+        <HBox>
+            <Label text="File:"/>
+            <ChosenJsonField fx:id="imageSettingsFile" styleClass="generalTextfield"/>
+        </HBox>
+        <HBox>
+            <Label text="Image Type:"/>
+            <ComboBox fx:id="imageType" styleClass="imageTypeDropdown"/>
+        </HBox>
+        <HBox>
+            <Label text="Character art:"/>
+            <ComboBox fx:id="artType" styleClass="artDropdown"/>
+        </HBox>
+        <HBox>
+            <Label text="From version:"/>
+            <ComboBox fx:id="version" styleClass="artDropdown"/>
+        </HBox>
+        <Button id="convert" styleClass="button" text="Convert" onAction="#convertFighterImageSettings"/>
+    </VBox>
+</AnchorPane>

@@ -54,7 +54,7 @@ public class JSONWriter {
         }
     }
 
-    public static void updateThumbnailImageSettingsFile(List<ImageSettings> imageSettings, String filePath){
+    public static <T> void updateImageSettingsFile(List<T> imageSettings, String filePath){
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();

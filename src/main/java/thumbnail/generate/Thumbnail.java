@@ -221,39 +221,5 @@ public class Thumbnail {
             return DownloadFighterURL.getFighterImageOnline(fighter, ts.getArtType());
         }
     }
-
-  /*  private static void test(ImageSettings imageSettings){
-        var list = imageSettings.getFighterImages();
-        top8.image.settings.ImageSettings top8ImageSettings = new top8.image.settings.ImageSettings();
-        List<FighterImageTop8Settings> fighterImages = new ArrayList<>();
-        for (var el: list){
-            List<SlotImageTop8Settings> slotlist = new ArrayList<>();
-            for (int i=1;i<=8; i++){
-                var a = el.getOffset();
-                for (int j = 0; j < a.length; j++){
-                    a[j] *= 0.4f;
-                }
-                SlotImageTop8Settings slot = new SlotImageTop8Settings(a, 0.4f, el.isFlip(), i);
-                slotlist.add(slot);
-            }
-            FighterImageTop8Settings fighterImageTop8Settings =
-                    new FighterImageTop8Settings(el.getFighter(), slotlist);
-            fighterImages.add(fighterImageTop8Settings);
-        }
-        top8ImageSettings.setFighterImages(fighterImages);
-        Gson gson = new GsonBuilder().setPrettyPrinting()
-                .excludeFieldsWithoutExposeAnnotation()
-                .create();
-        try (FileWriter writer = new FileWriter("settings/top8/images/icarus.json")) {
-            String json = gson.toJson(top8ImageSettings);
-            LOGGER.debug("Writing json to file {} -> {}", "settings/top8/images/icarus.json", json);
-            writer.write(json);
-        } catch (FileNotFoundException e) {
-            AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
-        } catch (IOException e) {
-            AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
-        }
-
-    }*/
 }
 

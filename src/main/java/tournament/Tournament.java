@@ -50,7 +50,7 @@ public class Tournament implements Cloneable{
     }
 
     public boolean updateDifferences(Object obj){
-        if (obj == null || !(obj instanceof Tournament)){
+        if (!(obj instanceof Tournament)){
             return false;
         }
         boolean equal = true;
