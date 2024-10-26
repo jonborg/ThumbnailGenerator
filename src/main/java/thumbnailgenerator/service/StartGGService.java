@@ -59,7 +59,7 @@ public class StartGGService {
             totalPages = result.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode()).getAsJsonObject("sets")
                     .getAsJsonObject("pageInfo").getAsJsonPrimitive("totalPages").getAsInt();
             foundSets.append(TournamentUtils.getSelectedTournament().getTournamentId()
-                    + ";" + searchGamesGG.getEventName() + ";RENDER"+ System.lineSeparator());
+                    + ";GAME;" + searchGamesGG.getEventName() + ";RENDER"+ System.lineSeparator());
         }
         SetGG set = (SetGG) JSONReader
                 .getJSONObject(result.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode())

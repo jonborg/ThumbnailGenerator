@@ -14,9 +14,14 @@ public class SmashUltimateCharacterImageFetcher extends CharacterImageFetcher {
     static String FIGHTERS_URL = "https://www.smashbros.com/assets_v2/img/fighter/";
     static String FIGHTERS_URL_2 = "https://raw.githubusercontent.com/marcrd/smash-ultimate-assets/master/renders/";
     static String SANS_URL = "https://i.redd.it/n2tcplon8qk31.png";
-    static String MURAL_URL = "https://raw.githubusercontent.com/jonborg/ThumbnailGenerator/dev/assets/mural/";
-    static String RENDER_URL = "https://raw.githubusercontent.com/jonborg/ThumbnailGenerator/dev/assets/render/";
-
+    static String MURAL_URL = "https://raw.githubusercontent.com/jonborg/" +
+            "ThumbnailGeneratorCharacterImageRepository/" +
+            "refs/heads/v3.1.0-beta1/" +
+            "ssbu/mural/";
+    static String RENDER_URL = "https://raw.githubusercontent.com/jonborg/" +
+            "ThumbnailGeneratorCharacterImageRepository/" +
+            "refs/heads/v3.1.0-beta1/" +
+            "ssbu/render/";
 
     @Override
     URL getOnlineUrl(Fighter fighter, GeneratedGraphic generatedGraphic)

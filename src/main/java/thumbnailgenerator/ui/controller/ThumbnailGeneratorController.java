@@ -32,8 +32,13 @@ import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 import thumbnailgenerator.JavaFxApplication;
+import thumbnailgenerator.Main;
+import thumbnailgenerator.config.SpringApplicationContext;
+import thumbnailgenerator.config.SpringFXMLLoader;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Thumbnail;
@@ -195,7 +200,12 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public void createFromSmashGG(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("thumbnailgenerator/ui/fxml/fromStartGG.fxml"));
+
+            ConfigurableApplicationContext applicationContext = new SpringApplicationBuilder(Main.class).run();
+            FXMLLoader loader = new FXMLLoader(ThumbnailGeneratorController.class.getClassLoader().getResource(
+                    "thumbnailgenerator/ui/fxml/fromStartGG.fxml"));
+            loader.setControllerFactory(applicationContext::getBean);
+
             Parent root = loader.load();
             root.setOnMousePressed(e -> root.requestFocus());
             FromStartGGController controller = loader.getController();

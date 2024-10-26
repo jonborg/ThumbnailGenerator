@@ -33,6 +33,7 @@ import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Player;
+import thumbnailgenerator.enums.RivalsOfAether2Enum;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
 import thumbnailgenerator.factory.CharacterImageFetcherFactory;
@@ -87,7 +88,7 @@ public class PlayerController implements Initializable {
 
 
     public void selectFighter(ActionEvent actionEvent) {
-        urlName = getSelectionName();
+        setUrlName(getSelectionName());
         updateFighterIcon();
     }
 
@@ -105,15 +106,19 @@ public class PlayerController implements Initializable {
             }
         }
 
-        if (sel == null){
-            return null;
-        } else if (Game.SF6.equals(parentController.getGame())){
-            return CharacterEnumUtils
-                    .findCodeByName(StreetFighter6Enum.class, sel);
-        } else {
-            return CharacterEnumUtils
-                    .findCodeByName(SmashUltimateEnum.class, sel);
+        switch (parentController.getGame()) {
+            case ROA2:
+                return CharacterEnumUtils
+                        .findCodeByName(RivalsOfAether2Enum.class, sel);
+            case SF6:
+                return CharacterEnumUtils
+                        .findCodeByName(StreetFighter6Enum.class, sel);
+            case SSBU:
+                return CharacterEnumUtils
+                        .findCodeByName(SmashUltimateEnum.class, sel);
+
         }
+        return null;
     }
 
     protected void updateFighterIcon(){
@@ -142,13 +147,20 @@ public class PlayerController implements Initializable {
     }
 
     protected void updateGameData(Game game){
-        if (Game.SF6.equals(game)){
-            initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(StreetFighter6Enum.class));
-            alt.setDisable(true);
-        }
-        if (Game.SSBU.equals(game)) {
-            initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(SmashUltimateEnum.class));
-            alt.setDisable(false);
+        switch (game) {
+            case ROA2:
+                initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(RivalsOfAether2Enum.class));
+                alt.setDisable(true);
+                break;
+            case SF6:
+                initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(StreetFighter6Enum.class));
+                alt.setDisable(true);
+                break;
+            case SSBU:
+                initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(SmashUltimateEnum.class));
+                alt.setDisable(false);
+                break;
+
         }
     }
 
@@ -194,7 +206,7 @@ public class PlayerController implements Initializable {
         return this.urlName;
     }
 
-    public void setUrlName(){
+    public void setUrlName(String urlName){
         this.urlName = urlName;
     }
 

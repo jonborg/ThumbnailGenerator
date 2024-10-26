@@ -1,5 +1,9 @@
 package thumbnailgenerator.utils.enums;
 
+import thumbnailgenerator.enums.RivalsOfAether2Enum;
+import thumbnailgenerator.enums.SmashUltimateEnum;
+import thumbnailgenerator.enums.StreetFighter6Enum;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +14,19 @@ public class CharacterEnumUtils {
         return findValue(enumClass, String.valueOf(name), "getName");
     }
 
-    public static <E extends Enum<E>> String findCodeByStartggId(Class<E> enumClass, int startggId) {
-        return findValue(enumClass, String.valueOf(startggId), "getStartggId");
+    public static <E extends Enum<E>> String findCodeByStartggId(int startggId) {
+        String value = findValue(SmashUltimateEnum.class, String.valueOf(startggId), "getStartggId");
+        if (value != null) return value;
+        value = findValue(StreetFighter6Enum.class, String.valueOf(startggId), "getStartggId");
+        if (value != null) return value;
+        value = findValue(RivalsOfAether2Enum.class, String.valueOf(startggId), "getStartggId");
+        return value;
     }
 
     private static <E extends Enum<E>> String findValue(Class<E> enumClass, String searchParam, String methodName) {
         for (E value : enumClass.getEnumConstants()) {
             try {
-                String paramValue = (String) enumClass.getMethod(methodName).invoke(value);
+                String paramValue =  String.valueOf(enumClass.getMethod(methodName).invoke(value));
                 if (paramValue.equalsIgnoreCase(searchParam)) {
                     return (String) enumClass.getMethod("getCode").invoke(value);
                 }

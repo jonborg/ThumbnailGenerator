@@ -64,7 +64,7 @@ public class SetNodeGG{
         }
         int mostUsedCharacter = Collections.max(charSel.entrySet(), HashMap.Entry.comparingByValue()).getKey();
         return CharacterEnumUtils
-                .findCodeByStartggId(SmashUltimateEnum.class, mostUsedCharacter);
+                .findCodeByStartggId(mostUsedCharacter);
     }
 
     private String getEntrateNameWithNoTeam(String name){

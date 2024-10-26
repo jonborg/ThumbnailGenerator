@@ -41,7 +41,7 @@ public class JavaFxApplication extends Application {
     public static void startApp(Stage primaryStage){
         primaryStage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
         primaryStage.setTitle("Smash Bros. VOD Thumbnail Generator");
-        primaryStage.setScene(new Scene(root, 740, 680));
+        primaryStage.setScene(new Scene(root, 740, 760));
         primaryStage.show();
     }
 

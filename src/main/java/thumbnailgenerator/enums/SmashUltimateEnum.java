@@ -103,7 +103,7 @@ public enum SmashUltimateEnum {
     RICHTER("Richter", "richter", 1412),
     KEN("Ken", "ken", 1410),
 
-    RANDOM("RANDOM", "random", 1749);
+    RANDOM("Random", "random", 1749);
 
     private final String name;
     private final String code;

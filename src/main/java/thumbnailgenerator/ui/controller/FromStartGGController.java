@@ -165,6 +165,7 @@ public class FromStartGGController implements Initializable {
                 result.append(startGGService
                         .readSetsFromSmashGGPage(searchGamesGG, totalPages));
             }while(readPages<totalPages);
+            foundSets.setText(result.toString());
             setDisableGeneration(false);
             LOGGER.info("Finished generating multiple thumbnails generation commands.");
             AlertFactory.displayInfo("Finished generating multiple thumbnails generation commands.");
@@ -289,7 +290,7 @@ public class FromStartGGController implements Initializable {
             LOGGER.debug("Result -> {}", result.toString());
 
             TournamentGG tournamentGG = (TournamentGG) JSONReader.getJSONObject(result.get("data")
-                    .getAsJsonObject().get("thumbnailgenerator/tournament").toString(), new TypeToken<TournamentGG>() {}.getType());
+                    .getAsJsonObject().get("tournament").toString(), new TypeToken<TournamentGG>() {}.getType());
             LOGGER.debug("Setting events list.");
             eventSelect.getItems().addAll(tournamentGG.getEvents());
 

@@ -70,6 +70,8 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
             } else {
                 thumbnail.setArtType(SmashUltimateFighterArtType.RENDER);
             }
+        } else {
+            thumbnail.setArtType(SmashUltimateFighterArtType.RENDER);
         }
         return thumbnail;
     }

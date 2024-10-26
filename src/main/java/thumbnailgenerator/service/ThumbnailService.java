@@ -188,7 +188,7 @@ public class ThumbnailService {
             var fighterImageThumbnailSettings = thumbnail.getImageSettings()
                     .findFighterImageSettings(fighter.getUrlName());
 
-            characterImage = editCharacterImage(characterImage, fighterImageThumbnailSettings);
+            characterImage = editCharacterImage(characterImage, fighterImageThumbnailSettings, player);
 
             LOGGER.info("Drawing player {}'s character: {}", port, fighter.getName());
             if (characterImage.getWidth() < thumbnailWidth / 2 && fighter.isFlip()) {
@@ -199,10 +199,12 @@ public class ThumbnailService {
         }
     }
 
-    public BufferedImage editCharacterImage(BufferedImage characterImage , FighterImageThumbnailSettings fighterImageThumbnailSettings) {
+    public BufferedImage editCharacterImage(BufferedImage characterImage , FighterImageThumbnailSettings fighterImageThumbnailSettings, Player player) {
+        var isFlip = player.getFighter(0).isFlip() !=
+                fighterImageThumbnailSettings.isFlip();
         characterImage = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
         characterImage = imageService.offsetImage(characterImage, fighterImageThumbnailSettings.getOffset());
-        characterImage = imageService.flipImage(characterImage, fighterImageThumbnailSettings.isFlip());
+        characterImage = imageService.flipImage(characterImage, isFlip);
         characterImage = imageService.cropImage(characterImage, thumbnailWidth/2, thumbnailHeight);
         return characterImage;
     }

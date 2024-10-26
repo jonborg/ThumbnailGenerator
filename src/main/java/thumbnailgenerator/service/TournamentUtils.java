@@ -29,7 +29,11 @@ public class TournamentUtils {
         tournamentsList.forEach(tournament ->{
             var textSettings = TextSettings.loadTextSettings(tournament.getTournamentId());
             LOGGER.debug("{} -> {}.", tournament.getName(), textSettings);
-            tournament.getThumbnailSettingsByGame(Game.SSBU).setTextSettings(textSettings);
+            for (Game game : Game.values()) {
+                tournament
+                        .getThumbnailSettingsByGame(game)
+                        .setTextSettings(textSettings);
+            }
         });
     }
 
