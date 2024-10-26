@@ -53,6 +53,7 @@ import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.converter.GameConverter;
 import thumbnailgenerator.utils.json.JSONReader;
+import ui.filechooser.FileChooserFactory;
 
 @Controller
 public class ThumbnailGeneratorController implements Initializable {
@@ -175,7 +176,7 @@ public class ThumbnailGeneratorController implements Initializable {
     //MenuBar
     public void createMultipleThumbnails(ActionEvent actionEvent) {
         LOGGER.info("User chose to generate multiple thumbnails at once.");
-        FileChooser fileChooser = new FileChooser();
+        var fileChooser = FileChooserFactory.createDefaultFileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
@@ -316,9 +317,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public void generateTop8(ActionEvent actionEvent) {
         LOGGER.info("User chose to generate top8.");
-        File workingDirectory = new File(System.getProperty("user.dir"));
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(workingDirectory);
+        var fileChooser = FileChooserFactory.createDefaultFileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
@@ -328,8 +327,7 @@ public class ThumbnailGeneratorController implements Initializable {
                 AlertFactory.displayInfo("Top 8 was successfully generated and saved!");
             }catch(Top8FromFileException | FileNotFoundException e ){
                 //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
-            } catch (FontNotFoundException | FighterImageSettingsNotFoundException e) {
-                e.printStackTrace();
+            }
         }
     }
 }

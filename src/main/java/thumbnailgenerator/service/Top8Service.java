@@ -11,6 +11,8 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
+
+import exception.Top8FromFileException;
 import lombok.var;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import org.apache.logging.log4j.LogManager;
@@ -46,15 +48,14 @@ public class Top8Service {
     private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
 
     public void generateTop8FromFile(InputStream inputStream, Boolean saveLocally)
-            throws FighterImageSettingsNotFoundException,
-            ThumbnailFromFileException, FontNotFoundException {
+            throws Top8FromFileException {
         var top8 = top8FileService.getTop8FromFile(inputStream,saveLocally);
         var invalidThumbnailList = new ArrayList<Thumbnail>();
         try {
             generateTop8(top8);
         }catch(IOException e) {
             AlertFactory.displayError(e.getMessage());
-            throw new ThumbnailFromFileException();
+            throw new Top8FromFileException();
         }
     }
 
