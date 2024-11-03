@@ -129,7 +129,7 @@ public class FromStartGGController implements Initializable {
 
         String query;
         String mainBody;
-        var eventName = eventSelect.getSelectionModel().getSelectedItem().getName();
+        var selectedEvent = eventSelect.getSelectionModel().getSelectedItem();
         StringBuilder result = new StringBuilder();
 
         try{
@@ -156,12 +156,14 @@ public class FromStartGGController implements Initializable {
                         return;
                 }
                 var selectedStream = streamSelect.getSelectionModel().getSelectedItem();
-                var searchGamesGG = SearchGamesGG.builder()
-                                                 .query(query)
-                                                 .eventName(eventName)
-                                                 .searchMode(mainBody)
-                                                 .stream(selectedStream)
-                                                 .build();
+                var searchGamesGG = SearchGamesGG
+                        .builder()
+                        .query(query)
+                        .eventName(selectedEvent.getName())
+                        .searchMode(mainBody)
+                        .stream(selectedStream)
+                        .gameId(selectedEvent.getVideoGameGG().getId())
+                        .build();
                 result.append(startGGService
                         .readSetsFromSmashGGPage(searchGamesGG, totalPages));
             }while(readPages<totalPages);

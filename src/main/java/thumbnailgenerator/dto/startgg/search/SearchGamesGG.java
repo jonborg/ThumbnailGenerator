@@ -13,4 +13,5 @@ public class SearchGamesGG {
     String eventName;
     String searchMode;
     StreamGG stream;
+    int gameId;
 }

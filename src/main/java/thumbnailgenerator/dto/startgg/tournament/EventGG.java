@@ -15,6 +15,9 @@ public class EventGG {
     @SerializedName("name")
     private String name;
     @Expose
+    @SerializedName("videogame")
+    private VideoGameGG videoGameGG;
+    @Expose
     @SerializedName("phases")
     private List<PhaseGG> phases;
 

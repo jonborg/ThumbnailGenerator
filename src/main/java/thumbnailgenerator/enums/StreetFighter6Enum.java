@@ -5,37 +5,39 @@ import lombok.Getter;
 @Getter
 public enum StreetFighter6Enum {
 
-    RYU("Ryu", "ryu", 0),
-    LUKE("Luke", "luke", 0),
-    JAMIE("Jamie", "jamie", 0),
-    CHUN_LI("Chun-Li", "chunli", 0),
-    GUILE("Guile", "guile", 0),
-    KIMBERLY("Kimberly", "kimberly", 0),
-    JURI("Juri", "juri", 0),
-    KEN("Ken", "ken", 0),
-    BLANKA("Blanka", "blanka", 0),
-    DHALSIM("Dhalsim", "dhalsim", 0),
-    E_HONDA("E.Honda", "ehonda", 0),
-    DEE_JAY("Dee Jay", "deejay", 0),
-    MANON("Manon", "manon", 0),
-    MARISA("Marisa", "marisa", 0),
-    JP("JP", "jp", 0),
-    ZANGIEF("Zangief", "zangief", 0),
-    LILY("Lily", "lily", 0),
-    CAMMY("Cammy", "cammy", 0),
-    RASHID("Rashid", "rashid", 0),
-    A_K_I("A.K.I.", "aki", 0),
-    ED("Ed", "ed", 0),
-    AKUMA("Akuma", "akuma", 0);
+    RYU("Ryu", "ryu", 2287),
+    LUKE("Luke", "luke", 2284),
+    JAMIE("Jamie", "jamie", 2278),
+    CHUN_LI("Chun-Li", "chunli", 2273),
+    GUILE("Guile", "guile", 2277),
+    KIMBERLY("Kimberly", "kimberly", 2282),
+    JURI("Juri", "juri", 2280),
+    KEN("Ken", "ken", 2281),
+    BLANKA("Blanka", "blanka", 2271),
+    DHALSIM("Dhalsim", "dhalsim", 2275),
+    E_HONDA("E.Honda", "ehonda", 2276),
+    DEE_JAY("Dee Jay", "deejay", 2274),
+    MANON("Manon", "manon", 2285),
+    MARISA("Marisa", "marisa", 2286),
+    JP("JP", "jp", 2279),
+    ZANGIEF("Zangief", "zangief", 2288),
+    LILY("Lily", "lily", 2283),
+    CAMMY("Cammy", "cammy", 2272),
+    RASHID("Rashid", "rashid", 2314),
+    A_K_I("A.K.I.", "aki", 2342),
+    ED("Ed", "ed", 2442),
+    AKUMA("Akuma", "akuma", 2495),
+    M_BISON("M. Bison", "m_bison", 2506),
+    TERRY("Terry", "terry", 2596);
 
     private final String name;
     private final String code;
-    private final int startggId;
+    private final int startGGId;
 
 
-    StreetFighter6Enum(String name, String code, int startggId) {
+    StreetFighter6Enum(String name, String code, int startGGId) {
         this.name = name;
         this.code = code;
-        this.startggId = startggId;
+        this.startGGId = startGGId;
     }
 }

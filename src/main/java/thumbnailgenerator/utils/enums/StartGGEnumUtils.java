@@ -1,26 +1,35 @@
 package thumbnailgenerator.utils.enums;
 
+import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.enums.RivalsOfAether2Enum;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class CharacterEnumUtils {
+public class StartGGEnumUtils {
 
     public static <E extends Enum<E>> String findCodeByName(Class<E> enumClass, String name) {
         return findValue(enumClass, String.valueOf(name), "getName");
     }
 
-    public static <E extends Enum<E>> String findCodeByStartggId(int startggId) {
-        String value = findValue(SmashUltimateEnum.class, String.valueOf(startggId), "getStartggId");
+    public static <E extends Enum<E>> String findCodeByStartggId(int startGGId) {
+        String value = findValue(SmashUltimateEnum.class, String.valueOf(startGGId), "getStartGGId");
         if (value != null) return value;
-        value = findValue(StreetFighter6Enum.class, String.valueOf(startggId), "getStartggId");
+        value = findValue(StreetFighter6Enum.class, String.valueOf(startGGId), "getStartGGId");
         if (value != null) return value;
-        value = findValue(RivalsOfAether2Enum.class, String.valueOf(startggId), "getStartggId");
+        value = findValue(RivalsOfAether2Enum.class, String.valueOf(startGGId), "getStartGGId");
         return value;
+    }
+
+    public static Game findGameByStartGGId(int startGGId) {
+        return Arrays.stream(Game.values())
+                .filter(g -> g.getStartGGId() == startGGId)
+                .findFirst()
+                .get();
     }
 
     private static <E extends Enum<E>> String findValue(Class<E> enumClass, String searchParam, String methodName) {

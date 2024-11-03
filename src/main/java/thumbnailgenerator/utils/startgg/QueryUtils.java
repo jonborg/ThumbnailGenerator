@@ -12,6 +12,7 @@ public class QueryUtils {
                 "tournament(slug:  \""+ urlSplit[3] + "/" + urlSplit[4] + "\") {id " +
                 "streams{ streamName }" +
                 "events{ id name " +
+                "videogame { id name } " +
                 "phases{ id name " +
                 "phaseGroups{ nodes{ id displayIdentifier " +
                 "}}}}}}";

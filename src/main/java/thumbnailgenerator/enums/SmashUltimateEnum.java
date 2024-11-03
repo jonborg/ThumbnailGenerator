@@ -107,11 +107,11 @@ public enum SmashUltimateEnum {
 
     private final String name;
     private final String code;
-    private final int startggId;
+    private final int startGGId;
 
-    SmashUltimateEnum(String name, String code, int startggId) {
+    SmashUltimateEnum(String name, String code, int startGGId) {
         this.name = name;
         this.code = code;
-        this.startggId = startggId;
+        this.startGGId = startGGId;
     }
 }

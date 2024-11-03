@@ -29,7 +29,6 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Player;
@@ -37,11 +36,10 @@ import thumbnailgenerator.enums.RivalsOfAether2Enum;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
 import thumbnailgenerator.factory.CharacterImageFetcherFactory;
-import thumbnailgenerator.service.CharacterImageFetcher;
 import thumbnailgenerator.service.SmashUltimateCharacterImageFetcher;
 import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-import thumbnailgenerator.utils.enums.CharacterEnumUtils;
+import thumbnailgenerator.utils.enums.StartGGEnumUtils;
 
 @Component
 @Scope("prototype")
@@ -70,7 +68,7 @@ public class PlayerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(SmashUltimateEnum.class));
+        initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(SmashUltimateEnum.class));
         initFighterAltsSpinner(alt);
     }
 
@@ -108,13 +106,13 @@ public class PlayerController implements Initializable {
 
         switch (parentController.getGame()) {
             case ROA2:
-                return CharacterEnumUtils
+                return StartGGEnumUtils
                         .findCodeByName(RivalsOfAether2Enum.class, sel);
             case SF6:
-                return CharacterEnumUtils
+                return StartGGEnumUtils
                         .findCodeByName(StreetFighter6Enum.class, sel);
             case SSBU:
-                return CharacterEnumUtils
+                return StartGGEnumUtils
                         .findCodeByName(SmashUltimateEnum.class, sel);
 
         }
@@ -149,15 +147,15 @@ public class PlayerController implements Initializable {
     protected void updateGameData(Game game){
         switch (game) {
             case ROA2:
-                initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(RivalsOfAether2Enum.class));
+                initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(RivalsOfAether2Enum.class));
                 alt.setDisable(true);
                 break;
             case SF6:
-                initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(StreetFighter6Enum.class));
+                initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(StreetFighter6Enum.class));
                 alt.setDisable(true);
                 break;
             case SSBU:
-                initFightersComboBox(fighter, CharacterEnumUtils.getAllNames(SmashUltimateEnum.class));
+                initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(SmashUltimateEnum.class));
                 alt.setDisable(false);
                 break;
 

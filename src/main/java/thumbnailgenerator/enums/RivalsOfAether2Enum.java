@@ -18,12 +18,12 @@ public enum RivalsOfAether2Enum {
 
     private final String name;
     private final String code;
-    private final int startggId;
+    private final int startGGId;
 
 
-    RivalsOfAether2Enum(String name, String code, int startggId) {
+    RivalsOfAether2Enum(String name, String code, int startGGId) {
         this.name = name;
         this.code = code;
-        this.startggId = startggId;
+        this.startGGId = startGGId;
     }
 }

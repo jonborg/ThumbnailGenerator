@@ -9,10 +9,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
 import org.springframework.stereotype.Service;
+import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.startgg.match.SetGG;
 import thumbnailgenerator.dto.startgg.match.StreamGG;
 import thumbnailgenerator.dto.startgg.search.SearchGamesGG;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
+import thumbnailgenerator.utils.enums.StartGGEnumUtils;
 import thumbnailgenerator.utils.json.JSONReader;
 
 import java.util.concurrent.CompletableFuture;
@@ -54,12 +56,13 @@ public class StartGGService {
         LOGGER.debug("Running query -> {}", searchGamesGG.getQuery());
         JsonObject result = runQuery(searchGamesGG.getQuery());
         LOGGER.debug("Result -> {}", result.toString());
+        Game eventGame = StartGGEnumUtils.findGameByStartGGId(searchGamesGG.getGameId());
 
         if (totalPages < 0){
             totalPages = result.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode()).getAsJsonObject("sets")
                     .getAsJsonObject("pageInfo").getAsJsonPrimitive("totalPages").getAsInt();
             foundSets.append(TournamentUtils.getSelectedTournament().getTournamentId()
-                    + ";GAME;" + searchGamesGG.getEventName() + ";RENDER"+ System.lineSeparator());
+                    + ";" + eventGame +";" + searchGamesGG.getEventName() + ";RENDER"+ System.lineSeparator());
         }
         SetGG set = (SetGG) JSONReader
                 .getJSONObject(result.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode())
