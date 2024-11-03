@@ -13,7 +13,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <jdk.version>1.8</jdk.version>
         <project.version>${project.version}</project.version>
-        <file.version>3.0.0.0</file.version>
+        <file.version>3.1.0.1</file.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
     </properties>
 
@@ -115,7 +115,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.3</version>
                 <configuration>
-                    <mainClass>HelloFX</mainClass>
+                    <mainClass>thumbnailgenerator/Main</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -132,7 +132,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>App</mainClass>
+                            <mainClass>thumbnailgenerator/Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -156,7 +156,7 @@
                             <jar>${project.build.directory}/${project.artifactId}-${project.version}-jar-with-dependencies.jar</jar>
                             <outfile>Thumbnail Generator.exe</outfile>
                             <classPath>
-                                <mainClass>App</mainClass>
+                                <mainClass>thumbnailgenerator/Main</mainClass>
                                 <preCp>anything</preCp>
                             </classPath>
                             <jre>

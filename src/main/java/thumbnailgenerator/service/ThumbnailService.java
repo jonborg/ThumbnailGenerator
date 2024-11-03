@@ -44,9 +44,9 @@ public class ThumbnailService {
     private @Autowired ImageService imageService;
     private @Autowired ThumbnailFileService thumbnailFileService;
     private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
-    private @Value("${thumbnail.size.width}") int thumbnailWidth;
-    private @Value("${thumbnail.size.height}") int thumbnailHeight;
-    private @Value("${thumbnail.path.save}") String saveThumbnailsPath;
+    private @Value("${thumbnail.size.width:1280}") Integer thumbnailWidth;
+    private @Value("${thumbnail.size.height:720}") Integer thumbnailHeight;
+    private @Value("${thumbnail.path.save:generated_thumbnails/}") String saveThumbnailsPath;
 
     public void generateAndSaveThumbnail(Thumbnail thumbnail)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
