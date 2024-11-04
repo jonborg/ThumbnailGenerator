@@ -14,7 +14,6 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,18 +25,13 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 import thumbnailgenerator.JavaFxApplication;
-import thumbnailgenerator.Main;
-import thumbnailgenerator.config.SpringApplicationContext;
 import thumbnailgenerator.config.SpringFXMLLoader;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
@@ -200,11 +194,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public void createFromSmashGG(ActionEvent actionEvent) {
         try {
-
-            ConfigurableApplicationContext applicationContext = new SpringApplicationBuilder(Main.class).run();
-            FXMLLoader loader = new FXMLLoader(ThumbnailGeneratorController.class.getClassLoader().getResource(
-                    "thumbnailgenerator/ui/fxml/fromStartGG.fxml"));
-            loader.setControllerFactory(applicationContext::getBean);
+            SpringFXMLLoader loader = new SpringFXMLLoader("thumbnailgenerator/ui/fxml/fromStartGG.fxml");
 
             Parent root = loader.load();
             root.setOnMousePressed(e -> root.requestFocus());
@@ -229,11 +219,11 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public void createNewTournament(ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("thumbnailgenerator/ui/fxml/tournamentsCreate.fxml"));
+            SpringFXMLLoader loader = new SpringFXMLLoader("thumbnailgenerator/ui/fxml/tournamentsCreate.fxml");
             Stage stage = new Stage();
             stage.setTitle("Create New Tournament");
             stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
-            stage.setScene(new Scene(root));
+            stage.setScene(new Scene(loader.load()));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -257,11 +247,11 @@ public class ThumbnailGeneratorController implements Initializable {
                 setSelectedEdit(tournament);
                 try {
                     LOGGER.info("Selected tournament {} for editing.", tournament.getName());
-                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("thumbnailgenerator/ui/fxml/tournamentsEdit.fxml"));
+                    SpringFXMLLoader loader = new SpringFXMLLoader("thumbnailgenerator/ui/fxml/tournamentsEdit.fxml");
                     Stage stage = new Stage();
                     stage.setTitle("Edit Tournament " + tournament.getName());
                     stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
-                    stage.setScene(new Scene(root));
+                    stage.setScene(new Scene(loader.load()));
                     stage.show();
                 } catch (IOException e) {
                     e.printStackTrace();

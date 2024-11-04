@@ -3,7 +3,6 @@ package thumbnailgenerator;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -13,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import thumbnailgenerator.config.ApplicationContextProvider;
+import thumbnailgenerator.config.SpringFXMLLoader;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.controller.ThumbnailGeneratorController;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
@@ -27,9 +28,8 @@ public class JavaFxApplication extends Application {
     public void init() throws IOException {
         TournamentUtils.initTournamentsListAndSettings();
         applicationContext = new SpringApplicationBuilder(Main.class).run();
-        FXMLLoader fxmlLoader = new FXMLLoader(ThumbnailGeneratorController.class.getClassLoader().getResource(
-                "thumbnailgenerator/ui/fxml/thumbnailGenerator.fxml"));
-        fxmlLoader.setControllerFactory(applicationContext::getBean);
+        ApplicationContextProvider.setApplicationContext(applicationContext);
+        SpringFXMLLoader fxmlLoader = new SpringFXMLLoader("thumbnailgenerator/ui/fxml/thumbnailGenerator.fxml");
         root = fxmlLoader.load();
     }
 
