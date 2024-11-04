@@ -2,6 +2,7 @@ package thumbnailgenerator.ui.controller;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +39,10 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
+import thumbnailgenerator.exception.FontNotFoundException;
+import thumbnailgenerator.exception.LocalImageNotFoundException;
+import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.utils.converter.GameConverter;
 import thumbnailgenerator.utils.converter.SmashUltimateFighterArtTypeConverter;
@@ -290,20 +295,20 @@ public class TournamentsCreateController implements Initializable {
     }
 
 
-    public void previewThumbnail(ActionEvent actionEvent) {
+    public void previewThumbnail(ActionEvent actionEvent)
+            throws FighterImageSettingsNotFoundException,
+            OnlineImageNotFoundException, MalformedURLException,
+            FontNotFoundException, LocalImageNotFoundException {
         if (!validateParameters()){
             return;
         }
         Tournament tournament = generateTournamentWithCurrentSettings();
 
-        try{
-            BufferedImage previewImage = thumbnailService
-                    .generatePreview(tournament, Game.SSBU, artType.getSelectionModel().getSelectedItem());
-            Image image = SwingFXUtils.toFXImage(previewImage, null);
-            preview.setImage(image);
-        }catch(Exception e){
-            LOGGER.catching(e);
-        }
+        BufferedImage previewImage = thumbnailService
+                .generatePreview(tournament, Game.SSBU, artType.getSelectionModel().getSelectedItem());
+        Image image = SwingFXUtils.toFXImage(previewImage, null);
+        preview.setImage(image);
+
     }
 
 

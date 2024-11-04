@@ -10,10 +10,12 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.codehaus.plexus.util.ExceptionUtils;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.controller.ThumbnailGeneratorController;
+import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
 public class JavaFxApplication extends Application {
 
@@ -29,12 +31,12 @@ public class JavaFxApplication extends Application {
                 "thumbnailgenerator/ui/fxml/thumbnailGenerator.fxml"));
         fxmlLoader.setControllerFactory(applicationContext::getBean);
         root = fxmlLoader.load();
-
     }
 
     @Override
     public void start(Stage primaryStage) {
         LOGGER.info("Starting application.");
+        Thread.setDefaultUncaughtExceptionHandler(JavaFxApplication::handleGlobalException);
         startApp(primaryStage);
     }
 
@@ -50,4 +52,14 @@ public class JavaFxApplication extends Application {
         applicationContext.close();
         Platform.exit();
     }
+
+    private static void handleGlobalException(Thread t, Throwable e) {
+        System.err.println("An unexpected error occurred in thread " + t.getName() + ": " + e.getMessage());
+        e.printStackTrace();
+        Platform.runLater(() -> {
+            AlertFactory.displayError("An unexpected error occurred:\n",
+                    ExceptionUtils.getStackTrace(e));
+        });
+    }
+
 }
