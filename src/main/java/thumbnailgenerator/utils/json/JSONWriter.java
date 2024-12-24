@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.codehaus.plexus.util.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +16,6 @@ import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.file.FileUtils;
 

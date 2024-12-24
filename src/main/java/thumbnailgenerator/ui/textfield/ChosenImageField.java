@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
-import lombok.var;
 import ui.filechooser.FileChooserFactory;
 
 public class ChosenImageField extends StackPane {

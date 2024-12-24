@@ -8,7 +8,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
-import org.codehaus.plexus.util.ExceptionUtils;
+
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import thumbnailgenerator.adapter.FileThumbnailSettingsTypeAdapter;
 import thumbnailgenerator.adapter.FileTop8SettingsTypeAdapter;
 import thumbnailgenerator.dto.FileThumbnailSettings;
