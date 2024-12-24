@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
 
-import lombok.var;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import top8.image.FighterImageTop8;

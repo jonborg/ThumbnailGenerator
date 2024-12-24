@@ -42,6 +42,7 @@ public class TournamentsController implements Initializable {
         getTournamentsList().forEach(tournament -> {
             TournamentButton button = new TournamentButton(tournament);
             button.setToggleGroup(tournamentsGroup);
+            button.setId(tournament.getTournamentId());
             tournamentsButtons.add(button);
             tournamentsBox.getChildren().add(button);
         });

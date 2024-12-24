@@ -10,11 +10,11 @@ import fighter.image.FighterImage;
 import fighter.image.ImageUtils;
 import fighter.image.settings.FighterImageSettings;
 import lombok.Getter;
-import lombok.var;
+
 import net.objecthunter.exp4j.ExpressionBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.codehaus.plexus.util.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import top8.generate.Top8;
 import top8.image.slot.PlayerSlot;
 import ui.factory.alert.AlertFactory;

@@ -26,10 +26,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import file.json.JSONWriter;
-import lombok.var;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.codehaus.plexus.util.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import thumbnail.image.FighterImageThumbnail;
 import thumbnail.image.settings.ImageSettings;
 import thumbnail.text.TextToImage;

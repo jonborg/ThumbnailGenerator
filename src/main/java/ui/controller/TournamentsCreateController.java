@@ -29,7 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import lombok.var;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thumbnail.generate.Thumbnail;

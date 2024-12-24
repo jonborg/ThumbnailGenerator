@@ -2,7 +2,7 @@ package file.json;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import org.codehaus.plexus.util.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import ui.factory.alert.AlertFactory;
 
 import java.io.FileNotFoundException;

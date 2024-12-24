@@ -7,7 +7,6 @@ import fighter.image.settings.FighterArtSettings;
 import java.util.List;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.var;
 
 @Getter
 @ToString

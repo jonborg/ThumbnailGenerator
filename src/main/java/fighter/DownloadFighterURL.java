@@ -2,7 +2,6 @@ package fighter;
 
 import exception.OnlineImageNotFoundException;
 import file.FileUtils;
-import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
