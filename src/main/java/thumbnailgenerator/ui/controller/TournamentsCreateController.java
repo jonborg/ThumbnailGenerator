@@ -69,7 +69,7 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField background;
     @FXML
-    protected ComboBox<FighterArtType> artType;
+    protected ComboBox<FighterArtType> artTypeThumbnail;
     @FXML
     protected ChosenJsonField fighterImageSettingsFile;
     @FXML
@@ -114,7 +114,7 @@ public class TournamentsCreateController implements Initializable {
     protected Button cancelButton;
     @FXML
     protected ImageView preview;
-    protected List<FighterArtSettings> artTypeDir = new ArrayList<>();
+    protected List<FighterArtSettings> artTypeDirThumbnail = new ArrayList<>();
     protected List<FighterArtSettings> artTypeDirTop8 = new ArrayList<>();
     protected List<FileThumbnailSettings> fileThumbnailSettingsList;
     protected List<FileTop8Settings> fileTop8SettingsList;
@@ -242,21 +242,21 @@ public class TournamentsCreateController implements Initializable {
                     && v.equals(SmashUltimateFighterArtType.RENDER)){
                 settingsFile.setFighterImageSettingsPath(renderSettings);
             }
-            artTypeDir.add(settingsFile);
+            artTypeDirThumbnail.add(settingsFile);
         }
 
-        artType.getItems().addAll(SmashUltimateFighterArtType.values());
-        artType.setConverter(new FighterArtTypeConverter());
-        artType.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
-        artType.getSelectionModel().selectedItemProperty()
+        artTypeThumbnail.getItems().addAll(SmashUltimateFighterArtType.values());
+        artTypeThumbnail.setConverter(new FighterArtTypeConverter());
+        artTypeThumbnail.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
+        artTypeThumbnail.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
-                    for (var dir : artTypeDir){
+                    for (var dir : artTypeDirThumbnail){
                         if (oldValue.equals(dir.getArtType())){
                             dir.setFighterImageSettingsPath(
                                     fighterImageSettingsFile.getText());
                         }
                     }
-                    for (var dir : artTypeDir){
+                    for (var dir : artTypeDirThumbnail){
                         if (newValue.equals(dir.getArtType())){
                             fighterImageSettingsFile.setText(dir.getFighterImageSettingsPath());
                         }
@@ -306,16 +306,15 @@ public class TournamentsCreateController implements Initializable {
         Tournament tournament = generateTournamentWithCurrentSettings();
 
         BufferedImage previewImage = thumbnailService
-                .generatePreview(tournament, Game.SSBU, artType.getSelectionModel().getSelectedItem());
+                .generatePreview(tournament, Game.SSBU, artTypeThumbnail.getSelectionModel().getSelectedItem());
         Image image = SwingFXUtils.toFXImage(previewImage, null);
         preview.setImage(image);
-
     }
 
 
     protected Tournament generateTournamentWithCurrentSettings(){
-        var lastSelectedArt = artType.getSelectionModel().getSelectedItem();
-        for (var dir : artTypeDir){
+        var lastSelectedArt = artTypeThumbnail.getSelectionModel().getSelectedItem();
+        for (var dir : artTypeDirThumbnail){
             if(lastSelectedArt.equals(dir.getArtType())){
                 var result = fighterImageSettingsFile.getText();
                 if (result == null){
@@ -348,7 +347,6 @@ public class TournamentsCreateController implements Initializable {
         for (FileThumbnailSettings settings : newFileThumbnailSettingsList){
             settings.setTextSettings(textSettings);
         }
-
         return new Tournament(id.getText(), name.getText(),
                 logo.getText(), newFileThumbnailSettingsList, newFileTop8SettingsList);
     }
@@ -401,7 +399,7 @@ public class TournamentsCreateController implements Initializable {
         thumbnailSettings.setBackground(background.getText());
         thumbnailSettings.setForeground(foreground.getText());
         thumbnailSettings.getArtTypeDir().stream()
-                .filter(a -> a.getArtType().equals(artType.getSelectionModel().getSelectedItem()))
+                .filter(a -> a.getArtType().equals(artTypeThumbnail.getSelectionModel().getSelectedItem()))
                 .findFirst()
                 .get()
                 .setFighterImageSettingsPath(fighterImageSettingsFile.getText());
@@ -427,9 +425,9 @@ public class TournamentsCreateController implements Initializable {
                 .get();
         background.setText(thumbnailSettings.getBackground());
         foreground.setText(thumbnailSettings.getBackground());
-        artType.getSelectionModel().select(0);
+        artTypeThumbnail.getSelectionModel().select(0);
         fighterImageSettingsFile.setText(thumbnailSettings.getArtTypeDir().stream()
-                .filter(a -> a.getArtType().equals(artType.getSelectionModel().getSelectedItem()))
+                .filter(a -> a.getArtType().equals(artTypeThumbnail.getSelectionModel().getSelectedItem()))
                 .findFirst()
                 .get()
                 .getFighterImageSettingsPath());

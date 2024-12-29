@@ -7,7 +7,10 @@ public enum ButtonId {
     TOURNAMENT_WEEKLY_L("#weeklyl"),
     TOURNAMENT_INVICTA("#invicta"),
     SAVE_THUMBNAIL("#saveButton"),
-    GENERATE_FROM_FILE("#fromFile");
+    GENERATE_FROM_FILE("#fromFile"),
+    SAVE_TOURNAMENT("#saveButton"),
+    CANCEL_TOURNAMENT("#cancelButton"),
+    TOURNAMENT_THUMBNAIL_PREVIEW("#previewButton");
 
     private final String value;
 

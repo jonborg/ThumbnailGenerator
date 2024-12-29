@@ -60,7 +60,6 @@ import ui.filechooser.FileChooserFactory;
 
 @Controller
 public class ThumbnailGeneratorController implements Initializable {
-
     private final Logger LOGGER = LogManager.getLogger(ThumbnailGeneratorController.class);
     private static Stage stage;
     private @FXML AnchorPane tournaments;
@@ -77,9 +76,9 @@ public class ThumbnailGeneratorController implements Initializable {
     private @FXML CheckBox saveLocally;
     private @FXML Button saveButton;
     private @FXML Button fromFile;
-    private @FXML Menu menuCopy;
-    private @FXML Menu menuEdit;
-    private @FXML Menu menuDelete;
+    private @FXML Menu menuCopyTournament;
+    private @FXML Menu menuEditTournament;
+    private @FXML Menu menuDeleteTournament;
     private @Autowired ThumbnailService thumbnailService;
     private @Autowired Top8Service top8Service;
     private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
@@ -201,6 +200,7 @@ public class ThumbnailGeneratorController implements Initializable {
             SpringFXMLLoader loader = new SpringFXMLLoader("thumbnailgenerator/ui/fxml/fromStartGG.fxml");
 
             Parent root = loader.load();
+            root.setId("startGGWindow");
             root.setOnMousePressed(e -> root.requestFocus());
             FromStartGGController controller = loader.getController();
             Stage stage = new Stage();
@@ -238,15 +238,17 @@ public class ThumbnailGeneratorController implements Initializable {
         String style = "-fx-padding: 0 100 0 20";
         for (Tournament tournament : getTournamentsList()){
             MenuItem copyOption = new MenuItem(tournament.getName());
+            copyOption.setId("menuCopy_"+tournament.getTournamentId());
             copyOption.setStyle(style);
             copyOption.setOnAction(event -> {
                 LOGGER.info("Creating copy of tournament {}.", tournament.toString());
                 updateTournamentsList(tournament);
             });
-            menuCopy.getItems().add(copyOption);
+            menuCopyTournament.getItems().add(copyOption);
 
             MenuItem editOption = new MenuItem(tournament.getName());
             editOption.setStyle(style);
+            editOption.setId("menuEdit_"+tournament.getTournamentId());
             editOption.setOnAction(event -> {
                 setSelectedEdit(tournament);
                 try {
@@ -261,12 +263,13 @@ public class ThumbnailGeneratorController implements Initializable {
                     e.printStackTrace();
                 }
             });
-            menuEdit.getItems().add(editOption);
+            menuEditTournament.getItems().add(editOption);
 
             MenuItem deleteOption = new MenuItem(tournament.getName());
+            deleteOption.setId("menuDelete_"+tournament.getTournamentId());
             deleteOption.setStyle(style);
             deleteOption.setOnAction(event -> deleteTournament(tournament));
-            menuDelete.getItems().add(deleteOption);
+            menuDeleteTournament.getItems().add(deleteOption);
         }
     }
 

@@ -4,6 +4,17 @@ import java.io.File;
 
 public class WaitUtils {
 
+    private WaitUtils(){
+        throw new UnsupportedOperationException("Utils class");
+    }
+
+    public static void waitInSeconds(double seconds) throws InterruptedException {
+        Thread.sleep((long) seconds * 1000);
+    }
+
+    public static void waitForWindowToLoad() throws InterruptedException {
+        waitInSeconds(1);
+    }
 
     public static boolean waitForFile(File file) {
         int timeoutSeconds = 10;
@@ -14,7 +25,7 @@ public class WaitUtils {
                 return false;
             }
             try {
-                Thread.sleep(500);
+                waitInSeconds(0.5);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return false;

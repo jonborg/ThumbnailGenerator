@@ -13,7 +13,7 @@
 
     <HBox styleClass="mainBox" spacing="15" >
         <VBox spacing="10">
-            <ScrollPane maxHeight="600" vbarPolicy="ALWAYS" hbarPolicy="NEVER">
+            <ScrollPane fx:id="tournamentSettings" maxHeight="600" vbarPolicy="ALWAYS" hbarPolicy="NEVER">
                 <VBox>
                     <TitledPane text="General Settings" collapsible="false" styleClass="settingsBox">
                         <VBox spacing="15">
@@ -53,7 +53,7 @@
                             </VBox>
                             <VBox>
                                 <Label text="Fighter Image Settings File:"/>
-                                <ComboBox fx:id="artType" styleClass="textfield"/>
+                                <ComboBox fx:id="artTypeThumbnail" styleClass="textfield"/>
                                 <ChosenJsonField fx:id="fighterImageSettingsFile"/>
                             </VBox>
                         </VBox>

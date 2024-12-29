@@ -42,9 +42,9 @@ public class TournamentsEditController extends TournamentsCreateController {
         fighterImageSettingsFile.setText(thumbnailRenderSettings);
         if(tournament.getThumbnailSettingsByGame(Game.SSBU).getArtTypeDir() != null
                 && !tournament.getThumbnailSettingsByGame(Game.SSBU).getArtTypeDir().isEmpty()) {
-            artTypeDir = new ArrayList<>();
+            artTypeDirThumbnail = new ArrayList<>();
             tournament.getThumbnailSettingsByGame(Game.SSBU)
-                    .getArtTypeDir().forEach(dir -> artTypeDir.add(dir.clone()));
+                    .getArtTypeDir().forEach(dir -> artTypeDirThumbnail.add(dir.clone()));
         }
         foregroundTop8.setText(tournament.getTop8SettingsByGame(Game.SSBU).getForeground());
         backgroundTop8.setText(tournament.getTop8SettingsByGame(Game.SSBU).getBackground());

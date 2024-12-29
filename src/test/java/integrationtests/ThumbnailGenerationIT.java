@@ -1,8 +1,8 @@
-package thumbnail;
+package integrationtests;
 
 import crosscutting.CustomApplicationTest;
-import crosscutting.PlayerInput;
-import crosscutting.ThumbnailInput;
+import dto.PlayerInput;
+import dto.ThumbnailInput;
 import enums.ButtonId;
 import enums.CheckBoxId;
 import enums.ComboBoxId;
@@ -16,12 +16,12 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import tournament.TournamentUtils;
 import ui.controller.ThumbnailGeneratorController;
+import utils.FileUtils;
 import utils.WaitUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
 
-public class ThumbnailGenerationTest extends CustomApplicationTest {
+public class ThumbnailGenerationIT extends CustomApplicationTest {
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -52,8 +52,8 @@ public class ThumbnailGenerationTest extends CustomApplicationTest {
     public void create_validThumbnailRenders_success() throws IOException {
         //Arrange
         ThumbnailInput input = generateThumbnailInput();
-        File actualImage = new File(System.getProperty("user.dir") + "/generated_thumbnails/" + input.getExpectedFileName());
-        File expectedImage = new File(getClass().getResource("/expected/invictaMarioSonicThumbnail.png").getPath());
+        File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
+        File expectedImage = FileUtils.getFileFromResources("/expected/invictaMarioSonicThumbnail.png");
 
         clickOnButton(ButtonId.TOURNAMENT_INVICTA);
         fillRoundData(input);
@@ -79,8 +79,8 @@ public class ThumbnailGenerationTest extends CustomApplicationTest {
         //Arrange
         ThumbnailInput input = generateThumbnailInput();
         input.setArtType(FighterArtType.MURAL);
-        File actualImage = new File(System.getProperty("user.dir") + "/generated_thumbnails/" + input.getExpectedFileName());
-        File expectedImage = new File(getClass().getResource("/expected/invictaMuralMarioSonicThumbnail.png").getPath());
+        File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
+        File expectedImage = FileUtils.getFileFromResources("/expected/invictaMuralMarioSonicThumbnail.png");
 
         clickOnButton(ButtonId.TOURNAMENT_INVICTA);
         fillRoundData(input);
@@ -105,10 +105,10 @@ public class ThumbnailGenerationTest extends CustomApplicationTest {
     public void create_validThumbnailSaveLocally_success() throws IOException {
         //Arrange
         ThumbnailInput input = generateThumbnailInput();
-        File actualImage = new File(System.getProperty("user.dir") + "/generated_thumbnails/" + input.getExpectedFileName());
-        File expectedImage = new File(getClass().getResource("/expected/invictaMarioSonicThumbnail.png").getPath());
-        File marioImage = new File(System.getProperty("user.dir") + "/assets/fighters/mario/1.png");
-        File sonicImage = new File(System.getProperty("user.dir") + "/assets/fighters/sonic/1.png");
+        File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
+        File expectedImage = FileUtils.getFileFromResources("/expected/invictaMarioSonicThumbnail.png");
+        File marioImage = FileUtils.getCharacterImage("mario", 1);
+        File sonicImage = FileUtils.getCharacterImage("sonic", 1);
 
         clickOnButton(ButtonId.TOURNAMENT_INVICTA);
         fillRoundData(input);
@@ -124,16 +124,14 @@ public class ThumbnailGenerationTest extends CustomApplicationTest {
         assertTrue(isFileCreated);
         assertTrue(marioImage.exists());
         assertTrue(sonicImage.exists());
-
-        byte[] actualImageBytes = Files.readAllBytes(actualImage.toPath());
-        byte[] expectedImageBytes = Files.readAllBytes(expectedImage.toPath());
-        assertArrayEquals(expectedImageBytes, actualImageBytes);
+        assertArrayEquals(
+                Files.readAllBytes(expectedImage.toPath()),
+                Files.readAllBytes(actualImage.toPath())
+        );
         assertTrue(actualImage.delete());
         assertTrue(marioImage.delete());
         assertTrue(sonicImage.delete());
     }
-
-
 
     private void fillRoundData(ThumbnailInput input){
         writeInTextField(TextFieldId.ROUND, input.getRound());
@@ -161,5 +159,4 @@ public class ThumbnailGenerationTest extends CustomApplicationTest {
                 .players(players)
                 .build();
     }
-
 }
