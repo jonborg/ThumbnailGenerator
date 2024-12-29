@@ -1,4 +1,4 @@
-package crosscutting;
+package dto;
 
 import fighter.FighterArtType;
 import lombok.Builder;

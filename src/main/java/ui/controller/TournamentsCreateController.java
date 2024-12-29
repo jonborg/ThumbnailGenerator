@@ -57,7 +57,7 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField background;
     @FXML
-    protected ComboBox<FighterArtType> artType;
+    protected ComboBox<FighterArtType> artTypeThumbnail;
     @FXML
     protected ChosenJsonField fighterImageSettingsFile;
     @FXML
@@ -103,7 +103,7 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ImageView preview;
 
-    protected List<FighterArtSettings> artTypeDir = new ArrayList<>();
+    protected List<FighterArtSettings> artTypeDirThumbnail = new ArrayList<>();
     protected List<FighterArtSettings> artTypeDirTop8 = new ArrayList<>();
 
     @Override
@@ -174,21 +174,21 @@ public class TournamentsCreateController implements Initializable {
                     && v.equals(FighterArtType.RENDER)){
                 settingsFile.setFighterImageSettingsPath(renderSettings);
             }
-            artTypeDir.add(settingsFile);
+            artTypeDirThumbnail.add(settingsFile);
         }
 
-        artType.getItems().addAll(FighterArtType.values());
-        artType.setConverter(new FighterArtTypeConverter());
-        artType.getSelectionModel().select(FighterArtType.RENDER);
-        artType.getSelectionModel().selectedItemProperty()
+        artTypeThumbnail.getItems().addAll(FighterArtType.values());
+        artTypeThumbnail.setConverter(new FighterArtTypeConverter());
+        artTypeThumbnail.getSelectionModel().select(FighterArtType.RENDER);
+        artTypeThumbnail.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
-                    for (var dir : artTypeDir){
+                    for (var dir : artTypeDirThumbnail){
                         if (oldValue.equals(dir.getArtType())){
                             dir.setFighterImageSettingsPath(
                                     fighterImageSettingsFile.getText());
                         }
                     }
-                    for (var dir : artTypeDir){
+                    for (var dir : artTypeDirThumbnail){
                         if (newValue.equals(dir.getArtType())){
                             fighterImageSettingsFile.setText(dir.getFighterImageSettingsPath());
                         }
@@ -235,7 +235,7 @@ public class TournamentsCreateController implements Initializable {
         Tournament tournament = generateTournamentWithCurrentSettings();
 
         try{
-            BufferedImage previewImage = Thumbnail.generatePreview(tournament, artType.getSelectionModel().getSelectedItem());
+            BufferedImage previewImage = Thumbnail.generatePreview(tournament, artTypeThumbnail.getSelectionModel().getSelectedItem());
             Image image = SwingFXUtils.toFXImage(previewImage, null);
             preview.setImage(image);
         }catch(Exception e){
@@ -245,8 +245,8 @@ public class TournamentsCreateController implements Initializable {
 
 
     protected Tournament generateTournamentWithCurrentSettings(){
-        var lastSelectedArt = artType.getSelectionModel().getSelectedItem();
-        for (var dir : artTypeDir){
+        var lastSelectedArt = artTypeThumbnail.getSelectionModel().getSelectedItem();
+        for (var dir : artTypeDirThumbnail){
             if(lastSelectedArt.equals(dir.getArtType())){
                 var result = fighterImageSettingsFile.getText();
                 if (result == null){
@@ -274,11 +274,11 @@ public class TournamentsCreateController implements Initializable {
                 new int[]{Integer.parseInt(downOffsetBottomLeft.getText()), Integer.parseInt(downOffsetBottomRight.getText())});
 
         var thumbnailSettings = new ThumbnailSettings(foreground.getText(),
-                background.getText(), artTypeDir, textSettings);
+                background.getText(), artTypeDirThumbnail, textSettings);
         var top8Settings = new Top8Settings(foregroundTop8.getText(),
                 backgroundTop8.getText(), artTypeDirTop8, slotSettingsFileTop8.getText());
         var tournament = new Tournament(id.getText(), name.getText(),
-                logo.getText(), foreground.getText(), background.getText(), artTypeDir,
+                logo.getText(), foreground.getText(), background.getText(), artTypeDirThumbnail,
                 thumbnailSettings, top8Settings);
 
         return tournament;

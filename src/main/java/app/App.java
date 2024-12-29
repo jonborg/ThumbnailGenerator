@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tournament.TournamentUtils;
@@ -30,6 +31,7 @@ public class App extends Application {
         try {
             FXMLLoader loader = new FXMLLoader(ThumbnailGeneratorController.class.getClassLoader().getResource("ui/fxml/thumbnailGenerator.fxml"));
             Parent root = (Parent) loader.load();
+            root.setId("mainWindow");
             ((ThumbnailGeneratorController) loader.getController()).setStage(primaryStage);
             primaryStage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
             primaryStage.setTitle("Smash Bros. VOD Thumbnail Generator");

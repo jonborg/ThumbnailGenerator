@@ -20,11 +20,11 @@
                 <SeparatorMenuItem/>
                 <MenuItem styleClass="menuItem" text="Close" onAction="#close"/>
             </Menu>
-            <Menu styleClass="menu" text="Edit">
-                <MenuItem styleClass="menuItem" text="Create new tournament" onAction="#createNewTournament"/>
-                <Menu fx:id="menuCopy" styleClass="menuItem" text="Create copy of..."/>
-                <Menu fx:id="menuEdit" styleClass="menuItem" text="Edit tournament"/>
-                <Menu fx:id="menuDelete" styleClass="menuItem" text="Delete tournament"/>
+            <Menu fx:id="menuEdit" styleClass="menu" text="Edit">
+                <MenuItem fx:id="menuCreateTournament" styleClass="menuItem" text="Create new tournament" onAction="#createNewTournament"/>
+                <Menu fx:id="menuCopyTournament" styleClass="menuItem" text="Create copy of..."/>
+                <Menu fx:id="menuEditTournament" styleClass="menuItem" text="Edit tournament"/>
+                <Menu fx:id="menuDeleteTournament" styleClass="menuItem" text="Delete tournament"/>
             </Menu>
         </MenuBar>
         <VBox spacing="40" alignment="CENTER" >

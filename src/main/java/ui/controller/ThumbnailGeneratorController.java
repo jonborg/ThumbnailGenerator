@@ -34,7 +34,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import startgg.query.QueryUtils;
@@ -77,11 +76,11 @@ public class ThumbnailGeneratorController implements Initializable {
     @FXML
     private Button fromFile;
     @FXML
-    private Menu menuCopy;
+    private Menu menuCopyTournament;
     @FXML
-    private Menu menuEdit;
+    private Menu menuEditTournament;
     @FXML
-    private Menu menuDelete;
+    private Menu menuDeleteTournament;
 
     private static Stage stage;
 
@@ -192,6 +191,7 @@ public class ThumbnailGeneratorController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/fxml/fromStartGG.fxml"));
             Parent root = loader.load();
+            root.setId("startGGWindow");
             root.setOnMousePressed(e -> root.requestFocus());
             FromStartGGController controller = loader.getController();
             Stage stage = new Stage();
@@ -215,6 +215,7 @@ public class ThumbnailGeneratorController implements Initializable {
     public void createNewTournament(ActionEvent actionEvent) {
         try {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsCreate.fxml"));
+            root.setId("createTournamentWindow");
             Stage stage = new Stage();
             stage.setTitle("Create New Tournament");
             stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
@@ -228,20 +229,23 @@ public class ThumbnailGeneratorController implements Initializable {
         String style = "-fx-padding: 0 100 0 20";
         for (Tournament tournament : getTournamentsList()){
             MenuItem copyOption = new MenuItem(tournament.getName());
+            copyOption.setId("menuCopy_"+tournament.getTournamentId());
             copyOption.setStyle(style);
             copyOption.setOnAction(event -> {
                 LOGGER.info("Creating copy of tournament {}.", tournament.toString());
                 updateTournamentsList(tournament);
             });
-            menuCopy.getItems().add(copyOption);
+            menuCopyTournament.getItems().add(copyOption);
 
             MenuItem editOption = new MenuItem(tournament.getName());
             editOption.setStyle(style);
+            editOption.setId("menuEdit_"+tournament.getTournamentId());
             editOption.setOnAction(event -> {
                 setSelectedEdit(tournament);
                 try {
                     LOGGER.info("Selected tournament {} for editing.", tournament.getName());
                     Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/fxml/tournamentsEdit.fxml"));
+                    root.setId("editTournamentWindow");
                     Stage stage = new Stage();
                     stage.setTitle("Edit Tournament " + tournament.getName());
                     stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
@@ -251,13 +255,13 @@ public class ThumbnailGeneratorController implements Initializable {
                     e.printStackTrace();
                 }
             });
-            menuEdit.getItems().add(editOption);
+            menuEditTournament.getItems().add(editOption);
 
             MenuItem deleteOption = new MenuItem(tournament.getName());
+            deleteOption.setId("menuDelete_"+tournament.getTournamentId());
             deleteOption.setStyle(style);
             deleteOption.setOnAction(event -> deleteTournament(tournament));
-            menuDelete.getItems().add(deleteOption);
-
+            menuDeleteTournament.getItems().add(deleteOption);
         }
     }
 
