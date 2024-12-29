@@ -9,13 +9,8 @@ import enums.ComboBoxId;
 import enums.SpinnerId;
 import enums.TextFieldId;
 import fighter.FighterArtType;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import org.junit.jupiter.api.Test;
-import tournament.TournamentUtils;
-import ui.controller.ThumbnailGeneratorController;
 import utils.FileUtils;
 import utils.WaitUtils;
 
@@ -31,16 +26,6 @@ import static org.testfx.util.NodeQueryUtils.hasText;
 
 public class ThumbnailGenerationIT extends CustomApplicationTest {
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        TournamentUtils.initTournamentsListAndSettings();
-        FXMLLoader loader = new FXMLLoader(
-                ThumbnailGeneratorController.class.getClassLoader().getResource(
-                        "ui/fxml/thumbnailGenerator.fxml"));
-        stage.setScene(new Scene(loader.load()));
-        stage.show();
-    }
-
     @Test
     public void testTournamentSelection() {
         verifyThat("#tournamentsLabel", hasText("Tournaments:"));
@@ -53,7 +38,8 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         //Arrange
         ThumbnailInput input = generateThumbnailInput();
         File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
-        File expectedImage = FileUtils.getFileFromResources("/expected/invictaMarioSonicThumbnail.png");
+        File expectedImage = FileUtils.getFileFromResources(
+                "/expected/thumbnail/invictaMarioSonicThumbnail.png");
 
         clickOnButton(ButtonId.TOURNAMENT_INVICTA);
         fillRoundData(input);
@@ -80,7 +66,8 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         ThumbnailInput input = generateThumbnailInput();
         input.setArtType(FighterArtType.MURAL);
         File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
-        File expectedImage = FileUtils.getFileFromResources("/expected/invictaMuralMarioSonicThumbnail.png");
+        File expectedImage = FileUtils.getFileFromResources(
+                "/expected/thumbnail/invictaMuralMarioSonicThumbnail.png");
 
         clickOnButton(ButtonId.TOURNAMENT_INVICTA);
         fillRoundData(input);
@@ -106,7 +93,8 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         //Arrange
         ThumbnailInput input = generateThumbnailInput();
         File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
-        File expectedImage = FileUtils.getFileFromResources("/expected/invictaMarioSonicThumbnail.png");
+        File expectedImage = FileUtils.getFileFromResources(
+                "/expected/thumbnail/invictaMarioSonicThumbnail.png");
         File marioImage = FileUtils.getCharacterImage("mario", 1);
         File sonicImage = FileUtils.getCharacterImage("sonic", 1);
 

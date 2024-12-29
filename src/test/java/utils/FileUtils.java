@@ -1,11 +1,17 @@
 package utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FileUtils {
 
@@ -31,5 +37,43 @@ public class FileUtils {
                 .filter(f -> !f.isDirectory())
                 .max(Comparator.comparingLong(File::lastModified))
                 .orElse(null);
+    }
+
+    public static void assertSameFileContent(File expected, File actual)
+            throws IOException {
+        assertTrue(
+                Arrays.equals(
+                        Files.readAllBytes(expected.toPath()),
+                        Files.readAllBytes(actual.toPath())
+                )
+        );
+    }
+
+    public static File loadTournamentsFile(){
+        return getActualFile("/settings/tournaments/tournaments.json");
+    }
+
+    public static void createFileBackups() throws IOException {
+        File originalTournamentPath = loadTournamentsFile();
+        File backupTournamentPath = getActualFile("/settings/tournaments/tournamentsBackup.json");
+
+        Files.copy(
+                originalTournamentPath.toPath(),
+                backupTournamentPath.toPath(),
+                StandardCopyOption.REPLACE_EXISTING
+        );
+    }
+
+    public static void loadFileBackups() throws IOException {
+        File originalTournamentPath = loadTournamentsFile();
+        File backupTournamentPath = getActualFile("/settings/tournaments/tournamentsBackup.json");
+
+        Files.copy(
+                originalTournamentPath.toPath(),
+                backupTournamentPath.toPath(),
+                StandardCopyOption.REPLACE_EXISTING
+        );
+
+        Files.deleteIfExists(backupTournamentPath.toPath());
     }
 }

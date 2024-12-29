@@ -27,7 +27,8 @@ public class Top8GenerationTest {
             throws IOException, Top8FromFileException {
         //Arrange
         File top8File = new File(getClass().getResource("/input/top8Generation.txt").getPath());
-        File expectedTop8 = FileUtils.getFileFromResources("/expected/multiTop8Generation.png");
+        File expectedTop8 = FileUtils.getFileFromResources(
+                "/expected/top8/multiTop8Generation.png");
         File actualTop8 = FileUtils.getMostRecentFile("/generated_top8/");
 
         //Act
