@@ -1,0 +1,95 @@
+[
+  {
+    "id": "weeklyl",
+    "name": "Weekly L",
+    "logo": "assets/tournaments/logos/weeklyl.png",
+    "thumbnailSettings": {
+      "foreground": "",
+      "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/thumbnails/images/default.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+        }
+      ]
+    },
+    "top8Settings": {
+      "slotSettingsFile": "settings/top8/slot/locus_slots.json",
+      "foreground": "",
+      "background": "",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/top8/images/locus.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "stier",
+    "name": "S Tier",
+    "logo": "assets/tournaments/logos/stier.png",
+    "thumbnailSettings": {
+      "foreground": "",
+      "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/thumbnails/images/default.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+        }
+      ]
+    },
+    "top8Settings": {
+      "slotSettingsFile": "",
+      "foreground": "",
+      "background": "",
+      "artSettings": []
+    }
+  },
+  {
+    "id": "invicta",
+    "name": "NEW TEST NAME",
+    "logo": "assets/tournaments/logos/invicta.png",
+    "thumbnailSettings": {
+      "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+      "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/thumbnails/images/default.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+        }
+      ]
+    },
+    "top8Settings": {
+      "slotSettingsFile": "settings/top8/slot/icarus_slots.json",
+      "foreground": "",
+      "background": "",
+      "artSettings": [
+        {
+          "artType": "RENDER",
+          "fighterImageSettings": "settings/top8/images/icarus.json"
+        },
+        {
+          "artType": "MURAL",
+          "fighterImageSettings": ""
+        }
+      ]
+    }
+  }
+]

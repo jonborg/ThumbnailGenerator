@@ -31,9 +31,12 @@ public class MultiThumbnailGenerationTest {
         //Arrange
         File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailGeneration.txt").getPath());
         List<File> expectedThumbnails = List.of(
-                FileUtils.getFileFromResources("/expected/multiThumbnail1.png"),
-                FileUtils.getFileFromResources("/expected/multiThumbnail2.png"),
-                FileUtils.getFileFromResources("/expected/multiThumbnail3.png")
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multiThumbnail1.png"),
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multiThumbnail2.png"),
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multiThumbnail3.png")
         );
         List<File> actualThumbnails = List.of(
                 FileUtils.getActualFile("/generated_thumbnails/UrQte-robin11--Arjay-byleth28--Losers-20_02_20XX.png"),
@@ -63,9 +66,12 @@ public class MultiThumbnailGenerationTest {
         //Arrange
         File thumbnailListFile = new File(getClass().getResource("/input/multiMuralThumbnailGeneration.txt").getPath());
         List<File> expectedThumbnails = List.of(
-                FileUtils.getFileFromResources("/expected/multiMuralThumbnail1.png"),
-                FileUtils.getFileFromResources("/expected/multiMuralThumbnail2.png"),
-                FileUtils.getFileFromResources("/expected/multiMuralThumbnail3.png")
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multiMuralThumbnail1.png"),
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multiMuralThumbnail2.png"),
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multiMuralThumbnail3.png")
         );
         List<File> actualThumbnails = List.of(
                 FileUtils.getActualFile("/generated_thumbnails/UrQte-robin11--Arjay-byleth28--Losers-20_02_20XX.png"),
@@ -95,9 +101,12 @@ public class MultiThumbnailGenerationTest {
         //Arrange
         File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailGeneration.txt").getPath());
         List<File> expectedThumbnails = List.of(
-                FileUtils.getFileFromResources("/expected/multiThumbnail1.png"),
-                FileUtils.getFileFromResources("/expected/multiThumbnail2.png"),
-                FileUtils.getFileFromResources("/expected/multiThumbnail3.png")
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multiThumbnail1.png"),
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multiThumbnail2.png"),
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multiThumbnail3.png")
         );
         List<File> actualThumbnails = List.of(
                 FileUtils.getActualFile("/generated_thumbnails/UrQte-robin11--Arjay-byleth28--Losers-20_02_20XX.png"),

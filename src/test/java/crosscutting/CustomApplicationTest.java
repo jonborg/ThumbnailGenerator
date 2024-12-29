@@ -1,5 +1,6 @@
 package crosscutting;
 
+import app.App;
 import enums.CheckBoxId;
 import enums.ChosenImageFieldId;
 import enums.ChosenJsonFieldId;
@@ -13,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.testfx.framework.junit5.ApplicationTest;
 import enums.ButtonId;
@@ -24,20 +26,15 @@ import javafx.scene.control.TextField;
 import ui.textfield.ChosenImageField;
 import ui.textfield.ChosenJsonField;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.testfx.api.FxToolkit.registerPrimaryStage;
 
 public class CustomApplicationTest extends ApplicationTest {
-    //@BeforeAll
-    public static void setupSpec() throws Exception {
-        if (Boolean.getBoolean("headless")) {
-            System.setProperty("testfx.robot", "glass");
-            System.setProperty("testfx.headless", "true");
-            System.setProperty("prism.order", "sw");
-            System.setProperty("prism.text", "t2k");
-            System.setProperty("java.awt.headless", "true");
-        }
-        registerPrimaryStage();
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        App.startApp(stage);
     }
 
     public void clickOnButton(ButtonId buttonId){
@@ -45,7 +42,9 @@ public class CustomApplicationTest extends ApplicationTest {
     }
 
     public void writeInTextField(TextFieldId textFieldId, String text){
-        clickOn(textFieldId.getValue()).write(text);
+        TextField textField = findElement(textFieldId.getValue());
+        textField.clear();
+        clickOn(textField).write(text);
     }
 
     public <T> void selectInComboBox(ComboBoxId textFieldId, String selection){
@@ -57,8 +56,20 @@ public class CustomApplicationTest extends ApplicationTest {
         clickOn(button);
     }
 
+    public void clickOnButton(Scene scene, ButtonId buttonId){
+        Button button = findElement(buttonId.getValue(), scene);
+        clickOn(button);
+    }
+
     public void writeInTextField(String parentFxml, TextFieldId textFieldId, String text){
         TextField textField = findElement(textFieldId.getValue(), parentFxml);
+        textField.clear();
+        clickOn(textField).write(text);
+    }
+
+    public void writeInTextField(Scene scene, TextFieldId textFieldId, String text){
+        TextField textField = findElement(textFieldId.getValue(), scene);
+        textField.clear();
         clickOn(textField).write(text);
     }
 
