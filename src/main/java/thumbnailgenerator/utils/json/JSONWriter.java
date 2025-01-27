@@ -10,7 +10,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import thumbnailgenerator.adapter.FighterArtTypeAdapter;
+import thumbnailgenerator.adapter.FileThumbnailSettingsTypeAdapter;
+import thumbnailgenerator.adapter.FileTop8SettingsTypeAdapter;
+import thumbnailgenerator.dto.FileThumbnailSettings;
+import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
@@ -27,7 +30,8 @@ public class JSONWriter {
     public static void updateTournamentsFile(List<Tournament> list){
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
-                .registerTypeAdapter(FighterArtType.class, new FighterArtTypeAdapter())
+                .registerTypeAdapter(FileThumbnailSettings.class, new FileThumbnailSettingsTypeAdapter())
+                .registerTypeAdapter(FileTop8Settings.class, new FileTop8SettingsTypeAdapter())
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
         try (FileWriter writer = new FileWriter(tournamentFile)) {
@@ -44,7 +48,8 @@ public class JSONWriter {
     public static void updateTextSettingsFile(List<TextSettings> list){
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
-                .registerTypeAdapter(FighterArtType.class, new FighterArtTypeAdapter())
+                .registerTypeAdapter(FileThumbnailSettings.class, new FileThumbnailSettingsTypeAdapter())
+                .registerTypeAdapter(FileTop8Settings.class, new FileTop8SettingsTypeAdapter())
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
         try (FileWriter writer = new FileWriter(textSettingsFile)) {

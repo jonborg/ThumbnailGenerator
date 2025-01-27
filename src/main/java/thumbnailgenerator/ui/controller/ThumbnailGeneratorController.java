@@ -26,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lombok.val;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,6 +38,11 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.enums.RivalsOfAether2Enum;
+import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
+import thumbnailgenerator.enums.SmashUltimateEnum;
+import thumbnailgenerator.enums.StreetFighter6Enum;
+import thumbnailgenerator.enums.StreetFighter6FighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
@@ -52,6 +58,7 @@ import thumbnailgenerator.utils.converter.FighterArtTypeConverter;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.converter.GameConverter;
+import thumbnailgenerator.utils.enums.StartGGEnumUtils;
 import thumbnailgenerator.utils.json.JSONReader;
 import ui.filechooser.FileChooserFactory;
 
@@ -269,9 +276,7 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     private void initArtDropdown(){
-        artTypeComboBox.getItems().addAll(SmashUltimateFighterArtType.values());
-        artTypeComboBox.setConverter(new FighterArtTypeConverter());
-        artTypeComboBox.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
+        val initialGame = Game.SSBU;
 
         gameComboBox.getItems().addAll(Game.values());
         gameComboBox.setConverter(new GameConverter());
@@ -280,7 +285,27 @@ public class ThumbnailGeneratorController implements Initializable {
                 .addListener((observable, oldValue, newValue) -> {
                     player1Controller.updateGameData(newValue);
                     player2Controller.updateGameData(newValue);
+                    updateArtTypeComboBox(newValue);
+
                 });
+        updateArtTypeComboBox(initialGame);
+        artTypeComboBox.setConverter(new FighterArtTypeConverter());
+        artTypeComboBox.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
+    }
+
+    private void updateArtTypeComboBox(Game game) {
+        artTypeComboBox.getItems().clear();
+        switch (game) {
+            case ROA2:
+                artTypeComboBox.getItems().addAll(RivalsOfAether2FighterArtType.values());
+                break;
+            case SF6:
+                artTypeComboBox.getItems().addAll(StreetFighter6FighterArtType.values());
+                break;
+            case SSBU:
+                artTypeComboBox.getItems().addAll(SmashUltimateFighterArtType.values());
+                break;
+        }
     }
 
     private static List<Tournament> getTournamentsList(){

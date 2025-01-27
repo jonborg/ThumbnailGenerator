@@ -9,15 +9,18 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 import org.codehaus.plexus.util.ExceptionUtils;
-import thumbnailgenerator.adapter.FighterArtTypeAdapter;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.adapter.FileThumbnailSettingsTypeAdapter;
+import thumbnailgenerator.adapter.FileTop8SettingsTypeAdapter;
+import thumbnailgenerator.dto.FileThumbnailSettings;
+import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
 public class JSONReader {
 
     public static <T> List<T> getJSONArrayFromFile(String jsonFile, Type type){
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(FighterArtType.class, new FighterArtTypeAdapter())
+                .registerTypeAdapter(FileThumbnailSettings.class, new FileThumbnailSettingsTypeAdapter())
+                .registerTypeAdapter(FileTop8Settings.class, new FileTop8SettingsTypeAdapter())
                 .create();
 
         try (FileReader reader = new FileReader(jsonFile))

@@ -4,13 +4,13 @@ import lombok.Getter;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 @Getter
-public enum RivalsOfAether2ArtType implements FighterArtType {
+public enum RivalsOfAether2FighterArtType implements FighterArtType {
     RENDER("Renders");
 
     private String name;
     private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/ro2/default.json";
 
-    RivalsOfAether2ArtType(String name) {
+    RivalsOfAether2FighterArtType(String name) {
         this.name = name;
     }
 

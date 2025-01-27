@@ -14,10 +14,8 @@ import org.apache.logging.log4j.Logger;
 import org.javatuples.Pair;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.GeneratedGraphic;
-import thumbnailgenerator.dto.Thumbnail;
-import thumbnailgenerator.dto.Top8;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.RivalsOfAether2ArtType;
+import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
@@ -110,9 +108,9 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
             case ROA2:
                 setArtType(generatedGraphic, parameters,
                         new Pair<>(
-                                RivalsOfAether2ArtType
+                                RivalsOfAether2FighterArtType
                                         .valueOf(parameters.get(getGameIndex()).toUpperCase()),
-                                RivalsOfAether2ArtType.RENDER
+                                RivalsOfAether2FighterArtType.RENDER
                         )
                 );
             default:

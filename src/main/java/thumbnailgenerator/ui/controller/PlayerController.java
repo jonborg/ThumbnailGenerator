@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import lombok.val;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -120,12 +121,13 @@ public class PlayerController implements Initializable {
     }
 
     protected void updateFighterIcon(){
+        val gameCode = parentController.getGame().getCode();
         try {
             iconLink.setDisable(false);
-            icon.setImage(new Image(getClass().getResourceAsStream("/icons/" + urlName + "/" + alt.getValue() + ".png")));
+            icon.setImage(new Image(getClass().getResourceAsStream("/icons/" + gameCode + "/" + urlName + "/" + alt.getValue() + ".png")));
             if (SmashUltimateEnum.PYRA.getName().equals(urlName)){
                 icon2Link.setDisable(false);
-                Image imageIcon2 = new Image(getClass().getResourceAsStream("/icons/mythra/" + alt.getValue() + ".png"));
+                Image imageIcon2 = new Image(getClass().getResourceAsStream("/icons/ssbu/mythra/" + alt.getValue() + ".png"));
                 icon2.setImage(imageIcon2);
                 colorBox.setSpacing(0);
             }else{
@@ -165,6 +167,7 @@ public class PlayerController implements Initializable {
     public void previewFighter(ActionEvent actionEvent) {
         SmashUltimateCharacterImageFetcher
                 downloadFighterURL = new SmashUltimateCharacterImageFetcher();
+        //TODO
         //String url = downloadFighterURL.generateFighterURL(urlName, alt.getValue(), parentController.getFighterArtType());
         String url = "";
         if(Desktop.isDesktopSupported()) {
