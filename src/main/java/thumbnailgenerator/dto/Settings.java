@@ -3,11 +3,10 @@ package thumbnailgenerator.dto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Setter;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import java.util.List;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.var;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 @Getter
 @Setter
@@ -34,15 +33,13 @@ public class Settings {
     }
 
     public String getFighterImageSettingsFile(
-            SmashUltimateFighterArtType artType){
-        var result = this.getArtTypeDir()
+            FighterArtType artType){
+        return this
+                .getArtTypeDir()
                 .stream()
                 .filter(dir -> artType.equals(dir.getArtType()))
-                .findFirst();
-        if (result.isPresent()){
-            return result.get().getFighterImageSettingsPath();
-        } else {
-            return null;
-        }
+                .findFirst()
+                .map(FighterArtSettings::getFighterImageSettingsPath)
+                .get();
     }
 }

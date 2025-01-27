@@ -9,8 +9,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
+import thumbnailgenerator.adapter.FighterArtTypeAdapter;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.file.FileUtils;
 
@@ -22,7 +25,9 @@ public class JSONWriter {
     private static String textSettingsFile = FileUtils.getTextSettingsFile();
 
     public static void updateTournamentsFile(List<Tournament> list){
-        Gson gson = new GsonBuilder().setPrettyPrinting()
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapter(FighterArtType.class, new FighterArtTypeAdapter())
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
         try (FileWriter writer = new FileWriter(tournamentFile)) {
@@ -37,7 +42,9 @@ public class JSONWriter {
     }
 
     public static void updateTextSettingsFile(List<TextSettings> list){
-        Gson gson = new GsonBuilder().setPrettyPrinting()
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapter(FighterArtType.class, new FighterArtTypeAdapter())
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
         try (FileWriter writer = new FileWriter(textSettingsFile)) {

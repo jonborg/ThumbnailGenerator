@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.var;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 @Getter
 @Setter
@@ -14,7 +14,7 @@ public class GeneratedGraphic {
     Game game;
     boolean locally;
     List<Player> players;
-    SmashUltimateFighterArtType artType;
+    FighterArtType artType;
 
     public static List<Player> createPlayerList(Player... players){
         var result = new ArrayList<Player>();

@@ -1,12 +1,13 @@
 package thumbnailgenerator.service;
 
 import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.var;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
@@ -15,14 +16,13 @@ import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Round;
 import thumbnailgenerator.dto.Thumbnail;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.utils.json.JSONReader;
 
 @Service
 public class ThumbnailFileService extends FileService<Thumbnail, Round> {
 
-    private static final Logger LOGGER = LogManager.getLogger(ThumbnailFileService.class);
+    private int gameIndex = 3;
     private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
 
     public List<Thumbnail> getListThumbnailsFromFile(InputStream inputStream, Boolean saveLocally)
@@ -37,7 +37,7 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
                 .get(0);
         var thumbnailList = new ArrayList<Thumbnail>();
         for (Round round : roundList){
-            setPlayerFlip(round.getPlayers(), imageSettings);
+            setPlayerFlip(round.getPlayers(), imageSettings, rootThumbnail.getGame());
             var thumbnail = Thumbnail.builder()
                                      .tournament(rootThumbnail.getTournament())
                                      .game(rootThumbnail.getGame())
@@ -59,21 +59,8 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
     }
 
     @Override
-    protected Thumbnail initializeGeneratedGraphic(List<String> parameters) {
-        var thumbnail = super.initializeGeneratedGraphic(parameters);
-        thumbnail.setDate(parameters.get(2));
-        if (Game.SSBU.equals(thumbnail.getGame())) {
-            if (parameters.size() > 3
-                    && !parameters.get(3).isEmpty()) {
-                thumbnail.setArtType(SmashUltimateFighterArtType
-                        .valueOf(parameters.get(3).toUpperCase()));
-            } else {
-                thumbnail.setArtType(SmashUltimateFighterArtType.RENDER);
-            }
-        } else {
-            thumbnail.setArtType(SmashUltimateFighterArtType.RENDER);
-        }
-        return thumbnail;
+    protected int getGameIndex(){
+        return this.gameIndex;
     }
 
     @Override
@@ -89,23 +76,24 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
         return new Round(playerList, roundName);
     }
 
-    private void setPlayerFlip(List<Player> players, ImageSettings imageSettings)
+    private void setPlayerFlip(List<Player> players, ImageSettings imageSettings, Game game)
             throws FighterImageSettingsNotFoundException {
 
-        players.get(0).setFighterFlip(0, readFlipFile(players.get(0).getFighter(0), imageSettings));
+        players.get(0).setFighterFlip(0, readFlipFile(players.get(0).getFighter(0), imageSettings, game));
         if (imageSettings.isMirrorPlayer2()) {
-            players.get(1).setFighterFlip(0, !readFlipFile(players.get(1).getFighter(0), imageSettings));
+            players.get(1).setFighterFlip(0, !readFlipFile(players.get(1).getFighter(0), imageSettings, game));
         } else {
-            players.get(1).setFighterFlip(0, readFlipFile(players.get(1).getFighter(0), imageSettings));
+            players.get(1).setFighterFlip(0, readFlipFile(players.get(1).getFighter(0), imageSettings, game));
         }
     }
 
-    private boolean readFlipFile(Fighter fighter, ImageSettings imageSettings) throws
+    private boolean readFlipFile(Fighter fighter, ImageSettings imageSettings, Game game) throws
             FighterImageSettingsNotFoundException {
         boolean result;
         String urlNameOriginal = fighter.getUrlName();
-        smashUltimateCharacterService.convertToAlternateRender(fighter);
-
+        if (Game.SSBU.equals(game)) {
+            smashUltimateCharacterService.convertToAlternateRender(fighter);
+        }
         result = imageSettings.findFighterImageSettings(fighter.getUrlName()).isFlip();
         fighter.setUrlName(urlNameOriginal);
         return result;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.GeneratedGraphic;
 import thumbnailgenerator.enums.SmashUltimateEnum;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 
 @Service
 public class SmashUltimateCharacterImageFetcher extends CharacterImageFetcher {
@@ -27,7 +28,7 @@ public class SmashUltimateCharacterImageFetcher extends CharacterImageFetcher {
     URL getOnlineUrl(Fighter fighter, GeneratedGraphic generatedGraphic)
             throws MalformedURLException {
         String urlString;
-        switch (generatedGraphic.getArtType()) {
+        switch ((SmashUltimateFighterArtType) generatedGraphic.getArtType()) {
             case MURAL:
                 urlString = MURAL_URL + fighter.getUrlName() + "/" + fighter.getAlt() + ".png";
                 break;

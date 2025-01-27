@@ -4,21 +4,17 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.var;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
-import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Top8;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
-import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 
 
 @Service
 public class Top8FileService extends FileService<Top8, Player>{
 
-    private static final Logger LOGGER = LogManager.getLogger(Top8FileService.class);
+    private int gameIndex = 2;
 
     public Top8 getTop8FromFile (InputStream inputStream, Boolean saveLocally){
         var tuple = readGraphicGenerationFile(inputStream);
@@ -40,23 +36,13 @@ public class Top8FileService extends FileService<Top8, Player>{
     }
 
     @Override
-    protected Top8 initializeGeneratedGraphic(List<String> parameters) {
-        var top8 = super.initializeGeneratedGraphic(parameters);
-        if (Game.SSBU.equals(top8.getGame())) {
-            if (parameters.size() > 2
-                    && !parameters.get(2).isEmpty()) {
-                top8.setArtType(SmashUltimateFighterArtType
-                        .valueOf(parameters.get(2).toUpperCase()));
-            } else {
-                top8.setArtType(SmashUltimateFighterArtType.RENDER);
-            }
-        }
-        return top8;
+    protected int getGameIndex(){
+        return this.gameIndex;
     }
 
+
     @Override
-    protected Player getCharacterData(List<String> parameters)
-            throws FighterImageSettingsNotFoundException {
+    protected Player getCharacterData(List<String> parameters) {
 
         var characters = new ArrayList<Fighter>();
         var characterQuantity = parameters.size()/2;

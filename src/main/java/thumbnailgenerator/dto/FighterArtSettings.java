@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 @Builder
 @Getter
@@ -17,7 +17,7 @@ public class FighterArtSettings implements Cloneable {
 
     @Expose
     @SerializedName("artType")
-    private SmashUltimateFighterArtType artType;
+    private FighterArtType artType;
     @Expose
     @SerializedName("fighterImageSettings")
     private String fighterImageSettingsPath;

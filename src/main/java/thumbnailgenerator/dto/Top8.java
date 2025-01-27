@@ -1,10 +1,10 @@
 package thumbnailgenerator.dto;
 
 import lombok.Setter;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 @Getter
 @Setter
@@ -15,7 +15,7 @@ public class Top8 extends GeneratedGraphic {
     private Game game;
     private boolean locally;
     private List<Player> players;
-    private SmashUltimateFighterArtType artType;
+    private FighterArtType artType;
 
     public FileTop8Settings getFileTop8Settings(){
         return getTournament().getTop8SettingsByGame(getGame());

@@ -1,6 +1,7 @@
 package thumbnailgenerator.utils.json;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -8,12 +9,17 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 import org.codehaus.plexus.util.ExceptionUtils;
+import thumbnailgenerator.adapter.FighterArtTypeAdapter;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
 public class JSONReader {
 
     public static <T> List<T> getJSONArrayFromFile(String jsonFile, Type type){
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(FighterArtType.class, new FighterArtTypeAdapter())
+                .create();
+
         try (FileReader reader = new FileReader(jsonFile))
         {
             return gson.fromJson(reader, type);

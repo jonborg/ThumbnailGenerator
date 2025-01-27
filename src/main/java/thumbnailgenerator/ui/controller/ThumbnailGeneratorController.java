@@ -37,6 +37,7 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
@@ -47,7 +48,7 @@ import thumbnailgenerator.service.StartGGService;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.Top8Service;
-import thumbnailgenerator.utils.converter.SmashUltimateFighterArtTypeConverter;
+import thumbnailgenerator.utils.converter.FighterArtTypeConverter;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.converter.GameConverter;
@@ -63,7 +64,7 @@ public class ThumbnailGeneratorController implements Initializable {
     private @FXML TournamentsController tournamentsController;
     private @FXML TextField round;
     private @FXML TextField date;
-    private @FXML ComboBox<SmashUltimateFighterArtType> artTypeComboBox;
+    private @FXML ComboBox<FighterArtType> artTypeComboBox;
     private @FXML ComboBox<Game> gameComboBox;
     private @FXML AnchorPane player1;
     private @FXML PlayerController player1Controller;
@@ -269,7 +270,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
     private void initArtDropdown(){
         artTypeComboBox.getItems().addAll(SmashUltimateFighterArtType.values());
-        artTypeComboBox.setConverter(new SmashUltimateFighterArtTypeConverter());
+        artTypeComboBox.setConverter(new FighterArtTypeConverter());
         artTypeComboBox.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
 
         gameComboBox.getItems().addAll(Game.values());
@@ -307,7 +308,7 @@ public class ThumbnailGeneratorController implements Initializable {
         this.stage=stage;
     }
 
-    public SmashUltimateFighterArtType getFighterArtType(){
+    public FighterArtType getFighterArtType(){
         return artTypeComboBox.getSelectionModel().getSelectedItem();
     }
 

@@ -4,15 +4,12 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 @Getter
 @Setter
 @ToString
 public class FileThumbnailSettings extends Settings implements Cloneable{
-
-    private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/default.json";
-    private static String defaultMuralImageSettingsFile= "settings/thumbnails/images/defaultMural.json";
 
     private TextSettings textSettings;
 
@@ -23,39 +20,22 @@ public class FileThumbnailSettings extends Settings implements Cloneable{
         this.artTypeDir.forEach(dir -> {
             if(dir.getFighterImageSettingsPath() == null
                     || dir.getFighterImageSettingsPath().isEmpty()) {
-                switch (dir.getArtType()) {
-                    case MURAL:
-                        dir.setFighterImageSettingsPath(
-                                defaultMuralImageSettingsFile);
-                        break;
-                    case RENDER:
-                    default:
-                        dir.setFighterImageSettingsPath(
-                                defaultRenderImageSettingsFile);
-                        break;
-                }
+                String defaultFighterImageSettingsFile = dir
+                        .getArtType()
+                        .getDefaultFighterImageSettingsFile();
+                dir.setFighterImageSettingsPath(defaultFighterImageSettingsFile);
             }
         });
     }
 
     @Override
     public String getFighterImageSettingsFile(
-            SmashUltimateFighterArtType artType){
+            FighterArtType artType){
         if (this.getArtTypeDir() == null){
-            switch (artType){
-                case MURAL:
-                    return defaultMuralImageSettingsFile;
-                case RENDER:
-                default:
-                    return defaultRenderImageSettingsFile;
-            }
+            return artType.getDefaultFighterImageSettingsFile();
+        } else {
+            return super.getFighterImageSettingsFile(artType);
         }
-        return this.getArtTypeDir()
-                .stream()
-                .filter(dir -> artType.equals(dir.getArtType()))
-                .findFirst()
-                .get()
-                .getFighterImageSettingsPath();
     }
 
     @Override

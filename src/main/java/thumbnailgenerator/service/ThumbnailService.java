@@ -26,6 +26,7 @@ import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
@@ -150,14 +151,16 @@ public class ThumbnailService {
         }
     }
 
-    public BufferedImage generatePreview(Tournament tournament, Game game, SmashUltimateFighterArtType artType)
+    public BufferedImage generatePreview(Tournament tournament, Game game, FighterArtType artType)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException,
             MalformedURLException {
         LOGGER.info("Generating thumbnail preview.");
         List<Player> players = Player.generatePreviewPlayers();
         ImageSettings imageSettings = (ImageSettings)
-                JSONReader.getJSONArrayFromFile(tournament.getThumbnailSettingsByGame(game)
+                JSONReader.getJSONArrayFromFile(
+                        tournament
+                                .getThumbnailSettingsByGame(game)
                                 .getFighterImageSettingsFile(artType),
                         new TypeToken<ArrayList<ImageSettings>>() {}.getType()).get(0);
         return generateThumbnail(Thumbnail.builder()
@@ -184,7 +187,9 @@ public class ThumbnailService {
             LOGGER.info("Drawing player {} information.", port);
             var fighter = player.getFighter(0);
             var characterImage = characterImageFetcher.getCharacterImage(fighter, thumbnail);
-            smashUltimateCharacterService.convertToAlternateRender(fighter);
+            if (Game.SSBU.equals(thumbnail.getGame())) {
+                smashUltimateCharacterService.convertToAlternateRender(fighter);
+            }
             var fighterImageThumbnailSettings = thumbnail.getImageSettings()
                     .findFighterImageSettings(fighter.getUrlName());
 

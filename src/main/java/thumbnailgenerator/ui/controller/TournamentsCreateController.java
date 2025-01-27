@@ -39,13 +39,14 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.utils.converter.GameConverter;
-import thumbnailgenerator.utils.converter.SmashUltimateFighterArtTypeConverter;
+import thumbnailgenerator.utils.converter.FighterArtTypeConverter;
 import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
@@ -68,7 +69,7 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField background;
     @FXML
-    protected ComboBox<SmashUltimateFighterArtType> artType;
+    protected ComboBox<FighterArtType> artType;
     @FXML
     protected ChosenJsonField fighterImageSettingsFile;
     @FXML
@@ -76,7 +77,7 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField backgroundTop8;
     @FXML
-    protected ComboBox<SmashUltimateFighterArtType> artTypeTop8;
+    protected ComboBox<FighterArtType> artTypeTop8;
     @FXML
     protected ChosenJsonField slotSettingsFileTop8;
     @FXML
@@ -245,7 +246,7 @@ public class TournamentsCreateController implements Initializable {
         }
 
         artType.getItems().addAll(SmashUltimateFighterArtType.values());
-        artType.setConverter(new SmashUltimateFighterArtTypeConverter());
+        artType.setConverter(new FighterArtTypeConverter());
         artType.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
         artType.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
@@ -270,7 +271,7 @@ public class TournamentsCreateController implements Initializable {
         }
 
         artTypeTop8.getItems().addAll(SmashUltimateFighterArtType.values());
-        artTypeTop8.setConverter(new SmashUltimateFighterArtTypeConverter());
+        artTypeTop8.setConverter(new FighterArtTypeConverter());
         artTypeTop8.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
         artTypeTop8.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
