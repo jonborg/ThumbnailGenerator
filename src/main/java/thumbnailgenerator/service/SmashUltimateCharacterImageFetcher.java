@@ -17,11 +17,11 @@ public class SmashUltimateCharacterImageFetcher extends CharacterImageFetcher {
     static String SANS_URL = "https://i.redd.it/n2tcplon8qk31.png";
     static String MURAL_URL = "https://raw.githubusercontent.com/jonborg/" +
             "ThumbnailGeneratorCharacterImageRepository/" +
-            "refs/heads/v3.1.0-beta1/" +
+            "refs/heads/v3.1.0-beta2/" +
             "ssbu/mural/";
     static String RENDER_URL = "https://raw.githubusercontent.com/jonborg/" +
             "ThumbnailGeneratorCharacterImageRepository/" +
-            "refs/heads/v3.1.0-beta1/" +
+            "refs/heads/v3.1.0-beta2/" +
             "ssbu/render/";
 
     @Override

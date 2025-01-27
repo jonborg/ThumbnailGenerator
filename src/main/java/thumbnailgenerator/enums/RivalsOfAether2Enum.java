@@ -14,7 +14,8 @@ public enum RivalsOfAether2Enum {
     ORCANE("Orcane", "orcane", 2597),
     RANNO("Ranno", "ranno", 2501),
     WRASTOR("Wrastor", "wrastor", 2500),
-    ZETTERBURN("Zetterburn", "zetterburn", 2499);
+    ZETTERBURN("Zetterburn", "zetterburn", 2499),
+    ETALUS("Etalus", "etalus", 2615);
 
     private final String name;
     private final String code;

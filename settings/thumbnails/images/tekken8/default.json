@@ -1,0 +1,294 @@
+[{
+	"mirrorPlayer2": false,
+	"fighters":[
+	  {
+		"fighter": "alisa",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "asuka",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "azucena",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "bryan",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "claudio",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "devil_jin",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "feng_wei",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "hwoarang",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "jack_8",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "jin",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "jun",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "kazuya",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "king",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "kuma",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "lars",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "lee",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "leo",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "leroy",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "lili",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "xiaoyu",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "law",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "nina",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "panda",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "paul",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "raven",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "reina",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "dragunov",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "shaheen",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "steve",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "victor",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "yoshimitsu",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "zafina",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "eddy",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "lidia",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "heihachi",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "clive",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  }
+	]
+
+}]

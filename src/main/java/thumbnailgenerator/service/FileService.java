@@ -18,6 +18,7 @@ import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
+import thumbnailgenerator.enums.Tekken8FighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
@@ -25,7 +26,8 @@ import thumbnailgenerator.ui.factory.alert.AlertFactory;
 public abstract class FileService<T extends GeneratedGraphic,V> {
 
     private static final Logger LOGGER = LogManager.getLogger(ThumbnailService.class);
-    private int gameIndex = 3;
+    private int gameIndex = 1;
+    private int artTypeIndex = 3;
 
     protected abstract V getCharacterData(List<String> parameters)
             throws FighterImageSettingsNotFoundException;
@@ -67,6 +69,10 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
         return this.gameIndex;
     }
 
+    protected int getArtTypeIndex(){
+        return this.artTypeIndex;
+    }
+
     protected T initializeGeneratedGraphic(List<String> parameters)
             throws IOException {
         var generatedGraphic = createEmptyGeneratedGraphic();
@@ -91,7 +97,7 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
                 setArtType(generatedGraphic, parameters,
                         new Pair<>(
                                 SmashUltimateFighterArtType
-                                        .valueOf(parameters.get(getGameIndex()).toUpperCase()),
+                                        .valueOf(parameters.get(getArtTypeIndex()).toUpperCase()),
                                 SmashUltimateFighterArtType.RENDER
                         )
                 );
@@ -100,7 +106,7 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
                 setArtType(generatedGraphic, parameters,
                         new Pair<>(
                                 StreetFighter6FighterArtType
-                                        .valueOf(parameters.get(getGameIndex()).toUpperCase()),
+                                        .valueOf(parameters.get(getArtTypeIndex()).toUpperCase()),
                                 StreetFighter6FighterArtType.RENDER
                         )
                 );
@@ -109,10 +115,20 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
                 setArtType(generatedGraphic, parameters,
                         new Pair<>(
                                 RivalsOfAether2FighterArtType
-                                        .valueOf(parameters.get(getGameIndex()).toUpperCase()),
+                                        .valueOf(parameters.get(getArtTypeIndex()).toUpperCase()),
                                 RivalsOfAether2FighterArtType.RENDER
                         )
                 );
+                break;
+            case TEKKEN8:
+                setArtType(generatedGraphic, parameters,
+                        new Pair<>(
+                                Tekken8FighterArtType
+                                        .valueOf(parameters.get(getArtTypeIndex()).toUpperCase()),
+                                Tekken8FighterArtType.RENDER
+                        )
+                );
+                break;
             default:
                 throw new IOException("Incompatible Game provided");
         }

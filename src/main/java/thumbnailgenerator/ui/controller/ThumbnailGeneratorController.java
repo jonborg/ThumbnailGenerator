@@ -43,6 +43,7 @@ import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
+import thumbnailgenerator.enums.Tekken8FighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
@@ -271,7 +272,6 @@ public class ThumbnailGeneratorController implements Initializable {
             deleteOption.setStyle(style);
             deleteOption.setOnAction(event -> deleteTournament(tournament));
             menuDelete.getItems().add(deleteOption);
-
         }
     }
 
@@ -286,7 +286,6 @@ public class ThumbnailGeneratorController implements Initializable {
                     player1Controller.updateGameData(newValue);
                     player2Controller.updateGameData(newValue);
                     updateArtTypeComboBox(newValue);
-
                 });
         updateArtTypeComboBox(initialGame);
         artTypeComboBox.setConverter(new FighterArtTypeConverter());
@@ -298,12 +297,19 @@ public class ThumbnailGeneratorController implements Initializable {
         switch (game) {
             case ROA2:
                 artTypeComboBox.getItems().addAll(RivalsOfAether2FighterArtType.values());
+                artTypeComboBox.getSelectionModel().select(0);
                 break;
             case SF6:
                 artTypeComboBox.getItems().addAll(StreetFighter6FighterArtType.values());
+                artTypeComboBox.getSelectionModel().select(0);
                 break;
             case SSBU:
                 artTypeComboBox.getItems().addAll(SmashUltimateFighterArtType.values());
+                artTypeComboBox.getSelectionModel().select(0);
+                break;
+            case TEKKEN8:
+                artTypeComboBox.getItems().addAll(Tekken8FighterArtType.values());
+                artTypeComboBox.getSelectionModel().select(0);
                 break;
         }
     }

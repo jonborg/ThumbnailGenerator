@@ -54,6 +54,14 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
     }
 
     @Override
+    protected Thumbnail initializeGeneratedGraphic(List<String> parameters)
+            throws IOException {
+        var thumbnail = super.initializeGeneratedGraphic(parameters);
+        thumbnail.setDate(parameters.get(2));
+        return thumbnail;
+    }
+
+    @Override
     protected Thumbnail createEmptyGeneratedGraphic() {
         return Thumbnail.builder().build();
     }

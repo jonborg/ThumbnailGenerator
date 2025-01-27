@@ -68,6 +68,12 @@ public class TextSettings {
         this.downOffsetBottom = downOffsetBottom;
     }
 
+    public TextSettings(String tournamentId){
+        this(tournamentId, "BebasNeue-Regular", false, false, false,
+                0.0f, 90, 75, 0, 0,
+                new int[]{0, 0}, new int[]{0, 0});
+    }
+
     public static TextSettings loadTextSettings(String tournamentId) {
 
         List<TextSettings> textSettingsList =

@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum Game {
     SSBU("ssbu","Smash Ultimate", 1386),
     ROA2("roa2","Rivals of Aether 2", 53945),
-    SF6("sf6", "Street Fighter 6", 43868);
+    SF6("sf6", "Street Fighter 6", 43868),
+    TEKKEN8("tekken8", "Tekken 8", 49783);
 
     private String code;
     private String name;

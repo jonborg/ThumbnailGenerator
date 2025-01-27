@@ -10,6 +10,7 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
+import thumbnailgenerator.enums.Tekken8FighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 import java.io.IOException;
@@ -121,6 +122,8 @@ public class FileTop8SettingsTypeAdapter extends TypeAdapter<FileTop8Settings> {
                 return RivalsOfAether2FighterArtType.valueOf(artTypeValue);
             case SF6:
                 return StreetFighter6FighterArtType.valueOf(artTypeValue);
+            case TEKKEN8:
+                return Tekken8FighterArtType.valueOf(artTypeValue);
             default:
                 throw new IllegalArgumentException("Unknown gameName: " + game);
         }
