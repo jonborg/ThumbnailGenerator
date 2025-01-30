@@ -8,6 +8,7 @@ import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.GeneratedGraphic;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 @Service
 public class SmashUltimateCharacterImageFetcher extends CharacterImageFetcher {
@@ -25,10 +26,10 @@ public class SmashUltimateCharacterImageFetcher extends CharacterImageFetcher {
             "ssbu/render/";
 
     @Override
-    URL getOnlineUrl(Fighter fighter, GeneratedGraphic generatedGraphic)
+    public URL getOnlineUrl(Fighter fighter, FighterArtType artType)
             throws MalformedURLException {
         String urlString;
-        switch ((SmashUltimateFighterArtType) generatedGraphic.getArtType()) {
+        switch ((SmashUltimateFighterArtType) artType) {
             case MURAL:
                 urlString = MURAL_URL + fighter.getUrlName() + "/" + fighter.getAlt() + ".png";
                 break;

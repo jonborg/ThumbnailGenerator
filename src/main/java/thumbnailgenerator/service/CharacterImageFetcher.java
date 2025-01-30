@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import javax.imageio.ImageIO;
 import lombok.var;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.GeneratedGraphic;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.utils.file.FileUtils;
 
@@ -24,7 +24,7 @@ public abstract class CharacterImageFetcher {
     private static final Logger LOGGER = LogManager.getLogger(
             CharacterImageFetcher.class);
 
-    abstract URL getOnlineUrl(Fighter fighter, GeneratedGraphic generatedGraphic)
+    public abstract URL getOnlineUrl(Fighter fighter, FighterArtType artType)
             throws MalformedURLException;
 
     public BufferedImage getCharacterImage(Fighter fighter, GeneratedGraphic generatedGraphic)
@@ -34,13 +34,13 @@ public abstract class CharacterImageFetcher {
                 return getFighterImageLocally(fighter, generatedGraphic);
             }  catch (IOException e) {
                 LOGGER.debug("Image for {} does not exist locally. Will now try finding it online.", fighter.getUrlName());
-                var url = getOnlineUrl(fighter, generatedGraphic);
+                var url = getOnlineUrl(fighter, generatedGraphic.getArtType());
                 var image = getFighterImageOnline(fighter, url);
                 saveImageLocally(fighter, generatedGraphic, image);
                 return image;
             }
         } else {
-            var url = getOnlineUrl(fighter, generatedGraphic);
+            var url = getOnlineUrl(fighter, generatedGraphic.getArtType());
             return getFighterImageOnline(fighter, url);
         }
     }

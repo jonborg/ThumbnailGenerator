@@ -4,256 +4,256 @@
 	  {
 		"fighter": "alisa",
 		"offset": [
-		  0,
-		  0
+		  -150,
+		  -80
 		],
-		"scale": 0.6
+		"scale": 0.7
 	  },
 	  {
 		"fighter": "asuka",
 		"offset": [
-		  0,
-		  0
+		  50,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.4
 	  },
 	  {
 		"fighter": "azucena",
 		"offset": [
 		  0,
-		  0
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.4
 	  },
 	  {
 		"fighter": "bryan",
 		"offset": [
-		  0,
-		  0
+		  40,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.4
 	  },
 	  {
 		"fighter": "claudio",
 		"offset": [
-		  0,
-		  0
+		  -40,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.65
 	  },
 	  {
 		"fighter": "devil_jin",
 		"offset": [
-		  0,
-		  0
+		  20,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.9
 	  },
 	  {
 		"fighter": "feng_wei",
 		"offset": [
-		  0,
-		  0
+		  180,
+		  50
 		],
-		"scale": 0.6
+		"scale": 0.75
 	  },
 	  {
 		"fighter": "hwoarang",
 		"offset": [
-		  0,
-		  0
+		  -300,
+		  -150
 		],
 		"scale": 0.6
 	  },
 	  {
 		"fighter": "jack_8",
 		"offset": [
-		  0,
-		  0
+		  -30,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.65
 	  },
 	  {
 		"fighter": "jin",
 		"offset": [
-		  0,
-		  0
+		  20,
+		  90
 		],
-		"scale": 0.6
+		"scale": 0.45
 	  },
 	  {
 		"fighter": "jun",
 		"offset": [
-		  0,
-		  0
+		  130,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.55
 	  },
 	  {
 		"fighter": "kazuya",
 		"offset": [
-		  0,
-		  0
+		  10,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.5
 	  },
 	  {
 		"fighter": "king",
 		"offset": [
 		  0,
-		  0
+		  150
 		],
-		"scale": 0.6
+		"scale": 0.7
 	  },
 	  {
 		"fighter": "kuma",
 		"offset": [
 		  0,
-		  0
+		  140
 		],
-		"scale": 0.6
+		"scale": 0.5
 	  },
 	  {
 		"fighter": "lars",
 		"offset": [
 		  0,
-		  0
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.8
 	  },
 	  {
 		"fighter": "lee",
 		"offset": [
-		  0,
-		  0
+		  -100,
+		  120
 		],
-		"scale": 0.6
+		"scale": 0.7
 	  },
 	  {
 		"fighter": "leo",
 		"offset": [
-		  0,
-		  0
+		  -30,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.5
 	  },
 	  {
 		"fighter": "leroy",
 		"offset": [
-		  0,
-		  0
+		  60,
+		  130
 		],
-		"scale": 0.6
+		"scale": 0.65
 	  },
 	  {
 		"fighter": "lili",
 		"offset": [
-		  0,
-		  0
+		  40,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.45
 	  },
 	  {
 		"fighter": "xiaoyu",
 		"offset": [
-		  0,
-		  0
+		  100,
+		  50
 		],
-		"scale": 0.6
+		"scale": 0.45
 	  },
 	  {
 		"fighter": "law",
 		"offset": [
-		  0,
-		  0
+		  100,
+		  100
 		],
 		"scale": 0.6
 	  },
 	  {
 		"fighter": "nina",
 		"offset": [
-		  0,
-		  0
+		  50,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.55
 	  },
 	  {
 		"fighter": "panda",
 		"offset": [
-		  0,
-		  0
+		  -30,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.5
 	  },
 	  {
 		"fighter": "paul",
 		"offset": [
-		  0,
-		  0
+		  -20,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.45
 	  },
 	  {
 		"fighter": "raven",
 		"offset": [
-		  0,
-		  0
+		  -20,
+		  120
 		],
-		"scale": 0.6
+		"scale": 0.8
 	  },
 	  {
 		"fighter": "reina",
 		"offset": [
-		  0,
-		  0
+		  20,
+		  110
 		],
-		"scale": 0.6
+		"scale": 0.52
 	  },
 	  {
 		"fighter": "dragunov",
 		"offset": [
-		  0,
-		  0
+		  80,
+		  120
 		],
-		"scale": 0.6
+		"scale": 0.57
 	  },
 	  {
 		"fighter": "shaheen",
 		"offset": [
-		  0,
-		  0
+		  -100,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.7
 	  },
 	  {
 		"fighter": "steve",
 		"offset": [
 		  0,
-		  0
+		  110
 		],
-		"scale": 0.6
+		"scale": 0.65
 	  },
 	  {
 		"fighter": "victor",
 		"offset": [
-		  0,
-		  0
+		  30,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.55
 	  },
 	  {
 		"fighter": "yoshimitsu",
 		"offset": [
-		  0,
-		  0
+		  100,
+		  80
 		],
-		"scale": 0.6
+		"scale": 0.8
 	  },
 	  {
 		"fighter": "zafina",
 		"offset": [
-		  0,
-		  0
+		  150,
+		  50
 		],
 		"scale": 0.6
 	  },
@@ -261,33 +261,33 @@
 		"fighter": "eddy",
 		"offset": [
 		  0,
-		  0
+		  90
 		],
-		"scale": 0.6
+		"scale": 0.7
 	  },
 	  {
 		"fighter": "lidia",
 		"offset": [
-		  0,
-		  0
+		  -150,
+		  100
 		],
-		"scale": 0.6
+		"scale": 0.8
 	  },
 	  {
 		"fighter": "heihachi",
 		"offset": [
-		  0,
-		  0
+		  -60,
+		  60
 		],
-		"scale": 0.6
+		"scale": 1
 	  },
 	  {
 		"fighter": "clive",
 		"offset": [
 		  0,
-		  0
+		  60
 		],
-		"scale": 0.6
+		"scale": 0.7
 	  }
 	]
 

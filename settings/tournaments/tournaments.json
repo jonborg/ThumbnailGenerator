@@ -39,6 +39,16 @@
             "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
           }
         ]
+      },{
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -110,6 +120,16 @@
           {
             "artType": "RENDER",
             "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
+          }
+        ]
+      },{
+        "game": "TEKKEN8",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
           }
         ]
       }

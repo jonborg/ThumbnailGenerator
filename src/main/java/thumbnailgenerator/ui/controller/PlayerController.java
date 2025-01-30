@@ -3,6 +3,7 @@ package thumbnailgenerator.ui.controller;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -38,6 +39,7 @@ import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
 import thumbnailgenerator.enums.Tekken8Enum;
 import thumbnailgenerator.enums.Tekken8FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.service.SmashUltimateCharacterImageFetcher;
 import thumbnailgenerator.ui.combobox.InputFilter;
@@ -171,22 +173,18 @@ public class PlayerController implements Initializable {
         }
     }
 
-    public void previewFighter(ActionEvent actionEvent) {
-        SmashUltimateCharacterImageFetcher
-                downloadFighterURL = new SmashUltimateCharacterImageFetcher();
-        //TODO
-        //String url = downloadFighterURL.generateFighterURL(urlName, alt.getValue(), parentController.getFighterArtType());
-        String url = "";
-        if(Desktop.isDesktopSupported()) {
-            try {
-                if ("http".equals(url.substring(0,4))){
-                    Desktop.getDesktop().browse(new URI(url));
-                } else {
-                    Desktop.getDesktop().open(new File(url));
-                }
-            }catch(URISyntaxException | IOException e ){
-                AlertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
-            }
+    public void previewFighter(ActionEvent actionEvent)
+            throws MalformedURLException {
+        Game game = parentController.getGame();
+        FighterArtType artType = parentController.getFighterArtType();
+        val imageFetcher = characterImageFetcherFactory.getCharacterImageFetcher(game);
+        String url = imageFetcher.getOnlineUrl(generatePlayer().getFighter(0), artType).toString();
+
+        try {
+            Runtime runtime = Runtime.getRuntime();
+            runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);
+        }catch(IOException e ){
+            AlertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
         }
     }
 

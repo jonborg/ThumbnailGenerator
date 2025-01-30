@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.GeneratedGraphic;
 import thumbnailgenerator.enums.SmashUltimateEnum;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -15,16 +16,14 @@ public class RivalsOfAether2CharacterImageFetcher extends CharacterImageFetcher 
             "https://raw.githubusercontent.com/jonborg/" +
                     "ThumbnailGeneratorCharacterImageRepository/" +
                     "refs/heads/v3.1.0-beta2/" +
-                    "roa2/render/";
+                    "roa2/";
 
     @Override
-    URL getOnlineUrl(Fighter fighter, GeneratedGraphic generatedGraphic)
+    public URL getOnlineUrl(Fighter fighter, FighterArtType artType)
             throws MalformedURLException {
-        String urlString = new StringBuffer()
-                .append(RENDER_URL)
-                .append(fighter.getUrlName())
-                .append("/1.png")
-                .toString();
+        String urlString = RENDER_URL +
+                artType.toString().toLowerCase() + "/" +
+                fighter.getUrlName() + "/1.png";
         return new URL(urlString);
     }
 }

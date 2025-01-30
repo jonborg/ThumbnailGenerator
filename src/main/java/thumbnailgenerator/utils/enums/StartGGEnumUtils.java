@@ -4,6 +4,8 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.enums.RivalsOfAether2Enum;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
+import thumbnailgenerator.enums.Tekken8Enum;
+import thumbnailgenerator.enums.Tekken8FighterArtType;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class StartGGEnumUtils {
         value = findValue(StreetFighter6Enum.class, String.valueOf(startGGId), "getStartGGId");
         if (value != null) return value;
         value = findValue(RivalsOfAether2Enum.class, String.valueOf(startGGId), "getStartGGId");
+        if (value != null) return value;
+        value = findValue(Tekken8Enum.class, String.valueOf(startGGId), "getStartGGId");
         return value;
     }
 
