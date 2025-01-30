@@ -5,7 +5,6 @@ import thumbnailgenerator.enums.RivalsOfAether2Enum;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
 import thumbnailgenerator.enums.Tekken8Enum;
-import thumbnailgenerator.enums.Tekken8FighterArtType;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

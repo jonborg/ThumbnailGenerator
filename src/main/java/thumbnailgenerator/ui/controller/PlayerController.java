@@ -1,16 +1,11 @@
 package thumbnailgenerator.ui.controller;
 
-import java.awt.Desktop;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -38,10 +33,8 @@ import thumbnailgenerator.enums.RivalsOfAether2Enum;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
 import thumbnailgenerator.enums.Tekken8Enum;
-import thumbnailgenerator.enums.Tekken8FighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.factory.CharacterImageFetcherFactory;
-import thumbnailgenerator.service.SmashUltimateCharacterImageFetcher;
 import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.enums.StartGGEnumUtils;

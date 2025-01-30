@@ -45,6 +45,11 @@ public class FileThumbnailSettingsTypeAdapter extends TypeAdapter<FileThumbnailS
                         .value(((StreetFighter6FighterArtType) artType)
                                 .getName());
             }
+            if (artType instanceof Tekken8FighterArtType) {
+                out.name("artType")
+                        .value(((Tekken8FighterArtType) artType)
+                                .getName());
+            }
             out.name("fighterImageSettings").value(artSetting.getFighterImageSettingsPath());
             out.endObject();
         }

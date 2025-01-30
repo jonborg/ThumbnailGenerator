@@ -4,6 +4,7 @@ import javafx.util.StringConverter;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
+import thumbnailgenerator.enums.Tekken8FighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 public class FighterArtTypeConverter extends StringConverter<FighterArtType> {
@@ -12,23 +13,26 @@ public class FighterArtTypeConverter extends StringConverter<FighterArtType> {
     public String toString(FighterArtType object) {
 
         if (object instanceof SmashUltimateFighterArtType) {
-            SmashUltimateFighterArtType smashArtType = (SmashUltimateFighterArtType) object;
-            return smashArtType.getName();
+            SmashUltimateFighterArtType artType = (SmashUltimateFighterArtType) object;
+            return artType.getName();
         }
         if (object instanceof RivalsOfAether2FighterArtType) {
-            RivalsOfAether2FighterArtType
-                    smashArtType = (RivalsOfAether2FighterArtType) object;
-            return smashArtType.getName();
+            RivalsOfAether2FighterArtType artType = (RivalsOfAether2FighterArtType) object;
+            return artType.getName();
         }
         if (object instanceof StreetFighter6FighterArtType) {
-            StreetFighter6FighterArtType smashArtType = (StreetFighter6FighterArtType) object;
-            return smashArtType.getName();
+            StreetFighter6FighterArtType artType = (StreetFighter6FighterArtType) object;
+            return artType.getName();
+        }
+        if (object instanceof Tekken8FighterArtType) {
+            Tekken8FighterArtType artType = (Tekken8FighterArtType) object;
+            return artType.getName();
         }
         return null;
     }
 
     @Override
-    public SmashUltimateFighterArtType fromString(String string) {
+    public FighterArtType fromString(String string) {
         return SmashUltimateFighterArtType.valueOf(string);
     }
 }
