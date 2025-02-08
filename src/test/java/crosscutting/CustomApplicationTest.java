@@ -1,6 +1,5 @@
 package crosscutting;
 
-import app.App;
 import enums.CheckBoxId;
 import enums.ChosenImageFieldId;
 import enums.ChosenJsonFieldId;
@@ -9,6 +8,7 @@ import enums.MenuId;
 import enums.ScrollPaneId;
 import enums.SpinnerId;
 import enums.WindowId;
+import javafx.application.Application;
 import javafx.geometry.VerticalDirection;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -23,8 +23,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import ui.textfield.ChosenImageField;
-import ui.textfield.ChosenJsonField;
+import thumbnailgenerator.JavaFxApplication;
+import thumbnailgenerator.Main;
+import thumbnailgenerator.ui.textfield.ChosenImageField;
+import thumbnailgenerator.ui.textfield.ChosenJsonField;
 
 import java.io.IOException;
 
@@ -34,7 +36,7 @@ public class CustomApplicationTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws IOException {
-        App.startApp(stage);
+        Application.launch(JavaFxApplication.class, null);
     }
 
     public void clickOnButton(ButtonId buttonId){

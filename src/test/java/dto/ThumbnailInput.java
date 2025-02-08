@@ -1,9 +1,9 @@
 package dto;
 
-import fighter.FighterArtType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-invicta;20/02/20XX;mural
+invicta;ssbu;20/02/20XX;mural
 UrQte;Arjay;robin;byleth;1;8;Losers
 fizbo;Darkout;pikachu;pokemon_trainer;1;5;winners Semis
 Chime;Toaster;rob;marth;2;5;Grand Final

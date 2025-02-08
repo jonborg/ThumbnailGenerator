@@ -7,17 +7,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 
 import exception.Top8FromFileException;
-import lombok.var;
 import net.objecthunter.exp4j.ExpressionBuilder;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.codehaus.plexus.util.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
@@ -29,9 +27,6 @@ import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Top8ImageSettings;
 import thumbnailgenerator.dto.FullSlot;
 import thumbnailgenerator.dto.Top8;
-import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
-import thumbnailgenerator.exception.FontNotFoundException;
-import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.image.ImageUtils;
@@ -152,14 +147,12 @@ public class Top8Service {
             AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
         }
         characterImage = imageService.flipImage(characterImage, player.getFighter(0).isFlip());
-        if (Game.SSBU.equals(game)) {
-            characterImage = addAdditionalFighters(characterImage, playerSlot,
-                    player.getSecondaryFighters());
-        }
+        characterImage = addAdditionalFighters(characterImage, playerSlot,
+                player.getSecondaryFighters(), game);
         return characterImage;
     }
 
-    public BufferedImage addAdditionalFighters(BufferedImage characterImage, PlayerSlot playerSlot, List<Fighter> fighters) {
+    public BufferedImage addAdditionalFighters(BufferedImage characterImage, PlayerSlot playerSlot, List<Fighter> fighters, Game game) {
         for (int i = 0; i< fighters.size(); i++){
             var fighter = fighters.get(i);
             var scale = playerSlot.getAdditionalFighters().getScale();
@@ -175,7 +168,7 @@ public class Top8Service {
                     .evaluate();
             try {
                 var icon = ImageIO.read(Top8Service.class.getResourceAsStream(
-                        "/icons/" + fighter.getUrlName() + "/" + fighter.getAlt() +
+                        "/icons/" + game.getCode() + "/" + fighter.getUrlName() + "/" + fighter.getAlt() +
                                 ".png"));
                 icon = ImageUtils.resizeImage(icon, scale);
                 var g2d = characterImage.createGraphics();

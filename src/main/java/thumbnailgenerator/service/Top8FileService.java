@@ -3,7 +3,6 @@ package thumbnailgenerator.service;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.var;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Player;

@@ -8,12 +8,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;;
-import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.javatuples.Pair;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.GeneratedGraphic;
+import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
@@ -27,7 +27,6 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
 
     private static final Logger LOGGER = LogManager.getLogger(ThumbnailService.class);
     private int gameIndex = 1;
-    private int artTypeIndex = 3;
 
     protected abstract V getCharacterData(List<String> parameters)
             throws FighterImageSettingsNotFoundException;
@@ -69,8 +68,8 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
         return this.gameIndex;
     }
 
-    protected int getArtTypeIndex(){
-        return this.artTypeIndex;
+    protected int getArtTypeIndex(T generatedGraphic){
+        return generatedGraphic instanceof Thumbnail ? 3 : 2;
     }
 
     protected T initializeGeneratedGraphic(List<String> parameters)
@@ -97,7 +96,7 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
                 setArtType(generatedGraphic, parameters,
                         new Pair<>(
                                 SmashUltimateFighterArtType
-                                        .valueOf(parameters.get(getArtTypeIndex()).toUpperCase()),
+                                        .valueOf(parameters.get(getArtTypeIndex(generatedGraphic)).toUpperCase()),
                                 SmashUltimateFighterArtType.RENDER
                         )
                 );
@@ -106,7 +105,7 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
                 setArtType(generatedGraphic, parameters,
                         new Pair<>(
                                 StreetFighter6FighterArtType
-                                        .valueOf(parameters.get(getArtTypeIndex()).toUpperCase()),
+                                        .valueOf(parameters.get(getArtTypeIndex(generatedGraphic)).toUpperCase()),
                                 StreetFighter6FighterArtType.RENDER
                         )
                 );
@@ -115,7 +114,7 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
                 setArtType(generatedGraphic, parameters,
                         new Pair<>(
                                 RivalsOfAether2FighterArtType
-                                        .valueOf(parameters.get(getArtTypeIndex()).toUpperCase()),
+                                        .valueOf(parameters.get(getArtTypeIndex(generatedGraphic)).toUpperCase()),
                                 RivalsOfAether2FighterArtType.RENDER
                         )
                 );
@@ -124,7 +123,7 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
                 setArtType(generatedGraphic, parameters,
                         new Pair<>(
                                 Tekken8FighterArtType
-                                        .valueOf(parameters.get(getArtTypeIndex()).toUpperCase()),
+                                        .valueOf(parameters.get(getArtTypeIndex(generatedGraphic)).toUpperCase()),
                                 Tekken8FighterArtType.RENDER
                         )
                 );

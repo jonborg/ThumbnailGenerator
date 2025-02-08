@@ -1,6 +1,5 @@
 package integrationtests;
 
-import app.App;
 import crosscutting.CustomApplicationTest;
 import enums.ButtonId;
 import enums.ChosenImageFieldId;
@@ -10,26 +9,23 @@ import enums.MenuId;
 import enums.ScrollPaneId;
 import enums.TextFieldId;
 import enums.WindowId;
-import fighter.FighterArtType;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import thumbnail.text.TextSettings;
-import tournament.Tournament;
-import tournament.TournamentUtils;
-import tournament.settings.ThumbnailSettings;
-import tournament.settings.Top8Settings;
-import ui.controller.ThumbnailGeneratorController;
+import thumbnailgenerator.dto.FileThumbnailSettings;
+import thumbnailgenerator.dto.FileTop8Settings;
+import thumbnailgenerator.dto.Game;
+import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 import utils.FileUtils;
 import utils.TestUtils;
 import utils.WaitUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -64,16 +60,18 @@ public class TournamentSettingsIT extends CustomApplicationTest {
         assertEquals(editScene.getRoot().getId(), WindowId.EDIT_TOURNAMENT.getValue());
         assertEquals(editStage.getTitle(), "Edit Tournament Smash Invicta");
         validateTournamentSettings(expectedTournament, editScene);
-        validateTournamentThumbnailSettings(expectedTournament.getThumbnailSettings(), editScene, FighterArtType.RENDER);
-        validateTournamentTop8Settings(expectedTournament.getTop8Settings(), editScene, FighterArtType.RENDER);
+        validateTournamentThumbnailSettings(expectedTournament.getThumbnailSettingsByGame(Game.SSBU),
+                editScene, SmashUltimateFighterArtType.RENDER);
+        validateTournamentTop8Settings(expectedTournament.getTop8SettingsByGame(Game.SSBU),
+                editScene, SmashUltimateFighterArtType.RENDER);
 
-        selectInComboBox(ComboBoxId.TOURNAMENT_THUMBNAIL_ART_TYPE, FighterArtType.MURAL.getName());
+        selectInComboBox(ComboBoxId.TOURNAMENT_THUMBNAIL_ART_TYPE, SmashUltimateFighterArtType.MURAL.getName());
         scrollPaneVertically(ScrollPaneId.TOURNAMENT_SETTINGS, editScene, 30);
-        selectInComboBox(ComboBoxId.TOURNAMENT_TOP8_ART_TYPE, FighterArtType.MURAL.getName());
+        selectInComboBox(ComboBoxId.TOURNAMENT_TOP8_ART_TYPE, SmashUltimateFighterArtType.MURAL.getName());
         assertEqualsComboBoxSelection(ComboBoxId.TOURNAMENT_THUMBNAIL_ART_TYPE, editScene,
-                FighterArtType.MURAL.toString());
+                SmashUltimateFighterArtType.MURAL.toString());
         assertEqualsComboBoxSelection(ComboBoxId.TOURNAMENT_TOP8_ART_TYPE, editScene,
-                FighterArtType.MURAL.toString());
+                SmashUltimateFighterArtType.MURAL.toString());
     }
 
     @Test
@@ -109,10 +107,11 @@ public class TournamentSettingsIT extends CustomApplicationTest {
         assertEqualsTextFieldContent(TextFieldId.TOURNAMENT_ID, scene, expectedTournament.getTournamentId());
         assertEqualsChosenImageFieldContent(ChosenImageFieldId.TOURNAMENT_LOGO, scene, expectedTournament.getImage());
         assertEqualsComboBoxSelection(ComboBoxId.TOURNAMENT_THUMBNAIL_FONT, scene,
-                expectedTournament.getThumbnailSettings().getTextSettings().getFont());
+                expectedTournament.getThumbnailSettings().get(0).getTextSettings().getFont());
     }
 
-    private void validateTournamentThumbnailSettings(ThumbnailSettings expectedThumbnailSettings, Scene scene, FighterArtType fighterArtType){
+    private void validateTournamentThumbnailSettings(
+            FileThumbnailSettings expectedThumbnailSettings, Scene scene, FighterArtType fighterArtType){
         assertEqualsChosenImageFieldContent(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_FOREGROUND, scene,
                 expectedThumbnailSettings.getForeground());
         assertEqualsChosenImageFieldContent(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_BACKGROUND, scene,
@@ -123,7 +122,8 @@ public class TournamentSettingsIT extends CustomApplicationTest {
                 expectedThumbnailSettings.getFighterImageSettingsFile(fighterArtType));
     }
 
-    private void validateTournamentTop8Settings(Top8Settings expectedTop8Settings, Scene scene, FighterArtType fighterArtType){
+    private void validateTournamentTop8Settings(
+            FileTop8Settings expectedTop8Settings, Scene scene, FighterArtType fighterArtType){
         assertEqualsChosenImageFieldContent(ChosenImageFieldId.TOURNAMENT_TOP8_FOREGROUND, scene,
                 expectedTop8Settings.getForeground());
         assertEqualsChosenImageFieldContent(ChosenImageFieldId.TOURNAMENT_TOP8_BACKGROUND, scene,

@@ -1,5 +1,7 @@
 package utils;
 
+import thumbnailgenerator.dto.Game;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,8 +29,8 @@ public class FileUtils {
         return new File(System.getProperty("user.dir") + path);
     }
 
-    public static File getCharacterImage(String characterUrlName, int alt){
-        return FileUtils.getActualFile("/assets/fighters/" + characterUrlName + "/" + alt + ".png");
+    public static File getCharacterImage(Game game, String characterUrlName, int alt){
+        return FileUtils.getActualFile("/assets/characters/" + game.toString() + "/" + characterUrlName + "/" + alt + ".png");
     }
 
     public static File getMostRecentFile(String folderPath){

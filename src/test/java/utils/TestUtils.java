@@ -1,8 +1,7 @@
 package utils;
 
-import thumbnail.text.TextSettings;
-import tournament.Tournament;
-import tournament.TournamentUtils;
+import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.service.TournamentUtils;
 
 public class TestUtils {
 
