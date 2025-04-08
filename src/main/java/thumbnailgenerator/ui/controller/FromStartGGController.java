@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import java.awt.Desktop;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -198,7 +199,7 @@ public class FromStartGGController implements Initializable {
             //AlertFactory already thrown inside ThumbnailFromFile.generateFromSmashGG
         }catch(FontNotFoundException e){
             AlertFactory.displayError(e.getMessage());
-        } catch (FileNotFoundException | FighterImageSettingsNotFoundException e) {
+        } catch (FileNotFoundException | FighterImageSettingsNotFoundException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
