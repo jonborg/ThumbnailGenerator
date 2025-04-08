@@ -40,7 +40,8 @@ public enum Tekken8Enum {
     EDDY("Eddy", "eddy", 2446),
     LIDIA("Lidia", "lidia", 2538),
     HEIHACHI("Heihachi", "heihachi", 2598),
-    CLIVE("Clive", "clive", 2612);
+    CLIVE("Clive", "clive", 2612),
+    ANNA("Anna", "anna", 2620);
 
     private final String name;
     private final String code;

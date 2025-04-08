@@ -28,7 +28,9 @@ public enum StreetFighter6Enum {
     ED("Ed", "ed", 2442),
     AKUMA("Akuma", "akuma", 2495),
     M_BISON("M. Bison", "m_bison", 2506),
-    TERRY("Terry", "terry", 2596);
+    TERRY("Terry", "terry", 2596),
+    MAI("Mai", "mai", 2616);
+
 
     private final String name;
     private final String code;

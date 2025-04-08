@@ -88,6 +88,14 @@
 		  20
 		],
 		"scale": 0.45
+	  },
+	  {
+		"fighter": "olympia",
+		"offset": [
+		  0,
+		  60
+		],
+		"scale": 0.85
 	  }
   ]
 }]

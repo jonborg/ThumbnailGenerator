@@ -14,7 +14,7 @@ public class Tekken8CharacterImageFetcher extends CharacterImageFetcher {
     static String RENDER_URL =
             "https://raw.githubusercontent.com/jonborg/" +
                     "ThumbnailGeneratorCharacterImageRepository/" +
-                    "refs/heads/v3.1.0-beta3/" +
+                    "refs/heads/v3.1.0-beta4/" +
                     "tekken8/";
 
     @Override
