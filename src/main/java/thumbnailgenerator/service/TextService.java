@@ -3,13 +3,10 @@ package thumbnailgenerator.service;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Shape;
-import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -17,11 +14,16 @@ import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.var;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import thumbnailgenerator.dto.TextFont;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.exception.FontNotFoundException;
 
@@ -33,7 +35,7 @@ public class TextService {
     private static int HEIGHT = 110;
 
     private static TextSettings textSettings;
-    private static Font font;
+    private static TextFont textFont;
     private static boolean top;
 
     public BufferedImage convert(String text, TextSettings settings, boolean topText) throws
@@ -55,70 +57,58 @@ public class TextService {
 
 
     private BufferedImage generateText(String text, Color color, int fontSize) throws FontNotFoundException {
+
         if (color.equals(Color.BLACK)){
             LOGGER.debug("Loading font {} for text {}", textSettings.getFont(), text);
         } else {
             LOGGER.debug("Loading font {} for text {}'s shadow", textSettings.getFont(), text);
         }
-        try {
-            InputStream fontFile = TextService.class.getResourceAsStream("/fonts/" + textSettings.getFont() + ".ttf");
-            if (!textSettings.isBold() && textSettings.isItalic())
-                font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.ITALIC, fontSize);
-            else if (textSettings.isBold() && !textSettings.isItalic())
-                font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD, fontSize);
-            else if (textSettings.isBold() && textSettings.isItalic())
-                font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD + Font.ITALIC, fontSize);
-            else
-                font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, fontSize);
-        }catch (FontFormatException | IOException | NullPointerException e){
-            LOGGER.debug("Could not find font {} on resources. Checking system fonts.", textSettings.getFont());
-            LOGGER.catching(e);
-            if (!textSettings.isBold() && textSettings.isItalic())
-                font = new Font(textSettings.getFont(), Font.ITALIC, fontSize);
-            else if (textSettings.isBold() && !textSettings.isItalic())
-                font = new Font(textSettings.getFont(), Font.BOLD, fontSize);
-            else if (textSettings.isBold() && textSettings.isItalic())
-                font = new Font(textSettings.getFont(), Font.BOLD+Font.ITALIC, fontSize);
-            else
-                font = new Font(textSettings.getFont(), Font.PLAIN, fontSize);
-            //throw new FontNotFoundException(textSettings.getFont());
-        }
 
+        textFont = new TextFont(textSettings, fontSize);
         BufferedImage rect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = rect.createGraphics();
 
-        FontRenderContext frc = graphics.getFontRenderContext();
-        font.layoutGlyphVector(frc, text.toCharArray(), 0, text.length(), Font.LAYOUT_LEFT_TO_RIGHT);
+        FontMetrics fontMetrics = graphics.getFontMetrics(textFont.getSelectedFont());
+        var textDataList = splitTextByLanguage(text);
+        var textWidth = checkTextWidth(textDataList, textFont, graphics);
 
-        // Get the FontMetrics
-        FontMetrics metrics = graphics.getFontMetrics(font);
         // Determine the X coordinate for the text
-        int x = (rect.getWidth() - metrics.stringWidth(text)) / 2;
+        int x = (rect.getWidth() - textWidth) / 2;
         // Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
-        int y = ((rect.getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
+        int y = ((rect.getHeight() - fontMetrics.getHeight()) / 2) + fontMetrics.getAscent();
 
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.setFont(font);
         graphics.setColor(color);
 
-        if (color == Color.BLACK) {
-            LOGGER.debug("Drawing shadow of text {}.", text);
-            return blurText(rect,text,graphics,x,y);
-        }
-        //else drawOutline(text,graphics);
-        LOGGER.debug("Drawing text {}.", text);
-        graphics.drawString(text, x, y);
-        //outline
-        if (textSettings.getContour()>0) {
-            LOGGER.debug("Drawing text {}'s contour", text);
-            drawOutline(graphics, text, x, y);
+        var offsetX = 0;
+        for (TextData textData : textDataList) {
+            if (textData.getLanguage() == "Japanese") {
+                graphics.setFont(textFont.getJapaneseFont());
+            } else {
+                graphics.setFont(textFont.getSelectedFont());
+            }
+
+            if (color == Color.BLACK) {
+                LOGGER.debug("Drawing shadow of text {}.", text);
+                blurText(rect, textData.text, graphics, x + offsetX, y);
+            } else {
+                LOGGER.debug("Drawing text {}.", text);
+                graphics.drawString(textData.text, x + offsetX, y);
+
+                //outline
+                if (textSettings.getContour() > 0) {
+                    LOGGER.debug("Drawing text {}'s contour", text);
+                    drawOutline(graphics, textData.text, x + offsetX, y);
+                }
+            }
+            offsetX += textData.getWidth();
         }
 
         LOGGER.debug("Rotate text {}.", text);
         return rotateText(rect);
     }
 
-    private BufferedImage blurText(BufferedImage rect, String text,Graphics2D graphics, int x, int y){
+    private BufferedImage blurText(BufferedImage rect, String text, Graphics2D graphics, int x, int y){
 
         graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.3f));
         graphics.drawString(text, x, y);
@@ -131,7 +121,7 @@ public class TextService {
 
         BufferedImageOp op = new ConvolveOp(kernel);
         BufferedImage image = op.filter(rect, null);
-        return rotateText(image);
+        return image;
     }
 
     private BufferedImage rotateText(BufferedImage rect){
@@ -147,7 +137,7 @@ public class TextService {
     }
 
     private void drawOutline(Graphics2D graphics, String text, int x, int y){
-        GlyphVector gv = font.createGlyphVector(graphics.getFontRenderContext(), text);
+        GlyphVector gv = textFont.getSelectedFont().createGlyphVector(graphics.getFontRenderContext(), text);
         Shape shape = gv.getOutline();
         graphics.setColor(Color.black);
         graphics.setStroke(new BasicStroke(textSettings.getContour()));
@@ -155,5 +145,64 @@ public class TextService {
         graphics.draw(shape);
     }
 
+    private boolean isCharJapanese(char ch) {
+        return (ch >= 0x3040 && ch <= 0x309F) || // Hiragana
+                (ch >= 0x30A0 && ch <= 0x30FF) || // Katakana
+                (ch >= 0x4E00 && ch <= 0x9FFF) || // Kanji
+                (ch >= 0x3000 && ch <= 0x303F);  // Punctuation, etc.
+    }
 
+    private List<TextData> splitTextByLanguage(String input) {
+        List<TextData> result = new ArrayList<>();
+        if (input == null || input.isEmpty()) return result;
+
+        StringBuilder current = new StringBuilder();
+        boolean currentIsJapanese = isCharJapanese(input.charAt(0));
+
+        for (char ch : input.toCharArray()) {
+            boolean isJap = isCharJapanese(ch);
+            if (isJap == currentIsJapanese) {
+                current.append(ch);
+            } else {
+                result.add(new TextData(current.toString(), currentIsJapanese ? "Japanese" : "English"));
+                current.setLength(0);
+                current.append(ch);
+                currentIsJapanese = isJap;
+            }
+        }
+        result.add(new TextData(current.toString(), currentIsJapanese ? "Japanese" : "English"));
+        return result;
+    }
+
+    private int checkTextWidth(List<TextData> textDataList, TextFont textFont, Graphics2D graphics){
+        // Get the FontMetrics
+        FontMetrics fontMetrics = graphics.getFontMetrics(textFont.getSelectedFont());
+        FontMetrics japaneseFontMetrics = graphics.getFontMetrics(textFont.getJapaneseFont());
+        var finalWidth = 0;
+        for (TextData textData : textDataList) {
+            int width;
+            if(textData.language == "Japanese"){
+                width = japaneseFontMetrics.stringWidth(textData.text);
+            } else {
+                width = fontMetrics.stringWidth(textData.text);
+            }
+            textData.setWidth(width);
+            finalWidth += width;
+        }
+        return finalWidth;
+    }
+}
+
+@Setter
+@Getter
+class TextData {
+    String text;
+    String language;
+    int width;
+
+    TextData(String text, String language) {
+        this.text = text;
+        this.language = language;
+        this.width = -1;
+    }
 }
