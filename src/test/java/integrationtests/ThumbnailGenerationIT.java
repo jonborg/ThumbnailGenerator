@@ -9,6 +9,8 @@ import enums.ComboBoxId;
 import enums.SpinnerId;
 import enums.TextFieldId;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import thumbnailgenerator.Main;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import utils.FileUtils;
@@ -24,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
 
+@SpringBootTest(classes = Main.class)
 public class ThumbnailGenerationIT extends CustomApplicationTest {
 
     @Test

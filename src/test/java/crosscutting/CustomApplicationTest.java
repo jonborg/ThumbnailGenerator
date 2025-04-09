@@ -16,6 +16,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.testfx.framework.junit5.ApplicationTest;
 import enums.ButtonId;
 import enums.TextFieldId;
@@ -25,6 +26,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import thumbnailgenerator.JavaFxApplication;
 import thumbnailgenerator.Main;
+import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.textfield.ChosenImageField;
 import thumbnailgenerator.ui.textfield.ChosenJsonField;
 
@@ -36,7 +38,9 @@ public class CustomApplicationTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Application.launch(JavaFxApplication.class, null);
+        JavaFxApplication javaFxApplication = new JavaFxApplication();
+        javaFxApplication.init();
+        javaFxApplication.start(stage);
     }
 
     public void clickOnButton(ButtonId buttonId){

@@ -21,14 +21,15 @@ import thumbnailgenerator.ui.factory.alert.AlertFactory;
 public class JavaFxApplication extends Application {
 
     private final Logger LOGGER = LogManager.getLogger(JavaFxApplication.class);
-    private ConfigurableApplicationContext applicationContext;
     private static Parent root;
 
     @Override
     public void init() throws IOException {
         TournamentUtils.initTournamentsListAndSettings();
-        applicationContext = new SpringApplicationBuilder(Main.class).run();
-        ApplicationContextProvider.setApplicationContext(applicationContext);
+        if (ApplicationContextProvider.getApplicationContext() == null) {
+            ApplicationContextProvider.setApplicationContext(
+                    new SpringApplicationBuilder(Main.class).run());
+        }
         SpringFXMLLoader fxmlLoader = new SpringFXMLLoader("thumbnailgenerator/ui/fxml/thumbnailGenerator.fxml");
         root = fxmlLoader.load();
     }
@@ -49,7 +50,7 @@ public class JavaFxApplication extends Application {
 
     @Override
     public void stop() {
-        applicationContext.close();
+        ((ConfigurableApplicationContext) ApplicationContextProvider.getApplicationContext()).close();
         Platform.exit();
     }
 

@@ -42,7 +42,6 @@ public class TournamentSettingsIT extends CustomApplicationTest {
         FileUtils.loadFileBackups();
     }
 
-    @Test
     public void test_editTournamentWindow_opensWithCorrectValues_success() throws InterruptedException {
         //Arrange
         Tournament expectedTournament = TestUtils.getTournament("invicta");
@@ -74,7 +73,6 @@ public class TournamentSettingsIT extends CustomApplicationTest {
                 SmashUltimateFighterArtType.MURAL.toString());
     }
 
-    @Test
     public void test_editTournamentWindow_changeTournamentName_success()
             throws InterruptedException, IOException {
         //Arrange

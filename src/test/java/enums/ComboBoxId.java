@@ -4,7 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum ComboBoxId {
-    ART_TYPE("#artType"),
+    GAME("gameComboBox"),
+    ART_TYPE("#artTypeComboBox"),
     FIGHTER("#fighter"),
     TOURNAMENT_THUMBNAIL_FONT("#font"),
     TOURNAMENT_THUMBNAIL_ART_TYPE("#artTypeThumbnail"),

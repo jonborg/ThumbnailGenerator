@@ -254,10 +254,13 @@ public class ThumbnailGeneratorController implements Initializable {
                 try {
                     LOGGER.info("Selected tournament {} for editing.", tournament.getName());
                     SpringFXMLLoader loader = new SpringFXMLLoader("thumbnailgenerator/ui/fxml/tournamentsEdit.fxml");
+                    Parent root = loader.load();
+                    root.setId("editTournamentWindow");
+
                     Stage stage = new Stage();
                     stage.setTitle("Edit Tournament " + tournament.getName());
                     stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
-                    stage.setScene(new Scene(loader.load()));
+                    stage.setScene(new Scene(root));
                     stage.show();
                 } catch (IOException e) {
                     e.printStackTrace();
