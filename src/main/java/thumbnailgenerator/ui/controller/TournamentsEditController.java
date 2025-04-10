@@ -19,11 +19,6 @@ import thumbnailgenerator.ui.factory.alert.AlertFactory;
 @Controller
 public class TournamentsEditController extends TournamentsCreateController {
     private static final Logger LOGGER = LogManager.getLogger(TournamentsEditController.class);
-    private Runnable onSaveCallback;
-
-    public void setOnSaveCallback(Runnable callback) {
-        this.onSaveCallback = callback;
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

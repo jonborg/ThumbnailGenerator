@@ -31,6 +31,7 @@ import javafx.util.converter.IntegerStringConverter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.FighterArtSettings;
 import thumbnailgenerator.dto.FileThumbnailSettings;
@@ -53,6 +54,7 @@ import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.ui.textfield.ChosenImageField;
 import thumbnailgenerator.ui.textfield.ChosenJsonField;
 
+@Primary
 @Controller
 public class TournamentsCreateController implements Initializable {
     private static final Logger LOGGER = LogManager.getLogger(TournamentsCreateController.class);
@@ -119,6 +121,11 @@ public class TournamentsCreateController implements Initializable {
     protected List<FileThumbnailSettings> fileThumbnailSettingsList;
     protected List<FileTop8Settings> fileTop8SettingsList;
     private @Autowired ThumbnailService thumbnailService;
+    protected Runnable onSaveCallback;
+
+    public void setOnSaveCallback(Runnable callback) {
+        this.onSaveCallback = callback;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -462,6 +469,7 @@ public class TournamentsCreateController implements Initializable {
         Tournament currentTournament = generateTournamentWithCurrentSettings();
         LOGGER.debug("Saving new tournament -> {}", currentTournament.toString());
         TournamentUtils.saveNewTournaments(currentTournament);
+        onSaveCallback.run();
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
