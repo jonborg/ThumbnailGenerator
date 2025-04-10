@@ -127,7 +127,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
     private void fillRoundData(ThumbnailInput input){
         writeInTextField(TextFieldId.ROUND, input.getRound());
         writeInTextField(TextFieldId.DATE, input.getDate());
-        selectInComboBox(ComboBoxId.ART_TYPE, ((SmashUltimateFighterArtType) input.getArtType()).getName());
+        selectInComboBox(ComboBoxId.ART_TYPE, ((SmashUltimateFighterArtType) input.getArtType()).getValue());
     }
 
     private void fillPlayerData(PlayerInput input, String parentFxml){

@@ -7,11 +7,16 @@ import thumbnailgenerator.enums.interfaces.FighterArtType;
 public enum RivalsOfAether2FighterArtType implements FighterArtType {
     RENDER("Renders");
 
-    private String name;
+    private String value;
     private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/ro2/default.json";
 
-    RivalsOfAether2FighterArtType(String name) {
-        this.name = name;
+    RivalsOfAether2FighterArtType(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String getEnumName() {
+        return this.name().toUpperCase();
     }
 
     @Override

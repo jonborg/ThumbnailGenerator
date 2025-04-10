@@ -29,7 +29,8 @@
             "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -39,7 +40,8 @@
             "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -53,10 +55,10 @@
     ],
     "top8Settings": [
       {
-        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "game": "SSBU",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -69,10 +71,10 @@
         ]
       },
       {
-        "slotSettingsFile": "",
         "game": "SF6",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -112,7 +114,8 @@
             "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -122,7 +125,8 @@
             "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -136,10 +140,10 @@
     ],
     "top8Settings": [
       {
-        "slotSettingsFile": "settings/top8/slot/icarus_slots.json",
         "game": "SSBU",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "settings/top8/slot/icarus_slots.json",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -152,10 +156,10 @@
         ]
       },
       {
-        "slotSettingsFile": "settings/top8/slot/sf6/icarus_slots.json",
         "game": "SF6",
         "foreground": "",
         "background": "assets/tournaments/backgrounds/top8/invictaTop8.png",
+        "slotSettingsFile": "settings/top8/slot/sf6/icarus_slots.json",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -163,8 +167,9 @@
           }
         ]
       }
-	]
-  },{
+    ]
+  },
+  {
     "id": "mushroommadness",
     "name": "Mushroom Madness",
     "logo": "assets/tournaments/logos/mushroommadness.png",
@@ -194,7 +199,8 @@
             "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
         "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
@@ -204,7 +210,8 @@
             "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
         "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
@@ -218,10 +225,10 @@
     ],
     "top8Settings": [
       {
-        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "game": "SSBU",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -234,10 +241,10 @@
         ]
       },
       {
-        "slotSettingsFile": "",
         "game": "SF6",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -246,7 +253,8 @@
         ]
       }
     ]
-  },{
+  },
+  {
     "id": "returnofaether",
     "name": "Return of Aether",
     "logo": "assets/tournaments/logos/ReturnofAether_logo.png",
@@ -276,7 +284,8 @@
             "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
         "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
@@ -286,7 +295,8 @@
             "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
         "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
@@ -300,10 +310,10 @@
     ],
     "top8Settings": [
       {
-        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "game": "SSBU",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -316,10 +326,10 @@
         ]
       },
       {
-        "slotSettingsFile": "",
         "game": "SF6",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -328,7 +338,8 @@
         ]
       }
     ]
-  },{
+  },
+  {
     "id": "fdt",
     "name": "Final Destination Tuesday",
     "logo": "assets/tournaments/logos/FDT_logo.png",
@@ -358,7 +369,8 @@
             "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -368,7 +380,8 @@
             "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -382,10 +395,10 @@
     ],
     "top8Settings": [
       {
-        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "game": "SSBU",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -398,10 +411,10 @@
         ]
       },
       {
-        "slotSettingsFile": "",
         "game": "SF6",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -410,7 +423,8 @@
         ]
       }
     ]
-  },{
+  },
+  {
     "id": "ragelx",
     "name": "Rage LX",
     "logo": "assets/tournaments/logos/ragelx.png",
@@ -440,7 +454,8 @@
             "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -450,7 +465,8 @@
             "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -464,10 +480,10 @@
     ],
     "top8Settings": [
       {
-        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "game": "SSBU",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -480,10 +496,10 @@
         ]
       },
       {
-        "slotSettingsFile": "",
         "game": "SF6",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -492,7 +508,8 @@
         ]
       }
     ]
-  },{
+  },
+  {
     "id": "TGF",
     "name": "Tomar Game Festival",
     "logo": "assets/tournaments/logos/tgf24.png",
@@ -522,7 +539,8 @@
             "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
         "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
@@ -532,7 +550,8 @@
             "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
           }
         ]
-      },{
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
         "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
@@ -546,10 +565,10 @@
     ],
     "top8Settings": [
       {
-        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "game": "SSBU",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -562,10 +581,10 @@
         ]
       },
       {
-        "slotSettingsFile": "",
         "game": "SF6",
         "foreground": "",
         "background": "",
+        "slotSettingsFile": "",
         "artSettings": [
           {
             "artType": "RENDER",

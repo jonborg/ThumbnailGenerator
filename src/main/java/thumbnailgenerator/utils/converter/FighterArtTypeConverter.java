@@ -14,19 +14,19 @@ public class FighterArtTypeConverter extends StringConverter<FighterArtType> {
 
         if (object instanceof SmashUltimateFighterArtType) {
             SmashUltimateFighterArtType artType = (SmashUltimateFighterArtType) object;
-            return artType.getName();
+            return artType.getValue();
         }
         if (object instanceof RivalsOfAether2FighterArtType) {
             RivalsOfAether2FighterArtType artType = (RivalsOfAether2FighterArtType) object;
-            return artType.getName();
+            return artType.getValue();
         }
         if (object instanceof StreetFighter6FighterArtType) {
             StreetFighter6FighterArtType artType = (StreetFighter6FighterArtType) object;
-            return artType.getName();
+            return artType.getValue();
         }
         if (object instanceof Tekken8FighterArtType) {
             Tekken8FighterArtType artType = (Tekken8FighterArtType) object;
-            return artType.getName();
+            return artType.getValue();
         }
         return null;
     }

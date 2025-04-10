@@ -64,15 +64,16 @@ public class TournamentSettingsIT extends CustomApplicationTest {
         validateTournamentTop8Settings(expectedTournament.getTop8SettingsByGame(Game.SSBU),
                 editScene, SmashUltimateFighterArtType.RENDER);
 
-        selectInComboBox(ComboBoxId.TOURNAMENT_THUMBNAIL_ART_TYPE, SmashUltimateFighterArtType.MURAL.getName());
+        selectInComboBox(ComboBoxId.TOURNAMENT_THUMBNAIL_ART_TYPE, SmashUltimateFighterArtType.MURAL.getValue());
         scrollPaneVertically(ScrollPaneId.TOURNAMENT_SETTINGS, editScene, 30);
-        selectInComboBox(ComboBoxId.TOURNAMENT_TOP8_ART_TYPE, SmashUltimateFighterArtType.MURAL.getName());
+        selectInComboBox(ComboBoxId.TOURNAMENT_TOP8_ART_TYPE, SmashUltimateFighterArtType.MURAL.getValue());
         assertEqualsComboBoxSelection(ComboBoxId.TOURNAMENT_THUMBNAIL_ART_TYPE, editScene,
                 SmashUltimateFighterArtType.MURAL.toString());
         assertEqualsComboBoxSelection(ComboBoxId.TOURNAMENT_TOP8_ART_TYPE, editScene,
                 SmashUltimateFighterArtType.MURAL.toString());
     }
 
+    @Test
     public void test_editTournamentWindow_changeTournamentName_success()
             throws InterruptedException, IOException {
         //Arrange

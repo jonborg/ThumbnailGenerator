@@ -8,12 +8,17 @@ public enum SmashUltimateFighterArtType implements FighterArtType {
     RENDER("Renders"),
     MURAL("Mural Arts");
 
-    private String name;
+    private String value;
     private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/default.json";
     private static String defaultMuralImageSettingsFile= "settings/thumbnails/images/defaultMural.json";
 
-    SmashUltimateFighterArtType(String name) {
-        this.name = name;
+    SmashUltimateFighterArtType(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String getEnumName() {
+        return this.name().toUpperCase();
     }
 
     @Override

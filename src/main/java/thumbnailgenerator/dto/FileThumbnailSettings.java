@@ -4,7 +4,9 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import thumbnailgenerator.dto.json.read.FileThumbnailSettingsRead;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.utils.enums.FighterArtTypeUtils;
 
 @Getter
 @Setter
@@ -26,6 +28,16 @@ public class FileThumbnailSettings extends Settings implements Cloneable{
                 dir.setFighterImageSettingsPath(defaultFighterImageSettingsFile);
             }
         });
+    }
+
+    public FileThumbnailSettings(FileThumbnailSettingsRead fileThumbnailSettingsRead){
+        this(
+                Game.valueOf(fileThumbnailSettingsRead.getGame()),
+                fileThumbnailSettingsRead.getForeground(),
+                fileThumbnailSettingsRead.getBackground(),
+                FighterArtTypeUtils.convertArtSettings(fileThumbnailSettingsRead.getArtTypeDir(),Game.valueOf(fileThumbnailSettingsRead.getGame())),
+                new TextSettings((String) null)
+        );
     }
 
     @Override

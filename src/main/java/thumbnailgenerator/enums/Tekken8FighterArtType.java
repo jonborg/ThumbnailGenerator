@@ -7,12 +7,17 @@ import thumbnailgenerator.enums.interfaces.FighterArtType;
 public enum Tekken8FighterArtType implements FighterArtType {
     RENDER("Renders");
 
-    private String name;
+    private String value;
     private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/tekken8/default.json";
 
 
-    Tekken8FighterArtType(String name) {
-        this.name = name;
+    Tekken8FighterArtType(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String getEnumName() {
+        return this.name().toUpperCase();
     }
 
     @Override

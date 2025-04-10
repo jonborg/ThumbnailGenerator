@@ -15,11 +15,7 @@ import thumbnailgenerator.enums.interfaces.FighterArtType;
 @ToString
 public class FighterArtSettings implements Cloneable {
 
-    @Expose
-    @SerializedName("artType")
     private FighterArtType artType;
-    @Expose
-    @SerializedName("fighterImageSettings")
     private String fighterImageSettingsPath;
 
     @Override

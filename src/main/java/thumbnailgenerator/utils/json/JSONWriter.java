@@ -9,13 +9,12 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import thumbnailgenerator.adapter.FileThumbnailSettingsTypeAdapter;
-import thumbnailgenerator.adapter.FileTop8SettingsTypeAdapter;
-import thumbnailgenerator.dto.FileThumbnailSettings;
-import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.dto.json.write.TextSettingsWrite;
+import thumbnailgenerator.dto.json.write.TournamentWrite;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.file.FileUtils;
 
@@ -27,14 +26,13 @@ public class JSONWriter {
     private static String textSettingsFile = FileUtils.getTextSettingsFile();
 
     public static void updateTournamentsFile(List<Tournament> list){
+        List<TournamentWrite> tournamentWriteList = list.stream().map(TournamentWrite::new).collect(Collectors.toList());
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
-                .registerTypeAdapter(FileThumbnailSettings.class, new FileThumbnailSettingsTypeAdapter())
-                .registerTypeAdapter(FileTop8Settings.class, new FileTop8SettingsTypeAdapter())
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
         try (FileWriter writer = new FileWriter(tournamentFile)) {
-            String json = gson.toJson(list);
+            String json = gson.toJson(tournamentWriteList);
             LOGGER.debug("Writing json to file {} -> {}", tournamentFile, json);
             writer.write(json);
         } catch (FileNotFoundException e) {
@@ -45,14 +43,13 @@ public class JSONWriter {
     }
 
     public static void updateTextSettingsFile(List<TextSettings> list){
+        List<TextSettingsWrite> textSettingsWrite = list.stream().map(TextSettingsWrite::new).collect(Collectors.toList());
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
-                .registerTypeAdapter(FileThumbnailSettings.class, new FileThumbnailSettingsTypeAdapter())
-                .registerTypeAdapter(FileTop8Settings.class, new FileTop8SettingsTypeAdapter())
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
         try (FileWriter writer = new FileWriter(textSettingsFile)) {
-            String json = gson.toJson(list);
+            String json = gson.toJson(textSettingsWrite);
             LOGGER.debug("Writing json to file {} -> {}", textSettingsFile, json);
             writer.write(json);
         } catch (FileNotFoundException e) {

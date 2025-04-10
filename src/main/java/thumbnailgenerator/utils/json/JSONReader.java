@@ -7,21 +7,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import thumbnailgenerator.adapter.FileThumbnailSettingsTypeAdapter;
-import thumbnailgenerator.adapter.FileTop8SettingsTypeAdapter;
-import thumbnailgenerator.dto.FileThumbnailSettings;
-import thumbnailgenerator.dto.FileTop8Settings;
+import thumbnailgenerator.dto.TextSettings;
+import thumbnailgenerator.dto.json.read.TextSettingsRead;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
 public class JSONReader {
 
+    private static String textSettingsFile = "settings/thumbnails/text/text.json";
+
     public static <T> List<T> getJSONArrayFromFile(String jsonFile, Type type){
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(FileThumbnailSettings.class, new FileThumbnailSettingsTypeAdapter())
-                .registerTypeAdapter(FileTop8Settings.class, new FileTop8SettingsTypeAdapter())
                 .create();
 
         try (FileReader reader = new FileReader(jsonFile))
@@ -58,6 +59,22 @@ public class JSONReader {
             return gson.fromJson(jsonText, type);
         } catch (JsonSyntaxException e){
             AlertFactory.displayError("JsonSyntaxException", ExceptionUtils.getStackTrace(e));
+        }
+        return null;
+    }
+
+    public static TextSettings loadTextSettings(String tournamentId) {
+
+        List<TextSettingsRead> textSettingsReadList =
+                        getJSONArrayFromFile(textSettingsFile, new TypeToken<ArrayList<TextSettingsRead>>() {}.getType());
+        List<TextSettings> textSettingsList = textSettingsReadList
+                .stream()
+                .map(TextSettings::new)
+                .collect(Collectors.toList());
+        for (TextSettings textSettings : textSettingsList) {
+            if (textSettings.getTournamentId().equals(tournamentId)) {
+                return textSettings;
+            }
         }
         return null;
     }

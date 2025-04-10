@@ -1,39 +1,25 @@
 package thumbnailgenerator.dto;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
 import lombok.Getter;
 import lombok.ToString;
-import lombok.val;
-import thumbnailgenerator.enums.RivalsOfAether2Enum;
+import thumbnailgenerator.dto.json.read.TournamentRead;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
 import thumbnailgenerator.enums.Tekken8FighterArtType;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 @Getter
 @ToString
 public class Tournament implements Cloneable{
-
-    @Expose
-    @SerializedName("id")
     private String tournamentId;
-    @Expose
-    @SerializedName("name")
     private String name;
-    @Expose
-    @SerializedName("logo")
     private String image;
-    @Expose
-    @SerializedName("thumbnailSettings")
     private List<FileThumbnailSettings> thumbnailSettings;
-    @Expose
-    @SerializedName("top8Settings")
     private List<FileTop8Settings> top8Settings;
 
     public Tournament(String id, String name, String image,
@@ -44,6 +30,22 @@ public class Tournament implements Cloneable{
         this.image = image;
         this.thumbnailSettings = thumbnailSettings;
         this.top8Settings = top8Settings;
+    }
+
+    public Tournament(TournamentRead tournamentRead){
+        this(
+                tournamentRead.getId(),
+                tournamentRead.getName(),
+                tournamentRead.getImage(),
+                tournamentRead.getThumbnailSettings()
+                        .stream()
+                        .map(ts -> new FileThumbnailSettings(ts))
+                        .collect(Collectors.toList()),
+                tournamentRead.getTop8Settings()
+                        .stream()
+                        .map(ts -> new FileTop8Settings(ts))
+                        .collect(Collectors.toList())
+        );
     }
 
     public Object clone() throws CloneNotSupportedException{
@@ -82,9 +84,10 @@ public class Tournament implements Cloneable{
     }
 
     public FileThumbnailSettings getThumbnailSettingsByGame(Game game){
-        return thumbnailSettings.stream().filter(ts -> game.equals(ts.getGame())).findFirst()
+        return thumbnailSettings.stream().filter(ts -> game.equals(ts.getGame()))
+                .findFirst()
                 .orElse(new FileThumbnailSettings(game, null, null, generateArtTypeSettings(game),
-                        new TextSettings(null)));
+                        new TextSettings((String) null)));
     }
 
     public FileTop8Settings getTop8SettingsByGame(Game game){

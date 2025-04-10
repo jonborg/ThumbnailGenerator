@@ -7,12 +7,17 @@ import thumbnailgenerator.enums.interfaces.FighterArtType;
 public enum StreetFighter6FighterArtType implements FighterArtType {
     RENDER("Renders");
 
-    private String name;
+    private String value;
     private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/sf6/default.json";
 
 
-    StreetFighter6FighterArtType(String name) {
-        this.name = name;
+    StreetFighter6FighterArtType(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String getEnumName() {
+        return this.name().toUpperCase();
     }
 
     @Override
