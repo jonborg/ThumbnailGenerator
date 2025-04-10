@@ -3,93 +3,617 @@
     "id": "weeklyl",
     "name": "Weekly L",
     "logo": "assets/tournaments/logos/weeklyl.png",
-    "thumbnailSettings": {
-      "foreground": "",
-      "background": "assets/tournaments/backgrounds/thumbnail/default.png",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": "settings/thumbnails/images/default.json"
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-        }
-      ]
-    },
-    "top8Settings": {
-      "slotSettingsFile": "settings/top8/slot/locus_slots.json",
-      "foreground": "",
-      "background": "",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": "settings/top8/images/locus.json"
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": ""
-        }
-      ]
-    }
-  },
-  {
-    "id": "stier",
-    "name": "S Tier",
-    "logo": "assets/tournaments/logos/stier.png",
-    "thumbnailSettings": {
-      "foreground": "",
-      "background": "assets/tournaments/backgrounds/thumbnail/default.png",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": "settings/thumbnails/images/default.json"
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-        }
-      ]
-    },
-    "top8Settings": {
-      "slotSettingsFile": "",
-      "foreground": "",
-      "background": "",
-      "artSettings": []
-    }
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "game": "SSBU",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/locus.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/sf6/locus.json"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "invicta",
     "name": "NEW TEST NAME",
     "logo": "assets/tournaments/logos/invicta.png",
-    "thumbnailSettings": {
-      "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
-      "background": "assets/tournaments/backgrounds/thumbnail/default.png",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": "settings/thumbnails/images/default.json"
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
-        }
-      ]
-    },
-    "top8Settings": {
-      "slotSettingsFile": "settings/top8/slot/icarus_slots.json",
-      "foreground": "",
-      "background": "",
-      "artSettings": [
-        {
-          "artType": "RENDER",
-          "fighterImageSettings": "settings/top8/images/icarus.json"
-        },
-        {
-          "artType": "MURAL",
-          "fighterImageSettings": ""
-        }
-      ]
-    }
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "game": "ROA2",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SSBU",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "settings/top8/slot/icarus_slots.json",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/icarus.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "",
+        "background": "assets/tournaments/backgrounds/top8/invictaTop8.png",
+        "slotSettingsFile": "settings/top8/slot/sf6/icarus_slots.json",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mushroommadness",
+    "name": "Mushroom Madness",
+    "logo": "assets/tournaments/logos/mushroommadness.png",
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "game": "SSBU",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/locus.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "returnofaether",
+    "name": "Return of Aether",
+    "logo": "assets/tournaments/logos/ReturnofAether_logo.png",
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "game": "SSBU",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/locus.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fdt",
+    "name": "Final Destination Tuesday",
+    "logo": "assets/tournaments/logos/FDT_logo.png",
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "game": "SSBU",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/locus.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ragelx",
+    "name": "Rage LX",
+    "logo": "assets/tournaments/logos/ragelx.png",
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "game": "SSBU",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/locus.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "TGF",
+    "name": "Tomar Game Festival",
+    "logo": "assets/tournaments/logos/tgf24.png",
+    "thumbnailSettings": [
+      {
+        "game": "SSBU",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/default.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": "settings/thumbnails/images/defaultMural.json"
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
+          }
+        ]
+      }
+    ],
+    "top8Settings": [
+      {
+        "game": "SSBU",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "settings/top8/slot/locus_slots.json",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/locus.json"
+          },
+          {
+            "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SF6",
+        "foreground": "",
+        "background": "",
+        "slotSettingsFile": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      }
+    ]
   }
 ]

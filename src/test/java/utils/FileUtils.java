@@ -55,15 +55,27 @@ public class FileUtils {
         return getActualFile("/settings/tournaments/tournaments.json");
     }
 
+    public static File loadTextFile(){
+        return getActualFile("/settings/thumbnails/text/text.json");
+    }
+
     public static void createFileBackups() throws IOException {
         File originalTournamentPath = loadTournamentsFile();
         File backupTournamentPath = getActualFile("/settings/tournaments/tournamentsBackup.json");
-
         Files.copy(
                 originalTournamentPath.toPath(),
                 backupTournamentPath.toPath(),
                 StandardCopyOption.REPLACE_EXISTING
         );
+
+        File originalTextPath = loadTextFile();
+        File backupTextPath = getActualFile("/settings/thumbnails/text/textBackup.json");
+        Files.copy(
+                originalTextPath.toPath(),
+                backupTextPath.toPath(),
+                StandardCopyOption.REPLACE_EXISTING
+        );
+
     }
 
     public static void loadFileBackups() throws IOException {
@@ -71,11 +83,19 @@ public class FileUtils {
         File backupTournamentPath = getActualFile("/settings/tournaments/tournamentsBackup.json");
 
         Files.copy(
-                originalTournamentPath.toPath(),
                 backupTournamentPath.toPath(),
+                originalTournamentPath.toPath(),
                 StandardCopyOption.REPLACE_EXISTING
         );
 
-        Files.deleteIfExists(backupTournamentPath.toPath());
+        File originalTextPath = loadTextFile();
+        File backupTextPath = getActualFile("/settings/thumbnails/text/textBackup.json");
+        Files.copy(
+                backupTextPath.toPath(),
+                originalTextPath.toPath(),
+                StandardCopyOption.REPLACE_EXISTING
+        );
+
+        Files.deleteIfExists(backupTextPath.toPath());
     }
 }

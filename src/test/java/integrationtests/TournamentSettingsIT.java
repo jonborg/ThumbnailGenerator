@@ -42,6 +42,7 @@ public class TournamentSettingsIT extends CustomApplicationTest {
         FileUtils.loadFileBackups();
     }
 
+    @Test
     public void test_editTournamentWindow_opensWithCorrectValues_success() throws InterruptedException {
         //Arrange
         Tournament expectedTournament = TestUtils.getTournament("invicta");
@@ -77,10 +78,12 @@ public class TournamentSettingsIT extends CustomApplicationTest {
     public void test_editTournamentWindow_changeTournamentName_success()
             throws InterruptedException, IOException {
         //Arrange
-        Tournament tournament = TestUtils.getTournament("invicta");
         String newTournamentName = "NEW TEST NAME";
-        File editedTournamentSettings = FileUtils.getFileFromResources(
+        File expectedTournamentSettings = FileUtils.getFileFromResources(
                 "/expected/tournament/editedTournamentName.json"
+        );
+        File expectedTextSettings = FileUtils.getFileFromResources(
+                "/expected/thumbnail/text/defaultText.json"
         );
 
         //Act
@@ -98,7 +101,9 @@ public class TournamentSettingsIT extends CustomApplicationTest {
         Tournament actualTournament = TestUtils.getTournament("invicta");
         assertEquals(newTournamentName, actualTournament.getName());
         File actualTournamentSettings = FileUtils.loadTournamentsFile();
-        FileUtils.assertSameFileContent(editedTournamentSettings, actualTournamentSettings);
+        FileUtils.assertSameFileContent(expectedTournamentSettings, actualTournamentSettings);
+        File actualTextSettings = FileUtils.loadTextFile();
+        FileUtils.assertSameFileContent(expectedTextSettings, actualTextSettings);
     }
 
     private void validateTournamentSettings(Tournament expectedTournament, Scene scene){

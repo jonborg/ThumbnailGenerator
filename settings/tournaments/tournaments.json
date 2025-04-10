@@ -140,6 +140,28 @@
     ],
     "top8Settings": [
       {
+        "game": "ROA2",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
         "game": "SSBU",
         "foreground": "",
         "background": "",
