@@ -27,6 +27,23 @@ public class FileTop8Settings extends Settings implements Cloneable {
         this.slotSettingsFile = slotSettingsFile;
     }
 
+    public FileTop8Settings(FileTop8Settings fileTop8Settings){
+        this(
+                fileTop8Settings.game,
+                fileTop8Settings.getForeground(),
+                fileTop8Settings.getBackground(),
+                fileTop8Settings.getArtTypeDir()
+                        .stream()
+                        .map(f -> FighterArtSettings
+                                .builder()
+                                .artType(f.getArtType())
+                                .fighterImageSettingsPath(f.getFighterImageSettingsPath())
+                                .build()
+                        )
+                        .collect(Collectors.toList()),
+                fileTop8Settings.getSlotSettingsFile()
+        );
+    }
     public FileTop8Settings(FileTop8SettingsRead fileTop8SettingsRead){
         this(
                 Game.valueOf(fileTop8SettingsRead.getGame()),

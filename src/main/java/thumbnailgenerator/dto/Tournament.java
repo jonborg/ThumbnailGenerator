@@ -32,6 +32,19 @@ public class Tournament implements Cloneable{
         this.top8Settings = top8Settings;
     }
 
+    public Tournament(Tournament tournament, String suffix){
+        this(
+                tournament.getTournamentId() + suffix,
+                tournament.getName() + suffix,
+                tournament.getImage(),
+                tournament.getThumbnailSettings()
+                        .stream()
+                        .map(t -> new FileThumbnailSettings(t, suffix))
+                        .collect(Collectors.toList()),
+                tournament.getTop8Settings().stream().map(FileTop8Settings::new).collect(Collectors.toList())
+        );
+    }
+
     public Tournament(TournamentRead tournamentRead){
         this(
                 tournamentRead.getId(),

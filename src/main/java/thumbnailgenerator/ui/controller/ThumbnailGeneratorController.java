@@ -242,7 +242,8 @@ public class ThumbnailGeneratorController implements Initializable {
             copyOption.setStyle(style);
             copyOption.setOnAction(event -> {
                 LOGGER.info("Creating copy of tournament {}.", tournament.toString());
-                updateTournamentsList(tournament);
+                var copyTournament = new Tournament(tournament, " - Copy");
+                updateTournamentsList(copyTournament);
             });
             menuCopyTournament.getItems().add(copyOption);
 
@@ -256,6 +257,9 @@ public class ThumbnailGeneratorController implements Initializable {
                     SpringFXMLLoader loader = new SpringFXMLLoader("thumbnailgenerator/ui/fxml/tournamentsEdit.fxml");
                     Parent root = loader.load();
                     root.setId("editTournamentWindow");
+
+                    TournamentsEditController editController = loader.getController();
+                    editController.setOnSaveCallback(this::reloadPage);
 
                     Stage stage = new Stage();
                     stage.setTitle("Edit Tournament " + tournament.getName());
@@ -278,6 +282,8 @@ public class ThumbnailGeneratorController implements Initializable {
 
     private void initArtDropdown(){
         val initialGame = Game.SSBU;
+        gameComboBox.getItems().clear();
+        artTypeComboBox.getItems().clear();
 
         gameComboBox.getItems().addAll(Game.values());
         gameComboBox.setConverter(new GameConverter());
@@ -324,16 +330,22 @@ public class ThumbnailGeneratorController implements Initializable {
     private static void setSelectedEdit(Tournament tournament){
         TournamentUtils.setSelectedEdit(tournament);
     }
-    private static void updateTournamentsList(Tournament... list) {
+    private void updateTournamentsList(Tournament... list) {
         TournamentUtils.updateTournamentsList(list);
+        reloadPage();
     }
 
-    private static void deleteTournament(Tournament tournament) {
+    private void deleteTournament(Tournament tournament) {
         TournamentUtils.deleteTournament(tournament);
+        reloadPage();
     }
 
-    public static void reloadPage(){
-        JavaFxApplication.startApp(stage);
+    public void reloadPage(){
+        tournamentsController.reloadTournaments();
+        menuDeleteTournament.getItems().clear();
+        menuCopyTournament.getItems().clear();
+        menuEditTournament.getItems().clear();
+        initMenuBars();
     }
 
     public void setStage(Stage stage){

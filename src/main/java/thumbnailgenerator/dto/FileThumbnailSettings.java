@@ -1,6 +1,8 @@
 package thumbnailgenerator.dto;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -28,6 +30,24 @@ public class FileThumbnailSettings extends Settings implements Cloneable{
                 dir.setFighterImageSettingsPath(defaultFighterImageSettingsFile);
             }
         });
+    }
+
+    public FileThumbnailSettings(FileThumbnailSettings fileThumbnailSettings, String suffix){
+        this(
+               fileThumbnailSettings.getGame(),
+               fileThumbnailSettings.getForeground(),
+               fileThumbnailSettings.getBackground(),
+               fileThumbnailSettings.getArtTypeDir()
+                       .stream()
+                       .map(f -> FighterArtSettings
+                               .builder()
+                               .artType(f.getArtType())
+                               .fighterImageSettingsPath(f.getFighterImageSettingsPath())
+                               .build()
+                       )
+                       .collect(Collectors.toList()),
+                new TextSettings(fileThumbnailSettings.getTextSettings(), suffix)
+        );
     }
 
     public FileThumbnailSettings(FileThumbnailSettingsRead fileThumbnailSettingsRead){

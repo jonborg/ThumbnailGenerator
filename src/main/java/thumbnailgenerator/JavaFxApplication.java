@@ -25,7 +25,6 @@ public class JavaFxApplication extends Application {
 
     @Override
     public void init() throws IOException {
-        TournamentUtils.initTournamentsListAndSettings();
         if (ApplicationContextProvider.getApplicationContext() == null) {
             ApplicationContextProvider.setApplicationContext(
                     new SpringApplicationBuilder(Main.class).run());

@@ -3,12 +3,17 @@ package thumbnailgenerator.service;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.dto.json.read.TextSettingsRead;
+import thumbnailgenerator.dto.json.read.TournamentRead;
+import thumbnailgenerator.dto.json.write.TournamentWrite;
 import thumbnailgenerator.ui.controller.ThumbnailGeneratorController;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.file.FileUtils;
@@ -22,12 +27,11 @@ public class TournamentUtils {
     private static Tournament selectedTournament;
     private static Tournament selectedEdit;
 
-
     public static void initTournamentsListAndSettings(){
         LOGGER.info("Loading saved tournament list.");
         loadTournamentsList();
         tournamentsList.forEach(tournament ->{
-            var textSettings = TextSettings.loadTextSettings(tournament.getTournamentId());
+            var textSettings = JSONReader.loadTextSettings(tournament.getTournamentId());
             LOGGER.debug("{} -> {}.", tournament.getName(), textSettings);
             for (Game game : Game.values()) {
                 tournament
@@ -38,9 +42,9 @@ public class TournamentUtils {
     }
 
     public static void loadTournamentsList(){
-        tournamentsList = JSONReader.getJSONArrayFromFile(FileUtils.getTournamentFile(),
-                new TypeToken<ArrayList<Tournament>>(){}.getType());
-        tournamentsList.size();
+        List<TournamentRead> tournamentReadList = JSONReader.getJSONArrayFromFile(FileUtils.getTournamentFile(),
+                new TypeToken<ArrayList<TournamentRead>>(){}.getType());
+        tournamentsList = tournamentReadList.stream().map(t -> new Tournament(t)).collect(Collectors.toList());
     }
 
     public static List<Tournament> getTournamentsList(){
@@ -71,21 +75,29 @@ public class TournamentUtils {
                 tournamentsList.add(tournament);
             }
         }
+
         JSONWriter.updateTournamentsFile(tournamentsList);
-        ThumbnailGeneratorController.reloadPage();
     }
 
-    public static void updateTournamentsListAndSettings(Tournament... list) {
+    public static void saveNewTournaments(Tournament tournament) {
         LOGGER.info("Saving updated tournament list.");
-        if (list != null){
-            for (Tournament tournament:list) {
-                LOGGER.info("{} -> {}", tournament.getName(), tournament.toString());
-                tournamentsList.add(tournament);
-            }
+        if (tournament != null){
+            tournamentsList.add(tournament);
+
         }
+        tournamentsList.stream().peek(t -> LOGGER.info("{} -> {}", t.getName(), t.toString()));
         JSONWriter.updateTournamentsFile(tournamentsList);
         JSONWriter.updateTextSettingsFile(TextSettings.getAllTextSettings(tournamentsList));
-        ThumbnailGeneratorController.reloadPage();
+    }
+
+    public static void saveChangesToTournament(Tournament newTournament, Tournament oldVersionTournament) {
+        LOGGER.info("Saving updated tournament list.");
+        tournamentsList = tournamentsList.stream()
+                .map(t -> oldVersionTournament.getTournamentId().equals(t.getTournamentId()) ? newTournament : t )
+                .collect(Collectors.toList());
+        tournamentsList.stream().peek(t -> LOGGER.info("{} -> {}", t.getName(), t.toString()));
+        JSONWriter.updateTournamentsFile(tournamentsList);
+        JSONWriter.updateTextSettingsFile(TextSettings.getAllTextSettings(tournamentsList));
     }
 
     public static void deleteTournament(Tournament tournament) {
@@ -96,7 +108,6 @@ public class TournamentUtils {
             tournamentsList.removeIf(t -> tournament.getTournamentId() == t.getTournamentId());
             JSONWriter.updateTournamentsFile(tournamentsList);
             JSONWriter.updateTextSettingsFile(TextSettings.getAllTextSettings(tournamentsList));
-            ThumbnailGeneratorController.reloadPage();
         }
     }
 }

@@ -161,14 +161,21 @@ public class TournamentsCreateController implements Initializable {
             fileTop8SettingsList
                     .add(new FileTop8Settings(game,
                             "", "", initArtType(game), null));
-        } if (tournament != null) {
+        }
+        if (tournament != null) {
             for (FileThumbnailSettings settings : tournament.getThumbnailSettings()){
-                var settingToUpdate = fileThumbnailSettingsList.stream().filter(s -> s.getGame().equals(settings.getGame()));
+                var settingToUpdate = fileThumbnailSettingsList.stream()
+                        .filter(s -> s.getGame().equals(settings.getGame()))
+                        .findFirst()
+                        .orElse(null);
                 fileThumbnailSettingsList.remove(settingToUpdate);
                 fileThumbnailSettingsList.add(settings.clone());
             }
             for (FileTop8Settings settings : tournament.getTop8Settings()){
-                var settingToUpdate = fileTop8SettingsList.stream().filter(s -> s.getGame().equals(settings.getGame()));
+                var settingToUpdate = fileTop8SettingsList.stream()
+                        .filter(s -> s.getGame().equals(settings.getGame()))
+                        .findFirst()
+                        .orElse(null);
                 fileTop8SettingsList.remove(settingToUpdate);
                 fileTop8SettingsList.add(settings.clone());
             }
@@ -454,7 +461,7 @@ public class TournamentsCreateController implements Initializable {
         }
         Tournament currentTournament = generateTournamentWithCurrentSettings();
         LOGGER.debug("Saving new tournament -> {}", currentTournament.toString());
-        updateTournamentsListAndSettings(currentTournament);
+        TournamentUtils.saveNewTournaments(currentTournament);
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
@@ -463,9 +470,5 @@ public class TournamentsCreateController implements Initializable {
         LOGGER.info("User cancelled tournament creation. Tournament will not be saved.");
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
-    }
-
-    protected static void updateTournamentsListAndSettings(Tournament... list){
-        TournamentUtils.updateTournamentsListAndSettings(list);
     }
 }

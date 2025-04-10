@@ -35,7 +35,14 @@ public class TournamentsController implements Initializable {
         initListeners();
     }
 
+    public void reloadTournaments(){
+        tournamentsBox.getChildren().clear();
+        initTournamentList();
+        initListeners();
+    }
+
     private void initTournamentList(){
+        TournamentUtils.initTournamentsListAndSettings();
         List<TournamentButton> tournamentsButtons = new ArrayList<>();
         tournamentsGroup = new ToggleGroup();
         if ( getTournamentsList() == null || getTournamentsList().isEmpty()){

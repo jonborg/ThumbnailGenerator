@@ -41,6 +41,23 @@ public class TextSettings {
         this.downOffsetBottom = downOffsetBottom;
     }
 
+    public TextSettings(TextSettings textSettings, String suffix){
+        this(
+                textSettings.getTournamentId() + suffix,
+                textSettings.getFont(),
+                textSettings.isBold(),
+                textSettings.isItalic(),
+                textSettings.isShadow(),
+                textSettings.getContour(),
+                textSettings.getSizeTop(),
+                textSettings.getSizeBottom(),
+                textSettings.getAngleTop(),
+                textSettings.getAngleBottom(),
+                textSettings.getDownOffsetTop(),
+                textSettings.getDownOffsetBottom()
+        );
+    }
+
     public TextSettings(TextSettingsRead textSettingsRead){
         this(
                 textSettingsRead.getId(),

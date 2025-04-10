@@ -19,6 +19,11 @@ import thumbnailgenerator.ui.factory.alert.AlertFactory;
 @Controller
 public class TournamentsEditController extends TournamentsCreateController {
     private static final Logger LOGGER = LogManager.getLogger(TournamentsEditController.class);
+    private Runnable onSaveCallback;
+
+    public void setOnSaveCallback(Runnable callback) {
+        this.onSaveCallback = callback;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -87,9 +92,8 @@ public class TournamentsEditController extends TournamentsCreateController {
         LOGGER.info("Saving changes to tournament.");
         Tournament currentTournament = generateTournamentWithCurrentSettings();
         LOGGER.debug("Saving changes to tournament -> {}", currentTournament.toString());
-        if(!getSelectedEdit().updateDifferences(currentTournament)){
-            updateTournamentsListAndSettings();
-        }
+        TournamentUtils.saveChangesToTournament(currentTournament, getSelectedEdit());
+        onSaveCallback.run();
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
