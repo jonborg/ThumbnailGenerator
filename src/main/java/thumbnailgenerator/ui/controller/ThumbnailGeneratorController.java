@@ -227,7 +227,10 @@ public class ThumbnailGeneratorController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Create New Tournament");
             stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
-            stage.setScene(new Scene(loader.load()));
+            Parent root = loader.load();
+            root.setId("createTournamentWindow");
+            stage.setScene(new Scene(root));
+
             TournamentsCreateController createController = loader.getController();
             createController.setOnSaveCallback(this::reloadPage);
             stage.show();

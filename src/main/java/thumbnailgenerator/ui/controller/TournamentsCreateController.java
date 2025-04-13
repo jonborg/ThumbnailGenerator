@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
@@ -53,13 +54,14 @@ import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.ui.textfield.ChosenImageField;
 import thumbnailgenerator.ui.textfield.ChosenJsonField;
+import thumbnailgenerator.utils.enums.FighterArtTypeUtils;
 
 @Primary
 @Controller
 public class TournamentsCreateController implements Initializable {
     private static final Logger LOGGER = LogManager.getLogger(TournamentsCreateController.class);
     @FXML
-    protected ComboBox<Game> gameComboBox;
+    protected ComboBox<Game> tournamentGame;
     @FXML
     protected TextField name;
     @FXML
@@ -156,9 +158,9 @@ public class TournamentsCreateController implements Initializable {
     }
 
     protected void initGamesDropdown(Tournament tournament){
-        gameComboBox.getItems().addAll(Game.values());
-        gameComboBox.setConverter(new GameConverter());
-        gameComboBox.getSelectionModel().select(Game.SSBU);
+        tournamentGame.getItems().addAll(Game.values());
+        tournamentGame.setConverter(new GameConverter());
+        tournamentGame.getSelectionModel().select(Game.SSBU);
         fileThumbnailSettingsList = new ArrayList<>();
         fileTop8SettingsList = new ArrayList<>();
         for (Game game: Game.values()) {
@@ -188,7 +190,7 @@ public class TournamentsCreateController implements Initializable {
             }
         }
 
-        gameComboBox.getSelectionModel().selectedItemProperty()
+        tournamentGame.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
                     cacheGeneratedGraphicSettings(oldValue);
                     loadCachedGeneratedGraphicSettings(newValue);
@@ -265,13 +267,13 @@ public class TournamentsCreateController implements Initializable {
         artTypeThumbnail.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
                     for (var dir : artTypeDirThumbnail){
-                        if (oldValue.equals(dir.getArtType())){
+                        if (Objects.equals(oldValue,dir.getArtType())){
                             dir.setFighterImageSettingsPath(
                                     fighterImageSettingsFile.getText());
                         }
                     }
                     for (var dir : artTypeDirThumbnail){
-                        if (newValue.equals(dir.getArtType())){
+                        if (Objects.equals(newValue, dir.getArtType())){
                             fighterImageSettingsFile.setText(dir.getFighterImageSettingsPath());
                         }
                     }
@@ -290,13 +292,13 @@ public class TournamentsCreateController implements Initializable {
         artTypeTop8.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
                     for (var dir : artTypeDirTop8){
-                        if (oldValue.equals(dir.getArtType())){
+                        if (Objects.equals(oldValue, dir.getArtType())){
                             dir.setFighterImageSettingsPath(
                                     fighterImageSettingsFileTop8.getText());
                         }
                     }
                     for (var dir : artTypeDirTop8){
-                        if (newValue.equals(dir.getArtType())){
+                        if (Objects.equals(newValue, dir.getArtType())){
                             fighterImageSettingsFileTop8.setText(dir.getFighterImageSettingsPath());
                         }
                     }
@@ -355,7 +357,7 @@ public class TournamentsCreateController implements Initializable {
                 new int[]{Integer.parseInt(downOffsetTopLeft.getText()), Integer.parseInt(downOffsetTopRight.getText())},
                 new int[]{Integer.parseInt(downOffsetBottomLeft.getText()), Integer.parseInt(downOffsetBottomRight.getText())});
 
-        cacheGeneratedGraphicSettings(gameComboBox.getSelectionModel().getSelectedItem());
+        cacheGeneratedGraphicSettings(tournamentGame.getSelectionModel().getSelectedItem());
         var newFileThumbnailSettingsList = fileThumbnailSettingsList;
         var newFileTop8SettingsList = fileTop8SettingsList;
         for (FileThumbnailSettings settings : newFileThumbnailSettingsList){
@@ -438,7 +440,9 @@ public class TournamentsCreateController implements Initializable {
                 .findFirst()
                 .get();
         background.setText(thumbnailSettings.getBackground());
-        foreground.setText(thumbnailSettings.getBackground());
+        foreground.setText(thumbnailSettings.getForeground());
+        artTypeThumbnail.getItems().clear();
+        artTypeThumbnail.getItems().addAll(FighterArtTypeUtils.getValues(game));
         artTypeThumbnail.getSelectionModel().select(0);
         fighterImageSettingsFile.setText(thumbnailSettings.getArtTypeDir().stream()
                 .filter(a -> a.getArtType().equals(artTypeThumbnail.getSelectionModel().getSelectedItem()))
@@ -451,8 +455,10 @@ public class TournamentsCreateController implements Initializable {
                 .findFirst()
                 .get();
         backgroundTop8.setText(top8Settings.getBackground());
-        foregroundTop8.setText(top8Settings.getBackground());
+        foregroundTop8.setText(top8Settings.getForeground());
         slotSettingsFileTop8.setText(top8Settings.getSlotSettingsFile());
+        artTypeTop8.getItems().clear();
+        artTypeTop8.getItems().addAll(FighterArtTypeUtils.getValues(game));
         artTypeTop8.getSelectionModel().select(0);
         fighterImageSettingsFileTop8.setText(top8Settings.getArtTypeDir().stream()
                 .filter(a -> a.getArtType().equals(artTypeTop8.getSelectionModel().getSelectedItem()))

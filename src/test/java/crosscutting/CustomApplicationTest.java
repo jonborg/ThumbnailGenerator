@@ -53,8 +53,20 @@ public class CustomApplicationTest extends ApplicationTest {
         clickOn(textField).write(text);
     }
 
-    public <T> void selectInComboBox(ComboBoxId textFieldId, String selection){
-        clickOn(textFieldId.getValue()).clickOn(selection);
+    public void writeInTextField(TextFieldId textFieldId, int value){
+        writeInTextField(textFieldId, String.valueOf(value));
+    }
+
+    public void writeInTextField(TextFieldId textFieldId, float value){
+        writeInTextField(textFieldId, String.valueOf(value));
+    }
+
+    public <T> void selectInComboBox(ComboBoxId comboBoxId, String selection){
+        clickOn(comboBoxId.getValue()).clickOn(selection);
+    }
+
+    public <T> void writeInComboBox(ComboBoxId comboBoxId, String value){
+        clickOn(comboBoxId.getValue()).write(value).clickOn(value);
     }
 
     public void clickOnButton(String parentFxml, ButtonId buttonId){
@@ -110,6 +122,16 @@ public class CustomApplicationTest extends ApplicationTest {
                 .type(KeyCode.ENTER);
     }
 
+    public void writeInChosenImageField(ChosenImageFieldId chosenImageFieldId, String value){
+        ChosenImageField chosenImageField = findElement(chosenImageFieldId.getValue());
+        clickOn(chosenImageField.getTextField()).write(value);
+    }
+
+    public void writeInChosenJsonField(ChosenJsonFieldId chosenImageFieldId, String value){
+        ChosenJsonField chosenJsonField = findElement(chosenImageFieldId.getValue());
+        clickOn(chosenJsonField.getTextField()).write(value);
+    }
+
     public void setCheckBox(String parentFxml, CheckBoxId checkBoxId, boolean value){
         if (value) {
             CheckBox checkBox = findElement(checkBoxId.getValue(), parentFxml);
@@ -150,14 +172,9 @@ public class CustomApplicationTest extends ApplicationTest {
         assertEquals(expectedText, chosenJsonField.getText());
     }
 
-    public void scrollPaneVertically(ScrollPaneId scrollPaneId, Scene scene, int value){
+    public void scrollPaneVertically(ScrollPaneId scrollPaneId, Scene scene, double value){
         ScrollPane scrollPane = findElement(scrollPaneId.getValue(), scene);
-        moveTo(scrollPane);
-        if (value > 0) {
-            scroll(value, VerticalDirection.DOWN);
-        } else {
-            scroll(value, VerticalDirection.UP);
-        }
+        scrollPane.setVvalue(value);
     }
 
     private <T> T findElement(String id, Scene scene){
