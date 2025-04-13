@@ -193,6 +193,21 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.14</version>
+                <configuration>
+                    <mainClass>thumbnailgenerator.Main</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
                 <artifactId>launch4j-maven-plugin</artifactId>
                 <version>2.5.2</version>
@@ -205,17 +220,13 @@
                         </goals>
                         <configuration>
                             <headerType>gui</headerType>
-                            <jar>
-                                ${project.build.directory}/${project.artifactId}-${project.version}-jar-with-dependencies.jar
-                            </jar>
+                            <jar>${project.build.directory}/${project.build.finalName}.jar</jar>
                             <outfile>Thumbnail Generator.exe</outfile>
                             <classPath>
-                                <mainClass>thumbnailgenerator/Main</mainClass>
-                                <preCp>anything</preCp>
+                                <mainClass>org.springframework.boot.loader.JarLauncher</mainClass>
                             </classPath>
                             <jre>
-                                <minVersion>1.6.0</minVersion>
-                                <jdkPreference>preferJre</jdkPreference>
+                                <minVersion>11</minVersion>
                             </jre>
                             <versionInfo>
                                 <fileVersion>${file.version}</fileVersion>
