@@ -1,0 +1,4 @@
+invicta;ssbu;20/02/20XX;render
+UrQte;Arjay;robin;byleth;1;8;Losers
+fizbo;Darkout;pikachu;pokemon_trainer;4;5;winners Semis
+Chime;Toaster;rob;marth;2;5;Grand Final

@@ -1,0 +1,205 @@
+[{
+	"mirrorPlayer2": false,
+	"fighters":[
+	  {
+		"fighter": "ryu",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "luke",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "jamie",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "chunli",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "guile",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "kimberly",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "juri",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "ken",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "blanka",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "dhalsim",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "ehonda",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "deejay",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "manon",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "marisa",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "jp",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "zangief",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "lily",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "cammy",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "rashid",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "aki",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "ed",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "akuma",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "m_bison",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "terry",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "mai",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  }
+	]
+}]

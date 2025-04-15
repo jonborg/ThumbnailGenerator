@@ -1,0 +1,101 @@
+[{
+	"mirrorPlayer2": false,
+	"fighters":[
+	  {
+		"fighter": "clairen",
+		"offset": [
+		  60,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "fleet",
+		"offset": [
+		  30,
+		  20
+		],
+		"scale": 0.75
+	  },
+	  {
+		"fighter": "forsburn",
+		"offset": [
+		  -250,
+		  -120
+		],
+		"scale": 0.7
+	  },
+	  {
+		"fighter": "kragg",
+		"offset": [
+		  50,
+		  -200
+		],
+		"scale": 0.59
+	  },
+	  {
+		"fighter": "loxodont",
+		"offset": [
+		  -70,
+		  -50
+		],
+		"scale": 0.60
+	  },
+	  {
+		"fighter": "maypul",
+		"offset": [
+		  90,
+		  -150
+		],
+		"scale": 0.75
+	  },
+	  {
+		"fighter": "orcane",
+		"offset": [
+		  -100,
+		  -100
+		],
+		"scale": 0.5
+	  },
+	  {
+		"fighter": "ranno",
+		"offset": [
+		  -50,
+		  -250
+		],
+		"scale": 0.7
+	  },
+	  {
+		"fighter": "wrastor",
+		"offset": [
+		  10,
+		  -80
+		],
+		"scale": 0.8
+	  },
+	  {
+		"fighter": "zetterburn",
+		"offset": [
+		  -50,
+		  -20
+		],
+		"scale": 0.67
+	  },
+	  {
+		"fighter": "etalus",
+		"offset": [
+		  -150,
+		  20
+		],
+		"scale": 0.45
+	  },
+	  {
+		"fighter": "olympia",
+		"offset": [
+		  0,
+		  60
+		],
+		"scale": 0.85
+	  }
+  ]
+}]

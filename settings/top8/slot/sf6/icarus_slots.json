@@ -1,0 +1,63 @@
+{	
+	"width": 1674,
+	"height": 739,
+	"slots":[
+		{
+			"place": 1,
+			"mask": "assets/masks/icarus/rect1.png",
+			"coordinate_x": 38,
+			"coordinate_y": 47,
+			"shadow":{"rgbColor": "ffffff", "coordinate_x": 0,"coordinate_y": 0},
+			"additionalFighters":{"scale":0.8, "coordinate_x":"370-52i", "coordinate_y":"445"}
+		},{
+			"place": 2,
+			"mask": "assets/masks/icarus/rect2.png",
+			"coordinate_x": 487,
+			"coordinate_y": 47,
+			"shadow":{"rgbColor": "ffffff", "coordinate_x": 0,"coordinate_y": 0},
+			"additionalFighters":{"scale":0.8, "coordinate_x":"235-52i", "coordinate_y":"155"}
+		},{
+			"place": 3,
+			"mask": "assets/masks/icarus/rect2.png",
+			"coordinate_x": 798,
+			"coordinate_y": 47,
+			"shadow":{"rgbColor": "ffffff", "coordinate_x": 0,"coordinate_y": 0},
+			"additionalFighters":{"scale":0.8, "coordinate_x":"235-52i", "coordinate_y":"155"}
+		},{
+			"place": 4,
+			"mask": "assets/masks/icarus/rect2.png",
+			"coordinate_x": 1109,
+			"coordinate_y": 47,
+			"shadow":{"rgbColor": "ffffff", "coordinate_x": 0,"coordinate_y": 0},
+			"additionalFighters":{"scale":0.8, "coordinate_x":"235-52i", "coordinate_y":"155"}
+		},{
+			"place": 5,
+			"mask": "assets/masks/icarus/rect3.png",
+			"coordinate_x": 487,
+			"coordinate_y": 378,
+			"shadow":{"rgbColor": "ffffff", "coordinate_x": 0,"coordinate_y": 0},
+			"additionalFighters":{"scale":0.8, "coordinate_x":"155-52i", "coordinate_y":"180"}
+		},{
+			"place": 6,
+			"mask": "assets/masks/icarus/rect3.png",
+			"coordinate_x": 720,
+			"coordinate_y": 378,
+			"shadow":{"rgbColor": "ffffff", "coordinate_x": 0,"coordinate_y": 0},
+			"additionalFighters":{"scale":0.8, "coordinate_x":"155-52i", "coordinate_y":"180"}
+		},{
+			"place": 7,
+			"mask": "assets/masks/icarus/rect3.png",
+			"coordinate_x": 954,
+			"coordinate_y": 378,
+			"shadow":{"rgbColor": "ffffff", "coordinate_x": 0,"coordinate_y": 0},
+			"additionalFighters":{"scale":0.8, "coordinate_x":"155-52i", "coordinate_y":"180"}
+		},{
+			"place": 8,
+			"mask": "assets/masks/icarus/rect3.png",
+			"coordinate_x": 1187,
+			"coordinate_y": 378,
+			"shadow":{"rgbColor": "ffffff", "coordinate_x": 0,"coordinate_y": 0},
+			"additionalFighters":{"scale":0.8, "coordinate_x":"155-52i", "coordinate_y":"180"}
+		}
+	]
+}

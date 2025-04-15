@@ -1,0 +1,293 @@
+[
+  {
+    "fighters": [
+      {
+        "fighter": "ryu",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "luke",
+        "slots": [
+          { "slot": 1, "offset": [-100, -40], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-50, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-50, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-50, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-50, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-50, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-50, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-50, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "jamie",
+        "slots": [
+		  { "slot": 1, "offset": [-100, -40], "scale": 0.5, "flip": false },
+          { "slot": 2, "offset": [-60, -40], "scale": 0.35, "flip": false },
+          { "slot": 3, "offset": [-60, -40], "scale": 0.35, "flip": false },
+          { "slot": 4, "offset": [-60, -40], "scale": 0.35, "flip": false },
+          { "slot": 5, "offset": [-70, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-70, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-70, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-70, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "chunli",
+        "slots": [
+          { "slot": 1, "offset": [-100, -120], "scale": 0.4, "flip": false },
+          { "slot": 2, "offset": [-40, -90], "scale": 0.25, "flip": false },
+          { "slot": 3, "offset": [-40, -90], "scale": 0.25, "flip": false },
+          { "slot": 4, "offset": [-40, -90], "scale": 0.25, "flip": false },
+          { "slot": 5, "offset": [-50, -60], "scale": 0.2, "flip": false },
+          { "slot": 6, "offset": [-50, -60], "scale": 0.2, "flip": false },
+          { "slot": 7, "offset": [-50, -60], "scale": 0.2, "flip": false },
+          { "slot": 8, "offset": [-50, -60], "scale": 0.2, "flip": false }
+        ]
+      },
+      {
+        "fighter": "guile",
+        "slots": [
+          { "slot": 1, "offset": [-140, 50], "scale": 0.5, "flip": false },
+          { "slot": 2, "offset": [-60, 20], "scale": 0.3, "flip": false },
+          { "slot": 3, "offset": [-60, 20], "scale": 0.3, "flip": false },
+          { "slot": 4, "offset": [-60, 20], "scale": 0.3, "flip": false },
+          { "slot": 5, "offset": [-70, 20], "scale": 0.25, "flip": false },
+          { "slot": 6, "offset": [-70, 20], "scale": 0.25, "flip": false },
+          { "slot": 7, "offset": [-70, 20], "scale": 0.25, "flip": false },
+          { "slot": 8, "offset": [-70, 20], "scale": 0.25, "flip": false }
+        ]
+      },
+      {
+        "fighter": "kimberly",
+        "slots": [
+          { "slot": 1, "offset": [-80, -50], "scale": 0.55, "flip": false },
+          { "slot": 2, "offset": [-20, -50], "scale": 0.3, "flip": false },
+          { "slot": 3, "offset": [-20, -50], "scale": 0.3, "flip": false },
+          { "slot": 4, "offset": [-20, -50], "scale": 0.3, "flip": false },
+          { "slot": 5, "offset": [-30, -30], "scale": 0.25, "flip": false },
+          { "slot": 6, "offset": [-30, -30], "scale": 0.25, "flip": false },
+          { "slot": 7, "offset": [-30, -30], "scale": 0.25, "flip": false },
+          { "slot": 8, "offset": [-30, -30], "scale": 0.25, "flip": false }
+        ]
+      },
+      {
+        "fighter": "juri",
+        "slots": [
+          { "slot": 1, "offset": [-100, -70], "scale": 0.5, "flip": false },
+          { "slot": 2, "offset": [-30, -100], "scale": 0.3, "flip": false },
+          { "slot": 3, "offset": [-30, -100], "scale": 0.3, "flip": false },
+          { "slot": 4, "offset": [-30, -100], "scale": 0.3, "flip": false },
+          { "slot": 5, "offset": [-60, -90], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-60, -90], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-60, -90], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-60, -90], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "ken",
+        "slots": [
+          { "slot": 1, "offset": [-270, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-130, -60], "scale": 0.35, "flip": false },
+          { "slot": 3, "offset": [-130, -60], "scale": 0.35, "flip": false },
+          { "slot": 4, "offset": [-130, -60], "scale": 0.35, "flip": false },
+          { "slot": 5, "offset": [-130, -40], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-130, -40], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-130, -40], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-130, -40], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "blanka",
+        "slots": [
+          { "slot": 1, "offset": [-200, -100], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-90, -90], "scale": 0.35, "flip": false },
+          { "slot": 3, "offset": [-90, -90], "scale": 0.35, "flip": false },
+          { "slot": 4, "offset": [-90, -90], "scale": 0.35, "flip": false },
+          { "slot": 5, "offset": [-100, -50], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -50], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -50], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -50], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "dhalsim",
+        "slots": [
+          { "slot": 1, "offset": [-200, -20], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-100, -20], "scale": 0.35, "flip": false },
+          { "slot": 3, "offset": [-100, -20], "scale": 0.35, "flip": false },
+          { "slot": 4, "offset": [-100, -20], "scale": 0.35, "flip": false },
+          { "slot": 5, "offset": [-100, -10], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -10], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -10], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -10], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "ehonda",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "deejay",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "manon",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "marisa",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "jp",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "zangief",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "lily",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "cammy",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "rashid",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "aki",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "ed",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      },
+      {
+        "fighter": "akuma",
+        "slots": [
+          { "slot": 1, "offset": [-200, -70], "scale": 0.6, "flip": false },
+          { "slot": 2, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 3, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 4, "offset": [-110, -40], "scale": 0.37, "flip": false },
+          { "slot": 5, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 6, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 7, "offset": [-100, -30], "scale": 0.3, "flip": false },
+          { "slot": 8, "offset": [-100, -30], "scale": 0.3, "flip": false }
+        ]
+      }
+    ]
+  }
+]
+

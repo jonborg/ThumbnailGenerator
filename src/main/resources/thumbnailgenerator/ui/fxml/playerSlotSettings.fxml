@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import thumbnailgenerator.ui.textfield.ChosenImageField?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="thumbnailgenerator.ui.controller.PlayerSlotSettingsController"
+            maxHeight="150" prefWidth="600.0">
+
+    <HBox spacing="15">
+        <TitledPane text="Slot Settings" collapsible="false">
+            <VBox spacing="10">
+                <VBox>
+                    <Label text="Slot Mask:"/>
+                    <ChosenImageField fx:id="slotMask"/>
+                </VBox>
+                <HBox spacing="40">
+                    <VBox>
+                        <Label text="X:"/>
+                        <TextField fx:id="maskCoordX" styleClass="small-textfield"/>
+                    </VBox>
+                    <VBox>
+                        <Label text="Y:"/>
+                        <TextField fx:id="maskCoordY" styleClass="small-textfield"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </TitledPane>
+
+        <TitledPane text="Shadow Settings" collapsible="false" >
+            <VBox spacing="10">
+                <VBox>
+                    <Label text="Shadow Color:"/>
+                    <TextField fx:id="shadowColor" styleClass="textfield"/>
+                </VBox>
+                <HBox spacing="40">
+                    <VBox>
+                        <Label text="X offset:"/>
+                        <TextField fx:id="shadowOffsetX" styleClass="small-textfield"/>
+                    </VBox>
+                    <VBox>
+                        <Label text="Y offset:"/>
+                        <TextField fx:id="shadowOffsetY" styleClass="small-textfield"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </TitledPane>
+
+        <TitledPane text="Secondaries Settings" collapsible="false" >
+            <VBox spacing="10">
+                <VBox>
+                    <Label text="X Coordinate Equation (i):"/>
+                    <TextField fx:id="secEquationX" styleClass="textfield"/>
+                </VBox>
+                <VBox>
+                    <Label text="Y Coordinate Equation (i)"/>
+                    <TextField fx:id="secEquationY" styleClass="textfield"/>
+                </VBox>
+            </VBox>
+        </TitledPane>
+    </HBox>
+</AnchorPane>
