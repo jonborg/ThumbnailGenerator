@@ -14,7 +14,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import thumbnailgenerator.config.ApplicationContextProvider;
 import thumbnailgenerator.config.SpringFXMLLoader;
-import thumbnailgenerator.service.TournamentUtils;
 import thumbnailgenerator.ui.controller.ThumbnailGeneratorController;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 

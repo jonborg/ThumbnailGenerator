@@ -14,7 +14,7 @@
     <HBox styleClass="mainBox" spacing="15" >
         <VBox spacing="10">
             <ScrollPane fx:id="tournamentSettings" maxHeight="600" vbarPolicy="ALWAYS" hbarPolicy="NEVER">
-                <VBox>
+                <VBox alignment="CENTER">
                     <TitledPane text="General Settings" collapsible="false" styleClass="settingsBox">
                         <VBox spacing="15">
                             <VBox>
@@ -37,8 +37,10 @@
                     </TitledPane>
                     <Pane>
                         <VBox>
-                            <Label text="Select game to edit:"/>
-                            <ComboBox fx:id="tournamentGame" styleClass="textfield"/>
+                            <VBox styleClass="settingsBox">
+                                <Label text="Select game to edit:"/>
+                                <ComboBox fx:id="tournamentGame" styleClass="textfield"/>
+                            </VBox>
                         </VBox>
                     </Pane>
                     <TitledPane text="Thumbnail Image Directories" collapsible="false" styleClass="settingsBox">

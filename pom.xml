@@ -201,6 +201,8 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>repackage</id>
+                        <phase>install</phase>
                         <goals>
                             <goal>repackage</goal>
                         </goals>
@@ -214,7 +216,7 @@
                 <executions>
                     <execution>
                         <id>l4j-clui</id>
-                        <phase>package</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>launch4j</goal>
                         </goals>
