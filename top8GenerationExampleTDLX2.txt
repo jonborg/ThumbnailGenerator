@@ -1,9 +1,0 @@
-tdlx
-sora;1
-sora;2
-sora;3
-sora;4
-sora;5
-sora;6
-sora;7
-sora;8

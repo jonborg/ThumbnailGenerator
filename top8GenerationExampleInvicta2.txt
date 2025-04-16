@@ -1,9 +1,0 @@
-invicta;SSBU
-cloud;2
-cloud;4
-cloud;6
-cloud;8
-cloud;2
-cloud;4
-cloud;6
-cloud;8
