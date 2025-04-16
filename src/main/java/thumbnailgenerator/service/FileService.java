@@ -11,6 +11,8 @@ import java.util.List;;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.javatuples.Pair;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.GeneratedGraphic;
 import thumbnailgenerator.dto.Thumbnail;
@@ -23,10 +25,13 @@ import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
+@Service
 public abstract class FileService<T extends GeneratedGraphic,V> {
 
     private static final Logger LOGGER = LogManager.getLogger(ThumbnailService.class);
     private int gameIndex = 1;
+    @Autowired
+    private TournamentService tournamentService;
 
     protected abstract V getCharacterData(List<String> parameters)
             throws FighterImageSettingsNotFoundException;
@@ -75,7 +80,7 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
     protected T initializeGeneratedGraphic(List<String> parameters)
             throws IOException {
         var generatedGraphic = createEmptyGeneratedGraphic();
-        for (Tournament t : TournamentUtils.getTournamentsList()) {
+        for (Tournament t : tournamentService.getTournamentsList()) {
             if (t.getTournamentId().equals(parameters.get(0))) {
                 LOGGER.info("Selected tournament {}", t.getName());
                 generatedGraphic.setTournament(t);

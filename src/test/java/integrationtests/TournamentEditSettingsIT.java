@@ -17,6 +17,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import thumbnailgenerator.Main;
 import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.Game;
@@ -26,6 +29,7 @@ import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
 import thumbnailgenerator.enums.Tekken8FighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.service.TournamentService;
 import utils.FileUtils;
 import utils.TestUtils;
 import utils.WaitUtils;
@@ -36,7 +40,11 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SpringBootTest(classes = Main.class)
 public class TournamentEditSettingsIT extends CustomApplicationTest {
+
+    @Autowired
+    private TournamentService tournamentService;
 
     @BeforeEach
     public void setUp() throws IOException {
@@ -54,7 +62,7 @@ public class TournamentEditSettingsIT extends CustomApplicationTest {
     public void test_editTournamentWindow_opensWithCorrectValues_success(Game game, FighterArtType artType)
             throws InterruptedException {
         //Arrange
-        Tournament expectedTournament = TestUtils.getTournament("invicta");
+        Tournament expectedTournament = TestUtils.getTournament(tournamentService, "invicta");
 
         //Act
         clickOnMenuOption(MenuId.EDIT);
@@ -118,12 +126,12 @@ public class TournamentEditSettingsIT extends CustomApplicationTest {
         clickOnButton(editScene, ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        Tournament actualTournament = TestUtils.getTournament("invicta");
+        Tournament actualTournament = TestUtils.getTournament(tournamentService, "invicta");
         assertEquals(newTournamentName, actualTournament.getName());
         File actualTournamentSettings = FileUtils.loadTournamentsFile();
-        FileUtils.assertSameFileContent(expectedTournamentSettings, actualTournamentSettings);
+        FileUtils.assertSameTextFileContent(expectedTournamentSettings, actualTournamentSettings);
         File actualTextSettings = FileUtils.loadTextFile();
-        FileUtils.assertSameFileContent(expectedTextSettings, actualTextSettings);
+        FileUtils.assertSameTextFileContent(expectedTextSettings, actualTextSettings);
     }
 
     private void validateTournamentSettings(Tournament expectedTournament, Scene scene){

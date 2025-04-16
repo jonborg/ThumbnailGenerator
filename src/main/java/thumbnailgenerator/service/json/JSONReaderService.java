@@ -1,4 +1,4 @@
-package thumbnailgenerator.utils.json;
+package thumbnailgenerator.service.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,15 +13,22 @@ import java.util.stream.Collectors;
 
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.json.read.TextSettingsRead;
+import thumbnailgenerator.dto.json.read.TournamentRead;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
-public class JSONReader {
+@Service
+public class JSONReaderService {
 
-    private static String textSettingsFile = "settings/thumbnails/text/text.json";
+    @Value("${settings.tournament.file.path}")
+    private String tournamentFile;
+    @Value("${settings.text.file.path}")
+    private String textSettingsFile;
 
-    public static <T> List<T> getJSONArrayFromFile(String jsonFile, Type type){
+    public <T> List<T> getJSONArrayFromFile(String jsonFile, Type type){
         Gson gson = new GsonBuilder()
                 .create();
 
@@ -38,7 +45,7 @@ public class JSONReader {
         return null;
     }
 
-    public static <T> Object getJSONObjectFromFile(String jsonFile, Type type){
+    public <T> Object getJSONObjectFromFile(String jsonFile, Type type){
         Gson gson = new Gson();
         try (FileReader reader = new FileReader(jsonFile))
         {
@@ -53,7 +60,7 @@ public class JSONReader {
         return null;
     }
 
-    public static <T> Object getJSONObject(String jsonText, Type type){
+    public <T> Object getJSONObject(String jsonText, Type type){
         Gson gson = new Gson();
         try {
             return gson.fromJson(jsonText, type);
@@ -63,7 +70,7 @@ public class JSONReader {
         return null;
     }
 
-    public static TextSettings loadTextSettings(String tournamentId) {
+    public TextSettings loadTextSettings(String tournamentId) {
 
         List<TextSettingsRead> textSettingsReadList =
                         getJSONArrayFromFile(textSettingsFile, new TypeToken<ArrayList<TextSettingsRead>>() {}.getType());
@@ -77,5 +84,9 @@ public class JSONReader {
             }
         }
         return null;
+    }
+
+    public List<TournamentRead> loadTournament(){
+        return getJSONArrayFromFile(tournamentFile, new TypeToken<ArrayList<TournamentRead>>(){}.getType());
     }
 }

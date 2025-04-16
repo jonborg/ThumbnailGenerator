@@ -8,17 +8,20 @@ import javafx.stage.Stage;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
-import thumbnailgenerator.service.TournamentUtils;
+import thumbnailgenerator.service.TournamentService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
 @Controller
 public class TournamentsEditController extends TournamentsCreateController {
     private static final Logger LOGGER = LogManager.getLogger(TournamentsEditController.class);
+    @Autowired
+    private TournamentService tournamentService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -87,7 +90,8 @@ public class TournamentsEditController extends TournamentsCreateController {
         LOGGER.info("Saving changes to tournament.");
         Tournament currentTournament = generateTournamentWithCurrentSettings();
         LOGGER.debug("Saving changes to tournament -> {}", currentTournament.toString());
-        TournamentUtils.saveChangesToTournament(currentTournament, getSelectedEdit());
+        tournamentService
+                .saveChangesToTournament(currentTournament, getSelectedEdit());
         onSaveCallback.run();
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
@@ -100,7 +104,7 @@ public class TournamentsEditController extends TournamentsCreateController {
         stage.close();
     }
 
-    private static Tournament getSelectedEdit(){
-        return TournamentUtils.getSelectedEdit();
+    private Tournament getSelectedEdit(){
+        return tournamentService.getSelectedEdit();
     }
 }

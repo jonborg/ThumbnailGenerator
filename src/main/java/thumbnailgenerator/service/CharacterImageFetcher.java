@@ -10,18 +10,21 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.GeneratedGraphic;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
-import thumbnailgenerator.utils.file.FileUtils;
 
 @Service
 public abstract class CharacterImageFetcher {
 
     private static final Logger LOGGER = LogManager.getLogger(
             CharacterImageFetcher.class);
+
+    @Value("${characters-image.local-save.path}")
+    private String characterImageLocalSavePath;
 
     public abstract URL getOnlineUrl(Fighter fighter, FighterArtType artType)
             throws MalformedURLException;
@@ -56,32 +59,20 @@ public abstract class CharacterImageFetcher {
     }
 
     private BufferedImage getFighterImageLocally(Fighter fighter, GeneratedGraphic generatedGraphic) throws IOException {
-        var localCharacterImageRootPath = FileUtils.getLocalFightersPath(
-                generatedGraphic);
-        var localGameCharacterImagePath = localCharacterImageRootPath + generatedGraphic.getGame() + "/";
-        var localCharacterImagePath = localGameCharacterImagePath + fighter.getUrlName() + "/";
+        var localCharacterImagePath = getLocalCharacterImagePath(fighter, generatedGraphic);
 
-        var rootDirectory = new File(localCharacterImageRootPath);
-        var gameFighterDirectory = new File(localGameCharacterImagePath);
-        var fighterDirectory = new File(localCharacterImagePath);
-
-        if (!rootDirectory.exists()) rootDirectory.mkdir();
-        if (!gameFighterDirectory.exists()) gameFighterDirectory.mkdir();
-        if (!fighterDirectory.exists()) fighterDirectory.mkdir();
-
-        File localImage = new File(localCharacterImagePath + fighter.getAlt()+".png");
+        var rootDirectory = new File(localCharacterImagePath);
+        if (!rootDirectory.exists()) rootDirectory.mkdirs();
 
         LOGGER.debug("Trying to find local image for alt {} of {}.", fighter.getAlt(), fighter.getName());
+        File localImage = new File(localCharacterImagePath + fighter.getAlt()+".png");
         return ImageIO.read(localImage);
     }
 
-    private void saveImageLocally(Fighter fighter, GeneratedGraphic generatedGraphic, BufferedImage image){
-        var localCharacterImagePath = FileUtils.getLocalFightersPath(
-                generatedGraphic);
-        var fighterDirPath = localCharacterImagePath + generatedGraphic.getGame() + "/"
-                + fighter.getUrlName() + "/";
 
-        File localImage = new File(fighterDirPath + fighter.getAlt()+".png");
+    private void saveImageLocally(Fighter fighter, GeneratedGraphic generatedGraphic, BufferedImage image){
+        var localCharacterImagePath = getLocalCharacterImagePath(fighter, generatedGraphic);
+        File localImage = new File(localCharacterImagePath + fighter.getAlt()+".png");
         saveImage(image, localImage);
     }
 
@@ -101,5 +92,12 @@ public abstract class CharacterImageFetcher {
             LOGGER.catching(e);
             throw new OnlineImageNotFoundException();
         }
+    }
+
+    private String getLocalCharacterImagePath(Fighter fighter, GeneratedGraphic generatedGraphic){
+        return characterImageLocalSavePath +
+                "/" + generatedGraphic.getGame().name().toLowerCase() +
+                "/" + generatedGraphic.getArtType().getEnumName().toLowerCase() +
+                "/" + fighter.getUrlName() + "/";
     }
 }

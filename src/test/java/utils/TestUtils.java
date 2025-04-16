@@ -1,7 +1,7 @@
 package utils;
 
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.service.TournamentUtils;
+import thumbnailgenerator.service.TournamentService;
 
 public class TestUtils {
 
@@ -9,8 +9,8 @@ public class TestUtils {
         throw new UnsupportedOperationException("Utils class");
     }
 
-    public static Tournament getTournament(String tournamentId){
-        return TournamentUtils.getTournamentsList()
+    public static Tournament getTournament(TournamentService tournamentService, String tournamentId){
+        return tournamentService.getTournamentsList()
                 .stream()
                 .filter(it -> tournamentId.equals(it.getTournamentId()))
                 .findFirst()

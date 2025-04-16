@@ -31,7 +31,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import thumbnailgenerator.JavaFxApplication;
 import thumbnailgenerator.config.SpringFXMLLoader;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
@@ -52,10 +51,10 @@ import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.Top8Service;
 import thumbnailgenerator.utils.converter.FighterArtTypeConverter;
-import thumbnailgenerator.service.TournamentUtils;
+import thumbnailgenerator.service.TournamentService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.converter.GameConverter;
-import thumbnailgenerator.utils.json.JSONReader;
+import thumbnailgenerator.service.json.JSONReaderService;
 import ui.filechooser.FileChooserFactory;
 
 @Controller
@@ -79,10 +78,12 @@ public class ThumbnailGeneratorController implements Initializable {
     private @FXML Menu menuCopyTournament;
     private @FXML Menu menuEditTournament;
     private @FXML Menu menuDeleteTournament;
+    private @Autowired TournamentService tournamentService;
     private @Autowired ThumbnailService thumbnailService;
     private @Autowired Top8Service top8Service;
     private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
     private @Autowired StartGGService startGGService;
+    private @Autowired JSONReaderService jsonReaderService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -133,7 +134,7 @@ public class ThumbnailGeneratorController implements Initializable {
         }
 
         LOGGER.info("Loading image settings of tournament {} for game {}", getSelectedTournament().getName(), getGame());
-        var imageSettings = (ImageSettings) JSONReader.getJSONArrayFromFile(
+        var imageSettings = (ImageSettings) jsonReaderService.getJSONArrayFromFile(
                 getSelectedTournament().getThumbnailSettingsByGame(getGame())
                         .getFighterImageSettingsFile(getFighterArtType()),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
@@ -209,7 +210,7 @@ public class ThumbnailGeneratorController implements Initializable {
             stage.setScene(new Scene(root));
             stage.setOnHidden(e -> {
                 startGGService.closeClient();
-                TournamentUtils.setSelectedTournament(controller.getBackupTournament());});
+                tournamentService.setSelectedTournament(controller.getBackupTournament());});
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -326,22 +327,24 @@ public class ThumbnailGeneratorController implements Initializable {
         }
     }
 
-    private static List<Tournament> getTournamentsList(){
-        return TournamentUtils.getTournamentsList();
+    private List<Tournament> getTournamentsList(){
+        return tournamentService.getTournamentsList();
     }
 
-    private static Tournament getSelectedTournament() { return TournamentUtils.getSelectedTournament(); }
+    private Tournament getSelectedTournament() {
+        return tournamentService.getSelectedTournament();
+    }
 
-    private static void setSelectedEdit(Tournament tournament){
-        TournamentUtils.setSelectedEdit(tournament);
+    private void setSelectedEdit(Tournament tournament){
+        tournamentService.setSelectedEdit(tournament);
     }
     private void updateTournamentsList(Tournament... list) {
-        TournamentUtils.updateTournamentsList(list);
+        tournamentService.updateTournamentsList(list);
         reloadPage();
     }
 
     private void deleteTournament(Tournament tournament) {
-        TournamentUtils.deleteTournament(tournament);
+        tournamentService.deleteTournament(tournament);
         reloadPage();
     }
 

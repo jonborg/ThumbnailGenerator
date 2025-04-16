@@ -37,9 +37,9 @@ import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.service.StartGGService;
 import thumbnailgenerator.utils.startgg.QueryUtils;
 import thumbnailgenerator.service.ThumbnailService;
-import thumbnailgenerator.service.TournamentUtils;
+import thumbnailgenerator.service.TournamentService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-import thumbnailgenerator.utils.json.JSONReader;
+import thumbnailgenerator.service.json.JSONReaderService;
 
 @Controller
 public class FromStartGGController implements Initializable {
@@ -66,8 +66,10 @@ public class FromStartGGController implements Initializable {
     @FXML
     private CheckBox saveLocally;
     private Tournament backupTournament;
+    private @Autowired TournamentService tournamentService;
     private @Autowired ThumbnailService thumbnailService;
     private @Autowired StartGGService startGGService;
+    private @Autowired JSONReaderService jsonReader;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,14 +81,14 @@ public class FromStartGGController implements Initializable {
     }
 
     private void removeSelectedTournament(){
-        backupTournament = TournamentUtils.getSelectedTournament();
-        TournamentUtils.setSelectedTournament(null);
+        backupTournament = tournamentService.getSelectedTournament();
+        tournamentService.setSelectedTournament(null);
     }
 
 
     public void generateCommands() {
         LOGGER.info("Generating commands for thumbnail generation.");
-        if (TournamentUtils.getSelectedTournament() == null){
+        if (tournamentService.getSelectedTournament() == null){
             LOGGER.error("User did not select a tournament.");
             AlertFactory.displayWarning("A tournament must be chosen before generating thumbnails.");
             return;
@@ -291,7 +293,7 @@ public class FromStartGGController implements Initializable {
             JsonObject result = startGGService.runQuery(QueryUtils.tournamentDetailsQuery(tournamentURL.getText()));
             LOGGER.debug("Result -> {}", result.toString());
 
-            TournamentGG tournamentGG = (TournamentGG) JSONReader.getJSONObject(result.get("data")
+            TournamentGG tournamentGG = (TournamentGG) jsonReader.getJSONObject(result.get("data")
                     .getAsJsonObject().get("tournament").toString(), new TypeToken<TournamentGG>() {}.getType());
             LOGGER.debug("Setting events list.");
             eventSelect.getItems().addAll(tournamentGG.getEvents());
