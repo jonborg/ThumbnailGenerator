@@ -1,8 +1,12 @@
 # Thumbnail Generator
 	
 ## Introduction
-This program was created to automate thumbnail creation for Smash Ultimate VODs. 
-This allows TOs to speed up VOD's release process.
+This program was created to automate thumbnail creation for Smash Ultimate VODs. It is also compatible with some other fighting games. 
+This allows TOs to speed up VODs' release process. Below are the compatible games:
+- Smash Ultimate
+- Rivals of Aether 2
+- Street Fighter 6
+- Tekken 8
 
 ![tg_main_page.png](./assets/documentation/tg_main_page.png)
 
@@ -27,7 +31,7 @@ of the executable in order to work properly.
 Program already has some tournaments available.
 When setting up your tournament in the program, you can copy existing tournament's settings to have something already working.
 
-If you created a tournament in a previous version, you can do one of the following:
+If you created a tournament in a previous version, you can try to do one of the following. Do note that, depending on the version upgrade, it may not work:
 
  - replace save files in new version;
  - replace old executable with the new one.
@@ -55,25 +59,25 @@ Thumbnails can have text being added during generation. Text is placed in four d
  - **Bottom Left** - Round
  - **Bottom Right** - Date or Bracket Type
  
-Regarding thumbnail generation, the following settings can be provided:
+Regarding thumbnail generation, the following settings can be provided for each fighting game:
  - **Foreground** - Directory of foreground image to place on thumbnail. Use this to put headers, logos, "VS.", etc.;
  - **Background** - Directory of background image to place on thumbnail;
  - **Fighter Image Settings File** - Json file with offsets of character's images. Can provide one file for "Renders" art and another for "Mural" art.
 
-None of this fields are mandatory. If no fighter image setting file is used, the program will use the following default files:
+None of this fields are mandatory. If no fighter image setting file is used, the program will use default files. Below are the default files used for Smash Ultimate:
  - **Renders** - settings/thumbnails/images/default.json
- - **Mural** -  settings/thumbnails/images/defaultMural.json
+ - **Mural** - settings/thumbnails/images/defaultMural.json
 
 When adding new foregrounds, backgrounds and logos, make sure they have the following dimensions:	
  - **foregrounds**: 1280x720;
  - **backgrounds**: 1280x720;
  - **logos**: 200x200.
  
-Regarding top 8 generation, the following settings can be provided:
+Regarding top 8 generation, the following settings can be provided for each fighting game:
  - **Foreground** - Directory of foreground image to place on thumbnail;
  - **Background** - Directory of background image to place on thumbnail;
  - **Slot Settings File** - Json file where you what region on top 8 file, character iamges will be placed and how they are placed.
- - **Fighter Image Settings File** - Json file with offsets of character's images inside each slot. Can provide one file for "Renders" art and another for "Mural" art.
+ - **Fighter Image Settings File** - Json file with offsets of character's images inside each slot. Can provide one file for "Renders" art and another for "Mural" art (SSBU only).
 
 There is also a **Preview** option that allow users to preview thumbnail generation with current settings.
 To save changes, just click on **Save** button.
@@ -89,15 +93,22 @@ A dialog box will appear to confirm whether this deletion is intentional.
 
 ## Character images
 ### Image download
-The majority of the character's images are downloaded directly from the official page of Super Smash Bros. Ultimate [website](https://www.smashbros.com/en_US/fighter/index.html).
+All character images are downloaded from a [Github repository](https://www.smashbros.com/en_US/fighter/index.html), that I created.
+Images were gathered thanks to:
+- [Smash Ultimate official website](https://www.smashbros.com/en_US/fighter/index.html)
+- [Rivals of Aether 2 Press Kit](https://rivals2.com/presskit)
+- [Street Fighter 6 official website](https://www.streetfighter.com/6)
+- [Tekken Warehouse](https://tekkenwarehouse.com/)
+- [smash-ultimate-assets](https://github.com/marcrd/smash-ultimate-assets) repository
+- [MuralAltDrive's](https://x.com/MuralAltDrive) Smash Ultimate Mural art [Google Drive](https://drive.google.com/drive/folders/1n4lAP6YB7N-bSSgEDx0OPEI2ykOKSQrM)
 
 As an option, Thumbnail Generator can save those downloaded images to use them for future uses without requiring access to the website. 
 Images are stored in the following folder:
 
-    assets/fighters/
+    assets/characters/[GAME]/[ART_TYPE]/
 
 As of version **2.2.0**, the program is capable to generate thumbnails using characters art
-from the "Everyone is here" mural/poster.
+from Smash Ultimate's "Everyone is here" mural/poster.
 
 [Character art isolation](https://www.deviantart.com/elevenzm/gallery/70115610/mural-isolations-super-smash-bros-ultimate) was done by @ElevenZM and mural arts for alts have been created by
 @MuralAltDrive team which contains a [GoogleDrive repository](https://drive.google.com/drive/folders/1n4lAP6YB7N-bSSgEDx0OPEI2ykOKSQrM) for these images.
@@ -106,11 +117,7 @@ from the "Everyone is here" mural/poster.
 For thumbnails, images need to be scaled and repositioned in other to be printed 
 correctly on the thumbnail. 
 
-As mentioned in [Creating tournaments](#creating-tournaments) section, the program provides 2 default settings files,
-one for each art type:
-
- - **RENDER** - settings/thumbnails/images/default.json
- - **MURAL** - settings/thumbnails/images/defaultMural.json
+As mentioned in [Creating tournaments](#creating-tournaments) section, the program provides default settings files, for each game and art type pair.
 
 If users are not satisfied with current settings, they can create a copy of the
 these Json files and change parameters for the specific character.
@@ -273,6 +280,14 @@ This is the main page of the application. it is currently filled with data for t
 Tournaments that were created and stored in **settings/tournaments/tournaments.json** are shown at the top. 
 Users must click on tournament to select the desired thumbnail configurations.
 
+As of version **4.0.0**, users can generate thumbnails and top8 for other games other than Smash Ultimate.
+When selecting a game from the dropdown, character list is updated with characters of respective selected game.
+The available games are the following:
+- Smash Ultimate
+- Rivals of Aether 2
+- Street Fighter 6
+- Tekken 8
+
 It is also mandatory to provide characters and their colours.
 When selecting a character from the dropdown, an icon will appear
 This icon is the respective stock icon of the selected character.
@@ -282,17 +297,13 @@ To have a better look at the selected alt, the icon can be clicked
 to show a fighter image that will appear on the thumbnail (character and alt).
 
 If the user has the respective fighter and alt saved on folder
-**"assets/fighters/**, the program will open this images locally.
+**"assets/characters/**, the program will open this images locally.
 Otherwise, it will open image's location online
 
 Text fields like players' names, round and date/event are not mandatory for thumbnail generation.
 Text provide here will be printed around top and bottom corners of thumbnail image.
 
-Users can also select different renders for characters in **Character art** dropdown.
-These are the current art styles available:
- 
- - **Renders** - renders used in character select screen
- - **Mural** - "Everyone's here!" mural art
+Users can also select different renders for characters in **Character art** dropdown when selecting Smash Ultimate. Remaining games only have 1 art type for now.
  
 To save character image's locally during generation, tick **Save/Load fighters' image locally** checkbox.
 
@@ -311,7 +322,7 @@ Character images used during batch generation can be saved locally if **Save/Loa
 
 Below is an example of a file to be used:
 
-    invicta;20/02/20XX;render
+    invicta;20/02/20XX;SSBU;render
     UrQte;Arjay;robin;byleth;1;8;Losers
     fizbo;Darkout;pikachu;pokemon_trainer;4;5;winners Semis
     Chime;Toaster;rob;marth;2;5;Grand Finals
@@ -320,7 +331,8 @@ The first line has common data between thumbnails, separated by **;**:
 
  1. **Tournament Diminutive** - tournament id, provided by user, during tournament settings creation;
  2. **Date/Event** - text that will be placed around bottom right corner of thumbnail. Usually date or event of the set. It is not case sensitive;
- 3. **Character art** - character art to be placed in thumbnails. It is not case sensitive (render, mural).
+ 3. **Game** - code name of the fighting game for which you want to create a tournament VOD thumbnail. It is not case sensitive (ssbu, roa2, sf6, tekken8)
+ 4. **Character art** - character art to be placed in thumbnails. It is not case sensitive (render, mural).
 
 Each following lines represents a thumbnail and has unique data for that thumbnail, also separated by **;**:
 
@@ -376,7 +388,7 @@ Top 8 can only be generated by a file
 Assuming that settings are correctly configured, top 8 generation is started by selecting **File** -> **Generate Top 8 from file**.
 Below is an file example for top 8 generation:
 
-    weeklyl
+    weeklyl;SSBU;render
     pokemon_trainer;6
     kazuya;6
     roy;3;donkey_kong;1
@@ -386,10 +398,11 @@ Below is an file example for top 8 generation:
     ganondorf;7
     joker;7;luigi;1;king_dedede
  
-First line contains only the target tournament's diminutive. 
+First line contains the target tournament's diminutive and target fighting game code. 
+You can also include the art type, but it is optional. 
 Each following line represents characters of each player, and alternate between character url name and its alt.
 
-The first character will be shown with its **render** art. 
+The first character will be shown with its "expected" art. 
 Remaining characters will be shown as stock icons.
 Stock icons are placed according to equations provided in slot settings file.
 
@@ -537,9 +550,102 @@ Thumbnails are saved in **/generated_top8** folder.
 | Ken                | ken                |
 | Random             | random             |
 
+### Rivals of Aether 2 URL names
+
+| Character          | URL Name           |
+|--------------------|--------------------|
+| Clairen            | clairen            |
+| Fleet              | fleet              |
+| Forsburn           | forsburn           |
+| Kragg              | kragg              |
+| Loxodont           | loxodont           |
+| Maypul             | maypul             |
+| Orcane             | orcane             |
+| Ranno              | ranno              |
+| Wrastor            | wrastor            |
+| Zetterburn         | zetterburn         |
+| Etalus             | etalus             |
+| Olympia            | olympia            |
+
+### Street Fighter 6 URL names
+
+| Character          | URL Name           |
+|--------------------|--------------------|
+| Ryu                | ryu                |
+| Luke               | luke               |
+| Jamie              | jamie              |
+| Chun-Li            | chunli             |
+| Guile              | guile              |
+| Kimberly           | kimberly           |
+| Juri               | juri               |
+| Ken                | ken                |
+| Blanka             | blanka             |
+| Dhalsim            | dhalsim            |
+| E.Honda            | ehonda             |
+| Dee Jay            | deejay             |
+| Manon              | manon              |
+| Marisa             | marisa             |
+| JP                 | jp                 |
+| Zangief            | zangief            |
+| Lily               | lily               |
+| Cammy              | cammy              |
+| Rashid             | rashid             |
+| A.K.I.             | aki                |
+| Ed                 | ed                 |
+| Akuma              | akuma              |
+| M. Bison           | m_bison            |
+| Terry              | terry              |
+| Mai                | mai                |
+
+### Tekken 8 URL names
+
+| Character          | URL Name           |
+|--------------------|--------------------|
+| Alisa              | alisa              |
+| Asuka              | asuka              |
+| Azucena            | azucena            |
+| Bryan              | bryan              |
+| Claudio            | claudio            |
+| Devil Jin          | devil_jin          |
+| Feng               | feng_wei           |
+| Hwoarang           | hwoarang           |
+| Jack-8             | jack_8             |
+| Jin                | jin                |
+| Jun                | jun                |
+| Kazuya             | kazuya             |
+| King               | king               |
+| Kuma               | kuma               |
+| Lars               | lars               |
+| Lee                | lee                |
+| Leo                | leo                |
+| Leroy              | leroy              |
+| Lili               | lili               |
+| Xiaoyu             | xiaoyu             |
+| Law                | law                |
+| Nina               | nina               |
+| Panda              | panda              |
+| Paul               | paul               |
+| Raven              | raven              |
+| Reina              | reina              |
+| Dragunov           | dragunov           |
+| Shaheen            | shaheen            |
+| Steve              | steve              |
+| Victor             | victor             |
+| Yoshimitsu         | yoshimitsu         |
+| Zafina             | zafina             |
+| Eddy               | eddy               |
+| Lidia              | lidia              |
+| Heihachi           | heihachi           |
+| Clive              | clive              |
+| Anna               | anna               |
 
 
 ### Release Notes
+#### v4.0.0
+- Thumbnails and Top8 graphs can be generated for other games (Rivals of Aether 2, Street Fighter 6 and Tekken 8);
+- Character images are now downloaded from ThumbnailGeneratorCharacterImageRepository repository, instead of depending on other websites;
+- Fixed Chrom's mural art settings (Issue [#55](https://github.com/jonborg/ThumbnailGenerator/issues/55) opened and fixed by JoVoStudios)
+
 #### v3.0.0
 - Added option for users to program their Top 8 Generator;
 - Added "Random" to character selection (Question mark, Sandbag);

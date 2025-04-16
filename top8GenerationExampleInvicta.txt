@@ -1,0 +1,9 @@
+invicta;SSBU
+sora;2
+steve;1
+snake;3
+donkey_kong;1;sephiroth;1;roy;7
+incineroar;5
+sora;2;cloud;2
+lucina;5;ike;6
+ryu;8

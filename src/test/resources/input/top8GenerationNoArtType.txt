@@ -1,0 +1,9 @@
+weeklyl;ssbu
+pokemon_trainer;6
+kazuya;6
+roy;3;donkey_kong;1
+yoshi;2
+little_mac;4;kazuya;1;sephiroth;7
+jigglypuff;4;wario;1
+ganondorf;7
+joker;7;luigi;1;king_dedede

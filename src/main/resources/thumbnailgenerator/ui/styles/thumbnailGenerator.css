@@ -1,0 +1,26 @@
+.menuBar{
+    -fx-padding: 0;
+    -fx-spacing: 0;
+    -fx-font-size:15;
+}
+
+.menu{
+    -fx-padding: 2 7 2 7;
+}
+
+.menuItem{
+    -fx-padding: 4 10 4 20;
+}
+
+.playerSection{
+    -fx-padding: 10;
+
+    -fx-border-color: #d3d3d3;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+}
+
+.generalTextfield{
+    -fx-pref-width: 225;
+    -fx-min-width: 225;
+}

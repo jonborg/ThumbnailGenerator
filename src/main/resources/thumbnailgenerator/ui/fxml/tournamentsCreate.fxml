@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import thumbnailgenerator.ui.textfield.ChosenImageField?>
+<?import thumbnailgenerator.ui.textfield.ChosenJsonField?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="thumbnailgenerator.ui.controller.TournamentsCreateController"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@../styles/tournamentsAddEdit.css">
+
+    <HBox styleClass="mainBox" spacing="15" >
+        <VBox spacing="10">
+            <ScrollPane fx:id="tournamentSettings" maxHeight="600" vbarPolicy="ALWAYS" hbarPolicy="NEVER">
+                <VBox alignment="CENTER">
+                    <TitledPane text="General Settings" collapsible="false" styleClass="settingsBox">
+                        <VBox spacing="15">
+                            <VBox>
+                                <Label text="Tournament Name*:"/>
+                                <TextField fx:id="name" styleClass="textfield"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Tournament Diminutive*:"/>
+                                <TextField fx:id="id" styleClass="textfield"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Font*:"/>
+                                <ComboBox fx:id="font" styleClass="textfield" editable="true"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Button Logo:"/>
+                                <ChosenImageField fx:id="logo"/>
+                            </VBox>
+                        </VBox>
+                    </TitledPane>
+                    <Pane>
+                        <VBox>
+                            <VBox styleClass="settingsBox">
+                                <Label text="Select game to edit:"/>
+                                <ComboBox fx:id="tournamentGame" styleClass="textfield"/>
+                            </VBox>
+                        </VBox>
+                    </Pane>
+                    <TitledPane text="Thumbnail Image Directories" collapsible="false" styleClass="settingsBox">
+                        <VBox spacing="15">
+                            <VBox>
+                                <Label text="Foreground*:"/>
+                                <ChosenImageField fx:id="foreground"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Background:"/>
+                                <ChosenImageField fx:id="background"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Fighter Image Settings File:"/>
+                                <ComboBox fx:id="artTypeThumbnail" styleClass="textfield"/>
+                                <ChosenJsonField fx:id="fighterImageSettingsFile"/>
+                            </VBox>
+                        </VBox>
+                    </TitledPane>
+                    <TitledPane text="Top 8 Image Directories" collapsible="false" styleClass="settingsBox">
+                        <VBox spacing="15">
+                            <VBox>
+                                <Label text="Foreground*:"/>
+                                <ChosenImageField fx:id="foregroundTop8"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Background:"/>
+                                <ChosenImageField fx:id="backgroundTop8"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Slot Settings File:"/>
+                                <ChosenJsonField fx:id="slotSettingsFileTop8"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Fighter Image Settings File:"/>
+                                <ComboBox fx:id="artTypeTop8" styleClass="textfield"/>
+                                <ChosenJsonField fx:id="fighterImageSettingsFileTop8"/>
+                            </VBox>
+                        </VBox>
+                    </TitledPane>
+                </VBox>
+            </ScrollPane>
+            <VBox spacing="10" alignment="CENTER">
+                <Button id="saveTournamentButton" styleClass="button" text="Save" onAction="#save"/>
+                <Button fx:id="cancelButton" styleClass="button" text="Cancel" onAction="#cancel"/>
+            </VBox>
+        </VBox>
+        <VBox spacing="27">
+            <HBox spacing="15">
+                <TitledPane text="Font Dimensions" collapsible="false">
+                    <VBox spacing="15">
+                        <HBox spacing="63">
+                            <VBox>
+                                <Label text="Top Size:"/>
+                                <TextField fx:id="sizeTop" styleClass="small-textfield"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Top Angle:"/>
+                                <TextField fx:id="angleTop" styleClass="small-textfield"/>
+                            </VBox>
+                        </HBox>
+                        <HBox spacing="40">
+                            <VBox>
+                                <Label text="Bottom Size:"/>
+                                <TextField fx:id="sizeBottom" styleClass="small-textfield"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Bottom Angle:"/>
+                                <TextField fx:id="angleBottom" styleClass="small-textfield" />
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+
+                <TitledPane text="Font Styling" collapsible="false" >
+                    <VBox spacing="25">
+                        <HBox spacing="40">
+                            <VBox>
+                                <Label text="Bold:"/>
+                                <CheckBox fx:id="bold"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Italic:"/>
+                                <CheckBox fx:id="italic"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Shadow:"/>
+                                <CheckBox fx:id="shadow"/>
+                            </VBox>
+                        </HBox>
+                        <VBox>
+                            <Label text="Contour Length:"/>
+                            <TextField styleClass="small-textfield" fx:id="contour"/>
+                        </VBox>
+                    </VBox>
+                </TitledPane>
+
+                <TitledPane text="Text Vertical Offset" collapsible="false" >
+                    <VBox spacing="15">
+                        <HBox spacing="61">
+                            <VBox>
+                                <Label text="Top Left:"/>
+                                <TextField fx:id="downOffsetTopLeft" styleClass="small-textfield"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Top Right:"/>
+                                <TextField fx:id="downOffsetTopRight" styleClass="small-textfield"/>
+                            </VBox>
+                        </HBox>
+                        <HBox spacing="40">
+                            <VBox>
+                                <Label text="Bottom Left:"/>
+                                <TextField fx:id="downOffsetBottomLeft" styleClass="small-textfield"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Bottom Right:"/>
+                                <TextField fx:id="downOffsetBottomRight" styleClass="small-textfield"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+            </HBox>
+            <VBox spacing="10" alignment="CENTER">
+                <BorderPane styleClass="previewPane">
+                    <center>
+                        <ImageView fx:id="preview" preserveRatio="true" fitWidth="720"/>
+                    </center>
+                </BorderPane>
+                <Button id="previewButton" styleClass="bigButton" text="Preview" onAction="#previewThumbnail"/>
+            </VBox>
+        </VBox>
+    </HBox>
+</AnchorPane>

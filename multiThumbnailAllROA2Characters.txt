@@ -1,0 +1,14 @@
+invicta;roa2;20/02/20XX;render
+t;t;clairen;clairen;1;1;t
+t;t;fleet;fleet;1;1;t
+t;t;forsburn;forsburn;1;1;t
+t;t;kragg;kragg;1;1;t
+t;t;loxodont;loxodont;1;1;t
+t;t;maypul;maypul;1;1;t
+t;t;orcane;orcane;1;1;t
+t;t;ranno;ranno;1;1;t
+t;t;wrastor;wrastor;1;1;t
+t;t;zetterburn;zetterburn;1;1;t
+t;t;etalus;etalus;1;1;t
+t;t;olympia;olympia;1;1;t
+
