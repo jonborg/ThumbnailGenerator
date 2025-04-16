@@ -2,6 +2,9 @@ package thumbnail;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import thumbnailgenerator.Main;
@@ -39,12 +42,13 @@ public class MultiThumbnailGenerationTest {
         tournamentService.initTournamentsListAndSettings();
     }
 
-    @Test
-    public void create_validThumbnailFileRenders_success()
+    @ParameterizedTest
+    @ValueSource(strings = {"multiThumbnailGeneration.txt", "multiThumbnailGenerationNoArtType.txt"})
+    public void create_validThumbnailFileRenders_success(String inputFile)
             throws ThumbnailFromFileException, FontNotFoundException,
             IOException, FighterImageSettingsNotFoundException {
         //Arrange
-        File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailGeneration.txt").getPath());
+        File thumbnailListFile = new File(getClass().getResource("/input/" + inputFile).getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(
                         "/expected/thumbnail/multiThumbnail1.png"),

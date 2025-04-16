@@ -24,6 +24,7 @@ import thumbnailgenerator.enums.Tekken8FighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
+import thumbnailgenerator.utils.enums.FighterArtTypeUtils;
 
 @Service
 public abstract class FileService<T extends GeneratedGraphic,V> {
@@ -73,10 +74,6 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
         return this.gameIndex;
     }
 
-    protected int getArtTypeIndex(T generatedGraphic){
-        return generatedGraphic instanceof Thumbnail ? 3 : 2;
-    }
-
     protected T initializeGeneratedGraphic(List<String> parameters)
             throws IOException {
         var generatedGraphic = createEmptyGeneratedGraphic();
@@ -96,59 +93,22 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
         }
         var game = Game.valueOf(parameters.get(1).toUpperCase());
         generatedGraphic.setGame(game);
-        switch (game) {
-            case SSBU:
-                setArtType(generatedGraphic, parameters,
-                        new Pair<>(
-                                SmashUltimateFighterArtType
-                                        .valueOf(parameters.get(getArtTypeIndex(generatedGraphic)).toUpperCase()),
-                                SmashUltimateFighterArtType.RENDER
-                        )
-                );
-                break;
-            case SF6:
-                setArtType(generatedGraphic, parameters,
-                        new Pair<>(
-                                StreetFighter6FighterArtType
-                                        .valueOf(parameters.get(getArtTypeIndex(generatedGraphic)).toUpperCase()),
-                                StreetFighter6FighterArtType.RENDER
-                        )
-                );
-                break;
-            case ROA2:
-                setArtType(generatedGraphic, parameters,
-                        new Pair<>(
-                                RivalsOfAether2FighterArtType
-                                        .valueOf(parameters.get(getArtTypeIndex(generatedGraphic)).toUpperCase()),
-                                RivalsOfAether2FighterArtType.RENDER
-                        )
-                );
-                break;
-            case TEKKEN8:
-                setArtType(generatedGraphic, parameters,
-                        new Pair<>(
-                                Tekken8FighterArtType
-                                        .valueOf(parameters.get(getArtTypeIndex(generatedGraphic)).toUpperCase()),
-                                Tekken8FighterArtType.RENDER
-                        )
-                );
-                break;
-            default:
-                throw new IOException("Incompatible Game provided");
-        }
+        setArtType(generatedGraphic, parameters);
         return generatedGraphic;
     }
 
-    private void setArtType(
-            GeneratedGraphic generatedGraphic,
-            List<String> parameters,
-            Pair<FighterArtType, FighterArtType> fighterArtTypes
-    ){
-        if (parameters.size() > gameIndex
-                && !parameters.get(gameIndex).isEmpty()) {
-            generatedGraphic.setArtType(fighterArtTypes.getValue0());
-        } else {
-            generatedGraphic.setArtType(fighterArtTypes.getValue1());
+    private void setArtType(GeneratedGraphic generatedGraphic, List<String> parameters){
+        //Assume generatedGraphic has its game identified
+        var artTypeIndex = generatedGraphic instanceof Thumbnail ? 3 : 2;
+        try{
+            var artTypeValue = parameters.get(artTypeIndex);
+            var fighterArtType = FighterArtTypeUtils.getEnum(generatedGraphic.getGame(), artTypeValue);
+            generatedGraphic.setArtType(fighterArtType);
+        } catch (IndexOutOfBoundsException ex){
+            var defaultArtType = FighterArtTypeUtils.getDefaultArtType(generatedGraphic.getGame());
+            LOGGER.info("Could not find art type to use. Using default art type \""
+                    + defaultArtType.getEnumName() + "\" for game " + generatedGraphic.getGame());
+            generatedGraphic.setArtType(defaultArtType);
         }
     }
 }

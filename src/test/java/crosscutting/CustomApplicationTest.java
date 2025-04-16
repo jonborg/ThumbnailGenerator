@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import thumbnailgenerator.JavaFxApplication;
 import thumbnailgenerator.ui.textfield.ChosenImageField;
 import thumbnailgenerator.ui.textfield.ChosenJsonField;
+import utils.WaitUtils;
 
 import java.io.IOException;
 
@@ -39,7 +40,7 @@ public class CustomApplicationTest extends ApplicationTest {
     }
 
     public void clickOnButton(ButtonId buttonId){
-        clickOn(buttonId.getValue());
+        moveTo(buttonId.getValue()).clickOn(buttonId.getValue());
     }
 
     public void writeInTextField(TextFieldId textFieldId, String text){
