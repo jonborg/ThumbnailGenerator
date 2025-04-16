@@ -123,7 +123,7 @@ public class TournamentEditSettingsIT extends CustomApplicationTest {
         Stage editStage = (Stage) getWindow(WindowId.EDIT_TOURNAMENT);
         Scene editScene = editStage.getScene();
         writeInTextField(editScene, TextFieldId.TOURNAMENT_NAME, newTournamentName);
-        clickOnButton(editScene, ButtonId.SAVE_THUMBNAIL);
+        clickOnButton(editScene, ButtonId.SAVE_TOURNAMENT);
 
         //Assert
         Tournament actualTournament = TestUtils.getTournament(tournamentService, "invicta");

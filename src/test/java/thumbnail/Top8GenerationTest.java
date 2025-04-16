@@ -3,6 +3,8 @@ package thumbnail;
 import exception.Top8FromFileException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import thumbnailgenerator.Main;
@@ -34,11 +36,12 @@ public class Top8GenerationTest {
     @Autowired
     private Top8Service top8Service;
 
-    @Test
-    public void create_validTop8_success()
+    @ParameterizedTest
+    @ValueSource(strings = {"top8Generation.txt", "top8GenerationNoArtType.txt"})
+    public void create_validTop8_success(String inputFile)
             throws IOException, Top8FromFileException {
         //Arrange
-        File top8File = new File(getClass().getResource("/input/top8Generation.txt").getPath());
+        File top8File = new File(getClass().getResource("/input/" + inputFile).getPath());
         File expectedTop8 = FileUtils.getFileFromResources(
                 "/expected/top8/multiTop8Generation.png");
 

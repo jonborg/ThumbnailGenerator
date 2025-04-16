@@ -643,7 +643,7 @@
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/default.json"
+            "fighterImageSettings": "settings/thumbnails/images/roa2/default.json"
           }
         ]
       },
@@ -654,7 +654,7 @@
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/default.json"
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
           }
         ]
       },
@@ -665,7 +665,7 @@
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/default.json"
+            "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
           }
         ]
       }

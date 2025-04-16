@@ -90,7 +90,7 @@ public abstract class CharacterImageFetcher {
             LOGGER.error("An issue occurred when finding image for alt {} of {}. URI: {}",
                     fighter.getAlt(), fighter.getName(), url);
             LOGGER.catching(e);
-            throw new OnlineImageNotFoundException();
+            throw new OnlineImageNotFoundException(fighter.getUrlName());
         }
     }
 

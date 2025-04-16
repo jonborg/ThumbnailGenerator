@@ -17,23 +17,30 @@ public class FighterArtTypeUtils {
 
     private FighterArtTypeUtils(){}
 
-    private static final Map<Game, Class<? extends FighterArtType>> enumMap = Map.of(
+    private static final Map<Game, Class<? extends FighterArtType>> gameArtTypesMap = Map.of(
             Game.SSBU, SmashUltimateFighterArtType.class,
             Game.ROA2, RivalsOfAether2FighterArtType.class,
             Game.SF6, StreetFighter6FighterArtType.class,
             Game.TEKKEN8, Tekken8FighterArtType.class
     );
 
+    private static final Map<Game, Enum<? extends FighterArtType>> gameDefaultArtTypeMap = Map.of(
+            Game.SSBU, SmashUltimateFighterArtType.RENDER,
+            Game.ROA2, RivalsOfAether2FighterArtType.RENDER,
+            Game.SF6, StreetFighter6FighterArtType.RENDER,
+            Game.TEKKEN8, Tekken8FighterArtType.RENDER
+    );
+
     public static FighterArtType getEnum(Game game, String value) {
-        Class<? extends FighterArtType> enumClass = enumMap.get(game);
+        Class<? extends FighterArtType> enumClass = gameArtTypesMap.get(game);
         if (enumClass == null) {
             throw new IllegalArgumentException("Unknown gameName: " + game);
         }
-        return (FighterArtType) Enum.valueOf((Class) enumClass, value);
+        return (FighterArtType) Enum.valueOf((Class) enumClass, value.toUpperCase());
     }
 
     public static FighterArtType[] getValues(Game game) {
-        Class<? extends FighterArtType> enumClass = enumMap.get(game);
+        Class<? extends FighterArtType> enumClass = gameArtTypesMap.get(game);
         if (enumClass == null) {
             throw new IllegalArgumentException("Unknown gameName: " + game);
         }
@@ -49,5 +56,9 @@ public class FighterArtTypeUtils {
                                 .build()
                 )
                 .collect(Collectors.toList());
+    }
+
+    public static FighterArtType getDefaultArtType(Game game){
+        return getEnum(game, gameDefaultArtTypeMap.get(game).name());
     }
 }

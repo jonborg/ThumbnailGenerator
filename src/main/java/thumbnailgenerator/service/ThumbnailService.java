@@ -16,6 +16,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -70,7 +71,7 @@ public class ThumbnailService {
             throws FighterImageSettingsNotFoundException,
             ThumbnailFromFileException, FontNotFoundException {
         var thumbnailList = thumbnailFileService.getListThumbnailsFromFile(inputStream,saveLocally);
-        var invalidThumbnailList = new ArrayList<Thumbnail>();
+        var invalidThumbnailList = new ArrayList<Pair<Thumbnail, String>>();
         for (Thumbnail thumbnail : thumbnailList){
             try {
                 generateAndSaveThumbnail(thumbnail);
@@ -80,15 +81,21 @@ public class ThumbnailService {
             }catch(FontNotFoundException e){
                 throw e;
             }catch (Exception e){
-                invalidThumbnailList.add(thumbnail);
+                invalidThumbnailList.add(new Pair(thumbnail, e.getMessage()));
             }
         }
         if (!invalidThumbnailList.isEmpty()){
             String details = "";
             LOGGER.error("Thumbnails could not be generated from these lines:");
-            for (Thumbnail thumbnail :invalidThumbnailList){
+            for (Pair pair :invalidThumbnailList){
+                Thumbnail thumbnail = (Thumbnail) pair.getValue0();
+                String errorMessage = (String) pair.getValue1();
                 LOGGER.error(thumbnail);
-                details += thumbnail + System.lineSeparator() + System.lineSeparator();
+                var listPlayers = thumbnail.getPlayers();
+                details += listPlayers.get(0).getPlayerName() + " "
+                        + listPlayers.get(1).getPlayerName() + " "
+                        + thumbnail.getRound() + " -> "
+                        + errorMessage + System.lineSeparator();
             }
             AlertFactory.displayError("Thumbnails could not be generated from these lines: ", details);
             throw new ThumbnailFromFileException();
@@ -157,7 +164,7 @@ public class ThumbnailService {
             FontNotFoundException, FighterImageSettingsNotFoundException,
             MalformedURLException {
         LOGGER.info("Generating thumbnail preview.");
-        List<Player> players = Player.generatePreviewPlayers();
+        List<Player> players = Player.generatePreviewPlayers(game);
         ImageSettings imageSettings = (ImageSettings)
                 jsonReaderService.getJSONArrayFromFile(
                         tournament

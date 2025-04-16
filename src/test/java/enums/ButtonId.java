@@ -8,7 +8,7 @@ public enum ButtonId {
     TOURNAMENT_INVICTA("#invicta"),
     SAVE_THUMBNAIL("#saveButton"),
     GENERATE_FROM_FILE("#fromFile"),
-    SAVE_TOURNAMENT("#saveButton"),
+    SAVE_TOURNAMENT("#saveTournamentButton"),
     CANCEL_TOURNAMENT("#cancelButton"),
     TOURNAMENT_THUMBNAIL_PREVIEW("#previewButton");
 

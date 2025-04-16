@@ -198,10 +198,8 @@ public class FromStartGGController implements Initializable {
             AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
         }catch(ThumbnailFromFileException e){
             //AlertFactory already thrown inside ThumbnailFromFile.generateFromSmashGG
-        }catch(FontNotFoundException e){
+        }catch(Exception e){
             AlertFactory.displayError(e.getMessage());
-        } catch (FileNotFoundException | FighterImageSettingsNotFoundException | UnsupportedEncodingException e) {
-            e.printStackTrace();
         }
     }
 
