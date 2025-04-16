@@ -120,11 +120,13 @@ public class CustomApplicationTest extends ApplicationTest {
 
     public void writeInChosenImageField(ChosenImageFieldId chosenImageFieldId, String value){
         ChosenImageField chosenImageField = findElement(chosenImageFieldId.getValue());
+        chosenImageField.getTextField().clear();
         clickOn(chosenImageField.getTextField()).write(value);
     }
 
-    public void writeInChosenJsonField(ChosenJsonFieldId chosenImageFieldId, String value){
-        ChosenJsonField chosenJsonField = findElement(chosenImageFieldId.getValue());
+    public void writeInChosenJsonField(ChosenJsonFieldId chosenJsonFieldId, String value){
+        ChosenJsonField chosenJsonField = findElement(chosenJsonFieldId.getValue());
+        chosenJsonField.getTextField().clear();
         clickOn(chosenJsonField.getTextField()).write(value);
     }
 

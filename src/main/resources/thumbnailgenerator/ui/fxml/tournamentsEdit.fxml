@@ -84,7 +84,7 @@
                 </VBox>
             </ScrollPane>
             <VBox spacing="10" alignment="CENTER">
-                <Button id="saveButton" styleClass="button" text="Save" onAction="#save"/>
+                <Button id="saveTournamentButton" styleClass="button" text="Save" onAction="#save"/>
                 <Button fx:id="cancelButton" styleClass="button" text="Cancel" onAction="#cancel"/>
             </VBox>
         </VBox>

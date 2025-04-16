@@ -131,9 +131,10 @@ public class TournamentCreateSettingsIT extends CustomApplicationTest {
         writeInChosenJsonField(ChosenJsonFieldId.TOURNAMENT_TOP8_CHARACTER_SETTINGS,
                 expectedTop8Settings.getFighterImageSettingsFile(artType));
 
+        WaitUtils.waitInSeconds(1);
         clickOnButton(ButtonId.SAVE_TOURNAMENT);
 
-        WaitUtils.waitInSeconds(5);
+        WaitUtils.waitInSeconds(2);
         //Assert
         File actualTournamentSettings = FileUtils.loadTournamentsFile();
         FileUtils.assertSameTextFileContent(expectedTournamentFile, actualTournamentSettings);
