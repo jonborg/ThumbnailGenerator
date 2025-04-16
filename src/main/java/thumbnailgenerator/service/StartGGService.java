@@ -7,13 +7,14 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.startgg.match.SetGG;
 import thumbnailgenerator.dto.startgg.search.SearchGamesGG;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.enums.StartGGEnumUtils;
-import thumbnailgenerator.utils.json.JSONReader;
+import thumbnailgenerator.service.json.JSONReaderService;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -23,6 +24,10 @@ public class StartGGService {
 
     private static final Logger LOGGER = LogManager.getLogger(StartGGService.class);
     private GGClient client;
+    @Autowired
+    private TournamentService tournamentService;
+    @Autowired
+    private JSONReaderService jsonReaderService;
 
     public void initClient(String authToken){
         client = GGClient.builder(authToken)
@@ -59,10 +64,10 @@ public class StartGGService {
         if (totalPages < 0){
             totalPages = result.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode()).getAsJsonObject("sets")
                     .getAsJsonObject("pageInfo").getAsJsonPrimitive("totalPages").getAsInt();
-            foundSets.append(TournamentUtils.getSelectedTournament().getTournamentId()
+            foundSets.append(tournamentService.getSelectedTournament().getTournamentId()
                     + ";" + eventGame +";" + searchGamesGG.getEventName() + ";RENDER"+ System.lineSeparator());
         }
-        SetGG set = (SetGG) JSONReader
+        SetGG set = (SetGG) jsonReaderService
                 .getJSONObject(result.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode())
                         .getAsJsonObject("sets").toString(), new TypeToken<SetGG>() {}.getType());
         set.getSetNodes().forEach(setNodeGG -> {

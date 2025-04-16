@@ -12,9 +12,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.service.TournamentUtils;
+import thumbnailgenerator.service.TournamentService;
 import thumbnailgenerator.ui.buttons.TournamentButton;
 
 @Controller
@@ -25,6 +26,8 @@ public class TournamentsController implements Initializable {
     private Label tournamentsLabel;
     @FXML
     private HBox tournamentsBox;
+    @Autowired
+    private TournamentService tournamentService;
 
     private static ToggleGroup tournamentsGroup;
 
@@ -42,7 +45,7 @@ public class TournamentsController implements Initializable {
     }
 
     private void initTournamentList(){
-        TournamentUtils.initTournamentsListAndSettings();
+        tournamentService.initTournamentsListAndSettings();
         List<TournamentButton> tournamentsButtons = new ArrayList<>();
         tournamentsGroup = new ToggleGroup();
         if ( getTournamentsList() == null || getTournamentsList().isEmpty()){
@@ -78,10 +81,10 @@ public class TournamentsController implements Initializable {
         });
     }
 
-    private static List<Tournament> getTournamentsList() {
-        return TournamentUtils.getTournamentsList();
+    private List<Tournament> getTournamentsList() {
+        return tournamentService.getTournamentsList();
     }
-    private static void setSelectedTournament(Tournament tournament) {
-        TournamentUtils.setSelectedTournament(tournament);
+    private void setSelectedTournament(Tournament tournament) {
+        tournamentService.setSelectedTournament(tournament);
     }
 }

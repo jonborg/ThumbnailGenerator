@@ -98,8 +98,8 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
         File expectedImage = FileUtils.getFileFromResources(
                 "/expected/thumbnail/invictaMarioSonicThumbnail.png");
-        File marioImage = FileUtils.getCharacterImage(Game.SSBU, "mario", 1);
-        File sonicImage = FileUtils.getCharacterImage(Game.SSBU, "sonic", 1);
+        File marioImage = FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtType.RENDER, "mario", 1);
+        File sonicImage = FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtType.RENDER, "sonic", 1);
 
         clickOnButton(ButtonId.TOURNAMENT_INVICTA);
         fillRoundData(input);

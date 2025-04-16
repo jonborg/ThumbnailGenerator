@@ -25,7 +25,6 @@ import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
@@ -34,7 +33,7 @@ import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-import thumbnailgenerator.utils.json.JSONReader;
+import thumbnailgenerator.service.json.JSONReaderService;
 
 @Service
 public class ThumbnailService {
@@ -45,9 +44,10 @@ public class ThumbnailService {
     private @Autowired ImageService imageService;
     private @Autowired ThumbnailFileService thumbnailFileService;
     private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
-    private @Value("${thumbnail.size.width:1280}") Integer thumbnailWidth;
-    private @Value("${thumbnail.size.height:720}") Integer thumbnailHeight;
-    private @Value("${thumbnail.path.save:generated_thumbnails/}") String saveThumbnailsPath;
+    private @Autowired JSONReaderService jsonReaderService;
+    private @Value("${thumbnail.size.width}") Integer thumbnailWidth;
+    private @Value("${thumbnail.size.height}") Integer thumbnailHeight;
+    private @Value("${thumbnail.path.save}") String saveThumbnailsPath;
 
     public void generateAndSaveThumbnail(Thumbnail thumbnail)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
@@ -159,7 +159,7 @@ public class ThumbnailService {
         LOGGER.info("Generating thumbnail preview.");
         List<Player> players = Player.generatePreviewPlayers();
         ImageSettings imageSettings = (ImageSettings)
-                JSONReader.getJSONArrayFromFile(
+                jsonReaderService.getJSONArrayFromFile(
                         tournament
                                 .getThumbnailSettingsByGame(game)
                                 .getFighterImageSettingsFile(artType),

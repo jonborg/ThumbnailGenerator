@@ -1,4 +1,4 @@
-package thumbnailgenerator.utils.json;
+package thumbnailgenerator.service.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,21 +11,23 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.dto.json.write.TextSettingsWrite;
 import thumbnailgenerator.dto.json.write.TournamentWrite;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-import thumbnailgenerator.utils.file.FileUtils;
 
+@Service
+public class JSONWriterService {
+    private static final Logger LOGGER = LogManager.getLogger(JSONWriterService.class);
+    @Value("${settings.tournament.file.path}")
+    private String tournamentFile;
+    @Value("${settings.text.file.path}")
+    private String textSettingsFile;
 
-public class JSONWriter {
-    private static final Logger LOGGER = LogManager.getLogger(JSONWriter.class);
-
-    private static String tournamentFile = FileUtils.getTournamentFile();
-    private static String textSettingsFile = FileUtils.getTextSettingsFile();
-
-    public static void updateTournamentsFile(List<Tournament> list){
+    public void updateTournamentsFile(List<Tournament> list){
         List<TournamentWrite> tournamentWriteList = list.stream().map(TournamentWrite::new).collect(Collectors.toList());
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
@@ -42,7 +44,7 @@ public class JSONWriter {
         }
     }
 
-    public static void updateTextSettingsFile(List<TextSettings> list){
+    public void updateTextSettingsFile(List<TextSettings> list){
         List<TextSettingsWrite> textSettingsWrite = list.stream().map(TextSettingsWrite::new).collect(Collectors.toList());
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()

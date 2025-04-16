@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import thumbnailgenerator.Main;
 import thumbnailgenerator.service.Top8Service;
-import thumbnailgenerator.service.TournamentUtils;
+import thumbnailgenerator.service.TournamentService;
 import utils.FileUtils;
 import utils.WaitUtils;
 
@@ -23,9 +23,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(classes = Main.class)
 public class Top8GenerationTest {
 
+    @Autowired
+    private TournamentService tournamentService;
+
     @BeforeEach
     public void init(){
-        TournamentUtils.initTournamentsListAndSettings();
+        tournamentService.initTournamentsListAndSettings();
     }
 
     @Autowired

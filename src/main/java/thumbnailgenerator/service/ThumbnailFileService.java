@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import org.javatuples.Pair;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
@@ -16,20 +16,21 @@ import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Round;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
-import thumbnailgenerator.utils.json.JSONReader;
+import thumbnailgenerator.service.json.JSONReaderService;
 
 @Service
 public class ThumbnailFileService extends FileService<Thumbnail, Round> {
 
     private int gameIndex = 3;
     private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
+    private @Autowired JSONReaderService jsonReaderService;
 
     public List<Thumbnail> getListThumbnailsFromFile(InputStream inputStream, Boolean saveLocally)
             throws FighterImageSettingsNotFoundException {
         var tuple = readGraphicGenerationFile(inputStream);
         var rootThumbnail = tuple.getValue0();
         var roundList = tuple.getValue1();
-        var imageSettings = (ImageSettings) JSONReader.getJSONArrayFromFile(
+        var imageSettings = (ImageSettings) jsonReaderService.getJSONArrayFromFile(
                 rootThumbnail.getFileThumbnailSettings()
                         .getFighterImageSettingsFile(rootThumbnail.getArtType()),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())

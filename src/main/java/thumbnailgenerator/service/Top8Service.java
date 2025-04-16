@@ -17,6 +17,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Game;
@@ -30,7 +31,7 @@ import thumbnailgenerator.dto.Top8;
 import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.image.ImageUtils;
-import thumbnailgenerator.utils.json.JSONReader;
+import thumbnailgenerator.service.json.JSONReaderService;
 
 @Service
 public class Top8Service {
@@ -41,6 +42,8 @@ public class Top8Service {
     private @Autowired ImageService imageService;
     private @Autowired Top8FileService top8FileService;
     private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
+    private @Autowired JSONReaderService jsonReaderService;
+    private @Value("${top8.path.save}") String saveTop8Path;
 
     public void generateTop8FromFile(InputStream inputStream, Boolean saveLocally)
             throws Top8FromFileException {
@@ -57,7 +60,7 @@ public class Top8Service {
     public void generateTop8(Top8 top8)
             throws IOException {
 
-        var fullSlot = (FullSlot) JSONReader.getJSONObjectFromFile(
+        var fullSlot = (FullSlot) jsonReaderService.getJSONObjectFromFile(
                 top8.getFileTop8Settings().getSlotSettingsFile(),
                 new TypeToken<FullSlot>() {}.getType());
 
@@ -75,9 +78,9 @@ public class Top8Service {
         LOGGER.info("Drawing foreground in path {}.", top8.getFileTop8Settings().getForeground());
         imageService.drawImageFromPathFile(top8.getFileTop8Settings().getForeground(), g2d);
 
-        var dir = new File("generated_top8/");
+        var dir = new File(saveTop8Path);
         if (!dir.exists()) dir.mkdir();
-        var file = new File("generated_top8/ " + top8.getPlayers().get(0).getFighter(0).getUrlName() + ".png");
+        var file = new File(saveTop8Path + top8.getPlayers().get(0).getFighter(0).getUrlName() + ".png");
         ImageIO.write(result, "png", file);
 
     }
@@ -100,7 +103,7 @@ public class Top8Service {
                 smashUltimateCharacterService.convertToAlternateRender(player.getFighter(0));
 
                 Top8ImageSettings top8ImageSettings = (Top8ImageSettings)
-                        JSONReader.getJSONArrayFromFile(top8.getFileTop8Settings()
+                        jsonReaderService.getJSONArrayFromFile(top8.getFileTop8Settings()
                                         .getFighterImageSettingsFile(top8.getArtType()),
                                 new TypeToken<ArrayList<Top8ImageSettings>>() {}.getType()).get(0);
 

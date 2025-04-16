@@ -49,7 +49,7 @@ import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.utils.converter.GameConverter;
 import thumbnailgenerator.utils.converter.FighterArtTypeConverter;
-import thumbnailgenerator.service.TournamentUtils;
+import thumbnailgenerator.service.TournamentService;
 import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.ui.textfield.ChosenImageField;
@@ -122,6 +122,7 @@ public class TournamentsCreateController implements Initializable {
     protected List<FighterArtSettings> artTypeDirTop8 = new ArrayList<>();
     protected List<FileThumbnailSettings> fileThumbnailSettingsList;
     protected List<FileTop8Settings> fileTop8SettingsList;
+    private @Autowired TournamentService tournamentService;
     private @Autowired ThumbnailService thumbnailService;
     protected Runnable onSaveCallback;
 
@@ -474,7 +475,7 @@ public class TournamentsCreateController implements Initializable {
         }
         Tournament currentTournament = generateTournamentWithCurrentSettings();
         LOGGER.debug("Saving new tournament -> {}", currentTournament.toString());
-        TournamentUtils.saveNewTournaments(currentTournament);
+        tournamentService.saveNewTournaments(currentTournament);
         onSaveCallback.run();
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();

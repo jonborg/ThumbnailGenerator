@@ -3,6 +3,7 @@ package thumbnailgenerator.service;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.GeneratedGraphic;
@@ -11,16 +12,14 @@ import thumbnailgenerator.enums.interfaces.FighterArtType;
 @Service
 public class StreetFighter6CharacterImageFetcher extends CharacterImageFetcher {
 
-    static String FIGHTERS_URL = "https://raw.githubusercontent.com/jonborg/" +
-            "ThumbnailGeneratorCharacterImageRepository/" +
-            "refs/heads/v3.1.0-beta4/" +
-            "sf6/";
+    @Value("${character-image.sf6.render.url}")
+    private String renderUrl;
 
     @Override
     public URL getOnlineUrl(Fighter fighter, FighterArtType artType)
             throws MalformedURLException {
     String urlString;
-        urlString = FIGHTERS_URL + artType.toString().toLowerCase() + "/" + fighter.getUrlName() + "/1.png";
+        urlString = renderUrl + "/" + fighter.getUrlName() + "/1.png";
         return new URL(urlString);
     }
 }

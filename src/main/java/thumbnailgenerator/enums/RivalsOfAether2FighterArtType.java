@@ -8,7 +8,7 @@ public enum RivalsOfAether2FighterArtType implements FighterArtType {
     RENDER("Renders");
 
     private String value;
-    private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/ro2/default.json";
+    private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/roa2/default.json";
 
     RivalsOfAether2FighterArtType(String value) {
         this.value = value;

@@ -2,14 +2,7 @@ package thumbnailgenerator.dto.json.read;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
-import thumbnailgenerator.dto.TextSettings;
-import thumbnailgenerator.utils.json.JSONReader;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 public class TextSettingsRead {
@@ -49,6 +42,4 @@ public class TextSettingsRead {
     @Expose
     @SerializedName("downOffsetBottom")
     private int[] downOffsetBottom;
-
-    private static String textSettingsFile = "settings/thumbnails/text/text.json";
 }

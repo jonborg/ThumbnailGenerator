@@ -1,18 +1,17 @@
 package utils;
 
+import org.junit.Assert;
 import thumbnailgenerator.dto.Game;
+import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FileUtils {
@@ -29,8 +28,12 @@ public class FileUtils {
         return new File(System.getProperty("user.dir") + path);
     }
 
-    public static File getCharacterImage(Game game, String characterUrlName, int alt){
-        return FileUtils.getActualFile("/assets/characters/" + game.toString() + "/" + characterUrlName + "/" + alt + ".png");
+    public static File getCharacterImage(Game game, FighterArtType artType, String characterUrlName, int alt){
+        return FileUtils.getActualFile("/assets/characters/"
+                + game.toString() + "/"
+                + artType.getEnumName().toLowerCase() + "/"
+                + characterUrlName + "/"
+                + alt + ".png");
     }
 
     public static File getMostRecentFile(String folderPath){
@@ -48,6 +51,14 @@ public class FileUtils {
                         Files.readAllBytes(expected.toPath()),
                         Files.readAllBytes(actual.toPath())
                 )
+        );
+    }
+
+    public static void assertSameTextFileContent(File expected, File actual)
+            throws IOException {
+        Assert.assertEquals(
+                normalizeLineEndings(Files.readString(expected.toPath())),
+                normalizeLineEndings(Files.readString(actual.toPath()))
         );
     }
 
@@ -97,5 +108,9 @@ public class FileUtils {
         );
 
         Files.deleteIfExists(backupTextPath.toPath());
+    }
+
+    private static String normalizeLineEndings(String content) {
+        return content.replace("\r\n", "\n").trim();
     }
 }

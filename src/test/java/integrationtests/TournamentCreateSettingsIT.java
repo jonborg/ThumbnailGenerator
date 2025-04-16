@@ -18,6 +18,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import thumbnailgenerator.Main;
 import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.Game;
@@ -27,6 +30,7 @@ import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
 import thumbnailgenerator.enums.Tekken8FighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.service.TournamentService;
 import utils.FileUtils;
 import utils.TestUtils;
 import utils.WaitUtils;
@@ -37,7 +41,11 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SpringBootTest(classes = Main.class)
 public class TournamentCreateSettingsIT extends CustomApplicationTest {
+
+    @Autowired
+    private TournamentService tournamentService;
 
     @BeforeEach
     public void setUp() throws IOException {
@@ -56,7 +64,7 @@ public class TournamentCreateSettingsIT extends CustomApplicationTest {
             throws InterruptedException, IOException {
         //Arrange
         Tournament expectedTournament = new Tournament(
-                TestUtils.getTournament("weeklyl"),
+                TestUtils.getTournament(tournamentService, "weeklyl"),
                 "createITTest"
         );
         var expectedThumbnailSettings = expectedTournament.getThumbnailSettingsByGame(game);
@@ -79,25 +87,6 @@ public class TournamentCreateSettingsIT extends CustomApplicationTest {
         writeInTextField(TextFieldId.TOURNAMENT_ID, expectedTournament.getTournamentId());
         writeInComboBox(ComboBoxId.TOURNAMENT_THUMBNAIL_FONT, expectedTextSettings.getFont());
         writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_LOGO, expectedTournament.getImage());
-
-        selectInComboBox(ComboBoxId.TOURNAMENT_GAME, game.getName());
-
-        scrollPaneVertically(ScrollPaneId.TOURNAMENT_SETTINGS, createScene, 1.0);
-        writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_FOREGROUND,
-                expectedThumbnailSettings.getForeground());
-        writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_BACKGROUND,
-                expectedThumbnailSettings.getBackground());
-        writeInChosenJsonField(ChosenJsonFieldId.TOURNAMENT_THUMBNAIL_CHARACTER_SETTINGS,
-                expectedThumbnailSettings.getFighterImageSettingsFile(artType));
-
-        writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_TOP8_FOREGROUND,
-                expectedTop8Settings.getForeground());
-        writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_TOP8_BACKGROUND,
-                expectedTop8Settings.getBackground());
-        writeInChosenJsonField(ChosenJsonFieldId.TOURNAMENT_TOP8_SLOT_SETTINGS,
-                expectedTop8Settings.getSlotSettingsFile());
-        writeInChosenJsonField(ChosenJsonFieldId.TOURNAMENT_TOP8_CHARACTER_SETTINGS,
-                expectedTop8Settings.getFighterImageSettingsFile(artType));
 
         writeInTextField(TextFieldId.TOURNAMENT_THUMBNAIL_FONT_TOP_SIZE,
                 expectedTextSettings.getSizeTop());
@@ -123,14 +112,33 @@ public class TournamentCreateSettingsIT extends CustomApplicationTest {
         writeInTextField(TextFieldId.TOURNAMENT_THUMBNAIL_FONT_BOTTOM_RIGHT_OFFSET,
                 expectedTextSettings.getDownOffsetBottom()[1]);
 
+        selectInComboBox(ComboBoxId.TOURNAMENT_GAME, game.getName());
+
+        scrollPaneVertically(ScrollPaneId.TOURNAMENT_SETTINGS, createScene, 1.0);
+        writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_FOREGROUND,
+                expectedThumbnailSettings.getForeground());
+        writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_BACKGROUND,
+                expectedThumbnailSettings.getBackground());
+        writeInChosenJsonField(ChosenJsonFieldId.TOURNAMENT_THUMBNAIL_CHARACTER_SETTINGS,
+                expectedThumbnailSettings.getFighterImageSettingsFile(artType));
+
+        writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_TOP8_FOREGROUND,
+                expectedTop8Settings.getForeground());
+        writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_TOP8_BACKGROUND,
+                expectedTop8Settings.getBackground());
+        writeInChosenJsonField(ChosenJsonFieldId.TOURNAMENT_TOP8_SLOT_SETTINGS,
+                expectedTop8Settings.getSlotSettingsFile());
+        writeInChosenJsonField(ChosenJsonFieldId.TOURNAMENT_TOP8_CHARACTER_SETTINGS,
+                expectedTop8Settings.getFighterImageSettingsFile(artType));
+
         clickOnButton(ButtonId.SAVE_TOURNAMENT);
 
-        WaitUtils.waitInSeconds(3);
+        WaitUtils.waitInSeconds(5);
         //Assert
         File actualTournamentSettings = FileUtils.loadTournamentsFile();
-        FileUtils.assertSameFileContent(expectedTournamentFile, actualTournamentSettings);
+        FileUtils.assertSameTextFileContent(expectedTournamentFile, actualTournamentSettings);
         File actualTextSettings = FileUtils.loadTextFile();
-        FileUtils.assertSameFileContent(expectedTextSettingsFile, actualTextSettings);
+        FileUtils.assertSameTextFileContent(expectedTextSettingsFile, actualTextSettings);
     }
 
     private static Stream<Arguments> getGamesAndDefaultArtTypeEnums() {

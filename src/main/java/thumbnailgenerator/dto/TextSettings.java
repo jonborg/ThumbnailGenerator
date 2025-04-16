@@ -1,8 +1,7 @@
 package thumbnailgenerator.dto;
 
-import com.google.gson.reflect.TypeToken;
 import thumbnailgenerator.dto.json.read.TextSettingsRead;
-import thumbnailgenerator.utils.json.JSONReader;
+
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
