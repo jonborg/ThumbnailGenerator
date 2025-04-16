@@ -118,8 +118,6 @@ public class TournamentsCreateController implements Initializable {
     protected Button cancelButton;
     @FXML
     protected ImageView preview;
-    protected List<FighterArtSettings> artTypeDirThumbnail = new ArrayList<>();
-    protected List<FighterArtSettings> artTypeDirTop8 = new ArrayList<>();
     protected List<FileThumbnailSettings> fileThumbnailSettingsList;
     protected List<FileTop8Settings> fileTop8SettingsList;
     private @Autowired TournamentService tournamentService;
@@ -136,22 +134,14 @@ public class TournamentsCreateController implements Initializable {
         initGamesDropdown(null);
         initNumberTextFields();
         initFontDropdown();
-        initFighterArtTypeDropdown(null);
+        initFighterArtTypeDropdown();
     }
 
     private List<FighterArtSettings> initArtType(Game game){
         List<FighterArtSettings> list = new ArrayList<>();
-        if (Game.SSBU.equals(game)) {
-            for (SmashUltimateFighterArtType artType : SmashUltimateFighterArtType
-                    .values()) {
-                list.add(FighterArtSettings.builder()
-                                            .artType(artType)
-                                            .fighterImageSettingsPath("")
-                                            .build());
-            }
-        } else {
+        for (FighterArtType artType : FighterArtTypeUtils.getValues(game)) {
             list.add(FighterArtSettings.builder()
-                    .artType(SmashUltimateFighterArtType.RENDER)
+                    .artType(artType)
                     .fighterImageSettingsPath("")
                     .build());
         }
@@ -249,56 +239,43 @@ public class TournamentsCreateController implements Initializable {
         font.setItems(filteredItems);
     }
 
-    protected void initFighterArtTypeDropdown(String renderSettings){
-        for (var v: SmashUltimateFighterArtType.values()) {
-            var settingsFile = FighterArtSettings.builder()
-                    .artType(v)
-                    .fighterImageSettingsPath("")
-                    .build();
-            if(renderSettings != null
-                    && v.equals(SmashUltimateFighterArtType.RENDER)){
-                settingsFile.setFighterImageSettingsPath(renderSettings);
-            }
-            artTypeDirThumbnail.add(settingsFile);
-        }
-
-        artTypeThumbnail.getItems().addAll(SmashUltimateFighterArtType.values());
+    protected void initFighterArtTypeDropdown(){
+        var game = tournamentGame.getSelectionModel().getSelectedItem();
+        var currentThumbnailSettings = fileThumbnailSettingsList.stream().filter(t -> t.getGame().equals(game)).findFirst().get();
+        var currentFighterArtTypeValues = FighterArtTypeUtils.getValues(game);
+        var currentDefaultArtType = FighterArtTypeUtils.getDefaultArtType(game);
+        fighterImageSettingsFile.setText(currentDefaultArtType.getDefaultFighterImageSettingsFile());
+        artTypeThumbnail.getItems().addAll(currentFighterArtTypeValues);
         artTypeThumbnail.setConverter(new FighterArtTypeConverter());
-        artTypeThumbnail.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
+        artTypeThumbnail.getSelectionModel().select(currentDefaultArtType);
         artTypeThumbnail.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
-                    for (var dir : artTypeDirThumbnail){
+                    for (var dir : currentThumbnailSettings.getArtTypeDir()){
                         if (Objects.equals(oldValue,dir.getArtType())){
                             dir.setFighterImageSettingsPath(
                                     fighterImageSettingsFile.getText());
                         }
                     }
-                    for (var dir : artTypeDirThumbnail){
+                    for (var dir : currentThumbnailSettings.getArtTypeDir()){
                         if (Objects.equals(newValue, dir.getArtType())){
                             fighterImageSettingsFile.setText(dir.getFighterImageSettingsPath());
                         }
                     }
                 });
-        for (var v: SmashUltimateFighterArtType.values()) {
-            var settingsFile = FighterArtSettings.builder()
-                    .artType(v)
-                    .fighterImageSettingsPath("")
-                    .build();
-            artTypeDirTop8.add(settingsFile);
-        }
 
-        artTypeTop8.getItems().addAll(SmashUltimateFighterArtType.values());
+        var currentTop8Settings = fileTop8SettingsList.stream().filter(t -> t.getGame().equals(game)).findFirst().get();
+        artTypeTop8.getItems().addAll(currentFighterArtTypeValues);
         artTypeTop8.setConverter(new FighterArtTypeConverter());
-        artTypeTop8.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
+        artTypeTop8.getSelectionModel().select(currentDefaultArtType);
         artTypeTop8.getSelectionModel().selectedItemProperty()
                 .addListener((options, oldValue, newValue) -> {
-                    for (var dir : artTypeDirTop8){
+                    for (var dir : currentTop8Settings.getArtTypeDir()){
                         if (Objects.equals(oldValue, dir.getArtType())){
                             dir.setFighterImageSettingsPath(
                                     fighterImageSettingsFileTop8.getText());
                         }
                     }
-                    for (var dir : artTypeDirTop8){
+                    for (var dir : currentTop8Settings.getArtTypeDir()){
                         if (Objects.equals(newValue, dir.getArtType())){
                             fighterImageSettingsFileTop8.setText(dir.getFighterImageSettingsPath());
                         }
@@ -321,17 +298,20 @@ public class TournamentsCreateController implements Initializable {
             return;
         }
         Tournament tournament = generateTournamentWithCurrentSettings();
-
+        Game game = tournamentGame.getSelectionModel().getSelectedItem();
+        FighterArtType artType = artTypeThumbnail.getSelectionModel().getSelectedItem();
         BufferedImage previewImage = thumbnailService
-                .generatePreview(tournament, Game.SSBU, artTypeThumbnail.getSelectionModel().getSelectedItem());
+                .generatePreview(tournament, game, artType);
         Image image = SwingFXUtils.toFXImage(previewImage, null);
         preview.setImage(image);
     }
 
 
     protected Tournament generateTournamentWithCurrentSettings(){
+        var lastSelectedGame = tournamentGame.getSelectionModel().getSelectedItem();
         var lastSelectedArt = artTypeThumbnail.getSelectionModel().getSelectedItem();
-        for (var dir : artTypeDirThumbnail){
+        var currentThumbnailSettings = fileThumbnailSettingsList.stream().filter(t -> t.getGame().equals(lastSelectedGame)).findFirst().get();
+        for (var dir : currentThumbnailSettings.getArtTypeDir()){
             if(lastSelectedArt.equals(dir.getArtType())){
                 var result = fighterImageSettingsFile.getText();
                 if (result == null){
@@ -340,8 +320,10 @@ public class TournamentsCreateController implements Initializable {
                 dir.setFighterImageSettingsPath(result);
             }
         }
+
+        var currentTop8Settings = fileTop8SettingsList.stream().filter(t -> t.getGame().equals(lastSelectedGame)).findFirst().get();
         var lastSelectedArtTop8 = artTypeTop8.getSelectionModel().getSelectedItem();
-        for (var dir : artTypeDirTop8){
+        for (var dir : currentTop8Settings.getArtTypeDir()){
             if(lastSelectedArtTop8.equals(dir.getArtType())){
                 var result = fighterImageSettingsFileTop8.getText();
                 if (result == null){

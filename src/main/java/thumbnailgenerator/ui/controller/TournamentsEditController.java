@@ -35,7 +35,7 @@ public class TournamentsEditController extends TournamentsCreateController {
         initGamesDropdown(tournament);
         initNumberTextFields();
         initFontDropdown();
-        initFighterArtTypeDropdown(thumbnailRenderSettings);
+        initFighterArtTypeDropdown();
 
         id.setText(tournament.getTournamentId());
         name.setText(tournament.getName());
@@ -43,22 +43,22 @@ public class TournamentsEditController extends TournamentsCreateController {
         foreground.setText(tournament.getThumbnailSettingsByGame(Game.SSBU).getForeground());
         background.setText(tournament.getThumbnailSettingsByGame(Game.SSBU).getBackground());
         fighterImageSettingsFile.setText(thumbnailRenderSettings);
-        if(tournament.getThumbnailSettingsByGame(Game.SSBU).getArtTypeDir() != null
+       /* if(tournament.getThumbnailSettingsByGame(Game.SSBU).getArtTypeDir() != null
                 && !tournament.getThumbnailSettingsByGame(Game.SSBU).getArtTypeDir().isEmpty()) {
             artTypeDirThumbnail = new ArrayList<>();
             tournament.getThumbnailSettingsByGame(Game.SSBU)
                     .getArtTypeDir().forEach(dir -> artTypeDirThumbnail.add(dir.clone()));
-        }
+        }*/
         foregroundTop8.setText(tournament.getTop8SettingsByGame(Game.SSBU).getForeground());
         backgroundTop8.setText(tournament.getTop8SettingsByGame(Game.SSBU).getBackground());
         slotSettingsFileTop8.setText(tournament.getTop8SettingsByGame(Game.SSBU).getSlotSettingsFile());
         fighterImageSettingsFileTop8.setText(top8RenderSettings);
-        if(tournament.getTop8SettingsByGame(Game.SSBU).getArtTypeDir() != null
+        /*if(tournament.getTop8SettingsByGame(Game.SSBU).getArtTypeDir() != null
                 && !tournament.getTop8SettingsByGame(Game.SSBU).getArtTypeDir().isEmpty()) {
             artTypeDirTop8 = new ArrayList<>();
             tournament.getTop8SettingsByGame(Game.SSBU)
                     .getArtTypeDir().forEach(dir -> artTypeDirTop8.add(dir.clone()));
-        }
+        }*/
 
         TextSettings textSettings = tournament.getThumbnailSettingsByGame(Game.SSBU).getTextSettings();
         try {
