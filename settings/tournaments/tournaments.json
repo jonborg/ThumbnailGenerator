@@ -5,6 +5,17 @@
     "logo": "assets/tournaments/logos/weeklyl.png",
     "thumbnailSettings": [
       {
+        "game": "SSBM",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
+          }
+        ]
+      },
+      {
         "game": "SSBU",
         "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -54,6 +65,39 @@
       }
     ],
     "top8Settings": [
+      {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
       {
         "game": "SSBU",
         "foreground": "",

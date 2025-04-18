@@ -37,6 +37,7 @@ import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
+import thumbnailgenerator.enums.SmashMeleeFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
 import thumbnailgenerator.enums.Tekken8FighterArtType;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
@@ -55,6 +56,7 @@ import thumbnailgenerator.service.TournamentService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.converter.GameConverter;
 import thumbnailgenerator.service.json.JSONReaderService;
+import thumbnailgenerator.utils.enums.FighterArtTypeUtils;
 import ui.filechooser.FileChooserFactory;
 
 @Controller
@@ -307,24 +309,9 @@ public class ThumbnailGeneratorController implements Initializable {
 
     private void updateArtTypeComboBox(Game game) {
         artTypeComboBox.getItems().clear();
-        switch (game) {
-            case ROA2:
-                artTypeComboBox.getItems().addAll(RivalsOfAether2FighterArtType.values());
-                artTypeComboBox.getSelectionModel().select(0);
-                break;
-            case SF6:
-                artTypeComboBox.getItems().addAll(StreetFighter6FighterArtType.values());
-                artTypeComboBox.getSelectionModel().select(0);
-                break;
-            case SSBU:
-                artTypeComboBox.getItems().addAll(SmashUltimateFighterArtType.values());
-                artTypeComboBox.getSelectionModel().select(0);
-                break;
-            case TEKKEN8:
-                artTypeComboBox.getItems().addAll(Tekken8FighterArtType.values());
-                artTypeComboBox.getSelectionModel().select(0);
-                break;
-        }
+        var values = FighterArtTypeUtils.getValues(game);
+        artTypeComboBox.getItems().addAll(values);
+        artTypeComboBox.getSelectionModel().select(0);
     }
 
     private List<Tournament> getTournamentsList(){
