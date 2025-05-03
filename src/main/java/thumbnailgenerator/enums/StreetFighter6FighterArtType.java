@@ -10,7 +10,6 @@ public enum StreetFighter6FighterArtType implements FighterArtType {
     private String value;
     private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/sf6/default.json";
 
-
     StreetFighter6FighterArtType(String value) {
         this.value = value;
     }

@@ -3,6 +3,7 @@ package thumbnailgenerator.utils.enums;
 import thumbnailgenerator.dto.FighterArtSettings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.json.read.FighterArtSettingsRead;
+import thumbnailgenerator.enums.FatalFuryCotwFighterArtType;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
@@ -21,14 +22,16 @@ public class FighterArtTypeUtils {
             Game.SSBU, SmashUltimateFighterArtType.class,
             Game.ROA2, RivalsOfAether2FighterArtType.class,
             Game.SF6, StreetFighter6FighterArtType.class,
-            Game.TEKKEN8, Tekken8FighterArtType.class
+            Game.TEKKEN8, Tekken8FighterArtType.class,
+            Game.FFCOTW, FatalFuryCotwFighterArtType.class
     );
 
     private static final Map<Game, Enum<? extends FighterArtType>> gameDefaultArtTypeMap = Map.of(
             Game.SSBU, SmashUltimateFighterArtType.RENDER,
             Game.ROA2, RivalsOfAether2FighterArtType.RENDER,
             Game.SF6, StreetFighter6FighterArtType.RENDER,
-            Game.TEKKEN8, Tekken8FighterArtType.RENDER
+            Game.TEKKEN8, Tekken8FighterArtType.RENDER,
+            Game.FFCOTW, Tekken8FighterArtType.RENDER
     );
 
     public static FighterArtType getEnum(Game game, String value) {

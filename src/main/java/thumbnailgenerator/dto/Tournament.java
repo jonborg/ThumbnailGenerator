@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.ToString;
 import thumbnailgenerator.dto.json.read.TournamentRead;
+import thumbnailgenerator.enums.FatalFuryCotwFighterArtType;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
@@ -137,6 +138,12 @@ public class Tournament implements Cloneable{
                 artTypeSettings.add(
                         new FighterArtSettings(Tekken8FighterArtType.RENDER,
                                 Tekken8FighterArtType.RENDER.getDefaultFighterImageSettingsFile())
+                );
+                break;
+            case FFCOTW:
+                artTypeSettings.add(
+                        new FighterArtSettings(FatalFuryCotwFighterArtType.RENDER,
+                                FatalFuryCotwFighterArtType.RENDER.getDefaultFighterImageSettingsFile())
                 );
                 break;
         }

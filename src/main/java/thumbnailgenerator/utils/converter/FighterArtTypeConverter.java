@@ -1,6 +1,7 @@
 package thumbnailgenerator.utils.converter;
 
 import javafx.util.StringConverter;
+import thumbnailgenerator.enums.FatalFuryCotwFighterArtType;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
@@ -26,6 +27,10 @@ public class FighterArtTypeConverter extends StringConverter<FighterArtType> {
         }
         if (object instanceof Tekken8FighterArtType) {
             Tekken8FighterArtType artType = (Tekken8FighterArtType) object;
+            return artType.getValue();
+        }
+        if (object instanceof FatalFuryCotwFighterArtType) {
+            FatalFuryCotwFighterArtType artType = (FatalFuryCotwFighterArtType) object;
             return artType.getValue();
         }
         return null;

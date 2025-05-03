@@ -1,6 +1,7 @@
 package thumbnailgenerator.utils.enums;
 
 import thumbnailgenerator.dto.Game;
+import thumbnailgenerator.enums.FatalFuryCotwEnum;
 import thumbnailgenerator.enums.RivalsOfAether2Enum;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
@@ -25,8 +26,9 @@ public class StartGGEnumUtils {
         value = findValue(RivalsOfAether2Enum.class, String.valueOf(startGGId), "getStartGGId");
         if (value != null) return value;
         value = findValue(Tekken8Enum.class, String.valueOf(startGGId), "getStartGGId");
-        return value;
-    }
+        if (value != null) return value;
+        value = findValue(FatalFuryCotwEnum.class, String.valueOf(startGGId), "getStartGGId");
+        return value;    }
 
     public static Game findGameByStartGGId(int startGGId) {
         return Arrays.stream(Game.values())

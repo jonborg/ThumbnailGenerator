@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import thumbnailgenerator.enums.FatalFuryCotwEnum;
 import thumbnailgenerator.enums.RivalsOfAether2Enum;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
@@ -64,6 +65,13 @@ public class Player {
                 listName1.add(tekken8EnumValues[0].getCode());
                 listName2.add(tekken8EnumValues[1].getName());
                 listName2.add(tekken8EnumValues[1].getCode());
+                break;
+            case FFCOTW:
+                var cotwEnumValues = FatalFuryCotwEnum.values();
+                listName1.add(cotwEnumValues[0].getName());
+                listName1.add(cotwEnumValues[0].getCode());
+                listName2.add(cotwEnumValues[1].getName());
+                listName2.add(cotwEnumValues[1].getCode());
                 break;
         }
 
