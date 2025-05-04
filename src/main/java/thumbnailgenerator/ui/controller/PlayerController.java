@@ -166,6 +166,10 @@ public class PlayerController implements Initializable {
                 initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(Tekken8Enum.class));
                 alt.setDisable(true);
                 break;
+            case FFCOTW:
+                initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(FatalFuryCotwEnum.class));
+                alt.setDisable(true);
+                break;
         }
     }
 

@@ -5,6 +5,17 @@
     "logo": "assets/tournaments/logos/weeklyl.png",
     "thumbnailSettings": [
       {
+        "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
+          }
+        ]
+      },
+      {
         "game": "SSBU",
         "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -54,6 +65,39 @@
       }
     ],
     "top8Settings": [
+      {
+        "game": "ROA2",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
       {
         "game": "SSBU",
         "foreground": "",

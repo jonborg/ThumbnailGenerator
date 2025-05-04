@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.service.CharacterImageFetcher;
+import thumbnailgenerator.service.FatalFuryCotwCharacterImageFetcher;
 import thumbnailgenerator.service.RivalsOfAether2CharacterImageFetcher;
 import thumbnailgenerator.service.SmashUltimateCharacterImageFetcher;
 import thumbnailgenerator.service.StreetFighter6CharacterImageFetcher;
@@ -20,6 +21,8 @@ public class CharacterImageFetcherFactory {
     private RivalsOfAether2CharacterImageFetcher rivalsOfAether2CharacterImageFetcher;
     @Autowired
     private Tekken8CharacterImageFetcher tekken8CharacterImageFetcher;
+    @Autowired
+    private FatalFuryCotwCharacterImageFetcher fatalFuryCotwCharacterImageFetcher;
 
     public CharacterImageFetcher getCharacterImageFetcher(Game game) {
         switch (game) {
@@ -31,6 +34,8 @@ public class CharacterImageFetcherFactory {
                 return smashUltimateCharacterImageFetcher;
             case TEKKEN8:
                 return tekken8CharacterImageFetcher;
+            case FFCOTW:
+                return fatalFuryCotwCharacterImageFetcher;
             default:
                 throw new IllegalArgumentException("Unsupported service type: " + game);
         }
