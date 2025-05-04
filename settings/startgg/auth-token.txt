@@ -1,0 +1,1 @@
+<set auth token in settings/startgg/auth-token.txt>
