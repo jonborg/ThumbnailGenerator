@@ -4,6 +4,7 @@ import thumbnailgenerator.dto.FighterArtSettings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.json.read.FighterArtSettingsRead;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
+import thumbnailgenerator.enums.SmashMeleeFighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
 import thumbnailgenerator.enums.Tekken8FighterArtType;
@@ -19,6 +20,7 @@ public class FighterArtTypeUtils {
 
     private static final Map<Game, Class<? extends FighterArtType>> gameArtTypesMap = Map.of(
             Game.SSBU, SmashUltimateFighterArtType.class,
+            Game.SSBM, SmashMeleeFighterArtType.class,
             Game.ROA2, RivalsOfAether2FighterArtType.class,
             Game.SF6, StreetFighter6FighterArtType.class,
             Game.TEKKEN8, Tekken8FighterArtType.class
@@ -26,6 +28,7 @@ public class FighterArtTypeUtils {
 
     private static final Map<Game, Enum<? extends FighterArtType>> gameDefaultArtTypeMap = Map.of(
             Game.SSBU, SmashUltimateFighterArtType.RENDER,
+            Game.SSBM, SmashMeleeFighterArtType.HD,
             Game.ROA2, RivalsOfAether2FighterArtType.RENDER,
             Game.SF6, StreetFighter6FighterArtType.RENDER,
             Game.TEKKEN8, Tekken8FighterArtType.RENDER

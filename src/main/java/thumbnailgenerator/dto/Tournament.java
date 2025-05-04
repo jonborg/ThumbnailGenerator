@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.ToString;
 import thumbnailgenerator.dto.json.read.TournamentRead;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
+import thumbnailgenerator.enums.SmashMeleeFighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
 import thumbnailgenerator.enums.Tekken8FighterArtType;
@@ -119,6 +120,12 @@ public class Tournament implements Cloneable{
                 artTypeSettings.add(
                         new FighterArtSettings(SmashUltimateFighterArtType.MURAL,
                                 SmashUltimateFighterArtType.MURAL.getDefaultFighterImageSettingsFile())
+                );
+                break;
+            case SSBM:
+                artTypeSettings.add(
+                        new FighterArtSettings(SmashMeleeFighterArtType.HD,
+                                SmashMeleeFighterArtType.HD.getDefaultFighterImageSettingsFile())
                 );
                 break;
             case ROA2:

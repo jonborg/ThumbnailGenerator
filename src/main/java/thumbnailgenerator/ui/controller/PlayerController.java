@@ -29,6 +29,7 @@ import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.enums.RivalsOfAether2Enum;
+import thumbnailgenerator.enums.SmashMeleeEnum;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
 import thumbnailgenerator.enums.Tekken8Enum;
@@ -111,6 +112,9 @@ public class PlayerController implements Initializable {
             case SSBU:
                 return StartGGEnumUtils
                         .findCodeByName(SmashUltimateEnum.class, sel);
+            case SSBM:
+                return StartGGEnumUtils
+                        .findCodeByName(SmashMeleeEnum.class, sel);
             case TEKKEN8:
                 return StartGGEnumUtils
                         .findCodeByName(Tekken8Enum.class, sel);
@@ -156,6 +160,10 @@ public class PlayerController implements Initializable {
                 break;
             case SSBU:
                 initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(SmashUltimateEnum.class));
+                alt.setDisable(false);
+                break;
+            case SSBM:
+                initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(SmashMeleeEnum.class));
                 alt.setDisable(false);
                 break;
             case TEKKEN8:

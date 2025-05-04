@@ -2,6 +2,7 @@ package thumbnailgenerator.utils.converter;
 
 import javafx.util.StringConverter;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
+import thumbnailgenerator.enums.SmashMeleeFighterArtType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
 import thumbnailgenerator.enums.Tekken8FighterArtType;
@@ -14,6 +15,10 @@ public class FighterArtTypeConverter extends StringConverter<FighterArtType> {
 
         if (object instanceof SmashUltimateFighterArtType) {
             SmashUltimateFighterArtType artType = (SmashUltimateFighterArtType) object;
+            return artType.getValue();
+        }
+        if (object instanceof SmashMeleeFighterArtType) {
+            SmashMeleeFighterArtType artType = (SmashMeleeFighterArtType) object;
             return artType.getValue();
         }
         if (object instanceof RivalsOfAether2FighterArtType) {

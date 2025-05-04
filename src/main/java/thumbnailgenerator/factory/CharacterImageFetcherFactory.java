@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.service.CharacterImageFetcher;
 import thumbnailgenerator.service.RivalsOfAether2CharacterImageFetcher;
+import thumbnailgenerator.service.SmashMeleeCharacterImageFetcher;
 import thumbnailgenerator.service.SmashUltimateCharacterImageFetcher;
 import thumbnailgenerator.service.StreetFighter6CharacterImageFetcher;
 import thumbnailgenerator.service.Tekken8CharacterImageFetcher;
@@ -14,6 +15,8 @@ public class CharacterImageFetcherFactory {
 
     @Autowired
     private SmashUltimateCharacterImageFetcher smashUltimateCharacterImageFetcher;
+    @Autowired
+    private SmashMeleeCharacterImageFetcher smashMeleeCharacterImageFetcher;
     @Autowired
     private StreetFighter6CharacterImageFetcher streetFighter6CharacterImageFetcher;
     @Autowired
@@ -29,6 +32,8 @@ public class CharacterImageFetcherFactory {
                 return streetFighter6CharacterImageFetcher;
             case SSBU:
                 return smashUltimateCharacterImageFetcher;
+            case SSBM:
+                return smashMeleeCharacterImageFetcher;
             case TEKKEN8:
                 return tekken8CharacterImageFetcher;
             default:
