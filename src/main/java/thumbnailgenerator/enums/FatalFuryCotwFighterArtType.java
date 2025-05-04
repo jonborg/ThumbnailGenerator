@@ -4,13 +4,13 @@ import lombok.Getter;
 import thumbnailgenerator.enums.interfaces.FighterArtType;
 
 @Getter
-public enum Tekken8FighterArtType implements FighterArtType {
+public enum FatalFuryCotwFighterArtType implements FighterArtType {
     RENDER("Renders");
 
     private String value;
-    private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/tekken8/default.json";
+    private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/ffcotw/default.json";
 
-    Tekken8FighterArtType(String value) {
+    FatalFuryCotwFighterArtType(String value) {
         this.value = value;
     }
 

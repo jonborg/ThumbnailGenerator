@@ -36,6 +36,7 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.enums.FatalFuryCotwFighterArtType;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
 import thumbnailgenerator.enums.StreetFighter6FighterArtType;
 import thumbnailgenerator.enums.Tekken8FighterArtType;
@@ -322,6 +323,10 @@ public class ThumbnailGeneratorController implements Initializable {
                 break;
             case TEKKEN8:
                 artTypeComboBox.getItems().addAll(Tekken8FighterArtType.values());
+                artTypeComboBox.getSelectionModel().select(0);
+                break;
+            case FFCOTW:
+                artTypeComboBox.getItems().addAll(FatalFuryCotwFighterArtType.values());
                 artTypeComboBox.getSelectionModel().select(0);
                 break;
         }

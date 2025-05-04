@@ -639,6 +639,28 @@ Thumbnails are saved in **/generated_top8** folder.
 | Clive              | clive              |
 | Anna               | anna               |
 
+###Fatal Fury: City of the Wolves URL names
+
+| Character           | URL Name           |
+|---------------------|--------------------|
+| Rock Howard         | rock               |
+| Terry Bogard        | terry              |
+| B. Jenet            | jenet              |
+| Marco Rodrigues     | marco              |
+| Preecha             | preecha            |
+| Hotaru Futaba       | hotaru             |
+| Vox Reaper          | vox                |
+| Tizoc               | tizoc              |
+| Kevin Rian          | kevin              |
+| Billy Kane          | billy              |
+| Mai Shiranui        | mai                |
+| Kim Dong Hwan       | kim                |
+| Gato                | gato               |
+| Kain R. Heinlein    | kain               |
+| Cristiano Ronaldo   | cr7                |
+| Salvatore Ganacci   | ganacci            |
+| Hokuto Maru         | hokuto             |
+
 
 ### Release Notes
 #### v4.0.0

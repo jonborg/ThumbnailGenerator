@@ -47,7 +47,6 @@ public enum Tekken8Enum {
     private final String code;
     private final int startGGId;
 
-
     Tekken8Enum(String name, String code, int startGGId) {
         this.name = name;
         this.code = code;

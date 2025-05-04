@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Player;
+import thumbnailgenerator.enums.FatalFuryCotwEnum;
 import thumbnailgenerator.enums.RivalsOfAether2Enum;
 import thumbnailgenerator.enums.SmashUltimateEnum;
 import thumbnailgenerator.enums.StreetFighter6Enum;
@@ -114,6 +115,9 @@ public class PlayerController implements Initializable {
             case TEKKEN8:
                 return StartGGEnumUtils
                         .findCodeByName(Tekken8Enum.class, sel);
+            case FFCOTW:
+                return StartGGEnumUtils
+                        .findCodeByName(FatalFuryCotwEnum.class, sel);
         }
         return null;
     }
@@ -160,6 +164,10 @@ public class PlayerController implements Initializable {
                 break;
             case TEKKEN8:
                 initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(Tekken8Enum.class));
+                alt.setDisable(true);
+                break;
+            case FFCOTW:
+                initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(FatalFuryCotwEnum.class));
                 alt.setDisable(true);
                 break;
         }
