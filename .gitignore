@@ -35,3 +35,4 @@ assets/characters/*
 assets/fighters/*
 generated_thumbnails/*
 generated_top8/*
+settings/startgg/auth-token.txt
