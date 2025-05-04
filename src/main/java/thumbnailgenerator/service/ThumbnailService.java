@@ -143,7 +143,7 @@ public class ThumbnailService {
                 thumbnail.getPlayers().get(0).getFighter(0).getUrlName()+thumbnail.getPlayers().get(0).getFighter(0).getAlt()+"--"+
                 thumbnail.getPlayers().get(1).getPlayerName().replace("|","_").replace("/","_")+"-"+
                 thumbnail.getPlayers().get(1).getFighter(0).getUrlName()+thumbnail.getPlayers().get(1).getFighter(0).getAlt()+"--"+
-                thumbnail.getRound()+"-"+thumbnail.getDate().replace("/","_")+".png";
+                thumbnail.getRound()+"-"+thumbnail.getDate().replace("/","_").replace(":","_")+".png";
 
         File dirThumbnails = new File(saveThumbnailsPath);
         if (!dirThumbnails.exists()) dirThumbnails.mkdir();

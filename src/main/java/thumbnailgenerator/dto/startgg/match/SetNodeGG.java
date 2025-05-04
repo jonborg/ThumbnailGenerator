@@ -49,15 +49,17 @@ public class SetNodeGG{
     public String getEntrantCharacter(String entrantName){
         HashMap<Integer,Integer> charSel = new HashMap<>();
         for (GameGG gameGG :games) {
-            for (SelectionGG selectionGG : gameGG.getSelections()) {
-                if (selectionGG.getEntrant().getName().equals(entrantName)) {
-                    int character = selectionGG.getSelectionValue();
-                    if (charSel.containsKey(character)) {
-                        charSel.put(character, charSel.get(character) + 1);
-                    }else{
-                        charSel.put(character, 1);
+            if (gameGG != null && gameGG.getSelections() != null) {
+                for (SelectionGG selectionGG : gameGG.getSelections()) {
+                    if (selectionGG.getEntrant().getName().equals(entrantName)) {
+                        int character = selectionGG.getSelectionValue();
+                        if (charSel.containsKey(character)) {
+                            charSel.put(character, charSel.get(character) + 1);
+                        } else {
+                            charSel.put(character, 1);
+                        }
+                        break;
                     }
-                    break;
                 }
             }
         }
