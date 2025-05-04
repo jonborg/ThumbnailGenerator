@@ -1,9 +1,10 @@
 package thumbnailgenerator.enums;
 
 import lombok.Getter;
+import thumbnailgenerator.enums.interfaces.CharacterEnum;
 
 @Getter
-public enum StreetFighter6Enum {
+public enum StreetFighter6Enum implements CharacterEnum {
 
     RYU("Ryu", "ryu", 2287),
     LUKE("Luke", "luke", 2284),

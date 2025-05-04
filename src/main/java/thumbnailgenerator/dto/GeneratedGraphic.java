@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 @Getter
 @Setter
@@ -13,7 +13,7 @@ public class GeneratedGraphic {
     Game game;
     boolean locally;
     List<Player> players;
-    FighterArtType artType;
+    FighterArtTypeEnum artType;
 
     public static List<Player> createPlayerList(Player... players){
         var result = new ArrayList<Player>();

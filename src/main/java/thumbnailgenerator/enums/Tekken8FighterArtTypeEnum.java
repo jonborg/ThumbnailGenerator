@@ -1,16 +1,16 @@
 package thumbnailgenerator.enums;
 
 import lombok.Getter;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 @Getter
-public enum Tekken8FighterArtType implements FighterArtType {
+public enum Tekken8FighterArtTypeEnum implements FighterArtTypeEnum {
     RENDER("Renders");
 
     private String value;
     private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/tekken8/default.json";
 
-    Tekken8FighterArtType(String value) {
+    Tekken8FighterArtTypeEnum(String value) {
         this.value = value;
     }
 

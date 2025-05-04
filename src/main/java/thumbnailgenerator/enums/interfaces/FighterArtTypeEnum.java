@@ -1,6 +1,6 @@
 package thumbnailgenerator.enums.interfaces;
 
-public interface FighterArtType {
+public interface FighterArtTypeEnum {
 
     public String getEnumName();
     public String getDefaultFighterImageSettingsFile();

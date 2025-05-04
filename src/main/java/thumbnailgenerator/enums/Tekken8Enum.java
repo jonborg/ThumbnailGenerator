@@ -1,9 +1,10 @@
 package thumbnailgenerator.enums;
 
 import lombok.Getter;
+import thumbnailgenerator.enums.interfaces.CharacterEnum;
 
 @Getter
-public enum Tekken8Enum {
+public enum Tekken8Enum implements CharacterEnum {
 
     ALISA("Alisa", "alisa", 2406),
     ASUKA("Asuka", "asuka", 2407),

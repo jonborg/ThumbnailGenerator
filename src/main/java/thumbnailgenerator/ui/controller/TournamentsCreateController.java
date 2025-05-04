@@ -40,12 +40,12 @@ import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
+import thumbnailgenerator.service.GameEnumService;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.utils.converter.GameConverter;
 import thumbnailgenerator.utils.converter.FighterArtTypeConverter;
@@ -54,7 +54,6 @@ import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.ui.textfield.ChosenImageField;
 import thumbnailgenerator.ui.textfield.ChosenJsonField;
-import thumbnailgenerator.utils.enums.FighterArtTypeUtils;
 
 @Primary
 @Controller
@@ -73,7 +72,7 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField background;
     @FXML
-    protected ComboBox<FighterArtType> artTypeThumbnail;
+    protected ComboBox<FighterArtTypeEnum> artTypeThumbnail;
     @FXML
     protected ChosenJsonField fighterImageSettingsFile;
     @FXML
@@ -81,7 +80,7 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField backgroundTop8;
     @FXML
-    protected ComboBox<FighterArtType> artTypeTop8;
+    protected ComboBox<FighterArtTypeEnum> artTypeTop8;
     @FXML
     protected ChosenJsonField slotSettingsFileTop8;
     @FXML
@@ -122,6 +121,7 @@ public class TournamentsCreateController implements Initializable {
     protected List<FileTop8Settings> fileTop8SettingsList;
     private @Autowired TournamentService tournamentService;
     private @Autowired ThumbnailService thumbnailService;
+    private @Autowired GameEnumService gameEnumService;
     protected Runnable onSaveCallback;
 
     public void setOnSaveCallback(Runnable callback) {
@@ -139,7 +139,7 @@ public class TournamentsCreateController implements Initializable {
 
     private List<FighterArtSettings> initArtType(Game game){
         List<FighterArtSettings> list = new ArrayList<>();
-        for (FighterArtType artType : FighterArtTypeUtils.getValues(game)) {
+        for (FighterArtTypeEnum artType : gameEnumService.getAllFighterArtTypes(game)) {
             list.add(FighterArtSettings.builder()
                     .artType(artType)
                     .fighterImageSettingsPath("")
@@ -242,8 +242,8 @@ public class TournamentsCreateController implements Initializable {
     protected void initFighterArtTypeDropdown(){
         var game = tournamentGame.getSelectionModel().getSelectedItem();
         var currentThumbnailSettings = fileThumbnailSettingsList.stream().filter(t -> t.getGame().equals(game)).findFirst().get();
-        var currentFighterArtTypeValues = FighterArtTypeUtils.getValues(game);
-        var currentDefaultArtType = FighterArtTypeUtils.getDefaultArtType(game);
+        var currentFighterArtTypeValues = gameEnumService.getAllFighterArtTypes(game);
+        var currentDefaultArtType = gameEnumService.getDefaultArtType(game);
         fighterImageSettingsFile.setText(currentDefaultArtType.getDefaultFighterImageSettingsFile());
         artTypeThumbnail.getItems().addAll(currentFighterArtTypeValues);
         artTypeThumbnail.setConverter(new FighterArtTypeConverter());
@@ -299,7 +299,7 @@ public class TournamentsCreateController implements Initializable {
         }
         Tournament tournament = generateTournamentWithCurrentSettings();
         Game game = tournamentGame.getSelectionModel().getSelectedItem();
-        FighterArtType artType = artTypeThumbnail.getSelectionModel().getSelectedItem();
+        FighterArtTypeEnum artType = artTypeThumbnail.getSelectionModel().getSelectedItem();
         BufferedImage previewImage = thumbnailService
                 .generatePreview(tournament, game, artType);
         Image image = SwingFXUtils.toFXImage(previewImage, null);
@@ -425,7 +425,7 @@ public class TournamentsCreateController implements Initializable {
         background.setText(thumbnailSettings.getBackground());
         foreground.setText(thumbnailSettings.getForeground());
         artTypeThumbnail.getItems().clear();
-        artTypeThumbnail.getItems().addAll(FighterArtTypeUtils.getValues(game));
+        artTypeThumbnail.getItems().addAll(gameEnumService.getAllFighterArtTypes(game));
         artTypeThumbnail.getSelectionModel().select(0);
         fighterImageSettingsFile.setText(thumbnailSettings.getArtTypeDir().stream()
                 .filter(a -> a.getArtType().equals(artTypeThumbnail.getSelectionModel().getSelectedItem()))
@@ -441,7 +441,7 @@ public class TournamentsCreateController implements Initializable {
         foregroundTop8.setText(top8Settings.getForeground());
         slotSettingsFileTop8.setText(top8Settings.getSlotSettingsFile());
         artTypeTop8.getItems().clear();
-        artTypeTop8.getItems().addAll(FighterArtTypeUtils.getValues(game));
+        artTypeTop8.getItems().addAll(gameEnumService.getAllFighterArtTypes(game));
         artTypeTop8.getSelectionModel().select(0);
         fighterImageSettingsFileTop8.setText(top8Settings.getArtTypeDir().stream()
                 .filter(a -> a.getArtType().equals(artTypeTop8.getSelectionModel().getSelectedItem()))

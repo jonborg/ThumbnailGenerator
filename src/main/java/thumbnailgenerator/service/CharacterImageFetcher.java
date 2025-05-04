@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.GeneratedGraphic;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 
 @Service
@@ -26,7 +26,7 @@ public abstract class CharacterImageFetcher {
     @Value("${characters-image.local-save.path}")
     private String characterImageLocalSavePath;
 
-    public abstract URL getOnlineUrl(Fighter fighter, FighterArtType artType)
+    public abstract URL getOnlineUrl(Fighter fighter, FighterArtTypeEnum artType)
             throws MalformedURLException;
 
     public BufferedImage getCharacterImage(Fighter fighter, GeneratedGraphic generatedGraphic)

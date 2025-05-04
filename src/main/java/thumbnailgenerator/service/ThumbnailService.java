@@ -26,13 +26,12 @@ import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
-import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.service.json.JSONReaderService;
 
@@ -40,12 +39,12 @@ import thumbnailgenerator.service.json.JSONReaderService;
 public class ThumbnailService {
 
     private static final Logger LOGGER = LogManager.getLogger(ThumbnailService.class);
-    private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
     private @Autowired TextService textService;
     private @Autowired ImageService imageService;
     private @Autowired ThumbnailFileService thumbnailFileService;
     private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
     private @Autowired JSONReaderService jsonReaderService;
+    private @Autowired GameEnumService gameEnumService;
     private @Value("${thumbnail.size.width}") Integer thumbnailWidth;
     private @Value("${thumbnail.size.height}") Integer thumbnailHeight;
     private @Value("${thumbnail.path.save}") String saveThumbnailsPath;
@@ -159,12 +158,12 @@ public class ThumbnailService {
         }
     }
 
-    public BufferedImage generatePreview(Tournament tournament, Game game, FighterArtType artType)
+    public BufferedImage generatePreview(Tournament tournament, Game game, FighterArtTypeEnum artType)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
             FontNotFoundException, FighterImageSettingsNotFoundException,
             MalformedURLException {
         LOGGER.info("Generating thumbnail preview.");
-        List<Player> players = Player.generatePreviewPlayers(game);
+        List<Player> players = Player.generatePreviewPlayers(gameEnumService.getAllCharacters(game));
         ImageSettings imageSettings = (ImageSettings)
                 jsonReaderService.getJSONArrayFromFile(
                         tournament
@@ -187,8 +186,7 @@ public class ThumbnailService {
             throws MalformedURLException, OnlineImageNotFoundException,
             FighterImageSettingsNotFoundException {
         var port = 0;
-        var characterImageFetcher = characterImageFetcherFactory
-                .getCharacterImageFetcher(thumbnail.getGame());
+        var characterImageFetcher = gameEnumService.getCharacterImageFetcher(thumbnail.getGame());
 
         for (Player player : thumbnail.getPlayers()) {
             port++;

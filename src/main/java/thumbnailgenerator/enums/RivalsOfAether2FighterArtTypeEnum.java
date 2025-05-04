@@ -1,16 +1,16 @@
 package thumbnailgenerator.enums;
 
 import lombok.Getter;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 @Getter
-public enum FatalFuryCotwFighterArtType implements FighterArtType {
+public enum RivalsOfAether2FighterArtTypeEnum implements FighterArtTypeEnum {
     RENDER("Renders");
 
     private String value;
-    private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/ffcotw/default.json";
+    private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/roa2/default.json";
 
-    FatalFuryCotwFighterArtType(String value) {
+    RivalsOfAether2FighterArtTypeEnum(String value) {
         this.value = value;
     }
 

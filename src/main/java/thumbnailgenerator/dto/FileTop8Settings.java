@@ -8,9 +8,7 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import thumbnailgenerator.dto.json.read.FighterArtSettingsRead;
 import thumbnailgenerator.dto.json.read.FileTop8SettingsRead;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.utils.enums.FighterArtTypeUtils;
 
 @Getter

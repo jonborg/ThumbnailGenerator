@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.ToString;
 import thumbnailgenerator.dto.json.read.TournamentRead;
-import thumbnailgenerator.enums.FatalFuryCotwFighterArtType;
-import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
-import thumbnailgenerator.enums.StreetFighter6FighterArtType;
-import thumbnailgenerator.enums.Tekken8FighterArtType;
+import thumbnailgenerator.enums.FatalFuryCotwFighterArtTypeEnum;
+import thumbnailgenerator.enums.RivalsOfAether2FighterArtTypeEnum;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
+import thumbnailgenerator.enums.StreetFighter6FighterArtTypeEnum;
+import thumbnailgenerator.enums.Tekken8FighterArtTypeEnum;
 
 @Getter
 @ToString
@@ -114,36 +114,37 @@ public class Tournament implements Cloneable{
         switch (game) {
             case SSBU:
                 artTypeSettings.add(
-                        new FighterArtSettings(SmashUltimateFighterArtType.RENDER,
-                                SmashUltimateFighterArtType.RENDER.getDefaultFighterImageSettingsFile())
+                        new FighterArtSettings(SmashUltimateFighterArtTypeEnum.RENDER,
+                                SmashUltimateFighterArtTypeEnum.RENDER.getDefaultFighterImageSettingsFile())
                 );
                 artTypeSettings.add(
-                        new FighterArtSettings(SmashUltimateFighterArtType.MURAL,
-                                SmashUltimateFighterArtType.MURAL.getDefaultFighterImageSettingsFile())
+                        new FighterArtSettings(SmashUltimateFighterArtTypeEnum.MURAL,
+                                SmashUltimateFighterArtTypeEnum.MURAL.getDefaultFighterImageSettingsFile())
                 );
                 break;
             case ROA2:
                 artTypeSettings.add(
-                        new FighterArtSettings(RivalsOfAether2FighterArtType.RENDER,
-                                RivalsOfAether2FighterArtType.RENDER.getDefaultFighterImageSettingsFile())
+                        new FighterArtSettings(
+                                RivalsOfAether2FighterArtTypeEnum.RENDER,
+                                RivalsOfAether2FighterArtTypeEnum.RENDER.getDefaultFighterImageSettingsFile())
                 );
                 break;
             case SF6:
                 artTypeSettings.add(
-                        new FighterArtSettings(StreetFighter6FighterArtType.RENDER,
-                                StreetFighter6FighterArtType.RENDER.getDefaultFighterImageSettingsFile())
+                        new FighterArtSettings(StreetFighter6FighterArtTypeEnum.RENDER,
+                                StreetFighter6FighterArtTypeEnum.RENDER.getDefaultFighterImageSettingsFile())
                 );
                 break;
             case TEKKEN8:
                 artTypeSettings.add(
-                        new FighterArtSettings(Tekken8FighterArtType.RENDER,
-                                Tekken8FighterArtType.RENDER.getDefaultFighterImageSettingsFile())
+                        new FighterArtSettings(Tekken8FighterArtTypeEnum.RENDER,
+                                Tekken8FighterArtTypeEnum.RENDER.getDefaultFighterImageSettingsFile())
                 );
                 break;
             case FFCOTW:
                 artTypeSettings.add(
-                        new FighterArtSettings(FatalFuryCotwFighterArtType.RENDER,
-                                FatalFuryCotwFighterArtType.RENDER.getDefaultFighterImageSettingsFile())
+                        new FighterArtSettings(FatalFuryCotwFighterArtTypeEnum.RENDER,
+                                FatalFuryCotwFighterArtTypeEnum.RENDER.getDefaultFighterImageSettingsFile())
                 );
                 break;
         }

@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import thumbnailgenerator.dto.json.read.FileThumbnailSettingsRead;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.utils.enums.FighterArtTypeUtils;
 
 @Getter
@@ -62,7 +62,7 @@ public class FileThumbnailSettings extends Settings implements Cloneable{
 
     @Override
     public String getFighterImageSettingsFile(
-            FighterArtType artType){
+            FighterArtTypeEnum artType){
         if (this.getArtTypeDir() == null){
             return artType.getDefaultFighterImageSettingsFile();
         } else {

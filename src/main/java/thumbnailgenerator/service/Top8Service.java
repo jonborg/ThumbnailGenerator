@@ -28,7 +28,6 @@ import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Top8ImageSettings;
 import thumbnailgenerator.dto.FullSlot;
 import thumbnailgenerator.dto.Top8;
-import thumbnailgenerator.factory.CharacterImageFetcherFactory;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.image.ImageUtils;
 import thumbnailgenerator.service.json.JSONReaderService;
@@ -38,7 +37,7 @@ public class Top8Service {
 
     private static final Logger LOGGER = LogManager.getLogger(Top8Service.class);
     private static Top8 top8;
-    private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
+    private @Autowired GameEnumService gameEnumService;
     private @Autowired ImageService imageService;
     private @Autowired Top8FileService top8FileService;
     private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
@@ -86,7 +85,7 @@ public class Top8Service {
     }
 
     private void drawCharacters(Top8 top8, FullSlot fullSlot, Graphics2D g2d){
-        var characterImageFetcher = characterImageFetcherFactory.getCharacterImageFetcher(top8.getGame());
+        var characterImageFetcher = gameEnumService.getCharacterImageFetcher(top8.getGame());
         var slots = fullSlot.getSlots();
 
         for (int i = 0; i < 8; i++){

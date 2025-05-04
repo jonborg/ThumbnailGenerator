@@ -3,13 +3,12 @@ package thumbnail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import thumbnailgenerator.Main;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
@@ -135,12 +134,12 @@ public class MultiThumbnailGenerationTest {
                 FileUtils.getActualFile("/generated_thumbnails/Chime-rob2--Toaster-marth5--Grand Final-20_02_20XX.png")
         );
         List<File> characterImages = Arrays.asList(
-                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtType.RENDER, "robin", 1),
-                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtType.RENDER, "byleth", 8),
-                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtType.RENDER, "pikachu", 4),
-                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtType.RENDER, "pokemon_trainer", 5),
-                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtType.RENDER, "rob", 2),
-                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtType.RENDER, "marth", 5)
+                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER, "robin", 1),
+                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER, "byleth", 8),
+                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER, "pikachu", 4),
+                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER, "pokemon_trainer", 5),
+                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER, "rob", 2),
+                FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER, "marth", 5)
         );
 
         //Act

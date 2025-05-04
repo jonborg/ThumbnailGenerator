@@ -1,10 +1,10 @@
 package thumbnailgenerator.enums;
 
 import lombok.Getter;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 @Getter
-public enum SmashUltimateFighterArtType implements FighterArtType {
+public enum SmashUltimateFighterArtTypeEnum implements FighterArtTypeEnum {
     RENDER("Renders"),
     MURAL("Mural Arts");
 
@@ -12,7 +12,7 @@ public enum SmashUltimateFighterArtType implements FighterArtType {
     private static String defaultRenderImageSettingsFile= "settings/thumbnails/images/default.json";
     private static String defaultMuralImageSettingsFile= "settings/thumbnails/images/defaultMural.json";
 
-    SmashUltimateFighterArtType(String value) {
+    SmashUltimateFighterArtTypeEnum(String value) {
         this.value = value;
     }
 

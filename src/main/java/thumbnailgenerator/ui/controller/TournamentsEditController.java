@@ -1,7 +1,6 @@
 package thumbnailgenerator.ui.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.service.TournamentService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
@@ -27,9 +26,9 @@ public class TournamentsEditController extends TournamentsCreateController {
     public void initialize(URL location, ResourceBundle resources) {
         var tournament = getSelectedEdit();
         var thumbnailRenderSettings = tournament.getThumbnailSettingsByGame(Game.SSBU)
-                .getFighterImageSettingsFile(SmashUltimateFighterArtType.RENDER);
+                .getFighterImageSettingsFile(SmashUltimateFighterArtTypeEnum.RENDER);
         var top8RenderSettings = tournament.getTop8SettingsByGame(Game.SSBU)
-                .getFighterImageSettingsFile(SmashUltimateFighterArtType.RENDER);
+                .getFighterImageSettingsFile(SmashUltimateFighterArtTypeEnum.RENDER);
         LOGGER.info("Editing tournament -> {}", tournament.toString());
 
         initGamesDropdown(tournament);
