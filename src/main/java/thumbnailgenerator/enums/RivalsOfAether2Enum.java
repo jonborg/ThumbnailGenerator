@@ -22,7 +22,6 @@ public enum RivalsOfAether2Enum {
     private final String code;
     private final int startGGId;
 
-
     RivalsOfAether2Enum(String name, String code, int startGGId) {
         this.name = name;
         this.code = code;

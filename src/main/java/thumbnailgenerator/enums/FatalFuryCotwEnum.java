@@ -27,7 +27,6 @@ public enum FatalFuryCotwEnum {
     private final String code;
     private final int startGGId;
 
-
     FatalFuryCotwEnum(String name, String code, int startGGId) {
         this.name = name;
         this.code = code;

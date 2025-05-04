@@ -31,11 +31,9 @@ public enum StreetFighter6Enum {
     TERRY("Terry", "terry", 2596),
     MAI("Mai", "mai", 2616);
 
-
     private final String name;
     private final String code;
     private final int startGGId;
-
 
     StreetFighter6Enum(String name, String code, int startGGId) {
         this.name = name;
