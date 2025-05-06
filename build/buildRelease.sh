@@ -16,7 +16,7 @@ echo "Removing auth token"
 mv "$STARTGG_AUTH_TOKEN_FILE" "$STARTGG_AUTH_TOKEN_BACKUP"
 echo "<set auth token in settings/startgg/auth-token.txt>" > "$STARTGG_AUTH_TOKEN_FILE"
 
-echo "Creating release $VERSION of Thumbnail Generator";
+echo "Creating release $VERSION of Thumbnail Generator"
 mvn clean install
 
 echo "Moving $EXE_FILE to zip"
