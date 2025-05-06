@@ -11,7 +11,7 @@ SETTING_FOLDER="settings"
 JRE_FOLDER="jre"  
 
 echo "Creating release $VERSION of Thumbnail Generator"
-mvn clean install -Dmaven.test.skip=true
+mvn clean install
 
 echo "Moving $EXE_FILE to zip"
 tar -a -c -f "${THUMB// /}_v${VERSION//./_}.zip" \
