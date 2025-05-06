@@ -172,6 +172,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.7.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -229,6 +230,7 @@
                             </classPath>
                             <jre>
                                 <minVersion>11</minVersion>
+                                <path>${project.basedir}/jre</path>
                             </jre>
                             <versionInfo>
                                 <fileVersion>${file.version}</fileVersion>
