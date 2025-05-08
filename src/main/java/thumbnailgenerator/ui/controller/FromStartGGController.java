@@ -351,14 +351,11 @@ public class FromStartGGController implements Initializable {
     public void showAuthTokenPage(ActionEvent actionEvent) {
         LOGGER.info("User loaded authorization token instructions' page.");
         String url ="https://developer.start.gg/docs/authentication/";
-        if(Desktop.isDesktopSupported()) {
-            try {
-                Desktop.getDesktop().browse(new URI(url));
-            }catch(URISyntaxException | IOException e ){
-                LOGGER.error("Could not open {}", url);
-                LOGGER.catching(e);
-                AlertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
-            }
+        try {
+            Runtime runtime = Runtime.getRuntime();
+            runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);
+        }catch(IOException e ){
+            AlertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
         }
     }
 
