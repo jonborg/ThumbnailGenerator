@@ -230,7 +230,7 @@
                             </classPath>
                             <jre>
                                 <minVersion>11</minVersion>
-                                <path>${project.basedir}/jre</path>
+                                <path>jre</path>
                             </jre>
                             <versionInfo>
                                 <fileVersion>${file.version}</fileVersion>
