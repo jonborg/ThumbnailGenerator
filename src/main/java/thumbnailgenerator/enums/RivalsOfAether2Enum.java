@@ -1,9 +1,10 @@
 package thumbnailgenerator.enums;
 
 import lombok.Getter;
+import thumbnailgenerator.enums.interfaces.CharacterEnum;
 
 @Getter
-public enum RivalsOfAether2Enum {
+public enum RivalsOfAether2Enum implements CharacterEnum {
 
     CLAIREN("Clairen", "clairen", 2503),
     FLEET("Fleet", "fleet", 2498),
@@ -21,7 +22,6 @@ public enum RivalsOfAether2Enum {
     private final String name;
     private final String code;
     private final int startGGId;
-
 
     RivalsOfAether2Enum(String name, String code, int startGGId) {
         this.name = name;

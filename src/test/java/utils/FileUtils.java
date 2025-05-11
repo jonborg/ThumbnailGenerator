@@ -2,7 +2,7 @@ package utils;
 
 import org.junit.Assert;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class FileUtils {
         return new File(System.getProperty("user.dir") + path);
     }
 
-    public static File getCharacterImage(Game game, FighterArtType artType, String characterUrlName, int alt){
+    public static File getCharacterImage(Game game, FighterArtTypeEnum artType, String characterUrlName, int alt){
         return FileUtils.getActualFile("/assets/characters/"
                 + game.toString() + "/"
                 + artType.getEnumName().toLowerCase() + "/"

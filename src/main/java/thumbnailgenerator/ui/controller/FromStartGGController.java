@@ -3,12 +3,13 @@ package thumbnailgenerator.ui.controller;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import java.awt.Desktop;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import javafx.event.ActionEvent;
@@ -23,6 +24,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.dto.startgg.match.StreamGG;
@@ -31,8 +33,6 @@ import thumbnailgenerator.dto.startgg.tournament.EventGG;
 import thumbnailgenerator.dto.startgg.tournament.PhaseGG;
 import thumbnailgenerator.dto.startgg.tournament.PhaseGroupNodeGG;
 import thumbnailgenerator.dto.startgg.tournament.TournamentGG;
-import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
-import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.service.StartGGService;
 import thumbnailgenerator.utils.startgg.QueryUtils;
@@ -71,6 +71,9 @@ public class FromStartGGController implements Initializable {
     private @Autowired StartGGService startGGService;
     private @Autowired JSONReaderService jsonReader;
 
+    @Value("${startgg.api.token.path}")
+    private String startGGAuthTokenPath;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LOGGER.info("User selected thumbnail generation with Start.gg tournament information.");
@@ -78,6 +81,7 @@ public class FromStartGGController implements Initializable {
         resetComboBoxes(true);
         initTournamentFieldListener();
         initFoundSetsListener();
+        initAuthToken();
     }
 
     private void removeSelectedTournament(){
@@ -335,23 +339,43 @@ public class FromStartGGController implements Initializable {
         });
     }
 
+    private void initAuthToken(){
+        try {
+            String token = Files.readString(Path.of(startGGAuthTokenPath)).strip();
+            authToken.setText(token);
+        } catch (IOException exception){
+            LOGGER.error("Issue loading auth token: ", exception);
+            AlertFactory.displayWarning("Could not load auth token.");
+        }
+    }
+
+    private void saveAuthToken(){
+        try (FileWriter writer = new FileWriter(startGGAuthTokenPath)) {
+            writer.write(authToken.getText());
+        } catch (IOException exception){
+            LOGGER.error("Issue saving auth token: ", exception);
+            AlertFactory.displayWarning("Could not save auth token.");
+        }
+    }
+
 
     public void showAuthTokenPage(ActionEvent actionEvent) {
         LOGGER.info("User loaded authorization token instructions' page.");
         String url ="https://developer.start.gg/docs/authentication/";
-        if(Desktop.isDesktopSupported()) {
-            try {
-                Desktop.getDesktop().browse(new URI(url));
-            }catch(URISyntaxException | IOException e ){
-                LOGGER.error("Could not open {}", url);
-                LOGGER.catching(e);
-                AlertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
-            }
+        try {
+            Runtime runtime = Runtime.getRuntime();
+            runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);
+        }catch(IOException e ){
+            AlertFactory.displayError("Could not open the following URL: "+ url, e.getMessage());
         }
     }
 
     private void setDisableGeneration(boolean disable){
         genStart.setDisable(disable);
         saveLocally.setDisable(disable);
+    }
+
+    public void onClose(){
+        saveAuthToken();
     }
 }

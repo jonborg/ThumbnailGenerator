@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.util.List;
 import lombok.Getter;
 import lombok.ToString;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 @Getter
 @Setter
@@ -33,7 +33,7 @@ public class Settings {
     }
 
     public String getFighterImageSettingsFile(
-            FighterArtType artType){
+            FighterArtTypeEnum artType){
         return this
                 .getArtTypeDir()
                 .stream()

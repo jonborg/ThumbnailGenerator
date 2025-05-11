@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.GeneratedGraphic;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 
 @Service
@@ -23,26 +23,41 @@ public abstract class CharacterImageFetcher {
     private static final Logger LOGGER = LogManager.getLogger(
             CharacterImageFetcher.class);
 
-    @Value("${characters-image.local-save.path}")
+    @Value("${character-image.local-save.path}")
     private String characterImageLocalSavePath;
 
-    public abstract URL getOnlineUrl(Fighter fighter, FighterArtType artType)
+    @Value("${character-image.base-url}")
+    protected String characterImageBaseUrl;
+
+    @Value("${character-image.version.main}")
+    protected String characterImageMainBranch;
+
+    @Value("${character-image.version.backup}")
+    protected String characterImageBackupBranch;
+
+    public abstract URL getOnlineUrl(Fighter fighter, FighterArtTypeEnum artType, boolean backup)
             throws MalformedURLException;
 
     public BufferedImage getCharacterImage(Fighter fighter, GeneratedGraphic generatedGraphic)
             throws OnlineImageNotFoundException, MalformedURLException {
-        if (generatedGraphic.isLocally()) {
-            try {
-                return getFighterImageLocally(fighter, generatedGraphic);
-            }  catch (IOException e) {
-                LOGGER.debug("Image for {} does not exist locally. Will now try finding it online.", fighter.getUrlName());
-                var url = getOnlineUrl(fighter, generatedGraphic.getArtType());
-                var image = getFighterImageOnline(fighter, url);
-                saveImageLocally(fighter, generatedGraphic, image);
-                return image;
+        try {
+            if (generatedGraphic.isLocally()) {
+                try {
+                    return getFighterImageLocally(fighter, generatedGraphic);
+                }  catch (IOException e) {
+                    LOGGER.debug("Image for {} does not exist locally. Will now try finding it online.", fighter.getUrlName());
+                    var url = getOnlineUrl(fighter, generatedGraphic.getArtType(), false);
+                    var image = getFighterImageOnline(fighter, url);
+                    saveImageLocally(fighter, generatedGraphic, image);
+                    return image;
+                }
+            } else {
+                var url = getOnlineUrl(fighter, generatedGraphic.getArtType(), false);
+                return getFighterImageOnline(fighter, url);
             }
-        } else {
-            var url = getOnlineUrl(fighter, generatedGraphic.getArtType());
+        } catch (OnlineImageNotFoundException exception) {
+            LOGGER.info("Trying to load image from backup branch " + characterImageBackupBranch);
+            var url = getOnlineUrl(fighter, generatedGraphic.getArtType(), true);
             return getFighterImageOnline(fighter, url);
         }
     }
@@ -99,5 +114,11 @@ public abstract class CharacterImageFetcher {
                 "/" + generatedGraphic.getGame().name().toLowerCase() +
                 "/" + generatedGraphic.getArtType().getEnumName().toLowerCase() +
                 "/" + fighter.getUrlName() + "/";
+    }
+
+    protected String getHostAndBranchVersion(boolean backup){
+        var branch = backup ?
+                characterImageBackupBranch : characterImageMainBranch;
+        return characterImageBaseUrl + branch;
     }
 }

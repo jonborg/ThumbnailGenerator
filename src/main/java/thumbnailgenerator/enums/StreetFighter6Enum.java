@@ -1,9 +1,10 @@
 package thumbnailgenerator.enums;
 
 import lombok.Getter;
+import thumbnailgenerator.enums.interfaces.CharacterEnum;
 
 @Getter
-public enum StreetFighter6Enum {
+public enum StreetFighter6Enum implements CharacterEnum {
 
     RYU("Ryu", "ryu", 2287),
     LUKE("Luke", "luke", 2284),
@@ -31,11 +32,9 @@ public enum StreetFighter6Enum {
     TERRY("Terry", "terry", 2596),
     MAI("Mai", "mai", 2616);
 
-
     private final String name;
     private final String code;
     private final int startGGId;
-
 
     StreetFighter6Enum(String name, String code, int startGGId) {
         this.name = name;

@@ -32,7 +32,7 @@ public class FileTop8SettingsWrite {
         this.background = fileTop8Settings.getBackground();
         this.artTypeDir = fileTop8Settings.getArtTypeDir()
                 .stream()
-                .map(atd -> new FighterArtSettingsWrite(atd))
+                .map(FighterArtSettingsWrite::new)
                 .collect(Collectors.toList());
         this.slotSettingsFile = fileTop8Settings.getSlotSettingsFile();
     }

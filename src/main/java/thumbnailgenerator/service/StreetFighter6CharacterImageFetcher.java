@@ -6,20 +6,18 @@ import java.net.URL;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
-import thumbnailgenerator.dto.GeneratedGraphic;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 @Service
 public class StreetFighter6CharacterImageFetcher extends CharacterImageFetcher {
 
-    @Value("${character-image.sf6.render.url}")
+    @Value("${character-image.sf6.render.path}")
     private String renderUrl;
 
     @Override
-    public URL getOnlineUrl(Fighter fighter, FighterArtType artType)
+    public URL getOnlineUrl(Fighter fighter, FighterArtTypeEnum artType, boolean backup)
             throws MalformedURLException {
-    String urlString;
-        urlString = renderUrl + "/" + fighter.getUrlName() + "/1.png";
-        return new URL(urlString);
+        String urlString = renderUrl + "/" + fighter.getUrlName() + "/1.png";
+        return new URL(getHostAndBranchVersion(backup) + urlString);
     }
 }

@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -28,15 +29,11 @@ import org.springframework.stereotype.Component;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Player;
-import thumbnailgenerator.enums.RivalsOfAether2Enum;
 import thumbnailgenerator.enums.SmashUltimateEnum;
-import thumbnailgenerator.enums.StreetFighter6Enum;
-import thumbnailgenerator.enums.Tekken8Enum;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
-import thumbnailgenerator.factory.CharacterImageFetcherFactory;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
+import thumbnailgenerator.service.GameEnumService;
 import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-import thumbnailgenerator.utils.enums.StartGGEnumUtils;
 
 @Component
 @Scope("prototype")
@@ -61,11 +58,11 @@ public class PlayerController implements Initializable {
     protected HBox colorBox;
     protected String urlName;
     private ThumbnailGeneratorController parentController;
-    private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
+    private @Autowired GameEnumService gameEnumService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(SmashUltimateEnum.class));
+        initFightersComboBox(fighter, gameEnumService.getAllCharacterNames(Game.SSBU));
         initFighterAltsSpinner(alt);
     }
 
@@ -100,22 +97,7 @@ public class PlayerController implements Initializable {
                 alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
             }
         }
-
-        switch (parentController.getGame()) {
-            case ROA2:
-                return StartGGEnumUtils
-                        .findCodeByName(RivalsOfAether2Enum.class, sel);
-            case SF6:
-                return StartGGEnumUtils
-                        .findCodeByName(StreetFighter6Enum.class, sel);
-            case SSBU:
-                return StartGGEnumUtils
-                        .findCodeByName(SmashUltimateEnum.class, sel);
-            case TEKKEN8:
-                return StartGGEnumUtils
-                        .findCodeByName(Tekken8Enum.class, sel);
-        }
-        return null;
+        return gameEnumService.findCharacterCodeByName(parentController.getGame(), sel);
     }
 
     protected void updateFighterIcon(){
@@ -145,32 +127,20 @@ public class PlayerController implements Initializable {
     }
 
     protected void updateGameData(Game game){
-        switch (game) {
-            case ROA2:
-                initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(RivalsOfAether2Enum.class));
-                alt.setDisable(true);
-                break;
-            case SF6:
-                initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(StreetFighter6Enum.class));
-                alt.setDisable(true);
-                break;
-            case SSBU:
-                initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(SmashUltimateEnum.class));
-                alt.setDisable(false);
-                break;
-            case TEKKEN8:
-                initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(Tekken8Enum.class));
-                alt.setDisable(true);
-                break;
+        initFightersComboBox(fighter, gameEnumService.getAllCharacterNames(game));
+        if (Game.SSBU.equals(game)) {
+            alt.setDisable(false);
+        } else {
+            alt.setDisable(true);
         }
     }
 
     public void previewFighter(ActionEvent actionEvent)
             throws MalformedURLException {
         Game game = parentController.getGame();
-        FighterArtType artType = parentController.getFighterArtType();
-        val imageFetcher = characterImageFetcherFactory.getCharacterImageFetcher(game);
-        String url = imageFetcher.getOnlineUrl(generatePlayer().getFighter(0), artType).toString();
+        FighterArtTypeEnum artType = parentController.getFighterArtType();
+        val imageFetcher = gameEnumService.getCharacterImageFetcher(game);
+        String url = imageFetcher.getOnlineUrl(generatePlayer().getFighter(0), artType, false).toString();
 
         try {
             Runtime runtime = Runtime.getRuntime();

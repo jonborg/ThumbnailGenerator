@@ -1,9 +1,10 @@
 package thumbnailgenerator.enums;
 
 import lombok.Getter;
+import thumbnailgenerator.enums.interfaces.CharacterEnum;
 
 @Getter
-public enum SmashUltimateEnum {
+public enum SmashUltimateEnum implements CharacterEnum {
 
     //64
     MARIO("Mario", "mario", 1302),

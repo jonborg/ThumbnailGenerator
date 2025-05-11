@@ -17,14 +17,8 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.GeneratedGraphic;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
-import thumbnailgenerator.enums.StreetFighter6FighterArtType;
-import thumbnailgenerator.enums.Tekken8FighterArtType;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-import thumbnailgenerator.utils.enums.FighterArtTypeUtils;
 
 @Service
 public abstract class FileService<T extends GeneratedGraphic,V> {
@@ -33,6 +27,8 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
     private int gameIndex = 1;
     @Autowired
     private TournamentService tournamentService;
+    @Autowired
+    private GameEnumService gameEnumService;
 
     protected abstract V getCharacterData(List<String> parameters)
             throws FighterImageSettingsNotFoundException;
@@ -102,10 +98,10 @@ public abstract class FileService<T extends GeneratedGraphic,V> {
         var artTypeIndex = generatedGraphic instanceof Thumbnail ? 3 : 2;
         try{
             var artTypeValue = parameters.get(artTypeIndex);
-            var fighterArtType = FighterArtTypeUtils.getEnum(generatedGraphic.getGame(), artTypeValue);
+            var fighterArtType = gameEnumService.getArtTypeEnum(generatedGraphic.getGame(), artTypeValue);
             generatedGraphic.setArtType(fighterArtType);
         } catch (IndexOutOfBoundsException ex){
-            var defaultArtType = FighterArtTypeUtils.getDefaultArtType(generatedGraphic.getGame());
+            var defaultArtType = gameEnumService.getDefaultArtType(generatedGraphic.getGame());
             LOGGER.info("Could not find art type to use. Using default art type \""
                     + defaultArtType.getEnumName() + "\" for game " + generatedGraphic.getGame());
             generatedGraphic.setArtType(defaultArtType);

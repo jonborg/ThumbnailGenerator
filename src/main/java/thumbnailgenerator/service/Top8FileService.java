@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Top8;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 
 
 @Service
@@ -23,7 +23,7 @@ public class Top8FileService extends FileService<Top8, Player>{
         top8.setPlayers(playerList);
         top8.setLocally(saveLocally);
         if (top8.getArtType() == null){
-            top8.setArtType(SmashUltimateFighterArtType.RENDER);
+            top8.setArtType(SmashUltimateFighterArtTypeEnum.RENDER);
         }
 
         return top8;

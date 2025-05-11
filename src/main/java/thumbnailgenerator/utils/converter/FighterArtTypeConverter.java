@@ -1,38 +1,47 @@
 package thumbnailgenerator.utils.converter;
 
 import javafx.util.StringConverter;
-import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
-import thumbnailgenerator.enums.StreetFighter6FighterArtType;
-import thumbnailgenerator.enums.Tekken8FighterArtType;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.FatalFuryCotwFighterArtTypeEnum;
+import thumbnailgenerator.enums.RivalsOfAether2FighterArtTypeEnum;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
+import thumbnailgenerator.enums.StreetFighter6FighterArtTypeEnum;
+import thumbnailgenerator.enums.Tekken8FighterArtTypeEnum;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
-public class FighterArtTypeConverter extends StringConverter<FighterArtType> {
+public class FighterArtTypeConverter extends StringConverter<FighterArtTypeEnum> {
 
     @Override
-    public String toString(FighterArtType object) {
+    public String toString(FighterArtTypeEnum object) {
 
-        if (object instanceof SmashUltimateFighterArtType) {
-            SmashUltimateFighterArtType artType = (SmashUltimateFighterArtType) object;
+        if (object instanceof SmashUltimateFighterArtTypeEnum) {
+            SmashUltimateFighterArtTypeEnum
+                    artType = (SmashUltimateFighterArtTypeEnum) object;
             return artType.getValue();
         }
-        if (object instanceof RivalsOfAether2FighterArtType) {
-            RivalsOfAether2FighterArtType artType = (RivalsOfAether2FighterArtType) object;
+        if (object instanceof RivalsOfAether2FighterArtTypeEnum) {
+            RivalsOfAether2FighterArtTypeEnum
+                    artType = (RivalsOfAether2FighterArtTypeEnum) object;
             return artType.getValue();
         }
-        if (object instanceof StreetFighter6FighterArtType) {
-            StreetFighter6FighterArtType artType = (StreetFighter6FighterArtType) object;
+        if (object instanceof StreetFighter6FighterArtTypeEnum) {
+            StreetFighter6FighterArtTypeEnum
+                    artType = (StreetFighter6FighterArtTypeEnum) object;
             return artType.getValue();
         }
-        if (object instanceof Tekken8FighterArtType) {
-            Tekken8FighterArtType artType = (Tekken8FighterArtType) object;
+        if (object instanceof Tekken8FighterArtTypeEnum) {
+            Tekken8FighterArtTypeEnum artType = (Tekken8FighterArtTypeEnum) object;
+            return artType.getValue();
+        }
+        if (object instanceof FatalFuryCotwFighterArtTypeEnum) {
+            FatalFuryCotwFighterArtTypeEnum
+                    artType = (FatalFuryCotwFighterArtTypeEnum) object;
             return artType.getValue();
         }
         return null;
     }
 
     @Override
-    public FighterArtType fromString(String string) {
-        return SmashUltimateFighterArtType.valueOf(string);
+    public FighterArtTypeEnum fromString(String string) {
+        return SmashUltimateFighterArtTypeEnum.valueOf(string);
     }
 }

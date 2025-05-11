@@ -1,13 +1,11 @@
 package thumbnailgenerator.dto;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 @Builder
 @Getter
@@ -15,7 +13,7 @@ import thumbnailgenerator.enums.interfaces.FighterArtType;
 @ToString
 public class FighterArtSettings implements Cloneable {
 
-    private FighterArtType artType;
+    private FighterArtTypeEnum artType;
     private String fighterImageSettingsPath;
 
     @Override
