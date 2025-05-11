@@ -3,6 +3,7 @@ package thumbnailgenerator.ui.controller;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import java.awt.Desktop;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -344,6 +345,16 @@ public class FromStartGGController implements Initializable {
             authToken.setText(token);
         } catch (IOException exception){
             LOGGER.error("Issue loading auth token: ", exception);
+            AlertFactory.displayWarning("Could not load auth token.");
+        }
+    }
+
+    private void saveAuthToken(){
+        try (FileWriter writer = new FileWriter(startGGAuthTokenPath)) {
+            writer.write(authToken.getText());
+        } catch (IOException exception){
+            LOGGER.error("Issue saving auth token: ", exception);
+            AlertFactory.displayWarning("Could not save auth token.");
         }
     }
 
@@ -362,5 +373,9 @@ public class FromStartGGController implements Initializable {
     private void setDisableGeneration(boolean disable){
         genStart.setDisable(disable);
         saveLocally.setDisable(disable);
+    }
+
+    public void onClose(){
+        saveAuthToken();
     }
 }

@@ -212,6 +212,7 @@ public class ThumbnailGeneratorController implements Initializable {
             stage.setOnHidden(e -> {
                 startGGService.closeClient();
                 tournamentService.setSelectedTournament(controller.getBackupTournament());});
+            stage.setOnCloseRequest(e -> controller.onClose());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
