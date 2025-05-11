@@ -30,11 +30,11 @@ public class TournamentFactory {
                 tournamentRead.getImage(),
                 tournamentRead.getThumbnailSettings()
                         .stream()
-                        .map(ts -> createFileThumbnailSettings(ts))
+                        .map(this::createFileThumbnailSettings)
                         .collect(Collectors.toList()),
                 tournamentRead.getTop8Settings()
                         .stream()
-                        .map(ts -> createFileTop8Settings(ts))
+                        .map(this::createFileTop8Settings)
                         .collect(Collectors.toList())
         );
     }
@@ -45,7 +45,7 @@ public class TournamentFactory {
                 Game.valueOf(fileThumbnailSettingsRead.getGame()),
                 fileThumbnailSettingsRead.getForeground(),
                 fileThumbnailSettingsRead.getBackground(),
-                createFighterArtSettings(fileThumbnailSettingsRead.getArtTypeDir(),Game.valueOf(fileThumbnailSettingsRead.getGame())),
+                createThumbnailFighterArtSettings(fileThumbnailSettingsRead.getArtTypeDir(),Game.valueOf(fileThumbnailSettingsRead.getGame())),
                 new TextSettings((String) null)
         );
     }
@@ -55,18 +55,33 @@ public class TournamentFactory {
                 Game.valueOf(fileTop8SettingsRead.getGame()),
                 fileTop8SettingsRead.getForeground(),
                 fileTop8SettingsRead.getBackground(),
-                createFighterArtSettings(fileTop8SettingsRead.getArtTypeDir(), Game.valueOf(fileTop8SettingsRead.getGame())),
+                createTop8FighterArtSettings(fileTop8SettingsRead.getArtTypeDir(), Game.valueOf(fileTop8SettingsRead.getGame())),
                 fileTop8SettingsRead.getSlotSettingsFile()
         );
     }
 
-    public List<FighterArtSettings> createFighterArtSettings(List<FighterArtSettingsRead> fighterArtSettingsReadList, Game game){
+    public List<FighterArtSettings> createThumbnailFighterArtSettings(List<FighterArtSettingsRead> fighterArtSettingsReadList, Game game){
+        return fighterArtSettingsReadList.stream()
+                .map(art -> {
+                    var artType = gameEnumService.getArtTypeEnum(game, art.getArtType());
+                    var settingsPath = art.getFighterImageSettingsPath() == null ?
+                            gameEnumService.getDefaultFighterArtTypeSettingsFile(game, artType) :
+                            art.getFighterImageSettingsPath();
+                    return FighterArtSettings.builder()
+                            .artType(artType)
+                            .fighterImageSettingsPath(settingsPath)
+                            .build();
+                })
+                .collect(Collectors.toList());
+    }
+
+    public List<FighterArtSettings> createTop8FighterArtSettings(List<FighterArtSettingsRead> fighterArtSettingsReadList, Game game){
         return fighterArtSettingsReadList.stream()
                 .map(art -> {
                     var artType = gameEnumService.getArtTypeEnum(game, art.getArtType());
                     return FighterArtSettings.builder()
                             .artType(artType)
-                            .fighterImageSettingsPath(gameEnumService.getDefaultFighterArtTypeSettingsFile(game, artType))
+                            .fighterImageSettingsPath(art.getFighterImageSettingsPath())
                             .build();
                 })
                 .collect(Collectors.toList());

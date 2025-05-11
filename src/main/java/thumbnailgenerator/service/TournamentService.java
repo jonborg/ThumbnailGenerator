@@ -53,7 +53,6 @@ public class TournamentService {
     public void loadTournamentsList(){
         List<TournamentRead> tournamentReadList = jsonReaderService.loadTournament();
         tournamentsList = tournamentReadList.stream().map(t -> tournamentFactory.createTournament(t)).collect(Collectors.toList());
-
     }
 
     public List<Tournament> getTournamentsList(){
@@ -85,7 +84,7 @@ public class TournamentService {
             }
         }
         jsonWriterService.updateTournamentsFile(tournamentsList);
-        jsonWriterService.updateTextSettingsFile(TextSettings.getAllTextSettings(tournamentsList));
+        jsonWriterService.updateTextSettingsFile(getAllTextSettings());
     }
 
     public void saveNewTournaments(Tournament tournament) {

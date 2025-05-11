@@ -141,7 +141,7 @@ public class TournamentsCreateController implements Initializable {
         List<FighterArtSettings> list = new ArrayList<>();
         for (FighterArtTypeEnum artType : gameEnumService.getAllFighterArtTypes(game)) {
             String defaultSettingsFile = hasDefaultSettingsFile ?
-                    gameEnumService.getDefaultFighterArtTypeSettingsFile(game, artType) : null;
+                    gameEnumService.getDefaultFighterArtTypeSettingsFile(game, artType) : "";
             list.add(FighterArtSettings.builder()
                     .artType(artType)
                     .fighterImageSettingsPath(defaultSettingsFile)
