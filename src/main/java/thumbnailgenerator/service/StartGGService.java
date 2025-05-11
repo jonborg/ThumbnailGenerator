@@ -15,6 +15,7 @@ import thumbnailgenerator.dto.startgg.match.SelectionGG;
 import thumbnailgenerator.dto.startgg.match.SetGG;
 import thumbnailgenerator.dto.startgg.match.SetNodeGG;
 import thumbnailgenerator.dto.startgg.search.SearchGamesGG;
+import thumbnailgenerator.enums.SmashMeleeEnum;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.service.json.JSONReaderService;
 
@@ -149,6 +150,10 @@ public class StartGGService {
     }
 
     private String findCodeByStartggId(int mostUsedCharacter) {
+        //Sheik / Zelda
+        if (mostUsedCharacter == 628) {
+            return SmashMeleeEnum.SHEIK.getCode();
+        }
         return gameEnumService.findCharacterCodeByStartGGId(eventGame, mostUsedCharacter);
     }
 }

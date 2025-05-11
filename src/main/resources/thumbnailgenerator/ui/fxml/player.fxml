@@ -26,7 +26,7 @@
             <HBox fx:id="colorBox" spacing="30">
                 <VBox>
                     <Label text="Alt:"/>
-                    <Spinner fx:id="alt" styleClass="alt" editable="true">
+                    <Spinner fx:id="alt" styleClass="alt" editable="true" disable="true">
                         <valueFactory>
                             <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="8"/>
                         </valueFactory>
