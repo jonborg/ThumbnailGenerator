@@ -679,7 +679,6 @@ Thumbnails are saved in **/generated_top8** folder.
 - Image fetchers now check 2 branch versions of ThumbnailGeneratorCharacterImageRepository before throwing an error;
 - Set a custom JRE to allow generator to run in any PC with no Java installed.
 
-
 #### v4.0.0
 - Thumbnails and Top8 graphs can be generated for other games (Rivals of Aether 2, Street Fighter 6 and Tekken 8);
 - Character images are now downloaded from ThumbnailGeneratorCharacterImageRepository repository, instead of depending on other websites;
