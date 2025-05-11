@@ -10,12 +10,18 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Game;
+import thumbnailgenerator.dto.startgg.match.GameGG;
+import thumbnailgenerator.dto.startgg.match.SelectionGG;
 import thumbnailgenerator.dto.startgg.match.SetGG;
+import thumbnailgenerator.dto.startgg.match.SetNodeGG;
 import thumbnailgenerator.dto.startgg.search.SearchGamesGG;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-import thumbnailgenerator.utils.enums.StartGGEnumUtils;
 import thumbnailgenerator.service.json.JSONReaderService;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -27,7 +33,11 @@ public class StartGGService {
     @Autowired
     private TournamentService tournamentService;
     @Autowired
+    private GameEnumService gameEnumService;
+    @Autowired
     private JSONReaderService jsonReaderService;
+
+    private static Game eventGame;
 
     public void initClient(String authToken){
         client = GGClient.builder(authToken)
@@ -59,7 +69,7 @@ public class StartGGService {
         LOGGER.debug("Running query -> {}", searchGamesGG.getQuery());
         JsonObject result = runQuery(searchGamesGG.getQuery());
         LOGGER.debug("Result -> {}", result.toString());
-        Game eventGame = StartGGEnumUtils.findGameByStartGGId(searchGamesGG.getGameId());
+        eventGame = findGameByStartGGId(searchGamesGG.getGameId());
 
         if (totalPages < 0){
             totalPages = result.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode()).getAsJsonObject("sets")
@@ -73,17 +83,72 @@ public class StartGGService {
         set.getSetNodes().forEach(setNodeGG -> {
             if(setNodeGG.hasStream()) {
                 if(searchGamesGG.getStream() == null || searchGamesGG.getStream().isNull()) {
-                    LOGGER.debug("Found set -> {}", setNodeGG.toString());
-                    foundSets.append(setNodeGG.toString()+System.lineSeparator());
+                    LOGGER.debug("Found set -> {}", setNodeGGToString(setNodeGG));
+                    foundSets.append(setNodeGGToString(setNodeGG)+System.lineSeparator());
                 } else {
                     LOGGER.info("Filtering sets by stream {}.", searchGamesGG.getStream().getStreamName());
                     if(searchGamesGG.getStream().getStreamName().equals(setNodeGG.getStreamName())){
-                        LOGGER.debug("Found set -> {}", setNodeGG.toString());
-                        foundSets.append(setNodeGG.toString()+System.lineSeparator());
+                        LOGGER.debug("Found set -> {}", setNodeGGToString(setNodeGG));
+                        foundSets.append(setNodeGGToString(setNodeGG)+System.lineSeparator());
                     }
                 }
             }
         });
         return foundSets.toString();
+    }
+
+    private Game findGameByStartGGId(int startGGId) {
+        return Arrays.stream(Game.values())
+                .filter(g -> g.getStartGGId() == startGGId)
+                .findFirst()
+                .get();
+    }
+
+    public String getMostUsedCharacter(List<GameGG> games, String entrantName){
+        HashMap<Integer,Integer> charSel = new HashMap<>();
+        for (GameGG gameGG :games) {
+            if (gameGG != null && gameGG.getSelections() != null) {
+                for (SelectionGG selectionGG : gameGG.getSelections()) {
+                    if (selectionGG.getEntrant().getName().equals(entrantName)) {
+                        int character = selectionGG.getSelectionValue();
+                        if (charSel.containsKey(character)) {
+                            charSel.put(character, charSel.get(character) + 1);
+                        } else {
+                            charSel.put(character, 1);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        int mostUsedCharacter = Collections.max(charSel.entrySet(), HashMap.Entry.comparingByValue()).getKey();
+        return findCodeByStartggId(mostUsedCharacter);
+    }
+
+    public String setNodeGGToString(SetNodeGG setNodeGG){
+        var games = setNodeGG.getGames();
+        var roundName = setNodeGG.getRoundName();
+        String player1 = setNodeGG.getEntrant(0).getName();
+        String player2 = setNodeGG.getEntrant(1).getName();
+
+        String player1NoTeam = setNodeGG.getEntrateNameWithNoTeam(player1);
+        String player2NoTeam = setNodeGG.getEntrateNameWithNoTeam(player2);
+
+        String characters;
+
+        if (games == null){
+            characters = "random;random";
+        }else{
+            characters = getMostUsedCharacter(games, player1) + ";" + getMostUsedCharacter(games, player2);
+        }
+
+        return player1NoTeam + ";" + player2NoTeam + ";"
+                + characters + ";"
+                + "1;1;"
+                + roundName;
+    }
+
+    private String findCodeByStartggId(int mostUsedCharacter) {
+        return gameEnumService.findCharacterCodeByStartGGId(eventGame, mostUsedCharacter);
     }
 }

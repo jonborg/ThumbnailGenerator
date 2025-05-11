@@ -36,19 +36,19 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.FatalFuryCotwFighterArtType;
-import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
-import thumbnailgenerator.enums.StreetFighter6FighterArtType;
-import thumbnailgenerator.enums.Tekken8FighterArtType;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.FatalFuryCotwFighterArtTypeEnum;
+import thumbnailgenerator.enums.RivalsOfAether2FighterArtTypeEnum;
+import thumbnailgenerator.enums.StreetFighter6FighterArtTypeEnum;
+import thumbnailgenerator.enums.Tekken8FighterArtTypeEnum;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
-import thumbnailgenerator.factory.CharacterImageFetcherFactory;
+import thumbnailgenerator.service.GameEnumService;
 import thumbnailgenerator.service.StartGGService;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.Top8Service;
 import thumbnailgenerator.utils.converter.FighterArtTypeConverter;
@@ -66,7 +66,7 @@ public class ThumbnailGeneratorController implements Initializable {
     private @FXML TournamentsController tournamentsController;
     private @FXML TextField round;
     private @FXML TextField date;
-    private @FXML ComboBox<FighterArtType> artTypeComboBox;
+    private @FXML ComboBox<FighterArtTypeEnum> artTypeComboBox;
     private @FXML ComboBox<Game> gameComboBox;
     private @FXML AnchorPane player1;
     private @FXML PlayerController player1Controller;
@@ -82,7 +82,7 @@ public class ThumbnailGeneratorController implements Initializable {
     private @Autowired TournamentService tournamentService;
     private @Autowired ThumbnailService thumbnailService;
     private @Autowired Top8Service top8Service;
-    private @Autowired CharacterImageFetcherFactory characterImageFetcherFactory;
+    private @Autowired GameEnumService gameEnumService;
     private @Autowired StartGGService startGGService;
     private @Autowired JSONReaderService jsonReaderService;
 
@@ -136,7 +136,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
         LOGGER.info("Loading image settings of tournament {} for game {}", getSelectedTournament().getName(), getGame());
         var imageSettings = (ImageSettings) jsonReaderService.getJSONArrayFromFile(
-                getSelectedTournament().getThumbnailSettingsByGame(getGame())
+                tournamentService.getTournamentThumbnailSettingsOrDefault(getSelectedTournament(), getGame())
                         .getFighterImageSettingsFile(getFighterArtType()),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
@@ -303,33 +303,16 @@ public class ThumbnailGeneratorController implements Initializable {
                 });
         updateArtTypeComboBox(initialGame);
         artTypeComboBox.setConverter(new FighterArtTypeConverter());
-        artTypeComboBox.getSelectionModel().select(SmashUltimateFighterArtType.RENDER);
+        artTypeComboBox.getSelectionModel().select(
+                SmashUltimateFighterArtTypeEnum.RENDER);
     }
 
     private void updateArtTypeComboBox(Game game) {
         artTypeComboBox.getItems().clear();
-        switch (game) {
-            case ROA2:
-                artTypeComboBox.getItems().addAll(RivalsOfAether2FighterArtType.values());
-                artTypeComboBox.getSelectionModel().select(0);
-                break;
-            case SF6:
-                artTypeComboBox.getItems().addAll(StreetFighter6FighterArtType.values());
-                artTypeComboBox.getSelectionModel().select(0);
-                break;
-            case SSBU:
-                artTypeComboBox.getItems().addAll(SmashUltimateFighterArtType.values());
-                artTypeComboBox.getSelectionModel().select(0);
-                break;
-            case TEKKEN8:
-                artTypeComboBox.getItems().addAll(Tekken8FighterArtType.values());
-                artTypeComboBox.getSelectionModel().select(0);
-                break;
-            case FFCOTW:
-                artTypeComboBox.getItems().addAll(FatalFuryCotwFighterArtType.values());
-                artTypeComboBox.getSelectionModel().select(0);
-                break;
-        }
+        artTypeComboBox.getItems().addAll(
+                gameEnumService.getAllFighterArtTypes(game)
+        );
+        artTypeComboBox.getSelectionModel().select(0);
     }
 
     private List<Tournament> getTournamentsList(){
@@ -365,7 +348,7 @@ public class ThumbnailGeneratorController implements Initializable {
         this.stage=stage;
     }
 
-    public FighterArtType getFighterArtType(){
+    public FighterArtTypeEnum getFighterArtType(){
         return artTypeComboBox.getSelectionModel().getSelectedItem();
     }
 

@@ -3,8 +3,7 @@ package thumbnailgenerator.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
-import thumbnailgenerator.dto.GeneratedGraphic;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,7 +15,7 @@ public class Tekken8CharacterImageFetcher extends CharacterImageFetcher {
     private String renderUrl;
 
     @Override
-    public URL getOnlineUrl(Fighter fighter, FighterArtType artType)
+    public URL getOnlineUrl(Fighter fighter, FighterArtTypeEnum artType)
             throws MalformedURLException {
         String urlString = renderUrl + "/" + fighter.getUrlName() + "/1.png";
         return new URL(urlString);

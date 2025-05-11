@@ -14,22 +14,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import thumbnailgenerator.Main;
-import thumbnailgenerator.dto.FileThumbnailSettings;
-import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
-import thumbnailgenerator.enums.StreetFighter6FighterArtType;
-import thumbnailgenerator.enums.Tekken8FighterArtType;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.service.TournamentService;
 import utils.FileUtils;
 import utils.TestUtils;
@@ -60,7 +54,7 @@ public class TournamentCreateSettingsIT extends CustomApplicationTest {
 
     @ParameterizedTest
     @MethodSource("getGamesAndDefaultArtTypeEnums")
-    public void test_createTournament_success(Game game, FighterArtType artType)
+    public void test_createTournament_success(Game game, FighterArtTypeEnum artType)
             throws InterruptedException, IOException {
         //Arrange
         Tournament expectedTournament = new Tournament(
@@ -144,7 +138,7 @@ public class TournamentCreateSettingsIT extends CustomApplicationTest {
 
     private static Stream<Arguments> getGamesAndDefaultArtTypeEnums() {
         return Stream.of(
-                Arguments.of(Game.SSBU, SmashUltimateFighterArtType.RENDER)/*,
+                Arguments.of(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER)/*,
                 Arguments.of(Game.ROA2, RivalsOfAether2FighterArtType.RENDER),
                 Arguments.of(Game.SF6, StreetFighter6FighterArtType.RENDER),
                 Arguments.of(Game.TEKKEN8, Tekken8FighterArtType.RENDER)*/

@@ -6,10 +6,8 @@ import java.net.URL;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
-import thumbnailgenerator.dto.GeneratedGraphic;
-import thumbnailgenerator.enums.SmashUltimateEnum;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 @Service
 public class SmashUltimateCharacterImageFetcher extends CharacterImageFetcher {
@@ -21,9 +19,9 @@ public class SmashUltimateCharacterImageFetcher extends CharacterImageFetcher {
     private String muralUrl;
 
     @Override
-    public URL getOnlineUrl(Fighter fighter, FighterArtType artType)
+    public URL getOnlineUrl(Fighter fighter, FighterArtTypeEnum artType)
             throws MalformedURLException {
-        String partialUrl = artType.equals(SmashUltimateFighterArtType.MURAL) ?
+        String partialUrl = artType.equals(SmashUltimateFighterArtTypeEnum.MURAL) ?
                 muralUrl : renderUrl;
         String urlString = partialUrl + "/" + fighter.getUrlName() + "/" + fighter.getAlt() +".png";
         return new URL(urlString);

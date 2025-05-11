@@ -3,10 +3,6 @@ package thumbnailgenerator.dto.startgg.match;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
-import thumbnailgenerator.utils.enums.StartGGEnumUtils;
-
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 @Getter
@@ -46,52 +42,8 @@ public class SetNodeGG{
         return slots.get(entrantIndex).getEntrant();
     }
 
-    public String getEntrantCharacter(String entrantName){
-        HashMap<Integer,Integer> charSel = new HashMap<>();
-        for (GameGG gameGG :games) {
-            if (gameGG != null && gameGG.getSelections() != null) {
-                for (SelectionGG selectionGG : gameGG.getSelections()) {
-                    if (selectionGG.getEntrant().getName().equals(entrantName)) {
-                        int character = selectionGG.getSelectionValue();
-                        if (charSel.containsKey(character)) {
-                            charSel.put(character, charSel.get(character) + 1);
-                        } else {
-                            charSel.put(character, 1);
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-        int mostUsedCharacter = Collections.max(charSel.entrySet(), HashMap.Entry.comparingByValue()).getKey();
-        return StartGGEnumUtils
-                .findCodeByStartggId(mostUsedCharacter);
-    }
-
-    private String getEntrateNameWithNoTeam(String name){
+    public String getEntrateNameWithNoTeam(String name){
         return name.contains(" | ") ? name.split(" \\| ")[1].trim() : name;
-    }
-
-    @Override
-    public String toString(){
-        String player1 = getEntrant(0).getName();
-        String player2 = getEntrant(1).getName();
-
-        String player1NoTeam = getEntrateNameWithNoTeam(player1);
-        String player2NoTeam = getEntrateNameWithNoTeam(player2);
-
-        String characters;
-
-        if (games == null){
-            characters = "random;random";
-        }else{
-            characters = getEntrantCharacter(player1) + ";" + getEntrantCharacter(player2);
-        }
-
-        return player1NoTeam + ";" + player2NoTeam + ";"
-                + characters + ";"
-                + "1;1;"
-                + getRoundName();
     }
 }
 

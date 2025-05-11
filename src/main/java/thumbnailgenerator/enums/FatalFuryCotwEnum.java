@@ -1,9 +1,10 @@
 package thumbnailgenerator.enums;
 
 import lombok.Getter;
+import thumbnailgenerator.enums.interfaces.CharacterEnum;
 
 @Getter
-public enum FatalFuryCotwEnum {
+public enum FatalFuryCotwEnum implements CharacterEnum {
 
     ROCK("Rock Howard", "rock", 2692),
     TERRY("Terry Bogard", "terry", 2694),

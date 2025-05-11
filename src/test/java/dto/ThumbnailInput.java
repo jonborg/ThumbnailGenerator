@@ -3,7 +3,7 @@ package dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class ThumbnailInput {
     private String tournamentId;
     private String round;
     private String date;
-    private FighterArtType artType;
+    private FighterArtTypeEnum artType;
     private List<PlayerInput> players;
     private boolean saveLocally;
 

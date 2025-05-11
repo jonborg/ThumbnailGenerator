@@ -4,7 +4,7 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 @Getter
 @Setter
@@ -17,11 +17,8 @@ public class Thumbnail extends GeneratedGraphic {
     private String round;
     private String date;
     private List<Player> players;
-    private FighterArtType artType;
+    private FighterArtTypeEnum artType;
 
-    public FileThumbnailSettings getFileThumbnailSettings(){
-        return getTournament().getThumbnailSettingsByGame(getGame());
-    }
 }
 
 

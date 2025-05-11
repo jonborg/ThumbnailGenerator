@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import thumbnailgenerator.Main;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import utils.FileUtils;
 import utils.WaitUtils;
 
@@ -67,7 +67,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
     public void create_validThumbnailMuralArts_success() throws IOException {
         //Arrange
         ThumbnailInput input = generateThumbnailInput();
-        input.setArtType(SmashUltimateFighterArtType.MURAL);
+        input.setArtType(SmashUltimateFighterArtTypeEnum.MURAL);
         File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
         File expectedImage = FileUtils.getFileFromResources(
                 "/expected/thumbnail/invictaMuralMarioSonicThumbnail.png");
@@ -98,8 +98,8 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
         File expectedImage = FileUtils.getFileFromResources(
                 "/expected/thumbnail/invictaMarioSonicThumbnail.png");
-        File marioImage = FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtType.RENDER, "mario", 1);
-        File sonicImage = FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtType.RENDER, "sonic", 1);
+        File marioImage = FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER, "mario", 1);
+        File sonicImage = FileUtils.getCharacterImage(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER, "sonic", 1);
 
         clickOnButton(ButtonId.TOURNAMENT_INVICTA);
         fillRoundData(input);
@@ -127,7 +127,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
     private void fillRoundData(ThumbnailInput input){
         writeInTextField(TextFieldId.ROUND, input.getRound());
         writeInTextField(TextFieldId.DATE, input.getDate());
-        selectInComboBox(ComboBoxId.ART_TYPE, ((SmashUltimateFighterArtType) input.getArtType()).getValue());
+        selectInComboBox(ComboBoxId.ART_TYPE, ((SmashUltimateFighterArtTypeEnum) input.getArtType()).getValue());
     }
 
     private void fillPlayerData(PlayerInput input, String parentFxml){
@@ -146,7 +146,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
                 .tournamentId("weeklyl")
                 .round("Winners Finals")
                 .date("20/02/2022")
-                .artType(SmashUltimateFighterArtType.RENDER)
+                .artType(SmashUltimateFighterArtTypeEnum.RENDER)
                 .players(players)
                 .build();
     }

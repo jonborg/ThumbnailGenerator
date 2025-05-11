@@ -1,7 +1,6 @@
 package thumbnailgenerator.ui.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.service.TournamentService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
@@ -26,10 +25,13 @@ public class TournamentsEditController extends TournamentsCreateController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         var tournament = getSelectedEdit();
-        var thumbnailRenderSettings = tournament.getThumbnailSettingsByGame(Game.SSBU)
-                .getFighterImageSettingsFile(SmashUltimateFighterArtType.RENDER);
-        var top8RenderSettings = tournament.getTop8SettingsByGame(Game.SSBU)
-                .getFighterImageSettingsFile(SmashUltimateFighterArtType.RENDER);
+        var thumbnailSettings = tournamentService.getTournamentThumbnailSettingsOrDefault(tournament, Game.SSBU);
+        var top8Settings = tournamentService.getTournamentTop8SettingsOrDefault(tournament, Game.SSBU);
+        var thumbnailRenderSettings = thumbnailSettings
+                .getFighterImageSettingsFile(SmashUltimateFighterArtTypeEnum.RENDER);
+        var top8RenderSettings = top8Settings
+                .getFighterImageSettingsFile(SmashUltimateFighterArtTypeEnum.RENDER);
+        var textSettings = thumbnailSettings.getTextSettings();
         LOGGER.info("Editing tournament -> {}", tournament.toString());
 
         initGamesDropdown(tournament);
@@ -40,16 +42,16 @@ public class TournamentsEditController extends TournamentsCreateController {
         id.setText(tournament.getTournamentId());
         name.setText(tournament.getName());
         logo.setText(tournament.getImage());
-        foreground.setText(tournament.getThumbnailSettingsByGame(Game.SSBU).getForeground());
-        background.setText(tournament.getThumbnailSettingsByGame(Game.SSBU).getBackground());
+
+        foreground.setText(thumbnailSettings.getForeground());
+        background.setText(thumbnailSettings.getBackground());
         fighterImageSettingsFile.setText(thumbnailRenderSettings);
 
-        foregroundTop8.setText(tournament.getTop8SettingsByGame(Game.SSBU).getForeground());
-        backgroundTop8.setText(tournament.getTop8SettingsByGame(Game.SSBU).getBackground());
-        slotSettingsFileTop8.setText(tournament.getTop8SettingsByGame(Game.SSBU).getSlotSettingsFile());
+        foregroundTop8.setText(top8Settings.getForeground());
+        backgroundTop8.setText(top8Settings.getBackground());
+        slotSettingsFileTop8.setText(top8Settings.getSlotSettingsFile());
         fighterImageSettingsFileTop8.setText(top8RenderSettings);
 
-        TextSettings textSettings = tournament.getThumbnailSettingsByGame(Game.SSBU).getTextSettings();
         try {
             font.getSelectionModel().select(textSettings.getFont());
             sizeTop.setText(String.valueOf(textSettings.getSizeTop()));

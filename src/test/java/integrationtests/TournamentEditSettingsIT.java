@@ -6,7 +6,6 @@ import enums.ChosenImageFieldId;
 import enums.ChosenJsonFieldId;
 import enums.ComboBoxId;
 import enums.MenuId;
-import enums.ScrollPaneId;
 import enums.TextFieldId;
 import enums.WindowId;
 import javafx.scene.Scene;
@@ -24,11 +23,11 @@ import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
-import thumbnailgenerator.enums.StreetFighter6FighterArtType;
-import thumbnailgenerator.enums.Tekken8FighterArtType;
-import thumbnailgenerator.enums.interfaces.FighterArtType;
+import thumbnailgenerator.enums.RivalsOfAether2FighterArtTypeEnum;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
+import thumbnailgenerator.enums.StreetFighter6FighterArtTypeEnum;
+import thumbnailgenerator.enums.Tekken8FighterArtTypeEnum;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.service.TournamentService;
 import utils.FileUtils;
 import utils.TestUtils;
@@ -59,7 +58,7 @@ public class TournamentEditSettingsIT extends CustomApplicationTest {
 
     @ParameterizedTest
     @MethodSource("getGamesAndDefaultArtTypeEnums")
-    public void test_editTournamentWindow_opensWithCorrectValues_success(Game game, FighterArtType artType)
+    public void test_editTournamentWindow_opensWithCorrectValues_success(Game game, FighterArtTypeEnum artType)
             throws InterruptedException {
         //Arrange
         Tournament expectedTournament = TestUtils.getTournament(tournamentService, "invicta");
@@ -143,19 +142,20 @@ public class TournamentEditSettingsIT extends CustomApplicationTest {
     }
 
     private void validateTournamentThumbnailSettings(
-            FileThumbnailSettings expectedThumbnailSettings, Scene scene, FighterArtType fighterArtType){
+            FileThumbnailSettings expectedThumbnailSettings, Scene scene, FighterArtTypeEnum fighterArtTypeEnum){
         assertEqualsChosenImageFieldContent(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_FOREGROUND, scene,
                 expectedThumbnailSettings.getForeground());
         assertEqualsChosenImageFieldContent(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_BACKGROUND, scene,
                 expectedThumbnailSettings.getBackground());
         assertEqualsComboBoxSelection(ComboBoxId.TOURNAMENT_THUMBNAIL_ART_TYPE, scene,
-                fighterArtType.toString());
+                fighterArtTypeEnum.toString());
         assertEqualsChosenJsonFieldContent(ChosenJsonFieldId.TOURNAMENT_THUMBNAIL_CHARACTER_SETTINGS, scene,
-                expectedThumbnailSettings.getFighterImageSettingsFile(fighterArtType));
+                expectedThumbnailSettings.getFighterImageSettingsFile(
+                        fighterArtTypeEnum));
     }
 
     private void validateTournamentTop8Settings(
-            FileTop8Settings expectedTop8Settings, Scene scene, FighterArtType fighterArtType){
+            FileTop8Settings expectedTop8Settings, Scene scene, FighterArtTypeEnum fighterArtTypeEnum){
         assertEqualsChosenImageFieldContent(ChosenImageFieldId.TOURNAMENT_TOP8_FOREGROUND, scene,
                 expectedTop8Settings.getForeground());
         assertEqualsChosenImageFieldContent(ChosenImageFieldId.TOURNAMENT_TOP8_BACKGROUND, scene,
@@ -163,17 +163,18 @@ public class TournamentEditSettingsIT extends CustomApplicationTest {
         assertEqualsChosenJsonFieldContent(ChosenJsonFieldId.TOURNAMENT_TOP8_SLOT_SETTINGS, scene,
                 expectedTop8Settings.getSlotSettingsFile());
         assertEqualsComboBoxSelection(ComboBoxId.TOURNAMENT_TOP8_ART_TYPE, scene,
-                fighterArtType.toString());
+                fighterArtTypeEnum.toString());
         assertEqualsChosenJsonFieldContent(ChosenJsonFieldId.TOURNAMENT_TOP8_CHARACTER_SETTINGS, scene,
-                expectedTop8Settings.getFighterImageSettingsFile(fighterArtType));
+                expectedTop8Settings.getFighterImageSettingsFile(
+                        fighterArtTypeEnum));
     }
 
     private static Stream<Arguments> getGamesAndDefaultArtTypeEnums() {
         return Stream.of(
-                Arguments.of(Game.SSBU, SmashUltimateFighterArtType.RENDER),
-                Arguments.of(Game.ROA2, RivalsOfAether2FighterArtType.RENDER),
-                Arguments.of(Game.SF6, StreetFighter6FighterArtType.RENDER),
-                Arguments.of(Game.TEKKEN8, Tekken8FighterArtType.RENDER)
+                Arguments.of(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER),
+                Arguments.of(Game.ROA2, RivalsOfAether2FighterArtTypeEnum.RENDER),
+                Arguments.of(Game.SF6, StreetFighter6FighterArtTypeEnum.RENDER),
+                Arguments.of(Game.TEKKEN8, Tekken8FighterArtTypeEnum.RENDER)
         );
     }
 }

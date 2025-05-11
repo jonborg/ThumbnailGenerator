@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.ToString;
 import thumbnailgenerator.dto.json.read.TournamentRead;
-import thumbnailgenerator.enums.FatalFuryCotwFighterArtType;
-import thumbnailgenerator.enums.RivalsOfAether2FighterArtType;
-import thumbnailgenerator.enums.SmashUltimateFighterArtType;
-import thumbnailgenerator.enums.StreetFighter6FighterArtType;
-import thumbnailgenerator.enums.Tekken8FighterArtType;
+import thumbnailgenerator.enums.FatalFuryCotwFighterArtTypeEnum;
+import thumbnailgenerator.enums.RivalsOfAether2FighterArtTypeEnum;
+import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
+import thumbnailgenerator.enums.StreetFighter6FighterArtTypeEnum;
+import thumbnailgenerator.enums.Tekken8FighterArtTypeEnum;
 
 @Getter
 @ToString
@@ -43,22 +43,6 @@ public class Tournament implements Cloneable{
                         .map(t -> new FileThumbnailSettings(t, suffix))
                         .collect(Collectors.toList()),
                 tournament.getTop8Settings().stream().map(FileTop8Settings::new).collect(Collectors.toList())
-        );
-    }
-
-    public Tournament(TournamentRead tournamentRead){
-        this(
-                tournamentRead.getId(),
-                tournamentRead.getName(),
-                tournamentRead.getImage(),
-                tournamentRead.getThumbnailSettings()
-                        .stream()
-                        .map(ts -> new FileThumbnailSettings(ts))
-                        .collect(Collectors.toList()),
-                tournamentRead.getTop8Settings()
-                        .stream()
-                        .map(ts -> new FileTop8Settings(ts))
-                        .collect(Collectors.toList())
         );
     }
 
@@ -100,53 +84,12 @@ public class Tournament implements Cloneable{
     public FileThumbnailSettings getThumbnailSettingsByGame(Game game){
         return thumbnailSettings.stream().filter(ts -> game.equals(ts.getGame()))
                 .findFirst()
-                .orElse(new FileThumbnailSettings(game, null, null, generateArtTypeSettings(game),
-                        new TextSettings((String) null)));
+                .orElse(null);
     }
 
     public FileTop8Settings getTop8SettingsByGame(Game game){
-        return top8Settings.stream().filter(ts -> game.equals(ts.getGame())).findFirst()
-                .orElse(new FileTop8Settings(game, null, null, generateArtTypeSettings(game), null));
-    }
-
-    private List<FighterArtSettings> generateArtTypeSettings(Game game){
-        List<FighterArtSettings> artTypeSettings = new ArrayList<>();
-        switch (game) {
-            case SSBU:
-                artTypeSettings.add(
-                        new FighterArtSettings(SmashUltimateFighterArtType.RENDER,
-                                SmashUltimateFighterArtType.RENDER.getDefaultFighterImageSettingsFile())
-                );
-                artTypeSettings.add(
-                        new FighterArtSettings(SmashUltimateFighterArtType.MURAL,
-                                SmashUltimateFighterArtType.MURAL.getDefaultFighterImageSettingsFile())
-                );
-                break;
-            case ROA2:
-                artTypeSettings.add(
-                        new FighterArtSettings(RivalsOfAether2FighterArtType.RENDER,
-                                RivalsOfAether2FighterArtType.RENDER.getDefaultFighterImageSettingsFile())
-                );
-                break;
-            case SF6:
-                artTypeSettings.add(
-                        new FighterArtSettings(StreetFighter6FighterArtType.RENDER,
-                                StreetFighter6FighterArtType.RENDER.getDefaultFighterImageSettingsFile())
-                );
-                break;
-            case TEKKEN8:
-                artTypeSettings.add(
-                        new FighterArtSettings(Tekken8FighterArtType.RENDER,
-                                Tekken8FighterArtType.RENDER.getDefaultFighterImageSettingsFile())
-                );
-                break;
-            case FFCOTW:
-                artTypeSettings.add(
-                        new FighterArtSettings(FatalFuryCotwFighterArtType.RENDER,
-                                FatalFuryCotwFighterArtType.RENDER.getDefaultFighterImageSettingsFile())
-                );
-                break;
-        }
-        return artTypeSettings;
+        return top8Settings.stream().filter(ts -> game.equals(ts.getGame()))
+                .findFirst()
+                .orElse(null);
     }
 }
