@@ -5,6 +5,17 @@
     "logo": "assets/tournaments/logos/weeklyl.png",
     "thumbnailSettings": [
       {
+        "game": "SSBM",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
+          }
+        ]
+      },
+      {
         "game": "FFCOTW",
         "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -65,6 +76,17 @@
       }
     ],
     "top8Settings": [
+      {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
       {
         "game": "ROA2",
         "foreground": "",
@@ -134,6 +156,17 @@
     "logo": "assets/tournaments/logos/invicta.png",
     "thumbnailSettings": [
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
+          }
+        ]
+      },
+      {
         "game": "FFCOTW",
         "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -194,6 +227,17 @@
       }
     ],
     "top8Settings": [
+      {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
       {
         "game": "FFCOTW",
         "foreground": "",
@@ -263,6 +307,17 @@
     "logo": "assets/tournaments/logos/mushroommadness.png",
     "thumbnailSettings": [
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
+          }
+        ]
+      },
+      {
         "game": "FFCOTW",
         "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
         "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
@@ -323,6 +378,17 @@
       }
     ],
     "top8Settings": [
+      {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
       {
         "game": "ROA2",
         "foreground": "",
@@ -392,6 +458,17 @@
     "logo": "assets/tournaments/logos/ReturnofAether_logo.png",
     "thumbnailSettings": [
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
+          }
+        ]
+      },
+      {
         "game": "FFCOTW",
         "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
         "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
@@ -452,6 +529,17 @@
       }
     ],
     "top8Settings": [
+      {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
       {
         "game": "ROA2",
         "foreground": "",
@@ -521,6 +609,17 @@
     "logo": "assets/tournaments/logos/FDT_logo.png",
     "thumbnailSettings": [
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
+          }
+        ]
+      },
+      {
         "game": "FFCOTW",
         "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -581,6 +680,17 @@
       }
     ],
     "top8Settings": [
+      {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
       {
         "game": "ROA2",
         "foreground": "",
@@ -650,6 +760,17 @@
     "logo": "assets/tournaments/logos/ragelx.png",
     "thumbnailSettings": [
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
+          }
+        ]
+      },
+      {
         "game": "FFCOTW",
         "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -710,6 +831,17 @@
       }
     ],
     "top8Settings": [
+      {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
       {
         "game": "ROA2",
         "foreground": "",
@@ -779,6 +911,17 @@
     "logo": "assets/tournaments/logos/tgf24.png",
     "thumbnailSettings": [
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
+          }
+        ]
+      },
+      {
         "game": "FFCOTW",
         "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
         "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
@@ -839,6 +982,17 @@
       }
     ],
     "top8Settings": [
+      {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
       {
         "game": "ROA2",
         "foreground": "",
@@ -923,6 +1077,17 @@
         ]
       },
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
+          }
+        ]
+      },
+      {
         "game": "ROA2",
         "foreground": "",
         "background": "",
@@ -980,6 +1145,17 @@
           },
           {
             "artType": "MURAL",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
             "fighterImageSettings": ""
           }
         ]
