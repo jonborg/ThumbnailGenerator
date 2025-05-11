@@ -136,7 +136,7 @@ public class ThumbnailGeneratorController implements Initializable {
 
         LOGGER.info("Loading image settings of tournament {} for game {}", getSelectedTournament().getName(), getGame());
         var imageSettings = (ImageSettings) jsonReaderService.getJSONArrayFromFile(
-                getSelectedTournament().getThumbnailSettingsByGame(getGame())
+                tournamentService.getTournamentThumbnailSettingsOrDefault(getSelectedTournament(), getGame())
                         .getFighterImageSettingsFile(getFighterArtType()),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);

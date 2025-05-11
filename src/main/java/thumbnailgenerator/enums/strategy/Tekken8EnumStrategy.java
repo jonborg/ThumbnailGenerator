@@ -16,7 +16,7 @@ import thumbnailgenerator.service.Tekken8CharacterImageFetcher;
 public class Tekken8EnumStrategy implements GameEnumStrategy {
 
     @Value("${thumbnail.settings.tekken8.render.default}")
-    private static String defaultRenderImageSettingsFile;
+    private String defaultRenderImageSettingsFile;
     @Autowired
     private Tekken8CharacterImageFetcher fetcher;
 

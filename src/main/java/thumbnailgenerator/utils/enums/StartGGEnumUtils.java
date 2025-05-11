@@ -51,15 +51,4 @@ public class StartGGEnumUtils {
         return null;
     }
 
-    public static <E extends Enum<E>> List<String> getAllNames(Class<E> enumClass) {
-        List<String> names = new ArrayList<>();
-        try {
-            for (E value : enumClass.getEnumConstants()) {
-                names.add((String) enumClass.getMethod("getName").invoke(value));
-            }
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return names;
-    }
 }

@@ -46,22 +46,6 @@ public class Tournament implements Cloneable{
         );
     }
 
-    public Tournament(TournamentRead tournamentRead){
-        this(
-                tournamentRead.getId(),
-                tournamentRead.getName(),
-                tournamentRead.getImage(),
-                tournamentRead.getThumbnailSettings()
-                        .stream()
-                        .map(ts -> new FileThumbnailSettings(ts))
-                        .collect(Collectors.toList()),
-                tournamentRead.getTop8Settings()
-                        .stream()
-                        .map(ts -> new FileTop8Settings(ts))
-                        .collect(Collectors.toList())
-        );
-    }
-
     public Object clone() throws CloneNotSupportedException{
         return super.clone();
     }
@@ -100,54 +84,12 @@ public class Tournament implements Cloneable{
     public FileThumbnailSettings getThumbnailSettingsByGame(Game game){
         return thumbnailSettings.stream().filter(ts -> game.equals(ts.getGame()))
                 .findFirst()
-                .orElse(new FileThumbnailSettings(game, null, null, generateArtTypeSettings(game),
-                        new TextSettings((String) null)));
+                .orElse(null);
     }
 
     public FileTop8Settings getTop8SettingsByGame(Game game){
-        return top8Settings.stream().filter(ts -> game.equals(ts.getGame())).findFirst()
-                .orElse(new FileTop8Settings(game, null, null, generateArtTypeSettings(game), null));
-    }
-
-    private List<FighterArtSettings> generateArtTypeSettings(Game game){
-        List<FighterArtSettings> artTypeSettings = new ArrayList<>();
-        switch (game) {
-            case SSBU:
-                artTypeSettings.add(
-                        new FighterArtSettings(SmashUltimateFighterArtTypeEnum.RENDER,
-                                SmashUltimateFighterArtTypeEnum.RENDER.getDefaultFighterImageSettingsFile())
-                );
-                artTypeSettings.add(
-                        new FighterArtSettings(SmashUltimateFighterArtTypeEnum.MURAL,
-                                SmashUltimateFighterArtTypeEnum.MURAL.getDefaultFighterImageSettingsFile())
-                );
-                break;
-            case ROA2:
-                artTypeSettings.add(
-                        new FighterArtSettings(
-                                RivalsOfAether2FighterArtTypeEnum.RENDER,
-                                RivalsOfAether2FighterArtTypeEnum.RENDER.getDefaultFighterImageSettingsFile())
-                );
-                break;
-            case SF6:
-                artTypeSettings.add(
-                        new FighterArtSettings(StreetFighter6FighterArtTypeEnum.RENDER,
-                                StreetFighter6FighterArtTypeEnum.RENDER.getDefaultFighterImageSettingsFile())
-                );
-                break;
-            case TEKKEN8:
-                artTypeSettings.add(
-                        new FighterArtSettings(Tekken8FighterArtTypeEnum.RENDER,
-                                Tekken8FighterArtTypeEnum.RENDER.getDefaultFighterImageSettingsFile())
-                );
-                break;
-            case FFCOTW:
-                artTypeSettings.add(
-                        new FighterArtSettings(FatalFuryCotwFighterArtTypeEnum.RENDER,
-                                FatalFuryCotwFighterArtTypeEnum.RENDER.getDefaultFighterImageSettingsFile())
-                );
-                break;
-        }
-        return artTypeSettings;
+        return top8Settings.stream().filter(ts -> game.equals(ts.getGame()))
+                .findFirst()
+                .orElse(null);
     }
 }

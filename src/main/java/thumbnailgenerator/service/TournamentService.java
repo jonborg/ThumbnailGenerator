@@ -9,9 +9,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import thumbnailgenerator.dto.FighterArtSettings;
+import thumbnailgenerator.dto.FileThumbnailSettings;
+import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.dto.factory.TournamentFactory;
 import thumbnailgenerator.dto.json.read.TournamentRead;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.service.json.JSONReaderService;
@@ -28,6 +32,10 @@ public class TournamentService {
     private JSONReaderService jsonReaderService;
     @Autowired
     private JSONWriterService jsonWriterService;
+    @Autowired
+    private GameEnumService gameEnumService;
+    @Autowired
+    private TournamentFactory tournamentFactory;
 
     public void initTournamentsListAndSettings(){
         LOGGER.info("Loading saved tournament list.");
@@ -36,8 +44,7 @@ public class TournamentService {
             var textSettings = jsonReaderService.loadTextSettings(tournament.getTournamentId());
             LOGGER.debug("{} -> {}.", tournament.getName(), textSettings);
             for (Game game : Game.values()) {
-                tournament
-                        .getThumbnailSettingsByGame(game)
+                getTournamentThumbnailSettingsOrDefault(tournament, game)
                         .setTextSettings(textSettings);
             }
         });
@@ -45,7 +52,7 @@ public class TournamentService {
 
     public void loadTournamentsList(){
         List<TournamentRead> tournamentReadList = jsonReaderService.loadTournament();
-        tournamentsList = tournamentReadList.stream().map(t -> new Tournament(t)).collect(Collectors.toList());
+        tournamentsList = tournamentReadList.stream().map(t -> tournamentFactory.createTournament(t)).collect(Collectors.toList());
 
     }
 
@@ -89,7 +96,7 @@ public class TournamentService {
         }
         tournamentsList.stream().peek(t -> LOGGER.info("{} -> {}", t.getName(), t.toString()));
         jsonWriterService.updateTournamentsFile(tournamentsList);
-        jsonWriterService.updateTextSettingsFile(TextSettings.getAllTextSettings(tournamentsList));
+        jsonWriterService.updateTextSettingsFile(getAllTextSettings());
     }
 
     public void saveChangesToTournament(Tournament newTournament, Tournament oldVersionTournament) {
@@ -99,7 +106,7 @@ public class TournamentService {
                 .collect(Collectors.toList());
         tournamentsList.stream().peek(t -> LOGGER.info("{} -> {}", t.getName(), t.toString()));
         jsonWriterService.updateTournamentsFile(tournamentsList);
-        jsonWriterService.updateTextSettingsFile(TextSettings.getAllTextSettings(tournamentsList));
+        jsonWriterService.updateTextSettingsFile(getAllTextSettings());
     }
 
     public void deleteTournament(Tournament tournament) {
@@ -109,7 +116,69 @@ public class TournamentService {
             LOGGER.info("Deleting tournament {}.", tournament.getName());
             tournamentsList.removeIf(t -> tournament.getTournamentId() == t.getTournamentId());
             jsonWriterService.updateTournamentsFile(tournamentsList);
-            jsonWriterService.updateTextSettingsFile(TextSettings.getAllTextSettings(tournamentsList));
+            jsonWriterService.updateTextSettingsFile(getAllTextSettings());
         }
+    }
+
+    private List<TextSettings> getAllTextSettings() {
+        List<TextSettings> textSettingsList = new ArrayList<>();
+        tournamentsList.forEach(tournament -> textSettingsList.add(getTournamentThumbnailSettingsOrDefault(tournament, Game.SSBU).getTextSettings()));
+        return textSettingsList;
+    }
+
+    public FileThumbnailSettings getTournamentThumbnailSettingsOrDefault(Tournament tournament, Game game){
+        var result = tournament.getThumbnailSettingsByGame(game);
+        if (result == null) {
+            List<FighterArtSettings> defaultList = new ArrayList<>();
+            var artTypes = gameEnumService.getAllFighterArtTypes(game);
+            for (var artType : artTypes){
+                defaultList.add(
+                        FighterArtSettings.builder()
+                                .artType(artType)
+                                .fighterImageSettingsPath(gameEnumService.getDefaultFighterArtTypeSettingsFile(game, artType))
+                                .build()
+                );
+            }
+            return new FileThumbnailSettings(
+                    game,
+                    null,
+                    null,
+                    defaultList,
+                    new TextSettings(tournament.getTournamentId())
+            );
+        } else {
+            for (var setting : result.getArtTypeDir()){
+                if (setting.getFighterImageSettingsPath() == null) {
+                    setting.setFighterImageSettingsPath(
+                            gameEnumService.getDefaultFighterArtTypeSettingsFile(game, setting.getArtType())
+                    );
+                }
+            }
+            return result;
+        }
+    }
+
+    public FileTop8Settings getTournamentTop8SettingsOrDefault(Tournament tournament, Game game){
+        var result = tournament.getTop8SettingsByGame(game);
+        if (result != null) {
+            return result;
+        }
+        List<FighterArtSettings> defaultList = new ArrayList<>();
+        var artTypes = gameEnumService.getAllFighterArtTypes(game);
+        for (var artType : artTypes){
+            defaultList.add(
+                    FighterArtSettings.builder()
+                            .artType(artType)
+                            .fighterImageSettingsPath(null)
+                            .build()
+            );
+        }
+        return new FileTop8Settings(
+                game,
+                null,
+                null,
+                defaultList,
+                null
+        );
     }
 }

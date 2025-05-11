@@ -16,7 +16,7 @@ import thumbnailgenerator.service.StreetFighter6CharacterImageFetcher;
 public class StreetFighter6EnumStrategy implements GameEnumStrategy {
 
     @Value("${thumbnail.settings.sf6.render.default}")
-    private static String defaultRenderImageSettingsFile;
+    private String defaultRenderImageSettingsFile;
     @Autowired
     private StreetFighter6CharacterImageFetcher fetcher;
 
@@ -49,4 +49,6 @@ public class StreetFighter6EnumStrategy implements GameEnumStrategy {
     public String getDefaultFighterImageSettingsFile(FighterArtTypeEnum fighterArtTypeEnum) {
         return defaultRenderImageSettingsFile;
     }
+
+
 }

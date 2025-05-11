@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.FighterImageThumbnailSettings;
+import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
@@ -41,6 +42,7 @@ public class ThumbnailService {
     private static final Logger LOGGER = LogManager.getLogger(ThumbnailService.class);
     private @Autowired TextService textService;
     private @Autowired ImageService imageService;
+    private @Autowired TournamentService tournamentService;
     private @Autowired ThumbnailFileService thumbnailFileService;
     private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
     private @Autowired JSONReaderService jsonReaderService;
@@ -48,6 +50,8 @@ public class ThumbnailService {
     private @Value("${thumbnail.size.width}") Integer thumbnailWidth;
     private @Value("${thumbnail.size.height}") Integer thumbnailHeight;
     private @Value("${thumbnail.path.save}") String saveThumbnailsPath;
+
+    private static FileThumbnailSettings fileThumbnailSettings;
 
     public void generateAndSaveThumbnail(Thumbnail thumbnail)
             throws LocalImageNotFoundException, OnlineImageNotFoundException,
@@ -116,22 +120,22 @@ public class ThumbnailService {
         LOGGER.debug("*********************************************************************************************");
 
         var result = new BufferedImage(thumbnailWidth, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
-        var thumbnailSettings = thumbnail.getFileThumbnailSettings();
+        fileThumbnailSettings = tournamentService.getTournamentThumbnailSettingsOrDefault(thumbnail.getTournament(), thumbnail.getGame());
         var g2d = result.createGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-        LOGGER.info("Drawing background in path {}.", thumbnail.getFileThumbnailSettings().getBackground());
-        imageService.drawImageFromPathFile(thumbnail.getFileThumbnailSettings().getBackground(), g2d);
+        LOGGER.info("Drawing background in path {}.", fileThumbnailSettings.getBackground());
+        imageService.drawImageFromPathFile(fileThumbnailSettings.getBackground(), g2d);
 
         this.drawCharacters(thumbnail, g2d);
 
-        LOGGER.info("Drawing foreground in path {}.", thumbnail.getFileThumbnailSettings().getForeground());
-        imageService.drawImageFromPathFile(thumbnail.getFileThumbnailSettings().getForeground(), g2d);
+        LOGGER.info("Drawing foreground in path {}.", fileThumbnailSettings.getForeground());
+        imageService.drawImageFromPathFile(fileThumbnailSettings.getForeground(), g2d);
 
         LOGGER.info("Drawing thumbnail text");
         LOGGER.debug("Loading {} text settings: {}", thumbnail.getTournament().getName(),
-                thumbnail.getFileThumbnailSettings().getTextSettings());
+                fileThumbnailSettings.getTextSettings());
         this.drawText(thumbnail, g2d);
 
         return result;
@@ -223,16 +227,16 @@ public class ThumbnailService {
     private void drawText(Thumbnail thumbnail, Graphics2D g2d)
             throws FontNotFoundException {
         g2d.drawImage(textService.convert(thumbnail.getPlayers().get(0).getPlayerName(),
-                thumbnail.getFileThumbnailSettings().getTextSettings(), true),
-                0, thumbnail.getFileThumbnailSettings().getTextSettings().getDownOffsetTop()[0], null);
+                fileThumbnailSettings.getTextSettings(), true),
+                0, fileThumbnailSettings.getTextSettings().getDownOffsetTop()[0], null);
         g2d.drawImage(textService.convert(thumbnail.getPlayers().get(1).getPlayerName(),
-                thumbnail.getFileThumbnailSettings().getTextSettings(), true),
-                thumbnailWidth / 2,  thumbnail.getFileThumbnailSettings().getTextSettings().getDownOffsetTop()[1], null);
+                fileThumbnailSettings.getTextSettings(), true),
+                thumbnailWidth / 2,  fileThumbnailSettings.getTextSettings().getDownOffsetTop()[1], null);
 
-        g2d.drawImage(textService.convert(thumbnail.getRound(), thumbnail.getFileThumbnailSettings().getTextSettings(), false),
-                0, thumbnailHeight - 100 + thumbnail.getFileThumbnailSettings().getTextSettings().getDownOffsetBottom()[0], null);
-        g2d.drawImage(textService.convert(thumbnail.getDate(), thumbnail.getFileThumbnailSettings().getTextSettings(), false),
-                thumbnailWidth / 2, thumbnailHeight - 100 + thumbnail.getFileThumbnailSettings().getTextSettings().getDownOffsetBottom()[1], null);
+        g2d.drawImage(textService.convert(thumbnail.getRound(), fileThumbnailSettings.getTextSettings(), false),
+                0, thumbnailHeight - 100 + fileThumbnailSettings.getTextSettings().getDownOffsetBottom()[0], null);
+        g2d.drawImage(textService.convert(thumbnail.getDate(), fileThumbnailSettings.getTextSettings(), false),
+                thumbnailWidth / 2, thumbnailHeight - 100 + fileThumbnailSettings.getTextSettings().getDownOffsetBottom()[1], null);
     }
 }
 

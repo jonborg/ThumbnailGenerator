@@ -137,12 +137,14 @@ public class TournamentsCreateController implements Initializable {
         initFighterArtTypeDropdown();
     }
 
-    private List<FighterArtSettings> initArtType(Game game){
+    private List<FighterArtSettings> initArtType(Game game, boolean hasDefaultSettingsFile){
         List<FighterArtSettings> list = new ArrayList<>();
         for (FighterArtTypeEnum artType : gameEnumService.getAllFighterArtTypes(game)) {
+            String defaultSettingsFile = hasDefaultSettingsFile ?
+                    gameEnumService.getDefaultFighterArtTypeSettingsFile(game, artType) : null;
             list.add(FighterArtSettings.builder()
                     .artType(artType)
-                    .fighterImageSettingsPath("")
+                    .fighterImageSettingsPath(defaultSettingsFile)
                     .build());
         }
         return list;
@@ -157,10 +159,10 @@ public class TournamentsCreateController implements Initializable {
         for (Game game: Game.values()) {
             fileThumbnailSettingsList
                     .add(new FileThumbnailSettings(game,
-                            "", "", initArtType(game), null));
+                            "", "", initArtType(game, true), null));
             fileTop8SettingsList
                     .add(new FileTop8Settings(game,
-                            "", "", initArtType(game), null));
+                            "", "", initArtType(game, false), null));
         }
         if (tournament != null) {
             for (FileThumbnailSettings settings : tournament.getThumbnailSettings()){
@@ -244,7 +246,7 @@ public class TournamentsCreateController implements Initializable {
         var currentThumbnailSettings = fileThumbnailSettingsList.stream().filter(t -> t.getGame().equals(game)).findFirst().get();
         var currentFighterArtTypeValues = gameEnumService.getAllFighterArtTypes(game);
         var currentDefaultArtType = gameEnumService.getDefaultArtType(game);
-        fighterImageSettingsFile.setText(currentDefaultArtType.getDefaultFighterImageSettingsFile());
+        fighterImageSettingsFile.setText(gameEnumService.getDefaultFighterArtTypeSettingsFile(game, currentDefaultArtType));
         artTypeThumbnail.getItems().addAll(currentFighterArtTypeValues);
         artTypeThumbnail.setConverter(new FighterArtTypeConverter());
         artTypeThumbnail.getSelectionModel().select(currentDefaultArtType);

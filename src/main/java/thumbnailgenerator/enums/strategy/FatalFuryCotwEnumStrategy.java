@@ -19,7 +19,7 @@ import thumbnailgenerator.service.Tekken8CharacterImageFetcher;
 public class FatalFuryCotwEnumStrategy implements GameEnumStrategy {
 
     @Value("${thumbnail.settings.ffcotw.render.default}")
-    private static String defaultRenderImageSettingsFile;
+    private String defaultRenderImageSettingsFile;
     @Autowired
     private FatalFuryCotwCharacterImageFetcher fetcher;
 

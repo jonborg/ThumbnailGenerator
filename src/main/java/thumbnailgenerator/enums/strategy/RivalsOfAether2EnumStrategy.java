@@ -16,7 +16,7 @@ import thumbnailgenerator.service.RivalsOfAether2CharacterImageFetcher;
 public class RivalsOfAether2EnumStrategy implements GameEnumStrategy {
 
     @Value("${thumbnail.settings.roa2.render.default}")
-    private static String defaultRenderImageSettingsFile;
+    private String defaultRenderImageSettingsFile;
     @Autowired
     private RivalsOfAether2CharacterImageFetcher fetcher;
 

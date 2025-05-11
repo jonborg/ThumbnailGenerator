@@ -96,6 +96,10 @@ public class GameEnumService {
         return names;
     }
 
+    public String getDefaultFighterArtTypeSettingsFile(Game game, FighterArtTypeEnum fighterArtTypeEnum) {
+        return getStrategy(game).getDefaultFighterImageSettingsFile(fighterArtTypeEnum);
+    }
+
     private GameEnumStrategy getStrategy(Game game) {
         if (!strategyMap.containsKey(game)) {
             throw new IllegalArgumentException("No strategy found for game: " + game);

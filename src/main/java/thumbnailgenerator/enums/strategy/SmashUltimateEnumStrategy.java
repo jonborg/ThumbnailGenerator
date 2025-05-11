@@ -16,9 +16,9 @@ import thumbnailgenerator.service.SmashUltimateCharacterImageFetcher;
 public class SmashUltimateEnumStrategy implements GameEnumStrategy {
 
     @Value("${thumbnail.settings.ssbu.render.default}")
-    private static String defaultRenderImageSettingsFile;
+    private String defaultRenderImageSettingsFile;
     @Value("${thumbnail.settings.ssbu.mural.default}")
-    private static String defaultMuralImageSettingsFile;
+    private String defaultMuralImageSettingsFile;
     @Autowired
     private SmashUltimateCharacterImageFetcher fetcher;
 

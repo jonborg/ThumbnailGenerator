@@ -24,6 +24,7 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
     private int gameIndex = 3;
     private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
     private @Autowired JSONReaderService jsonReaderService;
+    private @Autowired TournamentService tournamentService;
 
     public List<Thumbnail> getListThumbnailsFromFile(InputStream inputStream, Boolean saveLocally)
             throws FighterImageSettingsNotFoundException {
@@ -31,7 +32,7 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
         var rootThumbnail = tuple.getValue0();
         var roundList = tuple.getValue1();
         var imageSettings = (ImageSettings) jsonReaderService.getJSONArrayFromFile(
-                rootThumbnail.getFileThumbnailSettings()
+                tournamentService.getTournamentThumbnailSettingsOrDefault(rootThumbnail.getTournament(), rootThumbnail.getGame())
                         .getFighterImageSettingsFile(rootThumbnail.getArtType()),
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);

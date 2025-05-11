@@ -19,9 +19,6 @@ public class Thumbnail extends GeneratedGraphic {
     private List<Player> players;
     private FighterArtTypeEnum artType;
 
-    public FileThumbnailSettings getFileThumbnailSettings(){
-        return getTournament().getThumbnailSettingsByGame(getGame());
-    }
 }
 
 

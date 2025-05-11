@@ -69,7 +69,7 @@ public class PlayerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initFightersComboBox(fighter, StartGGEnumUtils.getAllNames(SmashUltimateEnum.class));
+        initFightersComboBox(fighter, gameEnumService.getAllCharacterNames(Game.SSBU));
         initFighterAltsSpinner(alt);
     }
 
