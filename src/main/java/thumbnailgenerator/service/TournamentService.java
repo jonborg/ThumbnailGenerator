@@ -77,8 +77,8 @@ public class TournamentService {
                 tournamentsList.add(tournament);
             }
         }
-
         jsonWriterService.updateTournamentsFile(tournamentsList);
+        jsonWriterService.updateTextSettingsFile(TextSettings.getAllTextSettings(tournamentsList));
     }
 
     public void saveNewTournaments(Tournament tournament) {
