@@ -67,13 +67,21 @@ public class GameEnumService {
         return getStrategy(game).getImageFetcher();
     }
 
-    public String findCharacterCodeByName(Game game, String searchParam) {
+    public String findCharacterCodeByName(Game game, String characterName) {
+        return searchEnum(game, characterName, "getName", "getCode");
+    }
+
+    public String findCharacterCodeByStartGGId(Game game, int characterStartGGId) {
+        return searchEnum(game, String.valueOf(characterStartGGId), "getStartGGId", "getCode");
+    }
+
+    private String searchEnum(Game game, String searchParam, String searchMethod, String returnMethod) {
         var enumClass = getCharacterEnumClass(game);
         for (CharacterEnum value : getAllCharacters(game)) {
             try {
-                String paramValue =  String.valueOf(enumClass.getMethod("getName").invoke(value));
+                String paramValue =  String.valueOf(enumClass.getMethod(searchMethod).invoke(value));
                 if (paramValue.equalsIgnoreCase(searchParam)) {
-                    return (String) enumClass.getMethod("getCode").invoke(value);
+                    return (String) enumClass.getMethod(returnMethod).invoke(value);
                 }
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
