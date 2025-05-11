@@ -86,17 +86,12 @@ public class PlayerController implements Initializable {
 
     protected String getSelectionName() {
         String sel = fighter.getSelectionModel().getSelectedItem();
-        if (sel == null || sel.equals(SmashUltimateEnum.MII_BRAWLER.getName())
-                || sel.equals(SmashUltimateEnum.MII_SWORDFIGHTER.getName())) {
-            alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
-        } else {
-            if (sel.equals(SmashUltimateEnum.MII_GUNNER.getName())
-                    || sel.equals(SmashUltimateEnum.RANDOM.getName())) {
-                alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2));
-            } else {
-                alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8));
-            }
-        }
+        int altQuantity = 1;
+        try {
+            altQuantity = gameEnumService.findCharacterAltQuantityByName(parentController.getGame(), sel);
+        } catch (NullPointerException ignored) { }
+        alt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, altQuantity));
+        alt.setDisable(altQuantity <= 1);
         return gameEnumService.findCharacterCodeByName(parentController.getGame(), sel);
     }
 
