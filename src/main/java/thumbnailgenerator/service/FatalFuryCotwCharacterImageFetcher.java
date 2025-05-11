@@ -11,14 +11,13 @@ import java.net.URL;
 @Service
 public class FatalFuryCotwCharacterImageFetcher extends CharacterImageFetcher {
 
-    @Value("${character-image.ffcotw.render.url}")
+    @Value("${character-image.ffcotw.render.path}")
     private String renderUrl;
 
     @Override
-    public URL getOnlineUrl(Fighter fighter, FighterArtTypeEnum artType)
+    public URL getOnlineUrl(Fighter fighter, FighterArtTypeEnum artType, boolean backup)
             throws MalformedURLException {
-    String urlString;
-        urlString = renderUrl + "/" + fighter.getUrlName() + "/1.png";
-        return new URL(urlString);
+        String urlString = renderUrl + "/" + fighter.getUrlName() + "/1.png";
+        return new URL(getHostAndBranchVersion(backup) + urlString);
     }
 }

@@ -140,7 +140,7 @@ public class PlayerController implements Initializable {
         Game game = parentController.getGame();
         FighterArtTypeEnum artType = parentController.getFighterArtType();
         val imageFetcher = gameEnumService.getCharacterImageFetcher(game);
-        String url = imageFetcher.getOnlineUrl(generatePlayer().getFighter(0), artType).toString();
+        String url = imageFetcher.getOnlineUrl(generatePlayer().getFighter(0), artType, false).toString();
 
         try {
             Runtime runtime = Runtime.getRuntime();

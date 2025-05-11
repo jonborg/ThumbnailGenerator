@@ -11,13 +11,13 @@ import java.net.URL;
 @Service
 public class Tekken8CharacterImageFetcher extends CharacterImageFetcher {
 
-    @Value("${character-image.tekken8.render.url}")
+    @Value("${character-image.tekken8.render.path}")
     private String renderUrl;
 
     @Override
-    public URL getOnlineUrl(Fighter fighter, FighterArtTypeEnum artType)
+    public URL getOnlineUrl(Fighter fighter, FighterArtTypeEnum artType, boolean backup)
             throws MalformedURLException {
         String urlString = renderUrl + "/" + fighter.getUrlName() + "/1.png";
-        return new URL(urlString);
+        return new URL(getHostAndBranchVersion(backup) + urlString);
     }
 }
