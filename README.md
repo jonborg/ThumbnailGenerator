@@ -7,6 +7,7 @@ This allows TOs to speed up VODs' release process. Below are the compatible game
 - Rivals of Aether 2
 - Street Fighter 6
 - Tekken 8
+- Fatal Fury: City of the Wolves
 
 ![tg_main_page.png](./assets/documentation/tg_main_page.png)
 
@@ -99,6 +100,7 @@ Images were gathered thanks to:
 - [Rivals of Aether 2 Press Kit](https://rivals2.com/presskit)
 - [Street Fighter 6 official website](https://www.streetfighter.com/6)
 - [Tekken Warehouse](https://tekkenwarehouse.com/)
+- [Fatal Fury: City of the Wolves official website](https://www.snk-corp.co.jp/us/games/fatalfury-cotw/)
 - [smash-ultimate-assets](https://github.com/marcrd/smash-ultimate-assets) repository
 - [MuralAltDrive's](https://x.com/MuralAltDrive) Smash Ultimate Mural art [Google Drive](https://drive.google.com/drive/folders/1n4lAP6YB7N-bSSgEDx0OPEI2ykOKSQrM)
 
@@ -287,6 +289,7 @@ The available games are the following:
 - Rivals of Aether 2
 - Street Fighter 6
 - Tekken 8
+- Fatal Fury: City of the Wolves
 
 It is also mandatory to provide characters and their colours.
 When selecting a character from the dropdown, an icon will appear
@@ -371,6 +374,13 @@ Depending on the number of participants of the tournament and the selections of 
 
 To save character image's locally during generation, tick **Save/Load fighters' image locally** checkbox.
 Thumbnails are saved in **/generated_thumbnails** folder.
+
+If users close Start GG thumbnail generation window, the program will store provided api key in the following file:
+
+    settings/startgg/auth-token.txt
+    
+Auth token is then loaded from said file when users open Start GG thumbnail generation window again.
+
 
 Additional Notes:
 
@@ -663,6 +673,13 @@ Thumbnails are saved in **/generated_top8** folder.
 
 
 ### Release Notes
+#### v4.1.0
+- Added Fatal Fury: City of the Wolves as a selectable game;
+- Latest Start GG API auth-token provided by user is now automatically loaded when requesting Start GG thumbnail generation; 
+- Image fetchers now check 2 branch versions of ThumbnailGeneratorCharacterImageRepository before throwing an error;
+- Set a custom JRE to allow generator to run in any PC with no Java installed.
+
+
 #### v4.0.0
 - Thumbnails and Top8 graphs can be generated for other games (Rivals of Aether 2, Street Fighter 6 and Tekken 8);
 - Character images are now downloaded from ThumbnailGeneratorCharacterImageRepository repository, instead of depending on other websites;
