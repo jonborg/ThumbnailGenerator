@@ -11,13 +11,13 @@ import java.net.URL;
 @Service
 public class RivalsOfAether2CharacterImageFetcher extends CharacterImageFetcher {
 
-    @Value("${character-image.roa2.render.url}")
+    @Value("${character-image.roa2.render.path}")
     private String renderUrl;
 
     @Override
-    public URL getOnlineUrl(Fighter fighter, FighterArtTypeEnum artType)
+    public URL getOnlineUrl(Fighter fighter, FighterArtTypeEnum artType, boolean backup)
             throws MalformedURLException {
         String urlString = renderUrl + "/" + fighter.getUrlName() + "/1.png";
-        return new URL(urlString);
+        return new URL(getHostAndBranchVersion(backup) + urlString);
     }
 }
