@@ -71,12 +71,12 @@ public class StartGGService {
         JsonObject result = runQuery(searchGamesGG.getQuery());
         LOGGER.debug("Result -> {}", result.toString());
         eventGame = findGameByStartGGId(searchGamesGG.getGameId());
-
+        var defaultArtType = gameEnumService.getDefaultArtType(eventGame).getEnumName();
         if (totalPages < 0){
             totalPages = result.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode()).getAsJsonObject("sets")
                     .getAsJsonObject("pageInfo").getAsJsonPrimitive("totalPages").getAsInt();
             foundSets.append(tournamentService.getSelectedTournament().getTournamentId()
-                    + ";" + eventGame +";" + searchGamesGG.getEventName() + ";RENDER"+ System.lineSeparator());
+                    + ";" + eventGame +";" + searchGamesGG.getEventName() + ";" + defaultArtType + System.lineSeparator());
         }
         SetGG set = (SetGG) jsonReaderService
                 .getJSONObject(result.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode())
