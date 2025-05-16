@@ -122,12 +122,9 @@ public class PlayerController implements Initializable {
     }
 
     protected void updateGameData(Game game){
+        fighter.getSelectionModel().clearSelection();
+        setAlt(1);
         initFightersComboBox(fighter, gameEnumService.getAllCharacterNames(game));
-        if (Game.SSBU.equals(game)) {
-            alt.setDisable(false);
-        } else {
-            alt.setDisable(true);
-        }
     }
 
     public void previewFighter(ActionEvent actionEvent)

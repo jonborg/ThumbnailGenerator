@@ -36,10 +36,6 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
-import thumbnailgenerator.enums.FatalFuryCotwFighterArtTypeEnum;
-import thumbnailgenerator.enums.RivalsOfAether2FighterArtTypeEnum;
-import thumbnailgenerator.enums.StreetFighter6FighterArtTypeEnum;
-import thumbnailgenerator.enums.Tekken8FighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
@@ -150,9 +146,7 @@ public class ThumbnailGeneratorController implements Initializable {
                                                                 .round(round.getText().toUpperCase())
                                                                 .date(date.getText())
                                                                 .players(
-                                                                        Thumbnail
-                                                                                .
-                                                                        createPlayerList(
+                                                                        Thumbnail.createPlayerList(
                                                                                 player1Controller.generatePlayer(),
                                                                                 player2Controller.generatePlayer()))
                                                                 .artType(getFighterArtType())
