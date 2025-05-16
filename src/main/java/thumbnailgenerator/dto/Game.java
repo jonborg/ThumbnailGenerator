@@ -9,6 +9,7 @@ public enum Game {
     ROA2("roa2","Rivals of Aether 2", 53945),
     SF6("sf6", "Street Fighter 6", 43868),
     TEKKEN8("tekken8", "Tekken 8", 49783),
+    GGST("ggst", "Guilty Gear: Strive", 33945),
     FFCOTW("ffcotw", "Fatal Fury CotW", 73221);
 
     private String code;
