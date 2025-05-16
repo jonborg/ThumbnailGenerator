@@ -5,28 +5,6 @@
     "logo": "assets/tournaments/logos/weeklyl.png",
     "thumbnailSettings": [
       {
-        "game": "SSBM",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
-          }
-        ]
-      },
-      {
-        "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
-          }
-        ]
-      },
-      {
         "game": "SSBU",
         "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -42,13 +20,13 @@
         ]
       },
       {
-        "game": "SF6",
+        "game": "SSBM",
         "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
           }
         ]
       },
@@ -64,6 +42,17 @@
         ]
       },
       {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -73,53 +62,31 @@
             "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
           }
         ]
-      }
-    ],
-    "top8Settings": [
-      {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": ""
-          }
-        ]
       },
       {
-        "game": "ROA2",
-        "foreground": "",
-        "background": "",
+        "game": "GGST",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
-          }
-        ]
-      },
-      {
-        "game": "TEKKEN8",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ggst/default.json"
           }
         ]
       },
       {
         "game": "FFCOTW",
-        "foreground": "",
-        "background": "",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
-      },
+      }
+    ],
+    "top8Settings": [
       {
         "game": "SSBU",
         "foreground": "",
@@ -137,6 +104,28 @@
         ]
       },
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
         "game": "SF6",
         "foreground": "",
         "background": "",
@@ -147,6 +136,39 @@
             "fighterImageSettings": "settings/top8/images/sf6/locus.json"
           }
         ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GGST",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
       }
     ]
   },
@@ -155,28 +177,6 @@
     "name": "Smash Invicta",
     "logo": "assets/tournaments/logos/invicta.png",
     "thumbnailSettings": [
-      {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
-          }
-        ]
-      },
-      {
-        "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
-          }
-        ]
-      },
       {
         "game": "SSBU",
         "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
@@ -193,13 +193,13 @@
         ]
       },
       {
-        "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
         "artSettings": [
           {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
           }
         ]
       },
@@ -215,6 +215,17 @@
         ]
       },
       {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -224,53 +235,31 @@
             "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
           }
         ]
-      }
-    ],
-    "top8Settings": [
+      },
       {
-        "game": "SSBM",
+        "game": "GGST",
         "foreground": "",
         "background": "",
         "artSettings": [
           {
-            "artType": "HD",
-            "fighterImageSettings": ""
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/ggst/default.json"
           }
         ]
       },
       {
         "game": "FFCOTW",
-        "foreground": "",
-        "background": "",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
-      },
-      {
-        "game": "ROA2",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": ""
-          }
-        ]
-      },
-      {
-        "game": "TEKKEN8",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": ""
-          }
-        ]
-      },
+      }
+    ],
+    "top8Settings": [
       {
         "game": "SSBU",
         "foreground": "",
@@ -288,6 +277,28 @@
         ]
       },
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
         "game": "SF6",
         "foreground": "",
         "background": "assets/tournaments/backgrounds/top8/invictaTop8.png",
@@ -296,6 +307,39 @@
           {
             "artType": "RENDER",
             "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GGST",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
           }
         ]
       }
@@ -307,28 +351,6 @@
     "logo": "assets/tournaments/logos/mushroommadness.png",
     "thumbnailSettings": [
       {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
-          }
-        ]
-      },
-      {
-        "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
-          }
-        ]
-      },
-      {
         "game": "SSBU",
         "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
         "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
@@ -344,13 +366,13 @@
         ]
       },
       {
-        "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
         "artSettings": [
           {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
           }
         ]
       },
@@ -366,6 +388,17 @@
         ]
       },
       {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
         "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
@@ -375,53 +408,31 @@
             "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
           }
         ]
-      }
-    ],
-    "top8Settings": [
-      {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": ""
-          }
-        ]
       },
       {
-        "game": "ROA2",
+        "game": "GGST",
         "foreground": "",
         "background": "",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
-          }
-        ]
-      },
-      {
-        "game": "TEKKEN8",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ggst/default.json"
           }
         ]
       },
       {
         "game": "FFCOTW",
-        "foreground": "",
-        "background": "",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
-      },
+      }
+    ],
+    "top8Settings": [
       {
         "game": "SSBU",
         "foreground": "",
@@ -439,6 +450,28 @@
         ]
       },
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
         "game": "SF6",
         "foreground": "",
         "background": "",
@@ -447,6 +480,39 @@
           {
             "artType": "RENDER",
             "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GGST",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
           }
         ]
       }
@@ -458,28 +524,6 @@
     "logo": "assets/tournaments/logos/ReturnofAether_logo.png",
     "thumbnailSettings": [
       {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
-          }
-        ]
-      },
-      {
-        "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
-          }
-        ]
-      },
-      {
         "game": "SSBU",
         "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
         "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
@@ -495,13 +539,13 @@
         ]
       },
       {
-        "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
         "artSettings": [
           {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
           }
         ]
       },
@@ -517,6 +561,17 @@
         ]
       },
       {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
         "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
@@ -526,53 +581,31 @@
             "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
           }
         ]
-      }
-    ],
-    "top8Settings": [
-      {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": ""
-          }
-        ]
       },
       {
-        "game": "ROA2",
+        "game": "GGST",
         "foreground": "",
         "background": "",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
-          }
-        ]
-      },
-      {
-        "game": "TEKKEN8",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ggst/default.json"
           }
         ]
       },
       {
         "game": "FFCOTW",
-        "foreground": "",
-        "background": "",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
-      },
+      }
+    ],
+    "top8Settings": [
       {
         "game": "SSBU",
         "foreground": "",
@@ -590,6 +623,28 @@
         ]
       },
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
         "game": "SF6",
         "foreground": "",
         "background": "",
@@ -598,6 +653,39 @@
           {
             "artType": "RENDER",
             "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GGST",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
           }
         ]
       }
@@ -609,28 +697,6 @@
     "logo": "assets/tournaments/logos/FDT_logo.png",
     "thumbnailSettings": [
       {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
-          }
-        ]
-      },
-      {
-        "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
-          }
-        ]
-      },
-      {
         "game": "SSBU",
         "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -646,13 +712,13 @@
         ]
       },
       {
-        "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
         "artSettings": [
           {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
           }
         ]
       },
@@ -668,6 +734,17 @@
         ]
       },
       {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -677,53 +754,31 @@
             "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
           }
         ]
-      }
-    ],
-    "top8Settings": [
-      {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": ""
-          }
-        ]
       },
       {
-        "game": "ROA2",
+        "game": "GGST",
         "foreground": "",
         "background": "",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
-          }
-        ]
-      },
-      {
-        "game": "TEKKEN8",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ggst/default.json"
           }
         ]
       },
       {
         "game": "FFCOTW",
-        "foreground": "",
-        "background": "",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
-      },
+      }
+    ],
+    "top8Settings": [
       {
         "game": "SSBU",
         "foreground": "",
@@ -741,6 +796,28 @@
         ]
       },
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
         "game": "SF6",
         "foreground": "",
         "background": "",
@@ -749,6 +826,39 @@
           {
             "artType": "RENDER",
             "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GGST",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
           }
         ]
       }
@@ -760,28 +870,6 @@
     "logo": "assets/tournaments/logos/ragelx.png",
     "thumbnailSettings": [
       {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
-          }
-        ]
-      },
-      {
-        "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
-          }
-        ]
-      },
-      {
         "game": "SSBU",
         "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -797,13 +885,13 @@
         ]
       },
       {
-        "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
         "artSettings": [
           {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
           }
         ]
       },
@@ -819,6 +907,17 @@
         ]
       },
       {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -828,53 +927,31 @@
             "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
           }
         ]
-      }
-    ],
-    "top8Settings": [
-      {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": ""
-          }
-        ]
       },
       {
-        "game": "ROA2",
+        "game": "GGST",
         "foreground": "",
         "background": "",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
-          }
-        ]
-      },
-      {
-        "game": "TEKKEN8",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ggst/default.json"
           }
         ]
       },
       {
         "game": "FFCOTW",
-        "foreground": "",
-        "background": "",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
-      },
+      }
+    ],
+    "top8Settings": [
       {
         "game": "SSBU",
         "foreground": "",
@@ -892,6 +969,28 @@
         ]
       },
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
         "game": "SF6",
         "foreground": "",
         "background": "",
@@ -900,6 +999,39 @@
           {
             "artType": "RENDER",
             "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GGST",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
           }
         ]
       }
@@ -911,28 +1043,6 @@
     "logo": "assets/tournaments/logos/tgf24.png",
     "thumbnailSettings": [
       {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
-          }
-        ]
-      },
-      {
-        "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
-          }
-        ]
-      },
-      {
         "game": "SSBU",
         "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
         "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
@@ -948,13 +1058,13 @@
         ]
       },
       {
-        "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
-        "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
         "artSettings": [
           {
-            "artType": "RENDER",
-            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+            "artType": "HD",
+            "fighterImageSettings": "settings/thumbnails/images/ssbm/default.json"
           }
         ]
       },
@@ -970,6 +1080,17 @@
         ]
       },
       {
+        "game": "SF6",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/sf6/default.json"
+          }
+        ]
+      },
+      {
         "game": "TEKKEN8",
         "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
         "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
@@ -979,53 +1100,31 @@
             "fighterImageSettings": "settings/thumbnails/images/tekken8/default.json"
           }
         ]
-      }
-    ],
-    "top8Settings": [
-      {
-        "game": "SSBM",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "HD",
-            "fighterImageSettings": ""
-          }
-        ]
       },
       {
-        "game": "ROA2",
+        "game": "GGST",
         "foreground": "",
         "background": "",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
-          }
-        ]
-      },
-      {
-        "game": "TEKKEN8",
-        "foreground": "",
-        "background": "",
-        "artSettings": [
-          {
-            "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ggst/default.json"
           }
         ]
       },
       {
         "game": "FFCOTW",
-        "foreground": "",
-        "background": "",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
         "artSettings": [
           {
             "artType": "RENDER",
-            "fighterImageSettings": ""
+            "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
-      },
+      }
+    ],
+    "top8Settings": [
       {
         "game": "SSBU",
         "foreground": "",
@@ -1043,6 +1142,28 @@
         ]
       },
       {
+        "game": "SSBM",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "ROA2",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
         "game": "SF6",
         "foreground": "",
         "background": "",
@@ -1051,6 +1172,39 @@
           {
             "artType": "RENDER",
             "fighterImageSettings": "settings/top8/images/sf6/icarus.json"
+          }
+        ]
+      },
+      {
+        "game": "TEKKEN8",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GGST",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
           }
         ]
       }
