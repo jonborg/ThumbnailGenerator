@@ -199,9 +199,6 @@ public class FromStartGGController implements Initializable {
             thumbnailService
                     .generateFromSmashGG(foundSets.getText(), saveLocally.isSelected());
             LOGGER.info("Thumbnails were successfully generated and saved.");
-            AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
-        }catch(ThumbnailFromFileException e){
-            //AlertFactory already thrown inside ThumbnailFromFile.generateFromSmashGG
         }catch(Exception e){
             AlertFactory.displayError(e.getMessage());
         }

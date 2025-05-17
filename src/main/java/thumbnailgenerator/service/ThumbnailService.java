@@ -13,7 +13,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 import javax.imageio.ImageIO;
+
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.javatuples.Pair;
@@ -47,6 +53,8 @@ public class ThumbnailService {
     private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
     private @Autowired JSONReaderService jsonReaderService;
     private @Autowired GameEnumService gameEnumService;
+    private @Autowired ExecutorService executorService;
+
     private @Value("${thumbnail.size.width}") Integer thumbnailWidth;
     private @Value("${thumbnail.size.height}") Integer thumbnailHeight;
     private @Value("${thumbnail.path.save}") String saveThumbnailsPath;
@@ -54,55 +62,72 @@ public class ThumbnailService {
     private static FileThumbnailSettings fileThumbnailSettings;
 
     public void generateAndSaveThumbnail(Thumbnail thumbnail)
-            throws LocalImageNotFoundException, OnlineImageNotFoundException,
-            FontNotFoundException, FighterImageSettingsNotFoundException,
-            MalformedURLException {
-
+            throws FighterImageSettingsNotFoundException,
+            OnlineImageNotFoundException, MalformedURLException,
+            FontNotFoundException, LocalImageNotFoundException {
         var imageResult = generateThumbnail(thumbnail);
         saveGeneratedGraphic(thumbnail, imageResult);
     }
 
     public void generateFromSmashGG(String text, boolean saveLocally)
-            throws FighterImageSettingsNotFoundException, FileNotFoundException,
-            ThumbnailFromFileException, FontNotFoundException,
-            UnsupportedEncodingException {
+            throws FighterImageSettingsNotFoundException, UnsupportedEncodingException {
         InputStream inputStream = new ByteArrayInputStream(text.getBytes("UTF-8"));
         generateAndSaveThumbnailsFromFile(inputStream, saveLocally);
     }
 
     public void generateAndSaveThumbnailsFromFile(InputStream inputStream, Boolean saveLocally)
-            throws FighterImageSettingsNotFoundException,
-            ThumbnailFromFileException, FontNotFoundException {
+            throws FighterImageSettingsNotFoundException {
         var thumbnailList = thumbnailFileService.getListThumbnailsFromFile(inputStream,saveLocally);
         var invalidThumbnailList = new ArrayList<Pair<Thumbnail, String>>();
-        for (Thumbnail thumbnail : thumbnailList){
-            try {
-                generateAndSaveThumbnail(thumbnail);
-            }catch(LocalImageNotFoundException e) {
-                AlertFactory.displayError(e.getMessage());
-                throw new ThumbnailFromFileException();
-            }catch(FontNotFoundException e){
-                throw e;
-            }catch (Exception e){
-                invalidThumbnailList.add(new Pair(thumbnail, e.getMessage()));
-            }
+        List<CompletableFuture<Void>> futures = new ArrayList<>();
+
+        for (Thumbnail thumbnail : thumbnailList) {
+            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+                try {
+                    generateAndSaveThumbnail(thumbnail);
+                } catch (Exception e) {
+                    synchronized (invalidThumbnailList) {
+                        invalidThumbnailList.add(new Pair<>(thumbnail, e.getMessage()));
+                    }
+                }
+            }, executorService);
+            futures.add(future);
         }
-        if (!invalidThumbnailList.isEmpty()){
-            String details = "";
-            LOGGER.error("Thumbnails could not be generated from these lines:");
-            for (Pair pair :invalidThumbnailList){
-                Thumbnail thumbnail = (Thumbnail) pair.getValue0();
-                String errorMessage = (String) pair.getValue1();
-                LOGGER.error(thumbnail);
-                var listPlayers = thumbnail.getPlayers();
-                details += listPlayers.get(0).getPlayerName() + " "
-                        + listPlayers.get(1).getPlayerName() + " "
-                        + thumbnail.getRound() + " -> "
-                        + errorMessage + System.lineSeparator();
+
+        CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+        allOf.thenRun(() -> {
+            if (invalidThumbnailList.isEmpty()) {
+                Platform.runLater(() ->
+                        AlertFactory.displayInfo("Thumbnails were successfully generated and saved!")
+                );
+            } else {
+                StringBuilder detailsBuilder = new StringBuilder();
+                LOGGER.error("Thumbnails could not be generated from these lines:");
+                for (Pair<Thumbnail, String> pair : invalidThumbnailList) {
+                    Thumbnail thumbnail = pair.getValue0();
+                    String errorMessage = pair.getValue1();
+                    LOGGER.error("Thumbnail: {}", thumbnail);
+                    var listPlayers = thumbnail.getPlayers();
+                    detailsBuilder.append(listPlayers.get(0).getPlayerName())
+                            .append(" ")
+                            .append(listPlayers.get(1).getPlayerName())
+                            .append(" ")
+                            .append(thumbnail.getRound())
+                            .append(" -> ")
+                            .append(errorMessage)
+                            .append(System.lineSeparator());
+                }
+                final String details = detailsBuilder.toString();
+                Platform.runLater(() ->
+                    AlertFactory.displayError("Thumbnails could not be generated from these lines: ", details)
+                );
+                throw new RuntimeException(new ThumbnailFromFileException());
             }
-            AlertFactory.displayError("Thumbnails could not be generated from these lines: ", details);
-            throw new ThumbnailFromFileException();
-        }
+        }).exceptionally(ex -> {
+            // Handle any unexpected exception from the entire batch
+            LOGGER.error("Error during batch processing", ex);
+            return null;
+        });
     }
 
     private BufferedImage generateThumbnail(Thumbnail thumbnail)

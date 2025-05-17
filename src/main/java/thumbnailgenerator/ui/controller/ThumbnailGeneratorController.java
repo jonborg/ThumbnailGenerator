@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -137,38 +138,59 @@ public class ThumbnailGeneratorController implements Initializable {
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
 
-        try {
-            thumbnailService.generateAndSaveThumbnail(Thumbnail.builder()
-                                                                .tournament(getSelectedTournament())
-                                                                .game(getGame())
-                                                                .imageSettings(imageSettings)
-                                                                .locally(saveLocally.isSelected())
-                                                                .round(round.getText().toUpperCase())
-                                                                .date(date.getText())
-                                                                .players(
-                                                                        Thumbnail.createPlayerList(
-                                                                                player1Controller.generatePlayer(),
-                                                                                player2Controller.generatePlayer()))
-                                                                .artType(getFighterArtType())
-                                                                .build());
+        var thumbnail = Thumbnail.builder()
+                .tournament(getSelectedTournament())
+                .game(getGame())
+                .imageSettings(imageSettings)
+                .locally(saveLocally.isSelected())
+                .round(round.getText().toUpperCase())
+                .date(date.getText())
+                .players(
+                        Thumbnail.createPlayerList(
+                                player1Controller.generatePlayer(),
+                                player2Controller.generatePlayer()))
+                .artType(getFighterArtType())
+                .build();
+
+        var thumbnailTask = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    thumbnailService.generateAndSaveThumbnail(thumbnail);
+                } catch (Exception e) {
+                    throw e;
+                }
+                return null;
+            }
+        };
+        thumbnailTask.setOnSucceeded(e -> {
             LOGGER.info("Thumbnail was successfully generated and saved!");
             AlertFactory.displayInfo("Thumbnail was successfully generated and saved!");
-        } catch (LocalImageNotFoundException e){
-            LOGGER.error("An issue occurred when loading an image. {}", e.getMessage());
-            AlertFactory.displayError(e.getMessage());
-        } catch (OnlineImageNotFoundException e){
-            LOGGER.error("An issue occurred when loading an image online. {}", e.getMessage());
-            AlertFactory.displayError(e.getMessage());
-        } catch (FontNotFoundException e){
-            LOGGER.error("An issue occurred when loading a font. {}", e.getMessage());
-            AlertFactory.displayError(e.getMessage());
-        } catch (FighterImageSettingsNotFoundException e){
-            LOGGER.error("An issue occurred when loading image settings of a character. {}", e.getMessage());
-            AlertFactory.displayError(e.getMessage());
-        }  catch (MalformedURLException e){
-            LOGGER.error("An issue occurred when getting image online. {}", e.getMessage());
-            AlertFactory.displayError(e.getMessage());
-        }
+        });
+        thumbnailTask.setOnFailed(e -> {
+            Throwable ex = thumbnailTask.getException();
+            if (ex instanceof LocalImageNotFoundException) {
+                LOGGER.error("An issue occurred when loading an image. {}", ex.getMessage());
+                AlertFactory.displayError(ex.getMessage());
+            } else if (ex instanceof OnlineImageNotFoundException) {
+                LOGGER.error("An issue occurred when loading an image online. {}", ex.getMessage());
+                AlertFactory.displayError(ex.getMessage());
+            } else if (ex instanceof FontNotFoundException) {
+                LOGGER.error("An issue occurred when loading a font. {}", ex.getMessage());
+                AlertFactory.displayError(ex.getMessage());
+            } else if (ex instanceof FighterImageSettingsNotFoundException) {
+                LOGGER.error("An issue occurred when loading image settings of a character. {}", ex.getMessage());
+                AlertFactory.displayError(ex.getMessage());
+            } else if (ex instanceof MalformedURLException) {
+                LOGGER.error("An issue occurred when getting image online. {}", ex.getMessage());
+                AlertFactory.displayError(ex.getMessage());
+            } else {
+                LOGGER.error("An unexpected error occurred.", ex);
+                AlertFactory.displayError("An unexpected error occurred: " + ex.getMessage());
+            }
+        });
+        var thumbnailThread = new Thread(thumbnailTask);
+        thumbnailThread.start();
     }
 
     //MenuBar
@@ -182,10 +204,7 @@ public class ThumbnailGeneratorController implements Initializable {
                 var inputStream = new FileInputStream(selectedFile);
                 thumbnailService
                         .generateAndSaveThumbnailsFromFile(inputStream, saveLocally.isSelected());
-                AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
-            }catch(ThumbnailFromFileException e){
-                //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
-            }catch(FontNotFoundException | FighterImageSettingsNotFoundException | FileNotFoundException e) {
+            }catch(FighterImageSettingsNotFoundException | FileNotFoundException e) {
                 AlertFactory.displayError(e.getMessage());
             }
         }
