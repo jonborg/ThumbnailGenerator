@@ -1,6 +1,8 @@
 package thumbnailgenerator;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Parent;
@@ -48,7 +50,11 @@ public class JavaFxApplication extends Application {
 
     @Override
     public void stop() {
-        ((ConfigurableApplicationContext) ApplicationContextProvider.getApplicationContext()).close();
+        var context = ((ConfigurableApplicationContext) ApplicationContextProvider.getApplicationContext());
+        var executor = context.getBean(ExecutorService.class);
+        
+        executor.shutdown();
+        context.close();
         Platform.exit();
     }
 
