@@ -1,0 +1,293 @@
+[{
+	"mirrorPlayer2": false,
+	"fighters":[
+	  {
+		"fighter": "gran",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "djeeta",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "katalina",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "charlotta",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "lancelot",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "percival",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "ladiva",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "metera",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "lowain",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "ferry",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "zeta",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "vaseraga",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "narmaya",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "soriz",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "zooey",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "cagliostro",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "yuel",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "anre",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "eustace",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "seox",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "vira",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "beelzebub",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "belial",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "avatar_belial",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "lunalu",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "anila",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "siegfried",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "grimnir",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "nier",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "lucilius",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "2b",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "vane",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "beatrix",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "versusia",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "vikala",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "sandalphon",
+		"offset": [
+		  0,
+		  0
+		],
+		"scale": 0.6
+	  }
+	]
+}]
