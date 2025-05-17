@@ -387,7 +387,8 @@ Additional Notes:
  - Users can edit the commands directly on the text area;
  - Start.gg does not provide info on used alts and some tournaments may not even provide used characters (ex.: offline tournaments);
  - Alts are set to the default alt and characters, when missing, are set to random;
- - If no commands are printed, it means that the program could not find a set with a stream assigned.
+ - If no commands are printed, it means that the program could not find a set with a stream assigned;
+ - Start.GG generations does **not** work for **Granblue Rising**, as Start.GG does not have character data for said game...
 
 ## Top 8 generation 
 ### Start Top 8 generation
@@ -560,6 +561,38 @@ Thumbnails are saved in **/generated_top8** folder.
 | Ken                | ken                |
 | Random             | random             |
 
+### Smash Melee Character URL names
+
+| Character          | URL Name           |
+|--------------------|--------------------|
+| Mario              | mario              |
+| Donkey Kong        | donkey_kong        |
+| Link               | link               |
+| Samus              | samus              |
+| Yoshi              | yoshi              |
+| Kirby              | kirby              |
+| Fox                | fox                |
+| Pikachu            | pikachu            |
+| Luigi              | luigi              |
+| Ness               | ness               |
+| Captain Falcon     | captain_falcon     |
+| Jigglypuff         | jigglypuff         |
+| Peach              | peach              |
+| Bowser             | bowser             |
+| Ice Climbers       | ice_climbers       |
+| Sheik              | sheik              |
+| Zelda              | zelda              |
+| Dr. Mario          | dr_mario           |
+| Pichu              | pichu              |
+| Falco              | falco              |
+| Marth              | marth              |
+| Young Link         | young_link         |
+| Ganondorf          | ganondorf          |
+| Mewtwo             | mewtwo             |
+| Roy                | roy                |
+| Mr. Game & Watch   | mr_game_and_watch  |
+| Random             | random             |
+
 ### Rivals of Aether 2 URL names
 
 | Character          | URL Name           |
@@ -649,6 +682,42 @@ Thumbnails are saved in **/generated_top8** folder.
 | Clive              | clive              |
 | Anna               | anna               |
 
+###Guilty Gear: Strive URL names
+
+| Character           | URL Name           |
+|---------------------|--------------------|
+| Sol Badguy          | sol                |
+| Ky Kiske            | ky                 |
+| May                 | may                |
+| Axl Low             | axl                |
+| Chipp Zanuff        | chipp              |
+| Potemkin            | potemkin           |
+| Faust               | faust              |
+| Millia Rage         | millia             |
+| Zato=1              | zato               |
+| Ramlethal Valentine | ramlethal          |
+| Leo Whitefang       | leo                |
+| Nagoriyuki          | nagoriyuki         |
+| Giovanna            | giovanna           |
+| Anji                | anji               |
+| I-No                | ino                |
+| Goldlewis Dickinson | goldlewis          |
+| Jack-O'             | jack_o             |
+| Happy Chaos         | happy_chaos        |
+| Baiken              | baiken             |
+| Testament           | testament          |
+| Bridget             | faust              |
+| Sin Kiske           | sin                |
+| Bedman?             | bedman             |
+| Asuka R #           | asuka              |
+| Johnny              | johnny             |
+| Elphet Valentine    | elphet             |
+| A.B.A               | aba                |
+| Slayer              | slayer             |
+| Dizzy               | dizzy              |
+| Venom               | venom              |
+| Random              | random             |
+
 ###Fatal Fury: City of the Wolves URL names
 
 | Character           | URL Name           |
@@ -671,8 +740,54 @@ Thumbnails are saved in **/generated_top8** folder.
 | Salvatore Ganacci   | ganacci            |
 | Hokuto Maru         | hokuto             |
 
+###Granblue Fantasy Versus: Rising URL names
+
+| Character          | URL Name           |
+|--------------------|--------------------|
+| Gran               | gran               |
+| Djeeta             | djeeta             |
+| Katalina           | katalina           |
+| Charlotta          | charlotta          |
+| Lancelot           | lancelot           |
+| Percival           | percival           |
+| Ladiva             | ladiva             |
+| Metera             | metera             |
+| Lowain             | lowain             |
+| Ferry              | ferry              |
+| Zeta               | zeta               |
+| Vaseraga           | vaseraga           |
+| Narmaya            | narmaya            |
+| Soriz              | soriz              |
+| Zooey              | zooey              |
+| Cagliostro         | cagliostro         |
+| Yuel               | yuel               |
+| Anre               | anre               |
+| Eustace            | eustace            |
+| Seox               | seox               |
+| Vira               | vira               |
+| Beelzebub          | beelzebub          |
+| Belial             | belial             |
+| Avatar Belial      | avatar_belial      |
+| Lunalu             | lunalu             |
+| Anila              | anila              |
+| Siegfried          | siegfried          |
+| Grimnir            | grimnir            |
+| Nier               | nier               |
+| Lucilius           | lucilius           |
+| 2B                 | 2b                 |
+| Vane               | vane               |
+| Beatrix            | beatrix            |
+| Versusia           | versusia           |
+| Vikala             | vikala             |
+| Sandalphon         | sandalphon         |
+
 
 ### Release Notes
+#### v4.2.0
+- Added Smash Melee, Guilty Gear: Strive and Granblue Fantasy Versus: Rising as selectable games;
+- Thumbnail and Top8 generation are now run in multiple threads, allowing parallel generation
+- Added loading indicator for Thumbnail and Top8 generations.
+
 #### v4.1.0
 - Added Fatal Fury: City of the Wolves as a selectable game;
 - Latest Start GG API auth-token provided by user is now automatically loaded when requesting Start GG thumbnail generation; 
