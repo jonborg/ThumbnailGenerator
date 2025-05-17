@@ -11,7 +11,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,8 +23,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -41,12 +46,12 @@ import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
-import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.service.GameEnumService;
 import thumbnailgenerator.service.StartGGService;
 import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.Top8Service;
+import thumbnailgenerator.ui.loading.LoadingState;
 import thumbnailgenerator.utils.converter.FighterArtTypeConverter;
 import thumbnailgenerator.service.TournamentService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
@@ -75,12 +80,18 @@ public class ThumbnailGeneratorController implements Initializable {
     private @FXML Menu menuCopyTournament;
     private @FXML Menu menuEditTournament;
     private @FXML Menu menuDeleteTournament;
+    private @FXML Label loadingText;
+    private @FXML ProgressIndicator loadingIndicator;
+
     private @Autowired TournamentService tournamentService;
     private @Autowired ThumbnailService thumbnailService;
     private @Autowired Top8Service top8Service;
     private @Autowired GameEnumService gameEnumService;
     private @Autowired StartGGService startGGService;
     private @Autowired JSONReaderService jsonReaderService;
+    private @Autowired ExecutorService executorService;
+
+    private static LoadingState loadingState;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -88,6 +99,7 @@ public class ThumbnailGeneratorController implements Initializable {
         player2Controller.setParentController(this);
         initMenuBars();
         initArtDropdown();
+        initLoading();
     }
 
     public void flipPlayers(ActionEvent actionEvent) {
@@ -137,38 +149,62 @@ public class ThumbnailGeneratorController implements Initializable {
                 new TypeToken<ArrayList<ImageSettings>>() {}.getType())
                 .get(0);
 
-        try {
-            thumbnailService.generateAndSaveThumbnail(Thumbnail.builder()
-                                                                .tournament(getSelectedTournament())
-                                                                .game(getGame())
-                                                                .imageSettings(imageSettings)
-                                                                .locally(saveLocally.isSelected())
-                                                                .round(round.getText().toUpperCase())
-                                                                .date(date.getText())
-                                                                .players(
-                                                                        Thumbnail.createPlayerList(
-                                                                                player1Controller.generatePlayer(),
-                                                                                player2Controller.generatePlayer()))
-                                                                .artType(getFighterArtType())
-                                                                .build());
+        var thumbnail = Thumbnail.builder()
+                .tournament(getSelectedTournament())
+                .game(getGame())
+                .imageSettings(imageSettings)
+                .locally(saveLocally.isSelected())
+                .round(round.getText().toUpperCase())
+                .date(date.getText())
+                .players(
+                        Thumbnail.createPlayerList(
+                                player1Controller.generatePlayer(),
+                                player2Controller.generatePlayer()))
+                .artType(getFighterArtType())
+                .build();
+        var thumbnailTask = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    thumbnailService.generateAndSaveThumbnail(thumbnail);
+                } catch (Exception e) {
+                    throw e;
+                }
+                return null;
+            }
+        };
+        thumbnailTask.setOnRunning(e -> loadingState
+                .update(true, true, 1, 1));
+        thumbnailTask.setOnSucceeded(e -> {
             LOGGER.info("Thumbnail was successfully generated and saved!");
+            loadingState.disableLoading();
             AlertFactory.displayInfo("Thumbnail was successfully generated and saved!");
-        } catch (LocalImageNotFoundException e){
-            LOGGER.error("An issue occurred when loading an image. {}", e.getMessage());
-            AlertFactory.displayError(e.getMessage());
-        } catch (OnlineImageNotFoundException e){
-            LOGGER.error("An issue occurred when loading an image online. {}", e.getMessage());
-            AlertFactory.displayError(e.getMessage());
-        } catch (FontNotFoundException e){
-            LOGGER.error("An issue occurred when loading a font. {}", e.getMessage());
-            AlertFactory.displayError(e.getMessage());
-        } catch (FighterImageSettingsNotFoundException e){
-            LOGGER.error("An issue occurred when loading image settings of a character. {}", e.getMessage());
-            AlertFactory.displayError(e.getMessage());
-        }  catch (MalformedURLException e){
-            LOGGER.error("An issue occurred when getting image online. {}", e.getMessage());
-            AlertFactory.displayError(e.getMessage());
-        }
+        });
+        thumbnailTask.setOnFailed(e -> {
+            loadingState.disableLoading();
+            Throwable ex = thumbnailTask.getException();
+            if (ex instanceof LocalImageNotFoundException) {
+                LOGGER.error("An issue occurred when loading an image. {}", ex.getMessage());
+                AlertFactory.displayError(ex.getMessage());
+            } else if (ex instanceof OnlineImageNotFoundException) {
+                LOGGER.error("An issue occurred when loading an image online. {}", ex.getMessage());
+                AlertFactory.displayError(ex.getMessage());
+            } else if (ex instanceof FontNotFoundException) {
+                LOGGER.error("An issue occurred when loading a font. {}", ex.getMessage());
+                AlertFactory.displayError(ex.getMessage());
+            } else if (ex instanceof FighterImageSettingsNotFoundException) {
+                LOGGER.error("An issue occurred when loading image settings of a character. {}", ex.getMessage());
+                AlertFactory.displayError(ex.getMessage());
+            } else if (ex instanceof MalformedURLException) {
+                LOGGER.error("An issue occurred when getting image online. {}", ex.getMessage());
+                AlertFactory.displayError(ex.getMessage());
+            } else {
+                LOGGER.error("An unexpected error occurred.", ex);
+                AlertFactory.displayError("An unexpected error occurred: " + ex.getMessage());
+            }
+        });
+        executorService.submit(thumbnailTask);
+
     }
 
     //MenuBar
@@ -181,11 +217,8 @@ public class ThumbnailGeneratorController implements Initializable {
             try {
                 var inputStream = new FileInputStream(selectedFile);
                 thumbnailService
-                        .generateAndSaveThumbnailsFromFile(inputStream, saveLocally.isSelected());
-                AlertFactory.displayInfo("Thumbnails were successfully generated and saved!");
-            }catch(ThumbnailFromFileException e){
-                //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
-            }catch(FontNotFoundException | FighterImageSettingsNotFoundException | FileNotFoundException e) {
+                        .generateAndSaveThumbnailsFromFile(inputStream, saveLocally.isSelected(), loadingState);
+            }catch(FighterImageSettingsNotFoundException | FileNotFoundException e) {
                 AlertFactory.displayError(e.getMessage());
             }
         }
@@ -357,13 +390,34 @@ public class ThumbnailGeneratorController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
-            try {
-                var inputStream = new FileInputStream(selectedFile);
-                top8Service.generateTop8FromFile(inputStream, saveLocally.isSelected());
+            var top8Task = new Task<>() {
+                @Override
+                protected Void call()
+                        throws FileNotFoundException, Top8FromFileException {
+                    try {
+                        var inputStream = new FileInputStream(selectedFile);
+                        top8Service.generateTop8FromFile(inputStream, saveLocally.isSelected());
+                    } catch (Exception e) {
+                        throw e;
+                    }
+                    return null;
+                }
+            };
+            top8Task.setOnRunning(e -> loadingState.update(true, false, 1, 1));
+            top8Task.setOnFailed(e -> loadingState.disableLoading());
+            top8Task.setOnSucceeded(e -> {
+                loadingState.disableLoading();
+                LOGGER.info("Top 8 was successfully generated and saved!");
                 AlertFactory.displayInfo("Top 8 was successfully generated and saved!");
-            }catch(Top8FromFileException | FileNotFoundException e ){
-                //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
-            }
+            });
+            executorService.submit(top8Task);
         }
+    }
+
+    private void initLoading(){
+        loadingState = new LoadingState(false, true, 0, 0);
+        loadingText.visibleProperty().bind(loadingState.isLoadingProperty());
+        loadingIndicator.visibleProperty().bind(loadingState.isLoadingProperty());
+        loadingText.textProperty().bind(loadingState.getLoadingText());
     }
 }

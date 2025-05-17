@@ -122,6 +122,9 @@ public class StartGGService {
                 }
             }
         }
+        if (charSel.isEmpty()) {
+            return "random";
+        }
         int mostUsedCharacter = Collections.max(charSel.entrySet(), HashMap.Entry.comparingByValue()).getKey();
         return findCodeByStartggId(mostUsedCharacter);
     }

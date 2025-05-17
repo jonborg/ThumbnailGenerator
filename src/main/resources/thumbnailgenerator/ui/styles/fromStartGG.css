@@ -29,3 +29,7 @@
 .side{
     -fx-padding:30 30 30 30;
 }
+
+.loading{
+    -fx-padding: 0 20 0 0;
+}
