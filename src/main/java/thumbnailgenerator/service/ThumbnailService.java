@@ -6,20 +6,18 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.imageio.ImageIO;
 
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.javatuples.Pair;
@@ -41,6 +39,7 @@ import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.service.json.JSONReaderService;
+import thumbnailgenerator.ui.loading.LoadingState;
 
 @Service
 public class ThumbnailService {
@@ -69,21 +68,23 @@ public class ThumbnailService {
         saveGeneratedGraphic(thumbnail, imageResult);
     }
 
-    public void generateFromSmashGG(String text, boolean saveLocally)
-            throws FighterImageSettingsNotFoundException, UnsupportedEncodingException {
-        InputStream inputStream = new ByteArrayInputStream(text.getBytes("UTF-8"));
-        generateAndSaveThumbnailsFromFile(inputStream, saveLocally);
+    public void generateFromSmashGG(String text, boolean saveLocally, LoadingState loadingState)
+            throws FighterImageSettingsNotFoundException {
+        InputStream inputStream = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
+        generateAndSaveThumbnailsFromFile(inputStream, saveLocally, loadingState);
     }
 
-    public void generateAndSaveThumbnailsFromFile(InputStream inputStream, Boolean saveLocally)
+    public void generateAndSaveThumbnailsFromFile(InputStream inputStream, Boolean saveLocally, LoadingState loadingState)
             throws FighterImageSettingsNotFoundException {
         var thumbnailList = thumbnailFileService.getListThumbnailsFromFile(inputStream,saveLocally);
         var invalidThumbnailList = new ArrayList<Pair<Thumbnail, String>>();
         List<CompletableFuture<Void>> futures = new ArrayList<>();
-
+        AtomicInteger generatedThumbnails = new AtomicInteger();
         for (Thumbnail thumbnail : thumbnailList) {
             CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                 try {
+                    loadingState.update(true, true,
+                            generatedThumbnails.incrementAndGet(), thumbnailList.size());
                     generateAndSaveThumbnail(thumbnail);
                 } catch (Exception e) {
                     synchronized (invalidThumbnailList) {
@@ -96,6 +97,7 @@ public class ThumbnailService {
 
         CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
         allOf.thenRun(() -> {
+            loadingState.disableLoading();
             if (invalidThumbnailList.isEmpty()) {
                 Platform.runLater(() ->
                         AlertFactory.displayInfo("Thumbnails were successfully generated and saved!")

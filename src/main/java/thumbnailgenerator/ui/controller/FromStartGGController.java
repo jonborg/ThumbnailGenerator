@@ -18,6 +18,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -35,6 +37,7 @@ import thumbnailgenerator.dto.startgg.tournament.PhaseGroupNodeGG;
 import thumbnailgenerator.dto.startgg.tournament.TournamentGG;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.service.StartGGService;
+import thumbnailgenerator.ui.loading.LoadingState;
 import thumbnailgenerator.utils.startgg.QueryUtils;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.TournamentService;
@@ -65,6 +68,11 @@ public class FromStartGGController implements Initializable {
     private ComboBox<StreamGG> streamSelect;
     @FXML
     private CheckBox saveLocally;
+    @FXML
+    private Label loadingText;
+    @FXML
+    private ProgressIndicator loadingIndicator;
+
     private Tournament backupTournament;
     private @Autowired TournamentService tournamentService;
     private @Autowired ThumbnailService thumbnailService;
@@ -73,6 +81,7 @@ public class FromStartGGController implements Initializable {
 
     @Value("${startgg.api.token.path}")
     private String startGGAuthTokenPath;
+    private static LoadingState loadingState;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -82,6 +91,7 @@ public class FromStartGGController implements Initializable {
         initTournamentFieldListener();
         initFoundSetsListener();
         initAuthToken();
+        initLoading();
     }
 
     private void removeSelectedTournament(){
@@ -197,7 +207,7 @@ public class FromStartGGController implements Initializable {
         }
         try {
             thumbnailService
-                    .generateFromSmashGG(foundSets.getText(), saveLocally.isSelected());
+                    .generateFromSmashGG(foundSets.getText(), saveLocally.isSelected(), loadingState);
             LOGGER.info("Thumbnails were successfully generated and saved.");
         }catch(Exception e){
             AlertFactory.displayError(e.getMessage());
@@ -374,5 +384,12 @@ public class FromStartGGController implements Initializable {
 
     public void onClose(){
         saveAuthToken();
+    }
+
+    private void initLoading(){
+        loadingState = new LoadingState(false, true, 0, 0);
+        loadingText.visibleProperty().bind(loadingState.isLoadingProperty());
+        loadingIndicator.visibleProperty().bind(loadingState.isLoadingProperty());
+        loadingText.textProperty().bind(loadingState.getLoadingText());
     }
 }
