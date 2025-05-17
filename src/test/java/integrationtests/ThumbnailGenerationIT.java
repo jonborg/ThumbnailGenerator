@@ -37,7 +37,8 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
     }
 
     @Test
-    public void create_validThumbnailRenders_success() throws IOException {
+    public void create_validThumbnailRenders_success()
+            throws IOException, InterruptedException {
         //Arrange
         ThumbnailInput input = generateThumbnailInput();
         File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
@@ -54,6 +55,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
+        WaitUtils.waitInSeconds(2);
         boolean isFileCreated = WaitUtils.waitForFile(actualImage);
         assertTrue(isFileCreated);
 
@@ -64,7 +66,8 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
     }
 
     @Test
-    public void create_validThumbnailMuralArts_success() throws IOException {
+    public void create_validThumbnailMuralArts_success()
+            throws IOException, InterruptedException {
         //Arrange
         ThumbnailInput input = generateThumbnailInput();
         input.setArtType(SmashUltimateFighterArtTypeEnum.MURAL);
@@ -82,6 +85,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
+        WaitUtils.waitInSeconds(2);
         boolean isFileCreated = WaitUtils.waitForFile(actualImage);
         assertTrue(isFileCreated);
 
@@ -92,7 +96,8 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
     }
 
     @Test
-    public void create_validThumbnailSaveLocally_success() throws IOException {
+    public void create_validThumbnailSaveLocally_success()
+            throws IOException, InterruptedException {
         //Arrange
         ThumbnailInput input = generateThumbnailInput();
         File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
@@ -111,6 +116,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
+        WaitUtils.waitInSeconds(2);
         boolean isFileCreated = WaitUtils.waitForFile(actualImage);
         assertTrue(isFileCreated);
         assertTrue(marioImage.exists());

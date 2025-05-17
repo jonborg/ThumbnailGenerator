@@ -1,5 +1,6 @@
 package thumbnail;
 
+import javafx.embed.swing.JFXPanel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,10 +11,9 @@ import thumbnailgenerator.Main;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
-import thumbnailgenerator.exception.FontNotFoundException;
-import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.TournamentService;
+import thumbnailgenerator.ui.loading.LoadingState;
 import utils.FileUtils;
 import utils.WaitUtils;
 
@@ -38,15 +38,17 @@ public class MultiThumbnailGenerationTest {
 
     @BeforeEach
     public void init(){
+        JFXPanel fxPanel = new JFXPanel();
         tournamentService.initTournamentsListAndSettings();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"multiThumbnailGeneration.txt", "multiThumbnailGenerationNoArtType.txt"})
     public void create_validThumbnailFileRenders_success(String inputFile)
-            throws ThumbnailFromFileException, FontNotFoundException,
-            IOException, FighterImageSettingsNotFoundException {
+            throws IOException, FighterImageSettingsNotFoundException,
+            InterruptedException {
         //Arrange
+        var loadingState = new LoadingState(false,true ,0 ,0);
         File thumbnailListFile = new File(getClass().getResource("/input/" + inputFile).getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(
@@ -64,8 +66,9 @@ public class MultiThumbnailGenerationTest {
 
         //Act
         InputStream fileInputsStream = new FileInputStream(thumbnailListFile);
-        thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, false);
+        thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, false, loadingState);
 
+        WaitUtils.waitInSeconds(7);
         //Assert
         for (int i=0; i<3; i++) {
             var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
@@ -80,9 +83,10 @@ public class MultiThumbnailGenerationTest {
 
     @Test
     public void create_validThumbnailFileMural_success()
-            throws ThumbnailFromFileException, FontNotFoundException,
-            IOException, FighterImageSettingsNotFoundException {
+            throws IOException, FighterImageSettingsNotFoundException,
+            InterruptedException {
         //Arrange
+        var loadingState = new LoadingState(false,true ,0 ,0);
         File thumbnailListFile = new File(getClass().getResource("/input/multiMuralThumbnailGeneration.txt").getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(
@@ -100,9 +104,10 @@ public class MultiThumbnailGenerationTest {
 
         //Act
         InputStream fileInputsStream = new FileInputStream(thumbnailListFile);
-        thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, false);
+        thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, false, loadingState);
 
         //Assert
+        WaitUtils.waitInSeconds(7);
         for (int i=0; i<3; i++) {
             var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
             assertTrue(thumbnailExists);
@@ -116,9 +121,10 @@ public class MultiThumbnailGenerationTest {
 
     @Test
     public void create_validThumbnailFileRendersSaveLocally_success()
-            throws ThumbnailFromFileException, FontNotFoundException,
-            IOException, FighterImageSettingsNotFoundException {
+            throws IOException, FighterImageSettingsNotFoundException,
+            InterruptedException {
         //Arrange
+        var loadingState = new LoadingState(false,true ,0 ,0);
         File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailGeneration.txt").getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(
@@ -144,8 +150,9 @@ public class MultiThumbnailGenerationTest {
 
         //Act
         InputStream fileInputsStream = new FileInputStream(thumbnailListFile);
-        thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, true);
+        thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, true, loadingState);
 
+        WaitUtils.waitInSeconds(7);
         //Assert
         for (int i=0; i<3; i++) {
             var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
