@@ -1,0 +1,245 @@
+[{
+	"mirrorPlayer2": false,
+	"fighters":[
+	  {
+		"fighter": "sol",
+		"offset": [
+		  -60,
+		  60
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "ky",
+		"offset": [
+		  150,
+		  100
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "may",
+		"offset": [
+		  120,
+		  40
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "axl",
+		"offset": [
+		  -150,
+		  100
+		],
+		"scale": 0.8
+	  },
+	  {
+		"fighter": "chipp",
+		"offset": [
+		  -210,
+		  80
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "potemkin",
+		"offset": [
+		  -280,
+		  -220
+		],
+		"scale": 1
+	  },
+	  {
+		"fighter": "faust",
+		"offset": [
+		  -320,
+		  110
+		],
+		"scale": 1
+	  },
+	  {
+		"fighter": "millia",
+		"offset": [
+		  20,
+		  0
+		],
+		"scale": 0.5
+	  },
+	  {
+		"fighter": "zato",
+		"offset": [
+		  0,
+		  -150
+		],
+		"scale": 0.5
+	  },
+	  {
+		"fighter": "ramlethal",
+		"offset": [
+		  10,
+		  -230
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "leo",
+		"offset": [
+		  -50,
+		  -520
+		],
+		"scale": 0.7
+	  },
+	  {
+		"fighter": "nagoriyuki",
+		"offset": [
+		  -50,
+		  -380
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "giovanna",
+		"offset": [
+		  -50,
+		  -300
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "anji",
+		"offset": [
+		  0,
+		  -50
+		],
+		"scale": 0.55
+	  },
+	  {
+		"fighter": "ino",
+		"offset": [
+		  60,
+		  -200
+		],
+		"scale": 0.55
+	  },
+	  {
+		"fighter": "goldlewis",
+		"offset": [
+		  -80,
+		  100
+		],
+		"scale": 1.1
+	  },
+	  {
+		"fighter": "jack_o",
+		"offset": [
+		  0,
+		  -200
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "happy_chaos",
+		"offset": [
+		  -30,
+		  -100
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "baiken",
+		"offset": [
+		  50,
+		  -100
+		],
+		"scale": 1.4
+	  },
+	  {
+		"fighter": "testament",
+		"offset": [
+		  -300,
+		  -120
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "sin",
+		"offset": [
+		  -80,
+		  -30
+		],
+		"scale": 1.4
+	  },
+	  {
+		"fighter": "bedman",
+		"offset": [
+		  200,
+		  -200
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "asuka",
+		"offset": [
+		  -170,
+		  -200
+		],
+		"scale": 1.7
+	  },
+	  {
+		"fighter": "johnny",
+		"offset": [
+		  100,
+		  0
+		],
+		"scale": 1.1
+	  },
+	  {
+		"fighter": "elphet",
+		"offset": [
+		  40,
+		  40
+		],
+		"scale": 1
+	  },
+	  {
+		"fighter": "aba",
+		"offset": [
+		  100,
+		  -400
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "slayer",
+		"offset": [
+		  0,
+		  -200
+		],
+		"scale": 1.5
+	  },
+	  {
+		"fighter": "dizzy",
+		"offset": [
+		  -50,
+		  -470
+		],
+		"scale": 1.5
+	  },
+	  {
+		"fighter": "venom",
+		"offset": [
+		  300,
+		  -550
+		],
+		"scale": 0.4
+	  },
+	  {
+		"fighter": "random",
+		"offset": [
+		  0,
+		  -100
+		],
+		"scale": 2
+	  }
+	]
+}]
