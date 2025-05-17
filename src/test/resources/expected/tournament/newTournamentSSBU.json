@@ -84,6 +84,17 @@
             "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
+      },
+      {
+        "game": "GBFVR",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/gbfvr/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -161,6 +172,17 @@
       },
       {
         "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GBFVR",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -257,6 +279,17 @@
             "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
+      },
+      {
+        "game": "GBFVR",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/gbfvr/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -334,6 +367,17 @@
       },
       {
         "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GBFVR",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -430,6 +474,17 @@
             "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
+      },
+      {
+        "game": "GBFVR",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/gbfvr/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -507,6 +562,17 @@
       },
       {
         "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GBFVR",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -603,6 +669,17 @@
             "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
+      },
+      {
+        "game": "GBFVR",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/gbfvr/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -680,6 +757,17 @@
       },
       {
         "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GBFVR",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -776,6 +864,17 @@
             "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
+      },
+      {
+        "game": "GBFVR",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/gbfvr/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -853,6 +952,17 @@
       },
       {
         "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GBFVR",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -949,6 +1059,17 @@
             "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
+      },
+      {
+        "game": "GBFVR",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/gbfvr/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -1026,6 +1147,17 @@
       },
       {
         "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GBFVR",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -1122,6 +1254,17 @@
             "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
+      },
+      {
+        "game": "GBFVR",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/gbfvr/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -1199,6 +1342,17 @@
       },
       {
         "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GBFVR",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -1295,6 +1449,17 @@
             "fighterImageSettings": "settings/thumbnails/images/ffcotw/default.json"
           }
         ]
+      },
+      {
+        "game": "GBFVR",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/gbfvr/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -1371,6 +1536,17 @@
       },
       {
         "game": "FFCOTW",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "GBFVR",
         "foreground": "",
         "background": "",
         "artSettings": [
