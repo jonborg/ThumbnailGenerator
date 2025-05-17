@@ -108,7 +108,7 @@ public class CustomApplicationTest extends ApplicationTest {
 
     public <T> void writeAndSelectInComboBox(String parentFxml, ComboBoxId comboBoxId, String selection){
         ComboBox<T> comboBox = findElement(comboBoxId.getValue(), parentFxml);
-        clickOn(comboBox).write(selection).clickOn(selection);
+        clickOn(comboBox).write(selection.substring(0, selection.length()-1)).press(KeyCode.ENTER);
     }
 
     public <T> void writeInSpinner(String parentFxml, SpinnerId spinnerId, String value){

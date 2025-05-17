@@ -1,0 +1,220 @@
+[{
+	"mirrorPlayer2": false,
+	"fighters":[
+	  {
+		"fighter": "mario",
+		"offset": [
+		  -10,
+		  80
+		],
+		"scale": 0.45
+	  },
+	  {
+		"fighter": "donkey_kong",
+		"offset": [
+		  70,
+		  -120
+		],
+		"scale": 0.55
+	  },
+	  {
+		"fighter": "link",
+		"offset": [
+		  170,
+		  -60
+		],
+		"scale": 0.8
+	  },
+	  {
+		"fighter": "samus",
+		"offset": [
+		  0,
+		  70
+		],
+		"scale": 0.60
+	  },
+	  {
+		"fighter": "yoshi",
+		"offset": [
+		  0,
+		  100
+		],
+		"scale": 0.45
+	  },
+	  {
+		"fighter": "kirby",
+		"offset": [
+		  0,
+		  -80
+		],
+		"scale": 0.40
+	  },
+	  {
+		"fighter": "fox",
+		"offset": [
+		  50,
+		  -40
+		],
+		"scale": 0.60
+	  },
+	  {
+		"fighter": "pikachu",
+		"offset": [
+		  60,
+		  0
+		],
+		"scale": 0.40
+	  },
+	  {
+		"fighter": "luigi",
+		"offset": [
+		  -30,
+		  0
+		],
+		"scale": 0.5
+	  },
+	  {
+		"fighter": "ness",
+		"offset": [
+		  20,
+		  100
+		],
+		"scale": 0.35
+	  },
+	  {
+		"fighter": "captain_falcon",
+		"offset": [
+		  -20,
+		  110
+		],
+		"scale": 0.8
+	  },
+	  {
+		"fighter": "jigglypuff",
+		"offset": [
+		  0,
+		  -60
+		],
+		"scale": 0.4
+	  },
+	  {
+		"fighter": "peach",
+		"offset": [
+		  0,
+		  60
+		],
+		"scale": 0.7
+	  },
+	  {
+		"fighter": "bowser",
+		"offset": [
+		  200,
+		  -300
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "ice_climbers",
+		"offset": [
+		  20,
+		  -170
+		],
+		"scale": 0.55
+	  },
+	  {
+		"fighter": "sheik",
+		"offset": [
+		  -70,
+		  -700
+		],
+		"scale": 0.65
+	  },
+	  {
+		"fighter": "zelda",
+		"offset": [
+		  -50,
+		  110
+		],
+		"scale": 0.7
+	  },
+	  {
+		"fighter": "dr_mario",
+		"offset": [
+		  70,
+		  -30
+		],
+		"scale": 0.5
+	  },
+	  {
+		"fighter": "pichu",
+		"offset": [
+		  40,
+		  70
+		],
+		"scale": 0.30
+	  },
+	  {
+		"fighter": "falco",
+		"offset": [
+		  0,
+		  70
+		],
+		"scale": 0.50
+	  },
+	  {
+		"fighter": "marth",
+		"offset": [
+		  0,
+		  120
+		],
+		"scale": 0.7
+	  },
+	  {
+		"fighter": "young_link",
+		"offset": [
+		  -120,
+		  10
+		],
+		"scale": 0.6
+	  },
+	  {
+		"fighter": "ganondorf",
+		"offset": [
+		  250,
+		  0
+		],
+		"scale": 0.7
+	  },
+	  {
+		"fighter": "mewtwo",
+		"offset": [
+		  -10,
+		  80
+		],
+		"scale": 0.45
+	  },
+	  {
+		"fighter": "roy",
+		"offset": [
+		  20,
+		  -170
+		],
+		"scale": 0.8
+	  },
+	  {
+		"fighter": "mr_game_and_watch",
+		"offset": [
+		  70,
+		  30
+		],
+		"scale": 0.45
+	  },
+	  {
+		"fighter": "random",
+		"offset": [
+		  0,
+		  -100
+		],
+		"scale": 2
+	  }
+]}]

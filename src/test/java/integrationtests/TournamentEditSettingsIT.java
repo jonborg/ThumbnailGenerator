@@ -23,7 +23,11 @@ import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.enums.FatalFuryCotwFighterArtTypeEnum;
+import thumbnailgenerator.enums.GranblueVersusRisingFighterArtTypeEnum;
+import thumbnailgenerator.enums.GuiltyGearStriveFighterArtTypeEnum;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtTypeEnum;
+import thumbnailgenerator.enums.SmashMeleeFighterArtTypeEnum;
 import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.enums.StreetFighter6FighterArtTypeEnum;
 import thumbnailgenerator.enums.Tekken8FighterArtTypeEnum;
@@ -172,9 +176,13 @@ public class TournamentEditSettingsIT extends CustomApplicationTest {
     private static Stream<Arguments> getGamesAndDefaultArtTypeEnums() {
         return Stream.of(
                 Arguments.of(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER),
+                Arguments.of(Game.SSBM, SmashMeleeFighterArtTypeEnum.HD),
                 Arguments.of(Game.ROA2, RivalsOfAether2FighterArtTypeEnum.RENDER),
                 Arguments.of(Game.SF6, StreetFighter6FighterArtTypeEnum.RENDER),
-                Arguments.of(Game.TEKKEN8, Tekken8FighterArtTypeEnum.RENDER)
+                Arguments.of(Game.TEKKEN8, Tekken8FighterArtTypeEnum.RENDER),
+                Arguments.of(Game.GGST, GuiltyGearStriveFighterArtTypeEnum.RENDER),
+                Arguments.of(Game.FFCOTW, FatalFuryCotwFighterArtTypeEnum.RENDER),
+                Arguments.of(Game.GBFVR, GranblueVersusRisingFighterArtTypeEnum.RENDER)
         );
     }
 }

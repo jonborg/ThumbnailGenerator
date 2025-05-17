@@ -21,6 +21,9 @@ public class AlertFactory {
     }
 
     public static void displayInfo(String contextText){
+        if (Boolean.getBoolean("javafx.headless")) {
+            return;
+        }
         alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText("Info");

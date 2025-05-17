@@ -24,3 +24,7 @@
     -fx-pref-width: 225;
     -fx-min-width: 225;
 }
+
+.loading{
+    -fx-padding: 0 20 0 0;
+}

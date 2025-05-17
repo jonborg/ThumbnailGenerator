@@ -2,6 +2,7 @@ package thumbnailgenerator.service;
 
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,6 +81,7 @@ public class TournamentService {
         if (list != null){
             for (Tournament tournament:list) {
                 LOGGER.info("{} -> {}", tournament.getName(), tournament.toString());
+                orderGameSettings(tournament);
                 tournamentsList.add(tournament);
             }
         }
@@ -90,8 +92,8 @@ public class TournamentService {
     public void saveNewTournaments(Tournament tournament) {
         LOGGER.info("Saving updated tournament list.");
         if (tournament != null){
+            orderGameSettings(tournament);
             tournamentsList.add(tournament);
-
         }
         tournamentsList.stream().peek(t -> LOGGER.info("{} -> {}", t.getName(), t.toString()));
         jsonWriterService.updateTournamentsFile(tournamentsList);
@@ -100,6 +102,7 @@ public class TournamentService {
 
     public void saveChangesToTournament(Tournament newTournament, Tournament oldVersionTournament) {
         LOGGER.info("Saving updated tournament list.");
+        orderGameSettings(newTournament);
         tournamentsList = tournamentsList.stream()
                 .map(t -> oldVersionTournament.getTournamentId().equals(t.getTournamentId()) ? newTournament : t )
                 .collect(Collectors.toList());
@@ -178,6 +181,15 @@ public class TournamentService {
                 null,
                 defaultList,
                 null
+        );
+    }
+
+    private void orderGameSettings(Tournament tournament){
+        tournament.getThumbnailSettings().sort(
+                Comparator.comparing(s -> s.getGame().ordinal())
+        );
+        tournament.getTop8Settings().sort(
+                Comparator.comparing(s -> s.getGame().ordinal())
         );
     }
 }

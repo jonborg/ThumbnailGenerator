@@ -7,7 +7,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="thumbnailgenerator.ui.controller.FromStartGGController"
-            prefHeight="400.0" prefWidth="800.0"
+            prefHeight="550.0" prefWidth="800.0"
             stylesheets="@../styles/fromStartGG.css">
 
     <HBox spacing="30" alignment="CENTER">
@@ -72,12 +72,18 @@
                 </graphic>
             </Button>
         </VBox>
-        <VBox alignment="CENTER" spacing="20" styleClass="side">
-            <TextArea fx:id="foundSets" prefWidth="500" prefHeight="380" />
-            <VBox alignment="CENTER" spacing="5">
-                <CheckBox fx:id="saveLocally" text="Save/Load fighters' image locally" disable="true"/>
-                <Button fx:id="genStart" disable="true" onAction="#generateThumbnails" text="Generate thumbnails"/>
+        <VBox>
+            <VBox alignment="CENTER" spacing="20" styleClass="side">
+                <TextArea fx:id="foundSets" prefWidth="500" prefHeight="380" />
+                <VBox alignment="CENTER" spacing="5">
+                    <CheckBox fx:id="saveLocally" text="Save/Load fighters' image locally" disable="true"/>
+                    <Button fx:id="genStart" disable="true" onAction="#generateThumbnails" text="Generate thumbnails"/>
+                </VBox>
             </VBox>
+            <HBox alignment="CENTER_RIGHT" spacing="5" styleClass="loading" >
+                <Label fx:id="loadingText" visible="false"/>
+                <ProgressIndicator fx:id="loadingIndicator" maxWidth="20" maxHeight="20" visible="false"/>
+            </HBox>
         </VBox>
     </HBox>
 </AnchorPane>

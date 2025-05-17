@@ -86,5 +86,9 @@
                 </HBox>
             </VBox>
         </VBox>
+        <HBox alignment="CENTER_RIGHT" spacing="5" styleClass="loading" >
+            <Label fx:id="loadingText" visible="false"/>
+            <ProgressIndicator fx:id="loadingIndicator" maxWidth="20" maxHeight="20" visible="false"/>
+        </HBox>
     </VBox>
 </StackPane>
