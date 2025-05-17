@@ -11,6 +11,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -82,6 +84,7 @@ public class ThumbnailGeneratorController implements Initializable {
     private @Autowired GameEnumService gameEnumService;
     private @Autowired StartGGService startGGService;
     private @Autowired JSONReaderService jsonReaderService;
+    private @Autowired ExecutorService executorService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -189,8 +192,8 @@ public class ThumbnailGeneratorController implements Initializable {
                 AlertFactory.displayError("An unexpected error occurred: " + ex.getMessage());
             }
         });
-        var thumbnailThread = new Thread(thumbnailTask);
-        thumbnailThread.start();
+        executorService.submit(thumbnailTask);
+
     }
 
     //MenuBar
@@ -376,13 +379,24 @@ public class ThumbnailGeneratorController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             LOGGER.info("User loaded file {}.", selectedFile.getPath());
-            try {
-                var inputStream = new FileInputStream(selectedFile);
-                top8Service.generateTop8FromFile(inputStream, saveLocally.isSelected());
+            var top8Task = new Task<>() {
+                @Override
+                protected Void call()
+                        throws FileNotFoundException, Top8FromFileException {
+                    try {
+                        var inputStream = new FileInputStream(selectedFile);
+                        top8Service.generateTop8FromFile(inputStream, saveLocally.isSelected());
+                    } catch (Exception e) {
+                        throw e;
+                    }
+                    return null;
+                }
+            };
+            top8Task.setOnSucceeded(e -> {
+                LOGGER.info("Top 8 was successfully generated and saved!");
                 AlertFactory.displayInfo("Top 8 was successfully generated and saved!");
-            }catch(Top8FromFileException | FileNotFoundException e ){
-                //AlertFactory already thrown inside ThumbnailFromFile.generateFromFile
-            }
+            });
+            executorService.submit(top8Task);
         }
     }
 }
