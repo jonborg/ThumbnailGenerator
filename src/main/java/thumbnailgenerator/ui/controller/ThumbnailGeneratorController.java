@@ -47,6 +47,7 @@ import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.service.GameEnumService;
+import thumbnailgenerator.service.LegacyService;
 import thumbnailgenerator.service.StartGGService;
 import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.service.ThumbnailService;
@@ -90,7 +91,7 @@ public class ThumbnailGeneratorController implements Initializable {
     private @Autowired StartGGService startGGService;
     private @Autowired JSONReaderService jsonReaderService;
     private @Autowired ExecutorService executorService;
-
+    private @Autowired LegacyService legacyService;
     private static LoadingState loadingState;
 
     @Override
@@ -143,11 +144,10 @@ public class ThumbnailGeneratorController implements Initializable {
         }
 
         LOGGER.info("Loading image settings of tournament {} for game {}", getSelectedTournament().getName(), getGame());
-        var imageSettings = (ImageSettings) jsonReaderService.getJSONArrayFromFile(
+        var imageSettings = (ImageSettings) jsonReaderService.getJSONObjectFromFile(
                 tournamentService.getTournamentThumbnailSettingsOrDefault(getSelectedTournament(), getGame())
                         .getFighterImageSettingsFile(getFighterArtType()),
-                new TypeToken<ArrayList<ImageSettings>>() {}.getType())
-                .get(0);
+                new TypeToken<ImageSettings>() {}.getType());
 
         var thumbnail = Thumbnail.builder()
                 .tournament(getSelectedTournament())
@@ -412,6 +412,14 @@ public class ThumbnailGeneratorController implements Initializable {
             });
             executorService.submit(top8Task);
         }
+    }
+
+    public void convertCharacterOffsets(ActionEvent actionEvent)
+            throws MalformedURLException, OnlineImageNotFoundException {
+        var filePath = "settings/thumbnails/images/ffcotw/default.json";
+        var game = Game.FFCOTW;
+        var artTypeString = "Render";
+        legacyService.convertThumbnailCharacterOffsets(filePath, game, artTypeString);
     }
 
     private void initLoading(){

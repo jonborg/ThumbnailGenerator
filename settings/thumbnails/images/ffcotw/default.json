@@ -1,126 +1,158 @@
-[{
-	"mirrorPlayer2": false,
-	"fighters":[
-	  {
-		"fighter": "rock",
-		"offset": [
-		  -100,
-		  0
-		],
-		"scale": 0.65
-	  },
-	  {
-		"fighter": "terry",
-		"offset": [
-		  -300,
-		  100
-		],
-		"scale": 0.60
-	  },{
-		"fighter": "jenet",
-		"offset": [
-		  -200,
-		  100
-		],
-		"scale": 0.65
-	  },{
-		"fighter": "marco",
-		"offset": [
-		  80,
-		  80
-		],
-		"scale": 0.65
-	  },{
-		"fighter": "preecha",
-		"offset": [
-		  -200,
-		  -50
-		],
-		"scale": 0.65
-	  },{
-		"fighter": "hotaru",
-		"offset": [
-		  80,
-		  0
-		],
-		"scale": 0.4
-	  },{
-		"fighter": "vox",
-		"offset": [
-		  200,
-		  50
-		],
-		"scale": 0.60
-	  },{
-		"fighter": "tizoc",
-		"offset": [
-		  -400,
-		  -620
-		],
-		"scale": 0.60
-	  },{
-		"fighter": "kevin",
-		"offset": [
-		  -400,
-		  0
-		],
-		"scale": 0.65
-	  },{
-		"fighter": "billy",
-		"offset": [
-		  250,
-		  -200
-		],
-		"scale": 0.65
-	  },{
-		"fighter": "mai",
-		"offset": [
-		  -30,
-		  30
-		],
-		"scale": 0.75
-	  },{
-		"fighter": "kim",
-		"offset": [
-		  200,
-		  -30
-		],
-		"scale": 0.7
-	  },{
-		"fighter": "gato",
-		"offset": [
-		  -300,
-		  50
-		],
-		"scale": 0.65
-	  },{
-		"fighter": "kain",
-		"offset": [
-		  -30,
-		  100
-		],
-		"scale": 0.65
-	  },{
-		"fighter": "cr7",
-		"offset": [
-		  -150,
-		  100
-		],
-		"scale": 1
-	  },{
-		"fighter": "ganacci",
-		"offset": [
-		  -100,
-		  100
-		],
-		"scale": 1
-	  },{
-		"fighter": "hokuto",
-		"offset": [
-		  -200,
-		  -70
-		],
-		"scale": 0.65
-	  }
-	]
-}]
+{
+  "mirrorPlayer2": false,
+  "fighters": [
+    {
+      "fighter": "rock",
+      "offset": [
+        -533,
+        0
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "terry",
+      "offset": [
+        -730,
+        100
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+    {
+      "fighter": "jenet",
+      "offset": [
+        -692,
+        100
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "marco",
+      "offset": [
+        -412,
+        80
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "preecha",
+      "offset": [
+        -633,
+        -50
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "hotaru",
+      "offset": [
+        -100,
+        0
+      ],
+      "scale": 0.4,
+      "flip": false
+    },
+    {
+      "fighter": "vox",
+      "offset": [
+        -230,
+        50
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+    {
+      "fighter": "tizoc",
+      "offset": [
+        -830,
+        -620
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+    {
+      "fighter": "kevin",
+      "offset": [
+        -892,
+        0
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "billy",
+      "offset": [
+        -242,
+        -200
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "mai",
+      "offset": [
+        -647,
+        30
+      ],
+      "scale": 0.75,
+      "flip": false
+    },
+    {
+      "fighter": "kim",
+      "offset": [
+        -758,
+        -30
+      ],
+      "scale": 0.7,
+      "flip": false
+    },
+    {
+      "fighter": "gato",
+      "offset": [
+        -792,
+        50
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "kain",
+      "offset": [
+        -522,
+        100
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "cr7",
+      "offset": [
+        -604,
+        100
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "ganacci",
+      "offset": [
+        -554,
+        100
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "hokuto",
+      "offset": [
+        -692,
+        -70
+      ],
+      "scale": 0.65,
+      "flip": false
+    }
+  ]
+}

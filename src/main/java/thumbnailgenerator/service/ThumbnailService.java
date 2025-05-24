@@ -196,11 +196,11 @@ public class ThumbnailService {
         LOGGER.info("Generating thumbnail preview.");
         List<Player> players = Player.generatePreviewPlayers(gameEnumService.getAllCharacters(game));
         ImageSettings imageSettings = (ImageSettings)
-                jsonReaderService.getJSONArrayFromFile(
+                jsonReaderService.getJSONObjectFromFile(
                         tournament
                                 .getThumbnailSettingsByGame(game)
                                 .getFighterImageSettingsFile(artType),
-                        new TypeToken<ArrayList<ImageSettings>>() {}.getType()).get(0);
+                        new TypeToken<ImageSettings>() {}.getType());
         return generateThumbnail(Thumbnail.builder()
                 .tournament(tournament)
                 .game(game)
@@ -222,21 +222,27 @@ public class ThumbnailService {
         for (Player player : thumbnail.getPlayers()) {
             port++;
             LOGGER.info("Drawing player {} information.", port);
-            var fighter = player.getFighter(0);
-            var characterImage = characterImageFetcher.getCharacterImage(fighter, thumbnail);
-            if (Game.SSBU.equals(thumbnail.getGame())) {
-                smashUltimateCharacterService.convertToAlternateRender(fighter);
+            var imageList = new ArrayList<BufferedImage>();
+            for (int i=0; i < player.getFighterList().size(); i++) {
+                var fighter = player.getFighter(i);
+                var characterImage = characterImageFetcher.getCharacterImage(fighter, thumbnail);
+                if (Game.SSBU.equals(thumbnail.getGame())) {
+                    smashUltimateCharacterService.convertToAlternateRender(fighter);
+                }
+                var fighterImageThumbnailSettings = thumbnail.getImageSettings()
+                        .findFighterImageSettings(fighter.getUrlName());
+
+                imageList.add(editCharacterImageWithMask(characterImage, fighterImageThumbnailSettings, player));
             }
-            var fighterImageThumbnailSettings = thumbnail.getImageSettings()
-                    .findFighterImageSettings(fighter.getUrlName());
 
-            characterImage = editCharacterImageWithMask(characterImage, fighterImageThumbnailSettings, player);
-
-            LOGGER.info("Drawing player {}'s character: {}", port, fighter.getName());
-            if (characterImage.getWidth() < thumbnailWidth / 2 && fighter.isFlip()) {
-                g2d.drawImage(characterImage, null, thumbnailWidth / 2 * port - characterImage.getWidth(), 0);
-            } else {
-                g2d.drawImage(characterImage, null, thumbnailWidth / 2 * (port - 1), 0);
+            if(imageList.size() < 2){
+                LOGGER.info("Drawing player {}'s character: {}", port, player.getFighter(0).getName());
+                var characterImage = imageList.get(0);
+                if (imageList.get(0).getWidth() < thumbnailWidth / 2 && player.getFighter(0).isFlip()) {
+                    g2d.drawImage(characterImage, null, thumbnailWidth / 2 * port - characterImage.getWidth(), 0);
+                } else {
+                    g2d.drawImage(characterImage, null, thumbnailWidth / 2 * (port - 1), 0);
+                }
             }
         }
     }
@@ -258,9 +264,9 @@ public class ThumbnailService {
             var mask = ImageIO.read(new File("assets/masks/thumbnails/default.png"));
             var characterImage1 = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
 
-            var cropOffset = - Math.max((characterImage1.getWidth() + Math.abs(2*fighterImageThumbnailSettings.getOffset()[0]) - 640) / 2, 0);
-            var offsetTotal = new int[]{Math.max(2*fighterImageThumbnailSettings.getOffset()[0], 0) + cropOffset, fighterImageThumbnailSettings.getOffset()[1]};
-
+            //var cropOffset = - Math.max((characterImage1.getWidth() + Math.abs(2*fighterImageThumbnailSettings.getOffset()[0]) - 640) / 2, 0);
+            //var offsetTotal = new int[]{Math.max(2*fighterImageThumbnailSettings.getOffset()[0], 0) + cropOffset, fighterImageThumbnailSettings.getOffset()[1]};
+            var offsetTotal = fighterImageThumbnailSettings.getOffset();
             var characterImage3 = imageService.flipImage(characterImage1, isFlip);
             var characterImage4 = imageService.applyMask(characterImage3, mask, offsetTotal);
             return characterImage4;

@@ -31,11 +31,10 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
         var tuple = readGraphicGenerationFile(inputStream);
         var rootThumbnail = tuple.getValue0();
         var roundList = tuple.getValue1();
-        var imageSettings = (ImageSettings) jsonReaderService.getJSONArrayFromFile(
+        var imageSettings = (ImageSettings) jsonReaderService.getJSONObjectFromFile(
                 tournamentService.getTournamentThumbnailSettingsOrDefault(rootThumbnail.getTournament(), rootThumbnail.getGame())
                         .getFighterImageSettingsFile(rootThumbnail.getArtType()),
-                new TypeToken<ArrayList<ImageSettings>>() {}.getType())
-                .get(0);
+                new TypeToken<ImageSettings>() {}.getType());
         var thumbnailList = new ArrayList<Thumbnail>();
         for (Round round : roundList){
             setPlayerFlip(round.getPlayers(), imageSettings, rootThumbnail.getGame());
