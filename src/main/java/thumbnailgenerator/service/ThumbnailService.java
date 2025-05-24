@@ -243,6 +243,16 @@ public class ThumbnailService {
                 } else {
                     g2d.drawImage(characterImage, null, thumbnailWidth / 2 * (port - 1), 0);
                 }
+            } else {
+                BufferedImage slot = new BufferedImage(thumbnailWidth/2, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
+                var slotGraphics = slot.getGraphics();
+                for (int i = 0; i < imageList.size(); i++){
+                    var characterImage = imageList.get(1-i);
+                    int x = port == 1 ? (i)*250 -50: (1-i)*250 -50;
+                    int y = (i)*150;
+                    slotGraphics.drawImage(characterImage, x, y, null);
+                }
+                g2d.drawImage(slot, null, thumbnailWidth / 2 * (port - 1), 0);
             }
         }
     }
@@ -268,8 +278,10 @@ public class ThumbnailService {
             //var offsetTotal = new int[]{Math.max(2*fighterImageThumbnailSettings.getOffset()[0], 0) + cropOffset, fighterImageThumbnailSettings.getOffset()[1]};
             var offsetTotal = fighterImageThumbnailSettings.getOffset();
             var characterImage3 = imageService.flipImage(characterImage1, isFlip);
-            var characterImage4 = imageService.applyMask(characterImage3, mask, offsetTotal);
-            return characterImage4;
+            var doublesScale = 0.7;
+            var characterImage4 = imageService.applyMask(characterImage3, imageService.resizeImage(mask, 1/doublesScale), offsetTotal);
+            var characterImage5 = imageService.resizeImage(characterImage4, doublesScale);
+            return characterImage5;
         } catch (IOException ex){
             LOGGER.error(ex);
             AlertFactory.displayError("ERROR Mask");

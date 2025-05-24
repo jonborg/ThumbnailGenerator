@@ -416,10 +416,11 @@ public class ThumbnailGeneratorController implements Initializable {
 
     public void convertCharacterOffsets(ActionEvent actionEvent)
             throws MalformedURLException, OnlineImageNotFoundException {
-        var filePath = "settings/thumbnails/images/ffcotw/default.json";
-        var game = Game.FFCOTW;
+        var filePath = "settings/thumbnails/images/mirrorPlayer2.json";
+        var game = Game.SSBU;
         var artTypeString = "Render";
         legacyService.convertThumbnailCharacterOffsets(filePath, game, artTypeString);
+        AlertFactory.displayInfo("Conversion completed.");
     }
 
     private void initLoading(){
