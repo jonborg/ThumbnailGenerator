@@ -230,7 +230,7 @@ public class ThumbnailService {
             var fighterImageThumbnailSettings = thumbnail.getImageSettings()
                     .findFighterImageSettings(fighter.getUrlName());
 
-            characterImage = editCharacterImage(characterImage, fighterImageThumbnailSettings, player);
+            characterImage = editCharacterImageWithMask(characterImage, fighterImageThumbnailSettings, player);
 
             LOGGER.info("Drawing player {}'s character: {}", port, fighter.getName());
             if (characterImage.getWidth() < thumbnailWidth / 2 && fighter.isFlip()) {
@@ -248,6 +248,24 @@ public class ThumbnailService {
         characterImage = imageService.offsetImage(characterImage, fighterImageThumbnailSettings.getOffset());
         characterImage = imageService.flipImage(characterImage, isFlip);
         characterImage = imageService.cropImage(characterImage, thumbnailWidth/2, thumbnailHeight);
+        return characterImage;
+    }
+
+    public BufferedImage editCharacterImageWithMask(BufferedImage characterImage , FighterImageThumbnailSettings fighterImageThumbnailSettings, Player player) {
+        var isFlip = player.getFighter(0).isFlip() !=
+                fighterImageThumbnailSettings.isFlip();
+        try {
+            ;
+            var mask = ImageIO.read(new File("assets/masks/thumbnails/default.png"));
+            var characterImage1 = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
+            var characterImage2 = imageService.offsetImage(characterImage1, fighterImageThumbnailSettings.getOffset());
+            var offset = new int[] {- Math.max((characterImage2.getWidth() - 640) / 2, 0), 0};
+            var characterImage3 = imageService.flipImage(characterImage2, isFlip);
+            var characterImage4 = imageService.applyMask(characterImage3, mask, offset);
+            return characterImage4;
+        } catch (IOException ex){
+            LOGGER.error(ex);
+        }
         return characterImage;
     }
 
