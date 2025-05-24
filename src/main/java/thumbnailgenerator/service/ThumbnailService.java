@@ -255,16 +255,18 @@ public class ThumbnailService {
         var isFlip = player.getFighter(0).isFlip() !=
                 fighterImageThumbnailSettings.isFlip();
         try {
-            ;
             var mask = ImageIO.read(new File("assets/masks/thumbnails/default.png"));
             var characterImage1 = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
-            var characterImage2 = imageService.offsetImage(characterImage1, fighterImageThumbnailSettings.getOffset());
-            var offset = new int[] {- Math.max((characterImage2.getWidth() - 640) / 2, 0), 0};
-            var characterImage3 = imageService.flipImage(characterImage2, isFlip);
-            var characterImage4 = imageService.applyMask(characterImage3, mask, offset);
+
+            var cropOffset = - Math.max((characterImage1.getWidth() + Math.abs(2*fighterImageThumbnailSettings.getOffset()[0]) - 640) / 2, 0);
+            var offsetTotal = new int[]{Math.max(2*fighterImageThumbnailSettings.getOffset()[0], 0) + cropOffset, fighterImageThumbnailSettings.getOffset()[1]};
+
+            var characterImage3 = imageService.flipImage(characterImage1, isFlip);
+            var characterImage4 = imageService.applyMask(characterImage3, mask, offsetTotal);
             return characterImage4;
         } catch (IOException ex){
             LOGGER.error(ex);
+            AlertFactory.displayError("ERROR Mask");
         }
         return characterImage;
     }
