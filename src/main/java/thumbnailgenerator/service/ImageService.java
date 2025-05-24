@@ -61,7 +61,7 @@ public class ImageService {
         int height = (int) (scale * bufferedImage.getHeight());
 
         LOGGER.info("Resize complete to width {} and height {}.",
-                bufferedImage.getWidth(), bufferedImage.getHeight());
+                width, height);
         return Scalr
                 .resize(bufferedImage, Scalr.Method.ULTRA_QUALITY,
                         bufferedImage.getHeight() < bufferedImage.getWidth() ?
@@ -128,7 +128,7 @@ public class ImageService {
         AlphaComposite
                 ac = AlphaComposite.getInstance(AlphaComposite.DST_IN, 1.0F);
         g2.setComposite(ac);
-        g2.drawImage(mask, 0, 0, null);
+        //g2.drawImage(mask, 0, 0, null);
         g2.dispose();
         return dest;
     }
