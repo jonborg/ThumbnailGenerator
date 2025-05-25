@@ -74,11 +74,16 @@ public class LegacyService {
         var thumbnail = Thumbnail.builder().artType(artTypeEnum).locally(false).build();
         var originalImage = imageFetcher.getCharacterImage(fighter, thumbnail);
         var scaledImage = imageService.resizeImage(originalImage, settings.getScale());
+        var offsetImage = imageService.offsetImage(scaledImage, settings.getOffset());
+        var flipImage = imageService.flipImage(offsetImage, settings.isFlip());
+        var cropImage = imageService.cropImage(flipImage, 640, 720);
 
         var cropOffset = - Math.max((scaledImage.getWidth() + Math.abs(2*settings.getOffset()[0]) - 640) / 2, 0);
-        var flipMultiplier = settings.isFlip() ? -1 : 1;
-        var offsetTotal = new int[]{flipMultiplier*Math.max(2*settings.getOffset()[0], 0) + flipMultiplier*cropOffset, settings.getOffset()[1]};
-
+        var flipOffset = settings.isFlip() ? (int) Math.max((320.0-cropImage.getWidth())/2, 0) : 0;
+        var offsetTotal = new int[]{
+                Math.max(2*settings.getOffset()[0], 0) + cropOffset + flipOffset,
+                settings.getOffset()[1]
+        };
         return offsetTotal;
     }
 }

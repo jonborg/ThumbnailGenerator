@@ -269,7 +269,7 @@ public class ThumbnailService {
             int centerOffsetY = (int) Math.round((0.3)*(360-fighterImageThumbnailSettings.getOffset()[1]));
 
             int pairOffsetX = port == 1 ? -100 + 200*(1-i) : -100 + 200*(i);
-            int pairOffsetY = -70 + 140*(1-i);
+            int pairOffsetY = -50 + 100*(1-i);
 
             int[] offset = new int[] {
                     fighterImageThumbnailSettings.getOffset()[0] + centerOffsetX + pairOffsetX,
@@ -300,11 +300,11 @@ public class ThumbnailService {
             //var cropOffset = - Math.max((characterImage1.getWidth() + Math.abs(2*fighterImageThumbnailSettings.getOffset()[0]) - 640) / 2, 0);
             //var offsetTotal = new int[]{Math.max(2*fighterImageThumbnailSettings.getOffset()[0], 0) + cropOffset, fighterImageThumbnailSettings.getOffset()[1]};
             var offsetTotal = fighterImageThumbnailSettings.getOffset();
-            var characterImage3 = imageService.flipImage(characterImage1, isFlip);
             var doublesScale = 0.7;
-            var characterImage4 = imageService.applyMask(characterImage3, imageService.resizeImage(mask, 1.5), offsetTotal);
-            var characterImage5 = imageService.resizeImage(characterImage4, doublesScale);
-            return characterImage5;
+            var characterImage3 = imageService.applyMask(characterImage1, mask, offsetTotal);
+            var characterImage4 = imageService.flipImage(characterImage3, isFlip);
+            //var characterImage5 = imageService.resizeImage(characterImage4, doublesScale);
+            return characterImage4;
         } catch (IOException ex){
             LOGGER.error(ex);
             AlertFactory.displayError("ERROR Mask");
