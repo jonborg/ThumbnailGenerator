@@ -12,41 +12,12 @@
     <VBox spacing="10">
         <TextField fx:id="player" styleClass="player"/>
         <VBox spacing="10">
-            <HBox spacing="5">
-                <VBox>
-                    <Label text="Character:"/>
-                    <ComboBox fx:id="fighter" styleClass="fighter" editable="true"
-                    onAction="#selectFighter"/>
-                </VBox>
-                <VBox>
-                    <Label text="Flip?"/>
-                    <CheckBox fx:id="flip"/>
-                </VBox>
-            </HBox>
-            <HBox fx:id="colorBox" spacing="30">
-                <VBox>
-                    <Label text="Alt:"/>
-                    <Spinner fx:id="alt" styleClass="alt" editable="true" disable="true">
-                        <valueFactory>
-                            <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="8"/>
-                        </valueFactory>
-                    </Spinner>
-                </VBox>
-                <HBox>
-                    <HBox>
-                        <Hyperlink fx:id="iconLink" disable="true" onAction="#previewFighter" >
-                            <graphic>
-                                <ImageView fx:id="icon" preserveRatio="true"/>
-                            </graphic>
-                        </Hyperlink>
-                        <Hyperlink fx:id="icon2Link" disable="true" onAction="#previewFighter" >
-                            <graphic>
-                                <ImageView fx:id="icon2" preserveRatio="true"/>
-                            </graphic>
-                        </Hyperlink>
-                    </HBox>
-                </HBox>
-            </HBox>
+            <GridPane fx:id="characterGrid" hgap="5" vgap="5">
+                <Label text="Character:" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.valignment="BOTTOM"/>
+                <Label text="Alt:" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM"/>
+                <Label text="Flip?" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.valignment="BOTTOM"/>
+            </GridPane>
+            <HBox fx:id="iconBox" spacing="5" alignment="CENTER"/>
         </VBox>
     </VBox>
 </AnchorPane>

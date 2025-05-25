@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
@@ -114,6 +113,8 @@ public class ThumbnailGeneratorController implements Initializable {
         int auxAlt1 = 1;
         int auxAlt2 = 1;
 
+        /*
+
         if (player1Controller.getUrlName() != null)    {
             auxAlt1 = player1Controller.getAlt();
         }
@@ -126,12 +127,12 @@ public class ThumbnailGeneratorController implements Initializable {
         player2Controller.setFighter(auxSel);
 
         player1Controller.setAlt(auxAlt2);
-        player2Controller.setAlt(auxAlt1);
+        player2Controller.setAlt(auxAlt1);*/
     }
 
     public void createThumbnail(ActionEvent actionEvent) {
         LOGGER.info("Creating a single thumbnail.");
-        if (player1Controller.getUrlName() == null || player2Controller.getUrlName() == null){
+        if (!player1Controller.hasMandatoryFields() || !player2Controller.hasMandatoryFields()){
             LOGGER.error("User did not select characters for all players.");
             AlertFactory.displayWarning("It is required to select a character for all players before generating the thumbnail.");
             return;
@@ -162,6 +163,7 @@ public class ThumbnailGeneratorController implements Initializable {
                                 player2Controller.generatePlayer()))
                 .artType(getFighterArtType())
                 .build();
+
         var thumbnailTask = new Task<>() {
             @Override
             protected Void call() throws Exception {

@@ -3,13 +3,13 @@
 }
 
 .fighter{
-    -fx-max-width: 200;
-    -fx-min-width: 200;
-    -fx-pref-width: 200;
+    -fx-max-width: 150;
+    -fx-min-width: 150;
+    -fx-pref-width: 150;
 }
 
 .alt{
-    -fx-max-width: 80;
+    -fx-max-width: 60;
 }
 
 .icon{
