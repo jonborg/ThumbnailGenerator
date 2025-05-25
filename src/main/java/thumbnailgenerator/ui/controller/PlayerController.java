@@ -100,7 +100,7 @@ public class PlayerController implements Initializable {
         try {
             iconLink.setDisable(false);
             icon.setImage(new Image(getClass().getResourceAsStream("/icons/" + gameCode + "/" + urlName + "/" + alt.getValue() + ".png")));
-            if (SmashUltimateEnum.PYRA.getName().equals(urlName)){
+            if (SmashUltimateEnum.PYRA.getCode().equals(urlName)){
                 icon2Link.setDisable(false);
                 Image imageIcon2 = new Image(getClass().getResourceAsStream("/icons/ssbu/mythra/" + alt.getValue() + ".png"));
                 icon2.setImage(imageIcon2);

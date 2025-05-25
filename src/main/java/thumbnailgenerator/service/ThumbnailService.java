@@ -291,7 +291,7 @@ public class ThumbnailService {
         BufferedImage slot = new BufferedImage(thumbnailWidth/2, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
         var slotGraphics = slot.getGraphics();
         for (int i=1; i >=0; i--) {
-            BufferedImage mask = slot;
+            BufferedImage mask;
             try {
                 if (port == 1) {
                     mask = ImageIO.read(new File("assets/masks/thumbnails/char" + (i + 1) + ".png"));
@@ -299,7 +299,8 @@ public class ThumbnailService {
                     mask = ImageIO.read(new File("assets/masks/thumbnails/char" + (i + 3) + ".png"));
                 }
             }catch (Exception e){
-                AlertFactory.displayError("ERROR", e.getMessage());
+                mask = new BufferedImage(thumbnailWidth/2, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
+                mask.getGraphics().fillRect(0, 0, thumbnailWidth/2, thumbnailHeight);
             }
 
             var fighter = player.getFighter(i);
