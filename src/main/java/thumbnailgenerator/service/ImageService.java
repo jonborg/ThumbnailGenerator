@@ -129,7 +129,7 @@ public class ImageService {
         AlphaComposite
                 ac = AlphaComposite.getInstance(AlphaComposite.DST_IN, 1.0F);
         g2.setComposite(ac);
-        //g2.drawImage(mask, 0, 0, null);
+        g2.drawImage(mask, 0, 0, null);
         g2.dispose();
         return dest;
     }

@@ -225,7 +225,7 @@ public class ThumbnailService {
             port++;
             LOGGER.info("Drawing player {} information.", port);
             var slot = player.getFighterList().size() > 1
-                    ? getCharacterPair(thumbnail, player, characterImageFetcher, port)
+                    ? getCharacterPairSplit(thumbnail, player, characterImageFetcher, port)
                     : getCharacterSingle(thumbnail, player, characterImageFetcher, port);
             g2d.drawImage(slot, null, thumbnailWidth / 2 * (port - 1), 0);
         }
@@ -281,6 +281,56 @@ public class ThumbnailService {
             flipGraphic.drawImage(characterImage2, offset[0], offset[1], null);
             var flipImage = imageService.flipImage(flipCanvas, fighter.isFlip());
             slotGraphics.drawImage(flipImage, 0, 0, null);
+        }
+        return slot;
+    }
+
+    private BufferedImage getCharacterPairSplit(Thumbnail thumbnail, Player player, CharacterImageFetcher characterImageFetcher, int port)
+            throws MalformedURLException, OnlineImageNotFoundException,
+            FighterImageSettingsNotFoundException {
+        BufferedImage slot = new BufferedImage(thumbnailWidth/2, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
+        var slotGraphics = slot.getGraphics();
+        for (int i=1; i >=0; i--) {
+            BufferedImage mask = slot;
+            try {
+                if (port == 1) {
+                    mask = ImageIO.read(new File("assets/masks/thumbnails/char" + (i + 1) + ".png"));
+                } else {
+                    mask = ImageIO.read(new File("assets/masks/thumbnails/char" + (i + 3) + ".png"));
+                }
+            }catch (Exception e){
+                AlertFactory.displayError("ERROR", e.getMessage());
+            }
+
+            var fighter = player.getFighter(i);
+            var characterImage = characterImageFetcher.getCharacterImage(fighter, thumbnail);
+            if (Game.SSBU.equals(thumbnail.getGame())) {
+                smashUltimateCharacterService.convertToAlternateRender(fighter);
+            }
+            var fighterImageThumbnailSettings = thumbnail.getImageSettings()
+                    .findFighterImageSettings(fighter.getUrlName());
+
+            var characterImage1 = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
+            var characterImage2 = Scalr.resize(characterImage1, (int) Math.round(0.7*characterImage1.getWidth()), (int) Math.round(0.7*characterImage1.getHeight()), Scalr.OP_ANTIALIAS);
+
+            //offset + double fighter offset
+            int centerOffsetX = (int) Math.round((0.3)*(320-fighterImageThumbnailSettings.getOffset()[0]));
+            int centerOffsetY = (int) Math.round((0.3)*(360-fighterImageThumbnailSettings.getOffset()[1]));
+
+            int pairOffsetX = port == 1 ? -100 + 200*(1-i) : -100 + 200*(i);
+            int pairOffsetY = -50 + 100*(1-i);
+
+            int flipMultiplier = fighter.isFlip() ? -1 : 1;
+            int[] offset = new int[] {
+                    fighterImageThumbnailSettings.getOffset()[0] + centerOffsetX + flipMultiplier*pairOffsetX,
+                    fighterImageThumbnailSettings.getOffset()[1] + centerOffsetY + pairOffsetY
+            };
+            var flipCanvas = new BufferedImage(640, 720, BufferedImage.TYPE_INT_ARGB);
+            var flipGraphic = flipCanvas.createGraphics();
+            flipGraphic.drawImage(characterImage2, offset[0], offset[1], null);
+            var flipImage = imageService.flipImage(flipCanvas, fighter.isFlip());
+            var maskedImage = imageService.applyMask(flipImage, mask, new int[]{0,0});
+            slotGraphics.drawImage(maskedImage, 0, 0, null);
         }
         return slot;
     }
