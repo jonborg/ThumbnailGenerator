@@ -34,24 +34,34 @@ public class CharacterSelect {
         this.icon = new ImageView();
         this.iconLink = new Hyperlink();
 
-        setStyles();
         initCharacterComboBox(characterList);
         initFighterAltsSpinner();
         initIcons();
     }
 
     public void setElements(GridPane gridPane, int row, HBox hBox){
-        gridPane.add(characterComboBox, 0, row);
-        gridPane.add(altSpinner, 1, row);
-        gridPane.add(flipCheckBox, 2, row);
+        if (row == 1) {
+            gridPane.add(characterComboBox, 0, row);
+            GridPane.setColumnSpan(characterComboBox, 2);
+        } else {
+            gridPane.add(characterComboBox, 1, row);
+        }
+        GridPane.setHalignment(characterComboBox, HPos.RIGHT);
+
+        gridPane.add(altSpinner, 2, row);
+        gridPane.add(flipCheckBox, 3, row);
         GridPane.setHalignment(flipCheckBox, HPos.CENTER);
         GridPane.setValignment(flipCheckBox, VPos.CENTER);
 
         hBox.getChildren().add(iconLink);
     }
 
-    private void setStyles(){
-        this.characterComboBox.setStyle("{-fx-max-width: 150; -fx-min-width: 150; -fx-pref-width: 150;}");
+    public void setStyles(int row){
+        if (row == 1) {
+            this.characterComboBox.setStyle("{-fx-max-width: 150; -fx-min-width: 140; -fx-pref-width: 150;}");
+        } else {
+            this.characterComboBox.setStyle("{-fx-max-width: 120; -fx-min-width: 120; -fx-pref-width: 120;}");
+        }
         this.altSpinner.setStyle("{-fx-max-width: 60; -fx-min-width: 60; -fx-pref-width: 60;}");
         this.icon.setStyle("{height: 64;}");
     }
@@ -85,15 +95,23 @@ public class CharacterSelect {
         return this.characterComboBox.getSelectionModel().getSelectedItem();
     }
 
+    public void setCharacterName(String name){
+        this.characterComboBox.getSelectionModel().select(name);
+    }
+
     public int getAlt(){
-        return this.getAltSpinner().getValue();
+        return this.altSpinner.getValue();
     }
 
     public void setAlt(int i){
-        getAltSpinner().getValueFactory().setValue(i);
+        this.altSpinner.getValueFactory().setValue(i);
     }
 
     public boolean isFlip(){
-        return this.getFlipCheckBox().isSelected();
+        return this.flipCheckBox.isSelected();
+    }
+
+    public void setFlip(boolean isFlip){
+        this.flipCheckBox.setSelected(isFlip);
     }
 }

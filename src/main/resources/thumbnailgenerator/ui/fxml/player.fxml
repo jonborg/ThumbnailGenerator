@@ -13,9 +13,9 @@
         <TextField fx:id="player" styleClass="player"/>
         <VBox spacing="10">
             <GridPane fx:id="characterGrid" hgap="5" vgap="5">
-                <Label text="Character:" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.valignment="BOTTOM"/>
-                <Label text="Alt:" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM"/>
-                <Label text="Flip?" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.valignment="BOTTOM"/>
+                <Label text="Characters:" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.valignment="BOTTOM"/>
+                <Label text="Alts:" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.valignment="BOTTOM"/>
+                <Label text="Flip?" GridPane.rowIndex="0" GridPane.columnIndex="3" GridPane.valignment="BOTTOM"/>
             </GridPane>
             <HBox fx:id="iconBox" spacing="5" alignment="CENTER"/>
         </VBox>

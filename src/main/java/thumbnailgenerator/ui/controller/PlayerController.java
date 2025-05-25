@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
@@ -43,6 +44,7 @@ public class PlayerController implements Initializable {
     protected GridPane characterGrid;
     @FXML
     protected HBox iconBox;
+    private Button addRemoveCharacter;
 
     protected String urlName;
     protected List<CharacterSelect> characterSelectList;
@@ -51,18 +53,34 @@ public class PlayerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initCharacterBox(gameEnumService.getAllCharacterNames(Game.SSBU));
+        initCharacterBox();
     }
 
-    protected void initCharacterBox(List<String> characterList){
+    protected void initCharacterBox(){
         characterSelectList = new ArrayList<>();
-        createCharacterSelect(characterList, 1);
-        createCharacterSelect(characterList, 2);
+        createCharacterSelect(gameEnumService.getAllCharacterNames(Game.SSBU), 1);
+
+        addRemoveCharacter = new Button();
+        addRemoveCharacter.setStyle("{-fx-max-width: 25; -fx-min-width: 25; -fx-pref-width: 25;}");
+        characterGrid.add(addRemoveCharacter, 0, 2);
+        addRemoveCharacter.setText("+");
+        addRemoveCharacter.setOnAction(event -> {
+            var game = parentController.getGame();
+            var chList = gameEnumService.getAllCharacterNames(game);
+            if (characterSelectList.size() < 2) {
+                createCharacterSelect(chList, 2);
+                addRemoveCharacter.setText("-");
+            } else {
+                removeCharacterSelect(2);
+                addRemoveCharacter.setText("+");
+            }
+        });
     }
 
     private void createCharacterSelect(List<String> characterList, int row){
         var characterSelect = new CharacterSelect(characterList);
-        characterSelect.setElements(characterGrid,row, iconBox);
+        characterSelect.setStyles(row);
+        characterSelect.setElements(characterGrid, row, iconBox);
         characterSelect.getCharacterComboBox()
                 .getSelectionModel()
                 .selectedItemProperty()
@@ -75,6 +93,17 @@ public class PlayerController implements Initializable {
                 .addListener(((observable, oldValue, newValue) -> updateFighterIcon(characterSelect)));
         characterSelect.getIconLink().setOnAction(actionEvent -> previewFighter(actionEvent, row-1));
         characterSelectList.add(characterSelect);
+    }
+
+    private void removeCharacterSelect(int row){
+        var characterSelect = characterSelectList.get(row-1);
+        characterGrid.getChildren().remove(characterSelect.getCharacterComboBox());
+        characterGrid.getChildren().remove(characterSelect.getAltSpinner());
+        characterGrid.getChildren().remove(characterSelect.getFlipCheckBox());
+        iconBox.getChildren().remove(characterSelect.getIcon());
+        iconBox.getChildren().remove(characterSelect.getIconLink());
+
+        characterSelectList.remove(row-1);
     }
 
     protected void updateSpinner(String sel, CharacterSelect characterSelect) {
@@ -153,6 +182,23 @@ public class PlayerController implements Initializable {
 
     public void setPlayer(String player){
         this.player.setText(player);
+    }
+
+    public List<CharacterSelect> getCharacterSelectList(){
+        return characterSelectList;
+    }
+
+    public void updateCharacterSelectList(List<CharacterSelect> characterSelectList){
+        if (this.characterSelectList.size() != characterSelectList.size()) {
+            addRemoveCharacter.fire();
+        }
+        for (int i = 0; i < this.characterSelectList.size(); i++) {
+            var cs = this.characterSelectList.get(i);
+            var newCs = characterSelectList.get(i);
+            cs.setCharacterName(newCs.getCharacterName());
+            cs.setAlt(newCs.getAlt());
+            cs.setFlip(newCs.isFlip());
+        }
     }
 
     public void setParentController(ThumbnailGeneratorController parentController) {
