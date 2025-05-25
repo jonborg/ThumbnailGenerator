@@ -271,11 +271,16 @@ public class ThumbnailService {
             int pairOffsetX = port == 1 ? -100 + 200*(1-i) : -100 + 200*(i);
             int pairOffsetY = -50 + 100*(1-i);
 
+            int flipMultiplier = fighter.isFlip() ? -1 : 1;
             int[] offset = new int[] {
-                    fighterImageThumbnailSettings.getOffset()[0] + centerOffsetX + pairOffsetX,
+                    fighterImageThumbnailSettings.getOffset()[0] + centerOffsetX + flipMultiplier*pairOffsetX,
                     fighterImageThumbnailSettings.getOffset()[1] + centerOffsetY + pairOffsetY
             };
-            slotGraphics.drawImage(characterImage2, offset[0], offset[1], null);
+            var flipCanvas = new BufferedImage(640, 720, BufferedImage.TYPE_INT_ARGB);
+            var flipGraphic = flipCanvas.createGraphics();
+            flipGraphic.drawImage(characterImage2, offset[0], offset[1], null);
+            var flipImage = imageService.flipImage(flipCanvas, fighter.isFlip());
+            slotGraphics.drawImage(flipImage, 0, 0, null);
         }
         return slot;
     }
