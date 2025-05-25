@@ -269,15 +269,19 @@ public class ThumbnailService {
             //offset + double fighter offset
             int pairOffsetX = port == 1 ? (i)*250 -50: (1-i)*250 -50;
             int pairOffsetY = (i)*150;
-            int centerOffsetX = 0;
-            int centerOffsetY = 0;
+
+            int centerOffsetX = (int) Math.round((0.3)*(320-fighterImageThumbnailSettings.getOffset()[0]));
+            int centerOffsetY = (int) Math.round((0.3)*(360-fighterImageThumbnailSettings.getOffset()[1]));
             int[] offset = new int[] {
                     fighterImageThumbnailSettings.getOffset()[0] + centerOffsetX ,
                     fighterImageThumbnailSettings.getOffset()[1] + centerOffsetY
             };
 
-
-           slotGraphics.drawImage(characterImage2, offset[0], offset[1], null);
+            if (i==0){
+                slotGraphics.drawImage(characterImage2, offset[0], offset[1], null);
+            }else {
+                slotGraphics.drawImage(characterImage1, fighterImageThumbnailSettings.getOffset()[0], fighterImageThumbnailSettings.getOffset()[1], null);
+            }
         }
         return slot;
     }
