@@ -263,25 +263,19 @@ public class ThumbnailService {
 
             var characterImage1 = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
             var characterImage2 = Scalr.resize(characterImage1, (int) Math.round(0.7*characterImage1.getWidth()), (int) Math.round(0.7*characterImage1.getHeight()), Scalr.OP_ANTIALIAS);
-            LOGGER.info("RRRRAATTTTTTTTTTTTTTTTTTTTTTTTTIIIONN "+ (float) characterImage2.getWidth()/characterImage1.getWidth());
-            LOGGER.info("RRRRAATTTTTTTTTTTTTTTTTTTTTTTTTIIIONN "+ (float) characterImage2.getHeight()/characterImage1.getHeight());
 
             //offset + double fighter offset
-            int pairOffsetX = port == 1 ? (i)*250 -50: (1-i)*250 -50;
-            int pairOffsetY = (i)*150;
-
             int centerOffsetX = (int) Math.round((0.3)*(320-fighterImageThumbnailSettings.getOffset()[0]));
             int centerOffsetY = (int) Math.round((0.3)*(360-fighterImageThumbnailSettings.getOffset()[1]));
-            int[] offset = new int[] {
-                    fighterImageThumbnailSettings.getOffset()[0] + centerOffsetX ,
-                    fighterImageThumbnailSettings.getOffset()[1] + centerOffsetY
-            };
 
-            if (i==0){
-                slotGraphics.drawImage(characterImage2, offset[0], offset[1], null);
-            }else {
-                slotGraphics.drawImage(characterImage1, fighterImageThumbnailSettings.getOffset()[0], fighterImageThumbnailSettings.getOffset()[1], null);
-            }
+            int pairOffsetX = port == 1 ? -100 + 200*(1-i) : -100 + 200*(i);
+            int pairOffsetY = -70 + 140*(1-i);
+
+            int[] offset = new int[] {
+                    fighterImageThumbnailSettings.getOffset()[0] + centerOffsetX + pairOffsetX,
+                    fighterImageThumbnailSettings.getOffset()[1] + centerOffsetY + pairOffsetY
+            };
+            slotGraphics.drawImage(characterImage2, offset[0], offset[1], null);
         }
         return slot;
     }

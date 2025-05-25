@@ -1,6 +1,7 @@
 package thumbnailgenerator.service;
 
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
@@ -187,5 +188,30 @@ public class ImageService {
             }
         }
         return imageSlot;
+    }
+
+    public void darkenImage(BufferedImage image){
+        var darkenFactor = 0.85f;
+        for (int y = 0; y < image.getHeight(); y++) {
+            for (int x = 0; x < image.getWidth(); x++) {
+                int argb = image.getRGB(x, y);
+                int alpha = (argb >> 24) & 0xff;
+
+                if (alpha != 0) {  // Only process non-transparent pixels
+                    int red   = (argb >> 16) & 0xff;
+                    int green = (argb >> 8) & 0xff;
+                    int blue  = argb & 0xff;
+
+                    // Apply darkening
+                    red   = (int)(red * darkenFactor);
+                    green = (int)(green * darkenFactor);
+                    blue  = (int)(blue * darkenFactor);
+
+                    // Reconstruct the pixel
+                    int darkened = (alpha << 24) | (red << 16) | (green << 8) | blue;
+                    image.setRGB(x, y, darkened);
+                }
+            }
+        }
     }
 }
