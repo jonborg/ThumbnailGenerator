@@ -170,11 +170,19 @@ public class PlayerController implements Initializable {
         return new Player(getPlayer(), characterList);
     }
 
-   /* public String toString(){
-        return "Name: " + this.player.getText() +
-                " | Character: " + this.fighter.getSelectionModel().getSelectedItem() +
-                " | Alt: " + this.alt.getValue();
-    }*/
+    public String toString(){
+        var charactersStringBuilder = new StringBuilder();
+        this.characterSelectList
+                .forEach( cs -> charactersStringBuilder
+                        .append(" | Character: ")
+                        .append(cs.getCharacterName())
+                        .append(", Alt: ")
+                        .append(cs.getAlt())
+                        .append(", Flip: ")
+                        .append(cs.isFlip())
+                );
+        return "Name: " + this.player.getText() + charactersStringBuilder.toString();
+    }
 
     public String getPlayer(){
         return this.player.getText();

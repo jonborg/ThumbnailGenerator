@@ -58,11 +58,11 @@ public class CharacterSelect {
 
     public void setStyles(int row){
         if (row == 1) {
-            this.characterComboBox.setStyle("{-fx-max-width: 150; -fx-min-width: 140; -fx-pref-width: 150;}");
+            this.characterComboBox.setStyle("{-fx-max-width: 140; -fx-min-width: 140; -fx-pref-width: 140;}");
         } else {
-            this.characterComboBox.setStyle("{-fx-max-width: 120; -fx-min-width: 120; -fx-pref-width: 120;}");
+            this.characterComboBox.setStyle("{-fx-max-width: 108; -fx-min-width: 108; -fx-pref-width: 108;}");
         }
-        this.altSpinner.setStyle("{-fx-max-width: 60; -fx-min-width: 60; -fx-pref-width: 60;}");
+        this.altSpinner.setStyle("{-fx-max-width: 50; -fx-min-width: 50; -fx-pref-width: 50;}");
         this.icon.setStyle("{height: 64;}");
     }
 
