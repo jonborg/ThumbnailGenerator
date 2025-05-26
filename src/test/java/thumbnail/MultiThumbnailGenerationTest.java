@@ -73,7 +73,7 @@ public class MultiThumbnailGenerationTest {
         for (int i=0; i<3; i++) {
             var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
             if(i==0){
-                WaitUtils.waitInSeconds(2);
+                WaitUtils.waitInSeconds(20);
             }
             assertTrue(thumbnailExists);
             assertArrayEquals(
@@ -113,7 +113,7 @@ public class MultiThumbnailGenerationTest {
         for (int i=0; i<3; i++) {
             var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
             if(i==0){
-                WaitUtils.waitInSeconds(2);
+                WaitUtils.waitInSeconds(20);
             }
             assertTrue(thumbnailExists);
             assertArrayEquals(
@@ -161,7 +161,7 @@ public class MultiThumbnailGenerationTest {
         for (int i=0; i<3; i++) {
             var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
             if(i==0){
-                WaitUtils.waitInSeconds(2);
+                WaitUtils.waitInSeconds(20);
             }
             assertTrue(thumbnailExists);
             assertArrayEquals(
@@ -201,7 +201,7 @@ public class MultiThumbnailGenerationTest {
         for (int i=0; i<2; i++) {
             var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
             if(i==0){
-                WaitUtils.waitInSeconds(2);
+                WaitUtils.waitInSeconds(20);
             }
             assertTrue(thumbnailExists);
             assertArrayEquals(

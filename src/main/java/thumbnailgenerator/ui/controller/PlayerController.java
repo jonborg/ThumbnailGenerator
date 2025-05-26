@@ -61,6 +61,7 @@ public class PlayerController implements Initializable {
         createCharacterSelect(gameEnumService.getAllCharacterNames(Game.SSBU), 1);
 
         addRemoveCharacter = new Button();
+        addRemoveCharacter.setId("addRemoveCharacter2");
         addRemoveCharacter.setStyle("{-fx-max-width: 25; -fx-min-width: 25; -fx-pref-width: 25;}");
         characterGrid.add(addRemoveCharacter, 0, 2);
         addRemoveCharacter.setText("+");
