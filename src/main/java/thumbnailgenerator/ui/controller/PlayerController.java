@@ -214,8 +214,9 @@ public class PlayerController implements Initializable {
     }
 
     public boolean hasMandatoryFields(){
-        var characterSelect = characterSelectList.get(0);
-        return characterSelect != null && characterSelect.getCharacterName() != null;
+        return this.characterSelectList
+                .stream()
+                .noneMatch(cs -> cs == null || cs.getCharacterName() == null);
     }
 
 }

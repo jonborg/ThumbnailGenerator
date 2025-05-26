@@ -26,9 +26,9 @@
                 <Menu fx:id="menuEditTournament" styleClass="menuItem" text="Edit tournament"/>
                 <Menu fx:id="menuDeleteTournament" styleClass="menuItem" text="Delete tournament"/>
             </Menu>
-            <Menu fx:id="menuLegacy" styleClass="menu" text="Legacy">
+         <!--   <Menu fx:id="menuLegacy" styleClass="menu" text="Legacy">
                 <MenuItem fx:id="menuConvertOffsets" styleClass="menuItem" text="Convert old character offsets" onAction="#convertCharacterOffsets"/>
-            </Menu>
+            </Menu> -->
         </MenuBar>
         <VBox spacing="40" alignment="CENTER" >
             <VBox spacing="10">

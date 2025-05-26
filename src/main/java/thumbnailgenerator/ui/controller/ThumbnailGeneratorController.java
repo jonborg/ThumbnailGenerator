@@ -132,7 +132,7 @@ public class ThumbnailGeneratorController implements Initializable {
         LOGGER.info("Creating a single thumbnail.");
         if (!player1Controller.hasMandatoryFields() || !player2Controller.hasMandatoryFields()){
             LOGGER.error("User did not select characters for all players.");
-            AlertFactory.displayWarning("It is required to select a character for all players before generating the thumbnail.");
+            AlertFactory.displayWarning("Select characters for all players before generating thumbnail.");
             return;
         }
 

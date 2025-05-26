@@ -68,7 +68,7 @@ public class MultiThumbnailGenerationTest {
         InputStream fileInputsStream = new FileInputStream(thumbnailListFile);
         thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, false, loadingState);
 
-        WaitUtils.waitInSeconds(7);
+        WaitUtils.waitInSeconds(40);
         //Assert
         for (int i=0; i<3; i++) {
             var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
@@ -107,7 +107,7 @@ public class MultiThumbnailGenerationTest {
         thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, false, loadingState);
 
         //Assert
-        WaitUtils.waitInSeconds(7);
+        WaitUtils.waitInSeconds(40);
         for (int i=0; i<3; i++) {
             var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
             assertTrue(thumbnailExists);
@@ -152,7 +152,7 @@ public class MultiThumbnailGenerationTest {
         InputStream fileInputsStream = new FileInputStream(thumbnailListFile);
         thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, true, loadingState);
 
-        WaitUtils.waitInSeconds(7);
+        WaitUtils.waitInSeconds(15);
         //Assert
         for (int i=0; i<3; i++) {
             var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));

@@ -54,6 +54,10 @@ public class CharacterSelect {
         GridPane.setValignment(flipCheckBox, VPos.CENTER);
 
         hBox.getChildren().add(iconLink);
+
+        characterComboBox.setId("character"+row);
+        altSpinner.setId("alt"+row);
+        flipCheckBox.setId("flip"+row);
     }
 
     public void setStyles(int row){

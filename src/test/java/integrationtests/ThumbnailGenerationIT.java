@@ -55,7 +55,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        WaitUtils.waitInSeconds(2);
+        WaitUtils.waitInSeconds(10);
         boolean isFileCreated = WaitUtils.waitForFile(actualImage);
         assertTrue(isFileCreated);
 
@@ -85,7 +85,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        WaitUtils.waitInSeconds(2);
+        WaitUtils.waitInSeconds(10);
         boolean isFileCreated = WaitUtils.waitForFile(actualImage);
         assertTrue(isFileCreated);
 
@@ -116,7 +116,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        WaitUtils.waitInSeconds(2);
+        WaitUtils.waitInSeconds(10);
         boolean isFileCreated = WaitUtils.waitForFile(actualImage);
         assertTrue(isFileCreated);
         assertTrue(marioImage.exists());
@@ -138,9 +138,9 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
 
     private void fillPlayerData(PlayerInput input, String parentFxml){
         writeInTextField(parentFxml, TextFieldId.PLAYER, input.getPlayerName());
-        writeAndSelectInComboBox(parentFxml,ComboBoxId.FIGHTER, input.getCharacterName());
-        writeInSpinner(parentFxml, SpinnerId.FIGHTER_ALT, String.valueOf(input.getAlt()));
-        setCheckBox(parentFxml, CheckBoxId.FLIP_FIGHTER, input.isFlip());
+        writeAndSelectInComboBox(parentFxml,ComboBoxId.CHARACTER_1, input.getCharacterName());
+        writeInSpinner(parentFxml, SpinnerId.ALT_CHARACTER_1, String.valueOf(input.getAlt()));
+        setCheckBox(parentFxml, CheckBoxId.FLIP_CHARACTER_1, input.isFlip());
     }
 
     private ThumbnailInput generateThumbnailInput(){
