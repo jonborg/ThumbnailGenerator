@@ -5,7 +5,9 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,14 +76,27 @@ public class ThumbnailFileService extends FileService<Thumbnail, Round> {
     @Override
     protected Round getCharacterData(List<String> parameters) {
         var playerList = new ArrayList<Player>();
-        var player1 = new Player(parameters.get(0), parameters.get(2), parameters.get(2), Integer.parseInt(parameters.get(4)), false);
-        var player2 = new Player(parameters.get(1), parameters.get(3), parameters.get(3), Integer.parseInt(parameters.get(5)), false);
 
-        playerList.add(player1);
-        playerList.add(player2);
+        playerList.add(preparePlayerData(parameters, 0));
+        playerList.add(preparePlayerData(parameters, 1));
 
         var roundName = parameters.get(6);
         return new Round(playerList, roundName);
+    }
+
+    private Player preparePlayerData(List<String> parameters, int playerIndex) {
+        var charactersList = Arrays.asList(parameters.get(2 + playerIndex).split(","));
+        var altList = Arrays.stream(parameters.get(4 + playerIndex).split(",")).map(Integer::parseInt).collect(Collectors.toList());
+        var playerCharactersList = new ArrayList<Fighter>();
+
+        for (int i = 0; i < charactersList.size(); i++){
+            var alt = 1;
+            if (i < altList.size()){
+                alt = altList.get(i);
+            }
+            playerCharactersList.add(new Fighter(charactersList.get(i), charactersList.get(i), alt, false));
+        }
+        return new Player(parameters.get(0 + playerIndex), playerCharactersList);
     }
 
     private void setPlayerFlip(List<Player> players, ImageSettings imageSettings, Game game)

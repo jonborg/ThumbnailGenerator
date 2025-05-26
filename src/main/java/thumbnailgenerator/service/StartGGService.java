@@ -19,10 +19,13 @@ import thumbnailgenerator.enums.SmashMeleeEnum;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.service.json.JSONReaderService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -64,7 +67,7 @@ public class StartGGService {
         return future.get();
     }
 
-    public String readSetsFromSmashGGPage(SearchGamesGG searchGamesGG, int totalPages)
+    public String readSetsFromSmashGGPage(SearchGamesGG searchGamesGG, int totalPages, boolean isMultipleCharacters)
             throws ExecutionException, InterruptedException {
         var foundSets = new StringBuffer();
         LOGGER.debug("Running query -> {}", searchGamesGG.getQuery());
@@ -83,14 +86,15 @@ public class StartGGService {
                         .getAsJsonObject("sets").toString(), new TypeToken<SetGG>() {}.getType());
         set.getSetNodes().forEach(setNodeGG -> {
             if(setNodeGG.hasStream()) {
+                var setNode = setNodeGGToString(setNodeGG, isMultipleCharacters);
                 if(searchGamesGG.getStream() == null || searchGamesGG.getStream().isNull()) {
-                    LOGGER.debug("Found set -> {}", setNodeGGToString(setNodeGG));
-                    foundSets.append(setNodeGGToString(setNodeGG)+System.lineSeparator());
+                    LOGGER.debug("Found set -> {}", setNode);
+                    foundSets.append(setNode+System.lineSeparator());
                 } else {
                     LOGGER.info("Filtering sets by stream {}.", searchGamesGG.getStream().getStreamName());
                     if(searchGamesGG.getStream().getStreamName().equals(setNodeGG.getStreamName())){
-                        LOGGER.debug("Found set -> {}", setNodeGGToString(setNodeGG));
-                        foundSets.append(setNodeGGToString(setNodeGG)+System.lineSeparator());
+                        LOGGER.debug("Found set -> {}", setNode);
+                        foundSets.append(setNode+System.lineSeparator());
                     }
                 }
             }
@@ -105,7 +109,7 @@ public class StartGGService {
                 .get();
     }
 
-    public String getMostUsedCharacter(List<GameGG> games, String entrantName){
+    public String getMostUsedCharacter(List<GameGG> games, String entrantName, boolean isMultipleCharacters){
         HashMap<Integer,Integer> charSel = new HashMap<>();
         for (GameGG gameGG :games) {
             if (gameGG != null && gameGG.getSelections() != null) {
@@ -125,11 +129,16 @@ public class StartGGService {
         if (charSel.isEmpty()) {
             return "random";
         }
-        int mostUsedCharacter = Collections.max(charSel.entrySet(), HashMap.Entry.comparingByValue()).getKey();
-        return findCodeByStartggId(mostUsedCharacter);
+        List<Map.Entry<Integer, Integer>> sortedEntries = new ArrayList<>(charSel.entrySet());
+        sortedEntries.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+        if (isMultipleCharacters && sortedEntries.size() > 1) {
+            return findCodeByStartggId(sortedEntries.get(0).getKey()) + "," + findCodeByStartggId(sortedEntries.get(1).getKey());
+        } else {
+            return findCodeByStartggId(sortedEntries.get(0).getKey());
+        }
     }
 
-    public String setNodeGGToString(SetNodeGG setNodeGG){
+    public String setNodeGGToString(SetNodeGG setNodeGG, boolean isMultipleCharacters){
         var games = setNodeGG.getGames();
         var roundName = setNodeGG.getRoundName();
         String player1 = setNodeGG.getEntrant(0).getName();
@@ -138,17 +147,23 @@ public class StartGGService {
         String player1NoTeam = setNodeGG.getEntrateNameWithNoTeam(player1);
         String player2NoTeam = setNodeGG.getEntrateNameWithNoTeam(player2);
 
-        String characters;
+        String characters1;
+        String characters2;
 
         if (games == null){
-            characters = "random;random";
+            characters1 = "random";
+            characters2 = "random";
         }else{
-            characters = getMostUsedCharacter(games, player1) + ";" + getMostUsedCharacter(games, player2);
+            characters1 = getMostUsedCharacter(games, player1, isMultipleCharacters);
+            characters2 = getMostUsedCharacter(games, player2, isMultipleCharacters);
         }
 
+        String alt1 = characters1.contains(",") ? "1,1" : "1";
+        String alt2 = characters2.contains(",") ? "1,1" : "1";
+
         return player1NoTeam + ";" + player2NoTeam + ";"
-                + characters + ";"
-                + "1;1;"
+                + characters1 + ";" + characters2 + ";"
+                + alt1 + ";" + alt2 + ";"
                 + roundName;
     }
 

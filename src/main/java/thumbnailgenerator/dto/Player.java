@@ -24,12 +24,6 @@ public class Player {
     private String  playerName;
     private List<Fighter> fighterList;
 
-    public Player(String playerName, String name, String urlName,int alt, boolean flip){
-        this.playerName = playerName;
-        this.fighterList = new ArrayList<>();
-        this.fighterList.add(new Fighter(name, urlName, alt, flip));
-    }
-
     public static List<Player> generatePreviewPlayers(CharacterEnum[] characterEnums){
         List<Player> list = new ArrayList<>();
         var listChar1 = new ArrayList<Fighter>();
@@ -37,14 +31,10 @@ public class Player {
 
         var random = new Random();
         var char1 = characterEnums[random.nextInt(characterEnums.length)];
-        var char12 = characterEnums[random.nextInt(characterEnums.length)];
         var char2 = characterEnums[random.nextInt(characterEnums.length)];
-        var char22 = characterEnums[random.nextInt(characterEnums.length)];
 
-        listChar1.add(new Fighter(char1.getName(), char1.getCode(), 1, false));
-        listChar1.add(new Fighter(char12.getName(), char12.getCode(), 1, false));
-        listChar2.add(new Fighter(char2.getName(), char2.getCode(), 1, false));
-        listChar2.add(new Fighter(char22.getName(), char22.getCode(), 1, false));
+        listChar1.add(new Fighter(char1.getName(), char1.getCode(), 1, true));
+        listChar2.add(new Fighter(char2.getName(), char2.getCode(), 5, false));
 
         list.add(new Player("Player1", listChar1));
         list.add(new Player("Player2", listChar2));

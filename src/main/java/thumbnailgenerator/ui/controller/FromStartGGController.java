@@ -48,10 +48,13 @@ import thumbnailgenerator.service.json.JSONReaderService;
 public class FromStartGGController implements Initializable {
     private final Logger LOGGER = LogManager.getLogger(FromStartGGController.class);
 
+
     @FXML
     private TextField authToken;
     @FXML
     private TextField tournamentURL;
+    @FXML
+    private CheckBox multipleCharacters;
     @FXML
     private TextArea foundSets;
     @FXML
@@ -147,6 +150,7 @@ public class FromStartGGController implements Initializable {
         String mainBody;
         var selectedEvent = eventSelect.getSelectionModel().getSelectedItem();
         StringBuilder result = new StringBuilder();
+        var isMultipleCharacters = multipleCharacters.isSelected();
 
         try{
             do{
@@ -181,7 +185,7 @@ public class FromStartGGController implements Initializable {
                         .gameId(selectedEvent.getVideoGameGG().getId())
                         .build();
                 result.append(startGGService
-                        .readSetsFromSmashGGPage(searchGamesGG, totalPages));
+                        .readSetsFromSmashGGPage(searchGamesGG, totalPages, isMultipleCharacters));
             }while(readPages<totalPages);
             foundSets.setText(result.toString());
             setDisableGeneration(false);
