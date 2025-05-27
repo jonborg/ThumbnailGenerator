@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import thumbnailgenerator.Main;
 import thumbnailgenerator.dto.Game;
+import thumbnailgenerator.enums.LoadingType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.service.ThumbnailService;
@@ -49,7 +50,7 @@ public class MultiThumbnailGenerationTest {
             throws IOException, FighterImageSettingsNotFoundException,
             InterruptedException {
         //Arrange
-        var loadingState = new LoadingState(false,true ,0 ,0);
+        var loadingState = new LoadingState(false, LoadingType.THUMBNAIL ,0 ,0);
         File thumbnailListFile = new File(getClass().getResource("/input/" + inputFile).getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(
@@ -89,7 +90,7 @@ public class MultiThumbnailGenerationTest {
             throws IOException, FighterImageSettingsNotFoundException,
             InterruptedException {
         //Arrange
-        var loadingState = new LoadingState(false,true ,0 ,0);
+        var loadingState = new LoadingState(false,LoadingType.THUMBNAIL ,0 ,0);
         File thumbnailListFile = new File(getClass().getResource("/input/multiMuralThumbnailGeneration.txt").getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(
@@ -129,7 +130,7 @@ public class MultiThumbnailGenerationTest {
             throws IOException, FighterImageSettingsNotFoundException,
             InterruptedException {
         //Arrange
-        var loadingState = new LoadingState(false,true ,0 ,0);
+        var loadingState = new LoadingState(false,LoadingType.THUMBNAIL ,0 ,0);
         File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailGeneration.txt").getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(
@@ -180,7 +181,7 @@ public class MultiThumbnailGenerationTest {
     public void create_validThumbnailFileDoubleCharacterPerPlayer_success()
             throws IOException,
             FighterImageSettingsNotFoundException, InterruptedException {
-        var loadingState = new LoadingState(false,true ,0 ,0);
+        var loadingState = new LoadingState(false,LoadingType.THUMBNAIL ,0 ,0);
         File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailDoubleCharacterGeneration.txt").getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(

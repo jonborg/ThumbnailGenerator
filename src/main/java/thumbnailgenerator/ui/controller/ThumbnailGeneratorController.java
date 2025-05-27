@@ -42,6 +42,7 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.enums.LoadingType;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
@@ -174,7 +175,7 @@ public class ThumbnailGeneratorController implements Initializable {
             }
         };
         thumbnailTask.setOnRunning(e -> loadingState
-                .update(true, true, 1, 1));
+                .update(true, LoadingType.THUMBNAIL, 1, 1));
         thumbnailTask.setOnSucceeded(e -> {
             LOGGER.info("Thumbnail was successfully generated and saved!");
             loadingState.disableLoading();
@@ -403,7 +404,7 @@ public class ThumbnailGeneratorController implements Initializable {
                     return null;
                 }
             };
-            top8Task.setOnRunning(e -> loadingState.update(true, false, 1, 1));
+            top8Task.setOnRunning(e -> loadingState.update(true, LoadingType.TOP8, 1, 1));
             top8Task.setOnFailed(e -> loadingState.disableLoading());
             top8Task.setOnSucceeded(e -> {
                 loadingState.disableLoading();
@@ -428,7 +429,7 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     private void initLoading(){
-        loadingState = new LoadingState(false, true, 0, 0);
+        loadingState = new LoadingState(false, LoadingType.THUMBNAIL, 0, 0);
         loadingText.visibleProperty().bind(loadingState.isLoadingProperty());
         loadingIndicator.visibleProperty().bind(loadingState.isLoadingProperty());
         loadingText.textProperty().bind(loadingState.getLoadingText());

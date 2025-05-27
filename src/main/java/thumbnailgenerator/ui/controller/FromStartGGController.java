@@ -35,6 +35,7 @@ import thumbnailgenerator.dto.startgg.tournament.EventGG;
 import thumbnailgenerator.dto.startgg.tournament.PhaseGG;
 import thumbnailgenerator.dto.startgg.tournament.PhaseGroupNodeGG;
 import thumbnailgenerator.dto.startgg.tournament.TournamentGG;
+import thumbnailgenerator.enums.LoadingType;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.service.StartGGService;
 import thumbnailgenerator.ui.loading.LoadingState;
@@ -389,7 +390,7 @@ public class FromStartGGController implements Initializable {
     }
 
     private void initLoading(){
-        loadingState = new LoadingState(false, true, 0, 0);
+        loadingState = new LoadingState(false, LoadingType.THUMBNAIL, 0, 0);
         loadingText.visibleProperty().bind(loadingState.isLoadingProperty());
         loadingIndicator.visibleProperty().bind(loadingState.isLoadingProperty());
         loadingText.textProperty().bind(loadingState.getLoadingText());

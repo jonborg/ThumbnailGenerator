@@ -7,10 +7,16 @@
 <?import javafx.scene.control.ComboBox?>
 <?import thumbnailgenerator.ui.textfield.ChosenJsonField?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ProgressIndicator?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="thumbnailgenerator.ui.controller.LegacyController"
-           prefHeight="200.0" prefWidth="400.0">
+           prefHeight="200.0" prefWidth="400.0"
+           stylesheets="@../styles/legacyConverter.css">
+
+
+    <VBox alignment="CENTER" spacing="15">
         <VBox alignment="CENTER" spacing="20">
             <GridPane vgap="5" hgap="10" alignment="CENTER">
                 <Label text="File's game:"/>
@@ -26,4 +32,9 @@
                 <Button text="Convert" onAction="#convertCharacterOffsets"/>
             </VBox>
         </VBox>
+        <HBox alignment="CENTER_RIGHT" spacing="5" styleClass="loading" >
+            <Label fx:id="loadingText" visible="false"/>
+            <ProgressIndicator fx:id="loadingIndicator" maxWidth="20" maxHeight="20" visible="false"/>
+        </HBox>
+    </VBox>
 </StackPane>
