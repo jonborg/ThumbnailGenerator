@@ -47,8 +47,6 @@ import thumbnailgenerator.service.json.JSONReaderService;
 @Controller
 public class FromStartGGController implements Initializable {
     private final Logger LOGGER = LogManager.getLogger(FromStartGGController.class);
-
-
     @FXML
     private TextField authToken;
     @FXML

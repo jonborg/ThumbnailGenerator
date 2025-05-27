@@ -10,6 +10,8 @@ import thumbnailgenerator.dto.FighterImageThumbnailSettings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Thumbnail;
+import thumbnailgenerator.enums.interfaces.CharacterEnum;
+import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.service.json.JSONReaderService;
 import thumbnailgenerator.service.json.JSONWriterService;
@@ -32,7 +34,7 @@ public class LegacyService {
     @Autowired
     private GameEnumService gameEnumService;
 
-    public void convertThumbnailCharacterOffsets(String filePath, Game game, String artTypeString)
+    public void convertThumbnailCharacterOffsets(String filePath, Game game, FighterArtTypeEnum artType)
             throws MalformedURLException, OnlineImageNotFoundException {
         ImageSettings imageSettings = (ImageSettings) jsonReaderService
                 .getJSONArrayFromFile(filePath,
@@ -46,7 +48,7 @@ public class LegacyService {
             var scale = setting.getScale();
             var offset = setting.getOffset()[0] == 0 && setting.getOffset()[1] == 0
                     ? setting.getOffset()
-                    : generateOffset(setting, game, artTypeString);
+                    : generateOffset(setting, game, artType);
             var flip = setting.isFlip();
             var newFighterImageSetting = new FighterImageThumbnailSettings(
                     characterCode,
@@ -61,17 +63,16 @@ public class LegacyService {
         jsonWriterService.updateThumbnailImageSettings(imageSettings, filePath);
     }
 
-    private int[] generateOffset(FighterImageThumbnailSettings settings, Game game, String artTypeString)
+    private int[] generateOffset(FighterImageThumbnailSettings settings, Game game, FighterArtTypeEnum artType)
             throws MalformedURLException, OnlineImageNotFoundException {
         var codeAltPair = game.equals(Game.SSBU)
                 ? smashUltimateCharacterService.convertToCodeAndAlt(settings.getFighter())
                 : new Pair<>(settings.getFighter(), 1);
         var imageFetcher = gameEnumService.getCharacterImageFetcher(game);
-        var artTypeEnum = gameEnumService.getArtTypeEnum(game, artTypeString);
 
         var fighter = new Fighter(codeAltPair.getValue0(), codeAltPair.getValue0(),
                 codeAltPair.getValue1(), settings.isFlip());
-        var thumbnail = Thumbnail.builder().artType(artTypeEnum).locally(false).build();
+        var thumbnail = Thumbnail.builder().artType(artType).locally(false).build();
         var originalImage = imageFetcher.getCharacterImage(fighter, thumbnail);
         var scaledImage = imageService.resizeImage(originalImage, settings.getScale());
         var offsetImage = imageService.offsetImage(scaledImage, settings.getOffset());

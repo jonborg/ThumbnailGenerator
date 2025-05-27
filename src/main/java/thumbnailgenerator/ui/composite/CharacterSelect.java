@@ -14,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import lombok.Getter;
-import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.ui.combobox.InputFilter;
 
 import java.util.List;
@@ -87,12 +86,6 @@ public class CharacterSelect {
     private void initIcons(){
         iconLink.setGraphic(icon);
         iconLink.setDisable(true);
-    }
-
-    public void updateValues(String charName, int alt, boolean isFlip){
-        this.getCharacterComboBox().getSelectionModel().select(charName);
-        this.getAltSpinner().getValueFactory().setValue(alt);
-        this.getFlipCheckBox().setSelected(isFlip);
     }
 
     public String getCharacterName(){

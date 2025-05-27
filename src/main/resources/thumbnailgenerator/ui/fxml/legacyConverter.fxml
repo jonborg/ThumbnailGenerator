@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import thumbnailgenerator.ui.textfield.ChosenJsonField?>
+<?import javafx.scene.layout.StackPane?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="thumbnailgenerator.ui.controller.LegacyController"
+           prefHeight="200.0" prefWidth="400.0">
+        <VBox alignment="CENTER" spacing="20">
+            <GridPane vgap="5" hgap="10" alignment="CENTER">
+                <Label text="File's game:"/>
+                <ComboBox fx:id="gameComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="File's art type" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="artTypeComboBox" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="File to convert:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ChosenJsonField fx:id="fileChosen" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            </GridPane>
+            <VBox alignment="CENTER">
+                <Button text="Convert" onAction="#convertCharacterOffsets"/>
+            </VBox>
+        </VBox>
+</StackPane>

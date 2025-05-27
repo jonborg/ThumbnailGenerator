@@ -415,12 +415,16 @@ public class ThumbnailGeneratorController implements Initializable {
     }
 
     public void convertCharacterOffsets(ActionEvent actionEvent)
-            throws MalformedURLException, OnlineImageNotFoundException {
-        var filePath = "settings/thumbnails/images/mirrorPlayer2.json";
-        var game = Game.SSBU;
-        var artTypeString = "Render";
-        legacyService.convertThumbnailCharacterOffsets(filePath, game, artTypeString);
-        AlertFactory.displayInfo("Conversion completed.");
+            throws IOException {
+        SpringFXMLLoader loader = new SpringFXMLLoader("thumbnailgenerator/ui/fxml/legacyConverter.fxml");
+        Stage stage = new Stage();
+        stage.setTitle("Convert old character offsets");
+        stage.getIcons().add(new Image(ThumbnailGeneratorController.class.getResourceAsStream("/logo/smash_ball.png")));
+        Parent root = loader.load();
+        root.setId("convertOldCharacterOffsets");
+        stage.setScene(new Scene(root));
+
+        stage.show();
     }
 
     private void initLoading(){
