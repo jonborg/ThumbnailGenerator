@@ -5,6 +5,7 @@ This program was created to automate thumbnail creation for Smash Ultimate VODs.
 This allows TOs to speed up VODs' release process. Below are the compatible games:
 - Smash Ultimate
 - Smash Melee
+- Smash 64 Remix
 - Rivals of Aether 2
 - Street Fighter 6
 - Tekken 8
@@ -101,6 +102,7 @@ All character images are downloaded from a [Github repository](https://www.smash
 Images were gathered thanks to:
 - [Smash Ultimate official website](https://www.smashbros.com/en_US/fighter/index.html)
 - [Melee HD Asset Library](https://assets.melee.tv/post/651913361021353984/definitive-melee-hd-texture-pack-for-dolphin-and)
+- [@smashenmasse's Google Drive](https://drive.google.com/drive/folders/1AjaPFEJhD-adgG_RqKKrJ5LhGUCG25Pg) of Smash 64 Remix artworks
 - [Rivals of Aether 2 Press Kit](https://rivals2.com/presskit)
 - [Street Fighter 6 official website](https://www.streetfighter.com/6)
 - [Tekken Warehouse](https://tekkenwarehouse.com/)
@@ -287,6 +289,7 @@ When selecting a game from the dropdown, character list is updated with characte
 The available games are the following:
 - Smash Ultimate
 - Smash Melee
+- Smash 64 Remix
 - Rivals of Aether 2
 - Street Fighter 6
 - Tekken 8
@@ -412,6 +415,7 @@ Additional Notes:
  - Alts are set to the default alt and characters, when missing, are set to random;
  - If no commands are printed, it means that the program could not find a set with a stream assigned;
  - Start.GG generations does **not** work for **Granblue Rising**, as Start.GG does not have character data for said game...
+ - For Smash 64 Remix, Start.GG generations only recognizes Smash 64's 12 original characters only;
  - Could not validate how to generate thumbnails for Doubles matches, as I could not find any Doubles Bracket with characters reported.
 
 ## Top 8 generation 
@@ -616,6 +620,42 @@ Thumbnails are saved in **/generated_top8** folder.
 | Roy                | roy                |
 | Mr. Game & Watch   | mr_game_and_watch  |
 | Random             | random             |
+
+### Smash 64 Remix Character URL names
+
+| Character          | URL Name           |
+|--------------------|--------------------|
+| Mario              | mario              |
+| Donkey Kong        | donkey_kong        |
+| Link               | link               |
+| Samus              | samus              |
+| Yoshi              | yoshi              |
+| Kirby              | kirby              |
+| Fox                | fox                |
+| Pikachu            | pikachu            |
+| Luigi              | luigi              |
+| Ness               | ness               |
+| Captain Falcon     | captain_falcon     |
+| Jigglypuff         | jigglypuff         |
+| Ganondorf          | ganondorf          |
+| Young Link         | young_link         |
+| Falco              | falco              |
+| Dr. Mario          | dr_mario           |
+| Dark Samus         | dark_samus         |
+| Wario              | wario              |
+| Lucas              | lucas              |
+| Bowser             | bowser             |
+| Wolf               | wolf               |
+| Conker             | conker             |
+| Mewtwo             | mewtwo             |
+| Marth              | marth              |
+| Sonic              | sonic              |
+| Classic Sonic      | classic_sonic      |
+| Sheik              | sheik              |
+| Marina             | marina             |
+| King Dedede        | king_dedede        |
+| Goemon             | goemon             |
+| Banjo & Kazooie    | banjo_and_kazooie  |
 
 ### Rivals of Aether 2 URL names
 
