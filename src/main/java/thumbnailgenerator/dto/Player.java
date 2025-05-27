@@ -33,8 +33,8 @@ public class Player {
         var char1 = characterEnums[random.nextInt(characterEnums.length)];
         var char2 = characterEnums[random.nextInt(characterEnums.length)];
 
-        listChar1.add(new Fighter(char1.getName(), char1.getCode(), 1, true));
-        listChar2.add(new Fighter(char2.getName(), char2.getCode(), 5, false));
+        listChar1.add(new Fighter(char1.getName(), char1.getCode(), 1, false));
+        listChar2.add(new Fighter(char2.getName(), char2.getCode(), 1, false));
 
         list.add(new Player("Player1", listChar1));
         list.add(new Player("Player2", listChar2));
