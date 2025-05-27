@@ -4,7 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum SpinnerId {
-    FIGHTER_ALT("#alt");
+    ALT_CHARACTER_1("#alt1"),
+    ALT_CHARACTER_2("#alt2");
 
     private final String value;
 

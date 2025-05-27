@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
+import java.util.stream.Collectors;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -47,10 +48,12 @@ import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.service.GameEnumService;
+import thumbnailgenerator.service.LegacyService;
 import thumbnailgenerator.service.StartGGService;
 import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.Top8Service;
+import thumbnailgenerator.ui.composite.CharacterSelect;
 import thumbnailgenerator.ui.loading.LoadingState;
 import thumbnailgenerator.utils.converter.FighterArtTypeConverter;
 import thumbnailgenerator.service.TournamentService;
@@ -90,7 +93,7 @@ public class ThumbnailGeneratorController implements Initializable {
     private @Autowired StartGGService startGGService;
     private @Autowired JSONReaderService jsonReaderService;
     private @Autowired ExecutorService executorService;
-
+    private @Autowired LegacyService legacyService;
     private static LoadingState loadingState;
 
     @Override
@@ -110,29 +113,26 @@ public class ThumbnailGeneratorController implements Initializable {
         player1Controller.setPlayer(player2Controller.getPlayer());
         player2Controller.setPlayer(nameAux);
 
-        int auxAlt1 = 1;
-        int auxAlt2 = 1;
 
-        if (player1Controller.getUrlName() != null)    {
-            auxAlt1 = player1Controller.getAlt();
-        }
-        if (player2Controller.getUrlName() != null) {
-            auxAlt2 = player2Controller.getAlt();
-        }
-
-        String auxSel = player1Controller.getFighter();
-        player1Controller.setFighter(player2Controller.getFighter());
-        player2Controller.setFighter(auxSel);
-
-        player1Controller.setAlt(auxAlt2);
-        player2Controller.setAlt(auxAlt1);
+        var auxSel = player1Controller.getCharacterSelectList()
+                .stream()
+                .map(cs -> {
+                    var newCs = new CharacterSelect(new ArrayList<>());
+                    newCs.setCharacterName(cs.getCharacterName());
+                    newCs.setAlt(cs.getAlt());
+                    newCs.setFlip(cs.isFlip());
+                    return newCs;
+                })
+                .collect(Collectors.toList());
+        player1Controller.updateCharacterSelectList(player2Controller.getCharacterSelectList());
+        player2Controller.updateCharacterSelectList(auxSel);
     }
 
     public void createThumbnail(ActionEvent actionEvent) {
         LOGGER.info("Creating a single thumbnail.");
-        if (player1Controller.getUrlName() == null || player2Controller.getUrlName() == null){
+        if (!player1Controller.hasMandatoryFields() || !player2Controller.hasMandatoryFields()){
             LOGGER.error("User did not select characters for all players.");
-            AlertFactory.displayWarning("It is required to select a character for all players before generating the thumbnail.");
+            AlertFactory.displayWarning("Select characters for all players before generating thumbnail.");
             return;
         }
 
@@ -143,11 +143,10 @@ public class ThumbnailGeneratorController implements Initializable {
         }
 
         LOGGER.info("Loading image settings of tournament {} for game {}", getSelectedTournament().getName(), getGame());
-        var imageSettings = (ImageSettings) jsonReaderService.getJSONArrayFromFile(
+        var imageSettings = (ImageSettings) jsonReaderService.getJSONObjectFromFile(
                 tournamentService.getTournamentThumbnailSettingsOrDefault(getSelectedTournament(), getGame())
                         .getFighterImageSettingsFile(getFighterArtType()),
-                new TypeToken<ArrayList<ImageSettings>>() {}.getType())
-                .get(0);
+                new TypeToken<ImageSettings>() {}.getType());
 
         var thumbnail = Thumbnail.builder()
                 .tournament(getSelectedTournament())
@@ -162,6 +161,7 @@ public class ThumbnailGeneratorController implements Initializable {
                                 player2Controller.generatePlayer()))
                 .artType(getFighterArtType())
                 .build();
+
         var thumbnailTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
@@ -412,6 +412,15 @@ public class ThumbnailGeneratorController implements Initializable {
             });
             executorService.submit(top8Task);
         }
+    }
+
+    public void convertCharacterOffsets(ActionEvent actionEvent)
+            throws MalformedURLException, OnlineImageNotFoundException {
+        var filePath = "settings/thumbnails/images/mirrorPlayer2.json";
+        var game = Game.SSBU;
+        var artTypeString = "Render";
+        legacyService.convertThumbnailCharacterOffsets(filePath, game, artTypeString);
+        AlertFactory.displayInfo("Conversion completed.");
     }
 
     private void initLoading(){

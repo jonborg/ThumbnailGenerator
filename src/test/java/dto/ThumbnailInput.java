@@ -20,9 +20,11 @@ public class ThumbnailInput {
 
     public String getExpectedFileName(){
         return getPlayers().get(0).getPlayerName().replace("|","_").replace("/","_")+"-"+
-                getPlayers().get(0).getCharacterName().toLowerCase()+getPlayers().get(0).getAlt()+"--"+
+                getPlayers().get(0).getCharacterInputList().get(0).getCharacterName().toLowerCase()+
+                getPlayers().get(0).getCharacterInputList().get(0).getAlt()+"--"+
                 getPlayers().get(1).getPlayerName().replace("|","_").replace("/","_")+"-"+
-                getPlayers().get(1).getCharacterName().toLowerCase()+getPlayers().get(1).getAlt()+"--"+
+                getPlayers().get(1).getCharacterInputList().get(0).getCharacterName().toLowerCase()+
+                getPlayers().get(1).getCharacterInputList().get(0).getAlt()+"--"+
                 getRound()+"-"+getDate().replace("/","_")+".png";
     }
 }

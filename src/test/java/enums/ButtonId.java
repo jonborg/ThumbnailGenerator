@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum ButtonId {
     TOURNAMENT_WEEKLY_L("#weeklyl"),
     TOURNAMENT_INVICTA("#invicta"),
+    ADD_REMOVE_CHARACTER_2("#addRemoveCharacter2"),
     SAVE_THUMBNAIL("#saveButton"),
     GENERATE_FROM_FILE("#fromFile"),
     SAVE_TOURNAMENT("#saveTournamentButton"),
