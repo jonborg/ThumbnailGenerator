@@ -1,3 +1,8 @@
+.comboBox{
+    -fx-pref-width: 205;
+    -fx-max-width: 205;
+}
+
 .loading{
     -fx-padding: 0 20 0 0;
 }

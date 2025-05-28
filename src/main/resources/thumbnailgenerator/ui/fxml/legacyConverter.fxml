@@ -9,21 +9,24 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.geometry.Insets?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="thumbnailgenerator.ui.controller.LegacyController"
-           prefHeight="200.0" prefWidth="400.0"
+           prefHeight="220.0" prefWidth="400.0"
            stylesheets="@../styles/legacyConverter.css">
-
 
     <VBox alignment="CENTER" spacing="15">
         <VBox alignment="CENTER" spacing="20">
+            <padding>
+                <Insets top="20.0"/>
+            </padding>
             <GridPane vgap="5" hgap="10" alignment="CENTER">
                 <Label text="File's game:"/>
-                <ComboBox fx:id="gameComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <ComboBox fx:id="gameComboBox" styleClass="comboBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                <Label text="File's art type" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <ComboBox fx:id="artTypeComboBox" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label text="File's art type:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="artTypeComboBox" styleClass="comboBox" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
                 <Label text="File to convert:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
                 <ChosenJsonField fx:id="fileChosen" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
