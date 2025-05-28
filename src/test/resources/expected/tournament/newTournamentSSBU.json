@@ -31,6 +31,17 @@
         ]
       },
       {
+        "game": "SSB64R",
+        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
+            "fighterImageSettings": "settings/thumbnails/images/ssb64r/default.json"
+          }
+        ]
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -121,6 +132,17 @@
         "artSettings": [
           {
             "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
             "fighterImageSettings": ""
           }
         ]
@@ -226,6 +248,17 @@
         ]
       },
       {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
+            "fighterImageSettings": "settings/thumbnails/images/ssb64r/default.json"
+          }
+        ]
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -316,6 +349,17 @@
         "artSettings": [
           {
             "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
             "fighterImageSettings": ""
           }
         ]
@@ -421,6 +465,17 @@
         ]
       },
       {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
+            "fighterImageSettings": "settings/thumbnails/images/ssb64r/default.json"
+          }
+        ]
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
         "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
@@ -511,6 +566,17 @@
         "artSettings": [
           {
             "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
             "fighterImageSettings": ""
           }
         ]
@@ -616,6 +682,17 @@
         ]
       },
       {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
+            "fighterImageSettings": "settings/thumbnails/images/ssb64r/default.json"
+          }
+        ]
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
         "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
@@ -706,6 +783,17 @@
         "artSettings": [
           {
             "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
             "fighterImageSettings": ""
           }
         ]
@@ -811,6 +899,17 @@
         ]
       },
       {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
+            "fighterImageSettings": "settings/thumbnails/images/ssb64r/default.json"
+          }
+        ]
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -901,6 +1000,17 @@
         "artSettings": [
           {
             "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
             "fighterImageSettings": ""
           }
         ]
@@ -1006,6 +1116,17 @@
         ]
       },
       {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
+            "fighterImageSettings": "settings/thumbnails/images/ssb64r/default.json"
+          }
+        ]
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
@@ -1096,6 +1217,17 @@
         "artSettings": [
           {
             "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
             "fighterImageSettings": ""
           }
         ]
@@ -1201,6 +1333,17 @@
         ]
       },
       {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
+            "fighterImageSettings": "settings/thumbnails/images/ssb64r/default.json"
+          }
+        ]
+      },
+      {
         "game": "ROA2",
         "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
         "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
@@ -1291,6 +1434,17 @@
         "artSettings": [
           {
             "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
             "fighterImageSettings": ""
           }
         ]
@@ -1396,6 +1550,17 @@
         ]
       },
       {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
+            "fighterImageSettings": "settings/thumbnails/images/ssb64r/default.json"
+          }
+        ]
+      },
+      {
         "game": "ROA2",
         "foreground": "",
         "background": "",
@@ -1486,6 +1651,17 @@
         "artSettings": [
           {
             "artType": "HD",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "SSB64R",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "ARTWORK",
             "fighterImageSettings": ""
           }
         ]

@@ -58,7 +58,11 @@ public abstract class CharacterImageFetcher {
         } catch (OnlineImageNotFoundException exception) {
             LOGGER.info("Trying to load image from backup branch " + characterImageBackupBranch);
             var url = getOnlineUrl(fighter, generatedGraphic.getArtType(), true);
-            return getFighterImageOnline(fighter, url);
+            var image = getFighterImageOnline(fighter, url);
+            if(generatedGraphic.isLocally()){
+                saveImageLocally(fighter, generatedGraphic, image);
+            }
+            return image;
         }
     }
 
