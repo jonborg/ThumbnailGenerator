@@ -24,12 +24,6 @@ public class Player {
     private String  playerName;
     private List<Fighter> fighterList;
 
-    public Player(String playerName, String name, String urlName,int alt, boolean flip){
-        this.playerName = playerName;
-        this.fighterList = new ArrayList<>();
-        this.fighterList.add(new Fighter(name, urlName, alt, flip));
-    }
-
     public static List<Player> generatePreviewPlayers(CharacterEnum[] characterEnums){
         List<Player> list = new ArrayList<>();
         var listChar1 = new ArrayList<Fighter>();

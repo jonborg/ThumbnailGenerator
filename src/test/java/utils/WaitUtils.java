@@ -17,7 +17,7 @@ public class WaitUtils {
     }
 
     public static boolean waitForFile(File file) {
-        int timeoutSeconds = 10;
+        int timeoutSeconds = 60;
         long startTime = System.currentTimeMillis();
 
         while (!file.exists()) {
@@ -31,7 +31,6 @@ public class WaitUtils {
                 return false;
             }
         }
-
         return true;
     }
 }

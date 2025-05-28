@@ -35,6 +35,7 @@ import thumbnailgenerator.dto.startgg.tournament.EventGG;
 import thumbnailgenerator.dto.startgg.tournament.PhaseGG;
 import thumbnailgenerator.dto.startgg.tournament.PhaseGroupNodeGG;
 import thumbnailgenerator.dto.startgg.tournament.TournamentGG;
+import thumbnailgenerator.enums.LoadingType;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.service.StartGGService;
 import thumbnailgenerator.ui.loading.LoadingState;
@@ -47,11 +48,12 @@ import thumbnailgenerator.service.json.JSONReaderService;
 @Controller
 public class FromStartGGController implements Initializable {
     private final Logger LOGGER = LogManager.getLogger(FromStartGGController.class);
-
     @FXML
     private TextField authToken;
     @FXML
     private TextField tournamentURL;
+    @FXML
+    private CheckBox multipleCharacters;
     @FXML
     private TextArea foundSets;
     @FXML
@@ -147,6 +149,7 @@ public class FromStartGGController implements Initializable {
         String mainBody;
         var selectedEvent = eventSelect.getSelectionModel().getSelectedItem();
         StringBuilder result = new StringBuilder();
+        var isMultipleCharacters = multipleCharacters.isSelected();
 
         try{
             do{
@@ -181,7 +184,7 @@ public class FromStartGGController implements Initializable {
                         .gameId(selectedEvent.getVideoGameGG().getId())
                         .build();
                 result.append(startGGService
-                        .readSetsFromSmashGGPage(searchGamesGG, totalPages));
+                        .readSetsFromSmashGGPage(searchGamesGG, totalPages, isMultipleCharacters));
             }while(readPages<totalPages);
             foundSets.setText(result.toString());
             setDisableGeneration(false);
@@ -387,7 +390,7 @@ public class FromStartGGController implements Initializable {
     }
 
     private void initLoading(){
-        loadingState = new LoadingState(false, true, 0, 0);
+        loadingState = new LoadingState(false, LoadingType.THUMBNAIL, 0, 0);
         loadingText.visibleProperty().bind(loadingState.isLoadingProperty());
         loadingIndicator.visibleProperty().bind(loadingState.isLoadingProperty());
         loadingText.textProperty().bind(loadingState.getLoadingText());

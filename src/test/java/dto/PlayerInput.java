@@ -3,12 +3,11 @@ package dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Getter
 public class PlayerInput {
     private String playerName;
-    private String characterName;
-    private int alt;
-    private boolean flip;
-
+    List<CharacterInput> characterInputList;
 }

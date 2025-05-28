@@ -1,0 +1,3 @@
+invicta;ssbu;20/02/20XX;render
+UrQte;Arjay;robin,sephiroth;ganondorf,byleth;1,1;5,8;Losers
+Aegis;Toaster;corrin,pyra;marth;8;5;winners Semis

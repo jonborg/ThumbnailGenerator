@@ -4,10 +4,14 @@
 This program was created to automate thumbnail creation for Smash Ultimate VODs. It is also compatible with some other fighting games. 
 This allows TOs to speed up VODs' release process. Below are the compatible games:
 - Smash Ultimate
+- Smash Melee
+- Smash 64 Remix
 - Rivals of Aether 2
 - Street Fighter 6
 - Tekken 8
+- Guilty Gear: Strive
 - Fatal Fury: City of the Wolves
+- Granblue Fantasy Versus: Rising
 
 ![tg_main_page.png](./assets/documentation/tg_main_page.png)
 
@@ -97,10 +101,14 @@ A dialog box will appear to confirm whether this deletion is intentional.
 All character images are downloaded from a [Github repository](https://www.smashbros.com/en_US/fighter/index.html), that I created.
 Images were gathered thanks to:
 - [Smash Ultimate official website](https://www.smashbros.com/en_US/fighter/index.html)
+- [Melee HD Asset Library](https://assets.melee.tv/post/651913361021353984/definitive-melee-hd-texture-pack-for-dolphin-and)
+- [@smashenmasse's Google Drive](https://drive.google.com/drive/folders/1AjaPFEJhD-adgG_RqKKrJ5LhGUCG25Pg) of Smash 64 Remix artworks
 - [Rivals of Aether 2 Press Kit](https://rivals2.com/presskit)
 - [Street Fighter 6 official website](https://www.streetfighter.com/6)
 - [Tekken Warehouse](https://tekkenwarehouse.com/)
+- [Fighters Collection's Guilty Gear: Strive Gallery](https://www.fightersgeneration.com/games/ggstrive-p2.html)
 - [Fatal Fury: City of the Wolves official website](https://www.snk-corp.co.jp/us/games/fatalfury-cotw/)
+- [GBFVR fan press kit](https://rising.granbluefantasy.jp/en/extras/fankit/)
 - [smash-ultimate-assets](https://github.com/marcrd/smash-ultimate-assets) repository
 - [MuralAltDrive's](https://x.com/MuralAltDrive) Smash Ultimate Mural art [Google Drive](https://drive.google.com/drive/folders/1n4lAP6YB7N-bSSgEDx0OPEI2ykOKSQrM)
 
@@ -108,12 +116,6 @@ As an option, Thumbnail Generator can save those downloaded images to use them f
 Images are stored in the following folder:
 
     assets/characters/[GAME]/[ART_TYPE]/
-
-As of version **2.2.0**, the program is capable to generate thumbnails using characters art
-from Smash Ultimate's "Everyone is here" mural/poster.
-
-[Character art isolation](https://www.deviantart.com/elevenzm/gallery/70115610/mural-isolations-super-smash-bros-ultimate) was done by @ElevenZM and mural arts for alts have been created by
-@MuralAltDrive team which contains a [GoogleDrive repository](https://drive.google.com/drive/folders/1n4lAP6YB7N-bSSgEDx0OPEI2ykOKSQrM) for these images.
 
 ### Thumbnail Image Settings 
 For thumbnails, images need to be scaled and repositioned in other to be printed 
@@ -128,8 +130,8 @@ to the new fighter image settings file.
 
 These settings files have the following structure:
 
-    [{
-    	"mirrorPlayer2": true,
+    {
+        "mirrorPlayer2": true,
     	"fighters":[
     	  {
     		"fighter": "mario",
@@ -157,8 +159,17 @@ These settings files have the following structure:
  - **flip** - tells whether image should be flipped. If true, image is flipped (default = false).
 
 To note that if image is flipped, horizontal offset orientation is also flipped.
-
 All these values can be changed to fit users preferences and can be changed and tested at run time.
+
+As of version **4.3.0**, thumbnail character positioning has been changed and simplified by using masks.
+This has impact on offsets, as new offsets need to be used to get desired character positioning.
+All thumbnail image settings files provided have **already been converted**.
+However if you have a custom file, you can convert it by going to **Legacy** -> **Convert old character offsets**
+
+![legace_menu.png](./assets/documentation/legacy_menu.png)
+
+Conversion requires internet access as it needs character's images to properly calculate new offset.
+Therefore, users must also select correct Game and Art Type related to image settings file to get correct images.
 
 ### Top 8 image settings
 For top 8 generation, images need to be scaled and repositioned in other to be printed 
@@ -286,15 +297,23 @@ As of version **4.0.0**, users can generate thumbnails and top8 for other games 
 When selecting a game from the dropdown, character list is updated with characters of respective selected game.
 The available games are the following:
 - Smash Ultimate
+- Smash Melee
+- Smash 64 Remix
 - Rivals of Aether 2
 - Street Fighter 6
 - Tekken 8
+- Guilty Gear: Strive
 - Fatal Fury: City of the Wolves
+- Granblue Fantasy Versus: Rising
 
 It is also mandatory to provide characters and their colours.
 When selecting a character from the dropdown, an icon will appear
 This icon is the respective stock icon of the selected character.
 Its colour also changes when selecting a different alt.
+
+Users can add a second character per player by clicking on "+" button.
+Doing so, makes button change to "-" and makes second character mandatory for thumbnail generation.
+Clicking on "-" removes second character and makes it non mandatory for thumbnail generation.
 
 To have a better look at the selected alt, the icon can be clicked
 to show a fighter image that will appear on the thumbnail (character and alt).
@@ -316,6 +335,21 @@ Thumbnails are saved in **/generated_thumbnails** folder, which is created in th
 
 ![tg_thumbnail_example.png](./assets/documentation/tg_thumbnail_example.png)
 
+When generating thumbnails with more than one character per player, characters will be displayed as show below.
+Main character of each player will be at the bottom of the image, while secondary characters will be at the top.
+
+![tg_thumbnail_double_character_example.png](./assets/documentation/tg_thumbnail_double_character_example.png)
+
+this thumbnail uses mask images to split player's characters. These masks are in the following folder:
+
+    assets\masks\thumbnails\
+
+Said mask images can be change, removed or renamed by users to provide different looks to thumbnail.
+Below is same thumbnail generated without said masks:
+
+![tg_thumbnail_double_character_no_mask_example.png](./assets/documentation/tg_thumbnail_double_character_no_mask_example.png)
+
+
 ### Multiple thumbnail generation by file
 Multiple thumbnails can ge generated at once using a file with a list of commands.
 
@@ -326,7 +360,7 @@ Character images used during batch generation can be saved locally if **Save/Loa
 Below is an example of a file to be used:
 
     invicta;20/02/20XX;SSBU;render
-    UrQte;Arjay;robin;byleth;1;8;Losers
+    UrQte;Arjay;robin,sephiroth;byleth;1,1;8;Losers
     fizbo;Darkout;pikachu;pokemon_trainer;4;5;winners Semis
     Chime;Toaster;rob;marth;2;5;Grand Finals
     
@@ -348,6 +382,9 @@ Each following lines represents a thumbnail and has unique data for that thumbna
  7. **Round** - text that will be placed around bottom left corner of thumbnail. Usually round name. It is not case sensitive.
 
 Flip data is not provided, as it is automated by settings created in respective fighter image settings file
+To add more than one character per player, put first character code name, put a comma after first character name, then add second character name;
+Repeat the same steps for alt number to provide alt data of second character. 
+If no alt data is provided for second character, program will use alt number 1 of second character.
 
 Thumbnails are saved in **/generated_thumbnails** folder
 
@@ -381,14 +418,14 @@ If users close Start GG thumbnail generation window, the program will store prov
     
 Auth token is then loaded from said file when users open Start GG thumbnail generation window again.
 
-
 Additional Notes:
-
  - Users can edit the commands directly on the text area;
  - Start.gg does not provide info on used alts and some tournaments may not even provide used characters (ex.: offline tournaments);
  - Alts are set to the default alt and characters, when missing, are set to random;
  - If no commands are printed, it means that the program could not find a set with a stream assigned;
  - Start.GG generations does **not** work for **Granblue Rising**, as Start.GG does not have character data for said game...
+ - For Smash 64 Remix, Start.GG generations only recognizes Smash 64's 12 original characters only;
+ - Could not validate how to generate thumbnails for Doubles matches, as I could not find any Doubles Bracket with characters reported.
 
 ## Top 8 generation 
 ### Start Top 8 generation
@@ -448,6 +485,8 @@ Position of stock images behave according to equations provided in  slot setting
 ![tg_char_image.png](./assets/documentation/tg_char_image.png) ![tg_final_slot.png](./assets/documentation/tg_final_slot.png)
 
 Thumbnails are saved in **/generated_top8** folder.
+
+
 
 ## Miscellaneous
 ### Missing Mural art
@@ -593,6 +632,42 @@ Thumbnails are saved in **/generated_top8** folder.
 | Mr. Game & Watch   | mr_game_and_watch  |
 | Random             | random             |
 
+### Smash 64 Remix Character URL names
+
+| Character          | URL Name           |
+|--------------------|--------------------|
+| Mario              | mario              |
+| Donkey Kong        | donkey_kong        |
+| Link               | link               |
+| Samus              | samus              |
+| Yoshi              | yoshi              |
+| Kirby              | kirby              |
+| Fox                | fox                |
+| Pikachu            | pikachu            |
+| Luigi              | luigi              |
+| Ness               | ness               |
+| Captain Falcon     | captain_falcon     |
+| Jigglypuff         | jigglypuff         |
+| Ganondorf          | ganondorf          |
+| Young Link         | young_link         |
+| Falco              | falco              |
+| Dr. Mario          | dr_mario           |
+| Dark Samus         | dark_samus         |
+| Wario              | wario              |
+| Lucas              | lucas              |
+| Bowser             | bowser             |
+| Wolf               | wolf               |
+| Conker             | conker             |
+| Mewtwo             | mewtwo             |
+| Marth              | marth              |
+| Sonic              | sonic              |
+| Classic Sonic      | classic_sonic      |
+| Sheik              | sheik              |
+| Marina             | marina             |
+| King Dedede        | king_dedede        |
+| Goemon             | goemon             |
+| Banjo & Kazooie    | banjo_and_kazooie  |
+
 ### Rivals of Aether 2 URL names
 
 | Character          | URL Name           |
@@ -639,6 +714,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | M. Bison           | m_bison            |
 | Terry              | terry              |
 | Mai                | mai                |
+| Elena              | elena              |
 
 ### Tekken 8 URL names
 
@@ -716,6 +792,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Slayer              | slayer             |
 | Dizzy               | dizzy              |
 | Venom               | venom              |
+| Unika               | unika              |
 | Random              | random             |
 
 ###Fatal Fury: City of the Wolves URL names
@@ -780,9 +857,19 @@ Thumbnails are saved in **/generated_top8** folder.
 | Versusia           | versusia           |
 | Vikala             | vikala             |
 | Sandalphon         | sandalphon         |
+| Galleo             | galleon            |
 
 
 ### Release Notes
+#### v4.3.0
+- Added Smash 64 Remix as selectable games;
+- Added Elena from Street Fighter 6
+- Added Unika from Guilty Gear: Strive
+- Added Galleon from Grandbule Fantasy Versus: Rising
+- Allow thumbnail generation of up to 2 characters per player
+- Adjusted thumbnails' character positioning process to use masks
+- Added Legacy menu, to allow users to convert their custom character positioning in thumbnails
+
 #### v4.2.0
 - Added Smash Melee, Guilty Gear: Strive and Granblue Fantasy Versus: Rising as selectable games;
 - Thumbnail and Top8 generation are now run in multiple threads, allowing parallel generation

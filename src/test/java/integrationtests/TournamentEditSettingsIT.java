@@ -27,6 +27,7 @@ import thumbnailgenerator.enums.FatalFuryCotwFighterArtTypeEnum;
 import thumbnailgenerator.enums.GranblueVersusRisingFighterArtTypeEnum;
 import thumbnailgenerator.enums.GuiltyGearStriveFighterArtTypeEnum;
 import thumbnailgenerator.enums.RivalsOfAether2FighterArtTypeEnum;
+import thumbnailgenerator.enums.Smash64RemixFighterArtTypeEnum;
 import thumbnailgenerator.enums.SmashMeleeFighterArtTypeEnum;
 import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.enums.StreetFighter6FighterArtTypeEnum;
@@ -177,6 +178,7 @@ public class TournamentEditSettingsIT extends CustomApplicationTest {
         return Stream.of(
                 Arguments.of(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER),
                 Arguments.of(Game.SSBM, SmashMeleeFighterArtTypeEnum.HD),
+                Arguments.of(Game.SSB64R, Smash64RemixFighterArtTypeEnum.ARTWORK),
                 Arguments.of(Game.ROA2, RivalsOfAether2FighterArtTypeEnum.RENDER),
                 Arguments.of(Game.SF6, StreetFighter6FighterArtTypeEnum.RENDER),
                 Arguments.of(Game.TEKKEN8, Tekken8FighterArtTypeEnum.RENDER),

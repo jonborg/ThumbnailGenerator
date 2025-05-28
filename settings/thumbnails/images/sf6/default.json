@@ -1,205 +1,239 @@
-[{
-	"mirrorPlayer2": false,
-	"fighters":[
-	  {
-		"fighter": "ryu",
-		"offset": [
-		  20,
-		  -80
-		],
-		"scale": 1.0
-	  },
-	  {
-		"fighter": "luke",
-		"offset": [
-		  130,
-		  -50
-		],
-		"scale": 0.9
-	  },
-	  {
-		"fighter": "jamie",
-		"offset": [
-		  140,
-		  -60
-		],
-		"scale": 1.0
-	  },
-	  {
-		"fighter": "chunli",
-		"offset": [
-		  60,
-		  -250
-		],
-		"scale": 0.8
-	  },
-	  {
-		"fighter": "guile",
-		"offset": [
-		  0,
-		  130
-		],
-		"scale": 0.9
-	  },
-	  {
-		"fighter": "kimberly",
-		"offset": [
-		  300,
-		  -300
-		],
-		"scale": 1.0
-	  },
-	  {
-		"fighter": "juri",
-		"offset": [
-		  200,
-		  -300
-		],
-		"scale": 0.90
-	  },
-	  {
-		"fighter": "ken",
-		"offset": [
-		  -60,
-		  -80
-		],
-		"scale": 0.95
-	  },
-	  {
-		"fighter": "blanka",
-		"offset": [
-		  0,
-		  -200
-		],
-		"scale": 0.95
-	  },
-	  {
-		"fighter": "dhalsim",
-		"offset": [
-		  0,
-		  0
-		],
-		"scale": 1.0
-	  },
-	  {
-		"fighter": "ehonda",
-		"offset": [
-		  50,
-		  -550
-		],
-		"scale": 1.0
-	  },
-	  {
-		"fighter": "deejay",
-		"offset": [
-		  -300,
-		  -30
-		],
-		"scale": 1.0
-	  },
-	  {
-		"fighter": "manon",
-		"offset": [
-		  0,
-		  -100
-		],
-		"scale": 0.95
-	  },
-	  {
-		"fighter": "marisa",
-		"offset": [
-		  200,
-		  -200
-		],
-		"scale": 0.9
-	  },
-	  {
-		"fighter": "jp",
-		"offset": [
-		  0,
-		  0
-		],
-		"scale": 0.9
-	  },
-	  {
-		"fighter": "zangief",
-		"offset": [
-		  -150,
-		  0
-		],
-		"scale": 1.0
-	  },
-	  {
-		"fighter": "lily",
-		"offset": [
-		  -50,
-		  -450
-		],
-		"scale": 1.05
-	  },
-	  {
-		"fighter": "cammy",
-		"offset": [
-		  -20,
-		  80
-		],
-		"scale": 1.0
-	  },
-	  {
-		"fighter": "rashid",
-		"offset": [
-		  250,
-		  -500
-		],
-		"scale": 0.9
-	  },
-	  {
-		"fighter": "aki",
-		"offset": [
-		  -180,
-		  -250
-		],
-		"scale": 1.0
-	  },
-	  {
-		"fighter": "ed",
-		"offset": [
-		  -60,
-		  -60
-		],
-		"scale": 1.0
-	  },
-	  {
-		"fighter": "akuma",
-		"offset": [
-		  40,
-		  -150
-		],
-		"scale": 0.9
-	  },
-	  {
-		"fighter": "m_bison",
-		"offset": [
-		  50,
-		  -50
-		],
-		"scale": 0.75
-	  },
-	  {
-		"fighter": "terry",
-		"offset": [
-		  -170,
-		  -150
-		],
-		"scale": 0.75
-	  },
-	  {
-		"fighter": "mai",
-		"offset": [
-		  -120,
-		  -300
-		],
-		"scale": 0.9
-	  }
-	]
-}]
+{
+  "mirrorPlayer2": false,
+  "fighters": [
+    {
+      "fighter": "ryu",
+      "offset": [
+        -366,
+        -80
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "luke",
+      "offset": [
+        -174,
+        -50
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "jamie",
+      "offset": [
+        -269,
+        -60
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "chunli",
+      "offset": [
+        -278,
+        -250
+      ],
+      "scale": 0.8,
+      "flip": false
+    },
+    {
+      "fighter": "guile",
+      "offset": [
+        -277,
+        130
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "kimberly",
+      "offset": [
+        -87,
+        -300
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "juri",
+      "offset": [
+        -160,
+        -300
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "ken",
+      "offset": [
+        -435,
+        -80
+      ],
+      "scale": 0.95,
+      "flip": false
+    },
+    {
+      "fighter": "blanka",
+      "offset": [
+        -359,
+        -200
+      ],
+      "scale": 0.95,
+      "flip": false
+    },
+    {
+      "fighter": "dhalsim",
+      "offset": [
+        -406,
+        0
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "ehonda",
+      "offset": [
+        -531,
+        -550
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "deejay",
+      "offset": [
+        -822,
+        -30
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "manon",
+      "offset": [
+        -784,
+        -100
+      ],
+      "scale": 0.95,
+      "flip": false
+    },
+    {
+      "fighter": "marisa",
+      "offset": [
+        -140,
+        -200
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "jp",
+      "offset": [
+        -343,
+        0
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "zangief",
+      "offset": [
+        -450,
+        0
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "lily",
+      "offset": [
+        -611,
+        -450
+      ],
+      "scale": 1.05,
+      "flip": false
+    },
+    {
+      "fighter": "cammy",
+      "offset": [
+        -351,
+        80
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "rashid",
+      "offset": [
+        -357,
+        -500
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "aki",
+      "offset": [
+        -615,
+        -250
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "ed",
+      "offset": [
+        -436,
+        -60
+      ],
+      "scale": 1.0,
+      "flip": false
+    },
+    {
+      "fighter": "akuma",
+      "offset": [
+        -350,
+        -150
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "m_bison",
+      "offset": [
+        -276,
+        -50
+      ],
+      "scale": 0.75,
+      "flip": false
+    },
+    {
+      "fighter": "terry",
+      "offset": [
+        -495,
+        -150
+      ],
+      "scale": 0.75,
+      "flip": false
+    },
+    {
+      "fighter": "mai",
+      "offset": [
+        -520,
+        -300
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "elena",
+      "offset": [
+        -820,
+        -900
+      ],
+      "scale": 0.9,
+      "flip": false
+    }
+  ]
+}

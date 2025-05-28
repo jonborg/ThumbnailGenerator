@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.dto.json.write.TextSettingsWrite;
@@ -53,6 +54,22 @@ public class JSONWriterService {
         try (FileWriter writer = new FileWriter(textSettingsFile)) {
             String json = gson.toJson(textSettingsWrite);
             LOGGER.debug("Writing json to file {} -> {}", textSettingsFile, json);
+            writer.write(json);
+        } catch (FileNotFoundException e) {
+            AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
+        } catch (IOException e) {
+            AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
+        }
+    }
+
+    public void updateThumbnailImageSettings(ImageSettings imageSettings, String imageSettingsFile){
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        try (FileWriter writer = new FileWriter(imageSettingsFile)) {
+            String json = gson.toJson(imageSettings);
+            LOGGER.debug("Writing json to file {} -> {}", imageSettingsFile, json);
             writer.write(json);
         } catch (FileNotFoundException e) {
             AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));

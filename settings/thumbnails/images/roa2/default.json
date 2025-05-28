@@ -1,101 +1,113 @@
-[{
-	"mirrorPlayer2": false,
-	"fighters":[
-	  {
-		"fighter": "clairen",
-		"offset": [
-		  60,
-		  0
-		],
-		"scale": 0.6
-	  },
-	  {
-		"fighter": "fleet",
-		"offset": [
-		  30,
-		  20
-		],
-		"scale": 0.75
-	  },
-	  {
-		"fighter": "forsburn",
-		"offset": [
-		  -250,
-		  -120
-		],
-		"scale": 0.7
-	  },
-	  {
-		"fighter": "kragg",
-		"offset": [
-		  50,
-		  -200
-		],
-		"scale": 0.59
-	  },
-	  {
-		"fighter": "loxodont",
-		"offset": [
-		  -70,
-		  -50
-		],
-		"scale": 0.60
-	  },
-	  {
-		"fighter": "maypul",
-		"offset": [
-		  90,
-		  -150
-		],
-		"scale": 0.75
-	  },
-	  {
-		"fighter": "orcane",
-		"offset": [
-		  -100,
-		  -100
-		],
-		"scale": 0.5
-	  },
-	  {
-		"fighter": "ranno",
-		"offset": [
-		  -50,
-		  -250
-		],
-		"scale": 0.7
-	  },
-	  {
-		"fighter": "wrastor",
-		"offset": [
-		  10,
-		  -80
-		],
-		"scale": 0.8
-	  },
-	  {
-		"fighter": "zetterburn",
-		"offset": [
-		  -50,
-		  -20
-		],
-		"scale": 0.67
-	  },
-	  {
-		"fighter": "etalus",
-		"offset": [
-		  -150,
-		  20
-		],
-		"scale": 0.45
-	  },
-	  {
-		"fighter": "olympia",
-		"offset": [
-		  0,
-		  60
-		],
-		"scale": 0.85
-	  }
+{
+  "mirrorPlayer2": false,
+  "fighters": [
+    {
+      "fighter": "clairen",
+      "offset": [
+        -220,
+        0
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+    {
+      "fighter": "fleet",
+      "offset": [
+        -250,
+        20
+      ],
+      "scale": 0.75,
+      "flip": false
+    },
+    {
+      "fighter": "forsburn",
+      "offset": [
+        -629,
+        -120
+      ],
+      "scale": 0.7,
+      "flip": false
+    },
+    {
+      "fighter": "kragg",
+      "offset": [
+        -219,
+        -200
+      ],
+      "scale": 0.59,
+      "flip": false
+    },
+    {
+      "fighter": "loxodont",
+      "offset": [
+        -350,
+        -50
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+    {
+      "fighter": "maypul",
+      "offset": [
+        -190,
+        -150
+      ],
+      "scale": 0.75,
+      "flip": false
+    },
+    {
+      "fighter": "orcane",
+      "offset": [
+        -280,
+        -100
+      ],
+      "scale": 0.5,
+      "flip": false
+    },
+    {
+      "fighter": "ranno",
+      "offset": [
+        -464,
+        -250
+      ],
+      "scale": 0.7,
+      "flip": false
+    },
+    {
+      "fighter": "wrastor",
+      "offset": [
+        -310,
+        -80
+      ],
+      "scale": 0.8,
+      "flip": false
+    },
+    {
+      "fighter": "zetterburn",
+      "offset": [
+        -266,
+        -20
+      ],
+      "scale": 0.67,
+      "flip": false
+    },
+    {
+      "fighter": "etalus",
+      "offset": [
+        -279,
+        20
+      ],
+      "scale": 0.45,
+      "flip": false
+    },
+    {
+      "fighter": "olympia",
+      "offset": [
+        -139,
+        60
+      ],
+      "scale": 0.85,
+      "flip": false
+    }
   ]
-}]
+}

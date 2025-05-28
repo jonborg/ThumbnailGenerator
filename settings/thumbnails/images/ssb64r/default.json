@@ -1,0 +1,283 @@
+{
+  "mirrorPlayer2": false,
+  "fighters": [
+    {
+      "fighter": "mario",
+      "offset": [
+        30,
+        80
+      ],
+      "scale": 0.5,
+      "flip": false
+    },
+    {
+      "fighter": "donkey_kong",
+      "offset": [
+        -22,
+        70
+      ],
+      "scale": 0.55,
+      "flip": false
+    },
+    {
+      "fighter": "link",
+      "offset": [
+        -110,
+        70
+      ],
+      "scale": 0.5,
+      "flip": false
+    },
+    {
+      "fighter": "samus",
+      "offset": [
+        -150,
+        0
+      ],
+      "scale": 0.45,
+      "flip": false
+    },
+    {
+      "fighter": "yoshi",
+      "offset": [
+        70,
+        80
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+    {
+      "fighter": "kirby",
+      "offset": [
+        20,
+        70
+      ],
+      "scale": 0.5,
+      "flip": false
+    },
+    {
+      "fighter": "fox",
+      "offset": [
+        -280,
+        20
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+    {
+      "fighter": "pikachu",
+      "offset": [
+        0,
+        -40
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+    {
+      "fighter": "luigi",
+      "offset": [
+        30,
+        50
+      ],
+      "scale": 0.35,
+      "flip": false
+    },
+    {
+      "fighter": "ness",
+      "offset": [
+        -40,
+        -40
+      ],
+      "scale": 0.35,
+      "flip": false
+    },
+    {
+      "fighter": "captain_falcon",
+      "offset": [
+        -220,
+        50
+      ],
+      "scale": 0.55,
+      "flip": false
+    },
+    {
+      "fighter": "jigglypuff",
+      "offset": [
+        0,
+        20
+      ],
+      "scale": 0.45,
+      "flip": false
+    },
+	{
+      "fighter": "ganondorf",
+      "offset": [
+        -100,
+        70
+      ],
+      "scale": 0.45,
+      "flip": false
+    },
+	{
+      "fighter": "young_link",
+      "offset": [
+        -270,
+        10
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+	{
+      "fighter": "falco",
+      "offset": [
+        -200,
+        70
+      ],
+      "scale": 0.55,
+      "flip": false
+    },
+	{
+      "fighter": "dr_mario",
+      "offset": [
+        30,
+        80
+      ],
+      "scale": 0.5,
+      "flip": false
+    },
+	{
+      "fighter": "dark_samus",
+      "offset": [
+        -100,
+        40
+      ],
+      "scale": 0.45,
+      "flip": false
+    },
+    {
+      "fighter": "wario",
+      "offset": [
+        -140,
+        -50
+      ],
+      "scale": 0.45,
+      "flip": false
+    },
+    {
+      "fighter": "lucas",
+      "offset": [
+        -70,
+        100
+      ],
+      "scale": 0.4,
+      "flip": false
+    },
+    {
+      "fighter": "bowser",
+      "offset": [
+        -300,
+        0
+      ],
+      "scale": 0.5,
+      "flip": false
+    },
+    {
+      "fighter": "wolf",
+      "offset": [
+        -100,
+        30
+      ],
+      "scale": 0.5,
+      "flip": false
+    },
+	{
+      "fighter": "conker",
+      "offset": [
+        -230,
+        120
+      ],
+      "scale": 0.5,
+      "flip": false
+    },
+	{
+      "fighter": "mewtwo",
+      "offset": [
+        0,
+        30
+      ],
+      "scale": 0.45,
+      "flip": false
+    },
+    {
+      "fighter": "marth",
+      "offset": [
+        -620,
+        0
+      ],
+      "scale": 0.5,
+      "flip": false
+    },
+    {
+      "fighter": "sonic",
+      "offset": [
+        50,
+        80
+      ],
+      "scale": 0.45,
+      "flip": false
+    },
+	{
+      "fighter": "classic_sonic",
+      "offset": [
+        -150,
+        80
+      ],
+      "scale": 0.45,
+      "flip": false
+    },
+	{
+      "fighter": "sheik",
+      "offset": [
+        0,
+		40
+      ],
+      "scale": 0.35,
+      "flip": false
+    },
+    {
+      "fighter": "marina",
+      "offset": [
+        -40,
+        80
+      ],
+      "scale": 0.5,
+      "flip": false
+    },
+    {
+      "fighter": "king_dedede",
+      "offset": [
+        -300,
+        -130
+      ],
+      "scale": 0.45,
+      "flip": false
+    },
+	{
+      "fighter": "goemon",
+      "offset": [
+        0,
+        -70
+      ],
+      "scale": 0.4,
+      "flip": false
+    },{
+      "fighter": "banjo_and_kazooie",
+      "offset": [
+        -90,
+        0
+      ],
+      "scale": 0.5,
+      "flip": false
+    }
+  ]
+}
