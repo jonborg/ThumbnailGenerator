@@ -7,40 +7,47 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import thumbnailgenerator.enums.LoadingType;
 
 public class LoadingState {
     private BooleanProperty isLoading;
     private DoubleProperty progress;
     private StringProperty loadingText;
 
-    public LoadingState(boolean isLoading, boolean isThumbnail,
-                        int quantityGenerated, int totalQuantity) {
+    public LoadingState(boolean isLoading, LoadingType loadingType, int currentQuantity, int totalQuantity) {
         this.isLoading = new SimpleBooleanProperty(isLoading);
-        this.progress = new SimpleDoubleProperty((double) quantityGenerated/totalQuantity);
-        if (isThumbnail) {
-            this.loadingText = new SimpleStringProperty(
-                    "Generating thumbnail: " + quantityGenerated + "/" + totalQuantity
-            );
-        } else {
-            this.loadingText = new SimpleStringProperty(
-                    "Generating top8: " + quantityGenerated + "/" + totalQuantity
-            );
-        }
+        this.progress = new SimpleDoubleProperty((double) currentQuantity/totalQuantity);
+        generateText(loadingType, currentQuantity, totalQuantity);
     }
 
-    public void update(boolean isLoading, boolean isThumbnail, int quantityGenerated, int totalQuantity) {
+    public void update(boolean isLoading, LoadingType loadingType, int currentQuantity, int totalQuantity) {
         Platform.runLater(() -> {
             this.isLoading.setValue(isLoading);
-            if (isThumbnail) {
-                this.loadingText.setValue("Generating thumbnail: " + quantityGenerated + "/" + totalQuantity);
-            } else {
-                this.loadingText.setValue("Generating top8: " + quantityGenerated + "/" + totalQuantity);
-            }
+            generateText(loadingType, currentQuantity, totalQuantity);
         });
     }
 
     public void disableLoading() {
-        update(false, true, 0, 0);
+        update(false, LoadingType.THUMBNAIL, 0, 0);
+    }
+
+    private void generateText(LoadingType loadingType, int currentQuantity, int totalQuantity) {
+        var string = "";
+        switch (loadingType){
+            case THUMBNAIL:
+                string = "Generating thumbnail: " + currentQuantity + "/" + totalQuantity;
+                break;
+            case TOP8:
+                string = "Generating top8: " + currentQuantity + "/" + totalQuantity;
+                break;
+            case THUMBNAIL_POSITION_CONVERSION:
+                string = "Converting character positions: " + currentQuantity + "/" + totalQuantity;
+        }
+        if (this.loadingText == null) {
+            this.loadingText = new SimpleStringProperty(string);
+        } else {
+            this.loadingText.setValue(string);
+        }
     }
 
     public BooleanProperty isLoadingProperty() {

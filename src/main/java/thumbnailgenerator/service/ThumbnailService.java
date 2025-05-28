@@ -4,7 +4,6 @@ import com.google.gson.reflect.TypeToken;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +32,7 @@ import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.enums.LoadingType;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
@@ -85,7 +85,7 @@ public class ThumbnailService {
         for (Thumbnail thumbnail : thumbnailList) {
             CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                 try {
-                    loadingState.update(true, true,
+                    loadingState.update(true, LoadingType.THUMBNAIL,
                             generatedThumbnails.incrementAndGet(), thumbnailList.size());
                     generateAndSaveThumbnail(thumbnail);
                 } catch (Exception e) {

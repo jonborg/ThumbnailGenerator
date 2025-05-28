@@ -130,8 +130,8 @@ to the new fighter image settings file.
 
 These settings files have the following structure:
 
-    [{
-    	"mirrorPlayer2": true,
+    {
+        "mirrorPlayer2": true,
     	"fighters":[
     	  {
     		"fighter": "mario",
@@ -159,8 +159,17 @@ These settings files have the following structure:
  - **flip** - tells whether image should be flipped. If true, image is flipped (default = false).
 
 To note that if image is flipped, horizontal offset orientation is also flipped.
-
 All these values can be changed to fit users preferences and can be changed and tested at run time.
+
+As of version **4.3.0**, thumbnail character positioning has been changed and simplified by using masks.
+This has impact on offsets, as new offsets need to be used to get desired character positioning.
+All thumbnail image settings files provided have **already been converted**.
+However if you have a custom file, you can convert it by going to **Legacy** -> **Convert old character offsets**
+
+![legace_menu.png](./assets/documentation/legacy_menu.png)
+
+Conversion requires internet access as it needs character's images to properly calculate new offset.
+Therefore, users must also select correct Game and Art Type related to image settings file to get correct images.
 
 ### Top 8 image settings
 For top 8 generation, images need to be scaled and repositioned in other to be printed 
@@ -476,6 +485,8 @@ Position of stock images behave according to equations provided in  slot setting
 ![tg_char_image.png](./assets/documentation/tg_char_image.png) ![tg_final_slot.png](./assets/documentation/tg_final_slot.png)
 
 Thumbnails are saved in **/generated_top8** folder.
+
+
 
 ## Miscellaneous
 ### Missing Mural art
