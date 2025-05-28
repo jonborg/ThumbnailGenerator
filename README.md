@@ -861,6 +861,15 @@ Thumbnails are saved in **/generated_top8** folder.
 
 
 ### Release Notes
+#### v4.3.0
+- Added Smash 64 Remix as selectable games;
+- Added Elena from Street Fighter 6
+- Added Unika from Guilty Gear: Strive
+- Added Galleon from Grandbule Fantasy Versus: Rising
+- Allow thumbnail generation of up to 2 characters per player
+- Adjusted thumbnails' character positioning process to use masks
+- Added Legacy menu, to allow users to convert their custom character positioning in thumbnails
+
 #### v4.2.0
 - Added Smash Melee, Guilty Gear: Strive and Granblue Fantasy Versus: Rising as selectable games;
 - Thumbnail and Top8 generation are now run in multiple threads, allowing parallel generation
