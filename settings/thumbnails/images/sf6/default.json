@@ -225,6 +225,15 @@
       ],
       "scale": 0.9,
       "flip": false
+    },
+    {
+      "fighter": "elena",
+      "offset": [
+        -820,
+        -900
+      ],
+      "scale": 0.9,
+      "flip": false
     }
   ]
 }

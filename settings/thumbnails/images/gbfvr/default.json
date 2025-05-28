@@ -324,6 +324,15 @@
       ],
       "scale": 0.7,
       "flip": false
+    },
+    {
+      "fighter": "galleon",
+      "offset": [
+        -500,
+        -370
+      ],
+      "scale": 0.7,
+      "flip": false
     }
   ]
 }
