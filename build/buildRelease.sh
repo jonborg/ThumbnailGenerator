@@ -1,4 +1,5 @@
 VERSION=$1
+MAVEN_OPTIONS=$2
 THUMB="Thumbnail Generator"
 EXE_FILE="$THUMB.exe"
 README_FILE="README.md"
@@ -17,7 +18,7 @@ mv "$STARTGG_AUTH_TOKEN_FILE" "$STARTGG_AUTH_TOKEN_BACKUP"
 echo "<set auth token in settings/startgg/auth-token.txt>" > "$STARTGG_AUTH_TOKEN_FILE"
 
 echo "Creating release $VERSION of Thumbnail Generator"
-mvn clean install
+mvn clean install $2
 
 echo "Moving $EXE_FILE to zip"
 tar -a -c -f "${THUMB// /}_v${VERSION//./_}.zip" \
