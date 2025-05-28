@@ -261,6 +261,14 @@
       ],
       "scale": 0.4,
       "flip": false
+    },{
+      "fighter": "unika",
+      "offset": [
+        -300,
+        120
+      ],
+      "scale": 0.65,
+      "flip": false
     },
     {
       "fighter": "random",

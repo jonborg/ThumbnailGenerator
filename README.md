@@ -714,6 +714,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | M. Bison           | m_bison            |
 | Terry              | terry              |
 | Mai                | mai                |
+| Elena              | elena              |
 
 ### Tekken 8 URL names
 
@@ -791,6 +792,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Slayer              | slayer             |
 | Dizzy               | dizzy              |
 | Venom               | venom              |
+| Unika               | unika              |
 | Random              | random             |
 
 ###Fatal Fury: City of the Wolves URL names
@@ -855,6 +857,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Versusia           | versusia           |
 | Vikala             | vikala             |
 | Sandalphon         | sandalphon         |
+| Galleo             | galleon            |
 
 
 ### Release Notes
