@@ -7,6 +7,7 @@ import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
+import thumbnailgenerator.dto.ThumbnailForegroundLogo;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.dto.json.read.FighterArtSettingsRead;
 import thumbnailgenerator.dto.json.read.FileThumbnailSettingsRead;
@@ -44,6 +45,7 @@ public class TournamentFactory {
         return new FileThumbnailSettings(
                 Game.valueOf(fileThumbnailSettingsRead.getGame()),
                 fileThumbnailSettingsRead.getForeground(),
+                new ThumbnailForegroundLogo(fileThumbnailSettingsRead.getForegroundLogo()),
                 fileThumbnailSettingsRead.getBackground(),
                 createThumbnailFighterArtSettings(fileThumbnailSettingsRead.getArtTypeDir(),Game.valueOf(fileThumbnailSettingsRead.getGame())),
                 new TextSettings((String) null)
@@ -59,6 +61,7 @@ public class TournamentFactory {
                 fileTop8SettingsRead.getSlotSettingsFile()
         );
     }
+
 
     public List<FighterArtSettings> createThumbnailFighterArtSettings(List<FighterArtSettingsRead> fighterArtSettingsReadList, Game game){
         return fighterArtSettingsReadList.stream()

@@ -46,8 +46,28 @@
                     <TitledPane text="Thumbnail Image Directories" collapsible="false" styleClass="settingsBox">
                         <VBox spacing="15">
                             <VBox>
-                                <Label text="Foreground*:"/>
+                                <Label text="Foreground:"/>
                                 <ChosenImageField fx:id="foreground"/>
+                            </VBox>
+                            <VBox spacing="2">
+                                <VBox>
+                                    <Label text="Foreground Logo:"/>
+                                    <ChosenImageField fx:id="foregroundLogo"/>
+                                </VBox>
+                                <HBox spacing="10">
+                                    <VBox>
+                                        <Label text="Scale:"/>
+                                        <TextField fx:id="foregroundLogoScale" styleClass="small-textfield"/>
+                                    </VBox>
+                                    <VBox>
+                                        <Label text="Vertical Offset:"/>
+                                        <TextField fx:id="foregroundLogoOffset" styleClass="medium-textfield"/>
+                                    </VBox>
+                                    <VBox>
+                                        <Label text="Above?:"/>
+                                        <CheckBox fx:id="foregroundLogoAbove"/>
+                                    </VBox>
+                                </HBox>
                             </VBox>
                             <VBox>
                                 <Label text="Background:"/>

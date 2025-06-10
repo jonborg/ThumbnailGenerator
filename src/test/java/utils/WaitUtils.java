@@ -1,6 +1,9 @@
 package utils;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Arrays;
 
 public class WaitUtils {
 
@@ -16,19 +19,25 @@ public class WaitUtils {
         waitInSeconds(1);
     }
 
-    public static boolean waitForFile(File file) {
+    public static boolean waitForExpectedFile(File actualFile, File expectedFile)
+            throws IOException {
         int timeoutSeconds = 60;
         long startTime = System.currentTimeMillis();
+        byte[] expectedBytes = Files.readAllBytes(expectedFile.toPath());
+        var sameBytes = false;
 
-        while (!file.exists()) {
+        while (!(actualFile.exists() && sameBytes)) {
+            if (actualFile.exists()) {
+                byte[] actualBytes = Files.readAllBytes(actualFile.toPath());
+                sameBytes = Arrays.equals(expectedBytes, actualBytes);
+            }
             if ((System.currentTimeMillis() - startTime) > timeoutSeconds * 1000) {
+                Thread.currentThread().interrupt();
                 return false;
             }
             try {
                 waitInSeconds(0.5);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return false;
+            } catch (InterruptedException ignored) {
             }
         }
         return true;

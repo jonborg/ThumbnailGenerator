@@ -20,7 +20,6 @@ import utils.WaitUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -72,10 +71,7 @@ public class MultiThumbnailGenerationTest {
 
         //Assert
         for (int i=0; i<3; i++) {
-            var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
-            if(i==0){
-                WaitUtils.waitInSeconds(20);
-            }
+            var thumbnailExists = WaitUtils.waitForExpectedFile(actualThumbnails.get(i), expectedThumbnails.get(i));
             assertTrue(thumbnailExists);
             assertArrayEquals(
                     Files.readAllBytes(expectedThumbnails.get(i).toPath()),
@@ -112,10 +108,7 @@ public class MultiThumbnailGenerationTest {
 
         //Assert
         for (int i=0; i<3; i++) {
-            var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
-            if(i==0){
-                WaitUtils.waitInSeconds(20);
-            }
+            var thumbnailExists = WaitUtils.waitForExpectedFile(actualThumbnails.get(i), expectedThumbnails.get(i));
             assertTrue(thumbnailExists);
             assertArrayEquals(
                     Files.readAllBytes(expectedThumbnails.get(i).toPath()),
@@ -160,10 +153,7 @@ public class MultiThumbnailGenerationTest {
 
         //Assert
         for (int i=0; i<3; i++) {
-            var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
-            if(i==0){
-                WaitUtils.waitInSeconds(20);
-            }
+            var thumbnailExists = WaitUtils.waitForExpectedFile(actualThumbnails.get(i), expectedThumbnails.get(i));
             assertTrue(thumbnailExists);
             assertArrayEquals(
                     Files.readAllBytes(expectedThumbnails.get(i).toPath()),
@@ -200,10 +190,7 @@ public class MultiThumbnailGenerationTest {
 
         //Assert
         for (int i=0; i<2; i++) {
-            var thumbnailExists = WaitUtils.waitForFile(actualThumbnails.get(i));
-            if(i==0){
-                WaitUtils.waitInSeconds(20);
-            }
+            var thumbnailExists = WaitUtils.waitForExpectedFile(actualThumbnails.get(i), expectedThumbnails.get(i));
             assertTrue(thumbnailExists);
             assertArrayEquals(
                     Files.readAllBytes(expectedThumbnails.get(i).toPath()),
