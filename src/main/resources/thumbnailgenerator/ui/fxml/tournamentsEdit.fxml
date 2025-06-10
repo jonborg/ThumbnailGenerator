@@ -49,9 +49,25 @@
                                 <Label text="Foreground:"/>
                                 <ChosenImageField fx:id="foreground"/>
                             </VBox>
-                            <VBox>
-                                <Label text="Foreground overlay:"/>
-                                <ChosenImageField fx:id="foregroundOverlay"/>
+                            <VBox spacing="2">
+                                <VBox>
+                                    <Label text="Foreground Logo:"/>
+                                    <ChosenImageField fx:id="foregroundLogo"/>
+                                </VBox>
+                                <HBox spacing="10">
+                                    <VBox>
+                                        <Label text="Scale:"/>
+                                        <TextField fx:id="foregroundLogoScale" styleClass="small-textfield"/>
+                                    </VBox>
+                                    <VBox>
+                                        <Label text="Vertical Offset:"/>
+                                        <TextField fx:id="foregroundLogoOffset" styleClass="medium-textfield"/>
+                                    </VBox>
+                                    <VBox>
+                                        <Label text="Above?:"/>
+                                        <CheckBox fx:id="foregroundLogoAbove"/>
+                                    </VBox>
+                                </HBox>
                             </VBox>
                             <VBox>
                                 <Label text="Background:"/>

@@ -160,9 +160,13 @@ public class ThumbnailService {
         this.drawCharacters(thumbnail, g2d);
 
         LOGGER.info("Drawing foreground in path {}.", fileThumbnailSettings.getForeground());
-        imageService.drawImageFromPathFile(fileThumbnailSettings.getForeground(), g2d);
-        imageService.drawImageFromPathFile(fileThumbnailSettings.getForegroundOverlay(), g2d);
-
+        if (fileThumbnailSettings.getThumbnailForegroundLogo().isAboveForeground()){
+            imageService.drawImageFromPathFile(fileThumbnailSettings.getForeground(), g2d);
+            imageService.drawThumbnailLogoFromPathFile(fileThumbnailSettings.getThumbnailForegroundLogo(), g2d);
+        } else {
+            imageService.drawThumbnailLogoFromPathFile(fileThumbnailSettings.getThumbnailForegroundLogo(), g2d);
+            imageService.drawImageFromPathFile(fileThumbnailSettings.getForeground(), g2d);
+        }
         LOGGER.info("Drawing thumbnail text");
         LOGGER.debug("Loading {} text settings: {}", thumbnail.getTournament().getName(),
                 fileThumbnailSettings.getTextSettings());

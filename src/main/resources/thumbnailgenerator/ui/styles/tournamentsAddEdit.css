@@ -41,6 +41,16 @@
     -fx-min-width: 210;
 }
 
+.small-textfield{
+    -fx-pref-width: 50;
+    -fx-min-width: 50;
+}
+
+.medium-textfield{
+    -fx-pref-width: 80;
+    -fx-min-width: 80;
+}
+
 .settingsBox{
     -fx-padding: 10 10 10 10;
 }

@@ -16,9 +16,11 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.imgscalr.Scalr;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.PlayerSlot;
+import thumbnailgenerator.dto.ThumbnailForegroundLogo;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.utils.image.ImageUtils;
 import thumbnailgenerator.utils.image.filter.ShadowFilter;
@@ -27,14 +29,41 @@ import thumbnailgenerator.utils.image.filter.ShadowFilter;
 public class ImageService {
 
     private static final Logger LOGGER = LogManager.getLogger(ImageService.class);
+    private @Value("${thumbnail.size.width}") Integer thumbnailWidth;
+    private @Value("${thumbnail.size.height}") Integer thumbnailHeight;
 
     public void drawImageFromPathFile(String pathname, Graphics2D g2d) throws
+            LocalImageNotFoundException {
+        drawImageFromPathFile(pathname, g2d, 0, 0);
+    }
+
+    public void drawThumbnailLogoFromPathFile(ThumbnailForegroundLogo thumbnailForegroundLogo, Graphics2D g2d) throws
+            LocalImageNotFoundException {
+        var pathname = thumbnailForegroundLogo.getLogo();
+        if (pathname == null || pathname.isEmpty()){
+            return;
+        }
+
+        try {
+            var image = ImageIO.read(new FileInputStream(pathname));
+            var scaledImage = resizeImage(image, thumbnailForegroundLogo.getScale());
+            int x = thumbnailWidth/2 - scaledImage.getWidth()/2;
+            int y = thumbnailHeight/2 + thumbnailForegroundLogo.getVerticalOffset();
+            g2d.drawImage(scaledImage, x, y, null);
+        } catch (IOException | NullPointerException e) {
+            LOGGER.error("An issue occurred when loading image in path {}:", pathname);
+            LOGGER.catching(e);
+            throw new LocalImageNotFoundException(pathname);
+        }
+    }
+
+    private void drawImageFromPathFile(String pathname, Graphics2D g2d, int x, int y) throws
             LocalImageNotFoundException {
         if (pathname == null || pathname.isEmpty()){
             return;
         }
         try {
-            g2d.drawImage(ImageIO.read(new FileInputStream(pathname)), 0, 0, null);
+            g2d.drawImage(ImageIO.read(new FileInputStream(pathname)), x, y, null);
         } catch (IOException | NullPointerException e) {
             LOGGER.error("An issue occurred when loading image in path {}:", pathname);
             LOGGER.catching(e);

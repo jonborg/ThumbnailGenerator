@@ -10,12 +10,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.service.TournamentService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-import thumbnailgenerator.ui.textfield.ChosenImageField;
 
 @Controller
 public class TournamentsEditController extends TournamentsCreateController {
@@ -45,7 +43,10 @@ public class TournamentsEditController extends TournamentsCreateController {
         logo.setText(tournament.getImage());
 
         foreground.setText(thumbnailSettings.getForeground());
-        foregroundOverlay.setText(thumbnailSettings.getForegroundOverlay());
+        foregroundLogo.setText(thumbnailSettings.getThumbnailForegroundLogo().getLogo());
+        foregroundLogoScale.setText(String.valueOf(thumbnailSettings.getThumbnailForegroundLogo().getScale()));
+        foregroundLogoOffset.setText(String.valueOf(thumbnailSettings.getThumbnailForegroundLogo().getVerticalOffset()));
+        foregroundLogoAbove.setSelected(thumbnailSettings.getThumbnailForegroundLogo().isAboveForeground());
         background.setText(thumbnailSettings.getBackground());
         fighterImageSettingsFile.setText(thumbnailRenderSettings);
 

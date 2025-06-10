@@ -39,6 +39,7 @@ import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
+import thumbnailgenerator.dto.ThumbnailForegroundLogo;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
@@ -70,7 +71,13 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField foreground;
     @FXML
-    protected ChosenImageField foregroundOverlay;
+    protected ChosenImageField foregroundLogo;
+    @FXML
+    protected TextField foregroundLogoScale;
+    @FXML
+    protected TextField foregroundLogoOffset;
+    @FXML
+    protected CheckBox foregroundLogoAbove;
     @FXML
     protected ChosenImageField background;
     @FXML
@@ -161,7 +168,7 @@ public class TournamentsCreateController implements Initializable {
         for (Game game: Game.values()) {
             fileThumbnailSettingsList
                     .add(new FileThumbnailSettings(game,
-                            "", "", "",
+                            "", new ThumbnailForegroundLogo("", 1.0f, 0, false), "",
                             initArtType(game, true), null));
             fileTop8SettingsList
                     .add(new FileTop8Settings(game,
@@ -214,11 +221,12 @@ public class TournamentsCreateController implements Initializable {
         };
 
         List<TextField> listIntFields = new ArrayList<>(Arrays.asList(
+                foregroundLogoOffset,
                 sizeTop, sizeBottom,
                 downOffsetTopLeft, downOffsetTopRight, downOffsetBottomLeft, downOffsetBottomRight)
         );
         List<TextField> listFloatFields = new ArrayList<>(Arrays.asList(
-                angleTop, angleBottom, contour)
+                foregroundLogoScale, angleTop, angleBottom, contour)
         );
 
         for (TextField intField : listIntFields){
@@ -229,6 +237,9 @@ public class TournamentsCreateController implements Initializable {
             floatField.setTextFormatter(new TextFormatter<>(new FloatStringConverter(), 0.0f, floatFilter));
             floatField.focusedProperty().addListener((arg0,newValue, oldValue) -> emptyTextField(floatField));
         }
+        foregroundLogoScale.setTextFormatter(new TextFormatter<>(new FloatStringConverter(), 1.0f, floatFilter));
+        foregroundLogoScale.focusedProperty().addListener((arg0,newValue, oldValue) -> emptyTextField(foregroundLogoScale));
+
     }
 
     protected void initFontDropdown(){
@@ -403,7 +414,10 @@ public class TournamentsCreateController implements Initializable {
                 .get();
         thumbnailSettings.setBackground(background.getText());
         thumbnailSettings.setForeground(foreground.getText());
-        thumbnailSettings.setForegroundOverlay(foregroundOverlay.getText());
+        thumbnailSettings.getThumbnailForegroundLogo().setLogo(foregroundLogo.getText());
+        thumbnailSettings.getThumbnailForegroundLogo().setScale(Float.parseFloat(foregroundLogoScale.getText()));
+        thumbnailSettings.getThumbnailForegroundLogo().setVerticalOffset(Integer.parseInt(foregroundLogoOffset.getText()));
+        thumbnailSettings.getThumbnailForegroundLogo().setAboveForeground(foregroundLogoAbove.isSelected());
         thumbnailSettings.getArtTypeDir().stream()
                 .filter(a -> a.getArtType().equals(artTypeThumbnail.getSelectionModel().getSelectedItem()))
                 .findFirst()
@@ -431,7 +445,10 @@ public class TournamentsCreateController implements Initializable {
                 .get();
         background.setText(thumbnailSettings.getBackground());
         foreground.setText(thumbnailSettings.getForeground());
-        foregroundOverlay.setText(thumbnailSettings.getForegroundOverlay());
+        foregroundLogo.setText(thumbnailSettings.getThumbnailForegroundLogo().getLogo());
+        foregroundLogoScale.setText(String.valueOf(thumbnailSettings.getThumbnailForegroundLogo().getScale()));
+        foregroundLogoOffset.setText(String.valueOf(thumbnailSettings.getThumbnailForegroundLogo().getVerticalOffset()));
+        foregroundLogoAbove.setSelected(thumbnailSettings.getThumbnailForegroundLogo().isAboveForeground());
         artTypeThumbnail.getItems().clear();
         artTypeThumbnail.getItems().addAll(gameEnumService.getAllFighterArtTypes(game));
         artTypeThumbnail.getSelectionModel().select(0);
