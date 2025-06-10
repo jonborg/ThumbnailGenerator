@@ -31,7 +31,7 @@ public enum StreetFighter6Enum implements CharacterEnum {
     M_BISON("M. Bison", "m_bison", 2506, 1),
     TERRY("Terry", "terry", 2596, 1),
     MAI("Mai", "mai", 2616, 1),
-    ELENA("Elena", "elena", -1, 1);
+    ELENA("Elena", "elena", 2699, 1);
 
     private final String name;
     private final String code;
