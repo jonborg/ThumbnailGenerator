@@ -2,7 +2,6 @@ package thumbnail;
 
 import exception.Top8FromFileException;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +50,7 @@ public class Top8GenerationTest {
 
         //Assert
         File actualTop8 = FileUtils.getMostRecentFile("/generated_top8/");
-        var thumbnailExists = WaitUtils.waitForFile(actualTop8);
+        var thumbnailExists = WaitUtils.waitForExpectedFile(actualTop8, expectedTop8);
         assertTrue(thumbnailExists);
         assertArrayEquals(
                 Files.readAllBytes(expectedTop8.toPath()),

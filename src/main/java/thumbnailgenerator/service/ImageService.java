@@ -46,7 +46,7 @@ public class ImageService {
 
         try {
             var image = ImageIO.read(new FileInputStream(pathname));
-            var scaledImage = resizeImage(image, thumbnailForegroundLogo.getScale());
+            var scaledImage = resizeImageSimple(image, thumbnailForegroundLogo.getScale());
             int x = thumbnailWidth/2 - scaledImage.getWidth()/2;
             int y = thumbnailHeight/2 + thumbnailForegroundLogo.getVerticalOffset();
             g2d.drawImage(scaledImage, x, y, null);
@@ -84,6 +84,14 @@ public class ImageService {
         return bufferedImage;
     }
 
+    public BufferedImage resizeImageSimple(BufferedImage bufferedImage, double scale) {
+        return Scalr.resize(
+                bufferedImage,
+                (int) Math.round(scale*bufferedImage.getWidth()),
+                (int) Math.round(scale*bufferedImage.getHeight()),
+                Scalr.OP_ANTIALIAS
+        );
+    }
     public BufferedImage resizeImage(BufferedImage bufferedImage, double scale) {
         LOGGER.info("Performing resize of image with width {} and height {}.",
                 bufferedImage.getWidth(), bufferedImage.getHeight());

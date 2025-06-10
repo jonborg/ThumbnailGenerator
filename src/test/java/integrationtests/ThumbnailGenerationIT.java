@@ -57,9 +57,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        boolean isFileCreated = WaitUtils.waitForFile(actualImage);
-        WaitUtils.waitInSeconds(2);
-
+        boolean isFileCreated = WaitUtils.waitForExpectedFile(actualImage, expectedImage);
         assertTrue(isFileCreated);
         byte[] actualImageBytes = Files.readAllBytes(actualImage.toPath());
         byte[] expectedImageBytes = Files.readAllBytes(expectedImage.toPath());
@@ -87,8 +85,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        boolean isFileCreated = WaitUtils.waitForFile(actualImage);
-        WaitUtils.waitInSeconds(2);
+        boolean isFileCreated = WaitUtils.waitForExpectedFile(actualImage, expectedImage);
 
         assertTrue(isFileCreated);
         byte[] actualImageBytes = Files.readAllBytes(actualImage.toPath());
@@ -118,8 +115,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        boolean isFileCreated = WaitUtils.waitForFile(actualImage);
-        WaitUtils.waitInSeconds(2);
+        boolean isFileCreated = WaitUtils.waitForExpectedFile(actualImage, expectedImage);
 
         assertTrue(isFileCreated);
         assertTrue(marioImage.exists());
@@ -152,9 +148,8 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        boolean isFileCreated = WaitUtils.waitForFile(actualImage);
+        boolean isFileCreated = WaitUtils.waitForExpectedFile(actualImage, expectedImage);
         assertTrue(isFileCreated);
-        WaitUtils.waitInSeconds(2);
 
         byte[] actualImageBytes = Files.readAllBytes(actualImage.toPath());
         byte[] expectedImageBytes = Files.readAllBytes(expectedImage.toPath());

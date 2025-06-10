@@ -280,12 +280,7 @@ public class ThumbnailService {
                     .findFighterImageSettings(fighter.getUrlName());
 
             var scaledImage = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
-            var doubleScaledImage = Scalr.resize(
-                    scaledImage,
-                    (int) Math.round(doubleCharacterScale*scaledImage.getWidth()),
-                    (int) Math.round(doubleCharacterScale*scaledImage.getHeight()),
-                    Scalr.OP_ANTIALIAS
-            );
+            var doubleScaledImage = imageService.resizeImageSimple(scaledImage, doubleCharacterScale);
 
             //offset + double fighter offset
             int centerOffsetX = (int) Math.round((1-doubleCharacterScale)*(320-fighterImageThumbnailSettings.getOffset()[0]));
