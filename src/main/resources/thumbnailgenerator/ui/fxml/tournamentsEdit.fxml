@@ -46,8 +46,12 @@
                     <TitledPane text="Thumbnail Image Directories" collapsible="false" styleClass="settingsBox">
                         <VBox spacing="15">
                             <VBox>
-                                <Label text="Foreground*:"/>
+                                <Label text="Foreground:"/>
                                 <ChosenImageField fx:id="foreground"/>
+                            </VBox>
+                            <VBox>
+                                <Label text="Foreground overlay:"/>
+                                <ChosenImageField fx:id="foregroundOverlay"/>
                             </VBox>
                             <VBox>
                                 <Label text="Background:"/>

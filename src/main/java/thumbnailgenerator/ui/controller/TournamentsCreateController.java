@@ -70,6 +70,8 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField foreground;
     @FXML
+    protected ChosenImageField foregroundOverlay;
+    @FXML
     protected ChosenImageField background;
     @FXML
     protected ComboBox<FighterArtTypeEnum> artTypeThumbnail;
@@ -159,10 +161,12 @@ public class TournamentsCreateController implements Initializable {
         for (Game game: Game.values()) {
             fileThumbnailSettingsList
                     .add(new FileThumbnailSettings(game,
-                            "", "", initArtType(game, true), null));
+                            "", "", "",
+                            initArtType(game, true), null));
             fileTop8SettingsList
                     .add(new FileTop8Settings(game,
-                            "", "", initArtType(game, false), null));
+                            "", "",
+                            initArtType(game, false), null));
         }
         if (tournament != null) {
             for (FileThumbnailSettings settings : tournament.getThumbnailSettings()){
@@ -399,6 +403,7 @@ public class TournamentsCreateController implements Initializable {
                 .get();
         thumbnailSettings.setBackground(background.getText());
         thumbnailSettings.setForeground(foreground.getText());
+        thumbnailSettings.setForegroundOverlay(foregroundOverlay.getText());
         thumbnailSettings.getArtTypeDir().stream()
                 .filter(a -> a.getArtType().equals(artTypeThumbnail.getSelectionModel().getSelectedItem()))
                 .findFirst()
@@ -426,6 +431,7 @@ public class TournamentsCreateController implements Initializable {
                 .get();
         background.setText(thumbnailSettings.getBackground());
         foreground.setText(thumbnailSettings.getForeground());
+        foregroundOverlay.setText(thumbnailSettings.getForegroundOverlay());
         artTypeThumbnail.getItems().clear();
         artTypeThumbnail.getItems().addAll(gameEnumService.getAllFighterArtTypes(game));
         artTypeThumbnail.getSelectionModel().select(0);

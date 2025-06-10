@@ -16,6 +16,9 @@ public class FileThumbnailSettingsWrite {
     @SerializedName("foreground")
     private String foreground;
     @Expose
+    @SerializedName("foregroundOverlay")
+    private String foregroundOverlay;
+    @Expose
     @SerializedName("background")
     private String background;
     @Expose
@@ -27,10 +30,11 @@ public class FileThumbnailSettingsWrite {
     public FileThumbnailSettingsWrite(FileThumbnailSettings fileThumbnailSettings){
         this.game = fileThumbnailSettings.getGame().name();
         this.foreground = fileThumbnailSettings.getForeground();
+        this.foregroundOverlay = fileThumbnailSettings.getForegroundOverlay();
         this.background = fileThumbnailSettings.getBackground();
         this.artTypeDir = fileThumbnailSettings.getArtTypeDir()
                 .stream()
-                .map(atd -> new FighterArtSettingsWrite(atd))
+                .map(FighterArtSettingsWrite::new)
                 .collect(Collectors.toList());
 
     }

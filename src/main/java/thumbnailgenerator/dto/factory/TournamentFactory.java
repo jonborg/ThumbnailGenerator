@@ -44,6 +44,7 @@ public class TournamentFactory {
         return new FileThumbnailSettings(
                 Game.valueOf(fileThumbnailSettingsRead.getGame()),
                 fileThumbnailSettingsRead.getForeground(),
+                fileThumbnailSettingsRead.getForegroundOverlay(),
                 fileThumbnailSettingsRead.getBackground(),
                 createThumbnailFighterArtSettings(fileThumbnailSettingsRead.getArtTypeDir(),Game.valueOf(fileThumbnailSettingsRead.getGame())),
                 new TextSettings((String) null)

@@ -15,6 +15,7 @@ import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.service.TournamentService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
+import thumbnailgenerator.ui.textfield.ChosenImageField;
 
 @Controller
 public class TournamentsEditController extends TournamentsCreateController {
@@ -44,6 +45,7 @@ public class TournamentsEditController extends TournamentsCreateController {
         logo.setText(tournament.getImage());
 
         foreground.setText(thumbnailSettings.getForeground());
+        foregroundOverlay.setText(thumbnailSettings.getForegroundOverlay());
         background.setText(thumbnailSettings.getBackground());
         fighterImageSettingsFile.setText(thumbnailRenderSettings);
 

@@ -50,6 +50,10 @@
                                 <ChosenImageField fx:id="foreground"/>
                             </VBox>
                             <VBox>
+                                <Label text="Foreground overlay:"/>
+                                <ChosenImageField fx:id="foregroundOverlay"/>
+                            </VBox>
+                            <VBox>
                                 <Label text="Background:"/>
                                 <ChosenImageField fx:id="background"/>
                             </VBox>

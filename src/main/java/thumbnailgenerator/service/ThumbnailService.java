@@ -161,6 +161,7 @@ public class ThumbnailService {
 
         LOGGER.info("Drawing foreground in path {}.", fileThumbnailSettings.getForeground());
         imageService.drawImageFromPathFile(fileThumbnailSettings.getForeground(), g2d);
+        imageService.drawImageFromPathFile(fileThumbnailSettings.getForegroundOverlay(), g2d);
 
         LOGGER.info("Drawing thumbnail text");
         LOGGER.debug("Loading {} text settings: {}", thumbnail.getTournament().getName(),
