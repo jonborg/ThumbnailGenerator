@@ -17,9 +17,6 @@ public class SettingsRead {
     @SerializedName("game")
     protected String game;
     @Expose
-    @SerializedName("foreground")
-    protected String foreground;
-    @Expose
     @SerializedName("background")
     protected String background;
     @Expose

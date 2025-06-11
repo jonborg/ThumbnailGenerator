@@ -51,6 +51,11 @@
     -fx-min-width: 80;
 }
 
+.color-picker{
+    -fx-pref-width: 90;
+    -fx-min-width: 90;
+}
+
 .settingsBox{
     -fx-padding: 10 10 10 10;
 }

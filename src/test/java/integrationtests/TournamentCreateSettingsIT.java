@@ -110,7 +110,7 @@ public class TournamentCreateSettingsIT extends CustomApplicationTest {
 
         scrollPaneVertically(ScrollPaneId.TOURNAMENT_SETTINGS, createScene, 1.0);
         writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_FOREGROUND,
-                expectedThumbnailSettings.getForeground());
+                expectedThumbnailSettings.getThumbnailForeground().getForeground());
         writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_BACKGROUND,
                 expectedThumbnailSettings.getBackground());
         writeInChosenJsonField(ChosenJsonFieldId.TOURNAMENT_THUMBNAIL_CHARACTER_SETTINGS,

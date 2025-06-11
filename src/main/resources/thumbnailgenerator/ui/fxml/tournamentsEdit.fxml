@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import thumbnailgenerator.ui.textfield.ChosenImageField?>
 <?import thumbnailgenerator.ui.textfield.ChosenJsonField?>
+<?import javafx.geometry.Insets?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="thumbnailgenerator.ui.controller.TournamentsEditController"
@@ -47,27 +48,42 @@
                         <VBox spacing="15">
                             <VBox>
                                 <Label text="Foreground:"/>
-                                <ChosenImageField fx:id="foreground"/>
-                            </VBox>
-                            <VBox spacing="2">
-                                <VBox>
-                                    <Label text="Foreground Logo:"/>
-                                    <ChosenImageField fx:id="foregroundLogo"/>
+                                <VBox spacing="5">
+                                    <padding>
+                                        <Insets left="10"/>
+                                    </padding>
+                                    <HBox>
+                                        <Label text="Use custom foreground?:"/>
+                                        <CheckBox fx:id="customForeground"/>
+                                    </HBox>
+                                    <VBox disable="${!customForeground.selected}">
+                                        <Label text="Foreground:"/>
+                                        <ChosenImageField fx:id="foreground" />
+                                    </VBox>
+                                    <VBox disable="${customForeground.selected}">
+                                        <Label text="Colors:"/>
+                                        <HBox spacing="5">
+                                            <ColorPicker fx:id="thumbnailPrimaryColor" styleClass="color-picker"/>
+                                            <ColorPicker fx:id="thumbnailSecondaryColor" styleClass="color-picker"/>
+                                        </HBox>
+                                        <Label text="Foreground Logo:"/>
+                                        <ChosenImageField fx:id="foregroundLogo"/>
+                                        <HBox spacing="10">
+                                            <VBox>
+                                                <Label text="Scale:"/>
+                                                <TextField fx:id="foregroundLogoScale" styleClass="small-textfield"/>
+                                            </VBox>
+                                            <VBox>
+                                                <Label text="Vertical Offset:"/>
+                                                <TextField fx:id="foregroundLogoOffset" styleClass="medium-textfield"/>
+                                            </VBox>
+                                            <VBox>
+                                                <Label text="Above?:"/>
+                                                <CheckBox fx:id="foregroundLogoAbove"/>
+                                            </VBox>
+                                        </HBox>
+                                    </VBox>
                                 </VBox>
-                                <HBox spacing="10">
-                                    <VBox>
-                                        <Label text="Scale:"/>
-                                        <TextField fx:id="foregroundLogoScale" styleClass="small-textfield"/>
-                                    </VBox>
-                                    <VBox>
-                                        <Label text="Vertical Offset:"/>
-                                        <TextField fx:id="foregroundLogoOffset" styleClass="medium-textfield"/>
-                                    </VBox>
-                                    <VBox>
-                                        <Label text="Above?:"/>
-                                        <CheckBox fx:id="foregroundLogoAbove"/>
-                                    </VBox>
-                                </HBox>
                             </VBox>
                             <VBox>
                                 <Label text="Background:"/>
