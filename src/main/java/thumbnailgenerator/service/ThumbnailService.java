@@ -9,6 +9,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -44,6 +45,7 @@ import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.ThumbnailForeground;
+import thumbnailgenerator.dto.ThumbnailForegroundLogo;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.LoadingType;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
@@ -172,12 +174,11 @@ public class ThumbnailService {
 
         this.drawCharacters(thumbnail, g2d);
 
-        LOGGER.info("Drawing foreground in path {}.", fileThumbnailSettings.getThumbnailForeground().getForeground());
         if (fileThumbnailSettings.getThumbnailForeground().getThumbnailForegroundLogo().isAboveForeground()){
             drawMainForeground(fileThumbnailSettings.getThumbnailForeground(), g2d);
-            imageService.drawThumbnailLogoFromPathFile(fileThumbnailSettings.getThumbnailForeground().getThumbnailForegroundLogo(), g2d);
+            drawThumbnailLogoFromPathFile(fileThumbnailSettings.getThumbnailForeground().getThumbnailForegroundLogo(), g2d);
         } else {
-            imageService.drawThumbnailLogoFromPathFile(fileThumbnailSettings.getThumbnailForeground().getThumbnailForegroundLogo(), g2d);
+            drawThumbnailLogoFromPathFile(fileThumbnailSettings.getThumbnailForeground().getThumbnailForegroundLogo(), g2d);
             drawMainForeground(fileThumbnailSettings.getThumbnailForeground(), g2d);
         }
         LOGGER.info("Drawing thumbnail text");
@@ -190,10 +191,12 @@ public class ThumbnailService {
     private void drawMainForeground(ThumbnailForeground thumbnailForeground, Graphics2D g2d)
             throws LocalImageNotFoundException {
         if (thumbnailForeground.isCustomForeground()){
+            LOGGER.info("Drawing foreground in path {}.", fileThumbnailSettings.getThumbnailForeground().getForeground());
             imageService.drawImageFromPathFile(thumbnailForeground.getForeground(), g2d);
         } else {
             String backColor = thumbnailForeground.getColors().get("secondary");
             String frontColor = thumbnailForeground.getColors().get("primary");
+            LOGGER.info("Drawing default foreground with colors {} and {}.", frontColor + backColor);
 
             generateBackRectangle(0, 0, backColor, g2d);
             generateBackRectangle(thumbnailWidth/2, 0, backColor, g2d);
@@ -241,6 +244,27 @@ public class ThumbnailService {
         BufferedImage finalRectangle = SwingFXUtils.fromFXImage(writableImage, null);
 
         g2d.drawImage(finalRectangle, null, x-14, y-14);
+    }
+
+    public void drawThumbnailLogoFromPathFile(
+            ThumbnailForegroundLogo thumbnailForegroundLogo, Graphics2D g2d) throws
+            LocalImageNotFoundException {
+        var pathname = thumbnailForegroundLogo.getLogo();
+        if (pathname == null || pathname.isEmpty()){
+            return;
+        }
+
+        try {
+            var image = ImageIO.read(new FileInputStream(pathname));
+            var scaledImage = imageService.resizeImageSimple(image, thumbnailForegroundLogo.getScale());
+            int x = thumbnailWidth/2 - scaledImage.getWidth()/2;
+            int y = thumbnailHeight/2 + thumbnailForegroundLogo.getVerticalOffset();
+            g2d.drawImage(scaledImage, x, y, null);
+        } catch (IOException | NullPointerException e) {
+            LOGGER.error("An issue occurred when loading image in path {}:", pathname);
+            LOGGER.catching(e);
+            throw new LocalImageNotFoundException(pathname);
+        }
     }
 
     private void saveGeneratedGraphic(Thumbnail thumbnail, BufferedImage image){
