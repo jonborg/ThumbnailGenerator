@@ -149,7 +149,7 @@ public class TournamentEditSettingsIT extends CustomApplicationTest {
     private void validateTournamentThumbnailSettings(
             FileThumbnailSettings expectedThumbnailSettings, Scene scene, FighterArtTypeEnum fighterArtTypeEnum){
         assertEqualsChosenImageFieldContent(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_FOREGROUND, scene,
-                expectedThumbnailSettings.getForeground());
+                expectedThumbnailSettings.getThumbnailForeground().getForeground());
         assertEqualsChosenImageFieldContent(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_BACKGROUND, scene,
                 expectedThumbnailSettings.getBackground());
         assertEqualsComboBoxSelection(ComboBoxId.TOURNAMENT_THUMBNAIL_ART_TYPE, scene,

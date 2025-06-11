@@ -14,12 +14,16 @@ import lombok.ToString;
 @ToString
 public class FileTop8Settings extends Settings implements Cloneable {
     @Expose
+    @SerializedName("foreground")
+    private String foreground;
+    @Expose
     @SerializedName("slotSettingsFile")
     private String slotSettingsFile;
 
     public FileTop8Settings(Game game, String foreground, String background,
                             List<FighterArtSettings> artTypeDir, String slotSettingsFile){
-        super(game, foreground, background, artTypeDir);
+        super(game, background, artTypeDir);
+        this.foreground = foreground;
         this.slotSettingsFile = slotSettingsFile;
     }
 

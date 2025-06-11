@@ -3,15 +3,21 @@ package thumbnailgenerator.service;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.awt.image.ConvolveOp;
 import java.awt.image.FilteredImageSource;
+import java.awt.image.Kernel;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import javax.imageio.ImageIO;
+
+import javafx.scene.image.WritableImage;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -172,7 +178,7 @@ public class ImageService {
     }
 
     public BufferedImage createShadow(BufferedImage image,
-                                             int shadowColor) {
+                                      int shadowColor) {
         var result = new BufferedImage(image.getWidth(),
                 image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         var g2 = result.createGraphics();
@@ -185,7 +191,7 @@ public class ImageService {
 
         return result;
     }
-
+    
     public BufferedImage mergeShadow(BufferedImage image,
                                             BufferedImage shadow) {
         var result = new BufferedImage(image.getWidth(),
@@ -196,59 +202,5 @@ public class ImageService {
         g2.dispose();
 
         return result;
-    }
-
-    public BufferedImage addAdditionalFighters(BufferedImage imageSlot, PlayerSlot playerSlot, List<Fighter> fighters) {
-        for (int i = 0; i< fighters.size(); i++){
-            var fighter = fighters.get(i);
-            var scale = playerSlot.getAdditionalFighters().getScale();
-            var posX = new ExpressionBuilder(playerSlot.getAdditionalFighters().getCoordinateX())
-                    .variable("i")
-                    .build()
-                    .setVariable("i", i)
-                    .evaluate();
-            var posY = new ExpressionBuilder(playerSlot.getAdditionalFighters().getCoordinateY())
-                    .variable("i")
-                    .build()
-                    .setVariable("i", i)
-                    .evaluate();
-            try {
-                var icon = ImageIO.read(Top8Service.class.getResourceAsStream(
-                        "/icons/" + fighter.getUrlName() + "/" + fighter.getAlt() +
-                                ".png"));
-                icon = ImageUtils.resizeImage(icon, scale);
-                var g2d = imageSlot.createGraphics();
-                g2d.drawImage(icon, (int) posX, (int) posY, null);
-                g2d.dispose();
-            } catch (IOException e){
-                LOGGER.error("Error occurred when adding additional fighters.", e);
-            }
-        }
-        return imageSlot;
-    }
-
-    public void darkenImage(BufferedImage image){
-        var darkenFactor = 0.85f;
-        for (int y = 0; y < image.getHeight(); y++) {
-            for (int x = 0; x < image.getWidth(); x++) {
-                int argb = image.getRGB(x, y);
-                int alpha = (argb >> 24) & 0xff;
-
-                if (alpha != 0) {  // Only process non-transparent pixels
-                    int red   = (argb >> 16) & 0xff;
-                    int green = (argb >> 8) & 0xff;
-                    int blue  = argb & 0xff;
-
-                    // Apply darkening
-                    red   = (int)(red * darkenFactor);
-                    green = (int)(green * darkenFactor);
-                    blue  = (int)(blue * darkenFactor);
-
-                    // Reconstruct the pixel
-                    int darkened = (alpha << 24) | (red << 16) | (green << 8) | blue;
-                    image.setRGB(x, y, darkened);
-                }
-            }
-        }
     }
 }

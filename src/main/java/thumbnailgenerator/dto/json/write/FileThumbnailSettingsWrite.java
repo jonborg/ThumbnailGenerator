@@ -14,10 +14,7 @@ public class FileThumbnailSettingsWrite {
     private String game;
     @Expose
     @SerializedName("foreground")
-    private String foreground;
-    @Expose
-    @SerializedName("foregroundLogo")
-    private ThumbnailForegroundLogoWrite foregroundLogo;
+    private ThumbnailForegroundWrite foreground;
     @Expose
     @SerializedName("background")
     private String background;
@@ -29,8 +26,7 @@ public class FileThumbnailSettingsWrite {
 
     public FileThumbnailSettingsWrite(FileThumbnailSettings fileThumbnailSettings){
         this.game = fileThumbnailSettings.getGame().name();
-        this.foreground = fileThumbnailSettings.getForeground();
-        this.foregroundLogo = new ThumbnailForegroundLogoWrite(fileThumbnailSettings.getThumbnailForegroundLogo());
+        this.foreground = new ThumbnailForegroundWrite(fileThumbnailSettings.getThumbnailForeground());
         this.background = fileThumbnailSettings.getBackground();
         this.artTypeDir = fileThumbnailSettings.getArtTypeDir()
                 .stream()

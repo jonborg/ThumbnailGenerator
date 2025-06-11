@@ -7,6 +7,9 @@ import lombok.Getter;
 @Getter
 public class FileTop8SettingsRead extends SettingsRead {
     @Expose
+    @SerializedName("foreground")
+    protected String foreground;
+    @Expose
     @SerializedName("slotSettingsFile")
     private String slotSettingsFile;
 }

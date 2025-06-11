@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -20,11 +21,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -39,6 +42,7 @@ import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
+import thumbnailgenerator.dto.ThumbnailForeground;
 import thumbnailgenerator.dto.ThumbnailForegroundLogo;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
@@ -55,6 +59,7 @@ import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.ui.textfield.ChosenImageField;
 import thumbnailgenerator.ui.textfield.ChosenJsonField;
+import thumbnailgenerator.utils.javafx.ColorUtils;
 
 @Primary
 @Controller
@@ -69,7 +74,13 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField logo;
     @FXML
+    protected CheckBox customForeground;
+    @FXML
     protected ChosenImageField foreground;
+    @FXML
+    protected ColorPicker thumbnailPrimaryColor;
+    @FXML
+    protected ColorPicker thumbnailSecondaryColor;
     @FXML
     protected ChosenImageField foregroundLogo;
     @FXML
@@ -168,7 +179,9 @@ public class TournamentsCreateController implements Initializable {
         for (Game game: Game.values()) {
             fileThumbnailSettingsList
                     .add(new FileThumbnailSettings(game,
-                            "", new ThumbnailForegroundLogo("", 1.0f, 0, false), "",
+                            new ThumbnailForeground("", new HashMap<>(),
+                                    new ThumbnailForegroundLogo("", 1.0f, 0, false),
+                                    false), "",
                             initArtType(game, true), null));
             fileTop8SettingsList
                     .add(new FileTop8Settings(game,
@@ -413,11 +426,15 @@ public class TournamentsCreateController implements Initializable {
                 .findFirst()
                 .get();
         thumbnailSettings.setBackground(background.getText());
-        thumbnailSettings.setForeground(foreground.getText());
-        thumbnailSettings.getThumbnailForegroundLogo().setLogo(foregroundLogo.getText());
-        thumbnailSettings.getThumbnailForegroundLogo().setScale(Float.parseFloat(foregroundLogoScale.getText()));
-        thumbnailSettings.getThumbnailForegroundLogo().setVerticalOffset(Integer.parseInt(foregroundLogoOffset.getText()));
-        thumbnailSettings.getThumbnailForegroundLogo().setAboveForeground(foregroundLogoAbove.isSelected());
+        var thumbnailForeground = thumbnailSettings.getThumbnailForeground();
+        thumbnailForeground.setForeground(foreground.getText());
+        thumbnailForeground.setCustomForeground(customForeground.isSelected());
+        thumbnailForeground.getColors().put("primary", ColorUtils.getHex(thumbnailPrimaryColor.getValue()));
+        thumbnailForeground.getColors().put("secondary", ColorUtils.getHex(thumbnailSecondaryColor.getValue()));
+        thumbnailForeground.getThumbnailForegroundLogo().setLogo(foregroundLogo.getText());
+        thumbnailForeground.getThumbnailForegroundLogo().setScale(Float.parseFloat(foregroundLogoScale.getText()));
+        thumbnailForeground.getThumbnailForegroundLogo().setVerticalOffset(Integer.parseInt(foregroundLogoOffset.getText()));
+        thumbnailForeground.getThumbnailForegroundLogo().setAboveForeground(foregroundLogoAbove.isSelected());
         thumbnailSettings.getArtTypeDir().stream()
                 .filter(a -> a.getArtType().equals(artTypeThumbnail.getSelectionModel().getSelectedItem()))
                 .findFirst()
@@ -443,12 +460,16 @@ public class TournamentsCreateController implements Initializable {
                 .filter(s -> game.equals(s.getGame()))
                 .findFirst()
                 .get();
+        var thumbnailForeground = thumbnailSettings.getThumbnailForeground();
         background.setText(thumbnailSettings.getBackground());
-        foreground.setText(thumbnailSettings.getForeground());
-        foregroundLogo.setText(thumbnailSettings.getThumbnailForegroundLogo().getLogo());
-        foregroundLogoScale.setText(String.valueOf(thumbnailSettings.getThumbnailForegroundLogo().getScale()));
-        foregroundLogoOffset.setText(String.valueOf(thumbnailSettings.getThumbnailForegroundLogo().getVerticalOffset()));
-        foregroundLogoAbove.setSelected(thumbnailSettings.getThumbnailForegroundLogo().isAboveForeground());
+        foreground.setText(thumbnailForeground.getForeground());
+        customForeground.setSelected(thumbnailForeground.isCustomForeground());
+        thumbnailPrimaryColor.setValue(Color.web(thumbnailForeground.getColors().get("primary")));
+        thumbnailSecondaryColor.setValue(Color.web(thumbnailForeground.getColors().get("secondary")));
+        foregroundLogo.setText(thumbnailForeground.getThumbnailForegroundLogo().getLogo());
+        foregroundLogoScale.setText(String.valueOf(thumbnailForeground.getThumbnailForegroundLogo().getScale()));
+        foregroundLogoOffset.setText(String.valueOf(thumbnailForeground.getThumbnailForegroundLogo().getVerticalOffset()));
+        foregroundLogoAbove.setSelected(thumbnailForeground.getThumbnailForegroundLogo().isAboveForeground());
         artTypeThumbnail.getItems().clear();
         artTypeThumbnail.getItems().addAll(gameEnumService.getAllFighterArtTypes(game));
         artTypeThumbnail.getSelectionModel().select(0);
