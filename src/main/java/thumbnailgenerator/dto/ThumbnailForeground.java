@@ -13,13 +13,17 @@ import java.util.Map;
 public class ThumbnailForeground {
     private String foreground;
     private Map<String, String> colors;
+    private ThumbnailForegroundVersus thumbnailForegroundVersus;
     private ThumbnailForegroundLogo thumbnailForegroundLogo;
     private boolean customForeground;
 
     public ThumbnailForeground(ThumbnailForegroundRead thumbnailForegroundRead){
         this.foreground = thumbnailForegroundRead.getForeground();
         setupColors(thumbnailForegroundRead.getColors());
-        this.thumbnailForegroundLogo = new ThumbnailForegroundLogo(thumbnailForegroundRead.getThumbnailForegroundLogo());
+        this.thumbnailForegroundVersus = new ThumbnailForegroundVersus(thumbnailForegroundRead
+                .getThumbnailForegroundVersus());
+        this.thumbnailForegroundLogo = new ThumbnailForegroundLogo(thumbnailForegroundRead
+                .getThumbnailForegroundLogo());
         this.customForeground = thumbnailForegroundRead.isCustomForeground();
     }
 

@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ThumbnailForegroundLogoRead {
+public class ThumbnailForegroundVersusRead {
     @Expose
     @SerializedName("image")
     protected String imagePath;
@@ -17,7 +17,4 @@ public class ThumbnailForegroundLogoRead {
     @Expose
     @SerializedName("verticalOffset")
     protected int verticalOffset;
-    @Expose
-    @SerializedName("aboveForeground")
-    protected boolean aboveForeground;
 }

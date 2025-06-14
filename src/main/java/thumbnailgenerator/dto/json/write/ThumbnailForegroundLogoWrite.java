@@ -10,8 +10,8 @@ import thumbnailgenerator.dto.ThumbnailForegroundLogo;
 @Setter
 public class ThumbnailForegroundLogoWrite {
     @Expose
-    @SerializedName("logo")
-    private String logo;
+    @SerializedName("image")
+    private String imagePath;
     @Expose
     @SerializedName("scale")
     private float scale;
@@ -23,7 +23,7 @@ public class ThumbnailForegroundLogoWrite {
     private boolean aboveForeground;
 
     public ThumbnailForegroundLogoWrite(ThumbnailForegroundLogo thumbnailForegroundLogo){
-        this.logo = thumbnailForegroundLogo.getLogo();
+        this.imagePath = thumbnailForegroundLogo.getImagePath();
         this.scale = thumbnailForegroundLogo.getScale();
         this.verticalOffset = thumbnailForegroundLogo.getVerticalOffset();
         this.aboveForeground = thumbnailForegroundLogo.isAboveForeground();
