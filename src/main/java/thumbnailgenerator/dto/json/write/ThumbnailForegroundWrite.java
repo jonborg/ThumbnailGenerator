@@ -13,13 +13,16 @@ import java.util.Map;
 @Setter
 public class ThumbnailForegroundWrite {
     @Expose
-    @SerializedName("foreground")
+    @SerializedName("foregroundImage")
     private String foreground;
     @Expose
     @SerializedName("colors")
     private Map<String, String> colors;
     @Expose
-    @SerializedName("foregroundLogo")
+    @SerializedName("versus")
+    private ThumbnailForegroundVersusWrite thumbnailForegroundVersus;
+    @Expose
+    @SerializedName("logo")
     private ThumbnailForegroundLogoWrite thumbnailForegroundLogo;
     @Expose
     @SerializedName("customForeground")
@@ -28,7 +31,10 @@ public class ThumbnailForegroundWrite {
     public ThumbnailForegroundWrite(ThumbnailForeground thumbnailForeground){
         this.foreground = thumbnailForeground.getForeground();
         this.colors = thumbnailForeground.getColors();
-        this.thumbnailForegroundLogo = new ThumbnailForegroundLogoWrite(thumbnailForeground.getThumbnailForegroundLogo());
+        this.thumbnailForegroundVersus = new ThumbnailForegroundVersusWrite(thumbnailForeground
+                .getThumbnailForegroundVersus());
+        this.thumbnailForegroundLogo = new ThumbnailForegroundLogoWrite(thumbnailForeground
+                .getThumbnailForegroundLogo());
         this.customForeground = thumbnailForeground.isCustomForeground();
     }
 }

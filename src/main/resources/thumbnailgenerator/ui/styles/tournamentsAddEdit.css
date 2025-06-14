@@ -13,13 +13,13 @@
 }
 
 .previewPane{
-    -fx-min-width: 746;
-    -fx-pref-width: 746;
-    -fx-max-width: 746;
+    -fx-min-width: 640;
+    -fx-pref-width: 640;
+    -fx-max-width: 640;
 
-    -fx-min-height: 436;
-    -fx-pref-height: 436;
-    -fx-max-height: 426;
+    -fx-min-height: 360;
+    -fx-pref-height: 360;
+    -fx-max-height: 360;
 
     -fx-border-color: black;
     -fx-border-width: 1;
@@ -33,7 +33,7 @@
 
 .bigButton{
     -fx-pref-height: 20;
-    -fx-pref-width: 746;
+    -fx-pref-width: 640;
 }
 
 .textfield{
@@ -58,4 +58,12 @@
 
 .settingsBox{
     -fx-padding: 10 10 10 10;
+}
+
+.borderSection{
+    -fx-padding: 5;
+
+    -fx-border-color: #d3d3d3;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
 }

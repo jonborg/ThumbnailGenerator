@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.Setter;
 import thumbnailgenerator.dto.ThumbnailForeground;
+import thumbnailgenerator.dto.ThumbnailForegroundVersus;
 import thumbnailgenerator.dto.json.write.ThumbnailForegroundLogoWrite;
 
 import java.util.Map;
@@ -13,13 +14,16 @@ import java.util.Map;
 @Setter
 public class ThumbnailForegroundRead {
     @Expose
-    @SerializedName("foreground")
+    @SerializedName("foregroundImage")
     private String foreground;
     @Expose
     @SerializedName("colors")
     private Map<String, String> colors;
     @Expose
-    @SerializedName("foregroundLogo")
+    @SerializedName("versus")
+    private ThumbnailForegroundVersusRead thumbnailForegroundVersus;
+    @Expose
+    @SerializedName("logo")
     private ThumbnailForegroundLogoRead thumbnailForegroundLogo;
     @Expose
     @SerializedName("customForeground")

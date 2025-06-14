@@ -9,14 +9,14 @@ import thumbnailgenerator.dto.json.read.ThumbnailForegroundLogoRead;
 @Setter
 @AllArgsConstructor
 public class ThumbnailForegroundLogo {
-    private String logo;
+    private String imagePath;
     private float scale;
     private int verticalOffset;
     private boolean aboveForeground;
 
     public ThumbnailForegroundLogo(ThumbnailForegroundLogoRead thumbnailForegroundLogoRead){
         var isLogoNull = thumbnailForegroundLogoRead == null;
-        this.logo = isLogoNull ? "" : thumbnailForegroundLogoRead.getLogo();
+        this.imagePath = isLogoNull ? "" : thumbnailForegroundLogoRead.getImagePath();
         this.scale = isLogoNull ? 1.0f : thumbnailForegroundLogoRead.getScale();
         this.verticalOffset = isLogoNull ? 0 : thumbnailForegroundLogoRead.getVerticalOffset();
         this.aboveForeground = !isLogoNull && thumbnailForegroundLogoRead.isAboveForeground();

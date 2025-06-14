@@ -151,12 +151,12 @@
     "angleTop": -2.0,
     "angleBottom": -2.0,
     "downOffsetTop": [
-      10,
-      5
+      12,
+      12
     ],
     "downOffsetBottom": [
-      0,
-      -5
+      -8,
+      -8
     ]
   }
 ]

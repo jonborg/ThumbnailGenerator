@@ -1,18 +1,11 @@
 package thumbnailgenerator.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 import lombok.Getter;
 import lombok.ToString;
-import thumbnailgenerator.dto.json.read.TournamentRead;
-import thumbnailgenerator.enums.FatalFuryCotwFighterArtTypeEnum;
-import thumbnailgenerator.enums.RivalsOfAether2FighterArtTypeEnum;
-import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
-import thumbnailgenerator.enums.StreetFighter6FighterArtTypeEnum;
-import thumbnailgenerator.enums.Tekken8FighterArtTypeEnum;
 
 @Getter
 @ToString

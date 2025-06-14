@@ -129,7 +129,8 @@ public class ThumbnailGeneratorController implements Initializable {
         player2Controller.updateCharacterSelectList(auxSel);
     }
 
-    public void createThumbnail(ActionEvent actionEvent) {
+    public void createThumbnail(ActionEvent actionEvent)
+            throws LocalImageNotFoundException {
         LOGGER.info("Creating a single thumbnail.");
         if (!player1Controller.hasMandatoryFields() || !player2Controller.hasMandatoryFields()){
             LOGGER.error("User did not select characters for all players.");
@@ -162,7 +163,8 @@ public class ThumbnailGeneratorController implements Initializable {
                                 player2Controller.generatePlayer()))
                 .artType(getFighterArtType())
                 .build();
-
+        var defaultForeground = thumbnailService.generateForeground(thumbnail);
+        thumbnail.setDefaultForeground(defaultForeground);
         var thumbnailTask = new Task<>() {
             @Override
             protected Void call() throws Exception {

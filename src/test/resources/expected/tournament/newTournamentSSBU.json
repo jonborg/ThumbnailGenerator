@@ -6,12 +6,24 @@
     "thumbnailSettings": [
       {
         "game": "SSBU",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -27,12 +39,24 @@
       },
       {
         "game": "SSBM",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -44,12 +68,24 @@
       },
       {
         "game": "SSB64R",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -61,12 +97,24 @@
       },
       {
         "game": "ROA2",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -78,12 +126,24 @@
       },
       {
         "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -95,12 +155,24 @@
       },
       {
         "game": "TEKKEN8",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -112,12 +184,24 @@
       },
       {
         "game": "GGST",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -129,12 +213,24 @@
       },
       {
         "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -146,12 +242,24 @@
       },
       {
         "game": "GBFVR",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -277,12 +385,24 @@
     "thumbnailSettings": [
       {
         "game": "SSBU",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -298,12 +418,24 @@
       },
       {
         "game": "SSBM",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -315,12 +447,24 @@
       },
       {
         "game": "SSB64R",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -332,12 +476,24 @@
       },
       {
         "game": "ROA2",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -349,12 +505,24 @@
       },
       {
         "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -366,12 +534,24 @@
       },
       {
         "game": "TEKKEN8",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -383,12 +563,24 @@
       },
       {
         "game": "GGST",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -400,12 +592,24 @@
       },
       {
         "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/invicta.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/invicta.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -417,12 +621,24 @@
       },
       {
         "game": "GBFVR",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -548,12 +764,24 @@
     "thumbnailSettings": [
       {
         "game": "SSBU",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
         "artSettings": [
@@ -569,12 +797,24 @@
       },
       {
         "game": "SSBM",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -586,12 +826,24 @@
       },
       {
         "game": "SSB64R",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -603,12 +855,24 @@
       },
       {
         "game": "ROA2",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
         "artSettings": [
@@ -620,12 +884,24 @@
       },
       {
         "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
         "artSettings": [
@@ -637,12 +913,24 @@
       },
       {
         "game": "TEKKEN8",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
         "artSettings": [
@@ -654,12 +942,24 @@
       },
       {
         "game": "GGST",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -671,12 +971,24 @@
       },
       {
         "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/mushroommadness.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/mushroommadness.png",
         "artSettings": [
@@ -688,12 +1000,24 @@
       },
       {
         "game": "GBFVR",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -819,12 +1143,24 @@
     "thumbnailSettings": [
       {
         "game": "SSBU",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
         "artSettings": [
@@ -840,12 +1176,24 @@
       },
       {
         "game": "SSBM",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -857,12 +1205,24 @@
       },
       {
         "game": "SSB64R",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -874,12 +1234,24 @@
       },
       {
         "game": "ROA2",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
         "artSettings": [
@@ -891,12 +1263,24 @@
       },
       {
         "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
         "artSettings": [
@@ -908,12 +1292,24 @@
       },
       {
         "game": "TEKKEN8",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
         "artSettings": [
@@ -925,12 +1321,24 @@
       },
       {
         "game": "GGST",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -942,12 +1350,24 @@
       },
       {
         "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/VOD_Singles_ReturnOfAether_foreground.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/VOD_Singles_ReturnOfAether_background.png",
         "artSettings": [
@@ -959,12 +1379,24 @@
       },
       {
         "game": "GBFVR",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1090,12 +1522,24 @@
     "thumbnailSettings": [
       {
         "game": "SSBU",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/fdt.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -1111,12 +1555,24 @@
       },
       {
         "game": "SSBM",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1128,12 +1584,24 @@
       },
       {
         "game": "SSB64R",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1145,12 +1613,24 @@
       },
       {
         "game": "ROA2",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/fdt.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -1162,12 +1642,24 @@
       },
       {
         "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/fdt.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -1179,12 +1671,24 @@
       },
       {
         "game": "TEKKEN8",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/fdt.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -1196,12 +1700,24 @@
       },
       {
         "game": "GGST",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1213,12 +1729,24 @@
       },
       {
         "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/fdt.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/fdt.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -1230,12 +1758,24 @@
       },
       {
         "game": "GBFVR",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1361,12 +1901,24 @@
     "thumbnailSettings": [
       {
         "game": "SSBU",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -1382,12 +1934,24 @@
       },
       {
         "game": "SSBM",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1399,12 +1963,24 @@
       },
       {
         "game": "SSB64R",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1416,12 +1992,24 @@
       },
       {
         "game": "ROA2",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -1433,12 +2021,24 @@
       },
       {
         "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -1450,12 +2050,24 @@
       },
       {
         "game": "TEKKEN8",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -1467,12 +2079,24 @@
       },
       {
         "game": "GGST",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1484,12 +2108,24 @@
       },
       {
         "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/ragelx.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -1501,12 +2137,24 @@
       },
       {
         "game": "GBFVR",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1632,12 +2280,24 @@
     "thumbnailSettings": [
       {
         "game": "SSBU",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
         "artSettings": [
@@ -1653,12 +2313,24 @@
       },
       {
         "game": "SSBM",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1670,12 +2342,24 @@
       },
       {
         "game": "SSB64R",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1687,12 +2371,24 @@
       },
       {
         "game": "ROA2",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
         "artSettings": [
@@ -1704,12 +2400,24 @@
       },
       {
         "game": "SF6",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
         "artSettings": [
@@ -1721,12 +2429,24 @@
       },
       {
         "game": "TEKKEN8",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
         "artSettings": [
@@ -1738,12 +2458,24 @@
       },
       {
         "game": "GGST",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1755,12 +2487,24 @@
       },
       {
         "game": "FFCOTW",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/tgf24.png",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/TGF24.png",
         "artSettings": [
@@ -1772,12 +2516,24 @@
       },
       {
         "game": "GBFVR",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "primary": "#333333FF",
+            "secondary": "#337733FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "",
         "artSettings": [
@@ -1903,12 +2659,24 @@
     "thumbnailSettings": [
       {
         "game": "SSBU",
-        "foreground": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 0.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
@@ -1924,14 +2692,26 @@
       },
       {
         "game": "SSBM",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
         },
-        "background": "",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "HD",
@@ -1941,14 +2721,26 @@
       },
       {
         "game": "SSB64R",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
         },
-        "background": "",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "ARTWORK",
@@ -1958,14 +2750,26 @@
       },
       {
         "game": "ROA2",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
         },
-        "background": "",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -1975,14 +2779,26 @@
       },
       {
         "game": "SF6",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
         },
-        "background": "",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -1992,14 +2808,26 @@
       },
       {
         "game": "TEKKEN8",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
         },
-        "background": "",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -2009,14 +2837,26 @@
       },
       {
         "game": "GGST",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
         },
-        "background": "",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -2026,14 +2866,26 @@
       },
       {
         "game": "FFCOTW",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
         },
-        "background": "",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "RENDER",
@@ -2043,14 +2895,26 @@
       },
       {
         "game": "GBFVR",
-        "foreground": "",
-        "foregroundLogo": {
-          "logo": "",
-          "scale": 1.0,
-          "verticalOffset": 0,
-          "aboveForeground": false
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
         },
-        "background": "",
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
           {
             "artType": "RENDER",

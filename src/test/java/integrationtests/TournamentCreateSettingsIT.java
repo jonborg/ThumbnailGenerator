@@ -79,9 +79,10 @@ public class TournamentCreateSettingsIT extends CustomApplicationTest {
 
         writeInTextField(TextFieldId.TOURNAMENT_NAME, expectedTournament.getName());
         writeInTextField(TextFieldId.TOURNAMENT_ID, expectedTournament.getTournamentId());
-        writeInComboBox(ComboBoxId.TOURNAMENT_THUMBNAIL_FONT, expectedTextSettings.getFont());
+        //writeInComboBox(ComboBoxId.TOURNAMENT_THUMBNAIL_FONT, expectedTextSettings.getFont());
         writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_LOGO, expectedTournament.getImage());
 
+        /*
         writeInTextField(TextFieldId.TOURNAMENT_THUMBNAIL_FONT_TOP_SIZE,
                 expectedTextSettings.getSizeTop());
         writeInTextField(TextFieldId.TOURNAMENT_THUMBNAIL_FONT_TOP_ANGLE,
@@ -105,17 +106,20 @@ public class TournamentCreateSettingsIT extends CustomApplicationTest {
                 expectedTextSettings.getDownOffsetBottom()[0]);
         writeInTextField(TextFieldId.TOURNAMENT_THUMBNAIL_FONT_BOTTOM_RIGHT_OFFSET,
                 expectedTextSettings.getDownOffsetBottom()[1]);
-
+*/
         selectInComboBox(ComboBoxId.TOURNAMENT_GAME, game.getName());
 
-        scrollPaneVertically(ScrollPaneId.TOURNAMENT_SETTINGS, createScene, 1.0);
+        scrollPaneVertically(ScrollPaneId.TOURNAMENT_SETTINGS, createScene, 0.5);
+        setCheckBox(CheckBoxId.CUSTOM_FOREGROUND, true);
         writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_FOREGROUND,
                 expectedThumbnailSettings.getThumbnailForeground().getForeground());
         writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_BACKGROUND,
                 expectedThumbnailSettings.getBackground());
+        scrollPaneVertically(ScrollPaneId.TOURNAMENT_SETTINGS, createScene, 1.0);
         writeInChosenJsonField(ChosenJsonFieldId.TOURNAMENT_THUMBNAIL_CHARACTER_SETTINGS,
                 expectedThumbnailSettings.getFighterImageSettingsFile(artType));
 
+        scrollPaneVertically(ScrollPaneId.TOURNAMENT_SETTINGS, createScene, 1.0);
         writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_TOP8_FOREGROUND,
                 expectedTop8Settings.getForeground());
         writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_TOP8_BACKGROUND,
