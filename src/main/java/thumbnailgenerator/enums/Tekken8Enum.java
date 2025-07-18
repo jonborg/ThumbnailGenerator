@@ -38,11 +38,14 @@ public enum Tekken8Enum implements CharacterEnum {
     VICTOR("Victor", "victor", 2436, 1),
     YOSHIMITSU("Yoshimitsu", "yoshimitsu", 2437, 1),
     ZAFINA("Zafina", "zafina", 2438, 1),
+
     EDDY("Eddy", "eddy", 2446, 1),
     LIDIA("Lidia", "lidia", 2538, 1),
     HEIHACHI("Heihachi", "heihachi", 2598, 1),
     CLIVE("Clive", "clive", 2612, 1),
-    ANNA("Anna", "anna", 2620, 1);
+
+    ANNA("Anna", "anna", 2620, 1),
+    FAHKUMRAM("Fahkumram", "fahkumram", 2700, 1);
 
     private final String name;
     private final String code;

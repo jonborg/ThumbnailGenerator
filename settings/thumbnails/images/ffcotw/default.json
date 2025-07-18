@@ -153,6 +153,24 @@
       ],
       "scale": 0.65,
       "flip": false
+    },
+    {
+      "fighter": "andy",
+      "offset": [
+        -530,
+        120
+      ],
+      "scale": 0.85,
+      "flip": false
+    },
+    {
+      "fighter": "ken",
+      "offset": [
+        -640,
+        40
+      ],
+      "scale": 0.65,
+      "flip": false
     }
   ]
 }

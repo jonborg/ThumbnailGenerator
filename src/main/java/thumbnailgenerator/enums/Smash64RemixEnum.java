@@ -39,7 +39,9 @@ public enum Smash64RemixEnum implements CharacterEnum {
     MARINA("Marina", "marina", -1, 6),
     KING_DEDEDE("King Dedede", "king_dedede", -1, 6),
     GOEMON("Goemon", "goemon", -1, 7),
-    BANJO_AND_KAZOOIE("Banjo & Kazooie", "banjo_and_kazooie", -1, 7);
+    BANJO_AND_KAZOOIE("Banjo & Kazooie", "banjo_and_kazooie", -1, 7),
+    PEACH("Peach", "peach", -1, 7),
+    CRASH("Crash Bandicoot", "crash", -1, 7);
 
     private final String name;
     private final String code;

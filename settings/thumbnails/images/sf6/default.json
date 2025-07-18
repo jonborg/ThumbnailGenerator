@@ -234,6 +234,15 @@
       ],
       "scale": 0.9,
       "flip": false
+    },
+    {
+      "fighter": "sagat",
+      "offset": [
+        -400,
+        -50
+      ],
+      "scale": 0.7,
+      "flip": false
     }
   ]
 }

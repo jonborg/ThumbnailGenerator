@@ -17,7 +17,8 @@ public enum RivalsOfAether2Enum implements CharacterEnum {
     WRASTOR("Wrastor", "wrastor", 2500, 1),
     ZETTERBURN("Zetterburn", "zetterburn", 2499, 1),
     ETALUS("Etalus", "etalus", 2615, 1),
-    OLYMPIA("Olympia", "olympia", 2619, 1);
+    OLYMPIA("Olympia", "olympia", 2619, 1),
+    ABSA("Absa", "absa", 2709, 1);
 
     private final String name;
     private final String code;

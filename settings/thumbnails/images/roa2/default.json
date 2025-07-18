@@ -108,6 +108,15 @@
       ],
       "scale": 0.85,
       "flip": false
+    },
+    {
+      "fighter": "absa",
+      "offset": [
+        -160,
+        0
+      ],
+      "scale": 0.55,
+      "flip": false
     }
   ]
 }

@@ -278,6 +278,22 @@
       ],
       "scale": 0.5,
       "flip": false
+    },{
+      "fighter": "peach",
+      "offset": [
+        20,
+        60
+      ],
+      "scale": 0.4,
+      "flip": false
+    },{
+      "fighter": "crash",
+      "offset": [
+        -190,
+        0
+      ],
+      "scale": 0.55,
+      "flip": false
     }
   ]
 }

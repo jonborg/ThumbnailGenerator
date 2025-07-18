@@ -21,22 +21,27 @@ public enum GuiltyGearStriveEnum implements CharacterEnum {
     GIOVANNA("Giovanna", "giovanna", 1832, 1),
     ANJI("Anji", "anji", 1828, 1),
     INO("I-No", "ino", 1833, 1),
+
     GOLDLEWIS("Goldlewis Dickinson", "goldlewis", 1849, 1),
     JACK_O("Jack-O'", "jack_o", 1872, 1),
     HAPPY_CHAOS("Happy Chaos", "happy_chaos", 1913, 1),
     BAIKEN("Baiken", "baiken", 1952, 1),
     TESTAMENT("Testament", "testament", 1951, 1),
+
     BRIDGET("Bridget", "faust", 2097, 1),
     SIN("Sin Kiske", "sin", 2316, 1),
     BEDMAN("Bedman?", "bedman", 2448, 1),
     ASUKA("Asuka R #", "asuka", 2315, 1),
+
     JOHNNY("Johnny", "johnny", 2318, 1),
     ELPHET("Elphet Valentine", "elphet", 2404, 1),
     ABA("A.B.A", "aba", 2445, 1),
     SLAYER("Slayer", "slayer", 2496, 1),
+
     DIZZY("Dizzy", "dizzy", 2613, 1),
     VENOM("Venom", "venom", 2622, 1),
-    UNIKA("Unika", "unika", -1, 1),
+    UNIKA("Unika", "unika", 2744, 1),
+
     RANDOM("Random", "random", 2621, 1);
 
 
