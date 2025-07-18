@@ -333,6 +333,15 @@
       ],
       "scale": 0.85,
       "flip": false
+    },
+    {
+      "fighter": "fahkumram",
+      "offset": [
+        -327,
+        100
+      ],
+      "scale": 0.7,
+      "flip": false
     }
   ]
 }

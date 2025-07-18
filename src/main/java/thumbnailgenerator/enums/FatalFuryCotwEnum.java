@@ -22,7 +22,10 @@ public enum FatalFuryCotwEnum implements CharacterEnum {
     KAIN("Kain R. Heinlein", "kain", 2686, 1),
     CR7("Cristiano Ronaldo", "cr7", 2682, 1),
     GANACCI("Salvatore Ganacci", "ganacci", 2693, 1),
-    HOKUTO("Hokuto Maru", "hokuto", 2684, 1);
+    HOKUTO("Hokuto Maru", "hokuto", 2684, 1),
+
+    ANDY("Andy Bogard", "andy", 2710, 1),
+    KEN("Ken", "ken", -1, 1);
 
     private final String name;
     private final String code;

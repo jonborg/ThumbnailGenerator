@@ -28,8 +28,11 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.service.GameEnumService;
+import thumbnailgenerator.service.Top8Service;
 import thumbnailgenerator.ui.composite.CharacterSelect;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
+
+import javax.imageio.ImageIO;
 
 @Component
 @Scope("prototype")
@@ -125,8 +128,15 @@ public class PlayerController implements Initializable {
         var alt = characterSelect.getAltSpinner().getValue();
 
         try {
+            var path = "/icons/" + gameCode + "/" + urlName + "/" + alt + ".png";
+            var defaultPath = "/icons/default/1.png";
+            var resource = Top8Service.class.getResourceAsStream(path);
+            if (resource == null && urlName != null) {
+                resource = Top8Service.class.getResourceAsStream(defaultPath);
+            }
+            var icon = new Image(resource);
             characterSelect.getIconLink().setDisable(false);
-            characterSelect.getIcon().setImage(new Image(getClass().getResourceAsStream("/icons/" + gameCode + "/" + urlName + "/" + alt + ".png")));
+            characterSelect.getIcon().setImage(icon);
         }catch (NullPointerException e){
             characterSelect.getIconLink().setDisable(true);
             characterSelect.getIconLink().setText(null);

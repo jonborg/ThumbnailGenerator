@@ -24,14 +24,18 @@ public enum StreetFighter6Enum implements CharacterEnum {
     ZANGIEF("Zangief", "zangief", 2288, 1),
     LILY("Lily", "lily", 2283, 1),
     CAMMY("Cammy", "cammy", 2272, 1),
+
     RASHID("Rashid", "rashid", 2314, 1),
     A_K_I("A.K.I.", "aki", 2342, 1),
     ED("Ed", "ed", 2442, 1),
     AKUMA("Akuma", "akuma", 2495, 1),
+
     M_BISON("M. Bison", "m_bison", 2506, 1),
     TERRY("Terry", "terry", 2596, 1),
     MAI("Mai", "mai", 2616, 1),
-    ELENA("Elena", "elena", 2699, 1);
+    ELENA("Elena", "elena", 2699, 1),
+
+    SAGAT("Sagat", "sagat", -1, 1);
 
     private final String name;
     private final String code;
