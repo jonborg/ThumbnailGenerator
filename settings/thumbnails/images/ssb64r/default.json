@@ -287,10 +287,42 @@
       "scale": 0.4,
       "flip": false
     },{
-      "fighter": "crash",
+      "fighter": "dragon_king",
       "offset": [
-        -190,
+        -130,
+        40
+      ],
+      "scale": 0.58,
+      "flip": false
+    },{
+      "fighter": "peppy",
+      "offset": [
+        -40,
         0
+      ],
+      "scale": 0.6,
+      "flip": false
+    },{
+      "fighter": "dr_luigi",
+      "offset": [
+        -80,
+        70
+      ],
+      "scale": 0.45,
+      "flip": false
+    },{
+      "fighter": "lanky_kong",
+      "offset": [
+        -160,
+        60
+      ],
+      "scale": 0.5,
+      "flip": false
+    },{
+      "fighter": "roy",
+      "offset": [
+        -260,
+        90
       ],
       "scale": 0.55,
       "flip": false
