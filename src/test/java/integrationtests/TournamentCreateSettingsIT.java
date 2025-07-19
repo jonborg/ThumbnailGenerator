@@ -1,6 +1,9 @@
 package integrationtests;
 
 import crosscutting.CustomApplicationTest;
+import dto.CharacterInput;
+import dto.PlayerInput;
+import dto.ThumbnailInput;
 import enums.ButtonId;
 import enums.CheckBoxId;
 import enums.ChosenImageFieldId;
@@ -14,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -31,9 +35,14 @@ import utils.WaitUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = Main.class)
 public class TournamentCreateSettingsIT extends CustomApplicationTest {
@@ -52,18 +61,18 @@ public class TournamentCreateSettingsIT extends CustomApplicationTest {
         FileUtils.loadFileBackups();
     }
 
-    @ParameterizedTest
-    @MethodSource("getGamesAndDefaultArtTypeEnums")
-    public void test_createTournament_success(Game game, FighterArtTypeEnum artType)
+    @Test
+    public void test_createTournament_success()
             throws InterruptedException, IOException {
         //Arrange
         Tournament expectedTournament = new Tournament(
                 TestUtils.getTournament(tournamentService, "weeklyl"),
                 "createITTest"
         );
+        var game = Game.SSBU;
+        var artType = SmashUltimateFighterArtTypeEnum.RENDER;
         var expectedThumbnailSettings = expectedTournament.getThumbnailSettingsByGame(game);
         var expectedTop8Settings = expectedTournament.getTop8SettingsByGame(game);
-        var expectedTextSettings = expectedThumbnailSettings.getTextSettings();
         var expectedTournamentFile = FileUtils
                 .getFileFromResources("/expected/tournament/newTournament"+game.name()+".json");
         var expectedTextSettingsFile = FileUtils
@@ -140,12 +149,74 @@ public class TournamentCreateSettingsIT extends CustomApplicationTest {
         FileUtils.assertSameTextFileContent(expectedTextSettingsFile, actualTextSettings);
     }
 
-    private static Stream<Arguments> getGamesAndDefaultArtTypeEnums() {
-        return Stream.of(
-                Arguments.of(Game.SSBU, SmashUltimateFighterArtTypeEnum.RENDER)/*,
-                Arguments.of(Game.ROA2, RivalsOfAether2FighterArtType.RENDER),
-                Arguments.of(Game.SF6, StreetFighter6FighterArtType.RENDER),
-                Arguments.of(Game.TEKKEN8, Tekken8FighterArtType.RENDER)*/
+    //TODO
+    public void test_createTournamentAndGenerateThumbnailWithDefaultForeground_success()
+            throws InterruptedException, IOException {
+        //Arrange
+        Tournament expectedTournament = new Tournament(
+                TestUtils.getTournament(tournamentService, "major_l"),
+                "defaultForeground"
         );
+        var thumbnailForegroundLogoPath = "assets/tournaments/logos/majorL.png";
+        ThumbnailInput input = generateThumbnailInput();
+        input.setArtType(SmashUltimateFighterArtTypeEnum.MURAL);
+        File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
+        File expectedImage = FileUtils.getFileFromResources(
+                "/expected/thumbnail/invictaMuralMarioSonicThumbnail.png");
+
+        //Act
+        clickOnMenuOption(MenuId.EDIT);
+        clickOnMenuOption(MenuId.CREATE_TOURNAMENT);
+
+        WaitUtils.waitForWindowToLoad();
+        Stage createStage = (Stage) getWindow(WindowId.CREATE_TOURNAMENT);
+        Scene createScene = createStage.getScene();
+
+        writeInTextField(TextFieldId.TOURNAMENT_NAME, expectedTournament.getName());
+        writeInTextField(TextFieldId.TOURNAMENT_ID, expectedTournament.getTournamentId());
+
+        scrollPaneVertically(ScrollPaneId.TOURNAMENT_SETTINGS, createScene, 0.5);
+        writeInChosenImageField(ChosenImageFieldId.TOURNAMENT_THUMBNAIL_FOREGROUND_LOGO, thumbnailForegroundLogoPath);
+        writeInTextField(TextFieldId.TOURNAMENT_THUMBNAIL_FOREGROUND_LOGO_SCALE, 0.35f);
+
+        WaitUtils.waitInSeconds(1);
+        clickOnButton(ButtonId.SAVE_TOURNAMENT);
+
+        WaitUtils.waitInSeconds(2);
+
+        //TODO scroll to new tournament and create static helper methods
+        clickOnButton(ButtonId.TOURNAMENT_INVICTA);
+        fillRoundData(input);
+        fillPlayerData(input.getPlayers().get(0), "#player1");
+        fillPlayerData(input.getPlayers().get(1), "#player2");
+
+        //Act
+        clickOnButton(ButtonId.SAVE_THUMBNAIL);
+
+        //Assert
+        boolean isFileCreated = WaitUtils.waitForExpectedFile(actualImage, expectedImage);
+
+        assertTrue(isFileCreated);
+        byte[] actualImageBytes = Files.readAllBytes(actualImage.toPath());
+        byte[] expectedImageBytes = Files.readAllBytes(expectedImage.toPath());
+        assertArrayEquals(expectedImageBytes, actualImageBytes);
+        assertTrue(actualImage.delete());
+
+    }
+
+    private ThumbnailInput generateThumbnailInput(){
+        var players = Arrays.asList(
+                new PlayerInput("Player 1",
+                        Collections.singletonList(new CharacterInput("Mario", 1, false))),
+                new PlayerInput("Player 2",
+                        Collections.singletonList(new CharacterInput("Sonic", 1, false)))
+        );
+        return ThumbnailInput.builder()
+                .tournamentId("weeklyl")
+                .round("Winners Finals")
+                .date("20/02/2022")
+                .artType(SmashUltimateFighterArtTypeEnum.RENDER)
+                .players(players)
+                .build();
     }
 }
