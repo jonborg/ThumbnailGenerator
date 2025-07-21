@@ -7,6 +7,6 @@ import lombok.Getter;
 @Getter
 public class FileThumbnailSettingsRead extends SettingsRead {
     @Expose
-    @SerializedName("foregroundLogo")
-    protected ThumbnailForegroundLogoRead foregroundLogo;
+    @SerializedName("foreground")
+    protected ThumbnailForegroundRead foreground;
 }

@@ -145,7 +145,6 @@ public class TournamentService {
                     game,
                     null,
                     null,
-                    null,
                     defaultList,
                     new TextSettings(tournament.getTournamentId())
             );

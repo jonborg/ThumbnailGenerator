@@ -9,6 +9,8 @@ public enum TextFieldId {
     PLAYER("#player"),
     TOURNAMENT_NAME("#name"),
     TOURNAMENT_ID("#id"),
+    TOURNAMENT_THUMBNAIL_FOREGROUND_LOGO_SCALE("#foregroundLogoScale"),
+    TOURNAMENT_THUMBNAIL_FOREGROUND_LOGO_OFFSET("#foregroundLogoOffset"),
     TOURNAMENT_THUMBNAIL_FONT_TOP_SIZE("#sizeTop"),
     TOURNAMENT_THUMBNAIL_FONT_TOP_ANGLE("#angleTop"),
     TOURNAMENT_THUMBNAIL_FONT_BOTTOM_SIZE("#sizeBottom"),

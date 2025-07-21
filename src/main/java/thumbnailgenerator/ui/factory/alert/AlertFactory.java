@@ -11,6 +11,7 @@ public class AlertFactory {
 
     public AlertFactory(){
         super();
+
         textArea = new TextArea();
         textArea.setEditable(false);
         textArea.setWrapText(true);
@@ -24,7 +25,7 @@ public class AlertFactory {
         if (Boolean.getBoolean("javafx.headless")) {
             return;
         }
-        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert = generateAlert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText("Info");
         alert.setContentText(contextText);
@@ -32,7 +33,7 @@ public class AlertFactory {
     }
 
     public static void displayWarning(String contextText){
-        alert = new Alert(Alert.AlertType.WARNING);
+        alert = generateAlert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
         alert.setHeaderText("Warning");
         alert.setContentText(contextText);
@@ -40,7 +41,7 @@ public class AlertFactory {
     }
 
     public static boolean displayConfirmation(String contextText){
-        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert = generateAlert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText("Confirmation");
         alert.setContentText(contextText);
@@ -77,4 +78,10 @@ public class AlertFactory {
         alert.getDialogPane().setExpandableContent(gridPane);
     }
 
+    private static Alert generateAlert(Alert.AlertType alertType) {
+        var alert = new Alert(alertType);
+        alert.getDialogPane().setPrefHeight(180.0f);
+        alert.getDialogPane().setMaxHeight(180.0f);
+        return alert;
+    }
 }

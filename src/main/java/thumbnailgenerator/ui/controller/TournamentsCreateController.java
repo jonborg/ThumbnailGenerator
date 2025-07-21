@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -20,11 +21,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -32,6 +35,7 @@ import javafx.util.converter.IntegerStringConverter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.FighterArtSettings;
@@ -39,7 +43,9 @@ import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.FileTop8Settings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
+import thumbnailgenerator.dto.ThumbnailForeground;
 import thumbnailgenerator.dto.ThumbnailForegroundLogo;
+import thumbnailgenerator.dto.ThumbnailForegroundVersus;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
@@ -55,6 +61,7 @@ import thumbnailgenerator.ui.combobox.InputFilter;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.ui.textfield.ChosenImageField;
 import thumbnailgenerator.ui.textfield.ChosenJsonField;
+import thumbnailgenerator.utils.javafx.ColorUtils;
 
 @Primary
 @Controller
@@ -69,7 +76,19 @@ public class TournamentsCreateController implements Initializable {
     @FXML
     protected ChosenImageField logo;
     @FXML
+    protected CheckBox customForeground;
+    @FXML
     protected ChosenImageField foreground;
+    @FXML
+    protected ColorPicker thumbnailPrimaryColor;
+    @FXML
+    protected ColorPicker thumbnailSecondaryColor;
+    @FXML
+    protected ChosenImageField foregroundVersus;
+    @FXML
+    protected TextField foregroundVersusScale;
+    @FXML
+    protected TextField foregroundVersusOffset;
     @FXML
     protected ChosenImageField foregroundLogo;
     @FXML
@@ -132,6 +151,10 @@ public class TournamentsCreateController implements Initializable {
     private @Autowired ThumbnailService thumbnailService;
     private @Autowired GameEnumService gameEnumService;
     protected Runnable onSaveCallback;
+    @Value("${thumbnail.foreground.versus.image.default}")
+    private String defaultForegroundVersusImagePath;
+    @Value("${thumbnail.background.image.default}")
+    private String defaultBackgroundImagePath;
 
     public void setOnSaveCallback(Runnable callback) {
         this.onSaveCallback = callback;
@@ -144,6 +167,7 @@ public class TournamentsCreateController implements Initializable {
         initNumberTextFields();
         initFontDropdown();
         initFighterArtTypeDropdown();
+        setDefaultValues();
     }
 
     private List<FighterArtSettings> initArtType(Game game, boolean hasDefaultSettingsFile){
@@ -166,9 +190,16 @@ public class TournamentsCreateController implements Initializable {
         fileThumbnailSettingsList = new ArrayList<>();
         fileTop8SettingsList = new ArrayList<>();
         for (Game game: Game.values()) {
+            var colors = new HashMap<String, String>();
+            colors.put("primary", "#333333FF");
+            colors.put("secondary", "#337733FF");
             fileThumbnailSettingsList
                     .add(new FileThumbnailSettings(game,
-                            "", new ThumbnailForegroundLogo("", 1.0f, 0, false), "",
+                            new ThumbnailForeground("", colors,
+                                    new ThumbnailForegroundVersus(
+                                            defaultForegroundVersusImagePath, 1.0f, 0),
+                                    new ThumbnailForegroundLogo("", 1.0f, 0, false),
+                                    false), defaultBackgroundImagePath,
                             initArtType(game, true), null));
             fileTop8SettingsList
                     .add(new FileTop8Settings(game,
@@ -220,26 +251,28 @@ public class TournamentsCreateController implements Initializable {
             return null;
         };
 
-        List<TextField> listIntFields = new ArrayList<>(Arrays.asList(
-                foregroundLogoOffset,
+        List<TextField> listIntFields = Arrays.asList(
+                foregroundVersusOffset, foregroundLogoOffset,
                 sizeTop, sizeBottom,
-                downOffsetTopLeft, downOffsetTopRight, downOffsetBottomLeft, downOffsetBottomRight)
+                downOffsetTopLeft, downOffsetTopRight, downOffsetBottomLeft, downOffsetBottomRight
         );
-        List<TextField> listFloatFields = new ArrayList<>(Arrays.asList(
-                foregroundLogoScale, angleTop, angleBottom, contour)
+        List<TextField> listFloatFields = Arrays.asList(
+                foregroundVersusScale, foregroundLogoScale, angleTop, angleBottom, contour
         );
+        List<Integer> initIntValue = Arrays.asList(0, 0, 90, 75, 12, 12, -8, -8);
+        List<Float> initFloatValue = Arrays.asList(0.0f, 0.0f, -2.0f, -2.0f, 0.0f);
 
+        int i=0;
         for (TextField intField : listIntFields){
-            intField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter(), 0, integerFilter));
+            intField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter(), initIntValue.get(i++), integerFilter));
             intField.focusedProperty().addListener((arg0,newValue, oldValue) -> emptyTextField(intField));
         }
+
+        i=0;
         for (TextField floatField : listFloatFields){
-            floatField.setTextFormatter(new TextFormatter<>(new FloatStringConverter(), 0.0f, floatFilter));
+            floatField.setTextFormatter(new TextFormatter<>(new FloatStringConverter(), initFloatValue.get(i++), floatFilter));
             floatField.focusedProperty().addListener((arg0,newValue, oldValue) -> emptyTextField(floatField));
         }
-        foregroundLogoScale.setTextFormatter(new TextFormatter<>(new FloatStringConverter(), 1.0f, floatFilter));
-        foregroundLogoScale.focusedProperty().addListener((arg0,newValue, oldValue) -> emptyTextField(foregroundLogoScale));
-
     }
 
     protected void initFontDropdown(){
@@ -298,6 +331,17 @@ public class TournamentsCreateController implements Initializable {
                         }
                     }
                 });
+    }
+
+    private void setDefaultValues(){
+        font.getSelectionModel().select("BebasNeue-Regular");
+        bold.setSelected(true);
+        italic.setSelected(true);
+        shadow.setSelected(true);
+        thumbnailPrimaryColor.setValue(Color.web("#333333FF"));
+        thumbnailSecondaryColor.setValue(Color.web("337733FF"));
+        foregroundVersus.setText(defaultForegroundVersusImagePath);
+        background.setText(defaultBackgroundImagePath);
     }
 
     private void emptyTextField(TextField tf){
@@ -413,11 +457,20 @@ public class TournamentsCreateController implements Initializable {
                 .findFirst()
                 .get();
         thumbnailSettings.setBackground(background.getText());
-        thumbnailSettings.setForeground(foreground.getText());
-        thumbnailSettings.getThumbnailForegroundLogo().setLogo(foregroundLogo.getText());
-        thumbnailSettings.getThumbnailForegroundLogo().setScale(Float.parseFloat(foregroundLogoScale.getText()));
-        thumbnailSettings.getThumbnailForegroundLogo().setVerticalOffset(Integer.parseInt(foregroundLogoOffset.getText()));
-        thumbnailSettings.getThumbnailForegroundLogo().setAboveForeground(foregroundLogoAbove.isSelected());
+        var thumbnailForeground = thumbnailSettings.getThumbnailForeground();
+        thumbnailForeground.setForeground(foreground.getText());
+        thumbnailForeground.setCustomForeground(customForeground.isSelected());
+        thumbnailForeground.getColors().put("primary", ColorUtils.getHex(thumbnailPrimaryColor.getValue()));
+        thumbnailForeground.getColors().put("secondary", ColorUtils.getHex(thumbnailSecondaryColor.getValue()));
+
+        thumbnailForeground.getThumbnailForegroundVersus().setImagePath(foregroundVersus.getText());
+        thumbnailForeground.getThumbnailForegroundLogo().setScale(Float.parseFloat(foregroundVersusScale.getText()));
+        thumbnailForeground.getThumbnailForegroundLogo().setVerticalOffset(Integer.parseInt(foregroundVersusOffset.getText()));
+
+        thumbnailForeground.getThumbnailForegroundLogo().setImagePath(foregroundLogo.getText());
+        thumbnailForeground.getThumbnailForegroundLogo().setScale(Float.parseFloat(foregroundLogoScale.getText()));
+        thumbnailForeground.getThumbnailForegroundLogo().setVerticalOffset(Integer.parseInt(foregroundLogoOffset.getText()));
+        thumbnailForeground.getThumbnailForegroundLogo().setAboveForeground(foregroundLogoAbove.isSelected());
         thumbnailSettings.getArtTypeDir().stream()
                 .filter(a -> a.getArtType().equals(artTypeThumbnail.getSelectionModel().getSelectedItem()))
                 .findFirst()
@@ -443,12 +496,23 @@ public class TournamentsCreateController implements Initializable {
                 .filter(s -> game.equals(s.getGame()))
                 .findFirst()
                 .get();
+        var thumbnailForeground = thumbnailSettings.getThumbnailForeground();
         background.setText(thumbnailSettings.getBackground());
-        foreground.setText(thumbnailSettings.getForeground());
-        foregroundLogo.setText(thumbnailSettings.getThumbnailForegroundLogo().getLogo());
-        foregroundLogoScale.setText(String.valueOf(thumbnailSettings.getThumbnailForegroundLogo().getScale()));
-        foregroundLogoOffset.setText(String.valueOf(thumbnailSettings.getThumbnailForegroundLogo().getVerticalOffset()));
-        foregroundLogoAbove.setSelected(thumbnailSettings.getThumbnailForegroundLogo().isAboveForeground());
+        foreground.setText(thumbnailForeground.getForeground());
+        customForeground.setSelected(thumbnailForeground.isCustomForeground());
+
+        thumbnailPrimaryColor.setValue(Color.web(thumbnailForeground.getColors().get("primary")));
+        thumbnailSecondaryColor.setValue(Color.web(thumbnailForeground.getColors().get("secondary")));
+
+        foregroundVersus.setText(thumbnailForeground.getThumbnailForegroundVersus().getImagePath());
+        foregroundVersusScale.setText(String.valueOf(thumbnailForeground.getThumbnailForegroundVersus().getScale()));
+        foregroundVersusOffset.setText(String.valueOf(thumbnailForeground.getThumbnailForegroundVersus().getVerticalOffset()));
+
+        foregroundLogo.setText(thumbnailForeground.getThumbnailForegroundLogo().getImagePath());
+        foregroundLogoScale.setText(String.valueOf(thumbnailForeground.getThumbnailForegroundLogo().getScale()));
+        foregroundLogoOffset.setText(String.valueOf(thumbnailForeground.getThumbnailForegroundLogo().getVerticalOffset()));
+        foregroundLogoAbove.setSelected(thumbnailForeground.getThumbnailForegroundLogo().isAboveForeground());
+
         artTypeThumbnail.getItems().clear();
         artTypeThumbnail.getItems().addAll(gameEnumService.getAllFighterArtTypes(game));
         artTypeThumbnail.getSelectionModel().select(0);

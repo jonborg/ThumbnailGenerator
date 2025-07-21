@@ -10,8 +10,7 @@ public enum CheckBoxId {
     TOURNAMENT_FONT_BOLD("#bold"),
     TOURNAMENT_FONT_ITALIC("#italic"),
     TOURNAMENT_FONT_SHADOW("#shadow"),
-
-    ;
+    CUSTOM_FOREGROUND("#customForeground");
 
     private final String value;
 

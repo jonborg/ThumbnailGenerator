@@ -12,21 +12,20 @@ import lombok.ToString;
 @ToString
 public class FileThumbnailSettings extends Settings implements Cloneable{
 
-    private ThumbnailForegroundLogo thumbnailForegroundLogo;
+    private ThumbnailForeground thumbnailForeground;
     private TextSettings textSettings;
 
-    public FileThumbnailSettings(Game game, String foreground, ThumbnailForegroundLogo thumbnailForegroundLogo, String background,
+    public FileThumbnailSettings(Game game, ThumbnailForeground foreground, String background,
                                  List<FighterArtSettings> artTypeDir, TextSettings textSettings){
-        super(game, foreground, background, artTypeDir);
-        this.thumbnailForegroundLogo = thumbnailForegroundLogo;
+        super(game, background, artTypeDir);
+        this.thumbnailForeground = foreground;
         this.textSettings = textSettings;
     }
 
     public FileThumbnailSettings(FileThumbnailSettings fileThumbnailSettings, String suffix){
         this(
                fileThumbnailSettings.getGame(),
-               fileThumbnailSettings.getForeground(),
-               fileThumbnailSettings.getThumbnailForegroundLogo(),
+               fileThumbnailSettings.getThumbnailForeground(),
                fileThumbnailSettings.getBackground(),
                fileThumbnailSettings.getArtTypeDir()
                        .stream()

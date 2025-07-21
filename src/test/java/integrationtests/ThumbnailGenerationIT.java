@@ -157,28 +157,6 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         assertTrue(actualImage.delete());
     }
 
-
-    private void fillRoundData(ThumbnailInput input){
-        writeInTextField(TextFieldId.ROUND, input.getRound());
-        writeInTextField(TextFieldId.DATE, input.getDate());
-        selectInComboBox(ComboBoxId.ART_TYPE, ((SmashUltimateFighterArtTypeEnum) input.getArtType()).getValue());
-    }
-
-    private void fillPlayerData(PlayerInput input, String parentFxml){
-        var character1 = input.getCharacterInputList().get(0);
-        writeInTextField(parentFxml, TextFieldId.PLAYER, input.getPlayerName());
-        writeAndSelectInComboBox(parentFxml,ComboBoxId.CHARACTER_1, character1.getCharacterName());
-        writeInSpinner(parentFxml, SpinnerId.ALT_CHARACTER_1, String.valueOf(character1.getAlt()));
-        setCheckBox(parentFxml, CheckBoxId.FLIP_CHARACTER_1, character1.isFlip());
-        if (input.getCharacterInputList().size() == 2){
-            var character2 = input.getCharacterInputList().get(1);
-            clickOnButton(parentFxml, ButtonId.ADD_REMOVE_CHARACTER_2);
-            writeAndSelectInComboBox(parentFxml,ComboBoxId.CHARACTER_2, character2.getCharacterName());
-            writeInSpinner(parentFxml, SpinnerId.ALT_CHARACTER_2, String.valueOf(character1.getAlt()));
-            setCheckBox(parentFxml, CheckBoxId.FLIP_CHARACTER_2, character1.isFlip());
-        }
-    }
-
     private ThumbnailInput generateThumbnailInput(){
         var players = Arrays.asList(
                 new PlayerInput("Player 1",
