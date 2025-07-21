@@ -634,129 +634,139 @@ Thumbnails are saved in **/generated_top8** folder.
 
 ### Smash 64 Remix Character URL names
 
-| Character          | URL Name           |
-|--------------------|--------------------|
-| Mario              | mario              |
-| Donkey Kong        | donkey_kong        |
-| Link               | link               |
-| Samus              | samus              |
-| Yoshi              | yoshi              |
-| Kirby              | kirby              |
-| Fox                | fox                |
-| Pikachu            | pikachu            |
-| Luigi              | luigi              |
-| Ness               | ness               |
-| Captain Falcon     | captain_falcon     |
-| Jigglypuff         | jigglypuff         |
-| Ganondorf          | ganondorf          |
-| Young Link         | young_link         |
-| Falco              | falco              |
-| Dr. Mario          | dr_mario           |
-| Dark Samus         | dark_samus         |
-| Wario              | wario              |
-| Lucas              | lucas              |
-| Bowser             | bowser             |
-| Wolf               | wolf               |
-| Conker             | conker             |
-| Mewtwo             | mewtwo             |
-| Marth              | marth              |
-| Sonic              | sonic              |
-| Classic Sonic      | classic_sonic      |
-| Sheik              | sheik              |
-| Marina             | marina             |
-| King Dedede        | king_dedede        |
-| Goemon             | goemon             |
-| Banjo & Kazooie    | banjo_and_kazooie  |
+| Character       | URL Name          |
+|-----------------|-------------------|
+| Mario           | mario             |
+| Donkey Kong     | donkey_kong       |
+| Link            | link              |
+| Samus           | samus             |
+| Yoshi           | yoshi             |
+| Kirby           | kirby             |
+| Fox             | fox               |
+| Pikachu         | pikachu           |
+| Luigi           | luigi             |
+| Ness            | ness              |
+| Captain Falcon  | captain_falcon    |
+| Jigglypuff      | jigglypuff        |
+| Ganondorf       | ganondorf         |
+| Young Link      | young_link        |
+| Falco           | falco             |
+| Dr. Mario       | dr_mario          |
+| Dark Samus      | dark_samus        |
+| Wario           | wario             |
+| Lucas           | lucas             |
+| Bowser          | bowser            |
+| Wolf            | wolf              |
+| Conker          | conker            |
+| Mewtwo          | mewtwo            |
+| Marth           | marth             |
+| Sonic           | sonic             |
+| Classic Sonic   | classic_sonic     |
+| Sheik           | sheik             |
+| Marina          | marina            |
+| King Dedede     | king_dedede       |
+| Goemon          | goemon            |
+| Banjo & Kazooie | banjo_and_kazooie |
+| Peach           | peach             |
+| Crash Bandicoot | crash             |
+| Dragon King     | dragon_king       |
+| Peppy           | peppy             |
+| Dr. Luigi       | dr_luigi          |
+| Lanky Kong      | lanky_kong        |
+| Roy             | roy               |
 
 ### Rivals of Aether 2 URL names
 
-| Character          | URL Name           |
-|--------------------|--------------------|
-| Clairen            | clairen            |
-| Fleet              | fleet              |
-| Forsburn           | forsburn           |
-| Kragg              | kragg              |
-| Loxodont           | loxodont           |
-| Maypul             | maypul             |
-| Orcane             | orcane             |
-| Ranno              | ranno              |
-| Wrastor            | wrastor            |
-| Zetterburn         | zetterburn         |
-| Etalus             | etalus             |
-| Olympia            | olympia            |
+| Character  | URL Name   |
+|------------|------------|
+| Clairen    | clairen    |
+| Fleet      | fleet      |
+| Forsburn   | forsburn   |
+| Kragg      | kragg      |
+| Loxodont   | loxodont   |
+| Maypul     | maypul     |
+| Orcane     | orcane     |
+| Ranno      | ranno      |
+| Wrastor    | wrastor    |
+| Zetterburn | zetterburn |
+| Etalus     | etalus     |
+| Olympia    | olympia    |
+| Absa       | absa       |
 
 ### Street Fighter 6 URL names
 
-| Character          | URL Name           |
-|--------------------|--------------------|
-| Ryu                | ryu                |
-| Luke               | luke               |
-| Jamie              | jamie              |
-| Chun-Li            | chunli             |
-| Guile              | guile              |
-| Kimberly           | kimberly           |
-| Juri               | juri               |
-| Ken                | ken                |
-| Blanka             | blanka             |
-| Dhalsim            | dhalsim            |
-| E.Honda            | ehonda             |
-| Dee Jay            | deejay             |
-| Manon              | manon              |
-| Marisa             | marisa             |
-| JP                 | jp                 |
-| Zangief            | zangief            |
-| Lily               | lily               |
-| Cammy              | cammy              |
-| Rashid             | rashid             |
-| A.K.I.             | aki                |
-| Ed                 | ed                 |
-| Akuma              | akuma              |
-| M. Bison           | m_bison            |
-| Terry              | terry              |
-| Mai                | mai                |
-| Elena              | elena              |
+| Character | URL Name |
+|-----------|----------|
+| Ryu       | ryu      |
+| Luke      | luke     |
+| Jamie     | jamie    |
+| Chun-Li   | chunli   |
+| Guile     | guile    |
+| Kimberly  | kimberly |
+| Juri      | juri     |
+| Ken       | ken      |
+| Blanka    | blanka   |
+| Dhalsim   | dhalsim  |
+| E.Honda   | ehonda   |
+| Dee Jay   | deejay   |
+| Manon     | manon    |
+| Marisa    | marisa   |
+| JP        | jp       |
+| Zangief   | zangief  |
+| Lily      | lily     |
+| Cammy     | cammy    |
+| Rashid    | rashid   |
+| A.K.I.    | aki      |
+| Ed        | ed       |
+| Akuma     | akuma    |
+| M. Bison  | m_bison  |
+| Terry     | terry    |
+| Mai       | mai      |
+| Elena     | elena    |
+| Sagat     | sagat    |
 
 ### Tekken 8 URL names
 
-| Character          | URL Name           |
-|--------------------|--------------------|
-| Alisa              | alisa              |
-| Asuka              | asuka              |
-| Azucena            | azucena            |
-| Bryan              | bryan              |
-| Claudio            | claudio            |
-| Devil Jin          | devil_jin          |
-| Feng               | feng_wei           |
-| Hwoarang           | hwoarang           |
-| Jack-8             | jack_8             |
-| Jin                | jin                |
-| Jun                | jun                |
-| Kazuya             | kazuya             |
-| King               | king               |
-| Kuma               | kuma               |
-| Lars               | lars               |
-| Lee                | lee                |
-| Leo                | leo                |
-| Leroy              | leroy              |
-| Lili               | lili               |
-| Xiaoyu             | xiaoyu             |
-| Law                | law                |
-| Nina               | nina               |
-| Panda              | panda              |
-| Paul               | paul               |
-| Raven              | raven              |
-| Reina              | reina              |
-| Dragunov           | dragunov           |
-| Shaheen            | shaheen            |
-| Steve              | steve              |
-| Victor             | victor             |
-| Yoshimitsu         | yoshimitsu         |
-| Zafina             | zafina             |
-| Eddy               | eddy               |
-| Lidia              | lidia              |
-| Heihachi           | heihachi           |
-| Clive              | clive              |
-| Anna               | anna               |
+| Character  | URL Name   |
+|------------|------------|
+| Alisa      | alisa      |
+| Asuka      | asuka      |
+| Azucena    | azucena    |
+| Bryan      | bryan      |
+| Claudio    | claudio    |
+| Devil Jin  | devil_jin  |
+| Feng       | feng_wei   |
+| Hwoarang   | hwoarang   |
+| Jack-8     | jack_8     |
+| Jin        | jin        |
+| Jun        | jun        |
+| Kazuya     | kazuya     |
+| King       | king       |
+| Kuma       | kuma       |
+| Lars       | lars       |
+| Lee        | lee        |
+| Leo        | leo        |
+| Leroy      | leroy      |
+| Lili       | lili       |
+| Xiaoyu     | xiaoyu     |
+| Law        | law        |
+| Nina       | nina       |
+| Panda      | panda      |
+| Paul       | paul       |
+| Raven      | raven      |
+| Reina      | reina      |
+| Dragunov   | dragunov   |
+| Shaheen    | shaheen    |
+| Steve      | steve      |
+| Victor     | victor     |
+| Yoshimitsu | yoshimitsu |
+| Zafina     | zafina     |
+| Eddy       | eddy       |
+| Lidia      | lidia      |
+| Heihachi   | heihachi   |
+| Clive      | clive      |
+| Anna       | anna       |
+| Fahkumram  | fahkumram  |
 
 ###Guilty Gear: Strive URL names
 
@@ -797,82 +807,90 @@ Thumbnails are saved in **/generated_top8** folder.
 
 ###Fatal Fury: City of the Wolves URL names
 
-| Character           | URL Name           |
-|---------------------|--------------------|
-| Rock Howard         | rock               |
-| Terry Bogard        | terry              |
-| B. Jenet            | jenet              |
-| Marco Rodrigues     | marco              |
-| Preecha             | preecha            |
-| Hotaru Futaba       | hotaru             |
-| Vox Reaper          | vox                |
-| Tizoc               | tizoc              |
-| Kevin Rian          | kevin              |
-| Billy Kane          | billy              |
-| Mai Shiranui        | mai                |
-| Kim Dong Hwan       | kim                |
-| Gato                | gato               |
-| Kain R. Heinlein    | kain               |
-| Cristiano Ronaldo   | cr7                |
-| Salvatore Ganacci   | ganacci            |
-| Hokuto Maru         | hokuto             |
+| Character         | URL Name |
+|-------------------|----------|
+| Rock Howard       | rock     |
+| Terry Bogard      | terry    |
+| B. Jenet          | jenet    |
+| Marco Rodrigues   | marco    |
+| Preecha           | preecha  |
+| Hotaru Futaba     | hotaru   |
+| Vox Reaper        | vox      |
+| Tizoc             | tizoc    |
+| Kevin Rian        | kevin    |
+| Billy Kane        | billy    |
+| Mai Shiranui      | mai      |
+| Kim Dong Hwan     | kim      |
+| Gato              | gato     |
+| Kain R. Heinlein  | kain     |
+| Cristiano Ronaldo | cr7      |
+| Salvatore Ganacci | ganacci  |
+| Hokuto Maru       | hokuto   |
+| Andy Bogard       | andy     |
+| Ken               | ken      |
 
 ###Granblue Fantasy Versus: Rising URL names
 
-| Character          | URL Name           |
-|--------------------|--------------------|
-| Gran               | gran               |
-| Djeeta             | djeeta             |
-| Katalina           | katalina           |
-| Charlotta          | charlotta          |
-| Lancelot           | lancelot           |
-| Percival           | percival           |
-| Ladiva             | ladiva             |
-| Metera             | metera             |
-| Lowain             | lowain             |
-| Ferry              | ferry              |
-| Zeta               | zeta               |
-| Vaseraga           | vaseraga           |
-| Narmaya            | narmaya            |
-| Soriz              | soriz              |
-| Zooey              | zooey              |
-| Cagliostro         | cagliostro         |
-| Yuel               | yuel               |
-| Anre               | anre               |
-| Eustace            | eustace            |
-| Seox               | seox               |
-| Vira               | vira               |
-| Beelzebub          | beelzebub          |
-| Belial             | belial             |
-| Avatar Belial      | avatar_belial      |
-| Lunalu             | lunalu             |
-| Anila              | anila              |
-| Siegfried          | siegfried          |
-| Grimnir            | grimnir            |
-| Nier               | nier               |
-| Lucilius           | lucilius           |
-| 2B                 | 2b                 |
-| Vane               | vane               |
-| Beatrix            | beatrix            |
-| Versusia           | versusia           |
-| Vikala             | vikala             |
-| Sandalphon         | sandalphon         |
-| Galleo             | galleon            |
+| Character     | URL Name           |
+|---------------|--------------------|
+| Gran          | gran               |
+| Djeeta        | djeeta             |
+| Katalina      | katalina           |
+| Charlotta     | charlotta          |
+| Lancelot      | lancelot           |
+| Percival      | percival           |
+| Ladiva        | ladiva             |
+| Metera        | metera             |
+| Lowain        | lowain             |
+| Ferry         | ferry              |
+| Zeta          | zeta               |
+| Vaseraga      | vaseraga           |
+| Narmaya       | narmaya            |
+| Soriz         | soriz              |
+| Zooey         | zooey              |
+| Cagliostro    | cagliostro         |
+| Yuel          | yuel               |
+| Anre          | anre               |
+| Eustace       | eustace            |
+| Seox          | seox               |
+| Vira          | vira               |
+| Beelzebub     | beelzebub          |
+| Belial        | belial             |
+| Avatar Belial | avatar_belial      |
+| Lunalu        | lunalu             |
+| Anila         | anila              |
+| Siegfried     | siegfried          |
+| Grimnir       | grimnir            |
+| Nier          | nier               |
+| Lucilius      | lucilius           |
+| 2B            | 2b                 |
+| Vane          | vane               |
+| Beatrix       | beatrix            |
+| Versusia      | versusia           |
+| Vikala        | vikala             |
+| Sandalphon    | sandalphon         |
+| Galleon       | galleon            |
 
 
 ### Release Notes
+#### v4.4.0
+- Added July 2025 DLC characters;
+- Provide a default setup of thumbnail foreground;
+- Provide custom color setup to default thumbnail foreground;
+- Provide custom logo setup to default thumbnail foreground.
+
 #### v4.3.0
 - Added Smash 64 Remix as selectable games;
-- Added Elena from Street Fighter 6
-- Added Unika from Guilty Gear: Strive
-- Added Galleon from Grandbule Fantasy Versus: Rising
-- Allow thumbnail generation of up to 2 characters per player
-- Adjusted thumbnails' character positioning process to use masks
-- Added Legacy menu, to allow users to convert their custom character positioning in thumbnails
+- Added Elena from Street Fighter 6;
+- Added Unika from Guilty Gear: Strive;
+- Added Galleon from Grandbule Fantasy Versus: Rising;
+- Allow thumbnail generation of up to 2 characters per player;
+- Adjusted thumbnails' character positioning process to use masks;
+- Added Legacy menu, to allow users to convert their custom character positioning in thumbnails.
 
 #### v4.2.0
 - Added Smash Melee, Guilty Gear: Strive and Granblue Fantasy Versus: Rising as selectable games;
-- Thumbnail and Top8 generation are now run in multiple threads, allowing parallel generation
+- Thumbnail and Top8 generation are now run in multiple threads, allowing parallel generation;
 - Added loading indicator for Thumbnail and Top8 generations.
 
 #### v4.1.0
