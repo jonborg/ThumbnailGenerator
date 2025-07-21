@@ -16,18 +16,14 @@ public class Settings {
     @SerializedName("game")
     protected Game game;
     @Expose
-    @SerializedName("foreground")
-    protected String foreground;
-    @Expose
     @SerializedName("background")
     protected String background;
     @Expose
     @SerializedName("artSettings")
     protected List<FighterArtSettings> artTypeDir;
 
-    public Settings(Game game, String foreground, String background, List<FighterArtSettings> artTypeDir){
+    public Settings(Game game, String background, List<FighterArtSettings> artTypeDir){
         this.game = game;
-        this.foreground = foreground;
         this.background = background;
         this.artTypeDir = artTypeDir;
     }

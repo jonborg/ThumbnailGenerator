@@ -1,20 +1,18 @@
 package thumbnailgenerator.ui.controller;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextField;
 import lombok.val;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.enums.LoadingType;
 import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
-import thumbnailgenerator.enums.interfaces.CharacterEnum;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.service.GameEnumService;
@@ -28,8 +26,6 @@ import thumbnailgenerator.utils.converter.GameConverter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
 
 @Controller
 public class LegacyController implements Initializable {
@@ -38,6 +34,8 @@ public class LegacyController implements Initializable {
     private LegacyService legacyService;
     @Autowired
     private GameEnumService gameEnumService;
+    @FXML
+    private TextField versionTextField;
     @FXML
     private ComboBox<Game> gameComboBox;
     @FXML
@@ -50,6 +48,8 @@ public class LegacyController implements Initializable {
     private ProgressIndicator loadingIndicator;
 
     private static LoadingState loadingState;
+
+    private static String OFFSET_VERSION_LIMIT = "4.3.0";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -89,11 +89,33 @@ public class LegacyController implements Initializable {
         loadingText.textProperty().bind(loadingState.getLoadingText());
     }
 
-    public void convertCharacterOffsets(ActionEvent actionEvent)
+    public void convertFile(ActionEvent actionEvent)
             throws MalformedURLException, OnlineImageNotFoundException {
-        var filePath = fileChosen.getText();
-        var game = gameComboBox.getSelectionModel().getSelectedItem();
-        var artTypeString = artTypeComboBox.getSelectionModel().getSelectedItem();
-        legacyService.convertThumbnailCharacterOffsets(filePath, game, artTypeString, loadingState);
+        convertCharacterOffsets();
+    }
+
+    private void convertCharacterOffsets()
+            throws MalformedURLException, OnlineImageNotFoundException {
+        if (isVersionBelowLimit(versionTextField.getText(), OFFSET_VERSION_LIMIT)) {
+            var filePath = fileChosen.getText();
+            var game = gameComboBox.getSelectionModel().getSelectedItem();
+            var artTypeString =
+                    artTypeComboBox.getSelectionModel().getSelectedItem();
+            legacyService.convertThumbnailCharacterOffsets(filePath, game,
+                    artTypeString, loadingState);
+        } else {
+            AlertFactory.displayWarning("Character offsets of versions above "
+                    + OFFSET_VERSION_LIMIT + " do not need to be updated."
+            );
+        }
+    }
+
+    private int convertVersionNumber(String version){
+        var mainVersion = version.replace(".","");
+        return Integer.parseInt(mainVersion);
+    }
+
+    private boolean isVersionBelowLimit(String version, String versionLimit) {
+        return convertVersionNumber(version) < convertVersionNumber(versionLimit);
     }
 }

@@ -3,22 +3,30 @@ package thumbnailgenerator.service;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.awt.image.ConvolveOp;
 import java.awt.image.FilteredImageSource;
+import java.awt.image.Kernel;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import javax.imageio.ImageIO;
+
+import javafx.scene.image.WritableImage;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.imgscalr.Scalr;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.PlayerSlot;
+import thumbnailgenerator.dto.ThumbnailForegroundLogo;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.utils.image.ImageUtils;
 import thumbnailgenerator.utils.image.filter.ShadowFilter;
@@ -30,11 +38,16 @@ public class ImageService {
 
     public void drawImageFromPathFile(String pathname, Graphics2D g2d) throws
             LocalImageNotFoundException {
+        drawImageFromPathFile(pathname, g2d, 0, 0);
+    }
+
+    private void drawImageFromPathFile(String pathname, Graphics2D g2d, int x, int y) throws
+            LocalImageNotFoundException {
         if (pathname == null || pathname.isEmpty()){
             return;
         }
         try {
-            g2d.drawImage(ImageIO.read(new FileInputStream(pathname)), 0, 0, null);
+            g2d.drawImage(ImageIO.read(new FileInputStream(pathname)), x, y, null);
         } catch (IOException | NullPointerException e) {
             LOGGER.error("An issue occurred when loading image in path {}:", pathname);
             LOGGER.catching(e);
@@ -55,6 +68,14 @@ public class ImageService {
         return bufferedImage;
     }
 
+    public BufferedImage resizeImageSimple(BufferedImage bufferedImage, double scale) {
+        return Scalr.resize(
+                bufferedImage,
+                (int) Math.round(scale*bufferedImage.getWidth()),
+                (int) Math.round(scale*bufferedImage.getHeight()),
+                Scalr.OP_ANTIALIAS
+        );
+    }
     public BufferedImage resizeImage(BufferedImage bufferedImage, double scale) {
         LOGGER.info("Performing resize of image with width {} and height {}.",
                 bufferedImage.getWidth(), bufferedImage.getHeight());
@@ -135,7 +156,7 @@ public class ImageService {
     }
 
     public BufferedImage createShadow(BufferedImage image,
-                                             int shadowColor) {
+                                      int shadowColor) {
         var result = new BufferedImage(image.getWidth(),
                 image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         var g2 = result.createGraphics();
@@ -159,59 +180,5 @@ public class ImageService {
         g2.dispose();
 
         return result;
-    }
-
-    public BufferedImage addAdditionalFighters(BufferedImage imageSlot, PlayerSlot playerSlot, List<Fighter> fighters) {
-        for (int i = 0; i< fighters.size(); i++){
-            var fighter = fighters.get(i);
-            var scale = playerSlot.getAdditionalFighters().getScale();
-            var posX = new ExpressionBuilder(playerSlot.getAdditionalFighters().getCoordinateX())
-                    .variable("i")
-                    .build()
-                    .setVariable("i", i)
-                    .evaluate();
-            var posY = new ExpressionBuilder(playerSlot.getAdditionalFighters().getCoordinateY())
-                    .variable("i")
-                    .build()
-                    .setVariable("i", i)
-                    .evaluate();
-            try {
-                var icon = ImageIO.read(Top8Service.class.getResourceAsStream(
-                        "/icons/" + fighter.getUrlName() + "/" + fighter.getAlt() +
-                                ".png"));
-                icon = ImageUtils.resizeImage(icon, scale);
-                var g2d = imageSlot.createGraphics();
-                g2d.drawImage(icon, (int) posX, (int) posY, null);
-                g2d.dispose();
-            } catch (IOException e){
-                LOGGER.error("Error occurred when adding additional fighters.", e);
-            }
-        }
-        return imageSlot;
-    }
-
-    public void darkenImage(BufferedImage image){
-        var darkenFactor = 0.85f;
-        for (int y = 0; y < image.getHeight(); y++) {
-            for (int x = 0; x < image.getWidth(); x++) {
-                int argb = image.getRGB(x, y);
-                int alpha = (argb >> 24) & 0xff;
-
-                if (alpha != 0) {  // Only process non-transparent pixels
-                    int red   = (argb >> 16) & 0xff;
-                    int green = (argb >> 8) & 0xff;
-                    int blue  = argb & 0xff;
-
-                    // Apply darkening
-                    red   = (int)(red * darkenFactor);
-                    green = (int)(green * darkenFactor);
-                    blue  = (int)(blue * darkenFactor);
-
-                    // Reconstruct the pixel
-                    int darkened = (alpha << 24) | (red << 16) | (green << 8) | blue;
-                    image.setRGB(x, y, darkened);
-                }
-            }
-        }
     }
 }

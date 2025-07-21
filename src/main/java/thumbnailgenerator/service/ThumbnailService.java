@@ -1,11 +1,14 @@
 package thumbnailgenerator.service;
 
 import com.google.gson.reflect.TypeToken;
+
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -18,9 +21,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.imageio.ImageIO;
 
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Polygon;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.imgscalr.Scalr;
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +39,9 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Thumbnail;
+import thumbnailgenerator.dto.ThumbnailForeground;
+import thumbnailgenerator.dto.ThumbnailForegroundLogo;
+import thumbnailgenerator.dto.ThumbnailForegroundVersus;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.LoadingType;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
@@ -71,18 +82,22 @@ public class ThumbnailService {
     }
 
     public void generateFromSmashGG(String text, boolean saveLocally, LoadingState loadingState)
-            throws FighterImageSettingsNotFoundException {
+            throws FighterImageSettingsNotFoundException,
+            LocalImageNotFoundException {
         InputStream inputStream = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
         generateAndSaveThumbnailsFromFile(inputStream, saveLocally, loadingState);
     }
 
     public void generateAndSaveThumbnailsFromFile(InputStream inputStream, Boolean saveLocally, LoadingState loadingState)
-            throws FighterImageSettingsNotFoundException {
-        var thumbnailList = thumbnailFileService.getListThumbnailsFromFile(inputStream,saveLocally);
+            throws FighterImageSettingsNotFoundException,
+            LocalImageNotFoundException {
+        var thumbnailList = thumbnailFileService.getListThumbnailsFromFile(inputStream, saveLocally);
         var invalidThumbnailList = new ArrayList<Pair<Thumbnail, String>>();
         List<CompletableFuture<Void>> futures = new ArrayList<>();
         AtomicInteger generatedThumbnails = new AtomicInteger();
+        var defaultForeground = generateForeground(thumbnailList.get(0));
         for (Thumbnail thumbnail : thumbnailList) {
+            thumbnail.setDefaultForeground(defaultForeground);
             CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                 try {
                     loadingState.update(true, LoadingType.THUMBNAIL,
@@ -156,18 +171,141 @@ public class ThumbnailService {
 
         LOGGER.info("Drawing background in path {}.", fileThumbnailSettings.getBackground());
         imageService.drawImageFromPathFile(fileThumbnailSettings.getBackground(), g2d);
-
         this.drawCharacters(thumbnail, g2d);
-
-        LOGGER.info("Drawing foreground in path {}.", fileThumbnailSettings.getForeground());
-        imageService.drawImageFromPathFile(fileThumbnailSettings.getForeground(), g2d);
+        drawForeground(thumbnail, g2d);
 
         LOGGER.info("Drawing thumbnail text");
         LOGGER.debug("Loading {} text settings: {}", thumbnail.getTournament().getName(),
                 fileThumbnailSettings.getTextSettings());
         this.drawText(thumbnail, g2d);
-
         return result;
+    }
+
+    private void drawForeground(Thumbnail thumbnail, Graphics2D g2d)
+            throws LocalImageNotFoundException {
+        var thumbnailForeground = fileThumbnailSettings.getThumbnailForeground();
+        if (thumbnailForeground.isCustomForeground()){
+            LOGGER.info("Drawing foreground in path {}.", fileThumbnailSettings.getThumbnailForeground().getForeground());
+            imageService.drawImageFromPathFile(thumbnailForeground.getForeground(), g2d);
+        } else {
+            LOGGER.info("Drawing default foreground.");
+            g2d.drawImage(thumbnail.getDefaultForeground(), 0, 0, null);
+        }
+    }
+
+    public BufferedImage generateForeground(Thumbnail thumbnail)
+            throws LocalImageNotFoundException {
+        var tournament = thumbnail.getTournament();
+        var game = thumbnail.getGame();
+        var thumbnailForeground = tournament.getThumbnailSettingsByGame(game).getThumbnailForeground();
+        var isCustomForeground = thumbnailForeground.isCustomForeground();
+        if (isCustomForeground){
+            return null;
+        }
+
+        var foregroundImage = new BufferedImage(thumbnailWidth, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
+        var g2d = foregroundImage.createGraphics();
+        var isLogoAbove = thumbnailForeground.getThumbnailForegroundLogo().isAboveForeground();
+        drawThumbnailVersusFromPathFile(thumbnailForeground.getThumbnailForegroundVersus(), g2d);
+        if (!isLogoAbove){
+            drawThumbnailLogoFromPathFile(thumbnailForeground.getThumbnailForegroundLogo(), g2d);
+        }
+        String backColor = thumbnailForeground.getColors().get("secondary");
+        String frontColor = thumbnailForeground.getColors().get("primary");
+        LOGGER.info("Creating default foreground with colors {} and {}.", frontColor, backColor);
+
+        generateBackRectangle(0, 0, backColor, g2d);
+        generateBackRectangle(thumbnailWidth/2, 0, backColor, g2d);
+        generateBackRectangle(0, thumbnailHeight - 50, backColor, g2d);
+        generateBackRectangle(thumbnailWidth/2, thumbnailHeight - 50, backColor, g2d);
+
+        generateFrontRectangle(0, 10, frontColor, g2d);
+        generateFrontRectangle(thumbnailWidth/2, 10, frontColor, g2d);
+        generateFrontRectangle(0, thumbnailHeight - 110, frontColor, g2d);
+        generateFrontRectangle(thumbnailWidth/2, thumbnailHeight - 110, frontColor, g2d);
+
+        if (isLogoAbove){
+            drawThumbnailLogoFromPathFile(thumbnailForeground.getThumbnailForegroundLogo(), g2d);
+        }
+        return foregroundImage;
+    }
+
+    private void generateBackRectangle(int x, int y, String colorHex, Graphics2D g2d){
+        Color color = Color.decode(colorHex.substring(0,7));
+        int rectWidth = (int) Math.ceil(thumbnailWidth/2.0);
+        int rectHeight = 50;
+
+        g2d.setColor(color);
+        g2d.fillRect(x, y, rectWidth, rectHeight);
+    }
+
+    private void generateFrontRectangle(int x, int y, String colorHex, Graphics2D g2d){
+        Paint color = javafx.scene.paint.Color.web(colorHex);
+        double lozengeInclination = Math.toRadians(-2);
+        Polygon lozenge = new Polygon();
+        lozenge.getPoints().addAll(
+                0.0, 0.0,  // Top point
+                640.0, thumbnailWidth/2 * Math.tan(lozengeInclination),
+                640.0, 100.0 + thumbnailWidth/2 * Math.tan(lozengeInclination),
+                0.0, 100.0
+        );
+
+        lozenge.setFill(color);
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setOffsetX(-5);
+        dropShadow.setOffsetY(5);
+        dropShadow.setColor(javafx.scene.paint.Color.web("#00000070"));
+        lozenge.setEffect(dropShadow);
+
+        WritableImage writableImage = new WritableImage(thumbnailWidth, thumbnailHeight);
+        SnapshotParameters snapshotParameters = new SnapshotParameters();
+        snapshotParameters.setFill(javafx.scene.paint.Color.TRANSPARENT);
+        lozenge.snapshot(snapshotParameters, writableImage);
+        BufferedImage finalRectangle = SwingFXUtils.fromFXImage(writableImage, null);
+
+        g2d.drawImage(finalRectangle, null, x-14, y-14);
+    }
+
+    public void drawThumbnailVersusFromPathFile(
+            ThumbnailForegroundVersus thumbnailForegroundVersus, Graphics2D g2d) throws
+            LocalImageNotFoundException {
+        var pathname = thumbnailForegroundVersus.getImagePath();
+        if (pathname == null || pathname.isEmpty()){
+            return;
+        }
+
+        try {
+            var image = ImageIO.read(new FileInputStream(pathname));
+            var scaledImage = imageService.resizeImageSimple(image, thumbnailForegroundVersus.getScale());
+            int x = thumbnailWidth/2 - scaledImage.getWidth()/2;
+            int y = thumbnailHeight/4 + thumbnailForegroundVersus.getVerticalOffset();
+            g2d.drawImage(scaledImage, x, y, null);
+        } catch (IOException | NullPointerException e) {
+            LOGGER.error("An issue occurred when loading image in path {}:", pathname);
+            LOGGER.catching(e);
+            throw new LocalImageNotFoundException(pathname);
+        }
+    }
+
+    public void drawThumbnailLogoFromPathFile(
+            ThumbnailForegroundLogo thumbnailForegroundLogo, Graphics2D g2d) throws
+            LocalImageNotFoundException {
+        var pathname = thumbnailForegroundLogo.getImagePath();
+        if (pathname == null || pathname.isEmpty()){
+            return;
+        }
+
+        try {
+            var image = ImageIO.read(new FileInputStream(pathname));
+            var scaledImage = imageService.resizeImageSimple(image, thumbnailForegroundLogo.getScale());
+            int x = thumbnailWidth/2 - scaledImage.getWidth()/2;
+            int y = thumbnailHeight/2 + thumbnailForegroundLogo.getVerticalOffset();
+            g2d.drawImage(scaledImage, x, y, null);
+        } catch (IOException | NullPointerException e) {
+            LOGGER.error("An issue occurred when loading image in path {}:", pathname);
+            LOGGER.catching(e);
+            throw new LocalImageNotFoundException(pathname);
+        }
     }
 
     private void saveGeneratedGraphic(Thumbnail thumbnail, BufferedImage image){
@@ -203,7 +341,7 @@ public class ThumbnailService {
                                 .getThumbnailSettingsByGame(game)
                                 .getFighterImageSettingsFile(artType),
                         new TypeToken<ImageSettings>() {}.getType());
-        return generateThumbnail(Thumbnail.builder()
+        var previewThumbnail = Thumbnail.builder()
                 .tournament(tournament)
                 .game(game)
                 .imageSettings(imageSettings)
@@ -212,7 +350,10 @@ public class ThumbnailService {
                 .date("07/12/2018")
                 .players(players)
                 .artType(artType)
-                .build());
+                .build();
+        var defaultForeground = generateForeground(previewThumbnail);
+        previewThumbnail.setDefaultForeground(defaultForeground);
+        return generateThumbnail(previewThumbnail);
     }
 
     private void drawCharacters(Thumbnail thumbnail, Graphics2D g2d)
@@ -275,12 +416,7 @@ public class ThumbnailService {
                     .findFighterImageSettings(fighter.getUrlName());
 
             var scaledImage = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
-            var doubleScaledImage = Scalr.resize(
-                    scaledImage,
-                    (int) Math.round(doubleCharacterScale*scaledImage.getWidth()),
-                    (int) Math.round(doubleCharacterScale*scaledImage.getHeight()),
-                    Scalr.OP_ANTIALIAS
-            );
+            var doubleScaledImage = imageService.resizeImageSimple(scaledImage, doubleCharacterScale);
 
             //offset + double fighter offset
             int centerOffsetX = (int) Math.round((1-doubleCharacterScale)*(320-fighterImageThumbnailSettings.getOffset()[0]));

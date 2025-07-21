@@ -57,9 +57,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        boolean isFileCreated = WaitUtils.waitForFile(actualImage);
-        WaitUtils.waitInSeconds(2);
-
+        boolean isFileCreated = WaitUtils.waitForExpectedFile(actualImage, expectedImage);
         assertTrue(isFileCreated);
         byte[] actualImageBytes = Files.readAllBytes(actualImage.toPath());
         byte[] expectedImageBytes = Files.readAllBytes(expectedImage.toPath());
@@ -87,8 +85,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        boolean isFileCreated = WaitUtils.waitForFile(actualImage);
-        WaitUtils.waitInSeconds(2);
+        boolean isFileCreated = WaitUtils.waitForExpectedFile(actualImage, expectedImage);
 
         assertTrue(isFileCreated);
         byte[] actualImageBytes = Files.readAllBytes(actualImage.toPath());
@@ -118,8 +115,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        boolean isFileCreated = WaitUtils.waitForFile(actualImage);
-        WaitUtils.waitInSeconds(2);
+        boolean isFileCreated = WaitUtils.waitForExpectedFile(actualImage, expectedImage);
 
         assertTrue(isFileCreated);
         assertTrue(marioImage.exists());
@@ -152,36 +148,13 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
         clickOnButton(ButtonId.SAVE_THUMBNAIL);
 
         //Assert
-        boolean isFileCreated = WaitUtils.waitForFile(actualImage);
+        boolean isFileCreated = WaitUtils.waitForExpectedFile(actualImage, expectedImage);
         assertTrue(isFileCreated);
-        WaitUtils.waitInSeconds(2);
 
         byte[] actualImageBytes = Files.readAllBytes(actualImage.toPath());
         byte[] expectedImageBytes = Files.readAllBytes(expectedImage.toPath());
         assertArrayEquals(expectedImageBytes, actualImageBytes);
         assertTrue(actualImage.delete());
-    }
-
-
-    private void fillRoundData(ThumbnailInput input){
-        writeInTextField(TextFieldId.ROUND, input.getRound());
-        writeInTextField(TextFieldId.DATE, input.getDate());
-        selectInComboBox(ComboBoxId.ART_TYPE, ((SmashUltimateFighterArtTypeEnum) input.getArtType()).getValue());
-    }
-
-    private void fillPlayerData(PlayerInput input, String parentFxml){
-        var character1 = input.getCharacterInputList().get(0);
-        writeInTextField(parentFxml, TextFieldId.PLAYER, input.getPlayerName());
-        writeAndSelectInComboBox(parentFxml,ComboBoxId.CHARACTER_1, character1.getCharacterName());
-        writeInSpinner(parentFxml, SpinnerId.ALT_CHARACTER_1, String.valueOf(character1.getAlt()));
-        setCheckBox(parentFxml, CheckBoxId.FLIP_CHARACTER_1, character1.isFlip());
-        if (input.getCharacterInputList().size() == 2){
-            var character2 = input.getCharacterInputList().get(1);
-            clickOnButton(parentFxml, ButtonId.ADD_REMOVE_CHARACTER_2);
-            writeAndSelectInComboBox(parentFxml,ComboBoxId.CHARACTER_2, character2.getCharacterName());
-            writeInSpinner(parentFxml, SpinnerId.ALT_CHARACTER_2, String.valueOf(character1.getAlt()));
-            setCheckBox(parentFxml, CheckBoxId.FLIP_CHARACTER_2, character1.isFlip());
-        }
     }
 
     private ThumbnailInput generateThumbnailInput(){

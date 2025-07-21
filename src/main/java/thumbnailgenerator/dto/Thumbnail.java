@@ -1,5 +1,6 @@
 package thumbnailgenerator.dto;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +19,7 @@ public class Thumbnail extends GeneratedGraphic {
     private String date;
     private List<Player> players;
     private FighterArtTypeEnum artType;
-
+    private BufferedImage defaultForeground;
 }
 
 

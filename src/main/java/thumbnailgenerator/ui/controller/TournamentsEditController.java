@@ -3,6 +3,7 @@ package thumbnailgenerator.ui.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.service.TournamentService;
@@ -43,7 +43,22 @@ public class TournamentsEditController extends TournamentsCreateController {
         name.setText(tournament.getName());
         logo.setText(tournament.getImage());
 
-        foreground.setText(thumbnailSettings.getForeground());
+        var thumbnailForeground = thumbnailSettings.getThumbnailForeground();
+        foreground.setText(thumbnailForeground.getForeground());
+        customForeground.setSelected(thumbnailForeground.isCustomForeground());
+
+        thumbnailPrimaryColor.setValue(Color.web(thumbnailForeground.getColors().get("primary")));
+        thumbnailSecondaryColor.setValue(Color.web(thumbnailForeground.getColors().get("secondary")));
+
+        foregroundVersus.setText(thumbnailForeground.getThumbnailForegroundVersus().getImagePath());
+        foregroundVersusScale.setText(String.valueOf(thumbnailForeground.getThumbnailForegroundVersus().getScale()));
+        foregroundVersusOffset.setText(String.valueOf(thumbnailForeground.getThumbnailForegroundVersus().getVerticalOffset()));
+
+        foregroundLogo.setText(thumbnailForeground.getThumbnailForegroundLogo().getImagePath());
+        foregroundLogoScale.setText(String.valueOf(thumbnailForeground.getThumbnailForegroundLogo().getScale()));
+        foregroundLogoOffset.setText(String.valueOf(thumbnailForeground.getThumbnailForegroundLogo().getVerticalOffset()));
+        foregroundLogoAbove.setSelected(thumbnailForeground.getThumbnailForegroundLogo().isAboveForeground());
+
         background.setText(thumbnailSettings.getBackground());
         fighterImageSettingsFile.setText(thumbnailRenderSettings);
 

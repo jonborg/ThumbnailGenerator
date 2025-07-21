@@ -6,25 +6,26 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 @Getter
 @Setter
 @ToString
 public class FileThumbnailSettings extends Settings implements Cloneable{
 
+    private ThumbnailForeground thumbnailForeground;
     private TextSettings textSettings;
 
-    public FileThumbnailSettings(Game game, String foreground, String background,
+    public FileThumbnailSettings(Game game, ThumbnailForeground foreground, String background,
                                  List<FighterArtSettings> artTypeDir, TextSettings textSettings){
-        super(game, foreground, background, artTypeDir);
+        super(game, background, artTypeDir);
+        this.thumbnailForeground = foreground;
         this.textSettings = textSettings;
     }
 
     public FileThumbnailSettings(FileThumbnailSettings fileThumbnailSettings, String suffix){
         this(
                fileThumbnailSettings.getGame(),
-               fileThumbnailSettings.getForeground(),
+               fileThumbnailSettings.getThumbnailForeground(),
                fileThumbnailSettings.getBackground(),
                fileThumbnailSettings.getArtTypeDir()
                        .stream()
