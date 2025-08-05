@@ -33,29 +33,27 @@ public class TextService {
     private static int WIDTH = 640;
     private static int HEIGHT = 110;
 
-    private static TextSettings textSettings;
-    private static TextFont textFont;
-    private static boolean top;
-
-    public BufferedImage convert(String text, TextSettings settings, boolean topText) throws
+    public BufferedImage convert(String text, TextSettings textSettings, boolean isTopText) throws
             FontNotFoundException {
-        textSettings = settings;
-        top=topText;
-
         if (text.isEmpty()) return null;
         BufferedImage rect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = rect.createGraphics();
 
-        if (textSettings.isShadow())
+        if (textSettings.isShadow()) {
             graphics.drawImage(generateText(text, Color.BLACK,
-                    top ? textSettings.getSizeTop() : textSettings.getSizeBottom()),5,5,null);
+                    textSettings,
+                    isTopText
+            ), 5, 5, null);
+        }
         graphics.drawImage(generateText(text,Color.WHITE,
-                top ? textSettings.getSizeTop() : textSettings.getSizeBottom()),0,0,null);
+                textSettings,
+                isTopText
+        ),0,0,null);
         return rect;
     }
 
 
-    private BufferedImage generateText(String text, Color color, int fontSize) throws FontNotFoundException {
+    private BufferedImage generateText(String text, Color color, TextSettings textSettings, boolean isTopText) throws FontNotFoundException {
 
         if (color.equals(Color.BLACK)){
             LOGGER.debug("Loading font {} for text {}", textSettings.getFont(), text);
@@ -63,7 +61,8 @@ public class TextService {
             LOGGER.debug("Loading font {} for text {}'s shadow", textSettings.getFont(), text);
         }
 
-        textFont = new TextFont(textSettings, fontSize);
+        var fontSize = isTopText ? textSettings.getSizeTop() : textSettings.getSizeBottom();
+        var textFont = new TextFont(textSettings, fontSize);
         BufferedImage rect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = rect.createGraphics();
 
@@ -97,14 +96,14 @@ public class TextService {
                 //outline
                 if (textSettings.getContour() > 0) {
                     LOGGER.debug("Drawing text {}'s contour", text);
-                    drawOutline(graphics, textData.text, x + offsetX, y);
+                    drawOutline(graphics, textSettings, textFont, textData.text, x + offsetX, y);
                 }
             }
             offsetX += textData.getWidth();
         }
 
         LOGGER.debug("Rotate text {}.", text);
-        return rotateText(rect);
+        return rotateText(rect, textSettings, isTopText);
     }
 
     private BufferedImage blurText(BufferedImage rect, String text, Graphics2D graphics, int x, int y){
@@ -123,11 +122,11 @@ public class TextService {
         return image;
     }
 
-    private BufferedImage rotateText(BufferedImage rect){
+    private BufferedImage rotateText(BufferedImage rect, TextSettings textSettings, boolean isTopText){
         BufferedImage finalRect = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
-        double rotationRequired = Math.toRadians (top ? textSettings.getAngleTop() : textSettings.getAngleBottom());
-        double locationX = finalRect.getWidth() / 2;
-        double locationY = finalRect.getHeight() / 2;
+        double rotationRequired = Math.toRadians (isTopText ? textSettings.getAngleTop() : textSettings.getAngleBottom());
+        double locationX = (double) finalRect.getWidth() / 2;
+        double locationY = (double) finalRect.getHeight() / 2;
         AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
         Graphics2D g2d = finalRect.createGraphics();
@@ -135,7 +134,7 @@ public class TextService {
         return finalRect;
     }
 
-    private void drawOutline(Graphics2D graphics, String text, int x, int y){
+    private void drawOutline(Graphics2D graphics, TextSettings textSettings, TextFont textFont, String text, int x, int y){
         GlyphVector gv = textFont.getSelectedFont().createGlyphVector(graphics.getFontRenderContext(), text);
         Shape shape = gv.getOutline();
         graphics.setColor(Color.black);
