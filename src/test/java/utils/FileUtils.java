@@ -107,6 +107,7 @@ public class FileUtils {
                 StandardCopyOption.REPLACE_EXISTING
         );
 
+        Files.deleteIfExists(backupTournamentPath.toPath());
         Files.deleteIfExists(backupTextPath.toPath());
     }
 

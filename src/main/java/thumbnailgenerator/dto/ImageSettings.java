@@ -5,11 +5,13 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import lombok.Getter;
 
+import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 
 @Getter
+@Setter
 public class ImageSettings {
     private final Logger LOGGER = LogManager.getLogger(ImageSettings.class);
 
@@ -19,14 +21,6 @@ public class ImageSettings {
     @Expose
     @SerializedName("fighters")
     private List<FighterImageThumbnailSettings> fighterImages;
-
-    public void setMirrorPlayer2(boolean mirrorPlayer2) {
-        this.mirrorPlayer2 = mirrorPlayer2;
-    }
-
-    public void setFighterImages(List<FighterImageThumbnailSettings> fighterImages) {
-        this.fighterImages = fighterImages;
-    }
 
     public FighterImageThumbnailSettings findFighterImageSettings(String fighterUrl)
             throws FighterImageSettingsNotFoundException {
