@@ -33,13 +33,13 @@ import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.FighterImageThumbnailSettings;
 import thumbnailgenerator.dto.FileThumbnailSettings;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Thumbnail;
-import thumbnailgenerator.dto.ThumbnailForeground;
 import thumbnailgenerator.dto.ThumbnailForegroundLogo;
 import thumbnailgenerator.dto.ThumbnailForegroundVersus;
 import thumbnailgenerator.dto.Tournament;
@@ -382,7 +382,7 @@ public class ThumbnailService {
         }
         var fighterImageThumbnailSettings = thumbnail.getImageSettings()
                 .findFighterImageSettings(fighter.getUrlName());
-        characterImage = editCharacterImageWithMask(characterImage, fighterImageThumbnailSettings, player);
+        characterImage = editCharacterImageWithMask(characterImage, fighterImageThumbnailSettings, fighter);
 
         LOGGER.info("Drawing player {}'s character: {}", port, fighter.getName());
         return characterImage;
@@ -440,14 +440,12 @@ public class ThumbnailService {
         return slot;
     }
 
-    public BufferedImage editCharacterImageWithMask(BufferedImage characterImage , FighterImageThumbnailSettings fighterImageThumbnailSettings, Player player) {
-        var isFlip = player.getFighter(0).isFlip() !=
-                fighterImageThumbnailSettings.isFlip();
+    public BufferedImage editCharacterImageWithMask(BufferedImage characterImage , FighterImageThumbnailSettings fighterImageThumbnailSettings, Fighter fighter) {
         try {
             var mask = ImageIO.read(new File("assets/masks/thumbnails/default.png"));
             var scaledImage = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
             var maskedImage = imageService.applyMask(scaledImage, mask, fighterImageThumbnailSettings.getOffset());
-            var flipImage = imageService.flipImage(maskedImage, isFlip);
+            var flipImage = imageService.flipImage(maskedImage, fighter.isFlip());
             return flipImage;
         } catch (IOException ex){
             LOGGER.error(ex);

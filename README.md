@@ -831,48 +831,55 @@ Thumbnails are saved in **/generated_top8** folder.
 
 ###Granblue Fantasy Versus: Rising URL names
 
-| Character     | URL Name           |
-|---------------|--------------------|
-| Gran          | gran               |
-| Djeeta        | djeeta             |
-| Katalina      | katalina           |
-| Charlotta     | charlotta          |
-| Lancelot      | lancelot           |
-| Percival      | percival           |
-| Ladiva        | ladiva             |
-| Metera        | metera             |
-| Lowain        | lowain             |
-| Ferry         | ferry              |
-| Zeta          | zeta               |
-| Vaseraga      | vaseraga           |
-| Narmaya       | narmaya            |
-| Soriz         | soriz              |
-| Zooey         | zooey              |
-| Cagliostro    | cagliostro         |
-| Yuel          | yuel               |
-| Anre          | anre               |
-| Eustace       | eustace            |
-| Seox          | seox               |
-| Vira          | vira               |
-| Beelzebub     | beelzebub          |
-| Belial        | belial             |
-| Avatar Belial | avatar_belial      |
-| Lunalu        | lunalu             |
-| Anila         | anila              |
-| Siegfried     | siegfried          |
-| Grimnir       | grimnir            |
-| Nier          | nier               |
-| Lucilius      | lucilius           |
-| 2B            | 2b                 |
-| Vane          | vane               |
-| Beatrix       | beatrix            |
-| Versusia      | versusia           |
-| Vikala        | vikala             |
-| Sandalphon    | sandalphon         |
-| Galleon       | galleon            |
+| Character     | URL Name      |
+|---------------|---------------|
+| Gran          | gran          |
+| Djeeta        | djeeta        |
+| Katalina      | katalina      |
+| Charlotta     | charlotta     |
+| Lancelot      | lancelot      |
+| Percival      | percival      |
+| Ladiva        | ladiva        |
+| Metera        | metera        |
+| Lowain        | lowain        |
+| Ferry         | ferry         |
+| Zeta          | zeta          |
+| Vaseraga      | vaseraga      |
+| Narmaya       | narmaya       |
+| Soriz         | soriz         |
+| Zooey         | zooey         |
+| Cagliostro    | cagliostro    |
+| Yuel          | yuel          |
+| Anre          | anre          |
+| Eustace       | eustace       |
+| Seox          | seox          |
+| Vira          | vira          |
+| Beelzebub     | beelzebub     |
+| Belial        | belial        |
+| Avatar Belial | avatar_belial |
+| Lunalu        | lunalu        |
+| Anila         | anila         |
+| Siegfried     | siegfried     |
+| Grimnir       | grimnir       |
+| Nier          | nier          |
+| Lucilius      | lucilius      |
+| 2B            | 2b            |
+| Vane          | vane          |
+| Beatrix       | beatrix       |
+| Versusia      | versusia      |
+| Vikala        | vikala        |
+| Sandalphon    | sandalphon    |
+| Galleon       | galleon       |
+| Wilnas        | wilnas        |
 
 
 ### Release Notes
+#### v4.4.1
+- Added Wilnas from GBFVR
+- Fixed issue where round was always written upper case during single thumbnail generation
+- Fixed issue where characters were not flip when character flip was set to true when using mirrorPlayer2.json
+- Fixed issue where thumbnail text would randomly use incorrect size during multi thumbnail generation
+
 #### v4.4.0
 - Added July 2025 DLC characters;
 - Provide a default setup of thumbnail foreground;

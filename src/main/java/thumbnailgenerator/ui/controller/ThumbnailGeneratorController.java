@@ -155,7 +155,7 @@ public class ThumbnailGeneratorController implements Initializable {
                 .game(getGame())
                 .imageSettings(imageSettings)
                 .locally(saveLocally.isSelected())
-                .round(round.getText().toUpperCase())
+                .round(round.getText())
                 .date(date.getText())
                 .players(
                         Thumbnail.createPlayerList(

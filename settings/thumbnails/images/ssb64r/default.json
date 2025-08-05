@@ -287,6 +287,14 @@
       "scale": 0.4,
       "flip": false
     },{
+      "fighter": "crash",
+      "offset": [
+        -140,
+        30
+      ],
+      "scale": 0.5,
+      "flip": false
+    },{
       "fighter": "dragon_king",
       "offset": [
         -130,
