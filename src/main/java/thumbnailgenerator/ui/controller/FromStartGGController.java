@@ -155,19 +155,19 @@ public class FromStartGGController implements Initializable {
             do{
                 switch (mode) {
                     case 0:
-                        query= QueryUtils.getSetsByEvent(
+                        query = QueryUtils.getSetsByEvent(
                             eventSelect.getSelectionModel().getSelectedItem().getId(), ++readPages);
                         mainBody = "event";
                         break;
 
                     case 1:
-                        query= QueryUtils.getSetsByPhase(
+                        query = QueryUtils.getSetsByPhase(
                             phaseSelect.getSelectionModel().getSelectedItem().getId(), ++readPages);
                         mainBody = "phase";
                         break;
 
                     case 2:
-                        query= QueryUtils.getSetsByPhaseGroup(
+                        query = QueryUtils.getSetsByPhaseGroup(
                             phaseGroupSelect.getSelectionModel().getSelectedItem().getId(), ++readPages);
                         mainBody = "phaseGroup";
                         break;
@@ -183,9 +183,17 @@ public class FromStartGGController implements Initializable {
                         .stream(selectedStream)
                         .gameId(selectedEvent.getVideoGameGG().getId())
                         .build();
-                result.append(startGGService
-                        .readSetsFromSmashGGPage(searchGamesGG, totalPages, isMultipleCharacters));
-            }while(readPages<totalPages);
+                var queryResponse = startGGService.queryStartGGForGames(searchGamesGG);
+                if(totalPages < 0) {
+                    totalPages = startGGService.getTotalPages(searchGamesGG, queryResponse);
+                    var tournamentData = startGGService.generateTournamentData(searchGamesGG);
+                    result.append(tournamentData);
+                }
+                var sets = startGGService
+                        .readSetsFromSmashGGPage(searchGamesGG, queryResponse, isMultipleCharacters);
+                result.append(sets);
+            } while(readPages<totalPages);
+
             foundSets.setText(result.toString());
             setDisableGeneration(false);
             LOGGER.info("Finished generating multiple thumbnails generation commands.");
@@ -193,6 +201,7 @@ public class FromStartGGController implements Initializable {
         }catch (ExecutionException | InterruptedException | NullPointerException e){
             LOGGER.error("An issue occurred when executing query");
             LOGGER.catching(e);
+
             AlertFactory.displayError("An issue occurred when executing query",
                     ExceptionUtils.getStackTrace(e));
             return;

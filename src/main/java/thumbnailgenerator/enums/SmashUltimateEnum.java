@@ -104,7 +104,7 @@ public enum SmashUltimateEnum implements CharacterEnum {
     RICHTER("Richter", "richter", 1412, 8),
     KEN("Ken", "ken", 1410, 8),
 
-    RANDOM("Random", "random", 1749, 2);
+    RANDOM("Random", "random", 1746, 2);
 
     private final String name;
     private final String code;
