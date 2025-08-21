@@ -35,7 +35,7 @@ public enum StreetFighter6Enum implements CharacterEnum {
     MAI("Mai", "mai", 2616, 1),
     ELENA("Elena", "elena", 2699, 1),
 
-    SAGAT("Sagat", "sagat", -1, 1);
+    SAGAT("Sagat", "sagat", 2745, 1);
 
     private final String name;
     private final String code;

@@ -21,7 +21,6 @@ import thumbnailgenerator.service.json.JSONReaderService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -67,50 +66,84 @@ public class StartGGService {
         return future.get();
     }
 
-    public String readSetsFromSmashGGPage(SearchGamesGG searchGamesGG, int totalPages, boolean isMultipleCharacters)
+    public JsonObject queryStartGGForGames(SearchGamesGG searchGamesGG)
             throws ExecutionException, InterruptedException {
-        var foundSets = new StringBuffer();
         LOGGER.debug("Running query -> {}", searchGamesGG.getQuery());
         JsonObject result = runQuery(searchGamesGG.getQuery());
         LOGGER.debug("Result -> {}", result.toString());
+        return result;
+    }
+
+    public int getTotalPages(SearchGamesGG searchGamesGG, JsonObject result){
+        return result.getAsJsonObject("data")
+                .getAsJsonObject(searchGamesGG.getSearchMode())
+                .getAsJsonObject("sets")
+                .getAsJsonObject("pageInfo")
+                .getAsJsonPrimitive("totalPages")
+                .getAsInt();
+    }
+
+    public String generateTournamentData(SearchGamesGG searchGamesGG) {
+        var tournamentData = new StringBuilder();
         eventGame = findGameByStartGGId(searchGamesGG.getGameId());
         var defaultArtType = gameEnumService.getDefaultArtType(eventGame).getEnumName();
-        if (totalPages < 0){
-            totalPages = result.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode()).getAsJsonObject("sets")
-                    .getAsJsonObject("pageInfo").getAsJsonPrimitive("totalPages").getAsInt();
-            foundSets.append(tournamentService.getSelectedTournament().getTournamentId()
-                    + ";" + eventGame +";" + searchGamesGG.getEventName() + ";" + defaultArtType + System.lineSeparator());
-        }
+
+        //Append first line of script regarding tournament data
+        tournamentData.append(tournamentService.getSelectedTournament().getTournamentId())
+                .append(";")
+                .append(eventGame)
+                .append(";")
+                .append(searchGamesGG.getEventName())
+                .append(";")
+                .append(defaultArtType)
+                .append(System.lineSeparator());
+
+        return tournamentData.toString();
+    }
+
+    public String readSetsFromSmashGGPage(SearchGamesGG searchGamesGG, JsonObject queryResponse, boolean isMultipleCharacters)
+            throws ExecutionException, InterruptedException {
+        var foundSets = new StringBuilder();
         SetGG set = (SetGG) jsonReaderService
-                .getJSONObject(result.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode())
+                .getJSONObject(queryResponse.getAsJsonObject("data").getAsJsonObject(searchGamesGG.getSearchMode())
                         .getAsJsonObject("sets").toString(), new TypeToken<SetGG>() {}.getType());
+
         set.getSetNodes().forEach(setNodeGG -> {
             if(setNodeGG.hasStream()) {
                 var setNode = setNodeGGToString(setNodeGG, isMultipleCharacters);
-                if(searchGamesGG.getStream() == null || searchGamesGG.getStream().isNull()) {
-                    LOGGER.debug("Found set -> {}", setNode);
-                    foundSets.append(setNode+System.lineSeparator());
-                } else {
-                    LOGGER.info("Filtering sets by stream {}.", searchGamesGG.getStream().getStreamName());
-                    if(searchGamesGG.getStream().getStreamName().equals(setNodeGG.getStreamName())){
-                        LOGGER.debug("Found set -> {}", setNode);
-                        foundSets.append(setNode+System.lineSeparator());
+                if(searchGamesGG.getStream() != null
+                        && !searchGamesGG.getStream().isNull()) {
+                    if (searchGamesGG.getStream().getStreamName().equals(setNodeGG.getStreamName())){
+                        LOGGER.info("Filtering sets by stream {}.", searchGamesGG.getStream().getStreamName());
+                        appendSet(setNode, foundSets);
                     }
+                } else {
+                    appendSet(setNode, foundSets);
                 }
             }
         });
         return foundSets.toString();
     }
 
+    private void appendSet(String setNode, StringBuilder foundSets){
+        LOGGER.debug("Found set -> {}", setNode);
+        foundSets.append(setNode);
+        foundSets.append(System.lineSeparator());
+    }
+
     private Game findGameByStartGGId(int startGGId) {
         return Arrays.stream(Game.values())
                 .filter(g -> g.getStartGGId() == startGGId)
                 .findFirst()
-                .get();
+                .orElse(null);
     }
 
     public String getMostUsedCharacter(List<GameGG> games, String entrantName, boolean isMultipleCharacters){
         HashMap<Integer,Integer> charSel = new HashMap<>();
+        String defaultCharacterCode = "random";
+        if (games == null) {
+            return defaultCharacterCode;
+        }
         for (GameGG gameGG :games) {
             if (gameGG != null && gameGG.getSelections() != null) {
                 for (SelectionGG selectionGG : gameGG.getSelections()) {
@@ -127,7 +160,7 @@ public class StartGGService {
             }
         }
         if (charSel.isEmpty()) {
-            return "random";
+            return defaultCharacterCode;
         }
         List<Map.Entry<Integer, Integer>> sortedEntries = new ArrayList<>(charSel.entrySet());
         sortedEntries.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
@@ -147,23 +180,15 @@ public class StartGGService {
         String player1NoTeam = setNodeGG.getEntrateNameWithNoTeam(player1);
         String player2NoTeam = setNodeGG.getEntrateNameWithNoTeam(player2);
 
-        String characters1;
-        String characters2;
+        String player1Characters = getMostUsedCharacter(games, player1, isMultipleCharacters);
+        String player2Characters = getMostUsedCharacter(games, player2, isMultipleCharacters);
 
-        if (games == null){
-            characters1 = "random";
-            characters2 = "random";
-        }else{
-            characters1 = getMostUsedCharacter(games, player1, isMultipleCharacters);
-            characters2 = getMostUsedCharacter(games, player2, isMultipleCharacters);
-        }
-
-        String alt1 = characters1.contains(",") ? "1,1" : "1";
-        String alt2 = characters2.contains(",") ? "1,1" : "1";
+        String player1Alts = player1Characters.contains(",") ? "1,1" : "1";
+        String player2Alts = player2Characters.contains(",") ? "1,1" : "1";
 
         return player1NoTeam + ";" + player2NoTeam + ";"
-                + characters1 + ";" + characters2 + ";"
-                + alt1 + ";" + alt2 + ";"
+                + player1Characters + ";" + player2Characters + ";"
+                + player1Alts + ";" + player2Alts + ";"
                 + roundName;
     }
 
@@ -172,6 +197,12 @@ public class StartGGService {
         if (mostUsedCharacter == 628) {
             return SmashMeleeEnum.SHEIK.getCode();
         }
-        return gameEnumService.findCharacterCodeByStartGGId(eventGame, mostUsedCharacter);
+        var result = gameEnumService.findCharacterCodeByStartGGId(eventGame, mostUsedCharacter);
+        if (result == null) {
+            LOGGER.warn("Start.gg character id " + mostUsedCharacter
+                    + " is unknown for " + eventGame.getName());
+            return "random";
+        }
+        return result;
     }
 }
