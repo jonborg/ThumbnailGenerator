@@ -423,7 +423,6 @@ Additional Notes:
  - Start.gg does not provide info on used alts and some tournaments may not even provide used characters (ex.: offline tournaments);
  - Alts are set to the default alt and characters, when missing, are set to random;
  - If no commands are printed, it means that the program could not find a set with a stream assigned;
- - Start.GG generations does **not** work for **Granblue Rising**, as Start.GG does not have character data for said game...
  - For Smash 64 Remix, Start.GG generations only recognizes Smash 64's 12 original characters only;
  - Could not validate how to generate thumbnails for Doubles matches, as I could not find any Doubles Bracket with characters reported.
 
