@@ -272,10 +272,10 @@
     },{
       "fighter": "lucy",
       "offset": [
-        0,
-        0
+        -150,
+        -300
       ],
-      "scale": 1.5,
+      "scale": 1,
       "flip": false
     },
     {

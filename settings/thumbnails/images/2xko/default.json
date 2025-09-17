@@ -1,11 +1,11 @@
 {
-  "mirrorPlayer2": false,
+  "mirrorPlayer2": true,
   "fighters": [
     {
       "fighter": "ahri",
       "offset": [
-        -328,
-        20
+        -420,
+        50
       ],
       "scale": 0.45,
       "flip": false
@@ -13,64 +13,73 @@
     {
       "fighter": "yasuo",
       "offset": [
-        -318,
-        -50
+        -750,
+        -100
       ],
-      "scale": 0.3,
+      "scale": 0.5,
       "flip": false
     },
     {
       "fighter": "darius",
       "offset": [
-        -383,
-        -450
+        -1110,
+        -100
       ],
-      "scale": 0.55,
+      "scale": 0.5,
       "flip": false
     },
     {
       "fighter": "ekko",
       "offset": [
-        -383,
-        -250
+        -450,
+        -30
       ],
-      "scale": 0.6,
+      "scale": 0.4,
       "flip": false
     },
     {
       "fighter": "illaoi",
       "offset": [
-        -345,
-        -50
+        -400,
+        -100
       ],
-      "scale": 0.65,
+      "scale": 0.35,
       "flip": false
     },
     {
       "fighter": "braum",
       "offset": [
-        -609,
+        -900,
         -100
       ],
-      "scale": 0.8,
+      "scale": 0.45,
       "flip": false
     },
     {
       "fighter": "jinx",
       "offset": [
-        -571,
-        -100
+        -350,
+        -200
       ],
-      "scale": 0.9,
+      "scale": 0.45,
       "flip": false
     },
     {
       "fighter": "vi",
       "offset": [
-        -562,
-        -330
+        -430,
+        70
       ],
-      "scale": 0.8,
+      "scale": 0.4,
+      "flip": false
+    },
+    {
+      "fighter": "blitzcrank",
+      "offset": [
+        -750,
+        100
+      ],
+      "scale": 0.5,
       "flip": false
     }
   ]

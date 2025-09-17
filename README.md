@@ -873,16 +873,17 @@ Thumbnails are saved in **/generated_top8** folder.
 
 ###2XKO
 
-| Character | URL Name |
-|-----------|----------|
-| Ahri      | ahri     |
-| Yasuo     | yasuo    |
-| Darius    | darius   |
-| Ekko      | ekko     |
-| Illaoi    | illaoi   |
-| Braum     | braum    |
-| Jinx      | jinx     |
-| Vi        | vi       |
+| Character  | URL Name   |
+|------------|------------|
+| Ahri       | ahri       |
+| Yasuo      | yasuo      |
+| Darius     | darius     |
+| Ekko       | ekko       |
+| Illaoi     | illaoi     |
+| Braum      | braum      |
+| Jinx       | jinx       |
+| Vi         | vi         |
+| Blitzcrank | blitzcrank |
 
 
 ### Release Notes

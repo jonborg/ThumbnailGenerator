@@ -272,7 +272,7 @@
       {
         "game": "TWOXKO",
         "foreground": {
-          "foregroundImage": "",
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
           "colors": {
             "secondary": "#337733FF",
             "primary": "#333333FF"
@@ -288,7 +288,7 @@
             "verticalOffset": 0,
             "aboveForeground": false
           },
-          "customForeground": false
+          "customForeground": true
         },
         "background": "assets/tournaments/backgrounds/thumbnail/default.png",
         "artSettings": [
