@@ -1,0 +1,77 @@
+{
+  "mirrorPlayer2": false,
+  "fighters": [
+    {
+      "fighter": "ahri",
+      "offset": [
+        -328,
+        20
+      ],
+      "scale": 0.45,
+      "flip": false
+    },
+    {
+      "fighter": "yasuo",
+      "offset": [
+        -318,
+        -50
+      ],
+      "scale": 0.3,
+      "flip": false
+    },
+    {
+      "fighter": "darius",
+      "offset": [
+        -383,
+        -450
+      ],
+      "scale": 0.55,
+      "flip": false
+    },
+    {
+      "fighter": "ekko",
+      "offset": [
+        -383,
+        -250
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+    {
+      "fighter": "illaoi",
+      "offset": [
+        -345,
+        -50
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "braum",
+      "offset": [
+        -609,
+        -100
+      ],
+      "scale": 0.8,
+      "flip": false
+    },
+    {
+      "fighter": "jinx",
+      "offset": [
+        -571,
+        -100
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "vi",
+      "offset": [
+        -562,
+        -330
+      ],
+      "scale": 0.8,
+      "flip": false
+    }
+  ]
+}

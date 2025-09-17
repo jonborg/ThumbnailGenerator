@@ -24,10 +24,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import thumbnailgenerator.JavaFxApplication;
-import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
+import thumbnailgenerator.enums.games.ssbu.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.ui.textfield.ChosenImageField;
 import thumbnailgenerator.ui.textfield.ChosenJsonField;
-import utils.WaitUtils;
 
 import java.io.IOException;
 

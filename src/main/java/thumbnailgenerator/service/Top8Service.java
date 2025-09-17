@@ -29,6 +29,8 @@ import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Top8ImageSettings;
 import thumbnailgenerator.dto.FullSlot;
 import thumbnailgenerator.dto.Top8;
+import thumbnailgenerator.service.games.GameEnumService;
+import thumbnailgenerator.service.games.SmashUltimateCharacterService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.utils.image.ImageUtils;
 import thumbnailgenerator.service.json.JSONReaderService;
@@ -42,7 +44,8 @@ public class Top8Service {
     private @Autowired ImageService imageService;
     private @Autowired TournamentService tournamentService;
     private @Autowired Top8FileService top8FileService;
-    private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
+    private @Autowired SmashUltimateCharacterService
+            smashUltimateCharacterService;
     private @Autowired JSONReaderService jsonReaderService;
     private @Value("${top8.path.save}") String saveTop8Path;
 

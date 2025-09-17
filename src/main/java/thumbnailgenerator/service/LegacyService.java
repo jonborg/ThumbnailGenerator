@@ -14,6 +14,8 @@ import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.enums.LoadingType;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
+import thumbnailgenerator.service.games.GameEnumService;
+import thumbnailgenerator.service.games.SmashUltimateCharacterService;
 import thumbnailgenerator.service.json.JSONReaderService;
 import thumbnailgenerator.service.json.JSONWriterService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;

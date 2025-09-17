@@ -1,7 +1,6 @@
 package thumbnailgenerator.ui.controller;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +26,10 @@ import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
-import thumbnailgenerator.service.GameEnumService;
+import thumbnailgenerator.service.games.GameEnumService;
 import thumbnailgenerator.service.Top8Service;
 import thumbnailgenerator.ui.composite.CharacterSelect;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
-
-import javax.imageio.ImageIO;
 
 @Component
 @Scope("prototype")

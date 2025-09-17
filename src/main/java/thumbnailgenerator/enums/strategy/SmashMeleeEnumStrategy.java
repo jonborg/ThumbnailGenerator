@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.enums.SmashMeleeEnum;
-import thumbnailgenerator.enums.SmashMeleeFighterArtTypeEnum;
+import thumbnailgenerator.enums.games.ssbm.SmashMeleeEnum;
+import thumbnailgenerator.enums.games.ssbm.SmashMeleeFighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.CharacterEnum;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.GameEnumStrategy;
-import thumbnailgenerator.service.CharacterImageFetcher;
-import thumbnailgenerator.service.SmashMeleeCharacterImageFetcher;
+import thumbnailgenerator.service.games.CharacterImageFetcher;
+import thumbnailgenerator.service.games.SmashMeleeCharacterImageFetcher;
 
 @Component
 public class SmashMeleeEnumStrategy implements GameEnumStrategy {

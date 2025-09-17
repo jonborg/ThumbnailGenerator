@@ -1,6 +1,5 @@
 package thumbnailgenerator.service;
 
-import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -18,6 +17,7 @@ import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.dto.factory.TournamentFactory;
 import thumbnailgenerator.dto.json.read.TournamentRead;
+import thumbnailgenerator.service.games.GameEnumService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.service.json.JSONReaderService;
 import thumbnailgenerator.service.json.JSONWriterService;

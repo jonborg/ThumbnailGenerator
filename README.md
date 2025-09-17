@@ -871,9 +871,22 @@ Thumbnails are saved in **/generated_top8** folder.
 | Galleon       | galleon       |
 | Wilnas        | wilnas        |
 
+###2XKO
+
+| Character | URL Name |
+|-----------|----------|
+| Ahri      | ahri     |
+| Yasuo     | yasuo    |
+| Darius    | darius   |
+| Ekko      | ekko     |
+| Illaoi    | illaoi   |
+| Braum     | braum    |
+| Jinx      | jinx     |
+| Vi        | vi       |
+
 
 ### Release Notes
-#### v4.4.1
+#### v4.4.1`
 - Added Wilnas from GBFVR
 - Fixed issue where round was always written upper case during single thumbnail generation
 - Fixed issue where characters were not flip when character flip was set to true when using mirrorPlayer2.json
@@ -884,7 +897,7 @@ Thumbnails are saved in **/generated_top8** folder.
 - Provide a default setup of thumbnail foreground;
 - Provide custom color setup to default thumbnail foreground;
 - Provide custom logo setup to default thumbnail foreground.
-
+`
 #### v4.3.0
 - Added Smash 64 Remix as selectable games;
 - Added Elena from Street Fighter 6;

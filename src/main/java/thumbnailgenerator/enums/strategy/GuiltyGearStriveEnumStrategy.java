@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.enums.GuiltyGearStriveEnum;
-import thumbnailgenerator.enums.GuiltyGearStriveFighterArtTypeEnum;
+import thumbnailgenerator.enums.games.ggst.GuiltyGearStriveEnum;
+import thumbnailgenerator.enums.games.ggst.GuiltyGearStriveFighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.CharacterEnum;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.GameEnumStrategy;
-import thumbnailgenerator.service.CharacterImageFetcher;
-import thumbnailgenerator.service.GuiltyGearStriveCharacterImageFetcher;
+import thumbnailgenerator.service.games.CharacterImageFetcher;
+import thumbnailgenerator.service.games.GuiltyGearStriveCharacterImageFetcher;
 
 @Component
 public class GuiltyGearStriveEnumStrategy implements GameEnumStrategy {

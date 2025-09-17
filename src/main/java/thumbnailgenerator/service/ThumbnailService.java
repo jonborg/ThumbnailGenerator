@@ -50,6 +50,9 @@ import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
 import thumbnailgenerator.exception.ThumbnailFromFileException;
+import thumbnailgenerator.service.games.CharacterImageFetcher;
+import thumbnailgenerator.service.games.GameEnumService;
+import thumbnailgenerator.service.games.SmashUltimateCharacterService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.service.json.JSONReaderService;
 import thumbnailgenerator.ui.loading.LoadingState;
@@ -62,7 +65,8 @@ public class ThumbnailService {
     private @Autowired ImageService imageService;
     private @Autowired TournamentService tournamentService;
     private @Autowired ThumbnailFileService thumbnailFileService;
-    private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
+    private @Autowired SmashUltimateCharacterService
+            smashUltimateCharacterService;
     private @Autowired JSONReaderService jsonReaderService;
     private @Autowired GameEnumService gameEnumService;
     private @Autowired ExecutorService executorService;

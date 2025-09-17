@@ -1,11 +1,7 @@
 package thumbnailgenerator.utils.converter;
 
 import javafx.util.StringConverter;
-import thumbnailgenerator.enums.FatalFuryCotwFighterArtTypeEnum;
-import thumbnailgenerator.enums.RivalsOfAether2FighterArtTypeEnum;
-import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
-import thumbnailgenerator.enums.StreetFighter6FighterArtTypeEnum;
-import thumbnailgenerator.enums.Tekken8FighterArtTypeEnum;
+import thumbnailgenerator.enums.games.ssbu.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 
 public class FighterArtTypeConverter extends StringConverter<FighterArtTypeEnum> {

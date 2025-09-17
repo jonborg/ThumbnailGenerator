@@ -13,7 +13,7 @@ import thumbnailgenerator.dto.json.read.FighterArtSettingsRead;
 import thumbnailgenerator.dto.json.read.FileThumbnailSettingsRead;
 import thumbnailgenerator.dto.json.read.FileTop8SettingsRead;
 import thumbnailgenerator.dto.json.read.TournamentRead;
-import thumbnailgenerator.service.GameEnumService;
+import thumbnailgenerator.service.games.GameEnumService;
 
 import java.util.List;
 import java.util.stream.Collectors;
