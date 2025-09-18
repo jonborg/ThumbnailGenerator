@@ -43,7 +43,7 @@ If you created a tournament in a previous version, you can try to do one of the 
 
 ## Tournament Settings
 ### Creating tournaments 
-Tournament settings are save on the following file:
+Tournament settings are saved on the following file:
 
 	settings/tournaments/tournaments.json
 
@@ -81,7 +81,7 @@ When adding new foregrounds, backgrounds and logos, make sure they have the foll
 Regarding top 8 generation, the following settings can be provided for each fighting game:
  - **Foreground** - Directory of foreground image to place on thumbnail;
  - **Background** - Directory of background image to place on thumbnail;
- - **Slot Settings File** - Json file where you what region on top 8 file, character iamges will be placed and how they are placed.
+ - **Slot Settings File** - Json file where you what region on top 8 file, character images will be placed and how they are placed.
  - **Fighter Image Settings File** - Json file with offsets of character's images inside each slot. Can provide one file for "Renders" art and another for "Mural" art (SSBU only).
 
 There is also a **Preview** option that allow users to preview thumbnail generation with current settings.
@@ -98,7 +98,7 @@ A dialog box will appear to confirm whether this deletion is intentional.
 
 ## Character images
 ### Image download
-All character images are downloaded from a [Github repository](https://www.smashbros.com/en_US/fighter/index.html), that I created.
+All character images are downloaded from a [GitHub repository](https://www.smashbros.com/en_US/fighter/index.html), that I created.
 Images were gathered thanks to:
 - [Smash Ultimate official website](https://www.smashbros.com/en_US/fighter/index.html)
 - [Melee HD Asset Library](https://assets.melee.tv/post/651913361021353984/definitive-melee-hd-texture-pack-for-dolphin-and)
@@ -111,6 +111,7 @@ Images were gathered thanks to:
 - [GBFVR fan press kit](https://rising.granbluefantasy.jp/en/extras/fankit/)
 - [smash-ultimate-assets](https://github.com/marcrd/smash-ultimate-assets) repository
 - [MuralAltDrive's](https://x.com/MuralAltDrive) Smash Ultimate Mural art [Google Drive](https://drive.google.com/drive/folders/1n4lAP6YB7N-bSSgEDx0OPEI2ykOKSQrM)
+- 2XKO Community Asset Kit found on [2XKO Community Competitive Guidelines page](https://2xko.riotgames.com/en-us/news/announcements/2xko-community-competition-guidelines/)
 
 As an option, Thumbnail Generator can save those downloaded images to use them for future uses without requiring access to the website. 
 Images are stored in the following folder:
@@ -220,8 +221,8 @@ Here is part of a slot settings file:
     - **coordinate_x** - x coordinate where top left corner of mask image is placed
     - **coordinate_y** - y coordinate where top left corner of mask image is placed
     - **shadow** - you can define a shadow effect on character image. Provide colour in RGB hexadecimal and its offset to character image
-    - **additionalFightersPosition_x** - x coordinate equation for additional characters, using stock icons. **i** is the variable and it can only be a natural number, starting at 0 
-    - **additionalFightersPosition_y** - y coordinate equation for additional characters, using stock icons. **i** is the variable and it can only be a natural number, starting at 0 
+    - **additionalFightersPosition_x** - x coordinate equation for additional characters, using stock icons. **i** is the variable, and it can only be a natural number, starting at 0 
+    - **additionalFightersPosition_y** - y coordinate equation for additional characters, using stock icons. **i** is the variable, and it can only be a natural number, starting at 0 
 
 Example files can be found in the following directories:
 
@@ -305,6 +306,7 @@ The available games are the following:
 - Guilty Gear: Strive
 - Fatal Fury: City of the Wolves
 - Granblue Fantasy Versus: Rising
+- 2XKO
 
 It is also mandatory to provide characters and their colours.
 When selecting a character from the dropdown, an icon will appear
@@ -313,13 +315,13 @@ Its colour also changes when selecting a different alt.
 
 Users can add a second character per player by clicking on "+" button.
 Doing so, makes button change to "-" and makes second character mandatory for thumbnail generation.
-Clicking on "-" removes second character and makes it non mandatory for thumbnail generation.
+Clicking on "-" removes second character and makes it non-mandatory for thumbnail generation.
 
 To have a better look at the selected alt, the icon can be clicked
 to show a fighter image that will appear on the thumbnail (character and alt).
 
 If the user has the respective fighter and alt saved on folder
-**"assets/characters/**, the program will open this images locally.
+**"assets/characters/"**, the program will open this images locally.
 Otherwise, it will open image's location online
 
 Text fields like players' names, round and date/event are not mandatory for thumbnail generation.
@@ -344,7 +346,7 @@ this thumbnail uses mask images to split player's characters. These masks are in
 
     assets\masks\thumbnails\
 
-Said mask images can be change, removed or renamed by users to provide different looks to thumbnail.
+Said mask images can be changed, removed or renamed by users to provide different looks to thumbnail.
 Below is same thumbnail generated without said masks:
 
 ![tg_thumbnail_double_character_no_mask_example.png](./assets/documentation/tg_thumbnail_double_character_no_mask_example.png)
@@ -367,19 +369,19 @@ Below is an example of a file to be used:
 The first line has common data between thumbnails, separated by **;**:
 
  1. **Tournament Diminutive** - tournament id, provided by user, during tournament settings creation;
- 2. **Date/Event** - text that will be placed around bottom right corner of thumbnail. Usually date or event of the set. It is not case sensitive;
+ 2. **Date/Event** - text that will be placed around bottom right corner of thumbnail. Usually date or event of the set. It is not case-sensitive;
  3. **Game** - code name of the fighting game for which you want to create a tournament VOD thumbnail. It is not case sensitive (ssbu, roa2, sf6, tekken8)
- 4. **Character art** - character art to be placed in thumbnails. It is not case sensitive (render, mural).
+ 4. **Character art** - character art to be placed in thumbnails. It is not case-sensitive (render, mural).
 
 Each following lines represents a thumbnail and has unique data for that thumbnail, also separated by **;**:
 
- 1. **Player 1 name** - thumbnail's left side player's name. It is not case sensitive;
- 2. **Player 2 name** - thumbnail's right side player's name. It is not case sensitive; 
+ 1. **Player 1 name** - thumbnail's left side player's name. It is not case-sensitive;
+ 2. **Player 2 name** - thumbnail's right side player's name. It is not case-sensitive; 
  3. **Player 1 character** - thumbnail's left side player's character url name;
  4. **Player 2 character** - thumbnail's right side player's character url name;
  5. **Player 1 character alt** - thumbnail's left side player's character alt number;
  6. **Player 2 character alt** - thumbnail's right side player's character alt number;
- 7. **Round** - text that will be placed around bottom left corner of thumbnail. Usually round name. It is not case sensitive.
+ 7. **Round** - text that will be placed around bottom left corner of thumbnail. Usually round name. It is not case-sensitive.
 
 Flip data is not provided, as it is automated by settings created in respective fighter image settings file
 To add more than one character per player, put first character code name, put a comma after first character name, then add second character name;
@@ -423,14 +425,13 @@ Additional Notes:
  - Start.gg does not provide info on used alts and some tournaments may not even provide used characters (ex.: offline tournaments);
  - Alts are set to the default alt and characters, when missing, are set to random;
  - If no commands are printed, it means that the program could not find a set with a stream assigned;
- - Start.GG generations does **not** work for **Granblue Rising**, as Start.GG does not have character data for said game...
  - For Smash 64 Remix, Start.GG generations only recognizes Smash 64's 12 original characters only;
  - Could not validate how to generate thumbnails for Doubles matches, as I could not find any Doubles Bracket with characters reported.
 
 ## Top 8 generation 
 ### Start Top 8 generation
 The program can allow users to **program** their top 8 generator.
-It is not recommended to use said feature alone, as Smash Ultimate has more that 80 characters and each character will require 8 different settings for scaling, offset and flip.
+It is not recommended to use said feature alone, as Smash Ultimate has more than 80 characters and each character will require 8 different settings for scaling, offset and flip.
 
 Top 8 can only be generated by a file 
 Assuming that settings are correctly configured, top 8 generation is started by selecting **File** -> **Generate Top 8 from file**.
@@ -467,7 +468,7 @@ If a background image is provided, it will be printed on empty image.
 The same goes for foreground image, but is placed at the end of process, just before saving image.
 
 In between these processes, each slot is printed in image, with its characters.
-Each slot has a mask associated with it and it is loaded first.
+Each slot has a mask associated with it, and it is loaded before loading image into it.
 
 The idea of the mask is to crop the original image. Think as if we are putting character image in said slot.
 To note that any colour background on the mask will be ignored so taht it does not collide with any background and foreground elements.
@@ -872,25 +873,44 @@ Thumbnails are saved in **/generated_top8** folder.
 | Galleon       | galleon       |
 | Wilnas        | wilnas        |
 
+###2XKO
+
+| Character  | URL Name   |
+|------------|------------|
+| Ahri       | ahri       |
+| Yasuo      | yasuo      |
+| Darius     | darius     |
+| Ekko       | ekko       |
+| Illaoi     | illaoi     |
+| Braum      | braum      |
+| Jinx       | jinx       |
+| Vi         | vi         |
+| Blitzcrank | blitzcrank |
+
 
 ### Release Notes
+#### v4.5.0
+- Added 2XKO as a selectable game;
+- Added Start.GG generation for GBFVR;
+- Fixed issue with Start.GG generation where not all sets were being analysed.
+
 #### v4.4.1
-- Added Wilnas from GBFVR
-- Fixed issue where round was always written upper case during single thumbnail generation
-- Fixed issue where characters were not flip when character flip was set to true when using mirrorPlayer2.json
-- Fixed issue where thumbnail text would randomly use incorrect size during multi thumbnail generation
+- Added Wilnas from GBFVR;
+- Fixed issue where round was always written upper case during single thumbnail generation;
+- Fixed issue where characters were not flip when character flip was set to true when using mirrorPlayer2.json;
+- Fixed issue where thumbnail text would randomly use incorrect size during multi thumbnail generation.
 
 #### v4.4.0
 - Added July 2025 DLC characters;
 - Provide a default setup of thumbnail foreground;
 - Provide custom color setup to default thumbnail foreground;
 - Provide custom logo setup to default thumbnail foreground.
-
+`
 #### v4.3.0
 - Added Smash 64 Remix as selectable games;
 - Added Elena from Street Fighter 6;
 - Added Unika from Guilty Gear: Strive;
-- Added Galleon from Grandbule Fantasy Versus: Rising;
+- Added Galleon from Granblue Fantasy Versus: Rising;
 - Allow thumbnail generation of up to 2 characters per player;
 - Adjusted thumbnails' character positioning process to use masks;
 - Added Legacy menu, to allow users to convert their custom character positioning in thumbnails.

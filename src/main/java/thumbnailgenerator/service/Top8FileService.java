@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Top8;
-import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
+import thumbnailgenerator.enums.games.ssbu.SmashUltimateFighterArtTypeEnum;
 
 
 @Service

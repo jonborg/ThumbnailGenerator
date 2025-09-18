@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.enums.Tekken8Enum;
-import thumbnailgenerator.enums.Tekken8FighterArtTypeEnum;
+import thumbnailgenerator.enums.games.tekken8.Tekken8Enum;
+import thumbnailgenerator.enums.games.tekken8.Tekken8FighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.CharacterEnum;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.GameEnumStrategy;
-import thumbnailgenerator.service.CharacterImageFetcher;
-import thumbnailgenerator.service.Tekken8CharacterImageFetcher;
+import thumbnailgenerator.service.games.CharacterImageFetcher;
+import thumbnailgenerator.service.games.Tekken8CharacterImageFetcher;
 
 @Component
 public class Tekken8EnumStrategy implements GameEnumStrategy {

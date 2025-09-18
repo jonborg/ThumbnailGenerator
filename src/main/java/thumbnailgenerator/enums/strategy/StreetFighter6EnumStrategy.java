@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.enums.StreetFighter6Enum;
-import thumbnailgenerator.enums.StreetFighter6FighterArtTypeEnum;
+import thumbnailgenerator.enums.games.sf6.StreetFighter6Enum;
+import thumbnailgenerator.enums.games.sf6.StreetFighter6FighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.CharacterEnum;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.GameEnumStrategy;
-import thumbnailgenerator.service.CharacterImageFetcher;
-import thumbnailgenerator.service.StreetFighter6CharacterImageFetcher;
+import thumbnailgenerator.service.games.CharacterImageFetcher;
+import thumbnailgenerator.service.games.StreetFighter6CharacterImageFetcher;
 
 @Component
 public class StreetFighter6EnumStrategy implements GameEnumStrategy {

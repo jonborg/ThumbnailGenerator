@@ -52,7 +52,7 @@ import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.exception.FontNotFoundException;
 import thumbnailgenerator.exception.LocalImageNotFoundException;
 import thumbnailgenerator.exception.OnlineImageNotFoundException;
-import thumbnailgenerator.service.GameEnumService;
+import thumbnailgenerator.service.games.GameEnumService;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.utils.converter.GameConverter;
 import thumbnailgenerator.utils.converter.FighterArtTypeConverter;

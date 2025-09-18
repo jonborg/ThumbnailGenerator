@@ -12,7 +12,8 @@ public enum Game {
     TEKKEN8("tekken8", "Tekken 8", 49783),
     GGST("ggst", "Guilty Gear: Strive", 33945),
     FFCOTW("ffcotw", "Fatal Fury CotW", 73221),
-    GBFVR("gbfvr", "Granblue Fantasy Versus: Rising", 48548);
+    GBFVR("gbfvr", "Granblue Fantasy Versus: Rising", 48548),
+    TWOXKO("2xko", "2XKO", 64423);
 
     private String code;
     private String name;

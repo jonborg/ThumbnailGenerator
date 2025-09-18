@@ -8,11 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import thumbnailgenerator.enums.FatalFuryCotwEnum;
-import thumbnailgenerator.enums.RivalsOfAether2Enum;
-import thumbnailgenerator.enums.SmashUltimateEnum;
-import thumbnailgenerator.enums.StreetFighter6Enum;
-import thumbnailgenerator.enums.Tekken8Enum;
 import thumbnailgenerator.enums.interfaces.CharacterEnum;
 
 

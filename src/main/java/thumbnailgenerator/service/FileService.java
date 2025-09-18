@@ -18,6 +18,7 @@ import thumbnailgenerator.dto.GeneratedGraphic;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
+import thumbnailgenerator.service.games.GameEnumService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
 @Service

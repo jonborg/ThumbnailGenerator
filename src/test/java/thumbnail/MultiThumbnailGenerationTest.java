@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import thumbnailgenerator.Main;
 import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.enums.LoadingType;
-import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
+import thumbnailgenerator.enums.games.ssbu.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
 import thumbnailgenerator.service.ThumbnailService;
 import thumbnailgenerator.service.TournamentService;

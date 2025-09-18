@@ -6,14 +6,11 @@ import dto.PlayerInput;
 import dto.ThumbnailInput;
 import enums.ButtonId;
 import enums.CheckBoxId;
-import enums.ComboBoxId;
-import enums.SpinnerId;
-import enums.TextFieldId;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import thumbnailgenerator.Main;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.enums.SmashUltimateFighterArtTypeEnum;
+import thumbnailgenerator.enums.games.ssbu.SmashUltimateFighterArtTypeEnum;
 import utils.FileUtils;
 import utils.WaitUtils;
 
