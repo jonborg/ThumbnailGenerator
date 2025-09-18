@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.enums.Smash64RemixEnum;
-import thumbnailgenerator.enums.Smash64RemixFighterArtTypeEnum;
+import thumbnailgenerator.enums.games.ssb64r.Smash64RemixEnum;
+import thumbnailgenerator.enums.games.ssb64r.Smash64RemixFighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.CharacterEnum;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.GameEnumStrategy;
-import thumbnailgenerator.service.CharacterImageFetcher;
-import thumbnailgenerator.service.Smash64RemixCharacterImageFetcher;
+import thumbnailgenerator.service.games.CharacterImageFetcher;
+import thumbnailgenerator.service.games.Smash64RemixCharacterImageFetcher;
 
 @Component
 public class Smash64RemixEnumStrategy implements GameEnumStrategy {

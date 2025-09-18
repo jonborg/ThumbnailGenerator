@@ -1,7 +1,7 @@
 package thumbnailgenerator.enums.interfaces;
 
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.service.CharacterImageFetcher;
+import thumbnailgenerator.service.games.CharacterImageFetcher;
 
 public interface GameEnumStrategy {
     Game getGame();

@@ -4,16 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import thumbnailgenerator.dto.Game;
-import thumbnailgenerator.enums.FatalFuryCotwEnum;
-import thumbnailgenerator.enums.FatalFuryCotwFighterArtTypeEnum;
-import thumbnailgenerator.enums.Tekken8Enum;
-import thumbnailgenerator.enums.Tekken8FighterArtTypeEnum;
+import thumbnailgenerator.enums.games.ffcotw.FatalFuryCotwEnum;
+import thumbnailgenerator.enums.games.ffcotw.FatalFuryCotwFighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.CharacterEnum;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.GameEnumStrategy;
-import thumbnailgenerator.service.CharacterImageFetcher;
-import thumbnailgenerator.service.FatalFuryCotwCharacterImageFetcher;
-import thumbnailgenerator.service.Tekken8CharacterImageFetcher;
+import thumbnailgenerator.service.games.CharacterImageFetcher;
+import thumbnailgenerator.service.games.FatalFuryCotwCharacterImageFetcher;
 
 @Component
 public class FatalFuryCotwEnumStrategy implements GameEnumStrategy {

@@ -15,7 +15,8 @@ import thumbnailgenerator.dto.startgg.match.SelectionGG;
 import thumbnailgenerator.dto.startgg.match.SetGG;
 import thumbnailgenerator.dto.startgg.match.SetNodeGG;
 import thumbnailgenerator.dto.startgg.search.SearchGamesGG;
-import thumbnailgenerator.enums.SmashMeleeEnum;
+import thumbnailgenerator.enums.games.ssbm.SmashMeleeEnum;
+import thumbnailgenerator.service.games.GameEnumService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.service.json.JSONReaderService;
 

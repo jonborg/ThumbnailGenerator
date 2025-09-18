@@ -18,13 +18,15 @@ import thumbnailgenerator.dto.Player;
 import thumbnailgenerator.dto.Round;
 import thumbnailgenerator.dto.Thumbnail;
 import thumbnailgenerator.exception.FighterImageSettingsNotFoundException;
+import thumbnailgenerator.service.games.SmashUltimateCharacterService;
 import thumbnailgenerator.service.json.JSONReaderService;
 
 @Service
 public class ThumbnailFileService extends FileService<Thumbnail, Round> {
 
     private int gameIndex = 3;
-    private @Autowired SmashUltimateCharacterService smashUltimateCharacterService;
+    private @Autowired SmashUltimateCharacterService
+            smashUltimateCharacterService;
     private @Autowired JSONReaderService jsonReaderService;
     private @Autowired TournamentService tournamentService;
 
