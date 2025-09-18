@@ -889,11 +889,16 @@ Thumbnails are saved in **/generated_top8** folder.
 
 
 ### Release Notes
+#### v4.5.0
+- Added 2XKO as a selectable game;
+- Added Start.GG generation for GBFVR;
+- Fixed issue with Start.GG generation where not all sets were being analysed.
+
 #### v4.4.1
-- Added Wilnas from GBFVR
-- Fixed issue where round was always written upper case during single thumbnail generation
-- Fixed issue where characters were not flip when character flip was set to true when using mirrorPlayer2.json
-- Fixed issue where thumbnail text would randomly use incorrect size during multi thumbnail generation
+- Added Wilnas from GBFVR;
+- Fixed issue where round was always written upper case during single thumbnail generation;
+- Fixed issue where characters were not flip when character flip was set to true when using mirrorPlayer2.json;
+- Fixed issue where thumbnail text would randomly use incorrect size during multi thumbnail generation.
 
 #### v4.4.0
 - Added July 2025 DLC characters;
