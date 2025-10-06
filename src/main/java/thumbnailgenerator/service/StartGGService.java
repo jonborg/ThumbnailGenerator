@@ -155,7 +155,6 @@ public class StartGGService {
                         } else {
                             charSel.put(character, 1);
                         }
-                        break;
                     }
                 }
             }

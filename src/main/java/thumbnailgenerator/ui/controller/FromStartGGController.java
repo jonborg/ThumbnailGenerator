@@ -324,7 +324,7 @@ public class FromStartGGController implements Initializable {
             if(tournamentGG.getStreams()!=null) {
                 streamSelect.getItems().addAll(tournamentGG.getStreams());
             }
-            if (eventSelect.getItems().size() > 0){
+            if (!eventSelect.getItems().isEmpty()){
                 eventSelect.getSelectionModel().select(0);
             }
             genText.setDisable(false);
@@ -334,15 +334,12 @@ public class FromStartGGController implements Initializable {
             AlertFactory.displayError("Could not connect to Start.gg due to a authorization token issue",
                     ExceptionUtils.getStackTrace(e));
             genText.setDisable(true);
-
-            return;
         }catch (ExecutionException | InterruptedException | NullPointerException e){
             LOGGER.error("An issue occurred when executing query");
             LOGGER.catching(e);
             AlertFactory.displayError("An issue occurred when executing query",
                     ExceptionUtils.getStackTrace(e));
             genText.setDisable(true);
-            return;
         }finally {
             startGGService.closeClient();
         }
