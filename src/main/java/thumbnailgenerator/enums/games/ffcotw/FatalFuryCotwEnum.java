@@ -25,7 +25,8 @@ public enum FatalFuryCotwEnum implements CharacterEnum {
     HOKUTO("Hokuto Maru", "hokuto", 2684, 1),
 
     ANDY("Andy Bogard", "andy", 2710, 1),
-    KEN("Ken", "ken", -1, 1);
+    KEN("Ken", "ken", -1, 1),
+    JOE("Joe Higashi", "joe", -1, 1);
 
     private final String name;
     private final String code;

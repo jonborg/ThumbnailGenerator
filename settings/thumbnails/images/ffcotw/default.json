@@ -171,6 +171,15 @@
       ],
       "scale": 0.65,
       "flip": false
+    },
+    {
+      "fighter": "joe",
+      "offset": [
+        -1000,
+        -40
+      ],
+      "scale": 0.8,
+      "flip": false
     }
   ]
 }

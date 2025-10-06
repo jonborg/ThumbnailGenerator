@@ -243,6 +243,15 @@
       ],
       "scale": 0.7,
       "flip": false
+    },
+    {
+      "fighter": "cviper",
+      "offset": [
+        -270,
+        10
+      ],
+      "scale": 0.8,
+      "flip": false
     }
   ]
 }
