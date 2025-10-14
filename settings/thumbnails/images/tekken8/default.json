@@ -342,6 +342,15 @@
       ],
       "scale": 0.7,
       "flip": false
+    },
+    {
+      "fighter": "armor_king",
+      "offset": [
+        -750,
+        80
+      ],
+      "scale": 1.5,
+      "flip": false
     }
   ]
 }
