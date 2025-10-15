@@ -342,6 +342,15 @@
       ],
       "scale": 1.1,
       "flip": false
+    },
+    {
+      "fighter": "meg",
+      "offset": [
+        -570,
+        20
+      ],
+      "scale": 0.75,
+      "flip": false
     }
   ]
 }
