@@ -693,6 +693,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Etalus     | etalus     |
 | Olympia    | olympia    |
 | Absa       | absa       |
+| Galvan     | galvan     |
 | Random     | random     |
 
 ### Street Fighter 6 URL names
@@ -771,6 +772,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Clive      | clive      |
 | Anna       | anna       |
 | Fahkumram  | fahkumram  |
+| Armor King | armor_king |
 | Random     | random     |
 
 ###Guilty Gear: Strive URL names
