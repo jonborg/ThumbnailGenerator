@@ -342,6 +342,33 @@
       ],
       "scale": 0.7,
       "flip": false
+    },
+    {
+      "fighter": "armor_king",
+      "offset": [
+        -750,
+        80
+      ],
+      "scale": 1.5,
+      "flip": false
+    },
+    {
+      "fighter": "miary",
+      "offset": [
+        0,
+        80
+      ],
+      "scale": 1.5,
+      "flip": false
+    },
+    {
+      "fighter": "random",
+      "offset": [
+        64,
+        100
+      ],
+      "scale": 1.0,
+      "flip": false
     }
   ]
 }

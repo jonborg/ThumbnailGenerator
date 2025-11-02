@@ -41,7 +41,7 @@ public enum GuiltyGearStriveEnum implements CharacterEnum {
     DIZZY("Dizzy", "dizzy", 2613, 1),
     VENOM("Venom", "venom", 2622, 1),
     UNIKA("Unika", "unika", 2744, 1),
-    LUCY("Lucy", "lucy", -1, 1),
+    LUCY("Lucy", "lucy", 2787, 1),
 
     RANDOM("Random", "random", 2621, 1);
 

@@ -45,7 +45,11 @@ public enum Tekken8Enum implements CharacterEnum {
     CLIVE("Clive", "clive", 2612, 1),
 
     ANNA("Anna", "anna", 2620, 1),
-    FAHKUMRAM("Fahkumram", "fahkumram", 2700, 1);
+    FAHKUMRAM("Fahkumram", "fahkumram", 2700, 1),
+    ARMOR_KING("Armor King", "armor_king", 2804, 1),
+    //MIARY("Miary Zo", "miary", 2805, 1),
+
+    RANDOM("Random", "random", 2430, 1);
 
     private final String name;
     private final String code;

@@ -81,6 +81,33 @@
       ],
       "scale": 0.5,
       "flip": false
+    },
+    {
+      "fighter": "teemo",
+      "offset": [
+        -230,
+        -60
+      ],
+      "scale": 0.2,
+      "flip": false
+    },
+    {
+      "fighter": "warwick",
+      "offset": [
+        -800,
+        -100
+      ],
+      "scale": 0.35,
+      "flip": false
+    },
+    {
+      "fighter": "random",
+      "offset": [
+        64,
+        100
+      ],
+      "scale": 1.0,
+      "flip": false
     }
   ]
 }

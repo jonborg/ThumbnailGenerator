@@ -36,15 +36,18 @@ public enum GranblueVersusRisingEnum implements CharacterEnum {
     SIEGFRIED("Siegfried", "siegfried", 2774, 1),
     GRIMNIR("Grimnir", "grimnir", 2761, 1),
     NIER("Nier", "nier", 2770, 1),
+
     LUCILIUS("Lucilius", "lucilius", 2766, 1),
     TWOB("2B", "2b", 2785, 1),
     VANE("Vane", "vane", 2776, 1),
     BEATRIX("Beatrix", "beatrix", 2751, 1),
     VERSUSIA("Versusia", "versusia", 2778, 1),
     VIKALA("Vikala", "vikala", 2779, 1),
+
     SANDALPHON("Sandalphon", "sandalphon", 2772, 1),
     GALLEON("Galleon", "galleon", 2759, 1),
-    WILNAS("Wilnas", "wilnas", 2781, 1);
+    WILNAS("Wilnas", "wilnas", 2781, 1),
+    MEG("Meg", "meg", 2797, 1);
 
     private final String name;
     private final String code;

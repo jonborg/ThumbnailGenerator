@@ -693,6 +693,8 @@ Thumbnails are saved in **/generated_top8** folder.
 | Etalus     | etalus     |
 | Olympia    | olympia    |
 | Absa       | absa       |
+| Galvan     | galvan     |
+| Random     | random     |
 
 ### Street Fighter 6 URL names
 
@@ -725,6 +727,8 @@ Thumbnails are saved in **/generated_top8** folder.
 | Mai       | mai      |
 | Elena     | elena    |
 | Sagat     | sagat    |
+| C. Viper  | c_viper  |
+| Random    | random   |
 
 ### Tekken 8 URL names
 
@@ -768,43 +772,46 @@ Thumbnails are saved in **/generated_top8** folder.
 | Clive      | clive      |
 | Anna       | anna       |
 | Fahkumram  | fahkumram  |
+| Armor King | armor_king |
+| Random     | random     |
 
 ###Guilty Gear: Strive URL names
 
-| Character           | URL Name           |
-|---------------------|--------------------|
-| Sol Badguy          | sol                |
-| Ky Kiske            | ky                 |
-| May                 | may                |
-| Axl Low             | axl                |
-| Chipp Zanuff        | chipp              |
-| Potemkin            | potemkin           |
-| Faust               | faust              |
-| Millia Rage         | millia             |
-| Zato=1              | zato               |
-| Ramlethal Valentine | ramlethal          |
-| Leo Whitefang       | leo                |
-| Nagoriyuki          | nagoriyuki         |
-| Giovanna            | giovanna           |
-| Anji                | anji               |
-| I-No                | ino                |
-| Goldlewis Dickinson | goldlewis          |
-| Jack-O'             | jack_o             |
-| Happy Chaos         | happy_chaos        |
-| Baiken              | baiken             |
-| Testament           | testament          |
-| Bridget             | faust              |
-| Sin Kiske           | sin                |
-| Bedman?             | bedman             |
-| Asuka R #           | asuka              |
-| Johnny              | johnny             |
-| Elphet Valentine    | elphet             |
-| A.B.A               | aba                |
-| Slayer              | slayer             |
-| Dizzy               | dizzy              |
-| Venom               | venom              |
-| Unika               | unika              |
-| Random              | random             |
+| Character           | URL Name    |
+|---------------------|-------------|
+| Sol Badguy          | sol         |
+| Ky Kiske            | ky          |
+| May                 | may         |
+| Axl Low             | axl         |
+| Chipp Zanuff        | chipp       |
+| Potemkin            | potemkin    |
+| Faust               | faust       |
+| Millia Rage         | millia      |
+| Zato=1              | zato        |
+| Ramlethal Valentine | ramlethal   |
+| Leo Whitefang       | leo         |
+| Nagoriyuki          | nagoriyuki  |
+| Giovanna            | giovanna    |
+| Anji                | anji        |
+| I-No                | ino         |
+| Goldlewis Dickinson | goldlewis   |
+| Jack-O'             | jack_o      |
+| Happy Chaos         | happy_chaos |
+| Baiken              | baiken      |
+| Testament           | testament   |
+| Bridget             | faust       |
+| Sin Kiske           | sin         |
+| Bedman?             | bedman      |
+| Asuka R #           | asuka       |
+| Johnny              | johnny      |
+| Elphet Valentine    | elphet      |
+| A.B.A               | aba         |
+| Slayer              | slayer      |
+| Dizzy               | dizzy       |
+| Venom               | venom       |
+| Unika               | unika       |
+| Lucy                | lucy        |
+| Random              | random      |
 
 ###Fatal Fury: City of the Wolves URL names
 
@@ -829,6 +836,9 @@ Thumbnails are saved in **/generated_top8** folder.
 | Hokuto Maru       | hokuto   |
 | Andy Bogard       | andy     |
 | Ken               | ken      |
+| Joe Higashi       | joe      |
+| Chun-Li           | chunli   |
+| Random            | random   |
 
 ###Granblue Fantasy Versus: Rising URL names
 
@@ -886,6 +896,9 @@ Thumbnails are saved in **/generated_top8** folder.
 | Jinx       | jinx       |
 | Vi         | vi         |
 | Blitzcrank | blitzcrank |
+| Teemo      | teemo      |
+| Warwick    | warwick    |
+| Random     | random     |
 
 
 ### Release Notes
