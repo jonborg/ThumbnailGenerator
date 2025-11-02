@@ -902,6 +902,17 @@ Thumbnails are saved in **/generated_top8** folder.
 
 
 ### Release Notes
+#### v4.5.1
+- Adjusted multi character detection on Start.GG generation to be compatible with 2XKO;
+- Added Galvan from ROA2;
+- Added C. Viper from SF6;
+- Added Armor King from Tekken 8;
+- Added Lucy from Guilty Gear Strive;
+- Added Joe Higashi and Chun-li from FFCOTW;
+- Added Meg from GBFVR;
+- Added Teemo and Warwick from 2XKO;
+- Added random character selection to ROA2, SF6, TEKKEN 8, FFCOTW and 2XKO.
+
 #### v4.5.0
 - Added 2XKO as a selectable game;
 - Added Start.GG generation for GBFVR;
