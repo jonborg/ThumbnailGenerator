@@ -245,12 +245,21 @@
       "flip": false
     },
     {
-      "fighter": "cviper",
+      "fighter": "c_viper",
       "offset": [
         -270,
         10
       ],
       "scale": 0.8,
+      "flip": false
+    },
+    {
+      "fighter": "random",
+      "offset": [
+        64,
+        100
+      ],
+      "scale": 1.0,
       "flip": false
     }
   ]

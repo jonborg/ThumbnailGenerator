@@ -36,7 +36,9 @@ public enum StreetFighter6Enum implements CharacterEnum {
     ELENA("Elena", "elena", 2699, 1),
 
     SAGAT("Sagat", "sagat", 2745, 1),
-    CVIPER("C. Viper", "cviper", -1, 1);
+    CVIPER("C. Viper", "c_viper", 2798, 1),
+
+    RANDOM("Random", "random", 2602, 1);
 
     private final String name;
     private final String code;

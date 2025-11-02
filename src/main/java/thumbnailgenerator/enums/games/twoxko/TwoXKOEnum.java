@@ -16,7 +16,9 @@ public enum TwoXKOEnum implements CharacterEnum {
     VI("Vi", "vi", 2788, 1),
     BLITZCRANK("Blitzcrank", "blitzcrank", 2789, 1),
     TEEMO("Teemo", "teemo", 2796, 1),
-    WARWICK("Warwick", "warwick", 2795, 1);
+    WARWICK("Warwick", "warwick", 2795, 1),
+
+    RANDOM("Random", "random", 2799, 1);
 
     private final String name;
     private final String code;

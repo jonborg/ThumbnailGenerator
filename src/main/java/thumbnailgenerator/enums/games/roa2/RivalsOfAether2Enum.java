@@ -20,7 +20,9 @@ public enum RivalsOfAether2Enum implements CharacterEnum {
     ETALUS("Etalus", "etalus", 2615, 1),
     OLYMPIA("Olympia", "olympia", 2619, 1),
     ABSA("Absa", "absa", 2709, 1),
-    GALVAN("Galvan", "galvan", 2794, 1);
+    GALVAN("Galvan", "galvan", 2794, 1),
+
+    RANDOM("Random", "random", 2803, 1);
 
     private final String name;
     private final String code;

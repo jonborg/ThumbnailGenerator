@@ -693,6 +693,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Etalus     | etalus     |
 | Olympia    | olympia    |
 | Absa       | absa       |
+| Random     | random     |
 
 ### Street Fighter 6 URL names
 
@@ -725,7 +726,8 @@ Thumbnails are saved in **/generated_top8** folder.
 | Mai       | mai      |
 | Elena     | elena    |
 | Sagat     | sagat    |
-| C. Viper  | cviper   |
+| C. Viper  | c_viper  |
+| Random    | random   |
 
 ### Tekken 8 URL names
 
@@ -769,6 +771,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Clive      | clive      |
 | Anna       | anna       |
 | Fahkumram  | fahkumram  |
+| Random     | random     |
 
 ###Guilty Gear: Strive URL names
 
@@ -832,6 +835,8 @@ Thumbnails are saved in **/generated_top8** folder.
 | Andy Bogard       | andy     |
 | Ken               | ken      |
 | Joe Higashi       | joe      |
+| Chun-Li           | chunli   |
+| Random            | random   |
 
 ###Granblue Fantasy Versus: Rising URL names
 
@@ -889,6 +894,9 @@ Thumbnails are saved in **/generated_top8** folder.
 | Jinx       | jinx       |
 | Vi         | vi         |
 | Blitzcrank | blitzcrank |
+| Teemo      | teemo      |
+| Warwick    | warwick    |
+| Random     | random     |
 
 
 ### Release Notes
