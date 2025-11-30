@@ -297,6 +297,35 @@
             "fighterImageSettings": "settings/thumbnails/images/2xko/default.json"
           }
         ]
+      },
+      {
+        "game": "UNIST2",
+        "foreground": {
+          "foregroundImage": "assets/tournaments/foregrounds/thumbnail/weeklyL.png",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": true
+        },
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/unist2/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -407,6 +436,17 @@
       },
       {
         "game": "TWOXKO",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "UNIST2",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -716,6 +756,35 @@
             "fighterImageSettings": "settings/thumbnails/images/2xko/default.json"
           }
         ]
+      },
+      {
+        "game": "UNIST2",
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
+        },
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/unist2/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -826,6 +895,17 @@
       },
       {
         "game": "TWOXKO",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "UNIST2",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -1135,6 +1215,35 @@
             "fighterImageSettings": "settings/thumbnails/images/2xko/default.json"
           }
         ]
+      },
+      {
+        "game": "UNIST2",
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
+        },
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/unist2/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -1245,6 +1354,17 @@
       },
       {
         "game": "TWOXKO",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "UNIST2",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -1554,6 +1674,35 @@
             "fighterImageSettings": "settings/thumbnails/images/2xko/default.json"
           }
         ]
+      },
+      {
+        "game": "UNIST2",
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
+        },
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/unist2/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -1664,6 +1813,17 @@
       },
       {
         "game": "TWOXKO",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "UNIST2",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -1973,6 +2133,35 @@
             "fighterImageSettings": "settings/thumbnails/images/2xko/default.json"
           }
         ]
+      },
+      {
+        "game": "UNIST2",
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
+        },
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/unist2/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -2083,6 +2272,17 @@
       },
       {
         "game": "TWOXKO",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "UNIST2",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -2392,6 +2592,35 @@
             "fighterImageSettings": "settings/thumbnails/images/2xko/default.json"
           }
         ]
+      },
+      {
+        "game": "UNIST2",
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
+        },
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/unist2/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -2502,6 +2731,17 @@
       },
       {
         "game": "TWOXKO",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "UNIST2",
         "foreground": "",
         "background": "",
         "artSettings": [
@@ -2811,6 +3051,35 @@
             "fighterImageSettings": "settings/thumbnails/images/2xko/default.json"
           }
         ]
+      },
+      {
+        "game": "UNIST2",
+        "foreground": {
+          "foregroundImage": "",
+          "colors": {
+            "secondary": "#337733FF",
+            "primary": "#333333FF"
+          },
+          "versus": {
+            "image": "assets/tournaments/foregrounds/thumbnail/versus/default.png",
+            "scale": 1.0,
+            "verticalOffset": 0
+          },
+          "logo": {
+            "image": "",
+            "scale": 1.0,
+            "verticalOffset": 0,
+            "aboveForeground": false
+          },
+          "customForeground": false
+        },
+        "background": "assets/tournaments/backgrounds/thumbnail/default.png",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": "settings/thumbnails/images/unist2/default.json"
+          }
+        ]
       }
     ],
     "top8Settings": [
@@ -2921,6 +3190,17 @@
       },
       {
         "game": "TWOXKO",
+        "foreground": "",
+        "background": "",
+        "artSettings": [
+          {
+            "artType": "RENDER",
+            "fighterImageSettings": ""
+          }
+        ]
+      },
+      {
+        "game": "UNIST2",
         "foreground": "",
         "background": "",
         "artSettings": [

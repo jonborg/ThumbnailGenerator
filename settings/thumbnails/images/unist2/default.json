@@ -1,0 +1,245 @@
+{
+  "mirrorPlayer2": false,
+  "fighters": [
+    {
+      "fighter": "hyde",
+      "offset": [
+        -300,
+        -230
+      ],
+      "scale": 0.55,
+      "flip": false
+    },{
+      "fighter": "linne",
+      "offset": [
+        -470,
+        100
+      ],
+      "scale": 0.75,
+      "flip": false
+    },{
+      "fighter": "waldstein",
+      "offset": [
+        -500,
+        -500
+      ],
+      "scale": 1,
+      "flip": false
+    },{
+      "fighter": "carmine",
+      "offset": [
+        -480,
+        70
+      ],
+      "scale": 0.57,
+      "flip": false
+    },
+    {
+      "fighter": "orie",
+      "offset": [
+        -230,
+        -500
+      ],
+      "scale": 0.75,
+      "flip": false
+    },
+    {
+      "fighter": "gordeau",
+      "offset": [
+        -1030,
+        -850
+      ],
+      "scale": 1.3,
+      "flip": false
+    },
+    {
+      "fighter": "merkava",
+      "offset": [
+        -230,
+        -500
+      ],
+      "scale": 0.75,
+      "flip": false
+    },
+    {
+      "fighter": "vatista",
+      "offset": [
+        -120,
+        -800
+      ],
+      "scale": 1.1,
+      "flip": false
+    },
+    {
+      "fighter": "seth",
+      "offset": [
+        -200,
+        50
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "yuzuriha",
+      "offset": [
+        -350,
+        -800
+      ],
+      "scale": 1.25,
+      "flip": false
+    },
+    {
+      "fighter": "hilda",
+      "offset": [
+        -1400,
+        -230
+      ],
+      "scale": 1.2,
+      "flip": false
+    },
+    {
+      "fighter": "chaos",
+      "offset": [
+        -140,
+        120
+      ],
+      "scale": 0.55,
+      "flip": false
+    },
+    {
+      "fighter": "nanase",
+      "offset": [
+        -220,
+        -330
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "byakuya",
+      "offset": [
+        -700,
+        -320
+      ],
+      "scale": 1,
+      "flip": false
+    },
+    {
+      "fighter": "phonon",
+      "offset": [
+        -550,
+        -170
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "mika",
+      "offset": [
+        -550,
+        -1250
+      ],
+      "scale": 1.1,
+      "flip": false
+    },
+    {
+      "fighter": "wagner",
+      "offset": [
+        -1210,
+        100
+      ],
+      "scale": 0.95,
+      "flip": false
+    },
+    {
+      "fighter": "enkidu",
+      "offset": [
+        -550,
+        70
+      ],
+      "scale": 0.8,
+      "flip": false
+    },
+    {
+      "fighter": "londrekia",
+      "offset": [
+        -400,
+        -200
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "tsurugi",
+      "offset": [
+        -950,
+        -200
+      ],
+      "scale": 1.2,
+      "flip": false
+    },
+    {
+      "fighter": "kaguya",
+      "offset": [
+        -750,
+        -300
+      ],
+      "scale": 0.85,
+      "flip": false
+    },
+    {
+      "fighter": "kuon",
+      "offset": [
+        -1150,
+        -1220
+      ],
+      "scale": 1.5,
+      "flip": false
+    },
+    {
+      "fighter": "uzuki",
+      "offset": [
+        -520,
+        -220
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "ogre",
+      "offset": [
+        -70,
+        -50
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "izumi",
+      "offset": [
+        -400,
+        110
+      ],
+      "scale": 0.70,
+      "flip": false
+    },
+    {
+      "fighter": "eltnum",
+      "offset": [
+        -350,
+        -200
+      ],
+      "scale": 0.8,
+      "flip": false
+    },
+    {
+      "fighter": "akatsuki",
+      "offset": [
+        -100,
+        100
+      ],
+      "scale": 0.45,
+      "flip": false
+    }
+  ]
+}
