@@ -355,10 +355,10 @@
     {
       "fighter": "miary",
       "offset": [
-        0,
-        80
+        -280,
+        100
       ],
-      "scale": 1.5,
+      "scale": 1,
       "flip": false
     },
     {

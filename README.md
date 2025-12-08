@@ -12,6 +12,8 @@ This allows TOs to speed up VODs' release process. Below are the compatible game
 - Guilty Gear: Strive
 - Fatal Fury: City of the Wolves
 - Granblue Fantasy Versus: Rising
+- 2XKO
+- Under Night In-Birth II Sys:Celes
 
 ![tg_main_page.png](./assets/documentation/tg_main_page.png)
 
@@ -112,6 +114,7 @@ Images were gathered thanks to:
 - [smash-ultimate-assets](https://github.com/marcrd/smash-ultimate-assets) repository
 - [MuralAltDrive's](https://x.com/MuralAltDrive) Smash Ultimate Mural art [Google Drive](https://drive.google.com/drive/folders/1n4lAP6YB7N-bSSgEDx0OPEI2ykOKSQrM)
 - 2XKO Community Asset Kit found on [2XKO Community Competitive Guidelines page](https://2xko.riotgames.com/en-us/news/announcements/2xko-community-competition-guidelines/)
+- [Under Night In-Birth II fan press kit](https://www.arcsystemworks.jp/uni2celes/en/fankit/)
 
 As an option, Thumbnail Generator can save those downloaded images to use them for future uses without requiring access to the website. 
 Images are stored in the following folder:
@@ -307,6 +310,7 @@ The available games are the following:
 - Fatal Fury: City of the Wolves
 - Granblue Fantasy Versus: Rising
 - 2XKO
+- Under Night In-Birth II Sys:Celes
 
 It is also mandatory to provide characters and their colours.
 When selecting a character from the dropdown, an icon will appear
@@ -773,6 +777,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Anna       | anna       |
 | Fahkumram  | fahkumram  |
 | Armor King | armor_king |
+| Miary Zo   | miary      |
 | Random     | random     |
 
 ###Guilty Gear: Strive URL names
@@ -900,8 +905,43 @@ Thumbnails are saved in **/generated_top8** folder.
 | Warwick    | warwick    |
 | Random     | random     |
 
+###Under Night In-Birth II Sys:Celes
+
+| Character | URL Name  |
+|-----------|-----------|
+| Hyde      | hyde      |
+| Linne     | linne     |
+| Waldstein | waldstein |
+| Carmine   | carmine   |
+| Gordeau   | gordeau   |
+| Merkava   | merkava   |
+| Vatista   | vatista   |
+| Seth      | seth      |
+| Yuzurinha | yuzuriha  |
+| Hilda     | hilda     |
+| Chaos     | chaos     |
+| Nanase    | nanase    |
+| Byakuya   | byakuya   |
+| Phonon    | phonon    | 
+| Mika      | mika      |
+| Wagner    | wagner    |
+| Enkidu    | enkidu    |
+| Londrekia | londrekia |
+| Tsurugi   | tsurugi   |
+| Kaguya    | kaguya    |
+| Kuon      | kuon      |
+| Uzuki     | uzuki     |
+| Ogre      | ogre      |
+| Izumi     | izumi     |
+| Eltnum    | eltnum    |
+| Akatsuki  | akatsuki  |
+
 
 ### Release Notes
+#### v4.6.0
+- Added Under Night In-Birth II Sys:Celes as a selectable game
+- Added Miary Zo from Tekken 8
+
 #### v4.5.1
 - Adjusted multi character detection on Start.GG generation to be compatible with 2XKO;
 - Added Galvan from ROA2;

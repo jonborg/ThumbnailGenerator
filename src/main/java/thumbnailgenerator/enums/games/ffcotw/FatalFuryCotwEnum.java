@@ -27,7 +27,7 @@ public enum FatalFuryCotwEnum implements CharacterEnum {
     ANDY("Andy Bogard", "andy", 2710, 1),
     KEN("Ken", "ken", 2802, 1),
     JOE("Joe Higashi", "joe", 2801, 1),
-    CHUN_LI("Chun-Li", "chunli", -1, 1),
+    CHUN_LI("Chun-Li", "chunli", 2810, 1),
 
     RANDOM("Random", "random", 2800, 1);
 
