@@ -777,6 +777,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Anna       | anna       |
 | Fahkumram  | fahkumram  |
 | Armor King | armor_king |
+| Miary Zo   | miary      |
 | Random     | random     |
 
 ###Guilty Gear: Strive URL names
