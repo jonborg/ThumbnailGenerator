@@ -938,6 +938,10 @@ Thumbnails are saved in **/generated_top8** folder.
 
 
 ### Release Notes
+#### v4.6.0
+- Added Under Night In-Birth II Sys:Celes as a selectable game
+- Added Miary Zo from Tekken 8
+
 #### v4.5.1
 - Adjusted multi character detection on Start.GG generation to be compatible with 2XKO;
 - Added Galvan from ROA2;
