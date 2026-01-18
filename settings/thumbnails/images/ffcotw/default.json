@@ -191,6 +191,15 @@
       "flip": false
     },
     {
+      "fighter": "mr_big",
+      "offset": [
+        -400,
+        120
+      ],
+      "scale": 0.8,
+      "flip": false
+    },
+    {
       "fighter": "random",
       "offset": [
         64,
