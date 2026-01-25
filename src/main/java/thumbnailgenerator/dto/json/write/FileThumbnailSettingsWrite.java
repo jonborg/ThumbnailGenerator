@@ -18,8 +18,9 @@ public class FileThumbnailSettingsWrite {
     @Expose
     @SerializedName("artSettings")
     private List<FighterArtSettingsWrite> artTypeDir;
-
-    private TextSettings textSettings;
+    @Expose
+    @SerializedName("textSettings")
+    private TextSettingsWrite textSettings;
 
     public FileThumbnailSettingsWrite(FileThumbnailSettings fileThumbnailSettings){
         this.foreground = new ThumbnailForegroundWrite(fileThumbnailSettings.getThumbnailForeground());
@@ -28,5 +29,6 @@ public class FileThumbnailSettingsWrite {
                 .stream()
                 .map(FighterArtSettingsWrite::new)
                 .collect(Collectors.toList());
+        this.textSettings = new TextSettingsWrite(fileThumbnailSettings.getTextSettings());
     }
 }

@@ -6,9 +6,6 @@ import thumbnailgenerator.dto.TextSettings;
 
 public class TextSettingsWrite {
     @Expose
-    @SerializedName("id")
-    private String id;
-    @Expose
     @SerializedName("font")
     private String font;
     @Expose
@@ -43,7 +40,6 @@ public class TextSettingsWrite {
     private int[] downOffsetBottom;
 
     public TextSettingsWrite(TextSettings textSettings){
-        this.id = textSettings.getTournamentId();
         this.font = textSettings.getFont();
         this.bold = textSettings.isBold();
         this.italic = textSettings.isItalic();

@@ -16,7 +16,6 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.dto.factory.TournamentFactory;
-import thumbnailgenerator.dto.json.read.TournamentListRead;
 import thumbnailgenerator.dto.json.read.TournamentRead;
 import thumbnailgenerator.dto.json.write.TournamentListWrite;
 import thumbnailgenerator.dto.json.write.TournamentListWrite.TournamentListElementWrite;
@@ -56,10 +55,7 @@ public class TournamentService {
 
     public void loadTournamentsList() {
         if (!jsonReaderService.doesMainTournamentListExist()) {
-            List<TournamentRead> tournamentReadList = jsonReaderService.loadTournamentOld();
-            tournamentsList = tournamentReadList.stream()
-                    .map(t -> tournamentFactory.createTournament(t))
-                    .collect(Collectors.toList());
+            loadTournamentsOldFormat();
             convertMonolithTournamentListToSplitVersion();
         }
         tournamentsList = jsonReaderService.loadTournament()
@@ -108,7 +104,7 @@ public class TournamentService {
             orderGameSettings(tournament);
             tournamentsList.add(tournament);
         }
-        tournamentsList.stream().peek(t -> LOGGER.info("{} -> {}", t.getName(), t.toString()));
+        tournamentsList.forEach(t -> LOGGER.info("{} -> {}", t.getName(), t.toString()));
         jsonWriterService.updateTournamentsFile(tournamentsList);
         jsonWriterService.updateTextSettingsFile(getAllTextSettings());
     }
@@ -206,6 +202,20 @@ public class TournamentService {
         );
     }
 
+    private void loadTournamentsOldFormat(){
+        List<TournamentRead> tournamentReadList = jsonReaderService.loadTournamentOld();
+        tournamentsList = tournamentReadList.stream()
+                .map(t -> tournamentFactory.createTournament(t))
+                .collect(Collectors.toList());
+        tournamentsList.forEach(tournament ->{
+            var textSettings = jsonReaderService.loadTextSettings(tournament.getTournamentId());
+            LOGGER.debug("{} -> {}.", tournament.getName(), textSettings);
+            for (Game game : Game.values()) {
+                getTournamentThumbnailSettingsOrDefault(tournament, game)
+                        .setTextSettings(textSettings);
+            }
+        });
+    }
     private void convertMonolithTournamentListToSplitVersion(){
         List<TournamentListElementWrite> convertedList = tournamentsList.stream()
                 .map(TournamentListElementWrite::new)

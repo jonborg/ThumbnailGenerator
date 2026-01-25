@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.TextSettings;
@@ -25,7 +26,8 @@ import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
 @Service
 public class JSONReaderService {
-
+    @Autowired
+    private Gson gson;
     @Deprecated
     @Value("${settings.tournament.file.path.old}")
     private String tournamentFileOld;
@@ -35,9 +37,6 @@ public class JSONReaderService {
     private String textSettingsFile;
 
     public <T> List<T> getJSONArrayFromFile(String jsonFile, Type type){
-        Gson gson = new GsonBuilder()
-                .create();
-
         try (FileReader reader = new FileReader(jsonFile))
         {
             return gson.fromJson(reader, type);
@@ -52,7 +51,6 @@ public class JSONReaderService {
     }
 
     public <T> Object getJSONObjectFromFile(String jsonFile, Type type){
-        Gson gson = new Gson();
         try (FileReader reader = new FileReader(jsonFile))
         {
             return gson.fromJson(reader, type);
@@ -67,7 +65,6 @@ public class JSONReaderService {
     }
 
     public <T> Object getJSONObject(String jsonText, Type type){
-        Gson gson = new Gson();
         try {
             return gson.fromJson(jsonText, type);
         } catch (JsonSyntaxException e){
