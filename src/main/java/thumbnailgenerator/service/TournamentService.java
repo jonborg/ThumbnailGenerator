@@ -213,6 +213,6 @@ public class TournamentService {
         TournamentListWrite tournamentListWrite = new TournamentListWrite(convertedList);
 
         jsonWriterService.updateTournamentListFile(tournamentListWrite);
-        tournamentsList.forEach(t -> jsonWriterService.updateTournamentFile(t));
+        tournamentsList.forEach(t -> jsonWriterService.updateTournamentFiles(t));
     }
 }

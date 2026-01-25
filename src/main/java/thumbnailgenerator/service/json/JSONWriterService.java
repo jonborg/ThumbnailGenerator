@@ -8,14 +8,23 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import thumbnailgenerator.dto.FileThumbnailSettings;
+import thumbnailgenerator.dto.FileTop8Settings;
+import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.ImageSettings;
+import thumbnailgenerator.dto.Settings;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
+import thumbnailgenerator.dto.json.write.FileThumbnailSettingsWrite;
+import thumbnailgenerator.dto.json.write.FileTop8SettingsWrite;
 import thumbnailgenerator.dto.json.write.TextSettingsWrite;
 import thumbnailgenerator.dto.json.write.TournamentListWrite;
 import thumbnailgenerator.dto.json.write.TournamentWrite;
@@ -66,18 +75,39 @@ public class JSONWriterService {
     }
 
     //update specific tournament data file
-    public void updateTournamentFile(Tournament t){
-        String tournamentFile = tournamentFilePath + t.getTournamentId() + tournamentFileSuffix;
-        TournamentWrite tournamentWrite = new TournamentWrite(t);
+    public void updateTournamentFiles(Tournament t) {
+        t.getThumbnailSettings()
+                .forEach(s ->
+                        updateTournamentFile(t, s, "thumbnail_settings.json"));
+        t.getTop8Settings()
+                .forEach(s ->
+                        updateTournamentFile(t, s, "top8_settings.json"));
+    }
+
+    public void updateTournamentFile(Tournament t, Settings s, String filename){
+        String tournamentSettingsFile = tournamentFilePath + t.getTournamentId()
+                + "/" + s.getGame()
+                + "/" + filename;
+
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
-        try (FileWriter writer = new FileWriter(tournamentFile)
-        ) {
-            String json = gson.toJson(tournamentWrite);
-            LOGGER.debug("Writing json to file {} -> {}", tournamentFile, json);
-            writer.write(json);
+        try {
+            Path filePath = Paths.get(tournamentSettingsFile);
+            Path parentDir = filePath.getParent();
+            if (parentDir != null) {
+                Files.createDirectories(parentDir);
+            }
+
+            try (FileWriter writer = new FileWriter(tournamentSettingsFile)) {
+                Object output = s instanceof FileThumbnailSettings ?
+                        new FileThumbnailSettingsWrite((FileThumbnailSettings) s) :
+                        new FileTop8SettingsWrite((FileTop8Settings) s);
+                String json = gson.toJson(output);
+                LOGGER.debug("Writing json to file {} -> {}", tournamentSettingsFile, json);
+                writer.write(json);
+            }
         } catch (IOException e) {
             AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
         }

@@ -10,9 +10,6 @@ import java.util.stream.Collectors;
 
 public class FileThumbnailSettingsWrite {
     @Expose
-    @SerializedName("game")
-    private String game;
-    @Expose
     @SerializedName("foreground")
     private ThumbnailForegroundWrite foreground;
     @Expose
@@ -25,13 +22,11 @@ public class FileThumbnailSettingsWrite {
     private TextSettings textSettings;
 
     public FileThumbnailSettingsWrite(FileThumbnailSettings fileThumbnailSettings){
-        this.game = fileThumbnailSettings.getGame().name();
         this.foreground = new ThumbnailForegroundWrite(fileThumbnailSettings.getThumbnailForeground());
         this.background = fileThumbnailSettings.getBackground();
         this.artTypeDir = fileThumbnailSettings.getArtTypeDir()
                 .stream()
                 .map(FighterArtSettingsWrite::new)
                 .collect(Collectors.toList());
-
     }
 }

@@ -11,9 +11,6 @@ import java.util.stream.Collectors;
 
 public class FileTop8SettingsWrite {
     @Expose
-    @SerializedName("game")
-    protected String game;
-    @Expose
     @SerializedName("foreground")
     protected String foreground;
     @Expose
@@ -27,7 +24,6 @@ public class FileTop8SettingsWrite {
     protected List<FighterArtSettingsWrite> artTypeDir;
 
     public FileTop8SettingsWrite(FileTop8Settings fileTop8Settings){
-        this.game = fileTop8Settings.getGame().name();
         this.foreground = fileTop8Settings.getForeground();
         this.background = fileTop8Settings.getBackground();
         this.artTypeDir = fileTop8Settings.getArtTypeDir()
