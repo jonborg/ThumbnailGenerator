@@ -17,29 +17,67 @@ import thumbnailgenerator.dto.ImageSettings;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.dto.json.write.TextSettingsWrite;
+import thumbnailgenerator.dto.json.write.TournamentListWrite;
 import thumbnailgenerator.dto.json.write.TournamentWrite;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
 @Service
 public class JSONWriterService {
     private static final Logger LOGGER = LogManager.getLogger(JSONWriterService.class);
+    @Value("${settings.tournament.files.path}")
+    private String tournamentFilePath;
     @Value("${settings.tournament.file.path}")
-    private String tournamentFile;
+    private String tournamentListFile;
+    @Value("${settings.tournament.file.split.suffix}")
+    private String tournamentFileSuffix;
+
     @Value("${settings.text.file.path}")
     private String textSettingsFile;
 
+    //update main tournament list file
     public void updateTournamentsFile(List<Tournament> list){
         List<TournamentWrite> tournamentWriteList = list.stream().map(TournamentWrite::new).collect(Collectors.toList());
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
-        try (FileWriter writer = new FileWriter(tournamentFile)) {
+        try (FileWriter writer = new FileWriter(tournamentListFile)) {
             String json = gson.toJson(tournamentWriteList);
+            LOGGER.debug("Writing json to file {} -> {}", tournamentListFile, json);
+            writer.write(json);
+        } catch (IOException e) {
+            AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
+        }
+    }
+
+    //update main tournament list file
+    public void updateTournamentListFile(TournamentListWrite output){
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        try (FileWriter writer = new FileWriter(tournamentListFile)) {
+            String json = gson.toJson(output);
+            LOGGER.debug("Writing json to file {} -> {}", tournamentListFile, json);
+            writer.write(json);
+        } catch (IOException e) {
+            AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
+        }
+    }
+
+    //update specific tournament data file
+    public void updateTournamentFile(Tournament t){
+        String tournamentFile = tournamentFilePath + t.getTournamentId() + tournamentFileSuffix;
+        TournamentWrite tournamentWrite = new TournamentWrite(t);
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        try (FileWriter writer = new FileWriter(tournamentFile)
+        ) {
+            String json = gson.toJson(tournamentWrite);
             LOGGER.debug("Writing json to file {} -> {}", tournamentFile, json);
             writer.write(json);
-        } catch (FileNotFoundException e) {
-            AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
         } catch (IOException e) {
             AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
         }
@@ -55,8 +93,6 @@ public class JSONWriterService {
             String json = gson.toJson(textSettingsWrite);
             LOGGER.debug("Writing json to file {} -> {}", textSettingsFile, json);
             writer.write(json);
-        } catch (FileNotFoundException e) {
-            AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
         } catch (IOException e) {
             AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
         }
@@ -71,8 +107,6 @@ public class JSONWriterService {
             String json = gson.toJson(imageSettings);
             LOGGER.debug("Writing json to file {} -> {}", imageSettingsFile, json);
             writer.write(json);
-        } catch (FileNotFoundException e) {
-            AlertFactory.displayError("FileNotFoundException", ExceptionUtils.getStackTrace(e));
         } catch (IOException e) {
             AlertFactory.displayError("IOException", ExceptionUtils.getStackTrace(e));
         }

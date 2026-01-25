@@ -9,15 +9,6 @@ import java.util.stream.Collectors;
 
 public class TournamentWrite {
     @Expose
-    @SerializedName("id")
-    private String id;
-    @Expose
-    @SerializedName("name")
-    private String name;
-    @Expose
-    @SerializedName("logo")
-    private String image;
-    @Expose
     @SerializedName("thumbnailSettings")
     private List<FileThumbnailSettingsWrite> thumbnailSettings;
     @Expose
@@ -25,9 +16,6 @@ public class TournamentWrite {
     private List<FileTop8SettingsWrite> top8Settings;
 
     public TournamentWrite(Tournament tournament){
-        this.id = tournament.getTournamentId();
-        this.name = tournament.getName();
-        this.image = tournament.getImage();
         this.thumbnailSettings = tournament.getThumbnailSettings()
                 .stream()
                 .map(ts -> new FileThumbnailSettingsWrite(ts))

@@ -12,6 +12,7 @@ import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.dto.json.read.FighterArtSettingsRead;
 import thumbnailgenerator.dto.json.read.FileThumbnailSettingsRead;
 import thumbnailgenerator.dto.json.read.FileTop8SettingsRead;
+import thumbnailgenerator.dto.json.read.TournamentListRead;
 import thumbnailgenerator.dto.json.read.TournamentRead;
 import thumbnailgenerator.service.games.GameEnumService;
 
@@ -23,6 +24,17 @@ public class TournamentFactory {
 
     @Autowired
     private GameEnumService gameEnumService;
+
+    public Tournament createTournament(
+            TournamentListRead.TournamentListElementRead tournamentRead) {
+        return new Tournament(
+                tournamentRead.getId(),
+                tournamentRead.getName(),
+                tournamentRead.getLogo(),
+                null,
+                null
+        );
+    }
 
     public Tournament createTournament(TournamentRead tournamentRead){
         return new Tournament(

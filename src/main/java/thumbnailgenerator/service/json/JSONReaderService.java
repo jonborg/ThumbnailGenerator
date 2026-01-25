@@ -3,6 +3,8 @@ package thumbnailgenerator.service.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,12 +19,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.json.read.TextSettingsRead;
+import thumbnailgenerator.dto.json.read.TournamentListRead;
 import thumbnailgenerator.dto.json.read.TournamentRead;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 
 @Service
 public class JSONReaderService {
 
+    @Deprecated
+    @Value("${settings.tournament.file.path.old}")
+    private String tournamentFileOld;
     @Value("${settings.tournament.file.path}")
     private String tournamentFile;
     @Value("${settings.text.file.path}")
@@ -86,7 +92,18 @@ public class JSONReaderService {
         return null;
     }
 
-    public List<TournamentRead> loadTournament(){
-        return getJSONArrayFromFile(tournamentFile, new TypeToken<ArrayList<TournamentRead>>(){}.getType());
+    public boolean doesMainTournamentListExist(){
+        File file = new File(tournamentFile);
+        return file.exists();
+    }
+    public TournamentListRead loadTournament(){
+        return (TournamentListRead) getJSONObjectFromFile(
+                tournamentFile,
+                new TypeToken<TournamentListRead>(){}.getType()
+        );
+    }
+
+    public List<TournamentRead> loadTournamentOld(){
+        return getJSONArrayFromFile(tournamentFileOld, new TypeToken<ArrayList<TournamentRead>>(){}.getType());
     }
 }

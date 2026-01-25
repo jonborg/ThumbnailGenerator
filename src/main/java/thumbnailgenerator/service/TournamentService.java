@@ -16,7 +16,10 @@ import thumbnailgenerator.dto.Game;
 import thumbnailgenerator.dto.TextSettings;
 import thumbnailgenerator.dto.Tournament;
 import thumbnailgenerator.dto.factory.TournamentFactory;
+import thumbnailgenerator.dto.json.read.TournamentListRead;
 import thumbnailgenerator.dto.json.read.TournamentRead;
+import thumbnailgenerator.dto.json.write.TournamentListWrite;
+import thumbnailgenerator.dto.json.write.TournamentListWrite.TournamentListElementWrite;
 import thumbnailgenerator.service.games.GameEnumService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.service.json.JSONReaderService;
@@ -41,19 +44,29 @@ public class TournamentService {
     public void initTournamentsListAndSettings(){
         LOGGER.info("Loading saved tournament list.");
         loadTournamentsList();
-        tournamentsList.forEach(tournament ->{
+       /* tournamentsList.forEach(tournament ->{
             var textSettings = jsonReaderService.loadTextSettings(tournament.getTournamentId());
             LOGGER.debug("{} -> {}.", tournament.getName(), textSettings);
             for (Game game : Game.values()) {
                 getTournamentThumbnailSettingsOrDefault(tournament, game)
                         .setTextSettings(textSettings);
             }
-        });
+        });*/
     }
 
-    public void loadTournamentsList(){
-        List<TournamentRead> tournamentReadList = jsonReaderService.loadTournament();
-        tournamentsList = tournamentReadList.stream().map(t -> tournamentFactory.createTournament(t)).collect(Collectors.toList());
+    public void loadTournamentsList() {
+        if (!jsonReaderService.doesMainTournamentListExist()) {
+            List<TournamentRead> tournamentReadList = jsonReaderService.loadTournamentOld();
+            tournamentsList = tournamentReadList.stream()
+                    .map(t -> tournamentFactory.createTournament(t))
+                    .collect(Collectors.toList());
+            convertMonolithTournamentListToSplitVersion();
+        }
+        tournamentsList = jsonReaderService.loadTournament()
+                .getTournamentList()
+                .stream()
+                .map(t -> tournamentFactory.createTournament(t))
+                .collect(Collectors.toList());
     }
 
     public List<Tournament> getTournamentsList(){
@@ -191,5 +204,15 @@ public class TournamentService {
         tournament.getTop8Settings().sort(
                 Comparator.comparing(s -> s.getGame().ordinal())
         );
+    }
+
+    private void convertMonolithTournamentListToSplitVersion(){
+        List<TournamentListElementWrite> convertedList = tournamentsList.stream()
+                .map(TournamentListElementWrite::new)
+                .collect(Collectors.toList());
+        TournamentListWrite tournamentListWrite = new TournamentListWrite(convertedList);
+
+        jsonWriterService.updateTournamentListFile(tournamentListWrite);
+        tournamentsList.forEach(t -> jsonWriterService.updateTournamentFile(t));
     }
 }

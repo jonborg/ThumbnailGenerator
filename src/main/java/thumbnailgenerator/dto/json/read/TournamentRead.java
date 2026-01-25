@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import java.util.List;
 
+@Deprecated
 @Getter
 public class TournamentRead {
     @Expose
