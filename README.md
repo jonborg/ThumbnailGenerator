@@ -698,6 +698,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Olympia    | olympia    |
 | Absa       | absa       |
 | Galvan     | galvan     |
+| La Reina   | reina      |
 | Random     | random     |
 
 ### Street Fighter 6 URL names
@@ -843,6 +844,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Ken               | ken      |
 | Joe Higashi       | joe      |
 | Chun-Li           | chunli   |
+| Mr. Big           | mr_big   |
 | Random            | random   |
 
 ###Granblue Fantasy Versus: Rising URL names
@@ -887,6 +889,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Sandalphon    | sandalphon    |
 | Galleon       | galleon       |
 | Wilnas        | wilnas        |
+| Meg           | meg           |
 
 ###2XKO
 
