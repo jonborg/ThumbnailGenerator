@@ -150,6 +150,8 @@ public class Top8Service {
                 var shadowImage = imageService.createShadow(characterImage, shadowSettings.getColor());
                 shadowImage = imageService.applyMask(shadowImage, mask, offset);
                 characterImage = imageService.mergeShadow(maskedImage, shadowImage);
+            } else {
+                characterImage = maskedImage;
             }
         } catch (IOException e){
             LOGGER.error("Could not find image mask in directory " + playerSlot.getMask());
