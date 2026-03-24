@@ -733,6 +733,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Elena     | elena    |
 | Sagat     | sagat    |
 | C. Viper  | c_viper  |
+| Alex      | alex     |
 | Random    | random   |
 
 ### Tekken 8 URL names
@@ -834,7 +835,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Kevin Rian        | kevin    |
 | Billy Kane        | billy    |
 | Mai Shiranui      | mai      |
-| Kim Dong Hwan     | kim      |
+| Kim Dong Hwan     | kim_hwan |
 | Gato              | gato     |
 | Kain R. Heinlein  | kain     |
 | Cristiano Ronaldo | cr7      |
@@ -845,6 +846,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Joe Higashi       | joe      |
 | Chun-Li           | chunli   |
 | Mr. Big           | mr_big   |
+| Kim Jae Hoon      | kim_hoon |
 | Random            | random   |
 
 ###Granblue Fantasy Versus: Rising URL names
@@ -890,6 +892,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Galleon       | galleon       |
 | Wilnas        | wilnas        |
 | Meg           | meg           |
+| Ilsa          | ilsa          |
 
 ###2XKO
 
@@ -906,6 +909,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Blitzcrank | blitzcrank |
 | Teemo      | teemo      |
 | Warwick    | warwick    |
+| Caitlyn    | caitlyn    |
 | Random     | random     |
 
 ###Under Night In-Birth II Sys:Celes
