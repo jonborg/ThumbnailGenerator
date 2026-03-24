@@ -101,6 +101,15 @@
       "flip": false
     },
     {
+      "fighter": "caitlyn",
+      "offset": [
+        -720,
+        50
+      ],
+      "scale": 1.7,
+      "flip": false
+    },
+    {
       "fighter": "random",
       "offset": [
         64,
