@@ -47,7 +47,8 @@ public enum GranblueVersusRisingEnum implements CharacterEnum {
     SANDALPHON("Sandalphon", "sandalphon", 2772, 1),
     GALLEON("Galleon", "galleon", 2759, 1),
     WILNAS("Wilnas", "wilnas", 2781, 1),
-    MEG("Meg", "meg", 2797, 1);
+    MEG("Meg", "meg", 2797, 1),
+    ILSA("Ilsa", "ilsa", 2881, 1);
 
     private final String name;
     private final String code;
