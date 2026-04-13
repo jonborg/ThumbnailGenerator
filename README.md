@@ -945,9 +945,18 @@ Thumbnails are saved in **/generated_top8** folder.
 
 
 ### Release Notes
+#### v4.6.1
+- Fixed issue where if no shadow was provided to top8 slot, character image was not cropped into top8;
+- Added La Reina from Rivals of Aether 2;
+- Added Alex from Street Fighter 6;
+- Added Mr.Big and Kim Jae Hoon from Fatal Fury: COTW;
+- Changed URL name from Kim Dong Hwan to better distinguish from Kim Jae Hoon;
+- Added Ilsa from GBFVR;
+- Added Caitlyn from 2XKO.
+
 #### v4.6.0
-- Added Under Night In-Birth II Sys:Celes as a selectable game
-- Added Miary Zo from Tekken 8
+- Added Under Night In-Birth II Sys:Celes as a selectable game;
+- Added Miary Zo from Tekken 8.
 
 #### v4.5.1
 - Adjusted multi character detection on Start.GG generation to be compatible with 2XKO;
