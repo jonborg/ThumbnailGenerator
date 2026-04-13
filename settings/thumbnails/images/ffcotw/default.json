@@ -101,7 +101,7 @@
       "flip": false
     },
     {
-      "fighter": "kim",
+      "fighter": "kim_hwan",
       "offset": [
         -758,
         -30
@@ -188,6 +188,24 @@
         50
       ],
       "scale": 0.8,
+      "flip": false
+    },
+    {
+      "fighter": "mr_big",
+      "offset": [
+        -400,
+        120
+      ],
+      "scale": 0.8,
+      "flip": false
+    },
+    {
+      "fighter": "kim_hoon",
+      "offset": [
+        -580,
+        -320
+      ],
+      "scale": 0.65,
       "flip": false
     },
     {

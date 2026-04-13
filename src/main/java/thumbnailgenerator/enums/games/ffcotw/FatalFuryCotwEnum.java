@@ -17,7 +17,7 @@ public enum FatalFuryCotwEnum implements CharacterEnum {
     KEVIN("Kevin Rian", "kevin", 2687, 1),
     BILLY("Billy Kane", "billy", 2681, 1),
     MAI("Mai Shiranui", "mai", 2689, 1),
-    KIM("Kim Dong Hwan", "kim", 2688, 1),
+    KIM_HWAN("Kim Dong Hwan", "kim_hwan", 2688, 1),
     GATO("Gato", "gato", 2683, 1),
     KAIN("Kain R. Heinlein", "kain", 2686, 1),
     CR7("Cristiano Ronaldo", "cr7", 2682, 1),
@@ -28,6 +28,9 @@ public enum FatalFuryCotwEnum implements CharacterEnum {
     KEN("Ken", "ken", 2802, 1),
     JOE("Joe Higashi", "joe", 2801, 1),
     CHUN_LI("Chun-Li", "chunli", 2810, 1),
+    MR_BIG("Mr.Big", "mr_big", 2826, 1),
+
+    KIM_HOON("Kim Jae Hoon", "kim_hoon", 2947, 1),
 
     RANDOM("Random", "random", 2800, 1);
 

@@ -254,6 +254,15 @@
       "flip": false
     },
     {
+      "fighter": "alex",
+      "offset": [
+        -310,
+        -250
+      ],
+      "scale": 0.7,
+      "flip": false
+    },
+    {
       "fighter": "random",
       "offset": [
         64,

@@ -22,6 +22,8 @@ public enum RivalsOfAether2Enum implements CharacterEnum {
     ABSA("Absa", "absa", 2709, 1),
     GALVAN("Galvan", "galvan", 2794, 1),
 
+    REINA("La Reina", "reina", 2834, 1),
+
     RANDOM("Random", "random", 2803, 1);
 
     private final String name;

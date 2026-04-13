@@ -337,7 +337,7 @@
     {
       "fighter": "wilnas",
       "offset": [
-        -650,
+        -680,
         -300
       ],
       "scale": 1.1,
@@ -350,6 +350,15 @@
         20
       ],
       "scale": 0.75,
+      "flip": false
+    },
+    {
+      "fighter": "ilsa",
+      "offset": [
+        -680,
+        -470
+      ],
+      "scale": 1.15,
       "flip": false
     }
   ]

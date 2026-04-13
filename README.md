@@ -698,6 +698,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Olympia    | olympia    |
 | Absa       | absa       |
 | Galvan     | galvan     |
+| La Reina   | reina      |
 | Random     | random     |
 
 ### Street Fighter 6 URL names
@@ -732,6 +733,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Elena     | elena    |
 | Sagat     | sagat    |
 | C. Viper  | c_viper  |
+| Alex      | alex     |
 | Random    | random   |
 
 ### Tekken 8 URL names
@@ -833,7 +835,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Kevin Rian        | kevin    |
 | Billy Kane        | billy    |
 | Mai Shiranui      | mai      |
-| Kim Dong Hwan     | kim      |
+| Kim Dong Hwan     | kim_hwan |
 | Gato              | gato     |
 | Kain R. Heinlein  | kain     |
 | Cristiano Ronaldo | cr7      |
@@ -843,6 +845,8 @@ Thumbnails are saved in **/generated_top8** folder.
 | Ken               | ken      |
 | Joe Higashi       | joe      |
 | Chun-Li           | chunli   |
+| Mr. Big           | mr_big   |
+| Kim Jae Hoon      | kim_hoon |
 | Random            | random   |
 
 ###Granblue Fantasy Versus: Rising URL names
@@ -887,6 +891,8 @@ Thumbnails are saved in **/generated_top8** folder.
 | Sandalphon    | sandalphon    |
 | Galleon       | galleon       |
 | Wilnas        | wilnas        |
+| Meg           | meg           |
+| Ilsa          | ilsa          |
 
 ###2XKO
 
@@ -903,6 +909,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Blitzcrank | blitzcrank |
 | Teemo      | teemo      |
 | Warwick    | warwick    |
+| Caitlyn    | caitlyn    |
 | Random     | random     |
 
 ###Under Night In-Birth II Sys:Celes
@@ -938,9 +945,18 @@ Thumbnails are saved in **/generated_top8** folder.
 
 
 ### Release Notes
+#### v4.6.1
+- Fixed issue where if no shadow was provided to top8 slot, character image was not cropped into top8;
+- Added La Reina from Rivals of Aether 2;
+- Added Alex from Street Fighter 6;
+- Added Mr.Big and Kim Jae Hoon from Fatal Fury: COTW;
+- Changed URL name from Kim Dong Hwan to better distinguish from Kim Jae Hoon;
+- Added Ilsa from GBFVR;
+- Added Caitlyn from 2XKO.
+
 #### v4.6.0
-- Added Under Night In-Birth II Sys:Celes as a selectable game
-- Added Miary Zo from Tekken 8
+- Added Under Night In-Birth II Sys:Celes as a selectable game;
+- Added Miary Zo from Tekken 8.
 
 #### v4.5.1
 - Adjusted multi character detection on Start.GG generation to be compatible with 2XKO;
