@@ -209,6 +209,42 @@
       "flip": false
     },
     {
+      "fighter": "geese",
+      "offset": [
+        -550,
+        100
+      ],
+      "scale": 0.7,
+      "flip": false
+    },
+    {
+      "fighter": "blue_mary",
+      "offset": [
+        -620,
+        120
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "krauser",
+      "offset": [
+        -410,
+        110
+      ],
+      "scale": 0.65,
+      "flip": false
+    },
+    {
+      "fighter": "mr_karate",
+      "offset": [
+        -820,
+        110
+      ],
+      "scale": 0.8,
+      "flip": false
+    },
+    {
       "fighter": "random",
       "offset": [
         64,

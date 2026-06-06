@@ -49,6 +49,8 @@ public enum Tekken8Enum implements CharacterEnum {
     ARMOR_KING("Armor King", "armor_king", 2804, 1),
     MIARY("Miary Zo", "miary", 2805, 1),
 
+    KUNIMITSU("Kunimitsu", "kunimitsu", 3015, 1),
+
     RANDOM("Random", "random", 2430, 1);
 
     private final String name;

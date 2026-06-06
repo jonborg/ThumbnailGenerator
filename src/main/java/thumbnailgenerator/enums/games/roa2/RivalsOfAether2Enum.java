@@ -23,6 +23,7 @@ public enum RivalsOfAether2Enum implements CharacterEnum {
     GALVAN("Galvan", "galvan", 2794, 1),
 
     REINA("La Reina", "reina", 2834, 1),
+    SLADE("Slade", "slade", 2953, 1),
 
     RANDOM("Random", "random", 2803, 1);
 
