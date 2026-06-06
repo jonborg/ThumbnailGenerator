@@ -109,6 +109,7 @@ Images were gathered thanks to:
 - [Street Fighter 6 official website](https://www.streetfighter.com/6)
 - [Tekken Warehouse](https://tekkenwarehouse.com/)
 - [Fighters Collection's Guilty Gear: Strive Gallery](https://www.fightersgeneration.com/games/ggstrive-p2.html)
+- [Guilty Gear Wikia - Strive icons](https://guiltygear.wiki.gg/wiki/Category:Guilty_Gear_-Strive-_Icons)
 - [Fatal Fury: City of the Wolves official website](https://www.snk-corp.co.jp/us/games/fatalfury-cotw/)
 - [GBFVR fan press kit](https://rising.granbluefantasy.jp/en/extras/fankit/)
 - [smash-ultimate-assets](https://github.com/marcrd/smash-ultimate-assets) repository
@@ -782,6 +783,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Fahkumram  | fahkumram  |
 | Armor King | armor_king |
 | Miary Zo   | miary      |
+| Kunimitsu  | kunimitsu  |
 | Random     | random     |
 
 ###Guilty Gear: Strive URL names
@@ -820,6 +822,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Venom               | venom       |
 | Unika               | unika       |
 | Lucy                | lucy        |
+| Jam                 | jam         |
 | Random              | random      |
 
 ###Fatal Fury: City of the Wolves URL names
