@@ -362,6 +362,15 @@
       "flip": false
     },
     {
+      "fighter": "kunimitsu",
+      "offset": [
+        -430,
+        80
+      ],
+      "scale": 0.75,
+      "flip": false
+    },
+    {
       "fighter": "random",
       "offset": [
         64,
