@@ -137,6 +137,15 @@
       "flip": false
     },
     {
+      "fighter": "slade",
+      "offset": [
+        -300,
+        0
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+    {
       "fighter": "random",
       "offset": [
         64,

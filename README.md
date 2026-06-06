@@ -699,6 +699,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Absa       | absa       |
 | Galvan     | galvan     |
 | La Reina   | reina      |
+| Slade      | slade      |
 | Random     | random     |
 
 ### Street Fighter 6 URL names
