@@ -734,6 +734,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Sagat     | sagat    |
 | C. Viper  | c_viper  |
 | Alex      | alex     |
+| Ingrid    | ingrid   |
 | Random    | random   |
 
 ### Tekken 8 URL names
