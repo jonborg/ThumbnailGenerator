@@ -31,6 +31,10 @@ public enum FatalFuryCotwEnum implements CharacterEnum {
     MR_BIG("Mr.Big", "mr_big", 2826, 1),
 
     KIM_HOON("Kim Jae Hoon", "kim_hoon", 2947, 1),
+    GEESE("Nigthmare Geese", "geese", 2948,1),
+    BLUE_MARY("Blue Mary", "blue_mary", 2949,1),
+    KRAUSER("Wolfgang Krauser", "krauser", 2963,1),
+    MR_KARATE("Mr. Karate", "mr_karate", -1,1),
 
     RANDOM("Random", "random", 2800, 1);
 

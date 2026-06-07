@@ -110,6 +110,24 @@
       "flip": false
     },
     {
+      "fighter": "akali",
+      "offset": [
+        -100,
+        -150
+      ],
+      "scale": 0.4,
+      "flip": false
+    },
+    {
+      "fighter": "senna",
+      "offset": [
+        -850,
+        -400
+      ],
+      "scale": 0.6,
+      "flip": false
+    },
+    {
       "fighter": "random",
       "offset": [
         64,

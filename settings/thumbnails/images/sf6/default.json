@@ -263,6 +263,15 @@
       "flip": false
     },
     {
+      "fighter": "ingrid",
+      "offset": [
+        -300,
+        -200
+      ],
+      "scale": 0.7,
+      "flip": false
+    },
+    {
       "fighter": "random",
       "offset": [
         64,

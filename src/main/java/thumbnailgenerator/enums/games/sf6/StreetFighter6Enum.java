@@ -38,6 +38,7 @@ public enum StreetFighter6Enum implements CharacterEnum {
     SAGAT("Sagat", "sagat", 2745, 1),
     CVIPER("C. Viper", "c_viper", 2798, 1),
     ALEX("Alex", "alex", 2946, 1),
+    INGRID("Ingrid", "ingrid", 3014, 1),
 
     RANDOM("Random", "random", 2602, 1);
 
