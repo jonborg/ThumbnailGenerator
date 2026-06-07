@@ -956,7 +956,7 @@ Thumbnails are saved in **/generated_top8** folder.
 
 
 ### Release Notes
-#### Unreleased
+#### v4.6.2
 - Added Slade from RoA2;
 - Added Ingrid from SF6;
 - Added Kunimitsu from Tekken 8;
