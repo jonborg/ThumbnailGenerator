@@ -245,6 +245,24 @@
       "flip": false
     },
     {
+      "fighter": "kenshiro",
+      "offset": [
+        -990,
+        90
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
+      "fighter": "rick",
+      "offset": [
+        -820,
+        90
+      ],
+      "scale": 0.8,
+      "flip": false
+    },
+    {
       "fighter": "random",
       "offset": [
         64,

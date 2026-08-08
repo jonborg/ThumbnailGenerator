@@ -44,6 +44,7 @@ public enum GuiltyGearStriveEnum implements CharacterEnum {
     LUCY("Lucy", "lucy", 2787, 1),
 
     JAM("Jam", "jam", 2962, 1),
+    ROBO_KY("Robo-Ky", "robo_ky", 3228, 1),
 
     RANDOM("Random", "random", 2621, 1);
 

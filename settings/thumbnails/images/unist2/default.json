@@ -240,6 +240,15 @@
       ],
       "scale": 0.45,
       "flip": false
+    },
+    {
+      "fighter": "zohar",
+      "offset": [
+        -370,
+        -100
+      ],
+      "scale": 0.9,
+      "flip": false
     }
   ]
 }
