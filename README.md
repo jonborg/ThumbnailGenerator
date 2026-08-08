@@ -737,6 +737,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | C. Viper  | c_viper  |
 | Alex      | alex     |
 | Ingrid    | ingrid   |
+| Yasmine   | yasmine  |
 | Random    | random   |
 
 ### Tekken 8 URL names
@@ -823,40 +824,42 @@ Thumbnails are saved in **/generated_top8** folder.
 | Unika               | unika       |
 | Lucy                | lucy        |
 | Jam                 | jam         |
+| Robo-Ky             | robo_ky     |
 | Random              | random      |
 
 ###Fatal Fury: City of the Wolves URL names
 
-| Character         | URL Name  |
-|-------------------|-----------|
-| Rock Howard       | rock      |
-| Terry Bogard      | terry     |
-| B. Jenet          | jenet     |
-| Marco Rodrigues   | marco     |
-| Preecha           | preecha   |
-| Hotaru Futaba     | hotaru    |
-| Vox Reaper        | vox       |
-| Tizoc             | tizoc     |
-| Kevin Rian        | kevin     |
-| Billy Kane        | billy     |
-| Mai Shiranui      | mai       |
-| Kim Dong Hwan     | kim_hwan  |
-| Gato              | gato      |
-| Kain R. Heinlein  | kain      |
-| Cristiano Ronaldo | cr7       |
-| Salvatore Ganacci | ganacci   |
-| Hokuto Maru       | hokuto    |
-| Andy Bogard       | andy      |
-| Ken               | ken       |
-| Joe Higashi       | joe       |
-| Chun-Li           | chunli    |
-| Mr. Big           | mr_big    |
-| Kim Jae Hoon      | kim_hoon  |
-| Nightmare Geese   | Geese     |
-| Blue Mary         | blue_mary |
-| Wolfgang Krauser  | krauser   |
-| Mr. Karate        | mr_karate |
-| Random            | random    |
+| Character         | URL Name   |
+|-------------------|------------|
+| Rock Howard       | rock       |
+| Terry Bogard      | terry      |
+| B. Jenet          | jenet      |
+| Marco Rodrigues   | marco      |
+| Preecha           | preecha    |
+| Hotaru Futaba     | hotaru     |
+| Vox Reaper        | vox        |
+| Tizoc             | tizoc      |
+| Kevin Rian        | kevin      |
+| Billy Kane        | billy      |
+| Mai Shiranui      | mai        |
+| Kim Dong Hwan     | kim_hwan   |
+| Gato              | gato       |
+| Kain R. Heinlein  | kain       |
+| Cristiano Ronaldo | cr7        |
+| Salvatore Ganacci | ganacci    |
+| Hokuto Maru       | hokuto     |
+| Andy Bogard       | andy       |
+| Ken               | ken        |
+| Joe Higashi       | joe        |
+| Chun-Li           | chunli     |
+| Mr. Big           | mr_big     |
+| Kim Jae Hoon      | kim_hoon   |
+| Nightmare Geese   | Geese      |
+| Blue Mary         | blue_mary  |
+| Wolfgang Krauser  | krauser    |
+| Mr. Karate        | mr_karate  |
+| Kenshiro          | kenshiro   |
+| Random            | random     |
 
 ###Granblue Fantasy Versus: Rising URL names
 
@@ -921,6 +924,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Caitlyn    | caitlyn    |
 | Akali      | akali      |
 | Senna      | senna      |
+| Thresh     | thresh     |
 | Random     | random     |
 
 ###Under Night In-Birth II Sys:Celes
@@ -951,6 +955,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Uzuki     | uzuki     |
 | Ogre      | ogre      |
 | Izumi     | izumi     |
+| Zohar     | zohar     |
 | Eltnum    | eltnum    |
 | Akatsuki  | akatsuki  |
 

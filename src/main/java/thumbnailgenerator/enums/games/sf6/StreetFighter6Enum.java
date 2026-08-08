@@ -40,6 +40,8 @@ public enum StreetFighter6Enum implements CharacterEnum {
     ALEX("Alex", "alex", 2946, 1),
     INGRID("Ingrid", "ingrid", 3014, 1),
 
+    YASMINE("Yasmine", "yasmine", 3229, 1),
+
     RANDOM("Random", "random", 2602, 1);
 
     private final String name;

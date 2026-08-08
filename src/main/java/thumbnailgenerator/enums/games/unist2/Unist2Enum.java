@@ -36,6 +36,7 @@ public enum Unist2Enum implements CharacterEnum {
     UZUKI("Uzuki", "uzuki", 2739, 1),
     OGRE("Ogre", "ogre", 2734, 1),
     IZUMI("Izumi", "izumi", 2827, 1),
+    ZOHAR("Zohar", "zohar", -1, 1),
 
     ELTNUM("Eltnum", "eltnum", 2722, 1),
     AKATSUKI("Akatsuki", "akatsuki", 2718, 1);

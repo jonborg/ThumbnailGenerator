@@ -20,7 +20,8 @@ public enum TwoXKOEnum implements CharacterEnum {
 
     CAITLYN("Caitlyn", "caitlyn", 2945, 1),
     AKALI("Akali", "akali", -1, 1),
-    SENNA("Senna", "senna", -1, 1),
+    SENNA("Senna", "senna", 3206, 1),
+    THRESH("Thresh", "thresh", 3205, 1),
 
     RANDOM("Random", "random", 2799, 1);
 

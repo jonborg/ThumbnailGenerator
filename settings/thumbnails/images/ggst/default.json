@@ -285,6 +285,14 @@
       ],
       "scale": 0.45,
       "flip": false
+    },{
+      "fighter": "robo_ky",
+      "offset": [
+        -600,
+        -380
+      ],
+      "scale": 1.25,
+      "flip": false
     },
     {
       "fighter": "random",
