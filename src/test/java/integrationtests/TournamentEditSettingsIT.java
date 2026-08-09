@@ -32,6 +32,8 @@ import thumbnailgenerator.enums.games.ssbm.SmashMeleeFighterArtTypeEnum;
 import thumbnailgenerator.enums.games.ssbu.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.enums.games.sf6.StreetFighter6FighterArtTypeEnum;
 import thumbnailgenerator.enums.games.tekken8.Tekken8FighterArtTypeEnum;
+import thumbnailgenerator.enums.games.tokon.TokonFighterArtTypeEnum;
+import thumbnailgenerator.enums.games.twoxko.TwoXKOFighterArtTypeEnum;
 import thumbnailgenerator.enums.interfaces.FighterArtTypeEnum;
 import thumbnailgenerator.service.TournamentService;
 import utils.FileUtils;
@@ -182,9 +184,10 @@ public class TournamentEditSettingsIT extends CustomApplicationTest {
                 Arguments.of(Game.ROA2, RivalsOfAether2FighterArtTypeEnum.RENDER),
                 Arguments.of(Game.SF6, StreetFighter6FighterArtTypeEnum.RENDER),
                 Arguments.of(Game.TEKKEN8, Tekken8FighterArtTypeEnum.RENDER),
-                Arguments.of(Game.GGST, GuiltyGearStriveFighterArtTypeEnum.RENDER),
+                Arguments.of(Game.TWOXKO, TwoXKOFighterArtTypeEnum.RENDER),
                 Arguments.of(Game.FFCOTW, FatalFuryCotwFighterArtTypeEnum.RENDER),
-                Arguments.of(Game.GBFVR, GranblueVersusRisingFighterArtTypeEnum.RENDER)
+                Arguments.of(Game.GGST, GuiltyGearStriveFighterArtTypeEnum.RENDER),
+                Arguments.of(Game.TOKON, TokonFighterArtTypeEnum.RENDER)
         );
     }
 }
