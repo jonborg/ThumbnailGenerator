@@ -122,7 +122,7 @@ public class PlayerController implements Initializable {
         var gameCode = game.getCode();
         var characterName = characterSelect.getCharacterComboBox().getSelectionModel().getSelectedItem();
         var urlName = gameEnumService.findCharacterCodeByName(game, characterName);
-        var alt = characterSelect.getAltSpinner().getValue();
+        var alt = characterSelect.getAlt();
 
         try {
             var path = "/icons/" + gameCode + "/" + urlName + "/" + alt + ".png";
