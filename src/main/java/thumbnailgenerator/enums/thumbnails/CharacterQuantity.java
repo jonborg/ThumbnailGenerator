@@ -4,5 +4,6 @@ public enum CharacterQuantity {
     ONE,
     TWO,
     THREE,
-    FOUR
+    FOUR,
+    FIVE
 }

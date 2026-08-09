@@ -372,50 +372,42 @@ public class ThumbnailService {
             port++;
             LOGGER.info("Drawing player {} information.", port);
             BufferedImage slot = new BufferedImage(thumbnailWidth/2, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
-
-            switch (player.getFighterList().size()){
-                case 1:
-                    slot = getCharacterSingle(
+            if(player.getFighterList().size() < 2) {
+                slot = getCharacterSingle(
                         thumbnail,
                         player,
                         characterImageFetcher,
                         port
-                    );
-                    break;
-                case 2:
-                    slot = getCharacterMulti(
+                );
+            } else {
+                CharacterQuantitySettings characterQuantitySettings;
+                switch (player.getFighterList().size()){
+                    case 2:
+                        characterQuantitySettings = CharacterQuantitySettingsSetup
+                                .getCharacterQuantitySettingsForTwo(port);
+                        break;
+                    case 3:
+                        characterQuantitySettings = CharacterQuantitySettingsSetup
+                                .getCharacterQuantitySettingsForThree(port, thumbnailWidth);
+                        break;
+                    case 4:
+                        characterQuantitySettings = CharacterQuantitySettingsSetup
+                                .getCharacterQuantitySettingsForFour(port, thumbnailWidth, thumbnailHeight);
+                        break;
+                    default:
+                        characterQuantitySettings = CharacterQuantitySettingsSetup
+                                .getCharacterQuantitySettingsForFive(port, thumbnailWidth, thumbnailHeight);
+                        break;
+
+                }
+                slot = getCharacterMulti(
                         thumbnail,
                         player,
                         characterImageFetcher,
-                        CharacterQuantitySettingsSetup.getCharacterQuantitySettingsForTwo(
-                                port
-                        )
-                    );
-                    break;
-                case 3:
-                    slot = getCharacterMulti(
-                            thumbnail,
-                            player,
-                            characterImageFetcher,
-                            CharacterQuantitySettingsSetup.getCharacterQuantitySettingsForThree(
-                                    port,
-                                    thumbnailWidth
-                            )
-                    );
-                    break;
-                case 4:
-                    slot = getCharacterMulti(
-                            thumbnail,
-                            player,
-                            characterImageFetcher,
-                            CharacterQuantitySettingsSetup.getCharacterQuantitySettingsForFour(
-                                    port,
-                                    thumbnailWidth,
-                                    thumbnailHeight
-                            )
-                    );
-                    break;
+                        characterQuantitySettings
+                );
             }
+
             g2d.drawImage(slot, null, thumbnailWidth / 2 * (port - 1), 0);
         }
     }

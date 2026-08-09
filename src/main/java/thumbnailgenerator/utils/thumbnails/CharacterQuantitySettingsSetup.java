@@ -45,6 +45,18 @@ public class CharacterQuantitySettingsSetup {
         }
     }
 
+    public static CharacterQuantitySettings getCharacterQuantitySettingsForFive(
+            int port,
+            Integer thumbnailWidth,
+            Integer thumbnailHeight
+    ) {
+        if (port == 1){
+            return getPlayer1CharacterQuantitySettingsForFive(thumbnailWidth, thumbnailHeight);
+        } else {
+            return getPlayer2CharacterQuantitySettingsForFive(thumbnailWidth, thumbnailHeight);
+        }
+    }
+
     private static CharacterQuantitySettings getPlayer1CharacterQuantitySettingsForTwo(){
         var masksFiles = new ArrayList<>(Arrays.asList(
                 thumbnailMaskPath(CharacterQuantity.TWO,"char2.png"),
@@ -169,14 +181,14 @@ public class CharacterQuantitySettingsSetup {
         var characterOrder = new ArrayList<>(Arrays.asList(0,3,1,2));
         var characterExtraOffsets = new ArrayList<>(Arrays.asList(
                 new Integer[] {0,-150},
-                new Integer[] {-150, 0},
-                new Integer[] {-150, 0},
+                new Integer[] {-200, -50},
+                new Integer[] {-100, -50},
                 new Integer[] {0, -200}
         ));
         var maskOffsets = new ArrayList<>(Arrays.asList(
                 new Integer[] {0, 0},
-                new Integer[] {0, 0},
-                new Integer[] {thumbnailWidth/4, 0},
+                new Integer[] {0, 40},
+                new Integer[] {thumbnailWidth/4, 40},
                 new Integer[] {0, thumbnailHeight/2}
         ));
 
@@ -203,20 +215,94 @@ public class CharacterQuantitySettingsSetup {
         var characterOrder = new ArrayList<>(Arrays.asList(0, 1, 3, 2));
         var characterExtraOffsets = new ArrayList<>(Arrays.asList(
                 new Integer[] {0, -150},
-                new Integer[] {-150, 0},
-                new Integer[] {-150, 0},
-                new Integer[] {0, -200}
+                new Integer[] {-100, -50},
+                new Integer[] {-200, -50},
+                new Integer[] {20, -200}
         ));
         var maskOffsets = new ArrayList<>(Arrays.asList(
                 new Integer[] {0, 0},
-                new Integer[] {thumbnailWidth / 4, 0},
-                new Integer[] {0, 0},
+                new Integer[] {thumbnailWidth / 4, 40},
+                new Integer[] {0, 40},
                 new Integer[] {0, thumbnailHeight / 2}
         ));
 
         return new CharacterQuantitySettings(
                 4,
                 0.5f,
+                masksFiles,
+                characterOrder,
+                characterExtraOffsets,
+                maskOffsets
+        );
+    }
+
+    private static CharacterQuantitySettings getPlayer1CharacterQuantitySettingsForFive(
+            Integer thumbnailWidth,
+            Integer thumbnailHeight
+    ){
+        var masksFiles = new ArrayList<>(Arrays.asList(
+                thumbnailMaskPath(CharacterQuantity.FIVE,"charTop.png"),
+                thumbnailMaskPath(CharacterQuantity.FIVE,"charLeft.png"),
+                thumbnailMaskPath(CharacterQuantity.FIVE,"charRight.png"),
+                thumbnailMaskPath(CharacterQuantity.FIVE,"charBottomLeft.png"),
+                thumbnailMaskPath(CharacterQuantity.FIVE,"charBottomRight.png")
+        ));
+        var characterOrder = new ArrayList<>(Arrays.asList(0,4,1,3,2));
+        var characterExtraOffsets = new ArrayList<>(Arrays.asList(
+                new Integer[] {-42,-150},
+                new Integer[] {-200, -50},
+                new Integer[] {-100, -50},
+                new Integer[] {-160, -220},
+                new Integer[] {-160, -220}
+        ));
+        var maskOffsets = new ArrayList<>(Arrays.asList(
+                new Integer[] {42, 0},
+                new Integer[] {0, 0},
+                new Integer[] {thumbnailWidth/4, 0},
+                new Integer[] {0, thumbnailHeight-330},
+                new Integer[] {thumbnailWidth/4, thumbnailHeight-330}
+        ));
+
+        return new CharacterQuantitySettings(
+                5,
+                0.4f,
+                masksFiles,
+                characterOrder,
+                characterExtraOffsets,
+                maskOffsets
+        );
+    }
+
+    private static CharacterQuantitySettings getPlayer2CharacterQuantitySettingsForFive(
+            Integer thumbnailWidth,
+            Integer thumbnailHeight
+    ){
+        var masksFiles = new ArrayList<>(Arrays.asList(
+                thumbnailMaskPath(CharacterQuantity.FIVE,"charTop.png"),
+                thumbnailMaskPath(CharacterQuantity.FIVE,"charRight.png"),
+                thumbnailMaskPath(CharacterQuantity.FIVE,"charLeft.png"),
+                thumbnailMaskPath(CharacterQuantity.FIVE,"charBottomRight.png"),
+                thumbnailMaskPath(CharacterQuantity.FIVE,"charBottomLeft.png")
+        ));
+        var characterOrder = new ArrayList<>(Arrays.asList(0,4,1,3,2));
+        var characterExtraOffsets = new ArrayList<>(Arrays.asList(
+                new Integer[] {-42,-150},
+                new Integer[] {-100, -50},
+                new Integer[] {-200, -50},
+                new Integer[] {-160, -220},
+                new Integer[] {-160, -220}
+        ));
+        var maskOffsets = new ArrayList<>(Arrays.asList(
+                new Integer[] {42, 0},
+                new Integer[] {thumbnailWidth/4, 0},
+                new Integer[] {0, 0},
+                new Integer[] {thumbnailWidth/4, thumbnailHeight-330},
+                new Integer[] {0, thumbnailHeight-330}
+        ));
+
+        return new CharacterQuantitySettings(
+                5,
+                0.4f,
                 masksFiles,
                 characterOrder,
                 characterExtraOffsets,
