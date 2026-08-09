@@ -30,7 +30,7 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
 
     @Test
     public void testTournamentSelection() {
-        verifyThat("#tournamentsLabel", hasText("Tournaments:"));
+        verifyThat("#tournamentsLabel", hasText("Tournament:"));
         clickOnButton(ButtonId.TOURNAMENT_WEEKLY_L);
         verifyThat("#tournamentsLabel", hasText("Tournament: Weekly L"));
     }

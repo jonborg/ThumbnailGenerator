@@ -30,7 +30,7 @@
                 <MenuItem fx:id="menuConvertOffsets" styleClass="menuItem" text="Convert old character offsets" onAction="#convertCharacterOffsets"/>
             </Menu>
         </MenuBar>
-        <VBox spacing="40" alignment="CENTER" >
+        <VBox spacing="20" alignment="CENTER" >
             <VBox spacing="10">
                 <!--Tournament UI-->
                 <HBox alignment="CENTER">

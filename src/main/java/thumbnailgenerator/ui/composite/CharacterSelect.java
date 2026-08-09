@@ -66,7 +66,7 @@ public class CharacterSelect {
             this.characterComboBox.setStyle("{-fx-min-width: 108; -fx-max-width: Infinity;}");
         }
         this.altSpinner.setStyle("{-fx-max-width: 50; -fx-min-width: 50; -fx-pref-width: 50;}");
-        this.icon.setStyle("{height: 64;}");
+        this.icon.setStyle("{height: 40;}");
     }
 
     public void initCharacterComboBox(List<String> characterList){

@@ -155,8 +155,12 @@ public class PlayerController implements Initializable {
                 resource = Top8Service.class.getResourceAsStream(defaultPath);
             }
             var icon = new Image(resource);
+
             characterSelect.getIconLink().setDisable(false);
             characterSelect.getIcon().setImage(icon);
+            characterSelect.getIcon().setFitWidth(icon.getWidth() * 5 / 8);
+            characterSelect.getIcon().setFitHeight(icon.getHeight() * 5 / 8);
+            characterSelect.getIcon().setPreserveRatio(true);
         }catch (NullPointerException e){
             characterSelect.getIconLink().setDisable(true);
             characterSelect.getIconLink().setText(null);
