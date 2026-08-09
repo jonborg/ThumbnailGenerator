@@ -14,7 +14,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -393,16 +392,27 @@ public class ThumbnailService {
                         )
                     );
                     break;
+                case 3:
+                    slot = getCharacterMulti(
+                            thumbnail,
+                            player,
+                            characterImageFetcher,
+                            CharacterQuantitySettingsSetup.getCharacterQuantitySettingsForThree(
+                                    port,
+                                    thumbnailWidth
+                            )
+                    );
+                    break;
                 case 4:
                     slot = getCharacterMulti(
-                        thumbnail,
-                        player,
-                        characterImageFetcher,
-                        CharacterQuantitySettingsSetup.getCharacterQuantitySettingsForFour(
-                                port,
-                                thumbnailWidth,
-                                thumbnailHeight
-                        )
+                            thumbnail,
+                            player,
+                            characterImageFetcher,
+                            CharacterQuantitySettingsSetup.getCharacterQuantitySettingsForFour(
+                                    port,
+                                    thumbnailWidth,
+                                    thumbnailHeight
+                            )
                     );
                     break;
             }
@@ -459,7 +469,7 @@ public class ThumbnailService {
                     fighterImageThumbnailSettings.getOffset()[1] + centerOffsetY + extraOffSet[1]
             };
 
-            var flipCanvas = new BufferedImage(640, 720, BufferedImage.TYPE_INT_ARGB);
+            var flipCanvas = new BufferedImage(thumbnailWidth/2, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
             var flipGraphic = flipCanvas.createGraphics();
             flipGraphic.drawImage(multiCharScaleScaledImage, offset[0], offset[1], null);
             var flipImage = imageService.flipImage(flipCanvas, fighter.isFlip());

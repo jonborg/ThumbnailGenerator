@@ -22,6 +22,17 @@ public class CharacterQuantitySettingsSetup {
         }
     }
 
+    public static CharacterQuantitySettings getCharacterQuantitySettingsForThree(
+            int port,
+            Integer thumbnailWidth
+    ) {
+        if (port == 1){
+            return getPlayer1CharacterQuantitySettingsForThree(thumbnailWidth);
+        } else {
+            return getPlayer2CharacterQuantitySettingsForThree(thumbnailWidth);
+        }
+    }
+
     public static CharacterQuantitySettings getCharacterQuantitySettingsForFour(
             int port,
             Integer thumbnailWidth,
@@ -77,6 +88,67 @@ public class CharacterQuantitySettingsSetup {
         return new CharacterQuantitySettings(
                 2,
                 0.7f,
+                masksFiles,
+                characterOrder,
+                characterExtraOffsets,
+                maskOffsets
+        );
+    }
+
+    private static CharacterQuantitySettings getPlayer1CharacterQuantitySettingsForThree(
+            Integer thumbnailWidth
+    ){
+        var masksFiles = new ArrayList<>(Arrays.asList(
+                thumbnailMaskPath(CharacterQuantity.THREE,"charTop.png"),
+                thumbnailMaskPath(CharacterQuantity.THREE,"charLeft.png"),
+                thumbnailMaskPath(CharacterQuantity.THREE,"charRight.png")
+        ));
+        var characterOrder = new ArrayList<>(Arrays.asList(0,2,1));
+        var characterExtraOffsets = new ArrayList<>(Arrays.asList(
+                new Integer[] {0,-100},
+                new Integer[] {-200, 50},
+                new Integer[] {-100, 50}
+        ));
+        var maskOffsets = new ArrayList<>(Arrays.asList(
+                new Integer[] {0, 0},
+                new Integer[] {0, 0},
+                new Integer[] {thumbnailWidth/4, 0}
+        ));
+
+        return new CharacterQuantitySettings(
+                3,
+                0.6f,
+                masksFiles,
+                characterOrder,
+                characterExtraOffsets,
+                maskOffsets
+        );
+    }
+
+    private static CharacterQuantitySettings getPlayer2CharacterQuantitySettingsForThree(
+            Integer thumbnailWidth
+    ){
+        var masksFiles = new ArrayList<>(Arrays.asList(
+                thumbnailMaskPath(CharacterQuantity.THREE,"charTop.png"),
+                thumbnailMaskPath(CharacterQuantity.THREE,"charRight.png"),
+                thumbnailMaskPath(CharacterQuantity.THREE,"charLeft.png")
+
+        ));
+        var characterOrder = new ArrayList<>(Arrays.asList(0,2,1));
+        var characterExtraOffsets = new ArrayList<>(Arrays.asList(
+                new Integer[] {0,-100},
+                new Integer[] {-100, 50},
+                new Integer[] {-200, 50}
+        ));
+        var maskOffsets = new ArrayList<>(Arrays.asList(
+                new Integer[] {0, 0},
+                new Integer[] {thumbnailWidth/4, 0},
+                new Integer[] {0, 0}
+        ));
+
+        return new CharacterQuantitySettings(
+                3,
+                0.6f,
                 masksFiles,
                 characterOrder,
                 characterExtraOffsets,
