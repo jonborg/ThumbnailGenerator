@@ -10,10 +10,11 @@ public enum Game {
     ROA2("roa2","Rivals of Aether 2", 53945),
     SF6("sf6", "Street Fighter 6", 43868),
     TEKKEN8("tekken8", "Tekken 8", 49783),
-    GGST("ggst", "Guilty Gear: Strive", 33945),
-    FFCOTW("ffcotw", "Fatal Fury CotW", 73221),
-    GBFVR("gbfvr", "Granblue Fantasy Versus: Rising", 48548),
     TWOXKO("2xko", "2XKO", 64423),
+    FFCOTW("ffcotw", "Fatal Fury CotW", 73221),
+    GGST("ggst", "Guilty Gear: Strive", 33945),
+    TOKON("tokon", "MARVEL Tōkon: Fighting Souls", 107706),
+    GBFVR("gbfvr", "Granblue Fantasy Versus: Rising", 48548),
     UNIST2("unist2", "Under Night In-Birth II Sys:Celes", 50203);
 
     private String code;

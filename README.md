@@ -787,7 +787,62 @@ Thumbnails are saved in **/generated_top8** folder.
 | Kunimitsu  | kunimitsu  |
 | Random     | random     |
 
-###Guilty Gear: Strive URL names
+### 2XKO
+
+| Character  | URL Name   |
+|------------|------------|
+| Ahri       | ahri       |
+| Yasuo      | yasuo      |
+| Darius     | darius     |
+| Ekko       | ekko       |
+| Illaoi     | illaoi     |
+| Braum      | braum      |
+| Jinx       | jinx       |
+| Vi         | vi         |
+| Blitzcrank | blitzcrank |
+| Teemo      | teemo      |
+| Warwick    | warwick    |
+| Caitlyn    | caitlyn    |
+| Akali      | akali      |
+| Senna      | senna      |
+| Thresh     | thresh     |
+| Random     | random     |
+
+### Fatal Fury: City of the Wolves URL names
+
+| Character         | URL Name   |
+|-------------------|------------|
+| Rock Howard       | rock       |
+| Terry Bogard      | terry      |
+| B. Jenet          | jenet      |
+| Marco Rodrigues   | marco      |
+| Preecha           | preecha    |
+| Hotaru Futaba     | hotaru     |
+| Vox Reaper        | vox        |
+| Tizoc             | tizoc      |
+| Kevin Rian        | kevin      |
+| Billy Kane        | billy      |
+| Mai Shiranui      | mai        |
+| Kim Dong Hwan     | kim_hwan   |
+| Gato              | gato       |
+| Kain R. Heinlein  | kain       |
+| Cristiano Ronaldo | cr7        |
+| Salvatore Ganacci | ganacci    |
+| Hokuto Maru       | hokuto     |
+| Andy Bogard       | andy       |
+| Ken               | ken        |
+| Joe Higashi       | joe        |
+| Chun-Li           | chunli     |
+| Mr. Big           | mr_big     |
+| Kim Jae Hoon      | kim_hoon   |
+| Nightmare Geese   | Geese      |
+| Blue Mary         | blue_mary  |
+| Wolfgang Krauser  | krauser    |
+| Mr. Karate        | mr_karate  |
+| Kenshiro          | kenshiro   |
+| Random            | random     |
+
+### Guilty Gear: Strive URL names
 
 | Character           | URL Name    |
 |---------------------|-------------|
@@ -827,41 +882,32 @@ Thumbnails are saved in **/generated_top8** folder.
 | Robo-Ky             | robo_ky     |
 | Random              | random      |
 
-###Fatal Fury: City of the Wolves URL names
+### MARVEL Tōkon: Fighting Souls
 
-| Character         | URL Name   |
-|-------------------|------------|
-| Rock Howard       | rock       |
-| Terry Bogard      | terry      |
-| B. Jenet          | jenet      |
-| Marco Rodrigues   | marco      |
-| Preecha           | preecha    |
-| Hotaru Futaba     | hotaru     |
-| Vox Reaper        | vox        |
-| Tizoc             | tizoc      |
-| Kevin Rian        | kevin      |
-| Billy Kane        | billy      |
-| Mai Shiranui      | mai        |
-| Kim Dong Hwan     | kim_hwan   |
-| Gato              | gato       |
-| Kain R. Heinlein  | kain       |
-| Cristiano Ronaldo | cr7        |
-| Salvatore Ganacci | ganacci    |
-| Hokuto Maru       | hokuto     |
-| Andy Bogard       | andy       |
-| Ken               | ken        |
-| Joe Higashi       | joe        |
-| Chun-Li           | chunli     |
-| Mr. Big           | mr_big     |
-| Kim Jae Hoon      | kim_hoon   |
-| Nightmare Geese   | Geese      |
-| Blue Mary         | blue_mary  |
-| Wolfgang Krauser  | krauser    |
-| Mr. Karate        | mr_karate  |
-| Kenshiro          | kenshiro   |
-| Random            | random     |
+| Character       | URL Name        |
+|-----------------|-----------------|
+| Captain America | captain_america |
+| Iron Man        | iron_man        |
+| Black Panther   | black_panter    |
+| Hulk            | hulk            |
+| Storm           | storm           |
+| Magik           | magik           |
+| Wolverine       | wolverine       |
+| Danger          | danger          |
+| Spider-Man      | spider_man      |
+| Ms. Marvel      | ms_marvek       |
+| Star-Lord       | star-lord       |
+| Peni Parker     | peni            |
+| Ghost Rider     | ghost_rider     |
+| Blade           | blade           |
+| Loki            | loki            |
+| Deadpool        | deadpool        |
+| Doctor Doom     | doctor_doom     |
+| Magento         | magneto         |
+| Green Goblin    | green_goblin    |
+| Carnage         | carnage         |
 
-###Granblue Fantasy Versus: Rising URL names
+### Granblue Fantasy Versus: Rising URL names
 
 | Character     | URL Name      |
 |---------------|---------------|
@@ -906,28 +952,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Meg           | meg           |
 | Ilsa          | ilsa          |
 
-###2XKO
-
-| Character  | URL Name   |
-|------------|------------|
-| Ahri       | ahri       |
-| Yasuo      | yasuo      |
-| Darius     | darius     |
-| Ekko       | ekko       |
-| Illaoi     | illaoi     |
-| Braum      | braum      |
-| Jinx       | jinx       |
-| Vi         | vi         |
-| Blitzcrank | blitzcrank |
-| Teemo      | teemo      |
-| Warwick    | warwick    |
-| Caitlyn    | caitlyn    |
-| Akali      | akali      |
-| Senna      | senna      |
-| Thresh     | thresh     |
-| Random     | random     |
-
-###Under Night In-Birth II Sys:Celes
+### Under Night In-Birth II Sys:Celes
 
 | Character | URL Name  |
 |-----------|-----------|
