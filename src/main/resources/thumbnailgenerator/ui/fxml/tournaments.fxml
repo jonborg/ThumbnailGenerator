@@ -12,7 +12,7 @@
             stylesheets="@../styles/tournaments.css">
 
     <VBox alignment="CENTER" spacing="5">
-        <Label fx:id="tournamentsLabel" text="Tournaments:"/>
+        <Label fx:id="tournamentsLabel" text="Tournament:"/>
         <ScrollPane styleClass="scrollPane" fitToWidth="true" hbarPolicy="ALWAYS">
             <content>
                 <HBox fx:id="tournamentsBox" spacing="10" alignment="CENTER"/>

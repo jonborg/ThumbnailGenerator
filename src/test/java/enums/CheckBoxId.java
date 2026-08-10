@@ -6,6 +6,9 @@ import lombok.Getter;
 public enum CheckBoxId {
     FLIP_CHARACTER_1("#flip1"),
     FLIP_CHARACTER_2("#flip2"),
+    FLIP_CHARACTER_3("#flip3"),
+    FLIP_CHARACTER_4("#flip4"),
+    FLIP_CHARACTER_5("#flip5"),
     SAVE_LOCALLY("#saveLocally"),
     TOURNAMENT_FONT_BOLD("#bold"),
     TOURNAMENT_FONT_ITALIC("#italic"),

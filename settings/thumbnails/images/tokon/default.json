@@ -1,0 +1,166 @@
+{
+  "mirrorPlayer2": true,
+  "fighters": [
+    {
+      "fighter": "captain_america",
+      "offset": [
+        -240,
+        -200
+      ],
+      "scale": 0.35,
+      "flip": false
+    },{
+      "fighter": "iron_man",
+      "offset": [
+        -340,
+        50
+      ],
+      "scale": 0.45,
+      "flip": false
+    },{
+      "fighter": "black_panther",
+      "offset": [
+        -600,
+        50
+      ],
+      "scale": 0.5,
+      "flip": false
+    },{
+      "fighter": "hulk",
+      "offset": [
+        -750,
+        -450
+      ],
+      "scale": 0.5,
+      "flip": false
+    },{
+      "fighter": "storm",
+      "offset": [
+        -1000,
+        -450
+      ],
+      "scale": 0.6,
+      "flip": false
+    },{
+      "fighter": "magik",
+      "offset": [
+        -620,
+        -250
+      ],
+      "scale": 0.35,
+      "flip": false
+    },{
+      "fighter": "wolverine",
+      "offset": [
+        -400,
+        -100
+      ],
+      "scale": 0.43,
+      "flip": false
+    },{
+      "fighter": "danger",
+      "offset": [
+        -1150,
+        -200
+      ],
+      "scale": 0.52,
+      "flip": false
+    },{
+      "fighter": "spider_man",
+      "offset": [
+        -400,
+        -200
+      ],
+      "scale": 0.31,
+      "flip": false
+    },{
+      "fighter": "ms_marvel",
+      "offset": [
+        -580,
+        -400
+      ],
+      "scale": 0.4,
+      "flip": false
+    },{
+      "fighter": "star_lord",
+      "offset": [
+        -1080,
+        -380
+      ],
+      "scale": 0.41,
+      "flip": false
+    },{
+      "fighter": "peni",
+      "offset": [
+        -1500,
+        -630
+      ],
+      "scale": 0.5,
+      "flip": false
+    },{
+      "fighter": "ghost_rider",
+      "offset": [
+        -990,
+        -100
+      ],
+      "scale": 0.53,
+      "flip": false
+    },{
+      "fighter": "blade",
+      "offset": [
+        -820,
+        -80
+      ],
+      "scale": 0.6,
+      "flip": false
+    },{
+      "fighter": "loki",
+      "offset": [
+        -930,
+        -230
+      ],
+      "scale": 0.44,
+      "flip": false
+    },{
+      "fighter": "deadpool",
+      "offset": [
+        -440,
+        -110
+      ],
+      "scale": 0.45,
+      "flip": false
+    },{
+      "fighter": "doctor_doom",
+      "offset": [
+        -800,
+        -110
+      ],
+      "scale": 0.65,
+      "flip": false
+    },{
+      "fighter": "magneto",
+      "offset": [
+        -1200,
+        -450
+      ],
+      "scale": 0.6,
+      "flip": false
+    },{
+      "fighter": "green_goblin",
+      "offset": [
+        -320,
+        -420
+      ],
+      "scale": 0.52,
+      "flip": false
+    },{
+      "fighter": "carnage",
+      "offset": [
+        -540,
+        -950
+      ],
+      "scale": 0.5,
+      "flip": false
+    }
+  ]
+}

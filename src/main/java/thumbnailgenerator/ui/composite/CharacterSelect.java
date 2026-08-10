@@ -61,12 +61,12 @@ public class CharacterSelect {
 
     public void setStyles(int row){
         if (row == 1) {
-            this.characterComboBox.setStyle("{-fx-max-width: 140; -fx-min-width: 140; -fx-pref-width: 140;}");
+            this.characterComboBox.setStyle("{-fx-min-width: 140; -fx-max-width: Infinity;}");
         } else {
-            this.characterComboBox.setStyle("{-fx-max-width: 108; -fx-min-width: 108; -fx-pref-width: 108;}");
+            this.characterComboBox.setStyle("{-fx-min-width: 108; -fx-max-width: Infinity;}");
         }
         this.altSpinner.setStyle("{-fx-max-width: 50; -fx-min-width: 50; -fx-pref-width: 50;}");
-        this.icon.setStyle("{height: 64;}");
+        this.icon.setStyle("{height: 40;}");
     }
 
     public void initCharacterComboBox(List<String> characterList){

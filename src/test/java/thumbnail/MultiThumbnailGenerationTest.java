@@ -53,11 +53,11 @@ public class MultiThumbnailGenerationTest {
         File thumbnailListFile = new File(getClass().getResource("/input/" + inputFile).getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(
-                        "/expected/thumbnail/multiThumbnail1.png"),
+                        "/expected/thumbnail/multi/character/one/multiThumbnail1.png"),
                 FileUtils.getFileFromResources(
-                        "/expected/thumbnail/multiThumbnail2.png"),
+                        "/expected/thumbnail/multi/character/one/multiThumbnail2.png"),
                 FileUtils.getFileFromResources(
-                        "/expected/thumbnail/multiThumbnail3.png")
+                        "/expected/thumbnail/multi/character/one/multiThumbnail3.png")
         );
         List<File> actualThumbnails = Arrays.asList(
                 FileUtils.getActualFile("/generated_thumbnails/UrQte-robin11--Arjay-byleth28--Losers-20_02_20XX.png"),
@@ -90,11 +90,11 @@ public class MultiThumbnailGenerationTest {
         File thumbnailListFile = new File(getClass().getResource("/input/multiMuralThumbnailGeneration.txt").getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(
-                        "/expected/thumbnail/multiMuralThumbnail1.png"),
+                        "/expected/thumbnail/multi/character/one/multiMuralThumbnail1.png"),
                 FileUtils.getFileFromResources(
-                        "/expected/thumbnail/multiMuralThumbnail2.png"),
+                        "/expected/thumbnail/multi/character/one/multiMuralThumbnail2.png"),
                 FileUtils.getFileFromResources(
-                        "/expected/thumbnail/multiMuralThumbnail3.png")
+                        "/expected/thumbnail/multi/character/one/multiMuralThumbnail3.png")
         );
         List<File> actualThumbnails = Arrays.asList(
                 FileUtils.getActualFile("/generated_thumbnails/UrQte-robin11--Arjay-byleth28--Losers-20_02_20XX.png"),
@@ -127,11 +127,11 @@ public class MultiThumbnailGenerationTest {
         File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailGeneration.txt").getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(
-                        "/expected/thumbnail/multiThumbnail1.png"),
+                        "/expected/thumbnail/multi/character/one/multiThumbnail1.png"),
                 FileUtils.getFileFromResources(
-                        "/expected/thumbnail/multiThumbnail2.png"),
+                        "/expected/thumbnail/multi/character/one/multiThumbnail2.png"),
                 FileUtils.getFileFromResources(
-                        "/expected/thumbnail/multiThumbnail3.png")
+                        "/expected/thumbnail/multi/character/one/multiThumbnail3.png")
         );
         List<File> actualThumbnails = Arrays.asList(
                 FileUtils.getActualFile("/generated_thumbnails/UrQte-robin11--Arjay-byleth28--Losers-20_02_20XX.png"),
@@ -168,16 +168,115 @@ public class MultiThumbnailGenerationTest {
     }
 
     @Test
-    public void create_validThumbnailFileDoubleCharacterPerPlayer_success()
+    public void create_validThumbnailFileTwoCharacterPerPlayer_success()
             throws IOException,
-            FighterImageSettingsNotFoundException, InterruptedException {
+            FighterImageSettingsNotFoundException {
         var loadingState = new LoadingState(false,LoadingType.THUMBNAIL ,0 ,0);
-        File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailDoubleCharacterGeneration.txt").getPath());
+        File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailTwoCharacterGeneration.txt").getPath());
         List<File> expectedThumbnails = Arrays.asList(
                 FileUtils.getFileFromResources(
-                        "/expected/thumbnail/multiThumbnailDoubleCharacter1.png"),
+                        "/expected/thumbnail/multi/character/two/multiThumbnailTwoCharacter1.png"),
                 FileUtils.getFileFromResources(
-                        "/expected/thumbnail/multiThumbnailDoubleCharacter2.png")
+                        "/expected/thumbnail/multi/character/two/multiThumbnailTwoCharacter2.png")
+        );
+        List<File> actualThumbnails = Arrays.asList(
+                FileUtils.getActualFile("/generated_thumbnails/UrQte-robin11--Arjay-ganondorf5--Losers-20_02_20XX.png"),
+                FileUtils.getActualFile("/generated_thumbnails/Aegis-corrin28--Toaster-marth5--winners Semis-20_02_20XX.png")
+        );
+
+        //Act
+        InputStream fileInputsStream = new FileInputStream(thumbnailListFile);
+        thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, false, loadingState);
+
+        //Assert
+        for (int i=0; i<2; i++) {
+            var thumbnailExists = WaitUtils.waitForExpectedFile(actualThumbnails.get(i), expectedThumbnails.get(i));
+            assertTrue(thumbnailExists);
+            assertArrayEquals(
+                    Files.readAllBytes(expectedThumbnails.get(i).toPath()),
+                    Files.readAllBytes(actualThumbnails.get(i).toPath())
+            );
+            assertTrue(actualThumbnails.get(i).delete());
+        }
+    }
+
+    @Test
+    public void create_validThumbnailFileThreeCharacterPerPlayer_success()
+            throws IOException,
+            FighterImageSettingsNotFoundException{
+        var loadingState = new LoadingState(false,LoadingType.THUMBNAIL ,0 ,0);
+        File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailThreeCharacterGeneration.txt").getPath());
+        List<File> expectedThumbnails = Arrays.asList(
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multi/character/three/multiThumbnailThreeCharacter1.png"),
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multi/character/three/multiThumbnailThreeCharacter2.png")
+        );
+        List<File> actualThumbnails = Arrays.asList(
+                FileUtils.getActualFile("/generated_thumbnails/UrQte-robin11--Arjay-ganondorf5--Losers-20_02_20XX.png"),
+                FileUtils.getActualFile("/generated_thumbnails/Aegis-corrin28--Toaster-marth5--winners Semis-20_02_20XX.png")
+        );
+
+        //Act
+        InputStream fileInputsStream = new FileInputStream(thumbnailListFile);
+        thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, false, loadingState);
+
+        //Assert
+        for (int i=0; i<2; i++) {
+            var thumbnailExists = WaitUtils.waitForExpectedFile(actualThumbnails.get(i), expectedThumbnails.get(i));
+            assertTrue(thumbnailExists);
+            assertArrayEquals(
+                    Files.readAllBytes(expectedThumbnails.get(i).toPath()),
+                    Files.readAllBytes(actualThumbnails.get(i).toPath())
+            );
+            assertTrue(actualThumbnails.get(i).delete());
+        }
+    }
+
+    @Test
+    public void create_validThumbnailFileFourCharacterPerPlayer_success()
+            throws IOException,
+            FighterImageSettingsNotFoundException{
+        var loadingState = new LoadingState(false,LoadingType.THUMBNAIL ,0 ,0);
+        File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailFourCharacterGeneration.txt").getPath());
+        List<File> expectedThumbnails = Arrays.asList(
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multi/character/four/multiThumbnailFourCharacter1.png"),
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multi/character/four/multiThumbnailFourCharacter2.png")
+        );
+        List<File> actualThumbnails = Arrays.asList(
+                FileUtils.getActualFile("/generated_thumbnails/UrQte-robin11--Arjay-ganondorf5--Losers-20_02_20XX.png"),
+                FileUtils.getActualFile("/generated_thumbnails/Aegis-corrin28--Toaster-marth5--winners Semis-20_02_20XX.png")
+        );
+
+        //Act
+        InputStream fileInputsStream = new FileInputStream(thumbnailListFile);
+        thumbnailService.generateAndSaveThumbnailsFromFile(fileInputsStream, false, loadingState);
+
+        //Assert
+        for (int i=0; i<2; i++) {
+            var thumbnailExists = WaitUtils.waitForExpectedFile(actualThumbnails.get(i), expectedThumbnails.get(i));
+            assertTrue(thumbnailExists);
+            assertArrayEquals(
+                    Files.readAllBytes(expectedThumbnails.get(i).toPath()),
+                    Files.readAllBytes(actualThumbnails.get(i).toPath())
+            );
+            assertTrue(actualThumbnails.get(i).delete());
+        }
+    }
+
+    @Test
+    public void create_validThumbnailFileFiveCharacterPerPlayer_success()
+            throws IOException,
+            FighterImageSettingsNotFoundException{
+        var loadingState = new LoadingState(false,LoadingType.THUMBNAIL ,0 ,0);
+        File thumbnailListFile = new File(getClass().getResource("/input/multiThumbnailFiveCharacterGeneration.txt").getPath());
+        List<File> expectedThumbnails = Arrays.asList(
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multi/character/five/multiThumbnailFiveCharacter1.png"),
+                FileUtils.getFileFromResources(
+                        "/expected/thumbnail/multi/character/five/multiThumbnailFiveCharacter2.png")
         );
         List<File> actualThumbnails = Arrays.asList(
                 FileUtils.getActualFile("/generated_thumbnails/UrQte-robin11--Arjay-ganondorf5--Losers-20_02_20XX.png"),

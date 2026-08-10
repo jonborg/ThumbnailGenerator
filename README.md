@@ -9,10 +9,11 @@ This allows TOs to speed up VODs' release process. Below are the compatible game
 - Rivals of Aether 2
 - Street Fighter 6
 - Tekken 8
-- Guilty Gear: Strive
-- Fatal Fury: City of the Wolves
-- Granblue Fantasy Versus: Rising
 - 2XKO
+- Fatal Fury: City of the Wolves
+- Guilty Gear: Strive
+- MARVEL Tōkon: Fighting Souls
+- Granblue Fantasy Versus: Rising
 - Under Night In-Birth II Sys:Celes
 
 ![tg_main_page.png](./assets/documentation/tg_main_page.png)
@@ -116,7 +117,7 @@ Images were gathered thanks to:
 - [MuralAltDrive's](https://x.com/MuralAltDrive) Smash Ultimate Mural art [Google Drive](https://drive.google.com/drive/folders/1n4lAP6YB7N-bSSgEDx0OPEI2ykOKSQrM)
 - 2XKO Community Asset Kit found on [2XKO Community Competitive Guidelines page](https://2xko.riotgames.com/en-us/news/announcements/2xko-community-competition-guidelines/)
 - [Under Night In-Birth II fan press kit](https://www.arcsystemworks.jp/uni2celes/en/fankit/)
-
+- [MARVEL Tōkon Wikia](https://marvel.fandom.com/wiki/MARVEL_T%C5%8Dkon:_Fighting_Souls/Gallery)
 As an option, Thumbnail Generator can save those downloaded images to use them for future uses without requiring access to the website. 
 Images are stored in the following folder:
 
@@ -300,18 +301,6 @@ Users must click on tournament to select the desired thumbnail configurations.
 
 As of version **4.0.0**, users can generate thumbnails and top8 for other games other than Smash Ultimate.
 When selecting a game from the dropdown, character list is updated with characters of respective selected game.
-The available games are the following:
-- Smash Ultimate
-- Smash Melee
-- Smash 64 Remix
-- Rivals of Aether 2
-- Street Fighter 6
-- Tekken 8
-- Guilty Gear: Strive
-- Fatal Fury: City of the Wolves
-- Granblue Fantasy Versus: Rising
-- 2XKO
-- Under Night In-Birth II Sys:Celes
 
 It is also mandatory to provide characters and their colours.
 When selecting a character from the dropdown, an icon will appear
@@ -343,7 +332,7 @@ Thumbnails are saved in **/generated_thumbnails** folder, which is created in th
 ![tg_thumbnail_example.png](./assets/documentation/tg_thumbnail_example.png)
 
 When generating thumbnails with more than one character per player, characters will be displayed as show below.
-Main character of each player will be at the bottom of the image, while secondary characters will be at the top.
+For character pairs, main character of each player will be at the bottom of the image, while secondary characters will be at the top.
 
 ![tg_thumbnail_double_character_example.png](./assets/documentation/tg_thumbnail_double_character_example.png)
 
@@ -737,6 +726,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | C. Viper  | c_viper  |
 | Alex      | alex     |
 | Ingrid    | ingrid   |
+| Yasmine   | yasmine  |
 | Random    | random   |
 
 ### Tekken 8 URL names
@@ -786,7 +776,62 @@ Thumbnails are saved in **/generated_top8** folder.
 | Kunimitsu  | kunimitsu  |
 | Random     | random     |
 
-###Guilty Gear: Strive URL names
+### 2XKO
+
+| Character  | URL Name   |
+|------------|------------|
+| Ahri       | ahri       |
+| Yasuo      | yasuo      |
+| Darius     | darius     |
+| Ekko       | ekko       |
+| Illaoi     | illaoi     |
+| Braum      | braum      |
+| Jinx       | jinx       |
+| Vi         | vi         |
+| Blitzcrank | blitzcrank |
+| Teemo      | teemo      |
+| Warwick    | warwick    |
+| Caitlyn    | caitlyn    |
+| Akali      | akali      |
+| Senna      | senna      |
+| Thresh     | thresh     |
+| Random     | random     |
+
+### Fatal Fury: City of the Wolves URL names
+
+| Character         | URL Name   |
+|-------------------|------------|
+| Rock Howard       | rock       |
+| Terry Bogard      | terry      |
+| B. Jenet          | jenet      |
+| Marco Rodrigues   | marco      |
+| Preecha           | preecha    |
+| Hotaru Futaba     | hotaru     |
+| Vox Reaper        | vox        |
+| Tizoc             | tizoc      |
+| Kevin Rian        | kevin      |
+| Billy Kane        | billy      |
+| Mai Shiranui      | mai        |
+| Kim Dong Hwan     | kim_hwan   |
+| Gato              | gato       |
+| Kain R. Heinlein  | kain       |
+| Cristiano Ronaldo | cr7        |
+| Salvatore Ganacci | ganacci    |
+| Hokuto Maru       | hokuto     |
+| Andy Bogard       | andy       |
+| Ken               | ken        |
+| Joe Higashi       | joe        |
+| Chun-Li           | chunli     |
+| Mr. Big           | mr_big     |
+| Kim Jae Hoon      | kim_hoon   |
+| Nightmare Geese   | Geese      |
+| Blue Mary         | blue_mary  |
+| Wolfgang Krauser  | krauser    |
+| Mr. Karate        | mr_karate  |
+| Kenshiro          | kenshiro   |
+| Random            | random     |
+
+### Guilty Gear: Strive URL names
 
 | Character           | URL Name    |
 |---------------------|-------------|
@@ -823,42 +868,35 @@ Thumbnails are saved in **/generated_top8** folder.
 | Unika               | unika       |
 | Lucy                | lucy        |
 | Jam                 | jam         |
+| Robo-Ky             | robo_ky     |
 | Random              | random      |
 
-###Fatal Fury: City of the Wolves URL names
+### MARVEL Tōkon: Fighting Souls
 
-| Character         | URL Name  |
-|-------------------|-----------|
-| Rock Howard       | rock      |
-| Terry Bogard      | terry     |
-| B. Jenet          | jenet     |
-| Marco Rodrigues   | marco     |
-| Preecha           | preecha   |
-| Hotaru Futaba     | hotaru    |
-| Vox Reaper        | vox       |
-| Tizoc             | tizoc     |
-| Kevin Rian        | kevin     |
-| Billy Kane        | billy     |
-| Mai Shiranui      | mai       |
-| Kim Dong Hwan     | kim_hwan  |
-| Gato              | gato      |
-| Kain R. Heinlein  | kain      |
-| Cristiano Ronaldo | cr7       |
-| Salvatore Ganacci | ganacci   |
-| Hokuto Maru       | hokuto    |
-| Andy Bogard       | andy      |
-| Ken               | ken       |
-| Joe Higashi       | joe       |
-| Chun-Li           | chunli    |
-| Mr. Big           | mr_big    |
-| Kim Jae Hoon      | kim_hoon  |
-| Nightmare Geese   | Geese     |
-| Blue Mary         | blue_mary |
-| Wolfgang Krauser  | krauser   |
-| Mr. Karate        | mr_karate |
-| Random            | random    |
+| Character       | URL Name        |
+|-----------------|-----------------|
+| Captain America | captain_america |
+| Iron Man        | iron_man        |
+| Black Panther   | black_panter    |
+| Hulk            | hulk            |
+| Storm           | storm           |
+| Magik           | magik           |
+| Wolverine       | wolverine       |
+| Danger          | danger          |
+| Spider-Man      | spider_man      |
+| Ms. Marvel      | ms_marvek       |
+| Star-Lord       | star-lord       |
+| Peni Parker     | peni            |
+| Ghost Rider     | ghost_rider     |
+| Blade           | blade           |
+| Loki            | loki            |
+| Deadpool        | deadpool        |
+| Doctor Doom     | doctor_doom     |
+| Magento         | magneto         |
+| Green Goblin    | green_goblin    |
+| Carnage         | carnage         |
 
-###Granblue Fantasy Versus: Rising URL names
+### Granblue Fantasy Versus: Rising URL names
 
 | Character     | URL Name      |
 |---------------|---------------|
@@ -903,27 +941,7 @@ Thumbnails are saved in **/generated_top8** folder.
 | Meg           | meg           |
 | Ilsa          | ilsa          |
 
-###2XKO
-
-| Character  | URL Name   |
-|------------|------------|
-| Ahri       | ahri       |
-| Yasuo      | yasuo      |
-| Darius     | darius     |
-| Ekko       | ekko       |
-| Illaoi     | illaoi     |
-| Braum      | braum      |
-| Jinx       | jinx       |
-| Vi         | vi         |
-| Blitzcrank | blitzcrank |
-| Teemo      | teemo      |
-| Warwick    | warwick    |
-| Caitlyn    | caitlyn    |
-| Akali      | akali      |
-| Senna      | senna      |
-| Random     | random     |
-
-###Under Night In-Birth II Sys:Celes
+### Under Night In-Birth II Sys:Celes
 
 | Character | URL Name  |
 |-----------|-----------|
@@ -951,18 +969,29 @@ Thumbnails are saved in **/generated_top8** folder.
 | Uzuki     | uzuki     |
 | Ogre      | ogre      |
 | Izumi     | izumi     |
+| Zohar     | zohar     |
 | Eltnum    | eltnum    |
 | Akatsuki  | akatsuki  |
 
 
 ### Release Notes
+#### v4.7.0
+- Allow to put up to 5 characters per player in thumbnail generation;
+- Added MARVEL Tōkon: Fighting Souls as a selectable game;
+- Added Thresh from 2XKO;
+- Added Kenshiro and Rick from Fatal Fury: CotW;
+- Added Robo-Ky from Guilty Gear: Strive;
+- Added Gouie from Rivals of Aether 2;
+- Added Yasmine from Street Fighter 6;
+- Added Zohar from UNIST 2.
+
 #### v4.6.2
 - Added Slade from RoA2;
 - Added Ingrid from SF6;
 - Added Kunimitsu from Tekken 8;
 - Added Jam from GGST;
 - Added Geese, Blue Mary, Krauser and Mr. Karate from FF:CotW;
-- Added Akali and Senna from 2XKO
+- Added Akali and Senna from 2XKO.
 
 #### v4.6.1
 - Fixed issue where if no shadow was provided to top8 slot, character image was not cropped into top8;

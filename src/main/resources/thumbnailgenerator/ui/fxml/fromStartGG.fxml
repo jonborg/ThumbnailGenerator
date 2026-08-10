@@ -37,9 +37,9 @@
                        GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 <TextField fx:id="tournamentURL" styleClass="url-textfield"
                            GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
-                <Label text="Multiple characters: "
+                <Label text="Characters per player: "
                        GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                <CheckBox fx:id="multipleCharacters"
+                <Spinner fx:id="charactersPerPlayer" styleClass="spinner"
                            GridPane.columnIndex="1" GridPane.rowIndex="2"/>
             </GridPane>
             <VBox alignment="CENTER" styleClass="test">

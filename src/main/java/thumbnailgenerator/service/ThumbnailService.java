@@ -33,6 +33,7 @@ import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import thumbnailgenerator.dto.CharacterQuantitySettings;
 import thumbnailgenerator.dto.Fighter;
 import thumbnailgenerator.dto.FighterImageThumbnailSettings;
 import thumbnailgenerator.dto.FileThumbnailSettings;
@@ -56,6 +57,7 @@ import thumbnailgenerator.service.games.SmashUltimateCharacterService;
 import thumbnailgenerator.ui.factory.alert.AlertFactory;
 import thumbnailgenerator.service.json.JSONReaderService;
 import thumbnailgenerator.ui.loading.LoadingState;
+import thumbnailgenerator.utils.thumbnails.CharacterQuantitySettingsSetup;
 
 @Service
 public class ThumbnailService {
@@ -369,9 +371,43 @@ public class ThumbnailService {
         for (Player player : thumbnail.getPlayers()) {
             port++;
             LOGGER.info("Drawing player {} information.", port);
-            var slot = player.getFighterList().size() > 1
-                    ? getCharacterPair(thumbnail, player, characterImageFetcher, port)
-                    : getCharacterSingle(thumbnail, player, characterImageFetcher, port);
+            BufferedImage slot = new BufferedImage(thumbnailWidth/2, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
+            if(player.getFighterList().size() < 2) {
+                slot = getCharacterSingle(
+                        thumbnail,
+                        player,
+                        characterImageFetcher,
+                        port
+                );
+            } else {
+                CharacterQuantitySettings characterQuantitySettings;
+                switch (player.getFighterList().size()){
+                    case 2:
+                        characterQuantitySettings = CharacterQuantitySettingsSetup
+                                .getCharacterQuantitySettingsForTwo(port);
+                        break;
+                    case 3:
+                        characterQuantitySettings = CharacterQuantitySettingsSetup
+                                .getCharacterQuantitySettingsForThree(port, thumbnailWidth);
+                        break;
+                    case 4:
+                        characterQuantitySettings = CharacterQuantitySettingsSetup
+                                .getCharacterQuantitySettingsForFour(port, thumbnailWidth, thumbnailHeight);
+                        break;
+                    default:
+                        characterQuantitySettings = CharacterQuantitySettingsSetup
+                                .getCharacterQuantitySettingsForFive(port, thumbnailWidth, thumbnailHeight);
+                        break;
+
+                }
+                slot = getCharacterMulti(
+                        thumbnail,
+                        player,
+                        characterImageFetcher,
+                        characterQuantitySettings
+                );
+            }
+
             g2d.drawImage(slot, null, thumbnailWidth / 2 * (port - 1), 0);
         }
     }
@@ -381,72 +417,77 @@ public class ThumbnailService {
             FighterImageSettingsNotFoundException {
         var fighter = player.getFighter(0);
         var characterImage = characterImageFetcher.getCharacterImage(fighter, thumbnail);
-        if (Game.SSBU.equals(thumbnail.getGame())) {
-            smashUltimateCharacterService.convertToAlternateRender(fighter);
-        }
-        var fighterImageThumbnailSettings = thumbnail.getImageSettings()
-                .findFighterImageSettings(fighter.getUrlName());
+        var fighterImageThumbnailSettings = getFighterImageSettingsForFighter(fighter, thumbnail);
+
         characterImage = editCharacterImageWithMask(characterImage, fighterImageThumbnailSettings, fighter);
 
         LOGGER.info("Drawing player {}'s character: {}", port, fighter.getName());
         return characterImage;
     }
 
-    private BufferedImage getCharacterPair(Thumbnail thumbnail, Player player, CharacterImageFetcher characterImageFetcher, int port)
-            throws MalformedURLException, OnlineImageNotFoundException,
-            FighterImageSettingsNotFoundException {
-        var doubleCharacterScale = 0.7;
+    private BufferedImage getCharacterMulti(
+            Thumbnail thumbnail,
+            Player player,
+            CharacterImageFetcher characterImageFetcher,
+            CharacterQuantitySettings characterQuantitySettings
+    ) throws FighterImageSettingsNotFoundException, MalformedURLException,
+            OnlineImageNotFoundException {
         BufferedImage slot = new BufferedImage(thumbnailWidth/2, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
         var slotGraphics = slot.getGraphics();
-        for (int i=1; i >=0; i--) {
+
+        for (int i = 0; i< characterQuantitySettings.getCharacterQuantity(); i++){
             BufferedImage mask;
             try {
-                if (port == 1) {
-                    mask = ImageIO.read(new File("assets/masks/thumbnails/char" + (i + 1) + ".png"));
-                } else {
-                    mask = ImageIO.read(new File("assets/masks/thumbnails/char" + (i + 3) + ".png"));
-                }
+                mask = ImageIO.read(new File(characterQuantitySettings.getMaskFiles().get(i)));
             }catch (Exception e){
                 mask = new BufferedImage(thumbnailWidth/2, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
                 mask.getGraphics().fillRect(0, 0, thumbnailWidth/2, thumbnailHeight);
             }
 
-            var fighter = player.getFighter(i);
+            var characterScale = characterQuantitySettings.getCharacterScale();
+            var fighter = player.getFighter(characterQuantitySettings.getCharacterOrder().get(i));
             var characterImage = characterImageFetcher.getCharacterImage(fighter, thumbnail);
-            if (Game.SSBU.equals(thumbnail.getGame())) {
-                smashUltimateCharacterService.convertToAlternateRender(fighter);
-            }
-            var fighterImageThumbnailSettings = thumbnail.getImageSettings()
-                    .findFighterImageSettings(fighter.getUrlName());
-
+            var fighterImageThumbnailSettings = getFighterImageSettingsForFighter(fighter, thumbnail);
             var scaledImage = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
-            var doubleScaledImage = imageService.resizeImageSimple(scaledImage, doubleCharacterScale);
+            var multiCharScaleScaledImage = imageService.resizeImageSimple(scaledImage, characterScale);
 
-            //offset + double fighter offset
-            int centerOffsetX = (int) Math.round((1-doubleCharacterScale)*(320-fighterImageThumbnailSettings.getOffset()[0]));
-            int centerOffsetY = (int) Math.round((1-doubleCharacterScale)*(360-fighterImageThumbnailSettings.getOffset()[1]));
+            int centerOffsetX = (int) Math.round((1-characterScale)*(thumbnailWidth/4.0-fighterImageThumbnailSettings.getOffset()[0]));
+            int centerOffsetY = (int) Math.round((1-characterScale)*(thumbnailHeight/2.0-fighterImageThumbnailSettings.getOffset()[1]));
 
-            int pairOffsetX = port == 1 ? -100 + 200*(1-i) : -100 + 200*(i);
-            int pairOffsetY = -50 + 100*(1-i);
-
+            var extraOffSet = characterQuantitySettings.getCharacterExtraOffSets().get(i);
             int flipMultiplier = fighter.isFlip() ? -1 : 1;
             int[] offset = new int[] {
-                    fighterImageThumbnailSettings.getOffset()[0] + centerOffsetX + flipMultiplier*pairOffsetX,
-                    fighterImageThumbnailSettings.getOffset()[1] + centerOffsetY + pairOffsetY
+                    fighterImageThumbnailSettings.getOffset()[0] + centerOffsetX + flipMultiplier*extraOffSet[0],
+                    fighterImageThumbnailSettings.getOffset()[1] + centerOffsetY + extraOffSet[1]
             };
-            var flipCanvas = new BufferedImage(640, 720, BufferedImage.TYPE_INT_ARGB);
+
+            var flipCanvas = new BufferedImage(thumbnailWidth/2, thumbnailHeight, BufferedImage.TYPE_INT_ARGB);
             var flipGraphic = flipCanvas.createGraphics();
-            flipGraphic.drawImage(doubleScaledImage, offset[0], offset[1], null);
+            flipGraphic.drawImage(multiCharScaleScaledImage, offset[0], offset[1], null);
             var flipImage = imageService.flipImage(flipCanvas, fighter.isFlip());
             var maskedImage = imageService.applyMask(flipImage, mask, new int[]{0,0});
-            slotGraphics.drawImage(maskedImage, 0, 0, null);
+
+            var maskOffsets = characterQuantitySettings.getMaskOffSets().get(i);
+            slotGraphics.drawImage(maskedImage, maskOffsets[0], maskOffsets[1], null);
         }
         return slot;
     }
 
+    private FighterImageThumbnailSettings getFighterImageSettingsForFighter(
+            Fighter fighter,
+            Thumbnail thumbnail
+    ) throws FighterImageSettingsNotFoundException {
+        if (Game.SSBU.equals(thumbnail.getGame())) {
+            smashUltimateCharacterService.convertToAlternateRender(fighter);
+        }
+        return thumbnail.getImageSettings()
+                .findFighterImageSettings(fighter.getUrlName());
+    }
+
+
     public BufferedImage editCharacterImageWithMask(BufferedImage characterImage , FighterImageThumbnailSettings fighterImageThumbnailSettings, Fighter fighter) {
         try {
-            var mask = ImageIO.read(new File("assets/masks/thumbnails/default.png"));
+            var mask = ImageIO.read(new File("assets/masks/thumbnails/one/default.png"));
             var scaledImage = imageService.resizeImage(characterImage, fighterImageThumbnailSettings.getScale());
             var maskedImage = imageService.applyMask(scaledImage, mask, fighterImageThumbnailSettings.getOffset());
             var flipImage = imageService.flipImage(maskedImage, fighter.isFlip());

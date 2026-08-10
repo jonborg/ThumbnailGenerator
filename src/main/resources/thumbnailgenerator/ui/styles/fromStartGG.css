@@ -33,3 +33,7 @@
 .loading{
     -fx-padding: 0 20 0 0;
 }
+
+.spinner{
+    -fx-max-width: 60;
+}

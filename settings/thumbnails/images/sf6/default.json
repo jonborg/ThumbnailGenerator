@@ -272,6 +272,15 @@
       "flip": false
     },
     {
+      "fighter": "yasmine",
+      "offset": [
+        -470,
+        -50
+      ],
+      "scale": 0.9,
+      "flip": false
+    },
+    {
       "fighter": "random",
       "offset": [
         64,

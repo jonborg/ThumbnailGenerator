@@ -24,6 +24,7 @@ public enum RivalsOfAether2Enum implements CharacterEnum {
 
     REINA("La Reina", "reina", 2834, 1),
     SLADE("Slade", "slade", 2953, 1),
+    GOUIE("Gouie", "gouie", 3252, 1),
 
     RANDOM("Random", "random", 2803, 1);
 

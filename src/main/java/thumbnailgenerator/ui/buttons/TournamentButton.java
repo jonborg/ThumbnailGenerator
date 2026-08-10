@@ -11,6 +11,8 @@ import thumbnailgenerator.dto.Tournament;
 public class TournamentButton extends ToggleButton {
 
     private Tournament tournament;
+    private static int imageSize = 100;
+    private static int buttonSize = 110;
 
     public TournamentButton(Tournament tournament) {
         super();
@@ -21,16 +23,16 @@ public class TournamentButton extends ToggleButton {
         } else {
             ImageView imageView = new ImageView(new Image("file:"+this.getImage()));
             if(imageView.getImage().getWidth() > imageView.getImage().getHeight()){
-                imageView.setFitWidth(100);
+                imageView.setFitWidth(imageSize);
             }else{
-                imageView.setFitHeight(100);
+                imageView.setFitHeight(imageSize);
             }
             imageView.setPreserveRatio(true);
             this.setGraphic(imageView);
         }
-        this.setMinSize(110,110);
-        this.setPrefSize(110,110);
-        this.setMaxSize(110,110);
+        this.setMinSize(buttonSize,buttonSize);
+        this.setPrefSize(buttonSize,buttonSize);
+        this.setMaxSize(buttonSize,buttonSize);
     }
 
     public String getTournamentId() {
