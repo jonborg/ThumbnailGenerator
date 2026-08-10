@@ -44,7 +44,7 @@ public class PlayerController implements Initializable {
     protected GridPane characterGrid;
     @FXML
     protected HBox iconBox;
-    private Button addRemoveCharacter;
+    private List<Button> addRemoveCharacter;
 
     protected String urlName;
     protected List<CharacterSelect> characterSelectList;
@@ -58,27 +58,36 @@ public class PlayerController implements Initializable {
 
     protected void initCharacterBox(){
         characterSelectList = new ArrayList<>();
-        createCharacterSelect(gameEnumService.getAllCharacterNames(Game.SSBU), 1);
+        addRemoveCharacter = new ArrayList<>();
 
-        addRemoveCharacter = new Button();
-        addRemoveCharacter.setId("addRemoveCharacter2");
-        addRemoveCharacter.setStyle("{-fx-max-width: 25; -fx-min-width: 25; -fx-pref-width: 25;}");
-        characterGrid.add(addRemoveCharacter, 0, 2);
-        addRemoveCharacter.setText("+");
-        addRemoveCharacter.setOnAction(event -> {
+        createCharacterSelect(gameEnumService.getAllCharacterNames(Game.SSBU), 1);
+    }
+
+    private Button createAddRemoveCharacterButton(int row){
+        var button = new Button();
+        button.setId("addRemoveCharacter"+row);
+        button.setStyle("{-fx-max-width: 25; -fx-min-width: 25; -fx-pref-width: 25;}");
+        characterGrid.add(button, 0, row);
+        button.setText("+");
+        button.setOnAction(event -> {
             var game = parentController.getGame();
             var chList = gameEnumService.getAllCharacterNames(game);
-            if (characterSelectList.size() < 2) {
-                createCharacterSelect(chList, 2);
-                addRemoveCharacter.setText("-");
+            if (characterSelectList.size() < row) {
+                createCharacterSelect(chList, row);
+                button.setText("-");
             } else {
-                removeCharacterSelect(2);
-                addRemoveCharacter.setText("+");
+                removeCharacterSelect(row);
+                removeAddRemoveCharacterButtons(row-1);
+                button.setText("+");
             }
         });
+        return button;
     }
 
     private void createCharacterSelect(List<String> characterList, int row){
+        if (row < 5) {
+            addRemoveCharacter.add(createAddRemoveCharacterButton( row + 1));
+        }
         var characterSelect = new CharacterSelect(characterList);
         characterSelect.setStyles(row);
         characterSelect.setElements(characterGrid, row, iconBox);
@@ -97,14 +106,28 @@ public class PlayerController implements Initializable {
     }
 
     private void removeCharacterSelect(int row){
-        var characterSelect = characterSelectList.get(row-1);
-        characterGrid.getChildren().remove(characterSelect.getCharacterComboBox());
-        characterGrid.getChildren().remove(characterSelect.getAltSpinner());
-        characterGrid.getChildren().remove(characterSelect.getFlipCheckBox());
-        iconBox.getChildren().remove(characterSelect.getIcon());
-        iconBox.getChildren().remove(characterSelect.getIconLink());
+        val clearList = characterSelectList.subList(row-1, characterSelectList.size());
+        for (int i = 0; i < clearList.size(); i++) {
+            var characterSelect = clearList.get(i);
+            characterGrid.getChildren()
+                    .remove(characterSelect.getCharacterComboBox());
+            characterGrid.getChildren().remove(characterSelect.getAltSpinner());
+            characterGrid.getChildren()
+                    .remove(characterSelect.getFlipCheckBox());
+            iconBox.getChildren().remove(characterSelect.getIcon());
+            iconBox.getChildren().remove(characterSelect.getIconLink());
+        }
+        characterSelectList = characterSelectList.subList(0, row-1);
+    }
 
-        characterSelectList.remove(row-1);
+    private void removeAddRemoveCharacterButtons(int row){
+        val clearList = addRemoveCharacter.subList(row, addRemoveCharacter.size());
+
+        for (int i = 0; i<clearList.size(); i++) {
+            var button = clearList.get(i);
+            characterGrid.getChildren().remove(button);
+        }
+        addRemoveCharacter = addRemoveCharacter.subList(0, row);
     }
 
     protected void updateSpinner(String sel, CharacterSelect characterSelect) {
@@ -122,7 +145,7 @@ public class PlayerController implements Initializable {
         var gameCode = game.getCode();
         var characterName = characterSelect.getCharacterComboBox().getSelectionModel().getSelectedItem();
         var urlName = gameEnumService.findCharacterCodeByName(game, characterName);
-        var alt = characterSelect.getAltSpinner().getValue();
+        var alt = characterSelect.getAlt();
 
         try {
             var path = "/icons/" + gameCode + "/" + urlName + "/" + alt + ".png";
@@ -132,8 +155,12 @@ public class PlayerController implements Initializable {
                 resource = Top8Service.class.getResourceAsStream(defaultPath);
             }
             var icon = new Image(resource);
+
             characterSelect.getIconLink().setDisable(false);
             characterSelect.getIcon().setImage(icon);
+            characterSelect.getIcon().setFitWidth(icon.getWidth() * 5 / 8);
+            characterSelect.getIcon().setFitHeight(icon.getHeight() * 5 / 8);
+            characterSelect.getIcon().setPreserveRatio(true);
         }catch (NullPointerException e){
             characterSelect.getIconLink().setDisable(true);
             characterSelect.getIconLink().setText(null);
@@ -205,8 +232,12 @@ public class PlayerController implements Initializable {
     }
 
     public void updateCharacterSelectList(List<CharacterSelect> characterSelectList){
-        if (this.characterSelectList.size() != characterSelectList.size()) {
-            addRemoveCharacter.fire();
+        while (this.characterSelectList.size() != characterSelectList.size()) {
+            if (this.characterSelectList.size() > characterSelectList.size()) {
+                addRemoveCharacter.get(characterSelectList.size() - 1).fire();
+            } else {
+                addRemoveCharacter.get(addRemoveCharacter.size() - 1).fire();
+            }
         }
         for (int i = 0; i < this.characterSelectList.size(); i++) {
             var cs = this.characterSelectList.get(i);

@@ -6,6 +6,7 @@ import dto.PlayerInput;
 import dto.ThumbnailInput;
 import enums.ButtonId;
 import enums.CheckBoxId;
+import enums.ComboBoxId;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import thumbnailgenerator.Main;
@@ -21,6 +22,8 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
@@ -30,9 +33,56 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
 
     @Test
     public void testTournamentSelection() {
-        verifyThat("#tournamentsLabel", hasText("Tournaments:"));
+        verifyThat("#tournamentsLabel", hasText("Tournament:"));
         clickOnButton(ButtonId.TOURNAMENT_WEEKLY_L);
         verifyThat("#tournamentsLabel", hasText("Tournament: Weekly L"));
+    }
+
+    @Test
+    public void testAddingAndRemovingMultipleCharacters() {
+        clickOnButton("#player1", ButtonId.ADD_REMOVE_CHARACTER_2);
+        clickOnButton("#player1", ButtonId.ADD_REMOVE_CHARACTER_3);
+        clickOnButton("#player1", ButtonId.ADD_REMOVE_CHARACTER_4);
+
+        assertNotNull(findElement(ComboBoxId.CHARACTER_1.getValue(), "#player1"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_2.getValue(), "#player1"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_3.getValue(), "#player1"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_4.getValue(), "#player1"));
+        assertNull(findElement(ComboBoxId.CHARACTER_5.getValue(), "#player1"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_1.getValue(), "#player2"));
+        assertNull(findElement(ComboBoxId.CHARACTER_2.getValue(), "#player2"));
+        assertNull(findElement(ComboBoxId.CHARACTER_3.getValue(), "#player2"));
+        assertNull(findElement(ComboBoxId.CHARACTER_4.getValue(), "#player2"));
+        assertNull(findElement(ComboBoxId.CHARACTER_5.getValue(), "#player2"));
+
+        clickOnButton("#player2", ButtonId.ADD_REMOVE_CHARACTER_2);
+        clickOnButton("#player2", ButtonId.ADD_REMOVE_CHARACTER_3);
+        clickOnButton("#player2", ButtonId.ADD_REMOVE_CHARACTER_4);
+        clickOnButton("#player2", ButtonId.ADD_REMOVE_CHARACTER_5);
+
+        assertNotNull(findElement(ComboBoxId.CHARACTER_1.getValue(), "#player1"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_2.getValue(), "#player1"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_3.getValue(), "#player1"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_4.getValue(), "#player1"));
+        assertNull(findElement(ComboBoxId.CHARACTER_5.getValue(), "#player1"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_1.getValue(), "#player2"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_2.getValue(), "#player2"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_3.getValue(), "#player2"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_4.getValue(), "#player2"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_5.getValue(), "#player2"));
+
+        clickOnButton("#player1", ButtonId.ADD_REMOVE_CHARACTER_3);
+        clickOnButton("#player2", ButtonId.ADD_REMOVE_CHARACTER_5);
+        assertNotNull(findElement(ComboBoxId.CHARACTER_1.getValue(), "#player1"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_2.getValue(), "#player1"));
+        assertNull(findElement(ComboBoxId.CHARACTER_3.getValue(), "#player1"));
+        assertNull(findElement(ComboBoxId.CHARACTER_4.getValue(), "#player1"));
+        assertNull(findElement(ComboBoxId.CHARACTER_5.getValue(), "#player1"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_1.getValue(), "#player2"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_2.getValue(), "#player2"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_3.getValue(), "#player2"));
+        assertNotNull(findElement(ComboBoxId.CHARACTER_4.getValue(), "#player2"));
+        assertNull(findElement(ComboBoxId.CHARACTER_5.getValue(), "#player2"));
     }
 
     @Test
@@ -127,13 +177,13 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
     }
 
     @Test
-    public void create_validThumbnailDoubleCharacters_success()
+    public void create_validThumbnailMultiCharacters_success()
             throws IOException, InterruptedException {
         //Arrange
         ThumbnailInput input = generateThumbnailDoubleCharactersInput();
         File actualImage = FileUtils.getActualFile("/generated_thumbnails/" + input.getExpectedFileName());
         File expectedImage = FileUtils.getFileFromResources(
-                "/expected/thumbnail/invictaMarioSonicDoubleCharacterThumbnail.png");
+                "/expected/thumbnail/invictaMarioSonicMultiCharacterThumbnail.png");
 
         clickOnButton(ButtonId.TOURNAMENT_INVICTA);
         fillRoundData(input);
@@ -175,13 +225,17 @@ public class ThumbnailGenerationIT extends CustomApplicationTest {
                 new PlayerInput("Player 1",
                         Arrays.asList(
                                 new CharacterInput("Mario", 1, false),
-                                new CharacterInput("Luigi", 1, false)
+                                new CharacterInput("Luigi", 1, false),
+                                new CharacterInput("Wario", 1, false)
                             )
                 ),
                 new PlayerInput("Player 2",
                         Arrays.asList(
                                 new CharacterInput("Sonic", 1, false),
-                                new CharacterInput("Pac-Man", 1, false)
+                                new CharacterInput("Snake", 1, false),
+                                new CharacterInput("Mega Man", 1, false),
+                                new CharacterInput("Pac-Man", 1, false),
+                                new CharacterInput("Ryu", 1, false)
                         )
                 )
         );

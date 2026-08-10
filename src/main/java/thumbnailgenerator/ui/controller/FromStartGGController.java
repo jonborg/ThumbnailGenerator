@@ -2,11 +2,9 @@ package thumbnailgenerator.ui.controller;
 
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import java.awt.Desktop;
+
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,6 +18,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -36,7 +36,6 @@ import thumbnailgenerator.dto.startgg.tournament.PhaseGG;
 import thumbnailgenerator.dto.startgg.tournament.PhaseGroupNodeGG;
 import thumbnailgenerator.dto.startgg.tournament.TournamentGG;
 import thumbnailgenerator.enums.LoadingType;
-import thumbnailgenerator.exception.ThumbnailFromFileException;
 import thumbnailgenerator.service.StartGGService;
 import thumbnailgenerator.ui.loading.LoadingState;
 import thumbnailgenerator.utils.startgg.QueryUtils;
@@ -53,7 +52,7 @@ public class FromStartGGController implements Initializable {
     @FXML
     private TextField tournamentURL;
     @FXML
-    private CheckBox multipleCharacters;
+    private Spinner<Integer> charactersPerPlayer;
     @FXML
     private TextArea foundSets;
     @FXML
@@ -94,6 +93,7 @@ public class FromStartGGController implements Initializable {
         initFoundSetsListener();
         initAuthToken();
         initLoading();
+        charactersPerPlayer.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5));
     }
 
     private void removeSelectedTournament(){
@@ -149,7 +149,6 @@ public class FromStartGGController implements Initializable {
         String mainBody;
         var selectedEvent = eventSelect.getSelectionModel().getSelectedItem();
         StringBuilder result = new StringBuilder();
-        var isMultipleCharacters = multipleCharacters.isSelected();
 
         try{
             do{
@@ -190,7 +189,7 @@ public class FromStartGGController implements Initializable {
                     result.append(tournamentData);
                 }
                 var sets = startGGService
-                        .readSetsFromSmashGGPage(searchGamesGG, queryResponse, isMultipleCharacters);
+                        .readSetsFromSmashGGPage(searchGamesGG, queryResponse, charactersPerPlayer.getValue());
                 result.append(sets);
             } while(readPages<totalPages);
 

@@ -22,6 +22,7 @@ import thumbnailgenerator.service.json.JSONReaderService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -102,7 +103,7 @@ public class StartGGService {
         return tournamentData.toString();
     }
 
-    public String readSetsFromSmashGGPage(SearchGamesGG searchGamesGG, JsonObject queryResponse, boolean isMultipleCharacters)
+    public String readSetsFromSmashGGPage(SearchGamesGG searchGamesGG, JsonObject queryResponse, int charactersPerPlayer)
             throws ExecutionException, InterruptedException {
         var foundSets = new StringBuilder();
         SetGG set = (SetGG) jsonReaderService
@@ -111,7 +112,7 @@ public class StartGGService {
 
         set.getSetNodes().forEach(setNodeGG -> {
             if(setNodeGG.hasStream()) {
-                var setNode = setNodeGGToString(setNodeGG, isMultipleCharacters);
+                var setNode = setNodeGGToString(setNodeGG, charactersPerPlayer);
                 if(searchGamesGG.getStream() != null
                         && !searchGamesGG.getStream().isNull()) {
                     if (searchGamesGG.getStream().getStreamName().equals(setNodeGG.getStreamName())){
@@ -139,16 +140,16 @@ public class StartGGService {
                 .orElse(null);
     }
 
-    public String getMostUsedCharacter(List<GameGG> games, String entrantName, boolean isMultipleCharacters){
-        HashMap<Integer,Integer> charSel = new HashMap<>();
-        String defaultCharacterCode = "random";
+    private List<Map.Entry<Integer,Integer>> getMostUsedCharacter(List<GameGG> games, String entrantName, int charactersPerPlayer) {
+        HashMap<Integer, Integer> charSel = new HashMap<>();
         if (games == null) {
-            return defaultCharacterCode;
+            return Collections.emptyList();
         }
-        for (GameGG gameGG :games) {
+        for (GameGG gameGG : games) {
             if (gameGG != null && gameGG.getSelections() != null) {
                 for (SelectionGG selectionGG : gameGG.getSelections()) {
-                    if (selectionGG.getEntrant().getName().equals(entrantName)) {
+                    if (selectionGG.getEntrant().getName()
+                            .equals(entrantName)) {
                         int character = selectionGG.getSelectionValue();
                         if (charSel.containsKey(character)) {
                             charSel.put(character, charSel.get(character) + 1);
@@ -160,18 +161,36 @@ public class StartGGService {
             }
         }
         if (charSel.isEmpty()) {
-            return defaultCharacterCode;
+            return Collections.emptyList();
         }
-        List<Map.Entry<Integer, Integer>> sortedEntries = new ArrayList<>(charSel.entrySet());
-        sortedEntries.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
-        if (isMultipleCharacters && sortedEntries.size() > 1) {
-            return findCodeByStartggId(sortedEntries.get(0).getKey()) + "," + findCodeByStartggId(sortedEntries.get(1).getKey());
-        } else {
-            return findCodeByStartggId(sortedEntries.get(0).getKey());
-        }
+        List<Map.Entry<Integer, Integer>> sortedEntries =
+                new ArrayList<>(charSel.entrySet());
+        sortedEntries.sort(
+                Map.Entry.comparingByValue(Comparator.reverseOrder()));
+        return sortedEntries;
     }
 
-    public String setNodeGGToString(SetNodeGG setNodeGG, boolean isMultipleCharacters){
+    private String convertCharacterEntriesToCharacterLine(List<Map.Entry<Integer,Integer>> entries, int maxSize) {
+        if(entries.isEmpty()){
+            return "random";
+        }
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < maxSize - 1; i++){
+            result.append(findCodeByStartggId(entries.get(i).getKey()))
+                    .append(",");
+        }
+        return result.append(findCodeByStartggId(entries.get(maxSize-1).getKey())).toString();
+    }
+
+    private String getMostUsedCharactersAlts(int numberOfCharacters){
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < numberOfCharacters -1 ; i++){
+            result.append("1,");
+        }
+        return result.append("1").toString();
+    }
+
+    public String setNodeGGToString(SetNodeGG setNodeGG, int charactersPerPlayer){
         var games = setNodeGG.getGames();
         var roundName = setNodeGG.getRoundName();
         String player1 = setNodeGG.getEntrant(0).getName();
@@ -180,11 +199,16 @@ public class StartGGService {
         String player1NoTeam = setNodeGG.getEntrateNameWithNoTeam(player1);
         String player2NoTeam = setNodeGG.getEntrateNameWithNoTeam(player2);
 
-        String player1Characters = getMostUsedCharacter(games, player1, isMultipleCharacters);
-        String player2Characters = getMostUsedCharacter(games, player2, isMultipleCharacters);
+        var player1Entries = getMostUsedCharacter(games, player1, charactersPerPlayer);
+        var player2Entries = getMostUsedCharacter(games, player2, charactersPerPlayer);
+        int player1SmallestSize = Math.min(player1Entries.size(), charactersPerPlayer);
+        int player2SmallestSize = Math.min(player2Entries.size(), charactersPerPlayer);
 
-        String player1Alts = player1Characters.contains(",") ? "1,1" : "1";
-        String player2Alts = player2Characters.contains(",") ? "1,1" : "1";
+        String player1Characters = convertCharacterEntriesToCharacterLine(player1Entries, player1SmallestSize);
+        String player2Characters = convertCharacterEntriesToCharacterLine(player2Entries, player2SmallestSize);
+
+        String player1Alts = getMostUsedCharactersAlts(player1SmallestSize);
+        String player2Alts = getMostUsedCharactersAlts(player2SmallestSize);
 
         return player1NoTeam + ";" + player2NoTeam + ";"
                 + player1Characters + ";" + player2Characters + ";"
