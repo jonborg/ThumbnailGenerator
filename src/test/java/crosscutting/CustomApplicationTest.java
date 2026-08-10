@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import org.testfx.service.query.EmptyNodeQueryException;
 import thumbnailgenerator.JavaFxApplication;
 import thumbnailgenerator.enums.games.ssbu.SmashUltimateFighterArtTypeEnum;
 import thumbnailgenerator.ui.textfield.ChosenImageField;
@@ -181,8 +182,12 @@ public class CustomApplicationTest extends ApplicationTest {
         return (T) scene.getRoot().lookup(id);
     }
 
-    private <T> T findElement(String id, String parent){
-        return (T) lookup(parent).lookup(id).query();
+    public <T> T findElement(String id, String parent){
+        try {
+            return (T) lookup(parent).lookup(id).query();
+        } catch (EmptyNodeQueryException e) {
+            return null;
+        }
     }
 
     private <T> T findElement(String id){
@@ -201,12 +206,33 @@ public class CustomApplicationTest extends ApplicationTest {
         writeAndSelectInComboBox(parentFxml,ComboBoxId.CHARACTER_1, character1.getCharacterName());
         writeInSpinner(parentFxml, SpinnerId.ALT_CHARACTER_1, String.valueOf(character1.getAlt()));
         setCheckBox(parentFxml, CheckBoxId.FLIP_CHARACTER_1, character1.isFlip());
-        if (input.getCharacterInputList().size() == 2){
-            var character2 = input.getCharacterInputList().get(1);
+        if (input.getCharacterInputList().size() > 1){
+            var extraCharacter = input.getCharacterInputList().get(1);
             clickOnButton(parentFxml, ButtonId.ADD_REMOVE_CHARACTER_2);
-            writeAndSelectInComboBox(parentFxml,ComboBoxId.CHARACTER_2, character2.getCharacterName());
-            writeInSpinner(parentFxml, SpinnerId.ALT_CHARACTER_2, String.valueOf(character1.getAlt()));
-            setCheckBox(parentFxml, CheckBoxId.FLIP_CHARACTER_2, character1.isFlip());
+            writeAndSelectInComboBox(parentFxml,ComboBoxId.CHARACTER_2, extraCharacter.getCharacterName());
+            writeInSpinner(parentFxml, SpinnerId.ALT_CHARACTER_2, String.valueOf(extraCharacter.getAlt()));
+            setCheckBox(parentFxml, CheckBoxId.FLIP_CHARACTER_2, extraCharacter.isFlip());
+        }
+        if (input.getCharacterInputList().size() > 2){
+            var extraCharacter = input.getCharacterInputList().get(2);
+            clickOnButton(parentFxml, ButtonId.ADD_REMOVE_CHARACTER_3);
+            writeAndSelectInComboBox(parentFxml,ComboBoxId.CHARACTER_3, extraCharacter.getCharacterName());
+            writeInSpinner(parentFxml, SpinnerId.ALT_CHARACTER_3, String.valueOf(extraCharacter.getAlt()));
+            setCheckBox(parentFxml, CheckBoxId.FLIP_CHARACTER_3, extraCharacter.isFlip());
+        }
+        if (input.getCharacterInputList().size() > 3){
+            var extraCharacter = input.getCharacterInputList().get(3);
+            clickOnButton(parentFxml, ButtonId.ADD_REMOVE_CHARACTER_4);
+            writeAndSelectInComboBox(parentFxml,ComboBoxId.CHARACTER_4, extraCharacter.getCharacterName());
+            writeInSpinner(parentFxml, SpinnerId.ALT_CHARACTER_4, String.valueOf(extraCharacter.getAlt()));
+            setCheckBox(parentFxml, CheckBoxId.FLIP_CHARACTER_4, extraCharacter.isFlip());
+        }
+        if (input.getCharacterInputList().size() > 4){
+            var extraCharacter = input.getCharacterInputList().get(4);
+            clickOnButton(parentFxml, ButtonId.ADD_REMOVE_CHARACTER_5);
+            writeAndSelectInComboBox(parentFxml,ComboBoxId.CHARACTER_5, extraCharacter.getCharacterName());
+            writeInSpinner(parentFxml, SpinnerId.ALT_CHARACTER_5, String.valueOf(extraCharacter.getAlt()));
+            setCheckBox(parentFxml, CheckBoxId.FLIP_CHARACTER_5, extraCharacter.isFlip());
         }
     }
 
